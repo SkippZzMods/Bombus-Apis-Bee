@@ -67,7 +67,7 @@ namespace BombusApisBee.Projectiles
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity * 6f, ModContent.ProjectileType<MetalBee>(), Projectile.damage, 0f, Projectile.owner);
 
                     SoundID.Item11.PlayWith(Projectile.Center);
-
+                    
                     Projectile.velocity += velocity * -4.45f;
 
                     owner.UseBeeResource(2);
