@@ -1,0 +1,38 @@
+﻿using BombusApisBee.BeeHelperProj;
+
+namespace BombusApisBee.Projectiles
+{
+    public class CursedBee : BeeHelper
+    {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Cursed Bee");
+            Main.projFrames[Projectile.type] = 4;
+        }
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            target.AddBuff(BuffID.CursedInferno, 720);
+        }
+        public override void Kill(int timeLeft)
+        {
+            int numberDust = 9 + Main.rand.Next(2);
+            for (int i = 0; i < numberDust; i++)
+            {
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch);
+                dust.noGravity = true;
+                dust.scale = 2.75f;
+            }
+        }
+        public override void SafeAI()
+        {
+            if (Main.rand.NextBool())
+            {
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch);
+                dust.noGravity = true;
+                dust.scale = 1.75f;
+            }
+        }
+
+    }
+}

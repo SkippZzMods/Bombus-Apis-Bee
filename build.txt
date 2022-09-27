@@ -1,0 +1,4 @@
+displayName = [c/FFEF00:Bombus Apis (The Bee Mod)]
+author = SkippZz
+version = 2.0.0.2
+homepage = https://forums.terraria.org/index.php?threads/the-terraria-bee-mod-bombusapis.109431/

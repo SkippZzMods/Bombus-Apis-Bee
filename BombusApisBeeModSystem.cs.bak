@@ -1,0 +1,63 @@
+﻿using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
+using BombusApisBee.UI;
+using BombusApisBee.UI.HoneyResourceBar;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.UI;
+
+namespace BombusApisBee
+{
+    public class BombusApisBeeModSystem : ModSystem
+    {
+		private UserInterface _HoneyResourceBarUserInterface;
+		internal HoneyResourceBar HoneyResourceBar;
+		internal static bool finalizedRegisterCompat = false;
+		internal static BombusApisBee mod;
+		public override void Load()
+		{
+			if (!Main.dedServ)
+			{
+				HoneyResourceBar = new HoneyResourceBar();
+				_HoneyResourceBarUserInterface = new UserInterface();
+				_HoneyResourceBarUserInterface.SetState(HoneyResourceBar);
+			}
+		}
+		public override void UpdateUI(GameTime gameTime)
+		{
+			_HoneyResourceBarUserInterface?.Update(gameTime);
+		}
+		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+		{
+			int mouseIndex = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
+			layers.Insert(mouseIndex, new LegacyGameInterfaceLayer("Honey UI", delegate ()
+			{
+				HoneyPlayerUI.Draw(Main.spriteBatch, Main.LocalPlayer);
+				return true;
+			}, (InterfaceScaleType)2));
+			int resourceBarIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Resource Bars"));
+			if (resourceBarIndex != -1)
+			{
+				layers.Insert(resourceBarIndex, new LegacyGameInterfaceLayer(
+					"BombusApisBee: Honey Resource Bar",
+					delegate {
+						_HoneyResourceBarUserInterface.Draw(Main.spriteBatch, new GameTime());
+						return true;
+					},
+					InterfaceScaleType.UI)
+				);
+			}
+		}
+		public static void AddRecipes()
+		{
+			Recipe recipe = mod.CreateRecipe(ItemID.AvengerEmblem);	
+			recipe.AddIngredient(ModContent.ItemType<BeeEmblem>(), 1).AddIngredient(ItemID.SoulofMight, 5).AddIngredient(ItemID.SoulofSight, 5).AddIngredient(ItemID.SoulofFright, 5).AddTile(TileID.TinkerersWorkbench).ReplaceResult(ItemID.AvengerEmblem);
+		}
+	}
+}

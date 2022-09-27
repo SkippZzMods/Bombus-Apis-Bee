@@ -1,0 +1,20 @@
+using BombusApisBee.UI;
+using BombusApisBee.UI.HoneyResourceBar;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ModLoader;
+using Terraria.UI;
+
+namespace BombusApisBee
+{
+    public class BombusApisBee : Mod
+	{
+		
+		internal static	BombusApisBee mod;
+        public override void AddRecipes()
+        {
+        }
+		
+	}
+}

@@ -1,0 +1,14 @@
+﻿[h1]Bombus Apis Bee (The Bee Mod!)[/h1]
+[url=https://discord.com/invite/ugnX7e7uMd]Discord[/url] [url=https://terrariamods.fandom.com/wiki/BombusApis]Official Wiki (Work In Progress)[/url] [url=https://forums.terraria.org/index.php?threads/the-terraria-bee-mod-bombusapis.109431/]Forum Page[/url]
+
+Bombus Apis Bee is a content mod that adds a new class, the Beekeeper! This class utilizes Honey, a custom resource, to use with hymenoptra weapons. The Beekeeper class has a large focus on homing and strong damage, with the drawbacks being very little defense, usually having as much or less than summoner throughout progression.
+
+This mod currently has 47 weapons, 6 armor sets, 2 armor helmets that corrospond to vanilla armor sets, and 12 accessories. 
+
+[i]Please note that this mod is [b]NOT[/b] the Calamity Expansion, that mod will be ported at a later date. It will take longer due to the fact that it has more content and code to port[/i]
+
+[b]Be sure to join the Discord server linked above to see spoilers of upcoming updates, news and patch notes about the mod, and talk with people who are knowledgeable about the mod, including me[/b]
+
+[hr]
+
+PLEASE report bugs to the comments section on this workshop page, or the bug report channel in the discord, as reporting bugs is incredibly helpful to me as I am one person, and can only test so much. I appreciate all who report bugs and it is a huge help to me.

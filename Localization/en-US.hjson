@@ -1,0 +1,23 @@
+﻿Mods: {
+		BombusApisBee: {
+				TownNPCMood: {
+						TheTraitorBee: {
+								Content: I feel fine, I guess.
+								NoHome: I'd love a house, as long as it isn't in the Jungle.
+								LoveSpace: I enjoy the piece and quiet. Much better than the constant buzzing of the Hive.
+								FarFromHome: Can you buzz me over to my house please?
+								DislikeCrowded: There are too many people around, reminds me of the Hive.
+								HateCrowded: Way too many people around! I'm getting flashbacks!
+								LikeBiome: "{BiomeName} is a nice change of scenery compared to the Jungle. I like it."
+								LoveBiome: "{BiomeName} is so peaceful compared to my previous home. I like being one with nature."
+								DislikeBiome: "The {BiomeName}' colors reminds me too much of the Hive. I don't like it."
+    							HateBiome: "{BiomeName} is way too close to the Hive, and is generally not my favorite place to bee."
+								LikeNPC: "I like {NPCName}, she makes me feel at peace."
+								LoveNPC: "I love how {NPCName} is similar to me, being more creature-like. It makes me feel like I belong."
+								DislikeNPC: "{NPCName} keeps trying to test his weapons on me. Not a fan."
+								HateNPC: "I hate how {NPCName} is way to aggressive towards me and my kind! The creatures in the Jungle never seemed to get along."
+						}	
+				}
+		}
+}
+	

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "lapGjuYlrA/sqncByEFr8rd3MGHtQEAGAmz7OJYxoBYdtL7z9oEqsoF0TLQw9xBrN67gMdMHEqM9dKpymxLPYw==",
+  "success": true,
+  "projectFilePath": "D:\\Collin\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BombusApisBee\\BombusApisBee.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Collin\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}

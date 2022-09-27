@@ -1,0 +1,10 @@
+[c/FFEF00:Bombus Apis (The Bee Mod)], is a class content mod that adds content to vanilla terraria
+- Adds a new class [c/FFEF00:Beekeeper]. This class uses hymenoptra damage to destroy your enemies
+
+- This class, uses [c/FFEF00:Honey], which is a similar resource to mana, albiet regenerated slower, more elusive, and should be used more sparingly
+
+- Adds many content to progression, currently adding (47) weapons, (12) accessories, (6), armor sets, (2), armor helmets, and one new town npc
+
+- The patch notes of all past and future updates, along with other info and knowlegdable people about the mod, including me, can be found on the discord server, which is located on the forum page.
+
+- Current version: 2.0.0.2

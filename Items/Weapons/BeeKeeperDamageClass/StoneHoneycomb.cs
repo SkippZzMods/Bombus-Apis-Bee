@@ -1,0 +1,41 @@
+﻿using BombusApisBee.BeeDamageClass;
+using BombusApisBee.Items.Other.Crafting;
+using BombusApisBee.Projectiles;
+
+
+namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
+{
+    public class StoneHoneycomb : BeeDamageItem
+    {
+        public override void SafeSetStaticDefaults()
+        {
+            DisplayName.SetDefault("Petrified Honeycomb");
+            Tooltip.SetDefault("Throws a heavy petrified honeycomb\nThe honeycomb always critically strikes when falling with enough velocity\n'Rocks... bees... what could go wrong?'");
+        }
+
+        public override void SafeSetDefaults()
+        {
+            Item.damage = 25;
+            Item.noMelee = true;
+            Item.width = 32;
+            Item.height = 32;
+            Item.useTime = 55;
+            Item.useAnimation = 55;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.knockBack = 5f;
+            Item.value = Item.sellPrice(silver: 15);
+            Item.rare = ItemRarityID.White;
+            Item.UseSound = SoundID.DD2_MonkStaffSwing;
+            Item.autoReuse = true;
+            Item.shoot = ModContent.ProjectileType<StoneHoneycombProjectile>();
+            Item.shootSpeed = 13;
+            beeResourceCost = 3;
+            Item.noUseGraphic = true;
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe(1).AddIngredient(ItemID.StoneBlock, 35).AddIngredient(ModContent.ItemType<Pollen>(), 10).AddTile(TileID.WorkBenches).Register();
+        }
+    }
+}
