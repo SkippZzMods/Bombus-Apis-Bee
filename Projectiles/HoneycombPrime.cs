@@ -69,7 +69,7 @@ namespace BombusApisBee.Projectiles
                     SoundID.Item11.PlayWith(Projectile.Center);
                     
                     Projectile.velocity += velocity * -4.45f;
-
+                    
                     owner.UseBeeResource(2);
 
                     flashTimer = 25;
