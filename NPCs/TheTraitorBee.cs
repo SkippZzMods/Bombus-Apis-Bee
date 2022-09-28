@@ -185,7 +185,7 @@ namespace BombusApisbee.NPCs
             {
                 shop.item[nextSlot].SetDefaults(ModContent.ItemType<Wasparang>());
                 nextSlot++;
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<BeeThrower>());
+                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Nectarthrower>());
                 nextSlot++;
                 shop.item[nextSlot].SetDefaults(ModContent.ItemType<HoneyLocket>());
                 nextSlot++;

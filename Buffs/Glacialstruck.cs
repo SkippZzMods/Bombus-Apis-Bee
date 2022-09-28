@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Buffs
+﻿namespace BombusApisBee.Buffs
 {
     public class Glacialstruck : ModBuff
     {
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Electrocuted");
-            Description.SetDefault("Zap!");
+            DisplayName.SetDefault("Glacialstruck");
+            Description.SetDefault("Brr!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

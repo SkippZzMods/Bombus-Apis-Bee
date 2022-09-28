@@ -144,7 +144,7 @@ namespace BombusApisBee.Core
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<MetalPlatedHoneycomb>()));
 
             if (npc.type == NPCID.Spazmatism)
-                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<SpazmaCannon>()));
+                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<OcularRemote>()));
 
             if (npc.type == NPCID.TheDestroyer)
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<ProbeyComb>()));

@@ -5,6 +5,7 @@ using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
 using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
 using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
 using BombusApisBee.Projectiles;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -50,6 +51,7 @@ namespace BombusApisBee.Core
         public int LivingFlowerRot;
         public bool HeartOfNectar;
         public int GlacialstruckCooldown;
+        public int OcularCooldown;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new[] { new Item(ModContent.ItemType<Honeycomb>(), 1) };
@@ -91,6 +93,8 @@ namespace BombusApisBee.Core
                 NectarVialCooldown--;
             if (GlacialstruckCooldown > 0)
                 GlacialstruckCooldown--;
+            if (OcularCooldown > 0)
+                OcularCooldown--;
         }
         public static BombusApisBeePlayer ModPlayer(Player player)
         {
@@ -360,6 +364,22 @@ namespace BombusApisBee.Core
                             Dust.NewDustPerfect(target.Center + Main.rand.NextVector2Circular(5f, 5f), ModContent.DustType<Gas>(),
                                 Main.rand.NextVector2Circular(3f, 3f), newColor: new Color(255, 255, 255) * 0.85f).scale = Main.rand.NextFloat(3.5f, 5.5f);
                         }
+                    }
+                }
+
+                if (target.HasBuff<NectarGlazed>() && Main.rand.NextFloat() < 0.1f)
+                {
+                    for (int i = 0; i < Main.rand.Next(1, 4); i++)
+                    {
+                        Projectile.NewProjectile(proj.GetSource_OnHit(target), target.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<NectarHealingBolt>(), 0, 0f, Player.whoAmI);
+                    }
+                    target.DelBuff(target.FindBuffIndex(ModContent.BuffType<NectarGlazed>()));
+                    BeeUtils.DrawDustImage(target.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0.25f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HoneyDustImage").Value, 1f, 0, new Color(255, 255, 150), rot: 0);
+
+                    for (int i = 0; i < 45; ++i)
+                    {
+                        float angle2 = 6.28f * (float)i / (float)45;
+                        Dust.NewDustPerfect(target.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Utils.ToRotationVector2(angle2) * 4.25f, 0, new Color(255, 255, 150), 1.15f);
                     }
                 }
             }

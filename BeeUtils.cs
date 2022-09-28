@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using BombusApisBee.Projectiles;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,30 @@ namespace BombusApisBee
 {
     public static class BeeUtils
     {
+        public static void DrawDustImage(Vector2 position, int dustType, float size, Texture2D tex, float dustSize = 1f, int Alpha = 0, Color? color = null, bool noGravity = true, float rot = 0.34f)
+        {
+            if (Main.netMode != NetmodeID.Server)
+            {
+                float rotation = Main.rand.NextFloat(0 - rot, rot);
+                Color[] data = new Color[tex.Width * tex.Height];
+                tex.GetData(data);
+                for (int i = 0; i < tex.Width; i += 2)
+                {
+                    for (int j = 0; j < tex.Height; j += 2)
+                    {
+                        Color alpha = data[j * tex.Width + i];
+                        if (alpha == new Color(255, 255, 255))
+                        {
+                            double dustX = (i - (tex.Width / 2));
+                            double dustY = (j - (tex.Height / 2));
+                            dustX *= size;
+                            dustY *= size;
+                            Dust.NewDustPerfect(position, dustType, new Vector2((float)dustX, (float)dustY).RotatedBy(rotation), Alpha, (Color)color, dustSize).noGravity = noGravity;
+                        }
+                    }
+                }
+            }
+        }
         public static void AddBuff<T>(this NPC npc, int time, bool quiet = true) where T : ModBuff
         {
             npc.AddBuff(ModContent.BuffType<T>(), time, quiet);

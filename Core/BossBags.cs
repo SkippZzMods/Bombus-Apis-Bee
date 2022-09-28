@@ -43,7 +43,7 @@ namespace BombusApisBee.Core
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<MetalPlatedHoneycomb>()));
 
             if (item.type == ItemID.TwinsBossBag)
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SpazmaCannon>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OcularRemote>()));
 
             if (item.type == ItemID.DestroyerBossBag)
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ProbeyComb>()));
