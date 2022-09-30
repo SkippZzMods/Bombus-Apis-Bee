@@ -8,7 +8,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beeflames");
+            DisplayName.SetDefault("Molten Nectar");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -17,7 +17,7 @@ namespace BombusApisBee.Projectiles
         {   
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.penetrate = 2;   
+            Projectile.penetrate = -1;   
             Projectile.timeLeft = 100;      
             Projectile.ignoreWater = true;       
             Projectile.tileCollide = true;       

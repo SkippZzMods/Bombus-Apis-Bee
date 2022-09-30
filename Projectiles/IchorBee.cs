@@ -1,53 +1,45 @@
 ﻿using BombusApisBee.BeeHelperProj;
+using BombusApisBee.Dusts;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BombusApisBee.Projectiles
 {
     public class IchorBee : BeeHelper
     {
-        internal int IchorBeeTimer = 1;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("IchorBee");
+            DisplayName.SetDefault("Ichor Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void SafeSetDefaults()
-        {
-        }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.AddBuff(BuffID.Ichor, 540, true);
+            target.AddBuff(BuffID.Ichor, 240, true);
         }
 
         public override void Kill(int timeLeft)
         {
-            int numberDust = 9 + Main.rand.Next(2); // 4 or 5 shots
-            for (int i = 0; i < numberDust; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch);
-                dust.noGravity = true;
-                dust.scale = 2.75f;
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(1f, 1f), 0, new Color(253, 152, 0), 0.35f);
+
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(1.5f, 1.5f), 0, new Color(196, 102, 9), 0.3f);
             }
-        }
-        public override void SafeAI()
-        {
-            IchorBeeTimer++;
-            if (Main.rand.NextBool())
-            {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor);
-                dust.noGravity = true;
-                dust.scale = 1.75f;
-            }
-            if (IchorBeeTimer >= 25)
-            {
-                if (Main.myPlayer == Projectile.owner)
-                {
-                    Vector2 vel = new Vector2(Main.rand.NextFloat(-8, 8), Main.rand.NextFloat(-5, 5));
-                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, vel, ProjectileID.GoldenShowerFriendly, Projectile.damage, 1, Projectile.owner).DamageType = BeeUtils.BeeDamageClass();
-                    IchorBeeTimer = 0;
-                }
-            }
+
+            SoundID.NPCHit13.PlayWith(Projectile.Center);
         }
 
+        public override bool SafePreDraw(ref Color lightColor)
+        {
+            Texture2D bloomTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+            Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, new Color(196, 102, 9, 0), 0f, bloomTex.Size() / 2f, 0.35f, 0, 0);
+            return true;
+        }
+
+        public override void PostDraw(Color lightColor)
+        {
+            Texture2D bloomTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+            Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, new Color(253, 152, 0, 0) * 0.5f, 0f, bloomTex.Size() / 2f, 0.45f, 0, 0);
+        }
     }
 }

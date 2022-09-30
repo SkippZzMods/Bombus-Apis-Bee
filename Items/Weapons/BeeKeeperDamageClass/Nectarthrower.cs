@@ -9,7 +9,6 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void SafeSetStaticDefaults()
         {
             Tooltip.SetDefault("Blasts out molten nectar, encasing enemies in a glaze of nectar\nEnemies who are glazed send out healing bolts when struck");
-            DisplayName.SetDefault("Beethrower");
         }
 
         public override void SafeSetDefaults()
@@ -42,8 +41,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             for (int i = 0; i < 10; i++)
             {
-                Dust.NewDustPerfect(position, ModContent.DustType<Dusts.HoneyDust>(), velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.35f), Main.rand.Next(150), default, 1.25f).noGravity = true;
-                Dust.NewDustPerfect(position, ModContent.DustType<Dusts.GlowFastDecelerate>(), velocity.RotatedByRandom(0.45f) * Main.rand.NextFloat(0.2f), 0, new Color(214, 158, 79), 0.35f).noGravity = true;
+                Dust.NewDustPerfect(position, ModContent.DustType<Dusts.HoneyDust>(), velocity.RotatedByRandom(0.95f) * Main.rand.NextFloat(0.35f), Main.rand.Next(150), default, 1.25f).noGravity = true;
+                Dust.NewDustPerfect(position, ModContent.DustType<Dusts.GlowFastDecelerate>(), velocity.RotatedByRandom(0.95f) * Main.rand.NextFloat(0.2f), 0, new Color(214, 158, 79), 0.35f).noGravity = true;
             }
             return true;
         }

@@ -49,8 +49,8 @@ namespace BombusApisBee.Projectiles
                 Projectile.Kill();
             }
 
-            if (Projectile.timeLeft % 30 == 0)
-                owner.UseBeeResource(1);
+            if (Projectile.timeLeft % 35 == 0)
+                owner.Hymenoptra().BeeResourceCurrent--;
 
             if (rotTimer > 0)
                 rotTimer--;
@@ -349,16 +349,13 @@ namespace BombusApisBee.Projectiles
         public override void AI()
         {
             if (Main.myPlayer == owner.whoAmI && owner.HeldItem.ModItem is OcularRemote && Main.mouseRight && owner.Bombus().OcularCooldown <= 0)
-            {
-                owner.Bombus().OcularCooldown = 1800;
                 Projectile.Kill();
-            }
 
             if (++Projectile.frameCounter % 7 == 0)
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
 
-            if (Projectile.timeLeft % 30 == 0)
-                owner.UseBeeResource(1);
+            if (Projectile.timeLeft % 35 == 0)
+                owner.Hymenoptra().BeeResourceCurrent--;
 
             if (owner.Hymenoptra().BeeResourceCurrent <= 0)
                 Projectile.Kill();

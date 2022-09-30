@@ -8,37 +8,42 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            // DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-            Tooltip.SetDefault("'A honeycomb overgrown by cysts.. gross'");
+            DisplayName.SetDefault("Cystcomb");
+            Tooltip.SetDefault("Throws a returning honeycomb infested with tumors\nHitting enemies causes an explosion of ichor\n'A honeycomb overgrown by cysts.. gross'");
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 25;
-            Item.noMelee = true;
-            Item.width = 40;
-            Item.height = 40;
-            Item.useTime = 15;
-            Item.useAnimation = 15;
+            Item.damage = 80;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 1f;
-            Item.value = Item.sellPrice(0, 3, 50, 0);
-            Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<IchorBee>();
-            Item.shootSpeed = 6;
-            Item.UseSound = SoundID.Item11;
-            Item.scale = 1;
-            Item.crit = 4;
+            Item.useAnimation = 35;
+            Item.useTime = 35;
+            Item.shootSpeed = 3f;
+            Item.knockBack = 4f;
+            Item.width = 32;
+            Item.height = 32;
+            Item.value = Item.sellPrice(0, 1, 50, 0);
             Item.rare = ItemRarityID.LightRed;
-            beeResourceCost = 2;
+
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+
+            Item.shoot = ModContent.ProjectileType<IchorHoneycombHoldout>();
+            beeResourceCost = 4;
         }
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+
+        public override bool SafeCanUseItem(Player player)
         {
-            velocity = velocity.RotatedByRandom(MathHelper.ToRadians(5));
+            return player.ownedProjectileCounts[ModContent.ProjectileType<IchorHoneycombHoldout>()] <= 0;
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemID.Ichor, 15).AddIngredient(ModContent.ItemType<Pollen>(), 10).AddIngredient(ItemID.HoneyBlock, 10).AddTile(TileID.MythrilAnvil).Register();
+            CreateRecipe(1).
+                AddIngredient(ItemID.Ichor, 15).
+                AddIngredient(ModContent.ItemType<Pollen>(), 10).
+                AddIngredient(ItemID.HoneyBlock, 10).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
     }
 }

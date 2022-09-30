@@ -80,7 +80,7 @@ namespace BombusApisBee.Projectiles
             //dust
             if (Main.rand.NextBool(15))
             {
-                Dust.NewDust(Projectile.direction == 1 ? Projectile.BottomRight : Projectile.Bottom, 1, 1, DustID.Honey);
+                Dust.NewDust(Projectile.direction == 1 ? Projectile.BottomRight : Projectile.Bottom, 1, 1, DustID.Honey2);
             }
         }
     }
