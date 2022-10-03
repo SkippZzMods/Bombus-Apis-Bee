@@ -48,11 +48,6 @@ namespace BombusApisBee.Projectiles
         }
         public override void SetDefaults(Projectile projectile)
         {
-            if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
-            {
-                projectile.usesIDStaticNPCImmunity = true;
-                projectile.idStaticNPCHitCooldown = 10;
-            }
             if (projectile.GetGlobalProjectile<BombusApisBeeGlobalProjectile>().ForceBee)
             {
                 projectile.DamageType = ModContent.GetInstance<HymenoptraDamageClass>();
@@ -87,5 +82,4 @@ namespace BombusApisBee.Projectiles
                 }
         }
     }
-
 }

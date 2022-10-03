@@ -5,13 +5,12 @@ using BombusApisBee.Projectiles;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
-    public class TheHive : BeeDamageItem
+    public class Ambrosia : BeeDamageItem
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a Beehive that spawns bees on contact\nUses 1 honey when an bee is spawned");
+            Tooltip.SetDefault("Throws a yoyo of pure nectar\nCauses nectar explosions on hit, healing the user");
 
-            // These are all related to gamepad controls and don't seem to affect anything else
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
@@ -26,8 +25,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 2.5f;
-            Item.damage = 20;
-            Item.value = Item.sellPrice(gold: 3, silver: 45);
+            Item.damage = 25;
+            Item.value = Item.sellPrice(gold: 1, silver: 45);
             Item.rare = ItemRarityID.Orange;
 
             Item.channel = true;
@@ -35,13 +34,17 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.noUseGraphic = true;
 
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ModContent.ProjectileType<TheHiveProjectile>();
+            Item.shoot = ModContent.ProjectileType<AmbrosiaProjectile>();
             beeResourceCost = 1;
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemID.BeeWax, 10).AddIngredient(ItemID.JungleYoyo, 1).AddIngredient(ModContent.ItemType<Pollen>(), 25).AddTile(TileID.WorkBenches).Register();
+            CreateRecipe().
+                AddIngredient(ItemID.BeeWax, 10).
+                AddIngredient(ItemID.JungleYoyo, 1).
+                AddIngredient(ModContent.ItemType<Pollen>(), 25).
+                AddTile(TileID.WorkBenches).
+                Register();
         }
-
     }
 }

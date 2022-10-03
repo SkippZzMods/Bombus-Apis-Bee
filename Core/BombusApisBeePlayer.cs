@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria.DataStructures;
 using Terraria.GameInput;
+using Terraria.ModLoader.IO;
 
 namespace BombusApisBee.Core
 {
@@ -52,6 +53,8 @@ namespace BombusApisBee.Core
         public bool HeartOfNectar;
         public int GlacialstruckCooldown;
         public int OcularCooldown;
+        public bool FrozenStinger;
+        public bool RoyalJelly;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new[] { new Item(ModContent.ItemType<Honeycomb>(), 1) };
@@ -95,7 +98,19 @@ namespace BombusApisBee.Core
                 GlacialstruckCooldown--;
             if (OcularCooldown > 0)
                 OcularCooldown--;
+            FrozenStinger = false;
         }
+
+        public override void LoadData(TagCompound tag)
+        {
+            RoyalJelly = tag.GetBool("RoyalJelly");
+        }
+
+        public override void SaveData(TagCompound tag)
+        {
+            tag["RoyalJelly"] = RoyalJelly;
+        }
+
         public static BombusApisBeePlayer ModPlayer(Player player)
         {
             return player.GetModPlayer<BombusApisBeePlayer>();
@@ -120,6 +135,12 @@ namespace BombusApisBee.Core
                 modPlayer2.BeeResourceCurrent -= healamount;
                 modPlayer2.BeeResourceRegenTimer = -300;
             }
+        }
+
+        public override void UpdateEquips()
+        {
+            if (RoyalJelly)
+                Player.Hymenoptra().BeeResourceMax2 += 15;
         }
 
         public override void PostUpdateMiscEffects()
@@ -259,7 +280,7 @@ namespace BombusApisBee.Core
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
-            if (proj.CountsAsClass<HymenoptraDamageClass>() && Player.whoAmI == Main.myPlayer)
+            if (proj.CountsAsClass<HymenoptraDamageClass>() && Player.whoAmI == Main.myPlayer && !NPCID.Sets.ProjectileNPC[target.type])
             {
                 if (HoneyCrit && crit)
                 {
@@ -382,6 +403,9 @@ namespace BombusApisBee.Core
                         Dust.NewDustPerfect(target.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Utils.ToRotationVector2(angle2) * 4.25f, 0, new Color(255, 255, 150), 1.15f);
                     }
                 }
+
+                if (FrozenStinger && crit)
+                    target.AddBuff<Frostbroken>(240);
             }
         }
 

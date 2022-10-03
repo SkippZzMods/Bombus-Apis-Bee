@@ -5,7 +5,7 @@ global using Terraria.Audio;
 global using Terraria.GameContent;
 global using Terraria.ID;
 global using Terraria.ModLoader;
-
+using BombusApisBee.Buffs;
 using BombusApisBee.Effects;
 using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
 using BombusApisBee.PrimitiveDrawing;
@@ -16,6 +16,8 @@ namespace BombusApisBee
 {
     public class BombusApisBee : Mod
     {
+        public static Color honeyIncreaseColor = new Color(255, 218, 110);
+
         public static readonly SoundStyle HoneycombWeapon = SoundID.NPCDeath1 with { Pitch = -0.2f, PitchVariance = 0.2f };
         public static string BeeWeapon = "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/";
         public static string Invisible = "BombusApisBee/ExtraTextures/Invisible";

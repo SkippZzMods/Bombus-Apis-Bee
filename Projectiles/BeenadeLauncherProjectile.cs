@@ -23,6 +23,9 @@ namespace BombusApisBee.Projectiles
 
             Projectile.timeLeft = 240;
             Projectile.penetrate = -1;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
         }
 
         public override void AI()

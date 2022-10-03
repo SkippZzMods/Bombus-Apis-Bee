@@ -82,7 +82,7 @@ namespace BombusApisBee.Projectiles
                     ModContent.ProjectileType<HoneyHoming>(), (int)(Projectile.damage * 0.75f), 3f, Projectile.owner, 1f);
             }
 
-            for (int i = 0; i < Main.rand.Next(2, 5); i++)
+            for (int i = 0; i < Main.rand.Next(3, 6); i++)
             {
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, -Projectile.velocity.RotatedByRandom(0.8f) * Main.rand.NextFloat(0.15f, 0.5f),
                     ModContent.ProjectileType<HoneySmoke>(), (int)(Projectile.damage * 0.75f), 0f, Projectile.owner);

@@ -5,11 +5,17 @@ using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Terraria.DataStructures;
 
 namespace BombusApisBee
 {
     public static class BeeUtils
     {
+        public static Projectile SpawnBee(this Projectile projectile, IEntitySource source, Vector2 pos, Vector2 velocity, float damage, float knockBack = 0f)
+        {
+            Player player = Main.player[projectile.owner];
+            return Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
+        }
         public static void DrawDustImage(Vector2 position, int dustType, float size, Texture2D tex, float dustSize = 1f, int Alpha = 0, Color? color = null, bool noGravity = true, float rot = 0.34f)
         {
             if (Main.netMode != NetmodeID.Server)

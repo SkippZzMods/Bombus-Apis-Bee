@@ -11,7 +11,7 @@ namespace BombusApisBee.Effects
             if (Main.dedServ)
                 return;
 
-            //Credits to Calamity for Shader Code
+            //Credits to Calamity for this Shader Code
             Ref<Effect> screenRef = new Ref<Effect>(ModContent.GetInstance<BombusApisBee>().Assets.Request<Effect>("Effects/HolyShieldShader", (ReLogic.Content.AssetRequestMode)1).Value);
             Filters.Scene["HolyShieldShader"] = new Filter(new ScreenShaderData(screenRef, "HolyShieldPass"), EffectPriority.High);
             Filters.Scene["HolyShieldShader"].Load();
@@ -35,6 +35,10 @@ namespace BombusApisBee.Effects
             screenRef = new Ref<Effect>(ModContent.GetInstance<BombusApisBee>().Assets.Request<Effect>("Effects/RebarTrail", (ReLogic.Content.AssetRequestMode)1).Value);
             Filters.Scene["RebarTrail"] = new Filter(new ScreenShaderData(screenRef, "RebarTrailPass"), EffectPriority.High);
             Filters.Scene["RebarTrail"].Load();
+
+            screenRef = new Ref<Effect>(ModContent.GetInstance<BombusApisBee>().Assets.Request<Effect>("Effects/FrostbrokenShader", (ReLogic.Content.AssetRequestMode)1).Value);
+            Filters.Scene["FrostbrokenShader"] = new Filter(new ScreenShaderData(screenRef, "FrostbrokenShaderPass"), EffectPriority.High);
+            Filters.Scene["FrostbrokenShader"].Load();
         }
     }
 }

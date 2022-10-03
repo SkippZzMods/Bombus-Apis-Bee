@@ -15,7 +15,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void SafeSetDefaults()
         {
             Item.expertOnly = true;
-            Item.damage = 40;
+            Item.damage = 55;
             Item.width = 38;
             Item.height = 38;
             Item.useTime = 15;

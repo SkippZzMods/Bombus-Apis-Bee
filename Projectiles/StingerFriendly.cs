@@ -32,8 +32,8 @@ namespace BombusApisBee.Projectiles
 
             for (int i = 0; i < Main.rand.Next(1, 3); i++)
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs);
-                dust.scale = 0.9f;
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Dusts.StingerDust>());
+                dust.scale = 1f;
                 dust.velocity *= 0.5f;
                 dust.noGravity = true;
             }

@@ -82,6 +82,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public static void Unload()
         {
             Main.OnPreDraw -= Main_OnPreDraw;
+            On.Terraria.Main.DrawNPCs -= DrawMarkedEffects;
         }
 
         private static void Main_OnPreDraw(GameTime obj)

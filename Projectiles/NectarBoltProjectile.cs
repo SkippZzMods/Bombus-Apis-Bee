@@ -207,7 +207,6 @@ namespace BombusApisBee.Projectiles
                 if (Projectile.velocity.Length() < 1f)
                     Projectile.Kill();
             }
-
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

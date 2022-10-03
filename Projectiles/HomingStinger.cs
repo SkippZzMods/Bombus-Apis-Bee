@@ -61,8 +61,8 @@ namespace BombusApisBee.Projectiles
 
             if (Main.rand.NextBool())
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CorruptGibs);
-                dust.scale = 0.9f;
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Dusts.StingerDust>());
+                dust.scale = 1f;
                 dust.velocity *= 0.5f;
                 dust.noGravity = true;
             }
@@ -71,7 +71,13 @@ namespace BombusApisBee.Projectiles
         public override bool PreDraw(ref Color lightColor)
         {
             DrawPrimitives();
-            return true;
+            Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+            Texture2D glowTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+
+            Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0, 0f);
+
+            Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(79, 170, 29, 0) * 0.45f, Projectile.rotation, glowTex.Size() / 2f, 0.45f, 0, 0f);
+            return false;
         }
         private void ManageCaches()
         {
@@ -80,11 +86,11 @@ namespace BombusApisBee.Projectiles
                 cache = new List<Vector2>();
                 for (int i = 0; i < 10; i++)
                 {
-                    cache.Add(Projectile.Center);
+                    cache.Add(Projectile.Center + Projectile.velocity);
                 }
             }
 
-            cache.Add(Projectile.Center);
+            cache.Add(Projectile.Center + Projectile.velocity);
 
             while (cache.Count > 10)
             {
@@ -94,13 +100,13 @@ namespace BombusApisBee.Projectiles
 
         private void ManageTrail()
         {
-            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 10, new TriangularTip(190), factor => 6.5f, factor =>
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 10, new TriangularTip(190), factor => factor * 6.5f, factor =>
             {
                 return new Color(160, 191, 38) * factor.X;
             });
 
             trail.Positions = cache.ToArray();
-            trail.NextPosition = Projectile.Center;
+            trail.NextPosition = Projectile.Center + Projectile.velocity;
         }
 
         public void DrawPrimitives()
@@ -115,6 +121,10 @@ namespace BombusApisBee.Projectiles
             effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.025f);
             effect.Parameters["repeats"].SetValue(2f);
             effect.Parameters["transformMatrix"].SetValue(world * view * projection);
+            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
+
+            trail?.Render(effect);
+
             effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
 
             trail?.Render(effect);

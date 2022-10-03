@@ -98,7 +98,7 @@ namespace BombusApisBee.Projectiles
                 }
                 else if (stingprojtimer < 480)
                 {
-                    Projectile.localNPCHitCooldown = 15;
+                    Projectile.localNPCHitCooldown = 5;
                     Projectile.rotation = Projectile.velocity.X * 0.025f;
                     if (DashDelay <= 0)
                     {

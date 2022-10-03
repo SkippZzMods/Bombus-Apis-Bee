@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.BeeDamageClass;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BombusApisBee.Projectiles
 {
@@ -8,10 +9,13 @@ namespace BombusApisBee.Projectiles
         private int StingerTimer;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.YoyosLifeTimeMultiplier[Projectile.type] = 14f;
-            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 285f;
+            ProjectileID.Sets.YoyosLifeTimeMultiplier[Projectile.type] = 12f;
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 350f;
             ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 14f;
             DisplayName.SetDefault("Stinging Yoyo");
+
+            ProjectileID.Sets.TrailingMode[Type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Type] = 5;
         }
 
         public override void SafeSetDefaults()
@@ -27,71 +31,84 @@ namespace BombusApisBee.Projectiles
             Projectile.localNPCHitCooldown = 13;
 
         }
-        public override void PostAI()
+        public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            var BeeDamagePlayer = player.GetModPlayer<BeeDamagePlayer>();
-            BeeDamagePlayer.BeeResourceRegenTimer = -120;
-            if (Main.rand.NextBool(2))
+            player.Hymenoptra().BeeResourceRegenTimer = -120;
+
+            if (player.Hymenoptra().BeeResourceCurrent <= 0)
+                Projectile.Kill();
+
+            if (Main.rand.NextBool())
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Poisoned, 0f, 0f, 65);
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Dusts.StingerDust>(), 0f, 0f, 65);
                 dust.noGravity = true;
                 dust.scale = 0.9f;
-                dust.velocity *= Main.rand.NextFloat(1.2f, 1.35f);
+                dust.velocity *= 0.5f;
             }
-            if (player.Hymenoptra().BeeResourceCurrent <= 0)
-            {
-                Projectile.Kill();
-            }
+
+            if (Main.myPlayer != Projectile.owner)
+                return;
+
             StingerTimer++;
-            if (stingercount < 6)
+            if (stingercount < 4)
             {
-                if (Main.myPlayer == Projectile.owner)
+                NPC target = Projectile.FindTargetWithinRange(500f);
+
+                if (target != null)
                 {
-                    for (int i = 0; i < 200; i++)
+                    if (StingerTimer > 30 && Collision.CanHitLine(Projectile.Center, 1, 1, target.Center, 1, 1))
                     {
-                        NPC target = Main.npc[i];
-                        float shootToX = target.position.X + (float)target.width * 0.5f - Projectile.Center.X;
-                        float shootToY = target.position.Y - Projectile.Center.Y;
-                        float distance = (float)System.Math.Sqrt((double)(shootToX * shootToX + shootToY * shootToY));
-                        if (distance < 350f && !target.friendly && target.active && Main.npc[i].CanBeChasedBy(Projectile, false) && Collision.CanHit(Projectile.position, 1, 1, target.position, 1, 1))
+                        player.UseBeeResource(1);
+                        StingerTimer = 0;
+                        stingercount++;
+
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.DirectionTo(target.Center) * 14.5f, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage, 2.5f, Projectile.owner);
+
+                        for (int i = 0; i < 7; i++)
                         {
-                            if (StingerTimer > 25f)
-                            {
-                                if (Main.myPlayer == Projectile.owner)
-                                {
-                                    distance = 3f / distance;
-                                    shootToX *= distance * 5.5f;
-                                    shootToY *= distance * 5.5f;
-                                    int proj = Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center.X, Projectile.Center.Y, shootToX, shootToY, ProjectileID.HornetStinger, Projectile.damage, Projectile.knockBack, Main.myPlayer);
-                                    Main.projectile[proj].DamageType = BeeUtils.BeeDamageClass();
-                                    player.UseBeeResource(1);
-                                    stingercount += 1;
-                                    StingerTimer = 0;
-                                }
-                            }
+                            Vector2 velocity = Projectile.DirectionTo(target.Center) * 14.5f;
+                            Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.StingerDust>(), velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(50, 125)).noGravity = true;
+                            Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(75)).noGravity = true;
                         }
                     }
                 }
             }
-            else if (StingerTimer > 25f && stingercount >= 6)
+            else if (StingerTimer > 45)
             {
-                Vector2 speed = new Vector2(20f, 20f);
-                float numberProjectiles = 8;
-                float rotation = MathHelper.ToRadians(360);
-                for (int i = 0; i < numberProjectiles; i++)
-                {
-                    Vector2 perturbedSpeed = new Vector2(speed.X, speed.Y).RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (numberProjectiles - 1))) * .2f;
-                    int stinger = Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position.X, Projectile.position.Y, perturbedSpeed.X * 2, perturbedSpeed.Y * 2, ProjectileID.HornetStinger, Projectile.damage, 1f, player.whoAmI);
-                    Main.projectile[stinger].GetGlobalProjectile<BombusApisBeeGlobalProjectile>().ForceBee = true;
-                    Main.projectile[stinger].penetrate = 2;
-                    Main.projectile[stinger].usesLocalNPCImmunity = true;
-                    Main.projectile[stinger].localNPCHitCooldown = 20;
-                }
-                stingercount = 0;
-                StingerTimer = 0;
                 player.UseBeeResource(3);
+                SoundID.Item17.PlayWith(Projectile.position);
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.One.RotatedBy(MathHelper.PiOver2 * i) * 10f, ModContent.ProjectileType<HomingStinger>(), Projectile.damage * 2/3, 2f, Projectile.owner);
+                }
+
+                StingerTimer = 0;
+
+                stingercount = 0;
+
+                for (int i = 0; i < 15; i++)
+                {
+                    Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.StingerDust>(), Main.rand.NextVector2Circular(3.5f, 3.5f), Main.rand.Next(50, 150), Scale: 1.25f).noGravity = true;
+
+                    Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, Main.rand.NextVector2Circular(3.5f, 3.5f), Main.rand.Next(50, 150), Scale: 1.25f).noGravity = true;
+                }
             }
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
+            {
+                Main.spriteBatch.Draw(tex, (Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f) - Main.screenPosition, null, lightColor * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
+                    Projectile.rotation, tex.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.55f, (i / (float)Projectile.oldPos.Length)), 0, 0);
+            }
+
+            Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0, 0f);
+            return false;
         }
     }
 }

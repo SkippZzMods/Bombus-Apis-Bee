@@ -51,9 +51,8 @@ namespace BombusApisBee.Projectiles
                         player.Hymenoptra().BeeResourceCurrent += (int)(resourceincrease);
                     if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
                         player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
-                    float Beefade = (float)Math.Sin(Main.GlobalTimeWrappedHourly);
-                    CombatText.NewText(player.getRect(), Color.Lerp(Color.Yellow, Color.Orange, Beefade), (int)resourceincrease, true, true);
-                    //NetMessage.SendData(MessageID.SpiritHeal, -1, -1, null, projectile.owner, 1, 0f, 0f, 0, 0, 0);
+
+                    CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)resourceincrease, true, true);
                 }
                 Projectile.Kill();
             }

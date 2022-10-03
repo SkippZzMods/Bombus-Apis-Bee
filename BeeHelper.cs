@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.DataStructures;
 using static Terraria.ModLoader.ModContent;
-
+using Terraria.ID;
 
 namespace BombusApisBee.BeeHelperProj
 {
@@ -33,9 +33,7 @@ namespace BombusApisBee.BeeHelperProj
         public virtual void SafeAI()
         {
         }
-        public override void SetStaticDefaults()
-        {
-        }
+
         public virtual void SafeSetDefaults()
         {
 
@@ -73,6 +71,11 @@ namespace BombusApisBee.BeeHelperProj
             }
         }
 
+        public override bool? CanHitNPC(NPC target)
+        {
+            return null;
+        }
+
         public sealed override void SetDefaults()
         {
             Projectile.DamageType = GetInstance<HymenoptraDamageClass>();
@@ -83,9 +86,7 @@ namespace BombusApisBee.BeeHelperProj
             Projectile.timeLeft = 1200;
             Projectile.ignoreWater = false;
             Projectile.tileCollide = true;
-
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.penetrate = 2;
             SafeSetDefaults();
         }
 
@@ -124,8 +125,7 @@ namespace BombusApisBee.BeeHelperProj
                 if (Giant && CanBeGiant)
                     otherGiant = true;
                 Initialized = true;
-            }
-
+            }           
             return base.PreAI();
         }
         public sealed override void AI()
@@ -153,7 +153,7 @@ namespace BombusApisBee.BeeHelperProj
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];
-                    if (npc.CanBeChasedBy(this) && (!npc.wet || npc.type == 370))
+                    if (npc.CanBeChasedBy(this) && (!npc.wet || npc.type == NPCID.DukeFishron))
                     {
                         float num267 = npc.position.X + (float)(npc.width / 2);
                         float num268 = npc.position.Y + (float)(npc.height / 2);
@@ -184,7 +184,6 @@ namespace BombusApisBee.BeeHelperProj
             float num272 = num262 - vector18.X;
             float num273 = num263 - vector18.Y;
             float num274 = (float)Math.Sqrt(num272 * num272 + num273 * num273);
-            float num275 = num274;
             num274 = num270 / num274;
             num272 *= num274;
             num273 *= num274;

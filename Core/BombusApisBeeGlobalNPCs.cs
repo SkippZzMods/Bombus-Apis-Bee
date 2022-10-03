@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
+using BombusApisBee.Items.Other.Consumables;
 using BombusApisBee.Items.Other.Crafting;
 using BombusApisBee.Items.Other.OnPickupItems;
 using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
@@ -101,11 +102,21 @@ namespace BombusApisBee.Core
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
+           
+            if (npc.type == NPCID.IceQueen)
+            {
+                Conditions.FrostMoonDropGatingChance condition = new();
+                IItemDropRule rule = new LeadingConditionRule(condition);
+                rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<FrozenStinger>(), 5));
+                npcLoot.Add(rule);
+            }
+
             if (npc.type == NPCID.Pumpking)
             {
                 Conditions.PumpkinMoonDropGatingChance condition = new();
-                IItemDropRule rule = new LeadingConditionRule(condition);
-                rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<PumpkinetScepter>()));
+                IItemDropRule rule = new LeadingConditionRule(condition);   
+                rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<PumpkinetScepter>(), 5));
+                npcLoot.Add(rule);
             }
 
             if (npc.type == NPCID.AngryNimbus)
@@ -121,7 +132,10 @@ namespace BombusApisBee.Core
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<HoneyManipulator>(), 5, 4));
 
             if (npc.type == NPCID.QueenBee)
-                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<QueenBeeStingerStriker>()));
+            {
+                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<Needleshot>()));
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<RoyalJelly>(), 2, 1));
+            }
 
             if (npc.type == NPCID.SkeletronHead)
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<CartilageCreator>()));
@@ -134,6 +148,7 @@ namespace BombusApisBee.Core
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<BeeEmblem>()));
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<TheBeepeater>()));
             }
+
             if (npc.type == NPCID.DarkCaster)
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<ManaInfusedHoneycomb>(), 20, 15));
 

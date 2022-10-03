@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a yoyo that shoots stingers at enemies\nOccasionally erupts into an even spread of stingers");
+            Tooltip.SetDefault("Throws a yoyo that shoots stingers at enemies\nPeriodically fires out a burst of homing stingers");
 
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
@@ -41,6 +41,5 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             CreateRecipe(1).AddIngredient(ItemID.WoodYoyo).AddIngredient(ItemID.Stinger, 12).AddIngredient(ModContent.ItemType<Pollen>(), 30).AddIngredient(ItemID.CobaltBar, 8).AddTile(TileID.Anvils).Register();
             CreateRecipe(1).AddIngredient(ItemID.WoodYoyo).AddIngredient(ItemID.Stinger, 12).AddIngredient(ModContent.ItemType<Pollen>(), 30).AddIngredient(ItemID.PalladiumBar, 8).AddTile(TileID.Anvils).Register();
         }
-
     }
 }

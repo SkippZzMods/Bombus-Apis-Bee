@@ -45,7 +45,8 @@ namespace BombusApisBee.Projectiles
 
             if (Projectile.Hitbox.Intersects(Main.player[Projectile.owner].Hitbox))
             {
-                Main.player[Projectile.owner].Heal(Main.rand.Next(3, 6));
+                float healing = Projectile.ai[0] == 0f ? Main.rand.Next(3, 6) : Projectile.ai[0];
+                Main.player[Projectile.owner].Heal((int)healing);
                 Projectile.Kill();
             }
         }

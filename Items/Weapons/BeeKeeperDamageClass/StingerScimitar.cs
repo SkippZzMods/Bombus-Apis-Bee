@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using BombusApisBee.Items.Other.Crafting;
+using BombusApisBee.Projectiles;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
@@ -24,7 +25,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.value = Item.sellPrice(gold: 2, silver: 75);
             Item.rare = ItemRarityID.Green;
             Item.autoReuse = true;
-            Item.shoot = ProjectileID.HornetStinger;
+            Item.shoot = ModContent.ProjectileType<StingerFriendly>();
             Item.shootSpeed = 17f;
             Item.UseSound = SoundID.Item1;
             Item.scale = 1.25f;

@@ -33,10 +33,13 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = ItemRarityID.Blue;
             beeResourceCost = 2;
+
+            Item.Size = new Vector2(40);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, swingDirection, combo);
             swingDirection *= -1;
             combo++;
             if (combo > 2)
@@ -44,7 +47,6 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 combo = 0;
                 swingDirection = 1;
             }
-            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, swingDirection, combo);
             return false;
         }
     }

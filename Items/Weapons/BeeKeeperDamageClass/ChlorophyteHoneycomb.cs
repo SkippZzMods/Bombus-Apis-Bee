@@ -8,45 +8,38 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            // DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-            Tooltip.SetDefault("Rapidly fires leafy bees\nThe bees cause crystal leafs to materialize upon death");
+            DisplayName.SetDefault("Chloro-comb");
+            Tooltip.SetDefault("Throws a fragile honeycomb which shatters into homing fragments, chloro-spores, and chloro-bees\nChloro-bees materialize into chloro-energy upon death");
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 47;
+            Item.damage = 45;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 20;
-            Item.useTime = 19;
-            Item.useAnimation = 19;
-            Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 5f;
-            Item.value = Item.sellPrice(0, 7, 5, 0);
-            Item.rare = ItemRarityID.Lime;
-            Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<ChlorophyteBee>();
-            Item.shootSpeed = 6f;
-            Item.UseSound = SoundID.Item11;
-            Item.scale = 1.1f;
-            Item.crit = 4;
-            beeResourceCost = 1;
-        }
 
+            Item.useTime = 65;
+            Item.useAnimation = 65;
+
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.knockBack = 5f;
+            Item.value = Item.sellPrice(gold: 10);
+            Item.rare = ItemRarityID.Lime;
+
+            Item.autoReuse = true;
+            Item.shoot = ModContent.ProjectileType<ChlorophyteHoneycombProjectile>();
+            Item.shootSpeed = 20f;
+            Item.UseSound = SoundID.DD2_MonkStaffSwing;
+            Item.noUseGraphic = true;
+
+            beeResourceCost = 5;
+        }
 
         public override void AddRecipes()
         {
             CreateRecipe(1).AddIngredient(ItemID.ChlorophyteBar, 12).AddIngredient(ModContent.ItemType<Pollen>(), 20).AddTile(TileID.MythrilAnvil).Register();
 
-        }
-
-        public override Vector2? HoldoutOffset()
-        {
-            return new Vector2(-1, 0);
-        }
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            velocity = velocity.RotatedByRandom(MathHelper.ToRadians(5));
         }
     }
 }

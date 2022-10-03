@@ -26,7 +26,7 @@ namespace BombusApisBee.Core
             if (item.type == ItemID.QueenBeeBossBag)
             {
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheQueensCharge>()));
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<QueenBeeStingerStriker>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Needleshot>()));
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheSting>()));
             }
 

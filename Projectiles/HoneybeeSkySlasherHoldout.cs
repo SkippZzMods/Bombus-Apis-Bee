@@ -31,7 +31,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeybee Sky Slasher");
+            DisplayName.SetDefault("Nectar Slasher");
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             ProjectileID.Sets.TrailingMode[Type] = 2;
         }
@@ -173,6 +173,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.rotation = Utils.ToRotation(direction);
                 Projectile.netUpdate = true;
                 SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
+                Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
             }
 
             if (!Main.dedServ && Projectile.timeLeft < maxTimeLeft)
@@ -206,6 +207,8 @@ namespace BombusApisBee.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
+            owner.Bombus().shakeTimer += 3;
+
             for (int i = 0; i < 15; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(3.5f, 3.5f), 0, new Color(255, 191, 73), 0.3f);
@@ -299,11 +302,11 @@ namespace BombusApisBee.Projectiles
                 cache = new List<Vector2>();
                 for (int i = 0; i < 20; i++)
                 {
-                    cache.Add(owner.Center + Projectile.rotation.ToRotationVector2() * (50f * Projectile.scale));
+                    cache.Add(owner.Center + (Projectile.rotation - 0.25f * SwingDirection).ToRotationVector2() * (40f * Projectile.scale));
                 }
             }
 
-            cache.Add(owner.Center + Projectile.rotation.ToRotationVector2() * (50f * Projectile.scale));
+            cache.Add(owner.Center + (Projectile.rotation - 0.25f * SwingDirection).ToRotationVector2() * (40f * Projectile.scale));
 
             while (cache.Count > 20)
             {
@@ -315,11 +318,11 @@ namespace BombusApisBee.Projectiles
                 cache2 = new List<Vector2>();
                 for (int i = 0; i < 15; i++)
                 {
-                    cache2.Add(owner.Center + Projectile.rotation.ToRotationVector2() * (35f * Projectile.scale));
+                    cache2.Add(owner.Center + (Projectile.rotation - 0.25f * SwingDirection).ToRotationVector2() * (30f * Projectile.scale));
                 }
             }
 
-            cache2.Add(owner.Center + Projectile.rotation.ToRotationVector2() * (35f * Projectile.scale));
+            cache2.Add(owner.Center + (Projectile.rotation - 0.25f * SwingDirection).ToRotationVector2() * (30f * Projectile.scale));
 
             while (cache2.Count > 15)
             {
@@ -361,21 +364,27 @@ namespace BombusApisBee.Projectiles
 
         private void ManageTrail()
         {
-            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 20, new TriangularTip(190), factor => 30f * MathHelper.Lerp(1f, 0f, 1f - Projectile.timeLeft / maxTimeLeft), factor =>
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 20, new TriangularTip(190), factor => (40f * MathHelper.Lerp(0f, 1f, 1f - Projectile.timeLeft / maxTimeLeft)) * factor * factor * factor, factor =>
             {
-                return new Color(214, 158, 79, 150) * MathHelper.Lerp(1f, 0f, 1f - Projectile.timeLeft / maxTimeLeft);
+                if (Projectile.timeLeft <= 5)
+                    return new Color(214, 158, 79) * MathHelper.Lerp(0.5f, 0, 1f - Projectile.timeLeft / 5f);
+
+                return new Color(214, 158, 79) * MathHelper.Lerp(0, 0.5f, 1f - Projectile.timeLeft / maxTimeLeft) * factor.X;
             });
 
             trail.Positions = cache.ToArray();
-            trail.NextPosition = owner.Center + Projectile.rotation.ToRotationVector2() * (50f * Projectile.scale);
+            trail.NextPosition = owner.Center + (Projectile.rotation - 0.25f * SwingDirection).ToRotationVector2() * (40f * Projectile.scale);
 
-            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(190), factor => 20f * MathHelper.Lerp(1f, 0f, 1f - Projectile.timeLeft / maxTimeLeft), factor =>
+            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(190), factor => (50f * MathHelper.Lerp(0f, 1f, 1f - Projectile.timeLeft / maxTimeLeft)) * factor * factor * factor, factor =>
             {
-                return new Color(214, 158, 79, 150) * MathHelper.Lerp(1f, 0f, 1f - Projectile.timeLeft / maxTimeLeft);  
+                if (Projectile.timeLeft <= 5)
+                    return new Color(214, 158, 79) * MathHelper.Lerp(0.5f, 0, 1f - Projectile.timeLeft / 5f);
+
+                return new Color(214, 158, 79) * MathHelper.Lerp(0, 0.5f, 1f - Projectile.timeLeft / maxTimeLeft) * factor.X;
             });
 
             trail2.Positions = cache2.ToArray();
-            trail2.NextPosition = owner.Center + Projectile.rotation.ToRotationVector2() * (35f * Projectile.scale);
+            trail2.NextPosition = owner.Center + (Projectile.rotation - 0.25f * SwingDirection).ToRotationVector2() * (30f * Projectile.scale);
 
 
             throwtrail = throwtrail ?? new Trail(Main.instance.GraphicsDevice, 20, new TriangularTip(190), factor => factor * 9f, factor =>
@@ -409,24 +418,28 @@ namespace BombusApisBee.Projectiles
             effect.Parameters["transformMatrix"].SetValue(world * view * projection);
             effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/GlowTrail").Value);
 
-            trail?.Render(effect);
-            trail2?.Render(effect);
+            if (Combo >= 2)
+            {
+                throwtrail?.Render(effect);
+                throwtrail2?.Render(effect);
+            }
+            else
+            {
+                trail?.Render(effect);
+                trail2?.Render(effect);
+            }
+
+            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
 
             if (Combo >= 2)
             {
                 throwtrail?.Render(effect);
                 throwtrail2?.Render(effect);
             }
-
-            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
-
-            trail?.Render(effect);
-            trail2?.Render(effect);
-
-            if (Combo >= 2)
+            else
             {
-                throwtrail?.Render(effect);
-                throwtrail2?.Render(effect);
+                trail?.Render(effect);
+                trail2?.Render(effect);
             }
 
             Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);

@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using BombusApisBee.Dusts;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BombusApisBee.Projectiles
 {
@@ -8,16 +9,12 @@ namespace BombusApisBee.Projectiles
         internal int BeeTimer;
         public override void SetStaticDefaults()
         {
-            // The following sets are only applicable to yoyo that use aiStyle 99.
-            // YoyosLifeTimeMultiplier is how long in seconds the yoyo will stay out before automatically returning to the player. 
-            // Vanilla values range from 3f(Wood) to 16f(Chik), and defaults to -1f. Leaving as -1 will make the time infinite.
-            ProjectileID.Sets.YoyosLifeTimeMultiplier[Projectile.type] = 12f;
-            // YoyosMaximumRange is the maximum distance the yoyo sleep away from the player. 
-            // Vanilla values range from 130f(Wood) to 400f(Terrarian), and defaults to 200f
+            ProjectileID.Sets.YoyosLifeTimeMultiplier[Projectile.type] = 14f;
             ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 325f;
-            // YoyosTopSpeed is top speed of the yoyo projectile. 
-            // Vanilla values range from 9f(Wood) to 17.5f(Terrarian), and defaults to 10f
             ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 15.5f;
+            DisplayName.SetDefault("Wasp Nest");
+            ProjectileID.Sets.TrailingMode[Type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Type] = 5;
         }
 
         public override void SafeSetDefaults()
@@ -39,7 +36,7 @@ namespace BombusApisBee.Projectiles
             Player player = Main.player[Projectile.owner];
             if (Main.rand.NextBool(2))
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HoneyDust>());
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HoneyDust>(), Alpha: Main.rand.Next(50, 150));
                 dust.noGravity = true;
                 dust.scale = 1.1f;
             }
@@ -56,9 +53,21 @@ namespace BombusApisBee.Projectiles
                 }
             }
             if (player.Hymenoptra().BeeResourceCurrent <= 0)
-            {
                 Projectile.Kill();
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
+            {
+                Main.spriteBatch.Draw(tex, (Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f) - Main.screenPosition, null, lightColor * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
+                    Projectile.rotation, tex.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.85f, (i / (float)Projectile.oldPos.Length)), 0, 0);
             }
+
+            Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0, 0f);
+            return false;
         }
     }
 }

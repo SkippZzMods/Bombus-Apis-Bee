@@ -25,11 +25,9 @@ namespace BombusApisBee.Items.Other.OnPickupItems
                 player.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent += 12;
             if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
                 player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
-            if (player.whoAmI == Main.myPlayer)
-            {
-                float Beefade = (float)((Math.Sin(Main.GlobalTimeWrappedHourly)));
-                CombatText.NewText(player.getRect(), Color.Lerp(Color.Orange, Color.Yellow, Beefade), 12, false, false);
-            }
+
+            CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, 12, false, false);
+
             return false;
         }
     }

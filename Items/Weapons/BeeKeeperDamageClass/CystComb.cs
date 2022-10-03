@@ -40,8 +40,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             CreateRecipe(1).
                 AddIngredient(ItemID.Ichor, 15).
+                AddIngredient(ItemID.Vertebrae, 10).
                 AddIngredient(ModContent.ItemType<Pollen>(), 10).
-                AddIngredient(ItemID.HoneyBlock, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }
