@@ -9,7 +9,7 @@ namespace BombusApisBee.Projectiles
             DisplayName.SetDefault("HellfireBee");
             Main.projFrames[Projectile.type] = 4;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(BuffID.OnFire3, 300);
         }

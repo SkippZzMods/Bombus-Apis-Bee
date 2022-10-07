@@ -9,10 +9,10 @@ namespace BombusApisBee.PrimitiveDrawing
             if (Main.dedServ)
                 return;
 
-            On.Terraria.Main.DrawPlayers_BehindNPCs += DrawPrim;
+            On.Terraria.Main.DrawDust += DrawPrims;
         }
 
-        private static void DrawPrim(On.Terraria.Main.orig_DrawPlayers_BehindNPCs orig, Main self)
+        private static void DrawPrims(On.Terraria.Main.orig_DrawDust orig, Main self)
         {
             orig(self);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace BombusApisBee.Projectiles
 {
@@ -52,7 +53,7 @@ namespace BombusApisBee.Projectiles
                     if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
                         player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
 
-                    CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)resourceincrease, true, true);
+                    CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)resourceincrease);
                 }
                 Projectile.Kill();
             }
@@ -73,6 +74,11 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity.X = (Projectile.velocity.X * 15f + playerVector.X) / (15f + 1f);
                 Projectile.velocity.Y = (Projectile.velocity.Y * 15f + playerVector.Y) / (15f + 1f);
             }
+        }
+
+        public override void Kill(int timeLeft)
+        {
+            BeeUtils.DrawDustImage(Projectile.Center, DustID.Honey2, 0.15f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HoneyDustImage").Value, 1f, 100, default, rot: 0);
         }
     }
 }

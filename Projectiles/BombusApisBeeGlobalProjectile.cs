@@ -11,7 +11,7 @@ namespace BombusApisBee.Projectiles
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (source is EntitySource_ItemUse_WithAmmo { Entity: Item i })
+            if (source is EntitySource_ItemUse_WithAmmo { Entity: Player p, Item: Item i })
             {
                 if (i.DamageType == BeeUtils.BeeDamageClass())
                     projectile.DamageType = i.DamageType;
@@ -55,6 +55,12 @@ namespace BombusApisBee.Projectiles
                 projectile.friendly = true;
                 projectile.hostile = false;
             }
+
+            if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
+            {
+                projectile.usesIDStaticNPCImmunity = true; //uses custom i-Frame logic
+                projectile.idStaticNPCHitCooldown = 10;
+            }
         }
         public override void AI(Projectile projectile)
         {
@@ -80,6 +86,21 @@ namespace BombusApisBee.Projectiles
                     if (Main.rand.Next(100) < critChance)
                         crit = true;
                 }
+        }
+
+        public override bool? CanHitNPC(Projectile projectile, NPC target)
+        {
+            if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
+                if (target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[projectile.owner] > 0)
+                    return false;
+
+            return base.CanHitNPC(projectile, target);
+        }
+          
+        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        {
+            if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
+                target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[projectile.owner] = 10;
         }
     }
 }

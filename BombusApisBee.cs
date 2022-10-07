@@ -16,12 +16,13 @@ namespace BombusApisBee
 {
     public class BombusApisBee : Mod
     {
-        public static Color honeyIncreaseColor = new Color(255, 218, 110);
+        public static Color honeyIncreaseColor = new Color(255, 226, 43);
 
         public static readonly SoundStyle HoneycombWeapon = SoundID.NPCDeath1 with { Pitch = -0.2f, PitchVariance = 0.2f };
         public static string BeeWeapon = "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/";
         public static string Invisible = "BombusApisBee/ExtraTextures/Invisible";
         public static ModKeybind HoneyManipulatorHotkey;
+        public static ModKeybind LihzardianRelicHotkey;
 
         public Asset<Texture2D> stinger;
         public Asset<Texture2D> bee;
@@ -50,6 +51,8 @@ namespace BombusApisBee
             TextureAssets.Projectile[ProjectileID.BeeArrow] = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/BeeArrowRetexture");
 
             HoneyManipulatorHotkey = KeybindLoader.RegisterKeybind(this, "Honey Manipulation", "Y");
+
+            LihzardianRelicHotkey = KeybindLoader.RegisterKeybind(this, "Lihzardian Hornet Relic", "L");
         }
 
         public override void Unload()
@@ -61,6 +64,8 @@ namespace BombusApisBee
             TextureAssets.Projectile[ProjectileID.Wasp] = wasp;
             TextureAssets.Projectile[ProjectileID.BeeArrow] = beeArrow;
             HoneyManipulatorHotkey = null;
+
+            LihzardianRelicHotkey = null;
         }
     }
 }

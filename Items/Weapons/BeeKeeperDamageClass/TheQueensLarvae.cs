@@ -8,51 +8,52 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            // DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-            Tooltip.SetDefault("'Once a royal queen, now your royal guard'\nDrains your honey bank on use\nPartially Ignores Immunity Frames\nOnly one Queen can be alive at once");
+            Tooltip.SetDefault("Drains your honey on use\n'Once a royal queen, now your royal guard'");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 175;
+            Item.damage = 356;
+
             Item.width = 40;
             Item.height = 20;
+
             Item.useTime = 50;
             Item.useAnimation = 50;
-            Item.useStyle = ItemUseStyleID.Swing;
+            Item.useStyle = ItemUseStyleID.HoldUp;
+
             Item.knockBack = 1f;
-            Item.value = Item.value = Item.sellPrice(2, 50, 0, 0);
+            Item.value = Item.value = Item.sellPrice(0, 25, 0, 0);
             Item.rare = ItemRarityID.Red;
             Item.shoot = ModContent.ProjectileType<TheQueen>();
+
             Item.shootSpeed = 13;
             Item.UseSound = SoundID.Roar;
-            Item.scale = 1.25f;
-            Item.crit = 4;
+
             Item.noMelee = true;
-            Item.noUseGraphic = true;
-            beeResourceCost = 150;
+            beeResourceCost = 5;
         }
 
-
-        public override Vector2? HoldoutOffset()
-        {
-            return new Vector2(-3, 0);
-        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-            modPlayer2.shakeTimer = 50;
-            Projectile.NewProjectile(source, player.Center, velocity, ModContent.ProjectileType<TheQueen>(), damage, 1f, player.whoAmI);
-            return false;
-        }
-        public override bool SafeCanUseItem(Player player)
-        {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<TheQueen>()] < 1)
+            player.Bombus().shakeTimer += 20;
+            player.Hymenoptra().BeeResourceCurrent = 0;
+            player.Hymenoptra().BeeResourceRegenTimer = -600;
+            player.AddBuff<Buffs.TheQueensGuard>(120);
+            Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.One, ModContent.ProjectileType<TheQueen>(), damage, knockback, player.whoAmI);
+            for (int i = 0; i < 30; i++)
             {
-                return true;
+                Dust.NewDustPerfect(Main.MouseWorld, ModContent.DustType<Dusts.HoneyDust>(), Main.rand.NextVector2Circular(5f, 5f), Main.rand.Next(100, 200), default, 1.45f).noGravity = true;
+
+                Dust.NewDustPerfect(Main.MouseWorld, DustID.Honey2, Main.rand.NextVector2Circular(6f, 6f), Main.rand.Next(50, 150), default, 1.45f).noGravity = true;
             }
             return false;
+        }
+
+        public override bool CanUseItem(Player player)
+        {
+            return player.ownedProjectileCounts<TheQueen>() <= 0 && player.Hymenoptra().BeeResourceCurrent >= player.Hymenoptra().BeeResourceMax2;
         }
     }
 }

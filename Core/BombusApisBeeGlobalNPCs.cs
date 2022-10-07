@@ -13,12 +13,22 @@ namespace BombusApisBee.Core
 {
     public class BombusApisBeeGlobalNPCs : GlobalNPC
     {
+        public int[] BeeHitCooldown = new int[256];
+
         public string NPCShopKey1 = "A faint revving can be heard from the Traitor Bee's shop";
         public string NPCShopKey2 = "An incessant buzzing is heard coming from the Traitor Bee's shop";
         public static List<int> PillarList = new List<int>(){
         NPCID.SolarCorite, NPCID.SolarCrawltipedeTail, NPCID.SolarDrakomire, NPCID.SolarDrakomireRider, NPCID.SolarSpearman, 419, 417, 427, 428, 426, 425, 429, 421, 423, 420, 424, 412, 413, 407, 402, 403, 404, 405, 406, 411, 409, 410};
         public override bool InstancePerEntity => true;
 
+        public override void ResetEffects(NPC npc)
+        {
+            for (int i = 0; i < 256; i++)
+            {
+                if (BeeHitCooldown[i] > 0)
+                    BeeHitCooldown[i]--;
+            }
+        }
         public override bool PreKill(NPC npc)
         {
             if (npc.type == NPCID.Golem && !NPC.downedGolemBoss)
@@ -102,6 +112,8 @@ namespace BombusApisBee.Core
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
+            if (npc.type == NPCID.FlyingSnake || npc.type == NPCID.Lihzahrd || npc.type == NPCID.LihzahrdCrawler)
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LihzardianHornetRelic>(), 35));
            
             if (npc.type == NPCID.IceQueen)
             {
@@ -172,7 +184,7 @@ namespace BombusApisBee.Core
 
             if (npc.type == NPCID.MartianSaucerCore)
             {
-                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<TheLaserBeem>(), 5, 4));
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<LaserbeemBlaster>(), 5, 4));
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<BeeBubbleBlaster>(), 5, 4));
             }
 

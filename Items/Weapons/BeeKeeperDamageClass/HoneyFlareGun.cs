@@ -21,15 +21,14 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useTime = 35;
             Item.useAnimation = 35;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 1f;
+            Item.knockBack = 2f;
             Item.value = Item.sellPrice(0, 1, 25, 0);
             Item.rare = ItemRarityID.Blue;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<HoneyFlare>();
             Item.shootSpeed = 15;
             Item.UseSound = SoundID.Item11;
-            Item.scale = 1;
-            Item.crit = 4;
+
             beeResourceCost = 2;
         }
 

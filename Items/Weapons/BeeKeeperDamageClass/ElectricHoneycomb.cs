@@ -22,7 +22,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3f;
             Item.value = Item.sellPrice(0, 5, 15, 75);
-            Item.rare = ItemRarityID.LightPurple;
+            Item.rare = ItemRarityID.LightRed;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<ElectricHoneycombProj>();

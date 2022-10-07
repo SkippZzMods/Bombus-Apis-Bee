@@ -14,7 +14,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 45;
+            Item.damage = 49;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 20;

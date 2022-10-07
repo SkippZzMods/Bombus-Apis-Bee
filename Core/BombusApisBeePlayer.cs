@@ -13,7 +13,7 @@ using Terraria.ModLoader.IO;
 
 namespace BombusApisBee.Core
 {
-    public class BombusApisBeePlayer : ModPlayer
+    public partial class BombusApisBeePlayer : ModPlayer
     {
         public bool RetinaReleaser;
         public bool BeeShoot;
@@ -55,6 +55,8 @@ namespace BombusApisBee.Core
         public int OcularCooldown;
         public bool FrozenStinger;
         public bool RoyalJelly;
+        public bool LihzardRelic;
+        public int LihzardRelicTimer;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new[] { new Item(ModContent.ItemType<Honeycomb>(), 1) };
@@ -99,8 +101,16 @@ namespace BombusApisBee.Core
             if (OcularCooldown > 0)
                 OcularCooldown--;
             FrozenStinger = false;
+            LihzardRelic = false;
+            if (LihzardRelicTimer > 0)
+                LihzardRelicTimer--;
         }
 
+        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        {
+            if (LihzardRelicTimer > 0)
+                damage = (int)(damage * 1.1f);
+        }
         public override void LoadData(TagCompound tag)
         {
             RoyalJelly = tag.GetBool("RoyalJelly");
@@ -135,12 +145,38 @@ namespace BombusApisBee.Core
                 modPlayer2.BeeResourceCurrent -= healamount;
                 modPlayer2.BeeResourceRegenTimer = -300;
             }
+
+            if (LihzardRelic && BombusApisBee.LihzardianRelicHotkey.JustPressed && !Player.HasBuff<LihzardianHornetRelicCooldown>())
+            {
+                SoundID.Item74.PlayWith(Player.Center, -0.15f, 0.1f, 1.25f);
+                Player.AddBuff(ModContent.BuffType<LihzardianHornetRelicCooldown>(), 2700, false);
+                LihzardRelicTimer = 480;
+
+                for (int i = 0; i < 25; i++)
+                {
+                    Dust.NewDustPerfect(Player.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(4.25f, 4.25f), 0, new Color(245, 245, 149), 0.55f);
+
+                    Dust.NewDustPerfect(Player.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(5.25f, 5.25f), 0, new Color(222, 173, 40), 0.55f);
+                }
+            }
         }
 
         public override void UpdateEquips()
         {
             if (RoyalJelly)
                 Player.Hymenoptra().BeeResourceMax2 += 15;
+
+            if (LihzardRelicTimer > 0)
+            {
+                Player.IncreaseBeeCrit(12);
+                Player.IncreaseBeeDamage(0.12f);
+                Player.IncreaseBeeUseSpeed(0.12f);
+
+                float lerper = MathHelper.Lerp(85f, 5f, 1f - LihzardRelicTimer / 480f);
+                Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2CircularEdge(lerper, lerper), ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(0.25f, 0.25f), 0, new Color(222, 173, 40), 0.45f);
+
+                Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2CircularEdge(lerper, lerper), ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(0.75f, 0.75f), 0, new Color(245, 245, 149), 0.35f);
+            }
         }
 
         public override void PostUpdateMiscEffects()
@@ -233,9 +269,21 @@ namespace BombusApisBee.Core
                 Player.lifeRegen += 4;
                 Player.lifeRegenTime += 4;
             }
+
             base.UpdateLifeRegen();
         }
 
+        public override void UpdateBadLifeRegen()
+        {
+            if (LihzardRelicTimer > 0)
+            {
+                if (Player.lifeRegen > 0)
+                    Player.lifeRegen = 0;
+
+                Player.lifeRegenTime = 0;
+                Player.lifeRegen -= 16;
+            }
+        }
 
         public override void ModifyScreenPosition()
         {
@@ -346,7 +394,7 @@ namespace BombusApisBee.Core
 
                 if (HoneyedHeart && !target.SpawnedFromStatue)
                 {
-                    if (crit && Main.rand.NextFloat() < 0.75f && Player.ownedProjectileCounts[ModContent.ProjectileType<BeeResourceIncreaseProjectile>()] < 9)
+                    if (Main.rand.NextFloat() < 0.1f)
                     {
                         Vector2 shootVelocity = target.Center.DirectionTo(Player.Center) * 10f;
                         Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, shootVelocity, ModContent.ProjectileType<BeeResourceIncreaseProjectile>(), 0, 1f, Player.whoAmI, 0, 1);

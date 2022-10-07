@@ -4,8 +4,6 @@ namespace BombusApisBee.Projectiles
 {
     public class SpectralBee : BeeHelper
     {
-        public override int RegularBeePenetrate => 3;
-        public override int GiantBeePenetrate => 4;
         public override int FrameTimer => 4;
         public override void SetStaticDefaults()
         {
@@ -18,6 +16,8 @@ namespace BombusApisBee.Projectiles
             Projectile.light = 0.15f;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 8;
+
+            Projectile.penetrate = 4;
         }
         public override void SafeAI()
         {

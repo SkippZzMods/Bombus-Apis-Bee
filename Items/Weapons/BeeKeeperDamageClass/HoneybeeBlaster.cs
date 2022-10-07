@@ -89,7 +89,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             modPlayer2.shakeTimer = 11;
             for (int i = 0; i < Main.rand.Next(1, 3); i++)
             {
-                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(5f.AsRadians()), player.beeType(), player.beeDamage((int)(damage)), player.beeKB(knockback), player.whoAmI).
+                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(15f.AsRadians()), player.beeType(), player.beeDamage((int)(damage)), player.beeKB(knockback), player.whoAmI).
                     DamageType = BeeUtils.BeeDamageClass();
             }
             for (int i = 0; i < Main.rand.Next(2, 4); i++)

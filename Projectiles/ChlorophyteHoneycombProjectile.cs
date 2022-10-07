@@ -50,7 +50,7 @@ namespace BombusApisBee.Projectiles
 
                 for (int i = 0; i < Main.rand.Next(4, 7); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.One.RotatedBy(Projectile.velocity.ToRotation() - MathHelper.PiOver4).RotatedByRandom(0.3f) * 3f, ModContent.ProjectileType<ChlorophyteBee>(), Projectile.damage * 2 / 3, 0, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.3f) * 0.25f, ModContent.ProjectileType<ChlorophyteBee>(), Projectile.damage * 2 / 3, 0, Projectile.owner);
                 }
 
                 for (int i = 0; i < 30; i++)

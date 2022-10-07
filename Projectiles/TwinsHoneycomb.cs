@@ -50,7 +50,10 @@ namespace BombusApisBee.Projectiles
             }
 
             if (Projectile.timeLeft % 35 == 0)
+            {
                 owner.Hymenoptra().BeeResourceCurrent--;
+                owner.Hymenoptra().BeeResourceRegenTimer = -60;
+            }
 
             if (rotTimer > 0)
                 rotTimer--;
@@ -355,7 +358,10 @@ namespace BombusApisBee.Projectiles
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
 
             if (Projectile.timeLeft % 35 == 0)
+            {
+                owner.Hymenoptra().BeeResourceRegenTimer = -60;
                 owner.Hymenoptra().BeeResourceCurrent--;
+            }
 
             if (owner.Hymenoptra().BeeResourceCurrent <= 0)
                 Projectile.Kill();

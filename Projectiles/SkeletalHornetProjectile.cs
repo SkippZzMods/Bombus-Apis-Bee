@@ -109,7 +109,7 @@ namespace BombusApisBee.Projectiles
             {
                 for (int k = 0; k < Projectile.oldPos.Length; k++)
                 {
-                    Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + (sourceRect.Size() / 2f) + new Vector2(0f, Projectile.gfxOffY);
+                    Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + (Projectile.Size / 2f) + new Vector2(0f, Projectile.gfxOffY);
                     Color color = new Color(200, 45, 20) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
                     color.A = 0;
                     if (EnrageTimer < 30)

@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.BeeDamageClass;
+using BombusApisBee.Items.Other.Crafting;
 using BombusApisBee.Projectiles;
 using Terraria.DataStructures;
 
@@ -9,7 +10,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int delay;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of 6 bee bullets\nFear the swarm!");
+            Tooltip.SetDefault("Fires a burst of 6 bee bullets\n'Fear the swarm!'");
         }
 
         public override void SafeSetDefaults()
@@ -63,6 +64,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             player.Hymenoptra().BeeResourceRegenTimer = -120;
             Gore.NewGorePerfect(source, player.Center + Vector2.Normalize(velocity) * 5f, velocity * -0.25f + (Vector2.UnitY * -3f), Mod.Find<ModGore>("ShellEjectGore").Type).timeLeft = 90;
             return true;
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe().AddIngredient(ItemID.HallowedBar, 10).AddIngredient(ItemID.Handgun).AddIngredient(ItemID.SoulofSight).AddIngredient<Pollen>(30).AddTile(TileID.MythrilAnvil).Register();
         }
     }
 }

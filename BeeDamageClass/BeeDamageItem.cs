@@ -43,7 +43,7 @@ namespace BombusApisBee.BeeDamageClass
         {
             return true;
         }
-        public sealed override bool CanUseItem(Player player)
+        public override bool CanUseItem(Player player)
         {
             bool bee = false;
             var BeeDamagePlayer = player.GetModPlayer<BeeDamagePlayer>();

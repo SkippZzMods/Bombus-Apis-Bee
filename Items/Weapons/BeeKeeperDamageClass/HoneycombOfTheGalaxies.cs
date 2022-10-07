@@ -37,6 +37,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             beeResourceCost = 5;
             Item.channel = true;
             Item.noUseGraphic = true;
+
+            ResourceChance = 0.33f;
         }
         public override void AddRecipes()
         {

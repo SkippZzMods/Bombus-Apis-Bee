@@ -47,6 +47,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Vector2 muzzleOffset = Vector2.Normalize(velocity) * 50f;
             if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))
                 position += muzzleOffset;
+
+            position += new Vector2(0, 3 * player.direction).RotatedBy(velocity.ToRotation());
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

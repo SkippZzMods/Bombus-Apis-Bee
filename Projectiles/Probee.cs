@@ -14,7 +14,6 @@ namespace BombusApisBee.Projectiles
 
         public override bool CanBeGiant => false;
 
-        public override int RegularBeePenetrate => 3;
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Probee");

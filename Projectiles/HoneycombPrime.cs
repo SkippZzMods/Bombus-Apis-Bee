@@ -588,7 +588,6 @@ namespace BombusApisBee.Projectiles
             Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, new Color(213, 95, 89, 0) * 0.5f, Projectile.rotation, bloomTex.Size() / 2f, 0.45f, 0, 0);
 
             if (laser && laserTimer > 0)
-
                 Main.spriteBatch.Draw(bloomTex, Projectile.Center + Projectile.rotation.ToRotationVector2() * 7f - Main.screenPosition, null, new Color(161, 31, 85, 0) * TrailFade(), Projectile.rotation, bloomTex.Size() / 2f, 0.65f, 0, 0);
             return false;
         }

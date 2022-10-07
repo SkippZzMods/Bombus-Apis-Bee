@@ -108,8 +108,9 @@ namespace BombusApisBee.Projectiles
                     ShotDelay = 0;
                 }
             }
-            UpdateProjectileHeldVariables(armPosition, !SpinningDown);
+
             ManipulatePlayerVariables();
+            UpdateProjectileHeldVariables(armPosition, !SpinningDown);
         }
         public void ShootShells(Vector2 armPosition)
         {
@@ -192,11 +193,12 @@ namespace BombusApisBee.Projectiles
             }
             Projectile.position = armPosition - Projectile.Size * 0.5f;
             Projectile.rotation = Utils.ToRotation(Projectile.velocity);
-            if (Projectile.spriteDirection == -1)
-            {
+
+            if (Owner.direction == -1)
                 Projectile.rotation += 3.1415927f;
-            }
+
             Projectile.spriteDirection = Projectile.direction;
+
             if (UpdateTime)
             {
                 Projectile.timeLeft = 2;

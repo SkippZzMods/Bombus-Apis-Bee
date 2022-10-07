@@ -32,7 +32,7 @@ namespace BombusApisBee.Projectiles
             Projectile.friendly = false;
             Projectile.DamageType = BeeUtils.BeeDamageClass();
             Projectile.ignoreWater = true;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.tileCollide = false;
             Projectile.Bombus().HeldProj = true;
         }

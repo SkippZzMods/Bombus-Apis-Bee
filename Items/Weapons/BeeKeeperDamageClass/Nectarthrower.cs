@@ -28,6 +28,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 12.5f;
             Item.UseSound = SoundID.Item34;
             beeResourceCost = 1;
+
+            ResourceChance = 0.15f;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

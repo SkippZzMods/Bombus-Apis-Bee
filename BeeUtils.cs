@@ -16,7 +16,7 @@ namespace BombusApisBee
             Player player = Main.player[projectile.owner];
             return Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
         }
-        public static void DrawDustImage(Vector2 position, int dustType, float size, Texture2D tex, float dustSize = 1f, int Alpha = 0, Color? color = null, bool noGravity = true, float rot = 0.34f)
+        public static void DrawDustImage(Vector2 position, int dustType, float size, Texture2D tex, float dustSize = 1f, int Alpha = 0, Color color = default, bool noGravity = true, float rot = 0.34f)
         {
             if (Main.netMode != NetmodeID.Server)
             {
@@ -34,7 +34,7 @@ namespace BombusApisBee
                             double dustY = (j - (tex.Height / 2));
                             dustX *= size;
                             dustY *= size;
-                            Dust.NewDustPerfect(position, dustType, new Vector2((float)dustX, (float)dustY).RotatedBy(rotation), Alpha, (Color)color, dustSize).noGravity = noGravity;
+                            Dust.NewDustPerfect(position, dustType, new Vector2((float)dustX, (float)dustY).RotatedBy(rotation), Alpha, color, dustSize).noGravity = noGravity;
                         }
                     }
                 }

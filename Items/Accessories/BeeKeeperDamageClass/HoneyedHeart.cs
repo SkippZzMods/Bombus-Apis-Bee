@@ -6,7 +6,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Hymenoptra critical strikes have a chance to spawn a homing honey globule, which replenishes one honey.");
+            DisplayName.SetDefault("Heart Of Honey");
+            Tooltip.SetDefault("Hymenoptra strikes have a chance to conjure a globule of honey, which replenishes honey");
         }
 
         public override void SetDefaults()

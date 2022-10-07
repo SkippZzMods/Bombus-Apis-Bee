@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Living Flower Crown");
-            Tooltip.SetDefault("2% increased hymenoptra damage\n+5 max Honey");
+            Tooltip.SetDefault("2% increased hymenoptra damage\nIncreases maximum honey by 5");
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 
@@ -20,6 +20,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             Item.width = 18;
             Item.height = 18;
             Item.value = Item.sellPrice(copper: 50);
+
             Item.rare = ItemRarityID.White;
             Item.defense = 1;
         }

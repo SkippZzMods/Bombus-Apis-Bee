@@ -26,10 +26,6 @@ namespace BombusApisBee.BeeHelperProj
         public bool Initialized;
         public virtual int FrameTimer => 3;
 
-        public virtual int GiantBeePenetrate => 3;
-
-        public virtual int RegularBeePenetrate => 2;
-
         public virtual void SafeAI()
         {
         }
@@ -69,11 +65,20 @@ namespace BombusApisBee.BeeHelperProj
                 if (player.strongBees)
                     Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
             }
+
+            Projectile.width = (Giant && CanBeGiant) ? GiantWidth : SmallWidth;
+            Projectile.height = (Giant && CanBeGiant) ? GiantHeight : SmallHeight;
+            if (Giant && CanBeGiant)
+                otherGiant = true;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public virtual bool? SafeCanHitNPC(NPC target) { return true; }
+        public sealed override bool? CanHitNPC(NPC target)
         {
-            return null;
+            if (target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[Projectile.owner] > 0)
+                return false;
+
+            return SafeCanHitNPC(target);
         }
 
         public sealed override void SetDefaults()
@@ -86,17 +91,19 @@ namespace BombusApisBee.BeeHelperProj
             Projectile.timeLeft = 1200;
             Projectile.ignoreWater = false;
             Projectile.tileCollide = true;
-            Projectile.penetrate = 2;
+            Projectile.penetrate = 3;
+
+            Projectile.usesIDStaticNPCImmunity = true; //uses custom i-Frame logic
+            Projectile.idStaticNPCHitCooldown = 10;
+
             SafeSetDefaults();
         }
 
         public sealed override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.penetrate--;
-            if (Projectile.penetrate <= 0)
-                Projectile.Kill();
-            else
+            if (Projectile.penetrate > 0)
             {
+                Projectile.penetrate--;
                 if (Projectile.velocity.X != oldVelocity.X)
                     Projectile.velocity.X = -oldVelocity.X;
 
@@ -117,15 +124,6 @@ namespace BombusApisBee.BeeHelperProj
             else if (Projectile.wet && !Projectile.honeyWet)
                 Projectile.Kill();
 
-            if (!Initialized)
-            {
-                Projectile.penetrate = (Giant && CanBeGiant) ? GiantBeePenetrate : RegularBeePenetrate;
-                Projectile.width = (Giant && CanBeGiant) ? GiantWidth : SmallWidth;
-                Projectile.height = (Giant && CanBeGiant) ? GiantHeight : SmallHeight;
-                if (Giant && CanBeGiant)
-                    otherGiant = true;
-                Initialized = true;
-            }           
             return base.PreAI();
         }
         public sealed override void AI()
@@ -245,6 +243,14 @@ namespace BombusApisBee.BeeHelperProj
             }
 
             SafeModifyHitNPC(target, ref damage, ref knockback, ref crit, ref hitDirection);
+        }
+
+        public virtual void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit) { }
+        public sealed override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[Projectile.owner] = 10;
+
+            SafeOnHitNPC(target, damage, knockback, crit);
         }
     }
 }

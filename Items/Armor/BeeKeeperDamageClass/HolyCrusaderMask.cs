@@ -21,7 +21,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 5);
             Item.rare = ItemRarityID.Pink;
-            Item.defense = 19;
+            Item.defense = 14;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

@@ -11,7 +11,6 @@ namespace BombusApisbee.NPCs
     [AutoloadHead]
     public class TheTraitorBee : ModNPC
     {
-
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Traitor Bee");

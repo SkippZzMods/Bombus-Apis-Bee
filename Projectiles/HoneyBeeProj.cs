@@ -56,6 +56,13 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity.X = -0.15f;
                 Projectile.velocity.Y = -0.05f;
             }
+
+            if (distanceToIdlePosition > 2000f)
+            {
+                Projectile.Center = idlePosition;
+                Projectile.velocity *= 0.1f;
+                Projectile.netUpdate = true;
+            }
             Projectile.rotation = Projectile.velocity.X * 0.05f;
             Projectile.frameCounter++;
             if (Projectile.frameCounter >= 8)
