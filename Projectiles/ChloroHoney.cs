@@ -69,9 +69,9 @@ namespace BombusApisBee.Projectiles
 
         public override bool PreDraw(ref Color lightColor)
         {
+            Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
             for (int i = 0; i < 3; i++)
-            {
-                Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+            {                
                 Color color = new Color(59, 148, 20);
                 color.A = 0;
                 Main.spriteBatch.Draw(tex, (Projectile.Center - Projectile.velocity) - Main.screenPosition, null, color, Projectile.rotation, tex.Size() / 2f, 0.3f, 0f, 0f);

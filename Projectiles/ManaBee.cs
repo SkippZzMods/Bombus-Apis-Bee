@@ -24,8 +24,8 @@ namespace BombusApisBee.Projectiles
 
                 float x = (float)Math.Cos(k + rand);
                 float y = (float)Math.Sin(k + rand);
-                float mult = ((Math.Abs(((k * (5 / 2)) % (float)Math.PI) - (float)Math.PI / 2)) * 1f) + 0.75f;
-                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), new Vector2(x, y).RotatedBy(rot) * mult * 1.2f, 0, new Color(18, 18, 255), 0.3f);
+                float mult = ((Math.Abs(((k * 5 / 2) % (float)Math.PI) - (float)Math.PI / 2)) * 1f) + 0.75f;
+                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), new Vector2(x, y).RotatedBy(rot) * mult * 1.2f, 0, new Color(18, 18, 255), 0.45f);
             }
 
             if (Main.myPlayer == Projectile.owner)

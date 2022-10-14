@@ -29,6 +29,8 @@ namespace BombusApisBee.Projectiles
 
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 9;
+
+            Projectile.rotation = Main.rand.NextFloat(6.28f);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

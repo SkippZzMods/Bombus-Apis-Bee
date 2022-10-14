@@ -140,7 +140,8 @@ namespace BombusApisBee.BeeHelperProj
                     Projectile.frame = 0;
                 }
             }
-            float findClosest = 1000f;
+
+            float findClosest = 10000f;
             float num262 = Projectile.position.X;
             float num263 = Projectile.position.Y;
             bool flag63 = false;
@@ -151,7 +152,7 @@ namespace BombusApisBee.BeeHelperProj
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];
-                    if (npc.CanBeChasedBy(this) && (!npc.wet || npc.type == NPCID.DukeFishron))
+                    if (npc.CanBeChasedBy() && (!npc.wet || npc.type == NPCID.DukeFishron))
                     {
                         float num267 = npc.position.X + (float)(npc.width / 2);
                         float num268 = npc.position.Y + (float)(npc.height / 2);

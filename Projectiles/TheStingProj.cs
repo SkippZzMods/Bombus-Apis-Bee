@@ -91,7 +91,7 @@ namespace BombusApisBee.Projectiles
                             distance = 3f / distance;
                             shootToX *= distance * 4;
                             shootToY *= distance * 4;
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center.X, Projectile.Center.Y, shootToX, shootToY, ProjectileID.HornetStinger, Projectile.damage * 1 / 2, Projectile.knockBack, Main.myPlayer);
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center.X, Projectile.Center.Y, shootToX, shootToY, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage * 1 / 2, Projectile.knockBack, Main.myPlayer);
                             Projectile.ai[0] = 0f;
                         }
                     }

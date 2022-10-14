@@ -10,30 +10,28 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            // DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
             Tooltip.SetDefault("'The souls of forgotten bees seek vengeance'");
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 8));
-
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 58;
-            Item.noMelee = true;
+            Item.damage = 65;
+            Item.noMelee = true; 
             Item.width = 50;
             Item.height = 18;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
+            Item.useTime = 15;
+            Item.useAnimation = 15;
+
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 2;
+            Item.knockBack = 2f;
             Item.value = Item.sellPrice(0, 10, 50, 0);
+
             Item.rare = ItemRarityID.Yellow;
-            Item.autoReuse = true;
+            Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<SpectralBeeTomeHoldout>();
-            Item.shootSpeed = 0f;
-            Item.UseSound = null;
-            Item.scale = 1;
-            Item.crit = 4;
+            Item.shootSpeed = 1f;
+
             beeResourceCost = 1;
             Item.noUseGraphic = true;
             Item.channel = true;

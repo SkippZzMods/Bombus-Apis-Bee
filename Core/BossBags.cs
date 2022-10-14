@@ -18,7 +18,7 @@ namespace BombusApisBee.Core
             }
 
             if (item.type == ItemID.EaterOfWorldsBossBag)
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InfectedHoneycomb>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EaterOfHoneycombs>()));
 
             if (item.type == ItemID.BrainOfCthulhuBossBag)
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainyHoneycomb>()));
@@ -35,7 +35,7 @@ namespace BombusApisBee.Core
 
             if (item.type == ItemID.WallOfFleshBossBag)
             {
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheBeepeater>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneyShot>()));
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BeeEmblem>()));
             }
 
@@ -52,7 +52,7 @@ namespace BombusApisBee.Core
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HimensApiary>()));
 
             if (item.type == ItemID.GolemBossBag)
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EarthenBeeTome>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TomeOfTheSun>()));
 
             if (item.type == ItemID.MoonLordBossBag)
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheQueensLarvae>()));

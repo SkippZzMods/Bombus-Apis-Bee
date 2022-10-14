@@ -139,7 +139,7 @@ namespace BombusApisBee.Core
         }
         public override void ModifyValue(ref float valueMult)
         {
-            valueMult *= 1f + (honeyBonus / 10f + chanceBonus);
+            valueMult *= 1f + (honeyBonus / 100f + chanceBonus);
         }
         public override void Apply(Item item)
         {

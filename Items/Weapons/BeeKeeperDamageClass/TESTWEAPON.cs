@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.rare = ItemRarityID.Gray;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<AstralStar>();
+            Item.shoot = ModContent.ProjectileType<AstralStarSplitting>();
             Item.shootSpeed = 10;
             Item.UseSound = SoundID.Item11;
             Item.scale = 1;

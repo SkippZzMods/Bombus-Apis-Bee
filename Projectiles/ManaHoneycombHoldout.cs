@@ -41,7 +41,7 @@ namespace BombusApisBee.Projectiles
 
                         float x = (float)Math.Cos(k + rand);
                         float y = (float)Math.Sin(k + rand);
-                        float mult = ((Math.Abs(((k * (7 / 2)) % (float)Math.PI) - (float)Math.PI / 2)) * 0.6f) + 0.5f;
+                        float mult = ((Math.Abs(((k * 5 / 2) % (float)Math.PI) - (float)Math.PI / 2)) * 0.6f) + 0.5f;
                         Dust.NewDustPerfect(starPos, ModContent.DustType<Dusts.GlowFastDecelerate>(), new Vector2(x, y) * mult * 1.2f, 0, new Color(18, 18, 255), 0.35f);
                     }
                 }

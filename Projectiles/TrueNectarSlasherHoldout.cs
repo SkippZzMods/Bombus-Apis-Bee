@@ -324,6 +324,7 @@ namespace BombusApisBee.Projectiles
                         if (Projectile.velocity.Y > 0f && betweenY < 0f)
                             Projectile.velocity.Y -= adjust;
                     }
+
                     if (Projectile.Distance(owner.Center) < 25f)
                     {
                         BeeUtils.DrawDustImage(owner.Center + new Vector2(3f, 0f), ModContent.DustType<Dusts.GlowFastDecelerate>(), 0.15f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/TrueNectarSlasherDustImage").Value, 1f, 0, new Color(255, 255, 150), rot: 0f);

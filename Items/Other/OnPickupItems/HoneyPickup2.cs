@@ -12,7 +12,7 @@ namespace BombusApisBee.Items.Other.OnPickupItems
         }
         public override void SetDefaults()
         {
-            Item.width = Item.height = 35;
+            Item.width = Item.height = 20;
             Item.rare = ItemRarityID.Yellow;
         }
         public override bool ItemSpace(Player player)

@@ -11,6 +11,52 @@ namespace BombusApisBee
 {
     public static class BeeUtils
     {
+        public static Vector2 GetArmPosition(this Player player)
+        {
+            Vector2 value = Main.OffsetsPlayerOnhand[player.bodyFrame.Y / 56] * 2f;
+            if (player.direction != 1)
+                value.X = (float)player.bodyFrame.Width - value.X;
+            if (player.gravDir != 1f)
+                value.Y = (float)player.bodyFrame.Height - value.Y;
+            value -= new Vector2((float)(player.bodyFrame.Width - player.width), (float)(player.bodyFrame.Height - 42)) / 2f;
+            return player.RotatedRelativePoint(player.MountedCenter - new Vector2(20f, 42f) / 2f + value + Vector2.UnitY * player.gfxOffY, false, true);
+        }
+        public static void DrawStar(Vector2 position, int dustType, int alpha = 0, Color dustColor = default, bool noGrav = true, float pointAmount = 5, float mainSize = 1, float dustDensity = 1, float dustSize = 1f, float pointDepthMult = 1f, float pointDepthMultOffset = 0.5f, float randomAmount = 0, float rotationAmount = -1)
+        {
+            float rot;
+            if (rotationAmount < 0) { rot = Main.rand.NextFloat(0, (float)Math.PI * 2); }
+            else { rot = rotationAmount; }
+
+            float density = 1 / dustDensity * 0.1f;
+
+            for (float k = 0; k < 6.28f; k += density)
+            {
+                float rand = 0;
+                if (randomAmount > 0) { rand = Main.rand.NextFloat(-0.01f, 0.01f) * randomAmount; }
+
+                float x = (float)Math.Cos(k + rand);
+                float y = (float)Math.Sin(k + rand);
+                float mult = ((Math.Abs(((k * (pointAmount / 2)) % (float)Math.PI) - (float)Math.PI / 2)) * pointDepthMult) + pointDepthMultOffset;
+                Dust.NewDustPerfect(position, dustType, new Vector2(x, y).RotatedBy(rot) * mult * mainSize, alpha, dustColor, dustSize).noGravity = noGrav;
+            }
+        }
+
+        public static void DrawStarWithRot(Vector2 position, int dustType, int alpha = 0, Color dustColor = default, bool noGrav = true, float pointAmount = 5, float mainSize = 1, float dustDensity = 1, float dustSize = 1f, float pointDepthMult = 1f, float pointDepthMultOffset = 0.5f, float randomAmount = 0, float rot = 0f)
+        {
+            float density = 1 / dustDensity * 0.1f;
+
+            for (float k = 0; k < 6.28f; k += density)
+            {
+                float rand = 0;
+                if (randomAmount > 0) { rand = Main.rand.NextFloat(-0.01f, 0.01f) * randomAmount; }
+
+                float x = (float)Math.Cos(k + rand);
+                float y = (float)Math.Sin(k + rand);
+                float mult = ((Math.Abs(((k * (pointAmount / 2)) % (float)Math.PI) - (float)Math.PI / 2)) * pointDepthMult) + pointDepthMultOffset;
+                Dust.NewDustPerfect(position, dustType, new Vector2(x, y).RotatedBy(rot) * mult * mainSize, alpha, dustColor, dustSize).noGravity = noGrav;
+            }
+        }
+
         public static Projectile SpawnBee(this Projectile projectile, IEntitySource source, Vector2 pos, Vector2 velocity, float damage, float knockBack = 0f)
         {
             Player player = Main.player[projectile.owner];

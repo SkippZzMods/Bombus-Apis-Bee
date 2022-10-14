@@ -158,7 +158,7 @@ namespace BombusApisBee.Core
             if (npc.type == NPCID.WallofFlesh)
             {
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<BeeEmblem>()));
-                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<TheBeepeater>()));
+                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<HoneyShot>()));
             }
 
             if (npc.type == NPCID.DarkCaster)
@@ -180,7 +180,7 @@ namespace BombusApisBee.Core
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<TheQueensLarvae>()));
 
             if (npc.type == NPCID.Golem)
-                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<EarthenBeeTome>()));
+                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<TomeOfTheSun>()));
 
             if (npc.type == NPCID.MartianSaucerCore)
             {

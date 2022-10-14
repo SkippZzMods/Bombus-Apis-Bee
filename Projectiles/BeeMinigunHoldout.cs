@@ -191,6 +191,7 @@ namespace BombusApisBee.Projectiles
                     Projectile.netUpdate = true;
                 }
             }
+
             Projectile.position = armPosition - Projectile.Size * 0.5f;
             Projectile.rotation = Utils.ToRotation(Projectile.velocity);
 

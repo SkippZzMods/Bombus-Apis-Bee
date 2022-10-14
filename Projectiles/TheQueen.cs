@@ -447,7 +447,7 @@ namespace BombusApisBee.Projectiles
                 toIdlePos = Vector2.Zero;
 
             float distance = toIdlePos.Length();
-            float speed = Vector2.Distance(Projectile.Center, targetPos) * 0.035f;
+            float speed = Vector2.Distance(Projectile.Center, targetPos) * 0.045f;
             speed = Utils.Clamp(speed, 1f, 35f);
             float inertia = Vector2.Distance(Projectile.Center, targetPos) * 0.05f;
             inertia = Utils.Clamp(inertia, 5f, 65f);
@@ -477,27 +477,28 @@ namespace BombusApisBee.Projectiles
                 {
                     SoundID.Item74.PlayWith(Projectile.Center, -0.15f, 0.25f, 1.35f);
                     owner.Bombus().shakeTimer += 20;
+                    laserRot = Projectile.DirectionTo(target.Center).ToRotation();
                 }
 
                 oldLaserRot = laserRot;
-                laserRot = Projectile.DirectionTo(target.Center).ToRotation();
+                laserRot = MathHelper.Lerp(oldLaserRot, Projectile.DirectionTo(target.Center).ToRotation(), 0.15f);
 
                 Projectile.velocity -= Vector2.One.RotatedBy(laserRot - MathHelper.PiOver4) * MathHelper.Lerp(0.65f, 0.1f, switchTimer / 240f);
 
                 Vector2 lerpPos = Vector2.Lerp(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), laserEnd, Main.rand.NextFloat());
-                Dust.NewDustPerfect(lerpPos, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(214, 178, 36), 0.45f);
+                Dust.NewDustPerfect(lerpPos, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(214, 178, 36) * TrailFade(), 0.45f);
                 lerpPos = Vector2.Lerp(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), laserEnd, Main.rand.NextFloat());
-                Dust.NewDustPerfect(lerpPos, ModContent.DustType<Dusts.Glow>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(254, 255, 204), 0.4f);
+                Dust.NewDustPerfect(lerpPos, ModContent.DustType<Dusts.Glow>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(254, 255, 204) * TrailFade(), 0.4f);
 
-                Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(5f, 5f), 0, new Color(254, 255, 204), 0.4f);
+                Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(5f, 5f), 0, new Color(254, 255, 204) * TrailFade(), 0.4f);
 
-                Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(5f, 5f), 0, new Color(214, 178, 36), 0.4f);
-
-                Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.Glow>(),
-                    (Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15)).DirectionTo(laserEnd).RotatedByRandom(0.3f) * Main.rand.NextFloat(8f), 0, new Color(214, 178, 36), 0.65f);
+                Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(5f, 5f), 0, new Color(214, 178, 36) * TrailFade(), 0.4f);
 
                 Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.Glow>(),
-                    (Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15)).DirectionTo(laserEnd).RotatedByRandom(0.3f) * Main.rand.NextFloat(12f), 0, new Color(254, 255, 204), 0.55f);
+                    (Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15)).DirectionTo(laserEnd).RotatedByRandom(0.3f) * Main.rand.NextFloat(8f), 0, new Color(214, 178, 36) * TrailFade(), 0.65f);
+
+                Dust.NewDustPerfect(Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15), ModContent.DustType<Dusts.Glow>(),
+                    (Projectile.Center + new Vector2(15 * Projectile.spriteDirection, 15)).DirectionTo(laserEnd).RotatedByRandom(0.3f) * Main.rand.NextFloat(12f), 0, new Color(254, 255, 204) * TrailFade(), 0.55f);
 
                 if (switchTimer % 7 == 0)
                     SoundID.Item60.PlayWith(Projectile.Center, 0.25f, 0.15f, 1.15f);

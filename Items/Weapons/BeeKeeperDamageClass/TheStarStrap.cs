@@ -23,14 +23,13 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useTime = 7;
             Item.useAnimation = 21;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 1f;
-            Item.value = Item.sellPrice(0, 3, 50);
+
+            Item.value = Item.sellPrice(0, 1, 50);
             Item.rare = ItemRarityID.Orange;
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<AstralBee>();
             Item.shootSpeed = 6;
-            Item.scale = 1;
-            Item.crit = 4;
+
             beeResourceCost = 3;
         }
 
