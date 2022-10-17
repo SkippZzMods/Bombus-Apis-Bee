@@ -31,7 +31,7 @@ namespace BombusApisBee.Core
             }
 
             if (item.type == ItemID.SkeletronBossBag)
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CartilageCreator>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Skelecomb>()));
 
             if (item.type == ItemID.WallOfFleshBossBag)
             {

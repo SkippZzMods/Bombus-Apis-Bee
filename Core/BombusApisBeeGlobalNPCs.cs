@@ -150,7 +150,7 @@ namespace BombusApisBee.Core
             }
 
             if (npc.type == NPCID.SkeletronHead)
-                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<CartilageCreator>()));
+                npcLoot.Add(onlyInNormalMode(ModContent.ItemType<Skelecomb>()));
 
             if (npc.type == NPCID.EyeofCthulhu)
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<RetinaReleaser>()));
