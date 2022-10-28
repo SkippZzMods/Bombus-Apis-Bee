@@ -171,7 +171,6 @@ namespace BombusApisBee.Core
                         PlayerIndexLookup[i] = activeCount;
                         activeCount++;
                     }
-
                 }
             }
 
@@ -210,7 +209,6 @@ namespace BombusApisBee.Core
                     player.MountedCenter = oldMountedCenter;
                     player.heldProj = oldHeldProj;
                 }
-
             }
 
             Main.spriteBatch.End();

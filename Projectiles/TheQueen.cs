@@ -481,7 +481,7 @@ namespace BombusApisBee.Projectiles
                 }
 
                 oldLaserRot = laserRot;
-                laserRot = MathHelper.Lerp(oldLaserRot, Projectile.DirectionTo(target.Center).ToRotation(), 0.15f);
+                laserRot = MathHelper.Lerp(oldLaserRot, Math.Abs(Projectile.DirectionTo(target.Center).ToRotation()), 0.15f);
 
                 Projectile.velocity -= Vector2.One.RotatedBy(laserRot - MathHelper.PiOver4) * MathHelper.Lerp(0.65f, 0.1f, switchTimer / 240f);
 

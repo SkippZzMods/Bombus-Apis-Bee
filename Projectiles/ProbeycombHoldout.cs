@@ -37,7 +37,7 @@ namespace BombusApisBee.Projectiles
             if (Charge < MaxCharge)
             {
                 Charge++;
-                if (Charge % (MaxCharge / 5) == 0)
+                if (Charge % (int)(MaxCharge / 5) == 0)
                 {
                     owner.UseBeeResource(1);
                     ProbesToShoot++;

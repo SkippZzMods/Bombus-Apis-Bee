@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         int shots;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of homing shrapnel-rockets full of bees\n'If God had wanted you to live, he would not have created me!'");
+            Tooltip.SetDefault("Fires a burst of homing bee-rockets, which explode into mini-missiles\nMini-missiles target the closest enemy to the mouse cursor, and explode into shrapnel\n'If God had wanted you to live, he would not have created me!'");
             DisplayName.SetDefault("Beezooka");
         }
 

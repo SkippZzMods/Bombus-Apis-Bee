@@ -43,6 +43,7 @@ namespace BombusApisBee.Projectiles
                 ShootThings(barrelPos);
                 Projectile.Kill();
             }
+
             owner.ChangeDir(Projectile.direction);
             owner.heldProj = Projectile.whoAmI;
             owner.itemTime = 2;

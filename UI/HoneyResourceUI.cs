@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using System;
 
 namespace BombusApisBee.UI
@@ -130,6 +131,8 @@ namespace BombusApisBee.UI
                     maxHoneyInt
                 }) ?? "", 0, 0, -1, -1, -1, -1);
             }
+            Vector2 drawPosition = new Vector2(Main.screenWidth - (GetLegacyHoneyAmount() > 10 ? 355 : 340), 5);
+            DynamicSpriteFontExtensionMethods.DrawString(Main.spriteBatch, FontAssets.MouseText.Value, "Honey", drawPosition, new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor));
         }
         public static int GetLegacyHoneyAmount()
         {

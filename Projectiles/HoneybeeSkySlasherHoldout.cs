@@ -250,7 +250,7 @@ namespace BombusApisBee.Projectiles
         {
             DrawPrimitives();
             Texture2D sword = ModContent.Request<Texture2D>(Texture).Value;
-            Texture2D swordGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+            Texture2D swordGlow = ModContent.Request<Texture2D>(Texture + "_Glowy").Value;
             Texture2D bloomTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
             SpriteEffects flip = owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
             float rotation = Projectile.rotation + MathHelper.PiOver4 + (owner.direction == -1 ? MathHelper.PiOver2 : 0f);
