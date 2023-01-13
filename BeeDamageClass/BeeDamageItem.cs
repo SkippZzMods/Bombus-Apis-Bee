@@ -55,7 +55,7 @@ namespace BombusApisBee.BeeDamageClass
                     BeeDamagePlayer.BeeResourceCurrent -= beeResourceCost;
                 }
                 BeeDamagePlayer.BeeResourceRegenTimer = Utils.Clamp(-Item.useAnimation * 3, -180, -20);
-                BeeDamagePlayer.BeeResourceRegenRate = 1f;
+                //BeeDamagePlayer.BeeResourceRegenRate = 1f;
                 bee = true;
             }
             return SafeCanUseItem(player) && bee;

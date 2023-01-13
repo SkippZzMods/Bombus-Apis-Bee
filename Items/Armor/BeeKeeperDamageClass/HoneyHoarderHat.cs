@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = "Increased honey regeneration\n33% increased chance to not use honey";
-            player.Hymenoptra().RegenRateStart -= 0.15f;
+            //player.Hymenoptra().RegenRateStart -= 0.15f;
             player.Hymenoptra().ResourceChanceAdd += 0.33f;
             player.Bombus().HoneyHoarderSet = true;
         }

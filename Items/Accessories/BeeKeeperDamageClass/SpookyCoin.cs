@@ -28,8 +28,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             }
             else
             {
-                player.Hymenoptra().RegenRateStart -= 0.55f;
-                player.Hymenoptra().RegenRateLowerLimit -= 0.03f;
+                //player.Hymenoptra().RegenRateStart -= 0.55f;
+                //player.Hymenoptra().RegenRateLowerLimit -= 0.03f;
             }
         }
 

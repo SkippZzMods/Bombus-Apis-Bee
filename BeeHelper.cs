@@ -186,6 +186,7 @@ namespace BombusApisBee.BeeHelperProj
             num274 = num270 / num274;
             num272 *= num274;
             num273 *= num274;
+
             if (Projectile.velocity.X < num272)
             {
                 Projectile.velocity.X += num271;

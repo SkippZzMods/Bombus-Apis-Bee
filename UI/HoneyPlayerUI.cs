@@ -1,7 +1,6 @@
-﻿using BombusApisBee.BeeDamageClass;
+﻿/*using BombusApisBee.BeeDamageClass;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-
 
 namespace BombusApisBee.UI
 {
@@ -15,10 +14,9 @@ namespace BombusApisBee.UI
 
         public static void Draw()
         {
-            if (!(Main.LocalPlayer.HeldItem.CountsAsClass<HymenoptraDamageClass>() || ModContent.GetInstance<BombusConfig>().DisableHoneyUI))
-            {
+            if (!(Main.LocalPlayer.HeldItem.CountsAsClass<HymenoptraDamageClass>()))
                 return;
-            }
+
             var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
             Texture2D frameTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyPlayerUIFrame");
             Texture2D barTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyPlayerUIBar");
@@ -44,4 +42,4 @@ namespace BombusApisBee.UI
             }
         }
     }
-}
+}*/

@@ -21,8 +21,8 @@
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.Bombus().HimenApiary = true;
-            player.Hymenoptra().RegenRateStart -= 0.15f;
-            player.Hymenoptra().RegenRateLowerLimit -= 0.01f;
+            //player.Hymenoptra().RegenRateStart -= 0.15f;
+            //player.Hymenoptra().RegenRateLowerLimit -= 0.01f;
         }
     }
 }

@@ -9,8 +9,10 @@ using BombusApisBee.Buffs;
 using BombusApisBee.Effects;
 using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
 using BombusApisBee.PrimitiveDrawing;
+using BombusApisBee.UI;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terraria.UI;
 
 namespace BombusApisBee
 {
@@ -21,14 +23,21 @@ namespace BombusApisBee
         public static readonly SoundStyle HoneycombWeapon = SoundID.NPCDeath1 with { Pitch = -0.2f, PitchVariance = 0.2f };
         public static string BeeWeapon = "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/";
         public static string Invisible = "BombusApisBee/ExtraTextures/Invisible";
+
         public static ModKeybind HoneyManipulatorHotkey;
         public static ModKeybind LihzardianRelicHotkey;
+        public static ModKeybind BeekeeperStateSwitchHotkey;
 
         public Asset<Texture2D> stinger;
         public Asset<Texture2D> bee;
         public Asset<Texture2D> giantBee;
         public Asset<Texture2D> wasp;
         public Asset<Texture2D> beeArrow;
+
+        public UserInterface BeeDamageInterface;
+
+        public BeePlayerUI BeePlayerUI;
+
         public override void Load()
         {
             if (!Main.dedServ)
@@ -36,6 +45,11 @@ namespace BombusApisBee
                 BeeShaders.Load();
                 MarkedNPCDrawer.Load();
                 PlayerRenderTarget.Load();
+
+                BeeDamageInterface = new UserInterface();
+
+                BeePlayerUI = new BeePlayerUI();
+                BeePlayerUI.Activate();
             }
 
             DrawPrimitives.Load();
@@ -53,6 +67,10 @@ namespace BombusApisBee
             HoneyManipulatorHotkey = KeybindLoader.RegisterKeybind(this, "Honey Manipulation", "Y");
 
             LihzardianRelicHotkey = KeybindLoader.RegisterKeybind(this, "Lihzardian Hornet Relic", "L");
+
+            BeekeeperStateSwitchHotkey = KeybindLoader.RegisterKeybind(this, "Change Beekeeper State", "N");
+
+            BeeDamageInterface.SetState(BeePlayerUI);
         }
 
         public override void Unload()
