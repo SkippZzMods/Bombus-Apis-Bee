@@ -70,6 +70,7 @@ namespace BombusApisBee.BeeDamageClass
             BeeResourceIncrease = 4;
             ResourceChanceAdd = 0f;
             BeeResourceMax2 = BeeResourceMax;
+            CurrentBees = DefaultBees;
 
             if (HeldBeeWeaponTimer > 0)
                 HeldBeeWeaponTimer--;
@@ -291,7 +292,7 @@ namespace BombusApisBee.BeeDamageClass
 
             IdlePos = Player.Center + RandOffset;
 
-            if (Player.Hymenoptra().HoldingBeeWeaponTimer <= 0 || Player.dead)
+            if (Player.Hymenoptra().HoldingBeeWeaponTimer <= 0 || Player.dead || Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > Player.Hymenoptra().CurrentBees)
                 Projectile.Kill();
 
             if (Player.Hymenoptra().HeldBeeWeaponTimer > 0 || Player.Hymenoptra().HoldingBeeWeaponTimer > 0)
@@ -517,7 +518,7 @@ namespace BombusApisBee.BeeDamageClass
             }
         }
 
-        private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1000f).OrderBy(n => n.Distance(Projectile.Center)).FirstOrDefault(); }
+        private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1000f && Collision.CanHitLine(Projectile.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Projectile.Center)).FirstOrDefault(); }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {

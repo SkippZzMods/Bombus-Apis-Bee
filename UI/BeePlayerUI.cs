@@ -21,6 +21,8 @@ namespace BombusApisBee.UI
 
         internal int UITimer;
 
+        internal float yOffset => ModContent.GetInstance<BombusConfig>().yOffset;
+
         public override void OnInitialize()
         {
             panel = new();
@@ -98,7 +100,7 @@ namespace BombusApisBee.UI
 
                 Texture2D honeyBarTex = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_BarHoney").Value;
 
-                Vector2 position = new Vector2(Main.LocalPlayer.Center.X - 66 + MathHelper.Lerp(0, 45, UITimer / 5f), Main.LocalPlayer.Center.Y - 16) - Main.screenPosition;
+                Vector2 position = new Vector2(Main.screenWidth / 2 + 20 + MathHelper.Lerp(0, 45, UITimer / 5f), Main.screenHeight / 2 + 3 + yOffset);
 
                 Main.spriteBatch.Draw(barInsideTex, position, null, Color.White);
 
@@ -118,8 +120,9 @@ namespace BombusApisBee.UI
 
             var mp = Main.LocalPlayer.Hymenoptra();
 
-            panel.Top.Set(Main.LocalPlayer.Center.Y - Main.screenPosition.Y - 20, 0f);
+            panel.Top.Set(Main.LocalPlayer.Center.Y - Main.screenPosition.Y + yOffset, 0f);
 
+            
             if (panel.IsMouseHovering)
             {
                 if (UITimer < 5)

@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honey Locket");
-            Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nSpawns wasps that swarm enemies every 2 seconds");
+            Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nIncreases your amount of Bees by 3");
             SacrificeTotal = 1;
         }
 
@@ -26,15 +26,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Bombus().HoneyLocket = true;
-            timer++;
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<WaspAccessory>()] < 4 && timer >= 120)
-            {
-                Vector2 vel = new Vector2(Main.rand.NextFloat(-8, 8), Main.rand.NextFloat(-5, 5));
-                int damage = (int)player.GetTotalDamage<HymenoptraDamageClass>().ApplyTo(Item.damage);
-                Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, vel, ModContent.ProjectileType<WaspAccessory>(), damage, 1, player.whoAmI);
-                timer = 0;
-            }
+            player.Hymenoptra().CurrentBees += 3;
         }
     }
 }
