@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using System.Linq;
+using BombusApisBee.PrimitiveDrawing;
 
 namespace BombusApisBee.BeeDamageClass
 {
@@ -37,6 +38,8 @@ namespace BombusApisBee.BeeDamageClass
         public int MaxHoneyShieldCD = 1200;
         public int HoneyImmuneTimer;
 
+        public int GatheringIncrease = 2;
+
         public int HoldingBeeWeaponTimer;
         public int HeldBeeWeaponTimer;
 
@@ -68,6 +71,7 @@ namespace BombusApisBee.BeeDamageClass
             JustShielded = false;
             HoneyShield = false;
             BeeResourceIncrease = 4;
+            GatheringIncrease = 2;
             ResourceChanceAdd = 0f;
             BeeResourceMax2 = BeeResourceMax;
             CurrentBees = DefaultBees;
@@ -148,6 +152,8 @@ namespace BombusApisBee.BeeDamageClass
 
                         Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Honey2, 0f, 0f, 90, default, 1.25f).velocity *= 0.25f;
                     }
+
+                    BeeUtils.CircleDust(Player.Center, 55, DustID.Honey2, 6f, scale: 2f);
                 }
 
                 if (HoneyImmuneTimer > 0)
@@ -210,6 +216,10 @@ namespace BombusApisBee.BeeDamageClass
 
         public int HoneyTimer;
 
+        private List<Vector2> cache;
+        private Trail trail;
+        private Trail trail2;
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bee");
@@ -256,7 +266,7 @@ namespace BombusApisBee.BeeDamageClass
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), DustID.Honey2, Vector2.Zero, Main.rand.Next(100), default, 0.75f);
 
                 if (++HoneyTimer % 30 == 0)
-                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Player.Center) * 10f, ModContent.ProjectileType<Projectiles.BeeResourceIncreaseProjectile>(), 0, 0f, Player.whoAmI, 0, 2).tileCollide = false;
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Player.Center) * 10f, ModContent.ProjectileType<Projectiles.BeeResourceIncreaseProjectile>(), 0, 0f, Player.whoAmI, 0, Player.Hymenoptra().GatheringIncrease).tileCollide = false;
 
                 if (Player.Hymenoptra().HoldingBeeWeaponTimer <= 0)
                     Projectile.Kill();
@@ -264,14 +274,7 @@ namespace BombusApisBee.BeeDamageClass
                 if (Player.Hymenoptra().HeldBeeWeaponTimer > 0 || Player.Hymenoptra().HoldingBeeWeaponTimer > 0)
                     Projectile.timeLeft = 2;
 
-                if (++Projectile.frameCounter >= 5)
-                {
-                    Projectile.frameCounter = 0;
-                    if (++Projectile.frame >= 4 + FrameOffset)
-                    {
-                        Projectile.frame = FrameOffset;
-                    }
-                }
+                Projectile.frame = FrameOffset + 1;
 
                 return false;
             }
@@ -324,6 +327,12 @@ namespace BombusApisBee.BeeDamageClass
 
                 if (Player.Hymenoptra().HoneyShieldCD == 1)
                     BeeUtils.CircleDust(Projectile.Center, 10, ModContent.DustType<Dusts.GlowFastDecelerate>(), 1f, 0, new Color(255, 205, 0), 0.5f);
+
+                if (!Main.dedServ)
+                {
+                    ManageCaches();
+                    ManageTrail();
+                }
             }
             else if (Offense)
             {
@@ -485,6 +494,61 @@ namespace BombusApisBee.BeeDamageClass
                 }
             }
         }
+        private void ManageCaches()
+        {
+            cache = new List<Vector2>();
+            for (int i = 0; i < 15; i++)
+            {
+                cache.Add(Vector2.Lerp(Projectile.Center + Projectile.velocity, Player.Center, i / 15f));
+            }
+
+            cache.Add(Player.Center);
+        }
+
+        private void ManageTrail()
+        {
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 16, new TriangularTip(12), factor => 3f, factor =>
+            {
+                return Color.Lerp(Color.Transparent, new Color(255, 50, 20, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+            });
+
+            trail.Positions = cache.ToArray();
+            trail.NextPosition = Player.Center;
+
+            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 16, new TriangularTip(12), factor => 6f, factor =>
+            {
+                return Color.Lerp(Color.Transparent, new Color(255, 200, 0, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f) * 0.25f;
+            });
+
+            trail2.Positions = cache.ToArray();
+            trail2.NextPosition = Player.Center;
+        }
+
+        private void DrawTrail(SpriteBatch spriteBatch)
+        {
+            if (Defense)
+            {
+                spriteBatch.End();
+                Effect effect = Terraria.Graphics.Effects.Filters.Scene["SLRCeirosRing"].GetShader().Shader;
+
+                Matrix world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
+                Matrix view = Main.GameViewMatrix.ZoomMatrix;
+                Matrix projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
+
+                effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.03f);
+                effect.Parameters["repeats"].SetValue(1);
+                effect.Parameters["transformMatrix"].SetValue(world * view * projection);
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/GlowTrail").Value);
+                trail?.Render(effect);
+
+                effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.025f);
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
+                trail2?.Render(effect);
+                trail?.Render(effect);
+
+                spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+            }
+        }
 
         private void ResetVariables()
         {
@@ -504,6 +568,9 @@ namespace BombusApisBee.BeeDamageClass
             {
                 float speed = Vector2.Distance(IdlePos, Projectile.Center) * 0.25f;
                 speed = Utils.Clamp(speed, 1f, 25f);
+                if (Defense)
+                    speed = Utils.Clamp(speed, 0.5f, 35f);
+
                 toIdlePos.Normalize();
                 toIdlePos *= speed;
             }
@@ -550,6 +617,8 @@ namespace BombusApisBee.BeeDamageClass
 
         public override bool PreDraw(ref Color lightColor)
         {
+            DrawTrail(Main.spriteBatch);
+
             Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
             Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
             Texture2D glowTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
@@ -560,9 +629,11 @@ namespace BombusApisBee.BeeDamageClass
 
             if (Defense)
             {
-                Color glowColor = Color.Lerp(Color.Transparent, new Color(255, 205, 0, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+                Color glowColor = Color.Lerp(Color.Transparent, new Color(255, 125, 0, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f);
 
                 Rectangle glowFrame = texGlow.Frame(verticalFrames: Main.projFrames[Type], frameY: Projectile.frame);
+
+                Main.spriteBatch.Draw(glowTex, Player.Center - Main.screenPosition, null, glowColor * 0.5f, Projectile.rotation, glowTex.Size() / 2f, 0.45f, 0f, 0f);
 
                 Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, glowColor, Projectile.rotation, glowTex.Size() / 2f, 0.35f, 0f, 0f);
 

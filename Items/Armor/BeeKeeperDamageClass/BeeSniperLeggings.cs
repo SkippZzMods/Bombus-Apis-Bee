@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("7% increased hymenoptra damage and critical strike chance");
+            Tooltip.SetDefault("7% increased hymenoptra damage and critical strike chance\nIncreases your amount of Bees by 1");
             SacrificeTotal = 1;
         }
 
@@ -22,6 +22,7 @@
         {
             player.IncreaseBeeDamage(0.05f);
             player.IncreaseBeeCrit(5);
+            player.Hymenoptra().CurrentBees += 1;
         }
 
         public override void AddRecipes()

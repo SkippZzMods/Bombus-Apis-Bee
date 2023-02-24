@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Holy Crusader Greaves");
-            Tooltip.SetDefault("10% increased hymenoptra damage\n10% increase chance to not consume honey");
+            Tooltip.SetDefault("10% increased hymenoptra damage\n10% increase chance to not consume honey\nIncreases your amount of Bees by 1");
             SacrificeTotal = 1;
         }
 
@@ -25,6 +25,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             player.IncreaseBeeDamage(0.1f);
             player.Hymenoptra().ResourceChanceAdd += 0.1f;
+            player.Hymenoptra().CurrentBees += 1;
         }
 
         public override void AddRecipes()

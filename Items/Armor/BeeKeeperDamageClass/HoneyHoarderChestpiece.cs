@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("8% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 25");
+            Tooltip.SetDefault("8% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 25\nIncreases your amount of Bees by 2");
             SacrificeTotal = 1;
         }
 
@@ -27,6 +27,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             player.IncreaseBeeDamage(0.08f);
             player.IncreaseBeeCrit(8);
             modPlayer.BeeResourceMax2 += 25;
+            player.Hymenoptra().CurrentBees += 2;
         }
 
         public override void AddRecipes()

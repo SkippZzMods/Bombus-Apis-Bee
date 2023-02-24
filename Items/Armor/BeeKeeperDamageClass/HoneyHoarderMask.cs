@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 20");
+            Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 20\nIncreases your amount of Bees by 1");
             SacrificeTotal = 1;
         }
 
@@ -27,11 +27,24 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Honey materializes on critical hits";
-            var modPlayer = BeeDamagePlayer.ModPlayer(player);
+            player.setBonus = "Honey materializes on critical hits\nIncreases hymenoptra damage by 15% while your Bees are in Attacking mode\nIncreases damage reduction by 20% while your Bees are in Defense mode";
+            var modPlayer = player.Hymenoptra();
             player.Hymenoptra().BeeResourceMax2 += 20;
             player.Bombus().HoneyHoarderSet = true;
             player.Bombus().HoneyCrit = true;
+            player.Hymenoptra().CurrentBees += 1;
+
+            if (modPlayer.HasBees)
+            {
+                if (modPlayer.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense)
+                {
+                    player.IncreaseBeeDamage(0.15f);
+                }
+                else if (modPlayer.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Offense)
+                {
+                    player.endurance += 0.2f;
+                }
+            }
         }
         public override void UpdateEquip(Player player)
         {

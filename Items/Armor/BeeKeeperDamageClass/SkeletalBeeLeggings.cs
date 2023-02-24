@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased movement speed");
+            Tooltip.SetDefault("15% increased movement speed\nIncreases your amount of Bees by 1");
             SacrificeTotal = 1;
         }
 
@@ -21,6 +21,7 @@
         public override void UpdateEquip(Player player)
         {
             player.moveSpeed += 0.15f;
+            player.Hymenoptra().CurrentBees += 1;
         }
 
         public override void AddRecipes()

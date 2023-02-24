@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Reduces damage taken by 5%");
+            Tooltip.SetDefault("Reduces damage taken by 5%\nIncrease your amount of Bees by 1");
             SacrificeTotal = 1;
         }
 
@@ -21,6 +21,7 @@
         public override void UpdateEquip(Player player)
         {
             player.endurance += 0.05f;
+            player.Hymenoptra().CurrentBees += 1;
         }
 
         public override void AddRecipes()

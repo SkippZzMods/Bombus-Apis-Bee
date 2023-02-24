@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honey Hoarder Hood");
-            Tooltip.SetDefault("20% decreased hymenoptra damage\nIncreases maximum honey by 60");
+            Tooltip.SetDefault("20% decreased hymenoptra damage\nIncreases maximum honey by 60\nIncreases your amount of Bees by 2");
             SacrificeTotal = 1;
         }
 
@@ -29,10 +29,13 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Increased honey regeneration\n33% increased chance to not use honey";
+            player.setBonus = "Doubles passive Honey gain\nIncreases Honey leech from Bees in Gathering Mode by 2\n33% increased chance to not use honey";
             //player.Hymenoptra().RegenRateStart -= 0.15f;
             player.Hymenoptra().ResourceChanceAdd += 0.33f;
             player.Bombus().HoneyHoarderSet = true;
+            player.Hymenoptra().CurrentBees += 2;
+            player.Hymenoptra().BeeResourceIncrease *= 2;
+            player.Hymenoptra().GatheringIncrease += 2;
         }
 
         public override void UpdateEquip(Player player)

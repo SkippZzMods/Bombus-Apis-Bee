@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased hymenoptra critical strike chance\nIncreases maximum honey by 35");
+            Tooltip.SetDefault("15% increased hymenoptra critical strike chance\nIncreases maximum honey by 35\nIncreases your amount of Bees by 1");
             SacrificeTotal = 1;
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
@@ -41,6 +41,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             BeeDamagePlayer.ModPlayer(player).BeeResourceMax2 += 35;
             player.IncreaseBeeCrit(15);
+            player.Hymenoptra().CurrentBees += 1;
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria.GameContent.UI.Elements;
@@ -16,6 +17,8 @@ namespace BombusApisBee.UI
         internal UIImageButton Left;
 
         internal UIImageButton Right;
+
+        internal UIImage Glow;
 
         internal UIImage Bar;
 
@@ -51,6 +54,14 @@ namespace BombusApisBee.UI
             Right.Width.Set(20, 0);
             Right.Height.Set(22, 0);
 
+            Glow = new(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Shield_Glow"));
+            Glow.VAlign = 0.5f;
+            Glow.HAlign = 0.5f;
+            Glow.Width.Set(22, 0);
+            Glow.Height.Set(24, 0);
+            Glow.Color = new Color(255, 200, 0, 0);
+
+            panel.Append(Glow);
             panel.Append(Middle);
 
             Left.OnClick += Left_OnClick;
@@ -120,7 +131,7 @@ namespace BombusApisBee.UI
 
             var mp = Main.LocalPlayer.Hymenoptra();
 
-            panel.Top.Set(Main.LocalPlayer.Center.Y - Main.screenPosition.Y + yOffset, 0f);
+            panel.Top.Set(Main.screenHeight / 2 + yOffset, 0f);
 
             
             if (panel.IsMouseHovering)
@@ -144,6 +155,7 @@ namespace BombusApisBee.UI
 
             if (mp.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense)
             {
+                Glow.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Shield_Glow"));
                 Middle.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Shield"));
                 Left.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Sword"));
                 Right.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Jar"));
@@ -162,6 +174,7 @@ namespace BombusApisBee.UI
 
             if (mp.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Offense)
             {
+                Glow.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Sword_Glow"));
                 Middle.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Sword"));
                 Left.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Shield"));
                 Right.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Jar"));
@@ -180,6 +193,7 @@ namespace BombusApisBee.UI
 
             if (mp.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Gathering)
             {
+                Glow.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Jar_Glow"));
                 Middle.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Jar"));
                 Left.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Shield"));
                 Right.SetImage(ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Sword"));
@@ -201,6 +215,8 @@ namespace BombusApisBee.UI
 
 
             panel.Width.Set(MathHelper.Lerp(45, 135, UITimer / 5f), 0f);
+
+            Glow.Color = Color.Lerp(new Color(255, 200, 0, 0) * 0.75f, new Color(255, 200, 0, 0) * 0.35f, (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1.5f) + 1f);
         }
     }
 }
