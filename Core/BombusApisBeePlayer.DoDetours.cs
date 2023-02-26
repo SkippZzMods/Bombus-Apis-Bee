@@ -74,11 +74,12 @@ namespace BombusApisBee.Core
                     Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, effect, Main.GameViewMatrix.TransformationMatrix);
 
                     Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value;
-                    Vector2 pos = new Vector2(Main.player[i].Center.X, Main.player[i].Center.Y + Main.player[i].gfxOffY) - Main.screenPosition;
-                    Main.spriteBatch.Draw(tex, pos, null, Color.White, 0f, tex.Size() / 2f, MathHelper.Lerp(0.2f, 0.225f, (float)Math.Sin(Main.GlobalTimeWrappedHourly * 0.5f) * 0.6f + 0.6f), 0, 0f);
+                    Vector2 pos = new Vector2(Main.player[i].Center.X, Main.player[i].Center.Y + Main.player[i].gfxOffY + 4) - Main.screenPosition;
+                    Main.spriteBatch.Draw(tex, pos, null, Color.White, 0f, tex.Size() / 2f, 0.195f, 0, 0f);
 
                     Main.spriteBatch.End();
                     Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+                    Vector2.Zero.Length();
                 }
             }
             orig.Invoke(self);

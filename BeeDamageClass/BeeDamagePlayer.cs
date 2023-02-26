@@ -4,6 +4,8 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using System.Linq;
 using BombusApisBee.PrimitiveDrawing;
+using Terraria.Graphics.Shaders;
+using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.BeeDamageClass
 {
@@ -121,6 +123,8 @@ namespace BombusApisBee.BeeDamageClass
                 if (HoldingBeeWeaponTimer < 15)
                     HoldingBeeWeaponTimer++;
             }
+
+            UpdateHoneyShader();
         }
 
         public override void ProcessTriggers(TriggersSet triggersSet)
@@ -189,6 +193,27 @@ namespace BombusApisBee.BeeDamageClass
         {
             BeeResourceIncrease += 4;
             Player.IncreaseBeeDamage(-0.15f);
+        }
+
+        private void UpdateHoneyShader()
+        {
+            if (Main.dedServ)
+                return;
+
+            if (CurrentBeeState == (int)BeeState.Defense && HoldingBeeWeaponTimer > 0)
+            {
+                if (!Filters.Scene["CircleDistort"].Active)
+                    Filters.Scene.Activate("CircleDistort", Player.Center);
+                else
+                    Filters.Scene["CircleDistort"].GetShader().
+                        UseProgress((float)Main.timeForVisualEffects * 0.001f).
+                        UseColor(1f, 0.00035f, 0.00035f).
+                        UseImage(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value, 1).
+                        UseImage(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/MiscNoise1").Value, 2).
+                        UseTargetPosition(Player.Center);
+            }
+            else
+                Filters.Scene.Deactivate("CircleDistort");
         }
     }
 
