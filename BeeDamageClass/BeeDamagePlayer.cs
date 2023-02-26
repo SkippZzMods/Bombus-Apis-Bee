@@ -205,12 +205,14 @@ namespace BombusApisBee.BeeDamageClass
                 if (!Filters.Scene["CircleDistort"].Active)
                     Filters.Scene.Activate("CircleDistort", Player.Center);
                 else
+                {
                     Filters.Scene["CircleDistort"].GetShader().
                         UseProgress((float)Main.timeForVisualEffects * 0.001f).
                         UseColor(1f, 0.00035f, 0.00035f).
                         UseImage(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value, 1).
                         UseImage(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/MiscNoise1").Value, 2).
                         UseTargetPosition(Player.Center);
+                }
             }
             else
                 Filters.Scene.Deactivate("CircleDistort");*/

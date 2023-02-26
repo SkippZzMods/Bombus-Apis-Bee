@@ -1,7 +1,11 @@
 ﻿sampler uImage0 : register(s0);
-sampler uImage1 : register(s1);
-sampler uImage2 : register(s2);
-sampler uImage3 : register(s3);
+
+texture uImage1;
+sampler2D uImage1Sampler = sampler_state { texture = <uImage1>; magfilter = LINEAR; minfilter = LINEAR; mipfilter = LINEAR; AddressU = wrap; AddressV = wrap; };
+
+texture uImage2;
+sampler2D uImage2Sampler = sampler_state { texture = <uImage2>; magfilter = LINEAR; minfilter = LINEAR; mipfilter = LINEAR; AddressU = wrap; AddressV = wrap; };
+
 float3 uColor;
 float3 uSecondaryColor;
 float2 uScreenResolution;
@@ -50,9 +54,9 @@ float4 Main(float2 coords : TEXCOORD0) : COLOR0
 	
 	for (int i = 0; i < 10; i++)
 	{
-		float intensity1 = tex2D(uImage1, uScreenPosition + (uv_n + float2(uProgress / 6.28f, uProgress / 6.28f) / repeats)).r;
-		float intensity2 = tex2D(uImage1, uScreenPosition + (uv_n + float2(-uProgress / 6.28f, uProgress / 6.28f) / repeats)).r;
-		float angle = (sqrt(intensity1 * intensity2) * 6.28f) * tex2D(uImage2, coords * 0.1f);
+		float intensity1 = tex2D(uImage1Sampler, uScreenPosition + (uv_n + float2(uProgress / 6.28f, uProgress / 6.28f) / repeats)).r;
+		float intensity2 = tex2D(uImage1Sampler, uScreenPosition + (uv_n + float2(-uProgress / 6.28f, uProgress / 6.28f) / repeats)).r;
+		float angle = (sqrt(intensity1 * intensity2) * 6.28f) * tex2D(uImage2Sampler, coords * 0.1f);
 		uv_n += rotation(offset, angle);
 	}
 

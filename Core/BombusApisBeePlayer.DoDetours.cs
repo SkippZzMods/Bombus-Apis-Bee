@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.Graphics.Shaders;
+using BombusApisBee.Core.ScreenTargetSystem;
 
 namespace BombusApisBee.Core
 {
     public partial class BombusApisBeePlayer
     {
+        ScreenTarget target = new(DrawHoneyShield, () => true, 1);
         public override void Load()
         {
             On.Terraria.Main.DrawInfernoRings += PlayerDraw;
@@ -45,8 +48,16 @@ namespace BombusApisBee.Core
                         Main.spriteBatch.Draw(texBloom, pos, null, new Color(245, 245, 149, 0) * 0.5f, modPlayer.LihzardRelicTimer * 0.0265f, tex.Size() / 2f, MathHelper.Lerp(1.1f, 0.05f, 1f - modPlayer.LihzardRelicTimer / 480f), 0, 0f);
                     }
                 }
+            }
+            orig.Invoke(self);
+        }
 
-                /*if (player.active && !player.outOfRange && !player.dead && player.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense && player.Hymenoptra().HoldingBeeWeaponTimer > 0)
+        public void DrawHoneyShield(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < Main.maxPlayers; i++)
+            {
+                Player player = Main.player[i];
+                if (player.active && !player.outOfRange && !player.dead && player.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense && player.Hymenoptra().HoldingBeeWeaponTimer > 0)
                 {
                     Effect effect = Terraria.Graphics.Effects.Filters.Scene["HoneyShieldShader"].GetShader().Shader;
                     effect.Parameters["time"].SetValue(Main.GlobalTimeWrappedHourly * 0.1f);
@@ -54,7 +65,6 @@ namespace BombusApisBee.Core
                     effect.Parameters["blowUpSize"].SetValue(1f);
 
                     float mult = (1f - player.Hymenoptra().HoneyShieldCD / (float)player.Hymenoptra().MaxHoneyShieldCD) * player.Hymenoptra().HoldingBeeWeaponTimer / 15f;
-                    
 
                     float noiseScale = MathHelper.Lerp(0.45f, 0.65f, (float)Math.Sin(Main.GlobalTimeWrappedHourly * 0.1f) + 1f);
                     effect.Parameters["noiseScale"].SetValue(noiseScale);
@@ -70,18 +80,53 @@ namespace BombusApisBee.Core
                     effect.Parameters["offset"].SetValue(new Vector2(Main.screenPosition.X / Main.screenWidth * 0.5f, 0));
                     effect.Parameters["speed"].SetValue(15f);
 
+                    GraphicsDevice gD = Main.graphics.GraphicsDevice;
+                    gD.SetRenderTarget(target.RenderTarget);
+                    gD.Clear(Color.Transparent);
+
+                    #region DISTORT
+                    effect = Terraria.Graphics.Effects.Filters.Scene["CircleDistort"].GetShader().Shader;
+                    effect.Parameters["uProgress"].SetValue((float)Main.timeForVisualEffects * 0.001f);
+                    effect.Parameters["uColor"].SetValue(new Color(1f, 0.00035f, 0.00035f).ToVector3());
+
+                    effect.Parameters["uImage1"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value);
+                    effect.Parameters["uImage2"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/MiscNoise1").Value);
+
+                    effect.Parameters["uTargetPosition"].SetValue(PlayerRenderTarget.getPlayerTargetPosition(player.whoAmI));
+
+                    effect.Parameters["uScreenPosition"].SetValue((Main.screenPosition + (new Vector2((float)Main.screenWidth, (float)Main.screenHeight) * 0.5f)
+                        * (Vector2.One - Vector2.One / Main.GameViewMatrix.Zoom)) - new Vector2(Main.offScreenRange));
+
+                    effect.Parameters["uScreenResolution"].SetValue(new Vector2((float)Main.screenWidth, (float)Main.screenHeight) / Main.GameViewMatrix.Zoom);
+
+                    Main.spriteBatch.End();
+                    Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, effect, Main.GameViewMatrix.TransformationMatrix);
+
+                    Rectangle rect = PlayerRenderTarget.getPlayerTargetSourceRectangle(player.whoAmI);
+
+                    Vector2 drawPos = PlayerRenderTarget.getPlayerTargetPosition(player.whoAmI) + PlayerRenderTarget.getPositionOffset(player.whoAmI) + (new Vector2(player.width * 0.5f, player.height * 0.5f));
+
+                    SpriteEffects flip = Main.LocalPlayer.gravDir == -1f ? SpriteEffects.FlipVertically : 0f;
+
+                    Main.spriteBatch.End();
+                    Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+                    #endregion DISTORT
+
                     Main.spriteBatch.End();
                     Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, effect, Main.GameViewMatrix.TransformationMatrix);
 
                     Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value;
-                    Vector2 pos = new Vector2(Main.player[i].Center.X, Main.player[i].Center.Y + Main.player[i].gfxOffY + 4) - Main.screenPosition;
-                    Main.spriteBatch.Draw(tex, pos, null, Color.White, 0f, tex.Size() / 2f, 0.195f, 0, 0f);
+
+                    Main.spriteBatch.Draw(tex, drawPos, null, Color.White, 0f, tex.Size() / 2f, 0.195f, flip, 0f);
 
                     Main.spriteBatch.End();
                     Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-                }*/
+
+                    gD.SetRenderTarget(null);
+
+                    Main.spriteBatch.Draw(PlayerRenderTarget.Target, drawPos, rect, Color.White, 0f, Vector2.Zero, 1f, flip, 0f);
+                }
             }
-            orig.Invoke(self);
         }
     }
 }
