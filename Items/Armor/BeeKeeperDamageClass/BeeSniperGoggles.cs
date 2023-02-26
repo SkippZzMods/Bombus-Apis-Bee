@@ -78,6 +78,16 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             });
             Main.OnPreDraw += Main_OnPreDraw;
             On.Terraria.Main.DrawNPCs += DrawMarkedEffects;
+            Main.OnResolutionChanged += ResizeTarget;
+        }
+
+        private static void ResizeTarget(Vector2 obj)
+        {
+            if (Main.gameMenu || Main.dedServ)
+                return;
+
+            NPCTarget.Dispose();
+            NPCTarget = new RenderTarget2D(Main.instance.GraphicsDevice, Main.screenWidth, Main.screenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
         }
 
         public static void Unload()

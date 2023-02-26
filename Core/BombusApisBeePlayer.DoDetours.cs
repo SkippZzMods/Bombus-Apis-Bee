@@ -46,7 +46,7 @@ namespace BombusApisBee.Core
                     }
                 }
 
-                if (player.active && !player.outOfRange && !player.dead && player.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense && player.Hymenoptra().HoldingBeeWeaponTimer > 0)
+                /*if (player.active && !player.outOfRange && !player.dead && player.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense && player.Hymenoptra().HoldingBeeWeaponTimer > 0)
                 {
                     Effect effect = Terraria.Graphics.Effects.Filters.Scene["HoneyShieldShader"].GetShader().Shader;
                     effect.Parameters["time"].SetValue(Main.GlobalTimeWrappedHourly * 0.1f);
@@ -79,8 +79,7 @@ namespace BombusApisBee.Core
 
                     Main.spriteBatch.End();
                     Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-                    Vector2.Zero.Length();
-                }
+                }*/
             }
             orig.Invoke(self);
         }

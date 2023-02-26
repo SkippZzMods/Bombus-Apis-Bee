@@ -200,7 +200,7 @@ namespace BombusApisBee.BeeDamageClass
             if (Main.dedServ)
                 return;
 
-            if (CurrentBeeState == (int)BeeState.Defense && HoldingBeeWeaponTimer > 0)
+            /*if (CurrentBeeState == (int)BeeState.Defense && HoldingBeeWeaponTimer > 0)
             {
                 if (!Filters.Scene["CircleDistort"].Active)
                     Filters.Scene.Activate("CircleDistort", Player.Center);
@@ -213,7 +213,7 @@ namespace BombusApisBee.BeeDamageClass
                         UseTargetPosition(Player.Center);
             }
             else
-                Filters.Scene.Deactivate("CircleDistort");
+                Filters.Scene.Deactivate("CircleDistort");*/
         }
     }
 

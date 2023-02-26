@@ -24,8 +24,8 @@ float4 main(float2 uv : TEXCOORD) : COLOR
     
     //Crop in a circle
     float distanceFromCenter = length(uv - float2(0.5, 0.5)) * 2;
-    if (distanceFromCenter > 1)
-        return float4(0, 0, 0, 0);
+    /*if (distanceFromCenter > 1)
+        return float4(0, 0, 0, 0);*/
     
     //"Blow up" the noise map so it looks circular.
     float blownUpUVX = pow((abs(uv.x - 0.5)) * 2, blowUpPower);
