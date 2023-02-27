@@ -6,6 +6,7 @@ using System.Linq;
 using BombusApisBee.PrimitiveDrawing;
 using Terraria.Graphics.Shaders;
 using Terraria.Graphics.Effects;
+using System;
 
 namespace BombusApisBee.BeeDamageClass
 {
@@ -180,7 +181,11 @@ namespace BombusApisBee.BeeDamageClass
                 HoneyImmuneTimer--;
 
             if (HoneyShieldCD == 1)
+            {
                 SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = -0.25f }, Player.Center);
+                BeeUtils.CircleDust(Player.Center, 55, DustID.Honey2, 6f, scale: 2f);
+            }
+                
         }
 
         private void UpdateOffense()    
@@ -200,22 +205,23 @@ namespace BombusApisBee.BeeDamageClass
             if (Main.dedServ)
                 return;
 
-            /*if (CurrentBeeState == (int)BeeState.Defense && HoldingBeeWeaponTimer > 0)
+            if (CurrentBeeState == (int)BeeState.Defense && HoldingBeeWeaponTimer > 0)
             {
                 if (!Filters.Scene["CircleDistort"].Active)
                     Filters.Scene.Activate("CircleDistort", Player.Center);
                 else
                 {
+                    float power = MathHelper.Lerp(0f, 0.00035f, (1f - HoneyShieldCD / (float)MaxHoneyShieldCD)) * HoldingBeeWeaponTimer / 15f;
                     Filters.Scene["CircleDistort"].GetShader().
                         UseProgress((float)Main.timeForVisualEffects * 0.001f).
-                        UseColor(1f, 0.00035f, 0.00035f).
+                        UseColor(1f, power, power).
                         UseImage(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value, 1).
                         UseImage(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/MiscNoise1").Value, 2).
-                        UseTargetPosition(Player.Center);
+                        UseTargetPosition(Player.Center + Player.velocity + new Vector2(0f, Player.gfxOffY));
                 }
             }
             else
-                Filters.Scene.Deactivate("CircleDistort");*/
+                Filters.Scene.Deactivate("CircleDistort");
         }
     }
 

@@ -39,7 +39,7 @@ float4 Main(float2 coords : TEXCOORD0) : COLOR0
 
     float aspectRatio = (uScreenResolution.x / uScreenResolution.y);
 
-    float2 center = (0.5, 0.5);
+    float2 center = (uTargetPosition + uImageOffset - uScreenPosition) / uScreenResolution;
 
     float2 diff = center - coords;
     diff *= float2(aspectRatio, 1);

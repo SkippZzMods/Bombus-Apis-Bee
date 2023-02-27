@@ -94,6 +94,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             Main.OnPreDraw -= Main_OnPreDraw;
             On.Terraria.Main.DrawNPCs -= DrawMarkedEffects;
+            Main.OnResolutionChanged -= ResizeTarget;
         }
 
         private static void Main_OnPreDraw(GameTime obj)
@@ -108,7 +109,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             gD.SetRenderTarget(NPCTarget);
             gD.Clear(Color.Transparent);
 
-            Main.spriteBatch.Begin(default, default, default, default, default, null, Main.GameViewMatrix.ZoomMatrix);
+            spriteBatch.Begin(default, default, default, default, default, null, Main.GameViewMatrix.ZoomMatrix);
 
             for (int i = 0; i < Main.npc.Length; i++)
             {
@@ -133,6 +134,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             spriteBatch.End();
             gD.SetRenderTargets(bindings);
         }
+
         private static void DrawMarkedEffects(On.Terraria.Main.orig_DrawNPCs orig, Main self, bool behindTiles)
         {
             orig(self, behindTiles);
