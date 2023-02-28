@@ -45,6 +45,8 @@ namespace BombusApisBee
                 BeeShaders.Load();
                 MarkedNPCDrawer.Load();
                 PlayerRenderTarget.Load();
+                BombusApisBee_DoIL.Load();
+                BombusApisBee_DoDetours.Load();
 
                 BeeDamageInterface = new UserInterface();
 
@@ -76,6 +78,8 @@ namespace BombusApisBee
         public override void Unload()
         {
             MarkedNPCDrawer.Unload();
+            BombusApisBee_DoIL.Unload();
+            BombusApisBee_DoDetours.Unload();
             TextureAssets.Projectile[ProjectileID.HornetStinger] = stinger;
             TextureAssets.Projectile[ProjectileID.Bee] = bee;
             TextureAssets.Projectile[ProjectileID.GiantBee] = giantBee;

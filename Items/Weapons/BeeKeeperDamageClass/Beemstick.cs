@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
-    public class HoneybeeBlaster : BeeDamageItem
+    public class Beemstick : BeeDamageItem
     {
         public override void SafeSetStaticDefaults()
         {

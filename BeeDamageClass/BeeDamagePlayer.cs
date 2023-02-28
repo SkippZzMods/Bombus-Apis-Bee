@@ -205,7 +205,7 @@ namespace BombusApisBee.BeeDamageClass
             if (Main.dedServ)
                 return;
 
-            if (CurrentBeeState == (int)BeeState.Defense && HoldingBeeWeaponTimer > 0)
+            if (CurrentBeeState == (int)BeeState.Defense)
             {
                 if (!Filters.Scene["CircleDistort"].Active)
                     Filters.Scene.Activate("CircleDistort", Player.Center);
@@ -221,7 +221,12 @@ namespace BombusApisBee.BeeDamageClass
                 }
             }
             else
+            {
+                Filters.Scene["CircleDistort"].GetShader().
+                        UseColor(1f, 0f, 0f);
+
                 Filters.Scene.Deactivate("CircleDistort");
+            }
         }
     }
 
@@ -337,6 +342,9 @@ namespace BombusApisBee.BeeDamageClass
             if (Defense)
             {
                 Projectile.friendly = true;
+                Projectile.usesLocalNPCImmunity = false;
+                Projectile.usesIDStaticNPCImmunity = true;
+                Projectile.idStaticNPCHitCooldown = 12;
 
                 FrameOffset = 0;
 
@@ -369,6 +377,9 @@ namespace BombusApisBee.BeeDamageClass
             }
             else if (Offense)
             {
+                Projectile.usesLocalNPCImmunity = true;
+                Projectile.usesIDStaticNPCImmunity = false;
+
                 FrameOffset = 0;
 
                 ResetVariables();
@@ -447,6 +458,8 @@ namespace BombusApisBee.BeeDamageClass
             }
             else if (Gathering)
             {
+                Projectile.usesLocalNPCImmunity = true;
+                Projectile.usesIDStaticNPCImmunity = false;
                 Projectile.friendly = true;
 
                 NPC target = FindTarget();
@@ -540,6 +553,10 @@ namespace BombusApisBee.BeeDamageClass
 
         private void ManageTrail()
         {
+            float mult = 1f;
+            if (Projectile.Distance(Player.Center) > 500)
+                mult = MathHelper.Lerp(1f, 0f, (Projectile.Distance(Player.Center) - 500) / 1500f);
+
             trail = trail ?? new Trail(Main.instance.GraphicsDevice, 16, new TriangularTip(12), factor => 3f, factor =>
             {
                 return Color.Lerp(Color.Transparent, new Color(255, 50, 20, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f);

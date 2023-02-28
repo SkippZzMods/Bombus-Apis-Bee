@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
-    public class HellfireBeeBlaster : BeeDamageItem
+    public class HellfireBeemstick : BeeDamageItem
     {
         public override void SafeSetStaticDefaults()
         {
@@ -36,14 +36,14 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void AddRecipes()
         {
             CreateRecipe(1).
-                AddIngredient(ModContent.ItemType<HoneybeeBlaster>()).
+                AddIngredient(ModContent.ItemType<Beemstick>()).
                 AddIngredient(ItemID.HellstoneBar, 15).
                 AddIngredient(ModContent.ItemType<Pollen>(), 15).
                 AddIngredient(ItemID.ShadowScale, 5).
                 AddTile(TileID.Anvils).
                 Register();
             CreateRecipe(1).
-                AddIngredient(ModContent.ItemType<HoneybeeBlaster>()).
+                AddIngredient(ModContent.ItemType<Beemstick>()).
                 AddIngredient(ItemID.HellstoneBar, 15).
                 AddIngredient(ModContent.ItemType<Pollen>(), 15).
                 AddIngredient(ItemID.TissueSample, 5).
