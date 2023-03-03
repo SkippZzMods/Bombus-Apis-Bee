@@ -74,7 +74,7 @@ namespace BombusApisBee.BeeDamageClass
             JustShielded = false;
             HoneyShield = false;
             BeeResourceIncrease = 4;
-            GatheringIncrease = 2;
+            GatheringIncrease = 10;
             ResourceChanceAdd = 0f;
             BeeResourceMax2 = BeeResourceMax;
             CurrentBees = DefaultBees;
@@ -243,6 +243,7 @@ namespace BombusApisBee.BeeDamageClass
         public Vector2 IdlePos;
 
         public int AttackDelay;
+        public int maxAttackDelay;
         public bool Attacking;
         public NPC attackTarget;
 
@@ -258,6 +259,7 @@ namespace BombusApisBee.BeeDamageClass
         private Trail trail;
         private Trail trail2;
 
+        float mult;
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bee");
@@ -301,9 +303,9 @@ namespace BombusApisBee.BeeDamageClass
                 target.GetGlobalNPC<BeeDamagePlayerNPC>().BeeAmount++;
 
                 if (Main.rand.NextBool(15))
-                    Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), DustID.Honey2, Vector2.Zero, Main.rand.Next(100), default, 0.75f);
+                    Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f) + Projectile.velocity, DustID.Honey2, Vector2.Zero, Main.rand.Next(100), default, 0.75f);
 
-                if (++HoneyTimer % 30 == 0)
+                if (++HoneyTimer % 150 == 0)
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Player.Center) * 10f, ModContent.ProjectileType<Projectiles.BeeResourceIncreaseProjectile>(), 0, 0f, Player.whoAmI, 0, Player.Hymenoptra().GatheringIncrease).tileCollide = false;
 
                 if (Player.Hymenoptra().HoldingBeeWeaponTimer <= 0)
@@ -368,6 +370,12 @@ namespace BombusApisBee.BeeDamageClass
 
                 if (Player.Hymenoptra().HoneyShieldCD == 1)
                     BeeUtils.CircleDust(Projectile.Center, 10, ModContent.DustType<Dusts.GlowFastDecelerate>(), 1f, 0, new Color(255, 205, 0), 0.5f);
+
+                mult = 1f;
+                if (Projectile.Distance(Player.Center) > 150 && Projectile.Distance(Player.Center) < 450)
+                    mult = MathHelper.Lerp(0f, 1f, 1f - (Projectile.Distance(Player.Center) - 150) / 300f);
+                else if (Projectile.Distance(Player.Center) > 450)
+                    mult = 0f;
 
                 if (!Main.dedServ)
                 {
@@ -472,7 +480,11 @@ namespace BombusApisBee.BeeDamageClass
 
                 if (target != default)
                 {
+                    if (Main.rand.NextBool(5))
+                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Vector2.Zero, 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.25f);
+
                     FrameOffset = 4;
+                    Attacking = true;
 
                     Vector2 between = target.Center - Projectile.Center;
 
@@ -527,6 +539,7 @@ namespace BombusApisBee.BeeDamageClass
 
                     FrameOffset = 0;
                     Projectile.friendly = false;
+                    Attacking = false;
                     IdleMovement();
                 }
             }
@@ -553,13 +566,11 @@ namespace BombusApisBee.BeeDamageClass
 
         private void ManageTrail()
         {
-            float mult = 1f;
-            if (Projectile.Distance(Player.Center) > 500)
-                mult = MathHelper.Lerp(1f, 0f, (Projectile.Distance(Player.Center) - 500) / 1500f);
+            float lerper = 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD;
 
             trail = trail ?? new Trail(Main.instance.GraphicsDevice, 16, new TriangularTip(12), factor => 3f, factor =>
             {
-                return Color.Lerp(Color.Transparent, new Color(255, 50, 20, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+                return (Color.Lerp(Color.Transparent, new Color(255, 50, 20, 0) * mult, lerper) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f));
             });
 
             trail.Positions = cache.ToArray();
@@ -567,7 +578,7 @@ namespace BombusApisBee.BeeDamageClass
 
             trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 16, new TriangularTip(12), factor => 6f, factor =>
             {
-                return Color.Lerp(Color.Transparent, new Color(255, 200, 0, 0), 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f) * 0.25f;
+                return (Color.Lerp(Color.Transparent, new Color(255, 200, 0, 0) * 0.25f * mult, lerper) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f));
             });
 
             trail2.Positions = cache.ToArray();
@@ -635,15 +646,40 @@ namespace BombusApisBee.BeeDamageClass
             }
         }
 
-        private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1000f && Collision.CanHitLine(Projectile.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Projectile.Center)).FirstOrDefault(); }
+        private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1000f && Collision.CanHitLine(Player.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Projectile.Center)).FirstOrDefault(); }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             if (Attacking)
-                if (Player.HeldItem.damage > 0)
-                    AttackDelay = Player.HeldItem.damage * 2;
-                else
-                    AttackDelay = 30;
+            {
+                if (Offense)
+                {
+                    if (Player.HeldItem.damage > 0)
+                    {
+                        AttackDelay = Player.HeldItem.damage;
+                        maxAttackDelay = AttackDelay;
+                    }
+                    else
+                    {
+                        AttackDelay = 30;
+                        maxAttackDelay = AttackDelay;
+                    }
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), (-Projectile.velocity * Main.rand.NextFloat(0.2f)).RotatedByRandom(0.55f), 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.45f);
+                    }
+                }
+
+                if (Gathering)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Dust.NewDustPerfect(Projectile.Center, DustID.Honey2, (-Projectile.velocity * Main.rand.NextFloat(0.2f)).RotatedByRandom(0.55f), 0, default, 1.45f).noGravity = true;
+                    }
+                }
+            }
+
 
             if (Gathering)
             {
@@ -692,10 +728,37 @@ namespace BombusApisBee.BeeDamageClass
 
             if (Offense)
             {
+                Color glowColor = Color.Lerp(Color.Transparent, new Color(255, 125, 0, 0), 1f - AttackDelay / (float)maxAttackDelay) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+
+                Rectangle glowFrame = texGlow.Frame(verticalFrames: Main.projFrames[Type], frameY: Projectile.frame);
+
+                Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, glowColor, Projectile.rotation, glowTex.Size() / 2f, 0.25f, 0f, 0f);
+
+                Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, glowFrame, glowColor, Projectile.rotation, glowFrame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : 0f, 0f);
+
                 for (int i = 0; i < Projectile.oldPos.Length; i++)
                 {
                     Main.spriteBatch.Draw(tex, (Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f) - Main.screenPosition, frame, lightColor * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
                         Projectile.rotation, frame.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.25f, (i / (float)Projectile.oldPos.Length)), Projectile.direction == -1 ? (SpriteEffects)1 : 0, 0);
+                }
+            }
+
+            if (Gathering)
+            {
+                if (stuck)
+                {
+                    Color glowColor = Color.Lerp(Color.Transparent, new Color(255, 125, 0, 0) * 0.5f, (float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 3f));
+
+                    Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, glowColor, Projectile.rotation, glowTex.Size() / 2f, 0.35f, 0f, 0f);
+                } 
+
+                if (Attacking)
+                {
+                    for (int i = 0; i < Projectile.oldPos.Length; i++)
+                    {
+                        Main.spriteBatch.Draw(tex, (Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f) - Main.screenPosition, frame, new Color(255, 125, 0, 0) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
+                            Projectile.rotation, frame.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.25f, (i / (float)Projectile.oldPos.Length)), Projectile.direction == -1 ? (SpriteEffects)1 : 0, 0);
+                    }
                 }
             }
 
@@ -725,8 +788,8 @@ namespace BombusApisBee.BeeDamageClass
 
             npc.lifeRegen -= BeeAmount * 10;
 
-            if (damage < 2)
-                damage = 2;
+            if (damage < 10)
+                damage = 10;
         }
     }
 }

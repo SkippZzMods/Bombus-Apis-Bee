@@ -23,7 +23,7 @@ namespace BombusApisBee.Projectiles
         {
             Projectile.spriteDirection = -1;
             Player player = Main.player[Projectile.owner];
-            if (player.Bombus().LivingFlower)
+            if (player.Bombus().LivingFlower && !player.dead)
                 Projectile.timeLeft = 2;
 
             Projectile.rotation = Projectile.AngleTo(player.Center);

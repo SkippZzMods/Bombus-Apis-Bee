@@ -63,13 +63,24 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void ResetEffects(NPC npc)
         {
             if (marked && --markedDuration < 0)
+            {
                 marked = false;
+            }
+
+            MarkedNPCDrawer.anyMarkedEnemies = Main.npc.Any(n => n.active && n.GetGlobalNPC<MarkedGlobalNPC>().marked);
+
+            if (markedDuration > 0)
+                MarkedNPCDrawer.timer = markedDuration;
         }
     }
 
     class MarkedNPCDrawer
     {
         public static RenderTarget2D NPCTarget;
+
+        public static bool anyMarkedEnemies;
+
+        public static int timer;
         public static void Load()
         {
             Main.QueueMainThreadAction(() =>
@@ -139,10 +150,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             orig(self, behindTiles);
 
-            NPC drawTarget = Main.npc.Where(n => n.active && n.GetGlobalNPC<MarkedGlobalNPC>().marked).FirstOrDefault();
-            if (drawTarget != default)
+            if (anyMarkedEnemies)
             {
-                var gNPC = drawTarget.GetGlobalNPC<MarkedGlobalNPC>();
                 GraphicsDevice gD = Main.graphics.GraphicsDevice;
                 SpriteBatch spriteBatch = Main.spriteBatch;
 
@@ -154,16 +163,17 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
                 Effect effect = Filters.Scene["MarkedEffect"].GetShader().Shader;
                 effect.Parameters["uImageSize0"].SetValue(NPCTarget.Size());
-                float alpha = MathHelper.Lerp(1f, 0.5f, (float)Math.Sin((gNPC.markedDuration / 600f) * 25f));
-                if (gNPC.markedDuration > 570)
-                    alpha = MathHelper.Lerp(1f, 0f, (gNPC.markedDuration - 570) / 30f);
-                if (gNPC.markedDuration < 30)
-                    alpha = MathHelper.Lerp(0.5f, 0f, 1f - (gNPC.markedDuration / 30f));
-                effect.Parameters["alpha"].SetValue(alpha);
-                effect.Parameters["colorOne"].SetValue(new Color(225, 220, 110).ToVector4());
-                effect.Parameters["colorTwo"].SetValue(new Color(215, 160, 80).ToVector4());
+                float alpha = MathHelper.Lerp(1f, 0.5f, (float)Math.Sin((timer / 600f) * 25f));
+                if (timer > 570)
+                    alpha = MathHelper.Lerp(1f, 0f, (timer - 570) / 30f);
+                if (timer < 30)
+                    alpha = MathHelper.Lerp(0.5f, 0f, 1f - (timer / 30f));
 
-                effect.Parameters["whiteness"].SetValue(0f);
+                effect.Parameters["alpha"].SetValue(alpha);
+                effect.Parameters["colorOne"].SetValue(Color.Lerp(new Color(225, 220, 110), new Color(215, 160, 80), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f + 1)).ToVector4());
+                effect.Parameters["colorTwo"].SetValue(Color.Lerp(new Color(215, 160, 80), new Color(225, 220, 110), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f + 1)).ToVector4());
+
+                effect.Parameters["whiteness"].SetValue(0.15f);
 
                 effect.CurrentTechnique.Passes[0].Apply();
                 spriteBatch.Draw(NPCTarget, new Rectangle((int)-Main.LocalPlayer.velocity.X, (int)-Main.LocalPlayer.velocity.Y, (int)NPCTarget.Size().X, (int)NPCTarget.Size().Y), Color.White);
