@@ -14,6 +14,8 @@ namespace BombusApisBee.Core.Metaballs
 
 		public float Priority => 1.1f;
 
+		public virtual bool overNPCS => false;
+
 		public virtual bool Invisible => false;
 
 		/// <summary>
@@ -110,8 +112,6 @@ namespace BombusApisBee.Core.Metaballs
 			metaballEdgeDetection.Parameters["height"].SetValue((float)Main.screenHeight / 2);
 			metaballEdgeDetection.Parameters["border"].SetValue(outlineColor.ToVector4());
 			metaballEdgeDetection.Parameters["invisible"].SetValue(Invisible);
-
-			//metaballEdgeDetection.CurrentTechnique.Passes[0].Apply();
 
 			spriteBatch.Begin(default, default, default, default, default, metaballEdgeDetection);
 

@@ -21,12 +21,8 @@ namespace BombusApisBee.Items.Other.OnPickupItems
         }
         public override bool OnPickup(Player player)
         {
-            if (player.Hymenoptra().BeeResourceCurrent < player.Hymenoptra().BeeResourceMax2)
-                player.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent += 12;
-            if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
-                player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
-
-            CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, 12, false, false);
+            if (player.whoAmI == Main.myPlayer)
+                player.IncreaseBeeResource(12);
 
             return false;
         }

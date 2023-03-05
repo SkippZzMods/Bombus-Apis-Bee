@@ -1,4 +1,5 @@
 using BombusApisBee.BeeDamageClass;
+using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
 using BombusApisBee.Projectiles;
 
 
@@ -26,7 +27,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.rare = ItemRarityID.Gray;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<AstralStarSplitting>();
+            Item.shoot = ModContent.ProjectileType<BandHoneyGlob>();
             Item.shootSpeed = 10;
             Item.UseSound = SoundID.Item11;
             Item.scale = 1;

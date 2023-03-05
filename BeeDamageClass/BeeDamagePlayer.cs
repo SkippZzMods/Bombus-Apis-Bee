@@ -87,7 +87,7 @@ namespace BombusApisBee.BeeDamageClass
         {
             if (++BeeResourceRegenTimer >= 60)
             {
-                BeeResourceCurrent += BeeResourceIncrease;
+                Player.IncreaseBeeResource(BeeResourceIncrease, false);
                 BeeResourceRegenTimer = 0;
             }
                 
