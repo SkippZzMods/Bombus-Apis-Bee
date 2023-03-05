@@ -46,6 +46,8 @@ float4 MainPS(VertexShaderOutput input) : COLOR
     {
         float4 retColor = lerp(uColorOne, uColorTwo, lerper);
 
+        retColor.a *= color.a;
+
         return retColor;
     }
     

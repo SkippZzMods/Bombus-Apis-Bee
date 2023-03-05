@@ -63,7 +63,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             if (timer <= 0)
                 timer = 120;
 
-            Explode(target, damage);
+            Explode(target);
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
@@ -75,23 +75,25 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             if (timer <= 0)
                 timer = 120;
 
-            Explode(target, damage);
+            Explode(target);
         }
 
-        void Explode(NPC target, int damage)
+        void Explode(NPC target)
         {
             if (!explode)
                 return;
 
+            damage = Player.ApplyHymenoptraDamageTo(500);
+
             for (int i = 0; i < 50; i++)
             {
-                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Main.rand.NextVector2Circular(15f, 15f), ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 1.25), 0f, Player.whoAmI);
+                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Main.rand.NextVector2Circular(15f, 15f), ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 0.5f), 0f, Player.whoAmI);
             }
 
             for (int i = 0; i < 35; i++)
             {
                 float angle = 6.2831855f * i / 35f;
-                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Utils.ToRotationVector2(angle) * 7.5f, ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 1.25), 0f, Player.whoAmI);
+                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Utils.ToRotationVector2(angle) * 7.5f, ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 0.5f), 0f, Player.whoAmI);
             }
 
             for (int i = 0; i < 200; i++)
@@ -99,9 +101,9 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
                 Dust.NewDustPerfect(target.Center, ModContent.DustType<BandHoneyDust>(), Main.rand.NextVector2Circular(10f, 10f), 0, default, 5f);
             }
 
-            Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<BandHoneyExplosion>(), damage * 3, 0, Player.whoAmI, 150, 55);
+            Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<BandHoneyExplosion>(), damage, 0, Player.whoAmI, 150, 55);
 
-            Player.Bombus().shakeTimer += 20;
+            Player.Bombus().shakeTimer += 30;
 
             SoundEngine.PlaySound(new SoundStyle("BombusApisBee/Sounds/Item/BiggerSplash"), Player.Center);
 
@@ -115,11 +117,10 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
     class BandHoneyGlob : ModProjectile
     {
-        bool hitTile;
-
         float originalScale;
 
-        Vector2 originalSize;
+        int originalTimeLeft;
+
 		private Player owner => Main.player[Projectile.owner];
 
 		public override void SetStaticDefaults()
@@ -133,7 +134,10 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 			Projectile.width = 36;
 			Projectile.height = 36;
 			Projectile.DamageType = BeeUtils.BeeDamageClass();
-			Projectile.timeLeft = 200;
+
+			Projectile.timeLeft = Main.rand.Next(180, 240);
+            originalTimeLeft = Projectile.timeLeft;
+
 			Projectile.friendly = true;
 			Projectile.penetrate = -1;
 			Projectile.hide = true;
@@ -161,7 +165,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void AI()
         {
-            Projectile.scale = MathHelper.Lerp(originalScale, originalScale * 0.1f, 1f - Projectile.timeLeft / 200f);
+            Projectile.scale = MathHelper.Lerp(originalScale, originalScale * 0.05f, 1f - Projectile.timeLeft / (float)originalTimeLeft);
 
             Tile tile = Main.tile[(int)Projectile.Center.X / 16, (int)Projectile.Center.Y / 16];
             if (tile.HasTile && Main.tileSolid[tile.TileType] && !TileID.Sets.Platforms[tile.TileType])
