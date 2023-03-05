@@ -85,13 +85,13 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
             for (int i = 0; i < 50; i++)
             {
-                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Main.rand.NextVector2Circular(15f, 15f), ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 0.5), 0f, Player.whoAmI);
+                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Main.rand.NextVector2Circular(15f, 15f), ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 1.25), 0f, Player.whoAmI);
             }
 
             for (int i = 0; i < 35; i++)
             {
                 float angle = 6.2831855f * i / 35f;
-                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Utils.ToRotationVector2(angle) * 7.5f, ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 0.5), 0f, Player.whoAmI);
+                Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Utils.ToRotationVector2(angle) * 7.5f, ModContent.ProjectileType<BandHoneyGlob>(), (int)(damage * 1.25), 0f, Player.whoAmI);
             }
 
             for (int i = 0; i < 200; i++)
@@ -144,7 +144,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             originalScale = Projectile.scale;
 
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 13;
+            Projectile.idStaticNPCHitCooldown = 8;
 		}
 
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -194,7 +194,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             }
 
             if ((Main.npc.Any(n => n.active && Projectile.Distance(n.Center) < 25f * Projectile.scale) || Main.projectile.Any(p => p.active && p.type == Type && p != Projectile && p.velocity == Vector2.Zero && Projectile.Distance(p.Center) < 35f * p.scale)) && Projectile.timeLeft < 190)
-                Projectile.velocity = Projectile.velocity * 0.35f;
+                Projectile.velocity = Projectile.velocity * 0.15f;
         }
 
         public void DrawMetaball()

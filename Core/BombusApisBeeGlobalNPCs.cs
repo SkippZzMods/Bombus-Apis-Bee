@@ -114,7 +114,12 @@ namespace BombusApisBee.Core
         {
             if (npc.type == NPCID.FlyingSnake || npc.type == NPCID.Lihzahrd || npc.type == NPCID.LihzahrdCrawler)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LihzardianHornetRelic>(), 35));
-           
+
+            Conditions.YoyosYelets cond = new();
+            IItemDropRule rl = new LeadingConditionRule(cond);
+            rl.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BandOfTheHive>(), 150));
+            npcLoot.Add(rl);
+
             if (npc.type == NPCID.IceQueen)
             {
                 Conditions.FrostMoonDropGatingChance condition = new();
