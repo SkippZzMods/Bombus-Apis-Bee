@@ -45,12 +45,16 @@ namespace BombusApisBee.Core.Metaballs
 
         private void DrawTargets(On.Terraria.Main.orig_DrawNPCs orig, Main self, bool behindTiles = false)
         {
-            if (behindTiles)
-                Actors.ForEach(a => a.DrawTarget(Main.spriteBatch));
-
             orig(self, behindTiles);
-        }
 
+            foreach (MetaballActor a in Actors)
+            {
+                if (!a.overNPCS && behindTiles)
+                    a.DrawTarget(Main.spriteBatch);
+                else if (a.overNPCS && !behindTiles)
+                    a.DrawTarget(Main.spriteBatch);
+            }
+        }
         private void BuildTargets(On.Terraria.Main.orig_CheckMonoliths orig)
         {
             if (Main.graphics.GraphicsDevice != null)

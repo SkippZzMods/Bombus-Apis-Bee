@@ -392,15 +392,6 @@ namespace BombusApisBee.Core
                     NectarVialCooldown = 90;
                 }
 
-                if (HoneyedHeart && !target.SpawnedFromStatue)
-                {
-                    if (Main.rand.NextFloat() < 0.1f)
-                    {
-                        Vector2 shootVelocity = target.Center.DirectionTo(Player.Center) * 10f;
-                        Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, shootVelocity, ModContent.ProjectileType<BeeResourceIncreaseProjectile>(), 0, 1f, Player.whoAmI, 0, 1);
-                    }
-                }
-
                 if (target.HasBuff<Glacialstruck>() && GlacialstruckCooldown <= 0 && crit)
                 {
                     GlacialstruckCooldown = 240;

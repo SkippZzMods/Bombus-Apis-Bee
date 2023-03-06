@@ -25,4 +25,17 @@
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
     }
+
+    public class BandOfTheHiveCooldown : ModBuff
+    {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Hive-Touched Band Cooldown");
+            Description.SetDefault("The band needs to recharge");
+            Main.debuff[Type] = true;
+            Main.pvpBuff[Type] = true;
+            Main.buffNoSave[Type] = true;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
+        }
+    }
 }

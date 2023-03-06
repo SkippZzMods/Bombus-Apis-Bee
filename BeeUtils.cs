@@ -10,7 +10,33 @@ using Terraria.DataStructures;
 namespace BombusApisBee
 {
     public static class BeeUtils
-    {
+    {       
+        public static void IncreaseBeeResource(this Player player, int amount, bool showText = true)
+        {
+            if (player.Bombus().HoneyedHeart && player.statLife < player.statLifeMax2)
+            {
+                if (player.Hymenoptra().BeeResourceCurrent < player.Hymenoptra().BeeResourceMax2)
+                    player.Hymenoptra().BeeResourceCurrent += (int)(amount * 0.75f);
+                if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
+                    player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
+
+                if (showText)
+                    CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)(amount * 0.75f));
+
+                player.Heal((int)(amount * 0.25f));
+
+                return;
+            }
+
+            if (player.Hymenoptra().BeeResourceCurrent < player.Hymenoptra().BeeResourceMax2)
+                player.Hymenoptra().BeeResourceCurrent += (int)(amount);
+            if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
+                player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
+
+            if (showText)
+                CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)amount);
+        }
+
         public static Vector2 GetArmPosition(this Player player)
         {
             Vector2 value = Main.OffsetsPlayerOnhand[player.bodyFrame.Y / 56] * 2f;
@@ -21,6 +47,7 @@ namespace BombusApisBee
             value -= new Vector2((float)(player.bodyFrame.Width - player.width), (float)(player.bodyFrame.Height - 42)) / 2f;
             return player.RotatedRelativePoint(player.MountedCenter - new Vector2(20f, 42f) / 2f + value + Vector2.UnitY * player.gfxOffY, false, true);
         }
+
         public static void DrawStar(Vector2 position, int dustType, int alpha = 0, Color dustColor = default, bool noGrav = true, float pointAmount = 5, float mainSize = 1, float dustDensity = 1, float dustSize = 1f, float pointDepthMult = 1f, float pointDepthMultOffset = 0.5f, float randomAmount = 0, float rotationAmount = -1)
         {
             float rot;

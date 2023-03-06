@@ -48,12 +48,7 @@ namespace BombusApisBee.Projectiles
             {
                 if (Projectile.owner == Main.myPlayer)
                 {
-                    if (player.Hymenoptra().BeeResourceCurrent < player.Hymenoptra().BeeResourceMax2)
-                        player.Hymenoptra().BeeResourceCurrent += (int)(resourceincrease);
-                    if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
-                        player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
-
-                    CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)resourceincrease);
+                    player.IncreaseBeeResource((int)resourceincrease);
                 }
                 Projectile.Kill();
             }
