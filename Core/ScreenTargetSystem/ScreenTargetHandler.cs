@@ -13,13 +13,13 @@ namespace BombusApisBee.Core.ScreenTargetSystem
 
 		public float Priority => 1;
 
-		public void Load()
+		public override void Load()
 		{
 			On.Terraria.Main.CheckMonoliths += RenderScreens;
 			Main.OnResolutionChanged += ResizeScreens;
 		}
 
-		public void Unload()
+		public override void Unload()
 		{
 			On.Terraria.Main.CheckMonoliths -= RenderScreens;
 			Main.OnResolutionChanged -= ResizeScreens;
