@@ -120,6 +120,9 @@ namespace BombusApisBee.Core
             rl.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BandOfTheHive>(), 150));
             npcLoot.Add(rl);
 
+            npcLoot.Add(new ItemDropWithConditionRule(ModContent.ItemType<NectarVial>(), 100, 1, 1, new NectarVialCondition()));
+            npcLoot.Add(new ItemDropWithConditionRule(ModContent.ItemType<TriTipStinger>(), 50, 1, 1, new TriTipStingerCondition()));
+
             if (npc.type == NPCID.IceQueen)
             {
                 Conditions.FrostMoonDropGatingChance condition = new();
@@ -141,9 +144,6 @@ namespace BombusApisBee.Core
 
             if (npc.type == NPCID.EyeofCthulhu)
                 npcLoot.Add(onlyInNormalMode(ModContent.ItemType<ThePeeperPoker>()));
-
-            if (npc.type == NPCID.Hornet || npc.type == NPCID.HornetHoney || npc.type == NPCID.HornetFatty || npc.type == NPCID.HornetLeafy || npc.type == NPCID.HornetSpikey || npc.type == NPCID.HornetStingy)
-                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<NectarVial>(), 30, 25));
 
             if (npc.type == NPCID.MartianSaucerCore)
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<HoneyManipulator>(), 5, 4));

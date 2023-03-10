@@ -13,8 +13,6 @@ namespace BombusApisBee.Core.Metaballs
 
         public static List<MetaballActor> Actors = new List<MetaballActor>();
 
-        public float Priority => 1;
-
         public void Load(Mod mod)
         {
             if (Main.dedServ)

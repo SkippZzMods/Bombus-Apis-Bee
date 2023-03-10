@@ -110,7 +110,12 @@ namespace BombusApisBee.Core.Metaballs
 			Effect metaballEdgeDetection = Terraria.Graphics.Effects.Filters.Scene["MetaballEdgeDetection"].GetShader().Shader;
 			metaballEdgeDetection.Parameters["width"].SetValue((float)Main.screenWidth / 2);
 			metaballEdgeDetection.Parameters["height"].SetValue((float)Main.screenHeight / 2);
-			metaballEdgeDetection.Parameters["border"].SetValue(outlineColor.ToVector4());
+
+			Color color = new Color(outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
+			if (color.G >= 255)
+				color.G -= 1;
+
+			metaballEdgeDetection.Parameters["border"].SetValue(color.ToVector4());
 			metaballEdgeDetection.Parameters["invisible"].SetValue(Invisible);
 
 			spriteBatch.Begin(default, default, default, default, default, metaballEdgeDetection);

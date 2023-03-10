@@ -443,8 +443,8 @@ namespace BombusApisBee.Core
                     }
                 }
 
-                if (FrozenStinger && crit)
-                    target.AddBuff<Frostbroken>(240);
+                if (FrozenStinger)
+                    target.AddBuff<Frostbroken>(900);
             }
         }
 
