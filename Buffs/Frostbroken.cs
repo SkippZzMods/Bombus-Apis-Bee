@@ -57,20 +57,99 @@ namespace BombusApisBee.Buffs
 
             NPC n = Main.npc[whoAmI];
 
-            float mult = 0.2f;
+            float mult = 0.3f;
             if (n.boss)
-                mult = 0.05f;
+                mult = 0.15f;
 
             if (n.life <= n.lifeMax * mult)
             {
                 n.life = 1;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    npc.StrikeNPCNoInteraction(9999, 0, 0);
+                    n.StrikeNPCNoInteraction(9999, 0, 0);
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, whoAmI, 9999f);
                 }
+
+                Explode(n);
             }
+
+            if (Main.rand.NextBool(20))
+            {
+                float lerper = 1f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 3f);
+                Color color = Color.Lerp(new Color(75, 150, 200), new Color(100, 170, 200), lerper);
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Glow>(), Main.rand.NextVector2Circular(.5f, .5f), 0, color, 0.75f);
+            }
+
+            float scale;
+            if (npc.width > npc.height)
+                scale = npc.width / 15f;
+            else if (npc.height > npc.width)
+                scale = npc.height / 15f;
+            else
+                scale = npc.width / 15f;
+
+            if (scale < 3f)
+                scale = 3f;
+
+            Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(0.25f, 0.25f), newColor: new Color(255, 255, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+
+            Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(0.5f, 0.5f), newColor: new Color(100, 150, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+        }
+
+        private void Explode(NPC npc)
+        {
+
+        }
+
+        public override bool? DrawHealthBar(NPC npc, byte hbPosition, ref float scale, ref Vector2 position)
+        {
+            if (inflicted)
+            {
+                float bright = Lighting.Brightness((int)npc.Center.X / 16, (int)npc.Center.Y / 16);
+
+                Main.instance.DrawHealthBar((int)position.X, (int)position.Y, npc.life, npc.lifeMax, bright, scale);
+
+                float life = npc.lifeMax * 0.3f;
+                if (npc.boss)
+                    life = npc.lifeMax * 0.15f;
+
+                Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/Items/Accessories/BeeKeeperDamageClass/FrozenStinger_Bar").Value;
+
+                float factor = Math.Min(life / (float)npc.lifeMax, 1);
+
+                var source = new Rectangle(0, 0, (int)(factor * tex.Width), tex.Height);
+                var target = new Rectangle((int)(position.X - Main.screenPosition.X), (int)(position.Y - Main.screenPosition.Y), (int)(factor * tex.Width * scale), (int)(tex.Height * scale));
+
+                Main.spriteBatch.Draw(tex, target, source, Color.White * bright * 0.75f, 0, new Vector2(tex.Width / 2, 0), 0, 0);
+
+                return false;
+            }
+
+            return base.DrawHealthBar(npc, hbPosition, ref scale, ref position);
+        }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (inflicted)
+            {
+                float scale;
+                if (npc.width > npc.height)
+                    scale = npc.width / 40f;
+                else if (npc.height > npc.width)
+                    scale = npc.height / 40f;
+                else
+                    scale = npc.width / 40f;
+
+                if (scale < 0.5f)
+                    scale = 0.5f;
+
+
+                Texture2D bloomTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+                spriteBatch.Draw(bloomTex, npc.Center - screenPos, null, new Color(100, 200, 255, 0), npc.rotation, bloomTex.Size() / 2f, scale, 0f, 0f);
+            }
+
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
     }
 
@@ -136,19 +215,27 @@ namespace BombusApisBee.Buffs
                 effect.Parameters["uImageSize0"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight));
                 effect.Parameters["alpha"].SetValue(1f);
 
-                effect.Parameters["colorOne"].SetValue(new Color(0, 170, 225, 75).ToVector4());
-                effect.Parameters["colorTwo"].SetValue(new Color(180, 255, 255, 100).ToVector4());
+                float lerper = Math.Clamp((float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f + 1f), 0, 1f);
+
+                Color color = Color.Lerp(new Color(75, 150, 200, 50), new Color(100, 170, 200, 100), lerper);
+
+                effect.Parameters["colorOne"].SetValue(new Color(100, 180, 255, 100).ToVector4());
+                effect.Parameters["colorTwo"].SetValue(new Color(180, 255, 255, 150).ToVector4());
                 effect.Parameters["colorThree"].SetValue(new Color(0, 200, 225).ToVector4());
 
-                effect.Parameters["noiseColor"].SetValue(new Color(150, 255, 255, 100).ToVector4());
+                effect.Parameters["noiseColor"].SetValue(color.ToVector4());
 
                 effect.Parameters["uImage1"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/ShaderNoiseLooping").Value);
                 effect.Parameters["uImage2"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/Cracks").Value);
 
-                effect.Parameters["noiseScale"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight) / 2000);
-                effect.Parameters["noiseScale2"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight) / 5000);
+                effect.Parameters["noiseScale"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight) / 1000);
+                effect.Parameters["noiseScale2"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight) / 500);
 
-                effect.Parameters["uTime"].SetValue((float)(Main.timeForVisualEffects * 0.0001f));
+                Vector2 offset = 4f * Main.screenPosition / new Vector2(Main.screenWidth, Main.screenHeight);
+
+                effect.Parameters["offset"].SetValue(offset + new Vector2((float)(Main.timeForVisualEffects * 0.0005f), 0f));
+
+                effect.Parameters["offset2"].SetValue(offset + new Vector2((float)(Main.timeForVisualEffects * -0.00075f), 0f));
 
                 effect.CurrentTechnique.Passes[0].Apply();
 

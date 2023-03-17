@@ -28,6 +28,7 @@ float noiseScale;
 float noiseScale2;
 
 float2 offset;
+float2 offset2;
 
 float4 White(float2 coords : TEXCOORD0) : COLOR0
 {
@@ -39,14 +40,11 @@ float4 White(float2 coords : TEXCOORD0) : COLOR0
 
     if (color.a != 0.0)
     {
-        float2 uv = coords;
-        uv.x = (uv + uTime) % 1;
-
         float lerper = tex2D(uImage1S, (coords * noiseScale) + offset).r;
 
         float4 retColor = lerp(colorOne, colorTwo, lerper);
 
-        float4 noise = tex2D(uImage2S, (uv * noiseScale2 ) + offset);
+        float4 noise = tex2D(uImage2S, (coords * noiseScale2) + offset2);
         noise *= noiseColor;
             
         return retColor * noise;

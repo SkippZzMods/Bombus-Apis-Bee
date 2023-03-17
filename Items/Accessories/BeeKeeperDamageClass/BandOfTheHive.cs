@@ -111,7 +111,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             this.damage = 0;
             timer = 0;
 
-            Player.AddBuff<BandOfTheHiveCooldown>(600);
+            Player.AddBuff<BandOfTheHiveCooldown>(1200);
         }
     }
 
@@ -150,18 +150,6 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 8;
 		}
-
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            /*Projectile.velocity *= 0.05f;
-            if (!hitTile)
-            {
-                hitTile = true;
-                Projectile.position += oldVelocity;
-            }*/
-
-            return false;
-        }
 
         public override void AI()
         {
