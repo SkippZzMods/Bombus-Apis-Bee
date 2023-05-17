@@ -88,6 +88,7 @@ namespace BombusApisBee.BeeHelperProj
             Projectile.extraUpdates = 1;
 
             Projectile.friendly = true;
+            Projectile.hostile = false;
             Projectile.timeLeft = 1200;
             Projectile.ignoreWater = false;
             Projectile.tileCollide = true;

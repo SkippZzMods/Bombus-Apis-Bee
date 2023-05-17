@@ -48,7 +48,7 @@ namespace BombusApisBee.BeeDamageClass
             bool bee = false;
             var BeeDamagePlayer = player.GetModPlayer<BeeDamagePlayer>();
 
-            if (BeeDamagePlayer.BeeResourceCurrent >= beeResourceCost && SafeCanUseItem(player))
+            if (BeeDamagePlayer.BeeResourceCurrent >= beeResourceCost + BeeDamagePlayer.BeeResourceReserved && SafeCanUseItem(player))
             {
                 if (UseHoney(player, player.TrueResourceChance()))
                 {

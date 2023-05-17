@@ -120,7 +120,24 @@ namespace BombusApisBee.UI
 
                 Main.spriteBatch.Draw(honeyBarTex, position + Vector2.UnitY * MathHelper.Lerp(0f, honeyBarTex.Height, 1f - completionRatio), barRectangle, Color.White);
 
-                Main.spriteBatch.Draw(barTex, position, null, Color.White);          
+                Main.spriteBatch.Draw(barTex, position, null, Color.White);
+
+                float uiScale = 1f + (Main.UIScale * 0.5f / 100);
+
+                Rectangle mouse = new Rectangle((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y, 8, 8);
+                Rectangle HoneyBar = Utils.CenteredRectangle(position + Utils.Size(barTex) * uiScale * 0.5f, Utils.Size(barTex) * uiScale);
+                if (HoneyBar.Intersects(mouse) && mp.BeeResourceMax2 > 0f)
+                {
+                    int HoneyInt = (int)Math.Round((double)(mp.BeeResourceCurrent));
+                    int maxHoneyInt = (int)Math.Round((double)(mp.BeeResourceMax2));
+                    Main.instance.MouseText(string.Concat(new object[]
+                    {
+                    "Honey: ",
+                    HoneyInt,
+                    "/",
+                    maxHoneyInt
+                    }) ?? "", 0, 0, -1, -1, -1, -1);
+                }
             }
         }
 

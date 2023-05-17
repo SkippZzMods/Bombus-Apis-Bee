@@ -63,6 +63,8 @@ namespace BombusApisBee.Buffs
 
             if (n.life <= n.lifeMax * mult)
             {
+                Explode(n);
+
                 n.life = 1;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
@@ -70,8 +72,6 @@ namespace BombusApisBee.Buffs
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, whoAmI, 9999f);
                 }
-
-                Explode(n);
             }
 
             if (Main.rand.NextBool(20))
@@ -99,7 +99,64 @@ namespace BombusApisBee.Buffs
 
         private void Explode(NPC npc)
         {
+            Vector2 center = npc.Center;
 
+            if (Main.LocalPlayer.Distance(center) < 2000 && Main.LocalPlayer.Bombus().shakeTimer < 10)
+            {
+                Main.LocalPlayer.Bombus().shakeTimer = 10;
+            }
+
+            float scale;
+            if (npc.width > npc.height)
+                scale = npc.width / 15f;
+            else if (npc.height > npc.width)
+                scale = npc.height / 15f;
+            else
+                scale = npc.width / 15f;
+
+            if (scale < 3f)
+                scale = 3f;
+
+            for (int i = 0; i < 20; i++)
+            {
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(5.25f, 5.25f), newColor: new Color(255, 255, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(5.5f, 5.5f), newColor: new Color(100, 150, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+            }
+
+            SoundID.DD2_WitherBeastDeath.PlayWith(npc.Center, pitch: 0.35f);
+
+            SoundEngine.PlaySound(SoundID.Item27, npc.position);
+
+            foreach (NPC n in Main.npc)
+            {
+                int whoAmI = n.whoAmI;
+                if (npc.realLife >= 0)
+                    whoAmI = n.realLife;
+
+                NPC realNPC = Main.npc[whoAmI];
+
+                if (realNPC.Distance(center) < 250f && realNPC.CanBeChasedBy())
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        realNPC.StrikeNPC(75, 2f, realNPC.Center.X > center.X ? 1 : -1, Main.rand.NextBool(10));
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, whoAmI, 50f);
+                    }
+
+                    realNPC.AddBuff(BuffID.Frostburn2, 600);
+                    
+                    for (int i = 0; i < 15; i++)
+                    {
+                        Dust.NewDustPerfect(realNPC.Center, DustID.Frost, (center.DirectionTo(realNPC.Center).RotatedByRandom(0.3f) * 15f) * Main.rand.NextFloat(0.1f, 1f), Scale: Main.rand.NextFloat(0.5f, 1.75f)).noGravity = true;
+
+                        float lerper = 1f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 3f);
+                        Color color = Color.Lerp(new Color(75, 150, 200), new Color(100, 170, 200), lerper);
+                        Dust.NewDustPerfect(realNPC.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), (center.DirectionTo(realNPC.Center).RotatedByRandom(0.3f) * 15f) * Main.rand.NextFloat(0.1f, 1f), 0, color, Main.rand.NextFloat(0.25f, .6f)).noGravity = true;
+                    }
+                }
+            }
         }
 
         public override bool? DrawHealthBar(NPC npc, byte hbPosition, ref float scale, ref Vector2 position)

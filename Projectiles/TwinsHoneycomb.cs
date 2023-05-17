@@ -31,7 +31,8 @@ namespace BombusApisBee.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
 
-            Projectile.penetrate = 4;
+            Projectile.penetrate = 40;
+            Projectile.timeLeft = 7200;
             DrawOffsetX = -15;
 
             Projectile.usesLocalNPCImmunity = true;
@@ -47,12 +48,6 @@ namespace BombusApisBee.Projectiles
             {
                 owner.Bombus().OcularCooldown = 1800;
                 Projectile.Kill();
-            }
-
-            if (Projectile.timeLeft % 35 == 0)
-            {
-                owner.Hymenoptra().BeeResourceCurrent--;
-                owner.Hymenoptra().BeeResourceRegenTimer = -60;
             }
 
             if (rotTimer > 0)
@@ -341,7 +336,8 @@ namespace BombusApisBee.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
 
-            Projectile.penetrate = 10;
+            Projectile.penetrate = 100;
+            Projectile.timeLeft = 7200;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 35;
@@ -357,11 +353,6 @@ namespace BombusApisBee.Projectiles
             if (++Projectile.frameCounter % 7 == 0)
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
 
-            if (Projectile.timeLeft % 35 == 0)
-            {
-                owner.Hymenoptra().BeeResourceRegenTimer = -60;
-                owner.Hymenoptra().BeeResourceCurrent--;
-            }
 
             if (owner.Hymenoptra().BeeResourceCurrent <= 0)
                 Projectile.Kill();

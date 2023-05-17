@@ -25,6 +25,9 @@ namespace BombusApisBee.BeeDamageClass
         public int BeeResourceMax = 100;
         public int BeeResourceMax2;
 
+        public int BeeResourceReserved;
+        public int BeeResourceReservedIncrease;
+
         public int BeeResourceRegenTimer;
         public int BeeResourceIncrease = 4;
 
@@ -81,6 +84,8 @@ namespace BombusApisBee.BeeDamageClass
 
             if (HeldBeeWeaponTimer > 0)
                 HeldBeeWeaponTimer--;
+
+            BeeResourceReserved = 0;
         }
 
         public override void PostUpdateMiscEffects()
@@ -90,9 +95,10 @@ namespace BombusApisBee.BeeDamageClass
                 Player.IncreaseBeeResource(BeeResourceIncrease, false);
                 BeeResourceRegenTimer = 0;
             }
-                
 
             BeeResourceCurrent = Utils.Clamp(BeeResourceCurrent, 0, BeeResourceMax2);
+
+            BeeResourceReserved = Utils.Clamp(BeeResourceReserved, 0, BeeResourceMax2);
 
             if (HasBees)
             {
@@ -260,6 +266,15 @@ namespace BombusApisBee.BeeDamageClass
         private Trail trail2;
 
         float mult;
+
+        public delegate void ExtraAI(Projectile proj);
+        public static event ExtraAI ExtraAIEvent;
+
+        public delegate void ExtraPreAI(Projectile proj);
+        public static event ExtraPreAI ExtraPreAIEvent;
+
+        public int waspAttackCooldown = 90;
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bee");
@@ -315,6 +330,8 @@ namespace BombusApisBee.BeeDamageClass
                     Projectile.timeLeft = 2;
 
                 Projectile.frame = FrameOffset + 1;
+
+                ExtraPreAIEvent.Invoke(Projectile);
 
                 return false;
             }
@@ -395,12 +412,11 @@ namespace BombusApisBee.BeeDamageClass
                 Projectile.rotation = Projectile.velocity.X * 0.085f;
                 Projectile.spriteDirection = Projectile.direction;
 
+                if (AttackDelay <= 0 && attackTarget == null)
+                    attackTarget = FindTarget();
+
                 if (AttackDelay > 0 && Projectile.Distance(Player.Center) < 50f)
                     AttackDelay--;
-
-                NPC target = default;
-                if (AttackDelay <= 0)
-                    target = FindTarget();
 
                 if (AttackDelay == 1)
                     if (Player.HeldItem.damage > 0)
@@ -408,14 +424,14 @@ namespace BombusApisBee.BeeDamageClass
                     else
                         Projectile.damage = Player.ApplyHymenoptraDamageTo(10);
 
-                if (target != default && AttackDelay <= 0)
+                if (attackTarget != null && AttackDelay <= 0)
                 {
                     Projectile.friendly = true;
                     Attacking = true;
 
-                    Vector2 between = target.Center - Projectile.Center;
+                    Vector2 between = attackTarget.Center - Projectile.Center;
 
-                    float dist = Vector2.Distance(Projectile.Center, target.Center);
+                    float dist = Vector2.Distance(Projectile.Center, attackTarget.Center);
 
                     float speed = 15f;
                     float adjust = 0.35f;
@@ -470,15 +486,19 @@ namespace BombusApisBee.BeeDamageClass
                 Projectile.usesIDStaticNPCImmunity = false;
                 Projectile.friendly = true;
 
-                NPC target = FindTarget();
+                if (AttackDelay <= 0 && attackTarget == null)
+                    attackTarget = FindTarget();
+
+                if (AttackDelay > 0 && Projectile.Distance(Player.Center) < 50f)
+                    AttackDelay--;
 
                 if (AttackDelay == 1)
-                    if (Player.HeldItem.damage > 0) 
-                        Projectile.damage = Player.ApplyHymenoptraDamageTo((int)(Player.HeldItem.damage * 0.5));
+                    if (Player.HeldItem.damage > 0)
+                        Projectile.damage = Player.ApplyHymenoptraDamageTo(Player.HeldItem.damage);
                     else
                         Projectile.damage = Player.ApplyHymenoptraDamageTo(10);
 
-                if (target != default)
+                if (attackTarget != null && AttackDelay <= 0)
                 {
                     if (Main.rand.NextBool(5))
                         Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Vector2.Zero, 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.25f);
@@ -486,9 +506,9 @@ namespace BombusApisBee.BeeDamageClass
                     FrameOffset = 4;
                     Attacking = true;
 
-                    Vector2 between = target.Center - Projectile.Center;
+                    Vector2 between = attackTarget.Center - Projectile.Center;
 
-                    float dist = Vector2.Distance(Projectile.Center, target.Center);
+                    float dist = Vector2.Distance(Projectile.Center, attackTarget.Center);
 
                     float speed = 15f;
                     float adjust = 0.5f;
@@ -530,7 +550,7 @@ namespace BombusApisBee.BeeDamageClass
                         }
                     }
 
-                    Projectile.rotation = Projectile.DirectionTo(target.Center).ToRotation();
+                    Projectile.rotation = Projectile.DirectionTo(attackTarget.Center).ToRotation();
                 }
                 else
                 {
@@ -552,6 +572,11 @@ namespace BombusApisBee.BeeDamageClass
                     Projectile.frame = FrameOffset;
                 }
             }
+
+            if (attackTarget != null && !attackTarget.active)
+                attackTarget = null;
+
+            ExtraAIEvent?.Invoke(Projectile);
         }
         private void ManageCaches()
         {
@@ -646,7 +671,7 @@ namespace BombusApisBee.BeeDamageClass
             }
         }
 
-        private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1000f && Collision.CanHitLine(Player.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Projectile.Center)).FirstOrDefault(); }
+        private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Player.Center) < 1000f && Collision.CanHitLine(Player.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Player.Center)).FirstOrDefault(); }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
@@ -669,6 +694,8 @@ namespace BombusApisBee.BeeDamageClass
                     {
                         Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), (-Projectile.velocity * Main.rand.NextFloat(0.2f)).RotatedByRandom(0.55f), 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.45f);
                     }
+
+                    attackTarget = null;
                 }
 
                 if (Gathering)
@@ -677,6 +704,8 @@ namespace BombusApisBee.BeeDamageClass
                     {
                         Dust.NewDustPerfect(Projectile.Center, DustID.Honey2, (-Projectile.velocity * Main.rand.NextFloat(0.2f)).RotatedByRandom(0.55f), 0, default, 1.45f).noGravity = true;
                     }
+
+                    AttackDelay = 120;
                 }
             }
 

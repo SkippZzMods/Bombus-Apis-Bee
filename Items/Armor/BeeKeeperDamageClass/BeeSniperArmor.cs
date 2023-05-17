@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased chance to not consume honey\nIncreases your amount of Bees by 1");
+            Tooltip.SetDefault("15% increased chance to not consume honey\nIncreases your amount of Loyal Bees by 1");
             SacrificeTotal = 1;
         }
 

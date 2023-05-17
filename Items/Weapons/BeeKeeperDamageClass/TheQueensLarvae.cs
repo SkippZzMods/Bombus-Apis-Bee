@@ -6,15 +6,27 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class TheQueensLarvae : BeeDamageItem
     {
+        public override void Load()
+        {
+            On.Terraria.Player.UpdateEquips += Player_UpdateEquips;
+        }
+
+        private void Player_UpdateEquips(On.Terraria.Player.orig_UpdateEquips orig, Player self, int i)
+        {
+            orig(self, i);
+
+            if (self.ownedProjectileCounts<TheQueen>() > 0)
+                self.Hymenoptra().BeeResourceReserved += (int)(self.Hymenoptra().BeeResourceMax2 * 0.65f);
+        }
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Drains your honey on use\n'Once a royal queen, now your royal guard'");
+            Tooltip.SetDefault("Drains your honey on use\nReserves 65% of your honey while alive\n'Once a royal queen, now your royal guard'");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 356;
+            Item.damage = 412;
 
             Item.width = 40;
             Item.height = 20;

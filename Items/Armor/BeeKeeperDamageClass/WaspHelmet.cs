@@ -1,11 +1,98 @@
 ﻿using BombusApisBee.BeeDamageClass;
 using BombusApisBee.Items.Other.Crafting;
+using System.Linq;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class WaspHelmet : BeeKeeperItem
     {
+        public override void Load()
+        {
+            BeePlayerBeeProjectile.ExtraAIEvent += AddStingers;
+
+            BeePlayerBeeProjectile.ExtraPreAIEvent += AddGatheringStingers;
+        }
+
+        private void AddGatheringStingers(Projectile proj)
+        {
+            BeePlayerBeeProjectile modProj = proj.ModProjectile as BeePlayerBeeProjectile;
+
+            if (modProj.Player.Bombus().WaspArmorSet)
+            {
+                if (modProj.waspAttackCooldown > 0)
+                    modProj.waspAttackCooldown--;
+
+                if (modProj.waspAttackCooldown <= 0)
+                {
+                    modProj.waspAttackCooldown = 75;
+
+                    Projectile.NewProjectileDirect(proj.GetSource_FromAI(), proj.Center + proj.velocity, proj.DirectionTo(proj.Center - proj.velocity * 15f).RotatedByRandom(0.2f) * Main.rand.NextFloat(10, 20), ModContent.ProjectileType<Projectiles.HomingStinger>(), 15, 1f, proj.owner);
+
+                    for (int d = 0; d < 15; d++)
+                    {
+                        Dust.NewDustPerfect(proj.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), proj.DirectionTo(proj.Center - proj.velocity * 15f).RotatedByRandom(0.3f) * Main.rand.NextFloat(1, 3), 0, new Color(79, 170, 29) * Main.rand.NextFloat(.2f, 1f), 0.4f);
+                    }
+
+                    BeeUtils.CircleDust(proj.Center, 10, ModContent.DustType<Dusts.GlowFastDecelerate>(), 1, 0, new Color(79, 170, 29) * Main.rand.NextFloat(.2f, 1f), 0.35f);
+                }
+            }
+        }
+
+        private void AddStingers(Projectile proj)
+        {
+            BeePlayerBeeProjectile modProj = proj.ModProjectile as BeePlayerBeeProjectile;
+
+            if (modProj.Player.Bombus().WaspArmorSet)
+            {
+                if (modProj.Defense)
+                {
+                    if (modProj.waspAttackCooldown > 0)
+                        modProj.waspAttackCooldown--;
+
+                    NPC target = Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(proj.Center) < 500f && Collision.CanHitLine(proj.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(proj.Center)).FirstOrDefault();
+
+                    if (target != default && modProj.waspAttackCooldown <= 0)
+                    {
+                        Projectile.NewProjectile(proj.GetSource_FromAI(), proj.Center, proj.DirectionTo(target.Center) * 35f, ModContent.ProjectileType<Projectiles.StingerFriendly>(), 20, 4f, proj.owner);
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            Dust.NewDustPerfect(proj.Center, ModContent.DustType<Dusts.StingerDust>(), proj.DirectionTo(target.Center).RotatedByRandom(.3f) * Main.rand.NextFloat(5f), Main.rand.Next(255), Scale: 1.25f).noGravity = true;
+                        }
+
+                        BeeUtils.CircleDust(proj.Center, 20, ModContent.DustType<Dusts.StingerDust>(), 1, Main.rand.Next(255), null, 1f);
+
+                        modProj.waspAttackCooldown = Main.rand.Next(60, 150);
+                    }
+                }
+                else if (modProj.Offense)
+                {
+                    if (modProj.waspAttackCooldown > 0)
+                        modProj.waspAttackCooldown--;
+
+                    if (modProj.Attacking && modProj.waspAttackCooldown <= 0 && modProj.attackTarget != null)
+                    {
+                        for (int i = -1; i < 2; i++)
+                        {
+                            Vector2 velocity = proj.DirectionTo(modProj.attackTarget.Center).RotatedBy(MathHelper.ToRadians(i * 15)) * 25;
+
+                            Projectile.NewProjectile(proj.GetSource_FromAI(), proj.Center, velocity, ModContent.ProjectileType<Projectiles.StingerFriendly>(), 25, 1.5f, proj.owner);
+
+                            for (int d = 0; d < 15; d++)
+                            {
+                                Dust.NewDustPerfect(proj.Center, ModContent.DustType<Dusts.StingerDust>(), velocity.RotatedByRandom(.05f) * Main.rand.NextFloat(.5f), Main.rand.Next(255), Scale: 1.25f).noGravity = true;
+                            }
+                        }
+
+                        BeeUtils.CircleDust(proj.Center, 20, ModContent.DustType<Dusts.StingerDust>(), 1, Main.rand.Next(255), null, 1f);
+
+                        modProj.waspAttackCooldown = 120;
+                    }
+                }
+            }
+        }
+
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("40% increased wing flight time and increased jump speed\nIncreases maximum honey by 25");
@@ -28,22 +115,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "6% increased hymenoptra damage and critical strike chance\nHornets no longer deal contact damage and their stingers deal half damage";
-            player.IncreaseBeeDamage(0.06f);
-            player.IncreaseBeeCrit(6);
+            player.setBonus = "Your Loyal Bees shoot powerful stingers";
             player.Bombus().WaspArmorSet = true;
-
-            player.npcTypeNoAggro[42] = true;
-
-            player.npcTypeNoAggro[231] = true;
-
-            player.npcTypeNoAggro[232] = true;
-
-            player.npcTypeNoAggro[233] = true;
-
-            player.npcTypeNoAggro[234] = true;
-
-            player.npcTypeNoAggro[235] = true;
         }
 
         public override void UpdateEquip(Player player)

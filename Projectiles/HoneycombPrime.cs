@@ -36,7 +36,7 @@ namespace BombusApisBee.Projectiles
             if (flashTimer > 0)
                 flashTimer--;
 
-            if ((!owner.channel && owner.itemAnimation == 0) || owner.Hymenoptra().BeeResourceCurrent <= 0)
+            if ((!owner.channel && owner.itemAnimation == 0) || !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
             {
                 Projectile.Kill();
                 return;

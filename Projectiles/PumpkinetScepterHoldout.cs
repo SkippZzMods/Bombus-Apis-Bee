@@ -25,14 +25,20 @@ namespace BombusApisBee.Projectiles
         {
             var modPlayer = Owner.Hymenoptra();
             modPlayer.BeeResourceRegenTimer = -120;
-            if (!Owner.channel || modPlayer.BeeResourceCurrent <= 0)
+            if (!Owner.channel || !(Owner.Hymenoptra().BeeResourceCurrent > Owner.Hymenoptra().BeeResourceReserved))
             {
                 Owner.reuseDelay = 60;
                 Projectile.Kill();
+                return;
             }
 
             if (++Projectile.ai[0] % 10 == 0)
-                Owner.UseBeeResource(1);
+                if (!Owner.UseBeeResource(1))
+                {
+                    Owner.reuseDelay = 60;
+                    Projectile.Kill();
+                    return;
+                }
 
             if (Main.myPlayer == Projectile.owner && Owner.ownedProjectileCounts[ModContent.ProjectileType<PumpkinetHornet>()] <= 0)
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.MouseWorld, Main.rand.NextVector2CircularEdge(5f, 5f), ModContent.ProjectileType<PumpkinetHornet>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
@@ -108,7 +114,7 @@ namespace BombusApisBee.Projectiles
 
         public override void AI()
         {
-            if (player.channel && !player.CCed && !player.noItems && player.Hymenoptra().BeeResourceCurrent >= 1)
+            if (player.channel && !player.CCed && !player.noItems && player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceReserved)
                 Projectile.timeLeft = 2;
 
             if (DashDelay > 0)

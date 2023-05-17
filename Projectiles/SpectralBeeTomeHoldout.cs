@@ -84,36 +84,40 @@ namespace BombusApisBee.Projectiles
             if (Main.myPlayer != Projectile.owner)
                 return;
 
-            if (Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent == 0)
+            if (Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent == Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceReserved)
             {
                 Projectile.Kill();
                 return;
             }
 
-            SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
-            for (int i = 0; i < 2; i++)
+            if (Owner.UseBeeResource(3))
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, -Vector2.UnitY.RotatedByRandom(0.35f) * Main.rand.NextFloat(5f, 10f), ModContent.ProjectileType<SpectralBee>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
+                for (int i = 0; i < 2; i++)
+                {
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, -Vector2.UnitY.RotatedByRandom(0.35f) * Main.rand.NextFloat(5f, 10f), ModContent.ProjectileType<SpectralBee>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                }
+
+                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, -Vector2.UnitY.RotatedByRandom(0.45f) * Main.rand.NextFloat(10f, 15f), ModContent.ProjectileType<SpectralSoul>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+
+                for (float k = 0; k < 6.28f; k += 0.1f)
+                {
+                    float x = (float)Math.Cos(k) * 50;
+                    float y = (float)Math.Sin(k) * 25;
+
+                    Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), new Vector2(x, y) * 0.035f, 0, new Color(6, 106, 255), 0.4f);
+                }
+
+                for (int i = 0; i < 15; i++)
+                {
+                    Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(6, 106, 255), 0.45f);
+                    Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), ModContent.DustType<Dusts.GlowFastDecelerate>(), -Vector2.UnitY.RotatedByRandom(0.35f) * Main.rand.NextFloat(2.5f, 5f), 0, new Color(130, 153, 208), 0.35f);
+                }
+
+                Projectile.netUpdate = true;
             }
-
-            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, -Vector2.UnitY.RotatedByRandom(0.45f) * Main.rand.NextFloat(10f, 15f), ModContent.ProjectileType<SpectralSoul>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-
-            for (float k = 0; k < 6.28f; k += 0.1f)
-            {
-                float x = (float)Math.Cos(k) * 50;
-                float y = (float)Math.Sin(k) * 25;
-
-                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), new Vector2(x, y) * 0.035f, 0, new Color(6, 106, 255), 0.4f);
-            }
-
-            for (int i = 0; i < 15; i++)
-            {
-                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(6, 106, 255), 0.45f);
-                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), ModContent.DustType<Dusts.GlowFastDecelerate>(), -Vector2.UnitY.RotatedByRandom(0.35f) * Main.rand.NextFloat(2.5f, 5f), 0, new Color(130, 153, 208), 0.35f);
-            }
-
-            Projectile.netUpdate = true;
-            Owner.UseBeeResource(3);
+            else
+                Projectile.Kill();
         }
 
         public void AdjustPlayerValues()

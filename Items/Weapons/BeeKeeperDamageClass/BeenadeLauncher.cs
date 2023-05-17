@@ -51,6 +51,15 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 AddIngredient(ModContent.ItemType<Pollen>(), 10).
                 AddTile(TileID.Anvils).
                 Register();
+
+            CreateRecipe(1).
+                AddIngredient(ItemID.HellstoneBar, 5).
+                AddIngredient(ItemID.Beenade, 15).
+                AddIngredient(ItemID.LeadBar, 10).
+                AddIngredient(ItemID.IllegalGunParts, 1).
+                AddIngredient(ModContent.ItemType<Pollen>(), 10).
+                AddTile(TileID.Anvils).
+                Register();
         }
 
         public override Vector2? HoldoutOffset()

@@ -137,10 +137,10 @@ namespace BombusApisBee.Core
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             var modPlayer2 = BeeDamagePlayer.ModPlayer(Player);
-            if (BombusApisBee.HoneyManipulatorHotkey.JustPressed && modPlayer2.BeeResourceCurrent == modPlayer2.BeeResourceMax2 && Main.myPlayer == Player.whoAmI && HoneyManipulator && !Player.HasBuff<HoneyManipulatorCooldown>())
+            if (BombusApisBee.HoneyManipulatorHotkey.JustPressed && modPlayer2.BeeResourceCurrent == modPlayer2.BeeResourceMax2 && modPlayer2.BeeResourceReserved < modPlayer2.BeeResourceMax2 && Main.myPlayer == Player.whoAmI && HoneyManipulator && !Player.HasBuff<HoneyManipulatorCooldown>())
             {
                 Player.AddBuff(ModContent.BuffType<HoneyManipulatorCooldown>(), 5400, false);
-                int healamount = (int)(modPlayer2.BeeResourceMax2 * 0.65f);
+                int healamount = (int)((modPlayer2.BeeResourceMax2 - modPlayer2.BeeResourceReserved) * 0.65f);
                 Player.Heal(healamount);
                 modPlayer2.BeeResourceCurrent -= healamount;
                 modPlayer2.BeeResourceRegenTimer = -300;
@@ -443,15 +443,9 @@ namespace BombusApisBee.Core
                     }
                 }
 
-                if (FrozenStinger)
+                if (FrozenStinger && crit)
                     target.AddBuff<Frostbroken>(900);
             }
-        }
-
-        public override void ModifyHitByProjectile(Projectile proj, ref int damage, ref bool crit)
-        {
-            if (WaspArmorSet && proj.type == ProjectileID.Stinger)
-                damage = damage / 2;
         }
     }
 }

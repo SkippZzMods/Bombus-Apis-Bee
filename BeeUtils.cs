@@ -337,13 +337,20 @@ namespace BombusApisBee
             }
             return Utils.SafeNormalize(destination - entity.Center, fallback.Value);
         }
-        public static void UseBeeResource(this Player player, int amount)
+        public static bool UseBeeResource(this Player player, int amount)
         {
-            if (Main.rand.NextFloat() > player.TrueResourceChance())
+            if (player.Hymenoptra().BeeResourceCurrent >= amount + player.Hymenoptra().BeeResourceReserved)
             {
-                player.Hymenoptra().BeeResourceRegenTimer = -120;
-                player.Hymenoptra().BeeResourceCurrent -= amount;
+                if (Main.rand.NextFloat() > player.TrueResourceChance())
+                {
+                    player.Hymenoptra().BeeResourceRegenTimer = -120;
+                    player.Hymenoptra().BeeResourceCurrent -= amount;
+                }
+
+                return true;
             }
+
+            return false;
         }
         public static float AsRadians(this float amount)
         {

@@ -10,7 +10,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("'A honeybee will actually collect honey for you'\nIncreases maximum honey by 15");
+            Tooltip.SetDefault("Summons a large Honeybee which will mimic your loyal bees\nIncreases maximum honey by 25");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 4));
             SacrificeTotal = 1;
         }
@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             var modPlayer = BeeDamagePlayer.ModPlayer(player);
-            modPlayer.BeeResourceMax2 += 15;
+            modPlayer.BeeResourceMax2 += 25;
             player.Bombus().HoneyBee = true;
             if (player.ownedProjectileCounts[ModContent.ProjectileType<HoneyBeeProj>()] < 1)
             {

@@ -40,6 +40,7 @@ namespace BombusApisBee.Projectiles
                 dust.noGravity = true;
                 dust.scale = 1.1f;
             }
+
             BeeTimer++;
             if (BeeTimer > 15)
             {
@@ -48,12 +49,11 @@ namespace BombusApisBee.Projectiles
                     Vector2 vel = new Vector2(Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-5, 5));
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, vel, ProjectileID.Wasp, Projectile.damage, 1, Projectile.owner).DamageType = BeeUtils.BeeDamageClass();
                     BeeTimer = 0;
-                    var BeeDamagePlayer = player.GetModPlayer<BeeDamagePlayer>();
-                    player.UseBeeResource(1);
+
+                    if (!player.UseBeeResource(1))
+                        Projectile.ai[0] = -1f;
                 }
             }
-            if (player.Hymenoptra().BeeResourceCurrent <= 0)
-                Projectile.Kill();
         }
 
         public override bool PreDraw(ref Color lightColor)

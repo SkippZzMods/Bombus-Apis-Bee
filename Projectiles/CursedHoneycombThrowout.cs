@@ -33,7 +33,7 @@ namespace BombusApisBee.Projectiles
 
         public override void AI()
         {
-            if (owner.channel && !owner.noItems && !owner.CCed && owner.Hymenoptra().BeeResourceCurrent > 0)
+            if (owner.channel && !owner.noItems && !owner.CCed && !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
                 Projectile.timeLeft = 2;
 
             owner.ChangeDir(Projectile.Center.X < owner.Center.X ? -1 : 1);
@@ -52,23 +52,28 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity = (Projectile.velocity * 20f + Utils.SafeNormalize(Main.MouseWorld - Projectile.Center + randomizedVector, Vector2.UnitX) * (Projectile.Distance(Main.MouseWorld) > 100f ? 17f : 12f)) / 21f;
                 if (--AttackDelay <= 0)
                 {
-                    for (int i = -1; i < 2; i++)
-                    {
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedBy(0.3f * i) * 21f, ModContent.ProjectileType<CursedTooth>(), Projectile.damage, 3.5f, Projectile.owner);
-                    }
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(15f, 18f), ModContent.ProjectileType<CursedEye>(), (int)(Projectile.damage * 0.66f), 1.5f, Projectile.owner);
-                    }
 
-                    for (int i = 0; i < 15; i++)
+                    if (owner.UseBeeResource(6))
                     {
-                        Dust.NewDustPerfect(Projectile.Center + Projectile.velocity, DustID.CursedTorch, Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(10f, 15f), Scale: Main.rand.NextFloat(2f, 2.5f)).noGravity = true;
-                        Dust.NewDustPerfect(Projectile.Center + Projectile.velocity, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(5f, 10f), newColor: new Color(97, 130, 30), Scale: Main.rand.NextFloat(0.5f, 0.65f));
+                        for (int i = -1; i < 2; i++)
+                        {
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedBy(0.3f * i) * 21f, ModContent.ProjectileType<CursedTooth>(), Projectile.damage, 3.5f, Projectile.owner);
+                        }
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(15f, 18f), ModContent.ProjectileType<CursedEye>(), (int)(Projectile.damage * 0.66f), 1.5f, Projectile.owner);
+                        }
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            Dust.NewDustPerfect(Projectile.Center + Projectile.velocity, DustID.CursedTorch, Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(10f, 15f), Scale: Main.rand.NextFloat(2f, 2.5f)).noGravity = true;
+                            Dust.NewDustPerfect(Projectile.Center + Projectile.velocity, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(5f, 10f), newColor: new Color(97, 130, 30), Scale: Main.rand.NextFloat(0.5f, 0.65f));
+                        }
+                        SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.position);
+                        AttackDelay = 120;
                     }
-                    SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.position);
-                    owner.UseBeeResource(6);
-                    AttackDelay = 120;
+                    else
+                        Projectile.Kill();                
                 }
             }
 

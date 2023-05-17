@@ -9,6 +9,8 @@ namespace BombusApisBee.Projectiles
         {
             SafeSetDefaults();
             Projectile.DamageType = ModContent.GetInstance<HymenoptraDamageClass>();
+
+            Projectile.hostile = false;
         }
     }
 }

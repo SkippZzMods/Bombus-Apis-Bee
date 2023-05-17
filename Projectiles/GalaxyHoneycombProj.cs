@@ -96,11 +96,12 @@ namespace BombusApisBee.Projectiles
                         Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel, ModContent.ProjectileType<GalacticBee>(), Projectile.damage * 1 / 2, Projectile.knockBack, Projectile.owner);
                     }
                 }
+
                 Owner.UseBeeResource(1);
                 StarTimer = 0f;
             }
             Projectile.rotation += 0.25f / Projectile.MaxUpdates;
-            if (Owner.channel && Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent > 0)
+            if (Owner.channel && Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent > Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceReserved)
             {
                 HomeTowardsMouse();
             }

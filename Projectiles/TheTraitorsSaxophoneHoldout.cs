@@ -58,34 +58,39 @@ namespace BombusApisBee.Projectiles
 
             if (Charge % MaxCharge == 0)
             {
-                flashTimer = 15;
-                string sax = "Sax" + Main.rand.Next(1, 7);
-                new SoundStyle("BombusApisBee/Sounds/Item/" + sax).PlayWith(Projectile.Center, 0f, 1f);
-                
-                int projType = Main.rand.Next(new int[] { ModContent.ProjectileType<MiniHoneyNoteQuarter>(), ModContent.ProjectileType<MiniHoneyNoteEighth>(), ModContent.ProjectileType<MiniHoneyNoteEighthTied>()});
-                Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(5f, 10f), projType, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                owner.UseBeeResource(1);
-                if (Main.rand.NextBool(3))
+                if (owner.UseBeeResource(1))
                 {
-                    int type = Main.rand.Next(new int[] { ModContent.ProjectileType<HoneyNoteQuarter>(), ModContent.ProjectileType<HoneyNoteEighth>(), ModContent.ProjectileType<HoneyNoteEighthTied>() });
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(8f, 15f), type, (int)(Projectile.damage * 1.5f), Projectile.knockBack, Projectile.owner);
-                    owner.UseBeeResource(2);
-                }
+                    flashTimer = 15;
+                    string sax = "Sax" + Main.rand.Next(1, 7);
+                    new SoundStyle("BombusApisBee/Sounds/Item/" + sax).PlayWith(Projectile.Center, 0f, 1f);
 
-                for (float k = 0; k < 6.28f; k += 0.1f)
-                {
-                    float x = (float)Math.Cos(k) * 60;
-                    float y = (float)Math.Sin(k) * 25;
+                    int projType = Main.rand.Next(new int[] { ModContent.ProjectileType<MiniHoneyNoteQuarter>(), ModContent.ProjectileType<MiniHoneyNoteEighth>(), ModContent.ProjectileType<MiniHoneyNoteEighthTied>() });
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(5f, 10f), projType, Projectile.damage, Projectile.knockBack, Projectile.owner);
 
-                    Vector2 pos = armPos + new Vector2(14, 10 * Projectile.direction).RotatedBy(Projectile.rotation);
-                    Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.HoneyDustSolid>(), new Vector2(x, y).RotatedBy(Projectile.rotation + 0.5f * Projectile.direction) * 0.045f, 75, default, 1.1f).noGravity = true;
-                }
+                    if (Main.rand.NextBool(3))
+                    {
+                        int type = Main.rand.Next(new int[] { ModContent.ProjectileType<HoneyNoteQuarter>(), ModContent.ProjectileType<HoneyNoteEighth>(), ModContent.ProjectileType<HoneyNoteEighthTied>() });
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(8f, 15f), type, (int)(Projectile.damage * 1.5f), Projectile.knockBack, Projectile.owner);
+                        owner.UseBeeResource(2);
+                    }
 
-                for (int i = 0; i < 25; i++)
-                {
-                    Vector2 pos = armPos + new Vector2(14, 10 * Projectile.direction).RotatedBy(Projectile.rotation);
-                    Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.HoneyDustSolid>(), Vector2.UnitY.RotatedBy(0.5f * Projectile.direction).RotatedByRandom(0.45f) * -Main.rand.NextFloat(5f), Main.rand.Next(50, 150), default, 1.25f).noGravity = true;
+                    for (float k = 0; k < 6.28f; k += 0.1f)
+                    {
+                        float x = (float)Math.Cos(k) * 60;
+                        float y = (float)Math.Sin(k) * 25;
+
+                        Vector2 pos = armPos + new Vector2(14, 10 * Projectile.direction).RotatedBy(Projectile.rotation);
+                        Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.HoneyDustSolid>(), new Vector2(x, y).RotatedBy(Projectile.rotation + 0.5f * Projectile.direction) * 0.045f, 75, default, 1.1f).noGravity = true;
+                    }
+
+                    for (int i = 0; i < 25; i++)
+                    {
+                        Vector2 pos = armPos + new Vector2(14, 10 * Projectile.direction).RotatedBy(Projectile.rotation);
+                        Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.HoneyDustSolid>(), Vector2.UnitY.RotatedBy(0.5f * Projectile.direction).RotatedByRandom(0.45f) * -Main.rand.NextFloat(5f), Main.rand.Next(50, 150), default, 1.25f).noGravity = true;
+                    }
                 }
+                else
+                    Projectile.Kill();
             }
 
             Projectile.spriteDirection = owner.direction;

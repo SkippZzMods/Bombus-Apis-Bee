@@ -63,7 +63,7 @@ namespace BombusApisBee.Projectiles
 
             if (shooting)
             {
-                if (ProbesToShoot <= 0 || owner.Hymenoptra().BeeResourceCurrent <= 0)
+                if (ProbesToShoot <= 0 || !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
                 {
                     Projectile.Kill(); 
                     return;

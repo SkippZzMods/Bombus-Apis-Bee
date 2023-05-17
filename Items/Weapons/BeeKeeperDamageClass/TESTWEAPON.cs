@@ -40,6 +40,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void HoldItem(Player player)
         {
+            player.Hymenoptra().BeeResourceReserved = 0;
             player.IncreaseBeeCrit(100);
         }
     }

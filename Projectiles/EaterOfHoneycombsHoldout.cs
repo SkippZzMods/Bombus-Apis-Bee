@@ -86,7 +86,8 @@ namespace BombusApisBee.Projectiles
                         Dust.NewDustPerfect(barrelPos, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.velocity.RotatedByRandom(0.45f) * Main.rand.NextFloat(0.5f, 3f), 0, new Color(140, 169, 44), 0.45f).noGravity = true;
                     }
 
-                    owner.UseBeeResource(1);
+                    if (!owner.UseBeeResource(1))
+                        shots = 11;
                 }
 
                 owner.ChangeDir(Projectile.direction);

@@ -70,6 +70,8 @@ namespace BombusApisBee.Projectiles
             {
                 if (!SpinningDown)
                 {
+                    SoundStyle winddown = new SoundStyle("BombusApisBee/Sounds/Item/GatlingWindDown", SoundType.Sound);
+                    SoundEngine.PlaySound(winddown, Projectile.position);
                     Projectile.timeLeft = 10;
                     SpinningDown = true;
                 }
@@ -93,19 +95,32 @@ namespace BombusApisBee.Projectiles
                 }
                 if (ShotDelay >= FramesToNextShot)
                 {
-                    Item heldItem = Owner.GetActiveItem();
-                    float shootSpeed = heldItem.shootSpeed;
-                    Vector2 shootVelocity = Utils.SafeNormalize(Projectile.velocity, Vector2.UnitY) * shootSpeed;
-                    Vector2 dustOnlySpread = Utils.NextVector2Circular(Main.rand, shootSpeed, shootSpeed);
-                    Vector2 dustVelocity = shootVelocity + 0.055f * dustOnlySpread;
-                    ShootDusts(BarrelPosition, dustVelocity);
-                    ShootBeeBullets(BarrelPosition);
-                    Owner.UseBeeResource(1);
-                    //minigun shoot sound
-                    SoundStyle shoot = new SoundStyle("BombusApisBee/Sounds/Item/GatlingShoot", SoundType.Sound);
-                    SoundEngine.PlaySound(shoot, Projectile.position);
-                    ShootShells(armPosition);
-                    ShotDelay = 0;
+                    if (Owner.UseBeeResource(1))
+                    {
+                        Item heldItem = Owner.GetActiveItem();
+                        float shootSpeed = heldItem.shootSpeed;
+                        Vector2 shootVelocity = Utils.SafeNormalize(Projectile.velocity, Vector2.UnitY) * shootSpeed;
+                        Vector2 dustOnlySpread = Utils.NextVector2Circular(Main.rand, shootSpeed, shootSpeed);
+                        Vector2 dustVelocity = shootVelocity + 0.055f * dustOnlySpread;
+                        ShootDusts(BarrelPosition, dustVelocity);
+                        ShootBeeBullets(BarrelPosition);
+
+                        //minigun shoot sound
+                        SoundStyle shoot = new SoundStyle("BombusApisBee/Sounds/Item/GatlingShoot", SoundType.Sound);
+                        SoundEngine.PlaySound(shoot, Projectile.position);
+                        ShootShells(armPosition);
+                        ShotDelay = 0;
+                    }
+                    else
+                    {
+                        if (!SpinningDown)
+                        {
+                            SoundStyle winddown = new SoundStyle("BombusApisBee/Sounds/Item/GatlingWindDown", SoundType.Sound);
+                            SoundEngine.PlaySound(winddown, Projectile.position);
+                            Projectile.timeLeft = 10;
+                            SpinningDown = true;
+                        }
+                    }
                 }
             }
 
@@ -220,8 +235,6 @@ namespace BombusApisBee.Projectiles
                     Main.gore[gore].timeLeft = 120;
                 }
             }
-            SoundStyle winddown = new SoundStyle("BombusApisBee/Sounds/Item/GatlingWindDown", SoundType.Sound);
-            SoundEngine.PlaySound(winddown, Projectile.position);
         }
     }
 }

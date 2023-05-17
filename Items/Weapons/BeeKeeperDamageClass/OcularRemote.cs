@@ -7,14 +7,30 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     public class OcularRemote : BeeDamageItem
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<SpazHoneycomb>() <= 0 && player.ownedProjectileCounts<RetinaHoneycomb>() <= 0;
+        public override void Load()
+        {
+            On.Terraria.Player.UpdateEquips += Player_UpdateEquips;
+        }
+
+        private void Player_UpdateEquips(On.Terraria.Player.orig_UpdateEquips orig, Player self, int i)
+        {
+            orig(self, i);
+
+            if (self.ownedProjectileCounts<RetinaHoneycomb>() > 0)
+                self.Hymenoptra().BeeResourceReserved += 25;
+
+            if (self.ownedProjectileCounts<SpazHoneycomb>() > 0)
+                self.Hymenoptra().BeeResourceReserved += 25;
+        }
+
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Calls upon the Retinacomb and Spazacomb to temporarily fight for you\nOnly one pair of twins can be alive at once\nEach twin drains your honey bank while alive\n<right> while holding the remote to self destruct them, with a cooldown\n'Good thing the Twins don't hold a grudge'");
+            Tooltip.SetDefault("Calls upon the Retinacomb and Spazacomb to temporarily fight for you\nOnly one pair of twins can be alive at once\nEach twin reserves 25 Honey while alive\n<right> while holding the remote to self destruct them, with a cooldown\n'Good thing the Twins don't hold a grudge'");
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 55;
+            Item.damage = 65;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 40;

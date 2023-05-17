@@ -125,19 +125,23 @@ namespace BombusApisBee.Projectiles
 
         public void ShootThings(Vector2 barrelPos)
         {
-            for (int i = 0; i < 15; i++)
+            if (owner.UseBeeResource(1))
             {
-                Dust.NewDustPerfect(barrelPos, Main.rand.NextBool() ? DustID.CorruptGibs : DustID.Poisoned, Projectile.velocity.RotatedByRandom(0.3f) * Main.rand.NextFloat(3f, 5f), Main.rand.Next(100), Scale: Main.rand.NextFloat(0.9f, 1.5f)).noGravity = true;
+                for (int i = 0; i < 15; i++)
+                {
+                    Dust.NewDustPerfect(barrelPos, Main.rand.NextBool() ? DustID.CorruptGibs : DustID.Poisoned, Projectile.velocity.RotatedByRandom(0.3f) * Main.rand.NextFloat(3f, 5f), Main.rand.Next(100), Scale: Main.rand.NextFloat(0.9f, 1.5f)).noGravity = true;
+                }
+                if (Main.myPlayer == Projectile.owner)
+                {
+                    int damage = (int)(Projectile.damage * MathHelper.Lerp(1f, 1.85f, Heat / MAXHEAT));
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), barrelPos, (Projectile.velocity.RotatedByRandom(0.15f)) * 17.5f, ModContent.ProjectileType<StingerFriendly>(), damage, Projectile.knockBack, Projectile.owner);
+                    if (Main.rand.NextBool())
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), barrelPos, (Projectile.velocity.RotatedByRandom(0.15f)) * 15f, ModContent.ProjectileType<HomingStinger>(), damage, Projectile.knockBack, Projectile.owner);
+                }
+                SoundID.Item11.PlayWith(Projectile.position, pitchVariance: 0.15f);
             }
-            if (Main.myPlayer == Projectile.owner)
-            {
-                int damage = (int)(Projectile.damage * MathHelper.Lerp(1f, 1.85f, Heat / MAXHEAT));
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), barrelPos, (Projectile.velocity.RotatedByRandom(0.15f)) * 17.5f, ModContent.ProjectileType<StingerFriendly>(), damage, Projectile.knockBack, Projectile.owner);
-                if (Main.rand.NextBool())
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), barrelPos, (Projectile.velocity.RotatedByRandom(0.15f)) * 15f, ModContent.ProjectileType<HomingStinger>(), damage, Projectile.knockBack, Projectile.owner);
-            }
-            SoundID.Item11.PlayWith(Projectile.position, pitchVariance: 0.15f);
-            owner.UseBeeResource(1);
+            else
+                Projectile.Kill();
         }
     }
 }

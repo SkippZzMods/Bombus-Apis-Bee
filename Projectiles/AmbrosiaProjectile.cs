@@ -35,7 +35,10 @@ namespace BombusApisBee.Projectiles
         public override void AI()
         {
             if (++HoneyDrainTimer % 30 == 0)
-                Main.player[Projectile.owner].UseBeeResource(1);
+            {
+                if (!Main.player[Projectile.owner].UseBeeResource(1))
+                    Projectile.ai[0] = -1f;
+            }
 
             if (Main.rand.NextBool(3))
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(1f, 1f), 0, new Color(255, 191, 73), 0.35f);

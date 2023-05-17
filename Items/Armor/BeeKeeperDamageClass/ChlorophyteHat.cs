@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Chlorophyte Veil");
-            Tooltip.SetDefault("16% increased hymenoptra damage\nIncreases maximum honey by 50\nIncreases your amount of Bees by 5");
+            Tooltip.SetDefault("16% increased hymenoptra damage\nIncreases maximum honey by 50\nIncreases your amount of Loyal Bees by 5");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()

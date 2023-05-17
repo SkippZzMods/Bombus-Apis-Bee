@@ -49,7 +49,7 @@ namespace BombusApisBee.Projectiles
             Projectile.penetrate = -1;
 
             Projectile.friendly = true;
-            Projectile.timeLeft = 7200;
+            Projectile.timeLeft = 12000;
 
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;

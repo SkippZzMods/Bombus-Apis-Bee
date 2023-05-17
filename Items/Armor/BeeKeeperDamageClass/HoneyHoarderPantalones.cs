@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honey Hoarder Leggings");
-            Tooltip.SetDefault("8% increased hymenoptra damage\n15% increased movement speed\nIncreases maximum honey by 25\nIncreases your amount of Bees by 2");
+            Tooltip.SetDefault("8% increased hymenoptra damage\n15% increased movement speed\nIncreases maximum honey by 25\nIncreases your amount of Loyal Bees by 2");
             SacrificeTotal = 1;
         }
 

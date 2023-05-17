@@ -37,14 +37,5 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             return player.ownedProjectileCounts[ModContent.ProjectileType<WasparangHoldout>()] <= 0;
         }
-        public override void AddRecipes()
-        {
-            CreateRecipe(1).
-                AddIngredient(ModContent.ItemType<Pollen>(), 15).
-                AddIngredient(ItemID.EnchantedBoomerang, 1).
-                AddIngredient(ItemID.HoneyBlock, 10).
-                AddTile(TileID.Anvils).Register();
-
-        }
     }
 }

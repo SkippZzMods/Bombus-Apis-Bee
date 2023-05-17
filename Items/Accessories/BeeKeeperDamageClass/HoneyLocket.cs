@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honey Locket");
-            Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nIncreases your amount of Bees by 3");
+            Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nIncreases your amount of Loyal Bees by 3");
             SacrificeTotal = 1;
         }
 

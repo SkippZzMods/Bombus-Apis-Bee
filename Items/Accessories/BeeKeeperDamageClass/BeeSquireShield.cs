@@ -41,6 +41,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         public override void AddRecipes()
         {
             CreateRecipe(1).AddIngredient(ItemID.IronBar, 15).AddIngredient(ModContent.ItemType<Pollen>(), 15).AddIngredient(ItemID.UnicornHorn, 3).AddTile(TileID.MythrilAnvil).Register();
+
+            CreateRecipe(1).AddIngredient(ItemID.LeadBar, 15).AddIngredient(ModContent.ItemType<Pollen>(), 15).AddIngredient(ItemID.UnicornHorn, 3).AddTile(TileID.MythrilAnvil).Register();
         }
     }
 }

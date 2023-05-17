@@ -36,9 +36,6 @@ namespace BombusApisBee.Projectiles
             Player player = Main.player[Projectile.owner];
             player.Hymenoptra().BeeResourceRegenTimer = -120;
 
-            if (player.Hymenoptra().BeeResourceCurrent <= 0)
-                Projectile.Kill();
-
             if (Main.rand.NextBool())
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<Dusts.StingerDust>(), 0f, 0f, 65);
@@ -59,40 +56,48 @@ namespace BombusApisBee.Projectiles
                 {
                     if (StingerTimer > 30 && Collision.CanHitLine(Projectile.Center, 1, 1, target.Center, 1, 1))
                     {
-                        player.UseBeeResource(1);
-                        StingerTimer = 0;
-                        stingercount++;
-
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.DirectionTo(target.Center) * 14.5f, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage, 2.5f, Projectile.owner);
-
-                        for (int i = 0; i < 7; i++)
+                        if (!player.UseBeeResource(1))
+                            Projectile.ai[0] = -1f;
+                        else
                         {
-                            Vector2 velocity = Projectile.DirectionTo(target.Center) * 14.5f;
-                            Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.StingerDust>(), velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(50, 125)).noGravity = true;
-                            Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(75)).noGravity = true;
+                            StingerTimer = 0;
+                            stingercount++;
+
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.DirectionTo(target.Center) * 14.5f, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage, 2.5f, Projectile.owner);
+
+                            for (int i = 0; i < 7; i++)
+                            {
+                                Vector2 velocity = Projectile.DirectionTo(target.Center) * 14.5f;
+                                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.StingerDust>(), velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(50, 125)).noGravity = true;
+                                Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(75)).noGravity = true;
+                            }
                         }
                     }
                 }
             }
             else if (StingerTimer > 45)
             {
-                player.UseBeeResource(3);
-                SoundID.Item17.PlayWith(Projectile.position);
-
-                for (int i = 0; i < 4; i++)
+                if (!player.UseBeeResource(1))
+                    Projectile.ai[0] = -1f;
+                else
                 {
-                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.One.RotatedBy(MathHelper.PiOver2 * i) * 10f, ModContent.ProjectileType<HomingStinger>(), Projectile.damage * 2/3, 2f, Projectile.owner);
-                }
+                    SoundID.Item17.PlayWith(Projectile.position);
 
-                StingerTimer = 0;
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.One.RotatedBy(MathHelper.PiOver2 * i) * 10f, ModContent.ProjectileType<HomingStinger>(), Projectile.damage * 2 / 3, 2f, Projectile.owner);
+                    }
 
-                stingercount = 0;
+                    StingerTimer = 0;
 
-                for (int i = 0; i < 15; i++)
-                {
-                    Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.StingerDust>(), Main.rand.NextVector2Circular(3.5f, 3.5f), Main.rand.Next(50, 150), Scale: 1.25f).noGravity = true;
+                    stingercount = 0;
 
-                    Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, Main.rand.NextVector2Circular(3.5f, 3.5f), Main.rand.Next(50, 150), Scale: 1.25f).noGravity = true;
+                    for (int i = 0; i < 15; i++)
+                    {
+                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.StingerDust>(), Main.rand.NextVector2Circular(3.5f, 3.5f), Main.rand.Next(50, 150), Scale: 1.25f).noGravity = true;
+
+                        Dust.NewDustPerfect(Projectile.Center, DustID.Poisoned, Main.rand.NextVector2Circular(3.5f, 3.5f), Main.rand.Next(50, 150), Scale: 1.25f).noGravity = true;
+                    }
                 }
             }
         }

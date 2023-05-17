@@ -38,13 +38,11 @@ namespace BombusApisBee.Projectiles
             var BeeDamagePlayer2 = player.Hymenoptra();
             if (HoneyTimer >= 60)
             {
-                player.UseBeeResource(2);
+                if (!player.UseBeeResource(2))
+                    Projectile.Kill();
+
                 BeeDamagePlayer2.BeeResourceRegenTimer = -240;
                 HoneyTimer = 0;
-            }
-            if (BeeDamagePlayer2.BeeResourceCurrent < 1)
-            {
-                Projectile.Kill();
             }
             if (player.dead && !player.active)
             {
