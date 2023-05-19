@@ -20,12 +20,14 @@ namespace BombusApisBee.Core.Metaballs
 
             On.Terraria.Main.DrawNPCs += DrawTargets;
             On.Terraria.Main.CheckMonoliths += BuildTargets;
+            On.Terraria.Main.DrawDust += DrawDustTargets;
         }
 
         public void Unload()
         {
             On.Terraria.Main.DrawNPCs -= DrawTargets;
             On.Terraria.Main.CheckMonoliths -= BuildTargets;
+            On.Terraria.Main.DrawDust -= DrawDustTargets;
 
             Actors = null;
         }
@@ -47,12 +49,26 @@ namespace BombusApisBee.Core.Metaballs
 
             foreach (MetaballActor a in Actors)
             {
-                if (!a.overNPCS && behindTiles)
+                if (!a.overNPCS && !a.actAsDust && behindTiles)
                     a.DrawTarget(Main.spriteBatch);
-                else if (a.overNPCS && !behindTiles)
+                else if (a.overNPCS && !a.actAsDust && !behindTiles)
                     a.DrawTarget(Main.spriteBatch);
             }
         }
+
+        private void DrawDustTargets(On.Terraria.Main.orig_DrawDust orig, Main self)
+        {
+            orig(self);
+
+            foreach (MetaballActor a in Actors)
+            {
+                if (a.actAsDust)
+                {
+                    a.DrawDustTarget(Main.spriteBatch);
+                }
+            }
+        }
+
         private void BuildTargets(On.Terraria.Main.orig_CheckMonoliths orig)
         {
             if (Main.graphics.GraphicsDevice != null)

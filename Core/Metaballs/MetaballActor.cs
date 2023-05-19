@@ -16,6 +16,8 @@ namespace BombusApisBee.Core.Metaballs
 
 		public virtual bool overNPCS => false;
 
+		public virtual bool actAsDust => false;
+
 		public virtual bool Invisible => false;
 
 		/// <summary>
@@ -143,6 +145,22 @@ namespace BombusApisBee.Core.Metaballs
 
 			spriteBatch.End();
 			spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.ZoomMatrix);
+		}
+
+		public void DrawDustTarget(SpriteBatch spriteBatch)
+		{
+			if (Main.gameMenu || !Active)
+				return;
+
+			if (Target is null || Target2 is null)
+				ResizeTarget(Main.screenWidth, Main.screenHeight);
+
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+
+			if (PostDraw(spriteBatch, Target))
+				spriteBatch.Draw(Target, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
+
+			spriteBatch.End();
 		}
 	}
 }

@@ -28,11 +28,15 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             var modPlayer = BeeDamagePlayer.ModPlayer(player);
             modPlayer.BeeResourceMax2 += 25;
             player.Bombus().HoneyBee = true;
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<HoneyBeeProj>()] < 1)
+
+            if (player.Hymenoptra().HoldingBeeWeaponTimer > 0)
             {
-                Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, Vector2.One, ModContent.ProjectileType<HoneyBeeProj>(), 0, 0, player.whoAmI);
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<HoneyBeeProj>()] < 1)
+                {
+                    Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, Vector2.One, ModContent.ProjectileType<HoneyBeeProj>(), 0, 0, player.whoAmI);
+                }
+                player.AddBuff(ModContent.BuffType<HoneyBeeBuff>(), 15);
             }
-            player.AddBuff(ModContent.BuffType<HoneyBeeBuff>(), 15);
         }
     }
 }

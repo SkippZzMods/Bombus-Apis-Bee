@@ -34,7 +34,7 @@ float4 MainPS(VertexShaderOutput input) : COLOR
 
     float2 coords = input.TextureCoordinates;
 
-    coords.x = (coords.x + uTime) % 1;
+    //coords.x = (coords.x + uTime) % 1;
 
     float2 off = float2(0, sin(time + (coords.x + uOffset.x) * speed) * sin(1.57 + (coords.x + uOffset.x) * 0.37 * speed - time) * sin((coords.x + uOffset.x) * 0.21 * speed - time) * power);
 

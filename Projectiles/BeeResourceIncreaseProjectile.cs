@@ -30,11 +30,10 @@ namespace BombusApisBee.Projectiles
         public override void AI()
         {
             Projectile.velocity.Y *= 0.98f;
-            int hdusty = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Honey, 0f, 0f, 25, default, 1.5f);
-            Dust dust = Main.dust[hdusty];
-            dust.noGravity = true;
-            dust.position.X = dust.position.X - Projectile.velocity.X * 0.2f;
-            dust.position.Y = dust.position.Y + Projectile.velocity.Y * 0.2f;
+
+            Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(2f, 2f), ModContent.DustType<Dusts.HoneyMetaballDust>(), -Projectile.velocity.RotatedByRandom(0.2f) * 0.15f, 0, default, 0.75f).noGravity = true;
+            Dust.NewDustPerfect(Projectile.Center - Projectile.velocity + Main.rand.NextVector2Circular(2f, 2f), ModContent.DustType<Dusts.HoneyMetaballDust>(), -Projectile.velocity.RotatedByRandom(0.2f) * 0.15f, 0, default, 0.75f).noGravity = true;
+
             Player player = Main.player[Projectile.owner];
             bool flag = true;
             float homingSpeed = 22f;
@@ -73,7 +72,10 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            BeeUtils.DrawDustImage(Projectile.Center, DustID.Honey2, 0.15f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HoneyDustImage").Value, 1f, 100, default, rot: 0);
+            for (int i = 0; i < 10; i++)
+            {
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(2f, 2f), ModContent.DustType<Dusts.HoneyMetaballDust>(), -Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(.3f), 0, default, Main.rand.NextFloat(.5f, 1.5f)).noGravity = true;
+            }
         }
     }
 }

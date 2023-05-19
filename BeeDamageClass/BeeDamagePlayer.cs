@@ -164,7 +164,7 @@ namespace BombusApisBee.BeeDamageClass
                         Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Honey2, 0f, 0f, 90, default, 1.25f).velocity *= 0.25f;
                     }
 
-                    BeeUtils.CircleDust(Player.Center, 55, DustID.Honey2, 6f, scale: 2f);
+                    BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.5f, 0, null, 2.5f);
                 }
 
                 if (HoneyImmuneTimer > 0)
@@ -189,7 +189,7 @@ namespace BombusApisBee.BeeDamageClass
             if (HoneyShieldCD == 1)
             {
                 SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = -0.25f }, Player.Center);
-                BeeUtils.CircleDust(Player.Center, 55, DustID.Honey2, 6f, scale: 2f);
+                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);
             }
                 
         }
