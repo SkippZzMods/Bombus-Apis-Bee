@@ -318,7 +318,7 @@ namespace BombusApisBee.Core
         {
             if (MarkedTimer > 0 && target == MarkedNPC)
             {
-                damage = (int)(damage * 1.25f);
+                 damage = (int)(damage * 1.25f);
 
                 if (!crit)
                     crit = Main.rand.NextFloat() < ((proj.CritChance * 2) / 100);

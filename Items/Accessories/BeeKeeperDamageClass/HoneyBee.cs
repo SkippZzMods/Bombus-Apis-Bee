@@ -33,7 +33,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             {
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<HoneyBeeProj>()] < 1)
                 {
-                    Projectile.NewProjectile(player.GetSource_Accessory(Item), player.Center, Vector2.One, ModContent.ProjectileType<HoneyBeeProj>(), 0, 0, player.whoAmI);
+                    Projectile.NewProjectileDirect(player.GetSource_Accessory(Item), player.Center, Vector2.One, ModContent.ProjectileType<HoneyBeeProj>(), 235, 4f, player.whoAmI).originalDamage = 235;
                 }
                 player.AddBuff(ModContent.BuffType<HoneyBeeBuff>(), 15);
             }

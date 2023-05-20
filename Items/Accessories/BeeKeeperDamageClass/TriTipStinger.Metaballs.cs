@@ -44,7 +44,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         public override bool PostDraw(SpriteBatch spriteBatch, Texture2D target)
         {
             Effect effect = Filters.Scene["HoneyNoise"].GetShader().Shader;
-            effect.Parameters["noiseScale"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight) / 200);
+            effect.Parameters["noiseScale"].SetValue((new Vector2(Main.screenWidth, Main.screenHeight) / 200) + new Vector2((float)(Main.timeForVisualEffects * 0.001f), 0f));
             effect.Parameters["offset"].SetValue(2 * Main.screenPosition / new Vector2(Main.screenWidth, Main.screenHeight));
             effect.Parameters["codedColor"].SetValue(Color.White.ToVector4());
             effect.Parameters["uColorOne"].SetValue(new Color(50, 100, 0, 200).ToVector4());

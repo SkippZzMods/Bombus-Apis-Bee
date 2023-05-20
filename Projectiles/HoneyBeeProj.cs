@@ -23,25 +23,51 @@ namespace BombusApisBee.Projectiles
         public bool Gathering => Owner.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Gathering;
 
         public int AttackDelay;
-        public int maxAttackDelay;
+        public int shotsFired;
+        public float rotIncrease;
+
+        public float backGlowOpacity;
+
+        public bool slammed;
+        public bool slamming;
+        public int slamTimer;
 
         public int blockDelay;
         public int shieldFade;
         public int shieldFlashTimer;
 
         public int honeyTimer;
+        public int oldDir;
+        public float oldRot;
 
         public NPC attackTarget;
         public Projectile projectileTarget;
 
         public Vector2 IdlePos;
+
+        public Vector2 targetPosAdd; 
+
+        private enum AttackState : int
+        {
+            Searching,
+            Firing,
+            Slamming,
+        }
+
+        private AttackState attackState = AttackState.Searching;
+
         public Vector2 BottleVector => Projectile.Center + new Vector2(Projectile.spriteDirection == -1 ? -20 : 15, 15).RotatedBy(Projectile.rotation);
 
         public override string Texture => "BombusApisBee/Items/Accessories/BeeKeeperDamageClass/HoneyBee";
+
+        public override bool? CanDamage() => Offense;
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honey Bee");
             Main.projFrames[Projectile.type] = 4;
+
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
         public override void SafeSetDefaults()
         {
@@ -56,6 +82,8 @@ namespace BombusApisBee.Projectiles
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
+
+            Projectile.ContinuouslyUpdateDamage = true;
         }
         public override void AI()
         {
@@ -65,12 +93,7 @@ namespace BombusApisBee.Projectiles
             if (Owner.Bombus().HoneyBee && Owner.active)
                 Projectile.timeLeft = 2;
 
-            if (Projectile.Distance(IdlePos) > 25f)
-                Projectile.spriteDirection = Projectile.direction;
-            else
-                Projectile.spriteDirection = Owner.direction;
-
-            if (++Projectile.frameCounter % 8 == 0)
+            if (++Projectile.frameCounter % 6 == 0)
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
 
             IdlePos = Owner.Center + new Vector2(115 * Owner.direction, MathHelper.Lerp(-20f, -25f, Utils.Clamp((float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 2f), 0, 1)));
@@ -107,12 +130,14 @@ namespace BombusApisBee.Projectiles
                             Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), Vector2.Zero, 0, default, 2f).noGravity = true;
                         }
 
+                        new SoundStyle("BombusApisBee/Sounds/Item/BiggerSplash").PlayWith(Projectile.Center, 0, 0.1f, 0.5f);
+
                         Projectile.velocity -= Projectile.DirectionTo(projectileTarget.Center) * 3f;
 
 
                         shieldFlashTimer = 15;
 
-                        blockDelay = 60;
+                        blockDelay = 180;
 
                         projectileTarget.Kill();
                         projectileTarget = null;
@@ -144,25 +169,104 @@ namespace BombusApisBee.Projectiles
 
                             blockDelay = 60;
 
-                            target.StrikeNPC(100, 10f, target.Center.X < Owner.Center.X ? -1 : 1, true);
+                            target.StrikeNPC(Projectile.damage / 2, 10f, target.Center.X < Owner.Center.X ? -1 : 1, Main.rand.NextBool(4));
                         }
                     }
                 }
 
                 IdleMovement();
+
+                Projectile.rotation = Projectile.velocity.X * 0.05f;
+                if (Projectile.Distance(IdlePos) > 30f)
+                    Projectile.spriteDirection = Projectile.direction;
+                else
+                    Projectile.spriteDirection = -Owner.direction;
+
                 honeyTimer = 0;
+                AttackDelay = 0;
+                attackTarget = null;
+                attackState = AttackState.Searching;
+                rotIncrease = 0;
+                slamming = false;
+                slammed = false;
             }
             else if (Offense)
             {
                 if (shieldFade > 0)
                     shieldFade--;
 
+                if (attackTarget == null)
+                {
+                    if (attackState == AttackState.Searching)
+                    {
+                        attackTarget = Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Owner.Center) < 1000f && Collision.CanHitLine(Owner.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Owner.Center)).FirstOrDefault();
+
+                        if (attackTarget != null)
+                        {
+                            targetPosAdd = new Vector2(Main.rand.NextBool() ? -75f : 75f, -65f);
+
+                            attackState = AttackState.Firing;
+                        }
+                    }
+                }
+
+                if (slamTimer > 0)
+                {
+                    backGlowOpacity = slamTimer / 60f;
+
+                    slamTimer--;
+
+                    Projectile.rotation = oldRot;
+
+                    rotIncrease = MathHelper.Lerp(0f, MathHelper.TwoPi, EaseBuilder.EaseCubicOut.Ease(1f - slamTimer / 60f)) + (oldDir == -1 ? MathHelper.Pi : 0f);
+
+                    Projectile.velocity *= 0.94f;
+
+                    if (slamTimer == 1)
+                    {
+                        backGlowOpacity = 0;
+                        rotIncrease = (oldDir == -1 ? MathHelper.Pi : 0f);
+                        slamTimer = 0;
+                        attackState = AttackState.Searching;
+                        AttackDelay = 0;
+                        attackTarget = null;
+
+                        slamming = false;
+                        slammed = false;
+                    }
+
+                    return;
+                }
+
                 if (attackTarget != null)
                 {
+                    if (!attackTarget.CanBeChasedBy())
+                    {
+                        attackTarget = null;
+                        attackState = AttackState.Searching;
+                        return;
+                    }
 
+                    switch (attackState) 
+                    {
+                        case AttackState.Firing: FiringBehavior(); break;
+
+                        case AttackState.Slamming: SlammingBehavior(); break;
+                    }
                 }
                 else
+                {                  
                     IdleMovement();
+                    Projectile.rotation = Projectile.velocity.X * 0.05f;
+                    if (Projectile.Distance(IdlePos) > 30f)
+                        Projectile.spriteDirection = Projectile.direction;
+                    else
+                        Projectile.spriteDirection = -Owner.direction;
+
+                    rotIncrease = 0;
+                    slamming = false;
+                    slammed = false;
+                }
 
                 honeyTimer = 0;
             }
@@ -187,9 +291,176 @@ namespace BombusApisBee.Projectiles
                 }
                 else
                     honeyTimer++;
+
+                Projectile.rotation = Projectile.velocity.X * 0.05f;
+                if (Projectile.Distance(IdlePos) > 30f)
+                    Projectile.spriteDirection = Projectile.direction;
+                else
+                    Projectile.spriteDirection = -Owner.direction;
+
+                AttackDelay = 0;
+                attackState = AttackState.Searching;
+                rotIncrease = 0;
+                attackTarget = null;
+                slamming = false;
+                slammed = false;
+            }
+        }
+
+        private void FiringBehavior()
+        {
+            Projectile.rotation = MathHelper.Lerp(Projectile.rotation, Math.Abs(Projectile.DirectionTo(attackTarget.Center).ToRotation()), .1f);
+
+            rotIncrease = (Projectile.Center.X > attackTarget.Center.X ? MathHelper.Pi : 0f);
+
+            Projectile.spriteDirection = Projectile.Center.X > attackTarget.Center.X ? -1 : 1;
+
+            Vector2 between = (attackTarget.Center + targetPosAdd) - Projectile.Center;
+
+            float dist = Vector2.Distance(Projectile.Center, attackTarget.Center);
+
+            float speed = 15f;
+            float adjust = 0.35f;
+
+            dist = speed / dist;
+            between.X *= dist;
+            between.Y *= dist;
+
+            if (Projectile.velocity.X < between.X)
+            {
+                Projectile.velocity.X += adjust;
+                if (Projectile.velocity.X < 0f && between.X > 0f)
+                {
+                    Projectile.velocity.X += adjust * 2f;
+                }
+            }
+            else if (Projectile.velocity.X > between.X)
+            {
+                Projectile.velocity.X -= adjust;
+                if (Projectile.velocity.X > 0f && between.X < 0f)
+                {
+                    Projectile.velocity.X -= adjust * 2f;
+                }
+            }
+            if (Projectile.velocity.Y < between.Y)
+            {
+                Projectile.velocity.Y += adjust;
+                if (Projectile.velocity.Y < 0f && between.Y > 0f)
+                {
+                    Projectile.velocity.Y += adjust * 2f;
+                }
+            }
+            else if (Projectile.velocity.Y > between.Y)
+            {
+                Projectile.velocity.Y -= adjust;
+                if (Projectile.velocity.Y > 0f && between.Y < 0f)
+                {
+                    Projectile.velocity.Y -= adjust * 2f;
+                }
             }
 
-            Projectile.rotation = Projectile.velocity.X * 0.05f;
+            AttackDelay++;
+            if (AttackDelay > 40)
+            {
+                if (AttackDelay >= 60)
+                {
+                    Vector2 pos = Projectile.Center + new Vector2(Projectile.spriteDirection == -1 ? -20 : 15, 15).RotatedBy(Projectile.rotation + rotIncrease);
+
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), pos, pos.DirectionTo(attackTarget.Center).RotatedByRandom(1f) * 5f, ModContent.ProjectileType<HoneyHomingMetaballs>(), Projectile.damage / 2, Projectile.knockBack * 0.5f, Owner.whoAmI);
+                    
+                    for (float k = 0; k < 6.28f; k += 0.1f)
+                    {
+                        float x = (float)Math.Cos(k) * 50;
+                        float y = (float)Math.Sin(k) * 25;
+
+                        Dust.NewDustPerfect(pos + pos.DirectionTo(attackTarget.Center) * 5f, ModContent.DustType<Dusts.HoneyMetaballDust>(), new Vector2(x, y).RotatedBy(Projectile.rotation + MathHelper.PiOver2) * 0.04f, 0, default, 1f).noGravity = true;
+                    }
+
+                    BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
+
+                    Projectile.velocity -= Projectile.DirectionTo(attackTarget.Center) * Main.rand.NextFloat(5f, 7f);
+
+                    shotsFired++;
+                    AttackDelay = 40;
+                }
+            }
+
+            if (shotsFired >= 6)
+            {
+                shotsFired = 0;
+                AttackDelay = 0;
+                attackState = AttackState.Slamming;
+            }
+        }
+
+        private void SlammingBehavior()
+        {
+            AttackDelay++;
+
+            backGlowOpacity = AttackDelay / 50f;
+
+            int sign = Math.Sign(targetPosAdd.X);
+
+            Projectile.rotation = MathHelper.Lerp(Projectile.rotation, Math.Abs(Projectile.DirectionTo(attackTarget.Center).ToRotation()), .1f);
+
+            rotIncrease = (Projectile.Center.X > attackTarget.Center.X ? MathHelper.Pi : 0f);
+
+            Projectile.spriteDirection = Projectile.Center.X > attackTarget.Center.X ? -1 : 1;
+
+            Vector2 between = (attackTarget.Center + targetPosAdd + Vector2.Lerp(Vector2.Zero, new Vector2(35f * sign, -25f), AttackDelay / 50f)) - Projectile.Center;
+
+            float dist = Vector2.Distance(Projectile.Center, attackTarget.Center);
+
+            float speed = 15f;
+            float adjust = 0.35f;
+
+            if (dist < 10f)
+                speed = 1f;
+
+            if (AttackDelay >= 50f)
+            {
+                between = attackTarget.Center - Projectile.Center;
+                slamming = true;
+                speed = 25f;
+                adjust = 0.5f;
+            }
+
+            dist = speed / dist;
+            between.X *= dist;
+            between.Y *= dist;
+
+            if (Projectile.velocity.X < between.X)
+            {
+                Projectile.velocity.X += adjust;
+                if (Projectile.velocity.X < 0f && between.X > 0f)
+                {
+                    Projectile.velocity.X += adjust * 2f;
+                }
+            }
+            else if (Projectile.velocity.X > between.X)
+            {
+                Projectile.velocity.X -= adjust;
+                if (Projectile.velocity.X > 0f && between.X < 0f)
+                {
+                    Projectile.velocity.X -= adjust * 2f;
+                }
+            }
+            if (Projectile.velocity.Y < between.Y)
+            {
+                Projectile.velocity.Y += adjust;
+                if (Projectile.velocity.Y < 0f && between.Y > 0f)
+                {
+                    Projectile.velocity.Y += adjust * 2f;
+                }
+            }
+            else if (Projectile.velocity.Y > between.Y)
+            {
+                Projectile.velocity.Y -= adjust;
+                if (Projectile.velocity.Y > 0f && between.Y < 0f)
+                {
+                    Projectile.velocity.Y -= adjust * 2f;
+                }
+            }
         }
 
         private void IdleMovement()
@@ -220,6 +491,35 @@ namespace BombusApisBee.Projectiles
             }
         }
 
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            if (Offense && slamming)
+            {
+                slammed = true;
+                slamTimer = 60;
+                Projectile.velocity -= Projectile.velocity.RotatedByRandom(0.3f) * 2f;
+                oldDir = Projectile.direction;
+                oldRot = Projectile.rotation;
+
+                for (int i = 0; i < 15; i++)
+                {
+                    Vector2 pos = target.Center + target.Center.DirectionTo(Projectile.Center) * (target.width * 0.5f);
+                    Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.GlowFastDecelerate>(), pos.DirectionTo(Projectile.Center).RotatedByRandom(0.45f) * Main.rand.NextFloat(1f, 6f), 0, new Color(250, 200, 0), 0.65f);
+                }
+
+                for (float k = 0; k < 6.28f; k += 0.1f)
+                {
+                    float x = (float)Math.Cos(k) * 50;
+                    float y = (float)Math.Sin(k) * 25;
+
+                    Dust.NewDustPerfect(target.Center + target.Center.DirectionTo(Projectile.Center) * (target.width * 0.5f), ModContent.DustType<Dusts.GlowFastDecelerate>(), new Vector2(x, y).RotatedBy(Projectile.rotation + MathHelper.PiOver2) * 0.05f, 0, new Color(255, 150, 0), 0.65f);
+                }
+
+                SoundID.DD2_MonkStaffGroundImpact.PlayWith(Projectile.Center, .25f, .1f, 0.9f);
+                Owner.Bombus().shakeTimer += 10;
+            }
+        }
+
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
@@ -229,23 +529,52 @@ namespace BombusApisBee.Projectiles
 
             lightColor = lightColor * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f);
 
-            float mult = (1f - blockDelay / 60f) * (shieldFade / 15f) * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+            float mult = (1f - blockDelay / 180f) * (shieldFade / 15f) * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f);
 
             if (honeyTimer > 0)
             {
                 Main.spriteBatch.Draw(glowTex, BottleVector - new Vector2(Projectile.spriteDirection == -1 ? -20 : 15, 5) - Main.screenPosition, null, (new Color(255, 150, 20, 0) * (honeyTimer / 100f)) * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 0.6f, 0f, 0f);
             }
 
+            if (Offense)
+            {
+                if (backGlowOpacity > 0)
+                {
+                    Rectangle glowFrame = texGlow.Frame(verticalFrames: 4, frameY: Projectile.frame);
+                    Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, glowFrame, new Color(250, 170, 20, 0) * backGlowOpacity * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), Projectile.rotation + rotIncrease, glowFrame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+
+                    Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 20, 0) * backGlowOpacity * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 1.25f, 0f, 0f);
+                }
+                
+                if (slamming)
+                {
+                    Rectangle afterImageFrame = tex.Frame(verticalFrames: 4, frameY: Projectile.frame);
+
+                    float fadeout = 1f;
+                    if (slamTimer < 30 && slammed)
+                    {
+                        fadeout = slamTimer / 30f;
+                    }
+
+                    for (int k = 0; k < Projectile.oldPos.Length; k++)
+                    {
+                        Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + Projectile.Size / 2f;
+                        Color color = new Color(250, 200, 0, 0) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                        Main.spriteBatch.Draw(tex, drawPos, afterImageFrame, color * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f) * fadeout, Projectile.rotation + rotIncrease, afterImageFrame.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.35f, (k / (float)Projectile.oldPos.Length)), Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                    }
+                }
+            }
+
             if (shieldFade > 0)
             {
                 Rectangle glowFrame = texGlow.Frame(verticalFrames: 4, frameY: Projectile.frame);
-                Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, glowFrame, new Color(250, 170, 20, 0) * mult, Projectile.rotation, glowFrame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, glowFrame, new Color(250, 170, 20, 0) * mult, Projectile.rotation + rotIncrease, glowFrame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 
                 Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 20, 0) * mult, 0f, glowTex.Size() / 2f, 0.8f, 0f, 0f);
             }
 
             Rectangle frame = tex.Frame(verticalFrames: 4, frameY: Projectile.frame);
-            Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation, frame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation + rotIncrease, frame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 
             if (shieldFlashTimer > 0)
             {

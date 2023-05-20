@@ -51,7 +51,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         {
             Effect effect = Filters.Scene["HoneyNoise"].GetShader().Shader;
             effect.Parameters["noiseScale"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight) / 250);
-            effect.Parameters["offset"].SetValue(2 * Main.screenPosition / new Vector2(Main.screenWidth, Main.screenHeight));
+            effect.Parameters["offset"].SetValue((2 * Main.screenPosition / new Vector2(Main.screenWidth, Main.screenHeight)) + new Vector2((float)(Main.timeForVisualEffects * 0.001f), 0f));
             effect.Parameters["codedColor"].SetValue(Color.White.ToVector4());
             effect.Parameters["uColorOne"].SetValue(new Color(255, 200, 20).ToVector4());
             effect.Parameters["uColorTwo"].SetValue(new Color(255, 150, 10).ToVector4());
