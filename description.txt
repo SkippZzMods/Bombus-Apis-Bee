@@ -1,7 +1,7 @@
 [c/FFEF00:Bombus Apis (The Bee Mod)], is a class content mod that adds content to vanilla terraria
 - Adds a new class [c/FFEF00:Beekeeper]. This class uses hymenoptra damage to destroy your enemies
 
-- This class, uses [c/FFEF00:Honey], a unique resource which is regenerated via the class' gimmick: Loyal Bees. The Beekeeper has Loyal Bees which follow him around everywhere. These Loyal Bees have 3 modes: Defense, Offense, and Gathering. While they are in Defense Mode, they will grant increase defense and DR, and periodically block attacks. While in Offense mode, they grant offensive buffs and attack enemies. While in Gathering mode they decrease your damage, but they will seek out enemies in order to siphon honey from them, dealing DoT. Gathering mode regenerates honey extremely quickly, but while you arent in gathering mode your honey regenerates quite slow, around 4 honey per second.
+- This class, uses [c/FFEF00:Honey], a unique resource which is regenerated via the class' gimmick: Loyal Bees. The Beekeeper has Loyal Bees which follow them around everywhere. These Loyal Bees have 3 modes: Defense, Offense, and Gathering. While they are in Defense Mode, they will grant increase defense and DR, and periodically block attacks. While in Offense mode, they grant offensive buffs and attack enemies. While in Gathering mode they decrease your damage, but they will seek out enemies in order to siphon honey from them, dealing DoT. Gathering mode regenerates honey extremely quickly, but while you arent in gathering mode your honey regenerates quite slow, around 4 honey per second.
 
 - Adds many content to progression, currently adding (56) weapons, (21) accessories, (7), armor sets, (2), armor helmets, and one new town npc
 
