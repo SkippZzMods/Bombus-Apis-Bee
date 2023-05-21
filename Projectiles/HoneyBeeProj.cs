@@ -263,7 +263,10 @@ namespace BombusApisBee.Projectiles
                     else
                         Projectile.spriteDirection = -Owner.direction;
 
+                    backGlowOpacity = 0;
                     rotIncrease = 0;
+                    slamTimer = 0;
+                    AttackDelay = 0;
                     slamming = false;
                     slammed = false;
                 }
