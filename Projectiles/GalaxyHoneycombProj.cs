@@ -113,7 +113,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.rotation = Utils.AngleTowards(Projectile.rotation, idealAngle, 0.25f);
                 if (Time > 180f && !Boolean)
                 {
-                    Owner.GetModPlayer<BombusApisBeePlayer>().shakeTimer = 35;
+                    Owner.GetModPlayer<BombusApisBeePlayer>().AddShake(35);
                     SoundEngine.PlaySound(StarSound, Projectile.position);
                     SpawnDeathProjectiles();
                     Boolean = true;
@@ -129,7 +129,7 @@ namespace BombusApisBee.Projectiles
                 if (!HasScaled)
                 {
                     Projectile.damage *= 2;
-                    Owner.Bombus().shakeTimer = 20;
+                    Owner.Bombus().AddShake(20);
                     SoundEngine.PlaySound(BigStarSound, Projectile.position);
                     const int Repeats = 55;
                     for (int i = 0; i < Repeats; ++i)

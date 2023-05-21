@@ -93,7 +93,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-            modPlayer2.shakeTimer = 13;
+            modPlayer2.AddShake(13);
             for (int i = 0; i < Main.rand.Next(2, 4); i++)
             {
                 Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(12f.AsRadians()), ModContent.ProjectileType<HellfireBee>(), player.beeDamage(damage),

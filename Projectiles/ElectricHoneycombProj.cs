@@ -45,7 +45,7 @@ namespace BombusApisBee.Projectiles
             if (Main.rand.NextBool(60))
             {
                 new SoundStyle("BombusApisBee/Sounds/Item/LightningStrike").PlayWith(Projectile.position, 0, 0.1f, 0.85f);
-                Main.player[Projectile.owner].Bombus().shakeTimer += 10;
+                Main.player[Projectile.owner].Bombus().AddShake(10);
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(3f, 3f), ModContent.ProjectileType<ElectricHoneycombLightning>(), Projectile.damage * 2 / 3, 0f, Projectile.owner);
             }
         }
@@ -67,7 +67,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            Main.player[Projectile.owner].Bombus().shakeTimer += 12;
+            Main.player[Projectile.owner].Bombus().AddShake(12);
 
             if (Main.myPlayer == Projectile.owner)
             {

@@ -285,7 +285,7 @@ namespace BombusApisBee.Projectiles
                     }
 
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), BottleVector,
-                        Projectile.DirectionTo(Owner.Center) * 5f, ModContent.ProjectileType<BeeResourceIncreaseProjectile>(), 0, 0f, Owner.whoAmI, 0, 8);
+                        Projectile.DirectionTo(Owner.Center) * 5f, ModContent.ProjectileType<BeeResourceIncreaseProjectile>(), 0, 0f, Owner.whoAmI, 0, Main.rand.Next(20, 25));
 
                     honeyTimer = 0;
                 }
@@ -516,7 +516,7 @@ namespace BombusApisBee.Projectiles
                 }
 
                 SoundID.DD2_MonkStaffGroundImpact.PlayWith(Projectile.Center, .25f, .1f, 0.9f);
-                Owner.Bombus().shakeTimer += 10;
+                Owner.Bombus().AddShake(10);
             }
         }
 

@@ -164,7 +164,7 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.Stardust>(), velocity.RotatedByRandom(0.3f) * Main.rand.NextFloat(0.55f), 0, default, 1.15f);
             }
 
-            Main.player[Projectile.owner].Bombus().shakeTimer += 3;
+            Main.player[Projectile.owner].Bombus().AddShake(3);
             Projectile.velocity = Vector2.Zero;
             Projectile.friendly = false;
             split = true;

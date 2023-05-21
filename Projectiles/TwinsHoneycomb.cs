@@ -266,7 +266,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            owner.Bombus().shakeTimer += 12;
+            owner.Bombus().AddShake(12);
             SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.Center);
 
             for (int i = 0; i < 55; i++)
@@ -487,7 +487,7 @@ namespace BombusApisBee.Projectiles
         {
             SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.Center);
             SoundID.Item74.PlayWith(Projectile.Center, 0.25f, 0.15f, 0.85f);
-            Main.player[Projectile.owner].Bombus().shakeTimer += 15;
+            Main.player[Projectile.owner].Bombus().AddShake(15);
 
             if (Main.myPlayer == Projectile.owner)
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<CursedExplosion>(), Projectile.damage, 0f, Projectile.owner, 95);

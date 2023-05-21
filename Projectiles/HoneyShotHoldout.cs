@@ -82,7 +82,7 @@ namespace BombusApisBee.Projectiles
                 }
                 new SoundStyle("BombusApisBee/Sounds/Item/BowFire").PlayWith(owner.Center);
                 owner.UseBeeResource(6);
-                owner.Bombus().shakeTimer += 4;
+                owner.Bombus().AddShake(4);
                 Projectile.timeLeft = 20;
                 updateTime = false;
             }

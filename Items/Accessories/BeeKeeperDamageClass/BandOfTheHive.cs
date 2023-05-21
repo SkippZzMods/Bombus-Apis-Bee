@@ -103,7 +103,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
             Projectile.NewProjectile(Player.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<BandHoneyExplosion>(), damage, 0, Player.whoAmI, 150, 55);
 
-            Player.Bombus().shakeTimer += 30;
+            Player.Bombus().AddShake(30);
 
             SoundEngine.PlaySound(new SoundStyle("BombusApisBee/Sounds/Item/BiggerSplash"), Player.Center);
 

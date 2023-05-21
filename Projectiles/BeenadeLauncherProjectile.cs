@@ -114,7 +114,7 @@ namespace BombusApisBee.Projectiles
             if (Main.myPlayer == Projectile.owner)
                 Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BasicExplosion>(), Projectile.damage * 2, 2f, Projectile.owner, 80);
 
-            player.Bombus().shakeTimer += 10;
+            player.Bombus().AddShake(10);
         }
 
         public override bool PreDraw(ref Color lightColor)

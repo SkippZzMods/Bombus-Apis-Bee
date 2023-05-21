@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Buffs;
+using System.Linq;
 
 namespace BombusApisBee.Projectiles
 {
@@ -49,24 +50,13 @@ namespace BombusApisBee.Projectiles
             }
             if (Projectile.timeLeft < 390)
             {
-                float distanceRequired = 1500f;
                 float homingVelocity = 12f;
                 float N = 20f;
-                Vector2 destination = Projectile.Center;
-                bool locatedTarget = false;
-                for (int i = 0; i < 200; i++)
+                NPC locatedTarget = Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1500f).OrderBy(n => Projectile.Distance(n.Center)).FirstOrDefault();
+                
+                if (locatedTarget != null)
                 {
-                    float extraDistance = (float)(Main.npc[i].width / 2 + Main.npc[i].height / 2);
-                    if (Main.npc[i].CanBeChasedBy(Projectile, false) && Projectile.WithinRange(Main.npc[i].Center, distanceRequired + extraDistance))
-                    {
-                        destination = Main.npc[i].Center;
-                        locatedTarget = true;
-                        break;
-                    }
-                }
-                if (locatedTarget)
-                {
-                    Vector2 homeDirection = Utils.SafeNormalize(destination - Projectile.Center, Vector2.UnitY);
+                    Vector2 homeDirection = Utils.SafeNormalize(locatedTarget.Center - Projectile.Center, Vector2.UnitY);
                     Projectile.velocity = (Projectile.velocity * N + homeDirection * homingVelocity) / (N + 1f);
                     return;
                 }
@@ -123,24 +113,13 @@ namespace BombusApisBee.Projectiles
 
             if (Projectile.timeLeft < 390)
             {
-                float distanceRequired = 1500f;
                 float homingVelocity = 12f;
                 float N = 20f;
-                Vector2 destination = Projectile.Center;
-                bool locatedTarget = false;
-                for (int i = 0; i < 200; i++)
+                NPC locatedTarget = Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1500f).OrderBy(n => Projectile.Distance(n.Center)).FirstOrDefault();
+
+                if (locatedTarget != null)
                 {
-                    float extraDistance = (float)(Main.npc[i].width / 2 + Main.npc[i].height / 2);
-                    if (Main.npc[i].CanBeChasedBy(Projectile, false) && Projectile.WithinRange(Main.npc[i].Center, distanceRequired + extraDistance))
-                    {
-                        destination = Main.npc[i].Center;
-                        locatedTarget = true;
-                        break;
-                    }
-                }
-                if (locatedTarget)
-                {
-                    Vector2 homeDirection = Utils.SafeNormalize(destination - Projectile.Center, Vector2.UnitY);
+                    Vector2 homeDirection = Utils.SafeNormalize(locatedTarget.Center - Projectile.Center, Vector2.UnitY);
                     Projectile.velocity = (Projectile.velocity * N + homeDirection * homingVelocity) / (N + 1f);
                     return;
                 }

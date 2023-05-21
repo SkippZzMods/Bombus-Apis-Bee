@@ -43,7 +43,7 @@ namespace BombusApisBee
             if (!Main.dedServ)
             {
                 BeeShaders.Load();
-                MarkedNPCDrawer.Load();
+                //MarkedNPCDrawer.Load();
                 PlayerRenderTarget.Load();
                 BombusApisBee_DoIL.Load();
                 BombusApisBee_DoDetours.Load();
@@ -77,7 +77,7 @@ namespace BombusApisBee
 
         public override void Unload()
         {
-            MarkedNPCDrawer.Unload();
+            //MarkedNPCDrawer.Unload();
             BombusApisBee_DoIL.Unload();
             BombusApisBee_DoDetours.Unload();
             TextureAssets.Projectile[ProjectileID.HornetStinger] = stinger;

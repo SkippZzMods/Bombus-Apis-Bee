@@ -207,7 +207,7 @@ namespace BombusApisBee.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            owner.Bombus().shakeTimer += 3;
+            owner.Bombus().AddShake(3);
 
             for (int i = 0; i < 15; i++)
             {

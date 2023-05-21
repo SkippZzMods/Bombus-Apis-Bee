@@ -294,6 +294,18 @@ namespace BombusApisBee.Core
                 Main.screenPosition += shake;
             }
         }
+
+        public void AddShake(int amount, bool clamped = true)
+        {
+            if (clamped)
+            {
+                if (shakeTimer < amount)
+                    shakeTimer = amount;
+            }
+            else
+                shakeTimer += amount;
+        }
+
         public override void OnHitAnything(float x, float y, Entity victim)
         {
             if (improvedhoneyskull)
@@ -316,18 +328,35 @@ namespace BombusApisBee.Core
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            if (MarkedTimer > 0 && target == MarkedNPC)
+            if (MarkedNPC != null)
             {
-                 damage = (int)(damage * 1.25f);
+                int whoAmI = target.whoAmI;
+                if (target.realLife >= 0)
+                    whoAmI = target.realLife;
 
-                if (!crit)
-                    crit = Main.rand.NextFloat() < ((proj.CritChance * 2) / 100);
+                int markedWhoAmI = MarkedNPC.whoAmI;
+                if (MarkedNPC.realLife >= 0)
+                    markedWhoAmI = MarkedNPC.realLife;
+
+                if (MarkedTimer > 0 && Main.npc[whoAmI] == Main.npc[markedWhoAmI])
+                {
+                    damage = (int)(damage * 1.25f);
+
+                    if (!crit)
+                        crit = Main.rand.NextFloat() < ((proj.CritChance * 2) / 100);
+                }
+                else if (MarkedTimer > 0)
+                    damage = (int)(damage * 0.85f);
             }
-            else if (MarkedTimer > 0 && MarkedNPC != null)
-                damage = (int)(damage * 0.85f);
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
+            if (target == MarkedNPC && target.life <= 0)
+            {
+                if (Player.HasBuff<BrokenScope>())
+                    Player.ClearBuff(ModContent.BuffType<BrokenScope>());
+            }
+
             if (proj.CountsAsClass<HymenoptraDamageClass>() && Player.whoAmI == Main.myPlayer && !NPCID.Sets.ProjectileNPC[target.type])
             {
                 if (HoneyCrit && crit)
@@ -383,7 +412,7 @@ namespace BombusApisBee.Core
                         target.GetGlobalNPC<MarkedGlobalNPC>().markedDuration = 600;
                         MarkedNPC = target;
                         MarkedTimer = 600;
-                        Player.AddBuff(ModContent.BuffType<BrokenScope>(), 1200);
+                        Player.AddBuff(ModContent.BuffType<BrokenScope>(), 900);
                     }
 
                 if (NectarVial && crit && NectarVialCooldown <= 0)

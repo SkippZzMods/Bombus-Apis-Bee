@@ -34,7 +34,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = "Striking enemies has a chance to mark them for 10 seconds\nMarked enemies take 25% more damage and have double the chance to be critically striked\n" +
-                "While an enemy is marked, non-marked enemies take 15% less damage\nMarking enemies has a cooldown of 20 seconds";
+                "While an enemy is marked, non-marked enemies take 15% less damage\nMarking enemies has a cooldown of 15 seconds\nKilling the Marked enemy resets the cooldown";
             player.Bombus().BeeSniperSet = true;
         }
 
@@ -61,6 +61,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public int markedDuration;
 
+        public int markedEffectTimer;
+
         public override void ResetEffects(NPC npc)
         {
             if (marked && --markedDuration < 0)
@@ -68,12 +70,81 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
                 marked = false;
             }
 
-            if (markedDuration > 0)
-                MarkedNPCDrawer.timer = markedDuration;
+            if (true)
+            {
+                markedEffectTimer++;
+                if (markedEffectTimer > 5)
+                    markedEffectTimer = 0;
+            }
+            else if (markedEffectTimer > 0)
+                markedEffectTimer = 0;           
+        }
+
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (marked)
+            {
+                Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/BeeSniperMarked").Value;
+                Texture2D texGlow = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/BeeSniperMarked_Glow").Value;
+                Texture2D texGlowAlt = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/BeeSniperMarked_GlowAlt").Value;
+
+                Texture2D glowTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+
+                float scale = 2.5f;
+
+                float width = npc.width / 20f;
+
+                if (width > 2.5f)
+                    scale = width;
+
+                Effect effect = Filters.Scene["HolyShieldShader"].GetShader().Shader;
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+
+                effect.Parameters["time"].SetValue((float)Main.timeForVisualEffects * 0.025f);
+                effect.Parameters["uTime"].SetValue((float)Main.timeForVisualEffects * 0.0025f);
+                effect.Parameters["screenPos"].SetValue(Main.screenPosition * new Vector2(0.5f, 0.1f) / new Vector2(Main.screenWidth, Main.screenHeight));
+
+                effect.Parameters["offset"].SetValue(new Vector2(0.001f));
+                effect.Parameters["repeats"].SetValue(1);
+                effect.Parameters["uImage1"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SwirlyNoiseLooping").Value);
+                effect.Parameters["uImage2"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/MiscNoise1").Value);
+                Color color = new Color(255, 150, 0, 0);
+
+                effect.Parameters["uColor"].SetValue(color.ToVector4());
+                effect.Parameters["noiseImage1"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HolyNoise").Value);
+
+                effect.CurrentTechnique.Passes[0].Apply();
+
+                spriteBatch.Draw(tex, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, tex.Size() / 2f, 0.25f * scale, 0f, 0f);
+
+                spriteBatch.Draw(texGlowAlt, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, texGlowAlt.Size() / 2f, 0.25f * scale, 0f, 0f);
+
+                spriteBatch.Draw(texGlow, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, texGlow.Size() / 2f, 0.25f * scale, 0f, 0f);
+
+                float otherScale = MathHelper.Lerp(0.1f, 0.25f, markedEffectTimer / 5f);
+
+                effect.Parameters["uColor"].SetValue((new Color(255, 150, 0, 0) * 0.65f).ToVector4());
+                effect.CurrentTechnique.Passes[0].Apply();
+
+                spriteBatch.Draw(tex, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, tex.Size() / 2f, otherScale * scale, 0f, 0f);
+
+                spriteBatch.Draw(texGlowAlt, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, texGlowAlt.Size() / 2f, otherScale * scale, 0f, 0f);
+
+                spriteBatch.Draw(texGlow, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, texGlow.Size() / 2f, otherScale * scale, 0f, 0f);
+
+                spriteBatch.End();
+                spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+
+                spriteBatch.Draw(glowTex, npc.Center - Main.screenPosition, null, new Color(255, 150, 0, 0) * 0.25f, 0f, glowTex.Size() / 2f, 0.45f * scale, 0f, 0f);
+
+            }
         }
     }
+}
 
-    class MarkedNPCDrawer
+/*class MarkedNPCDrawer
     {
         public static ScreenTarget target = new(DrawNPCTarget, () => active, 1);
 
@@ -157,4 +228,4 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             }
         }
     }
-}
+}*/

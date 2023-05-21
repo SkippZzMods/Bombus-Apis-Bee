@@ -114,7 +114,7 @@ namespace BombusApisBee.Projectiles
                 Vector2 Value = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                 Vector2 ShootVelocity = Vector2.Normalize(Value - Projectile.Center);
                 Projectile.NewProjectile(Projectile.GetSource_FromAI(), Owner.Center + direction * 30f, ShootVelocity * 20, ModContent.ProjectileType<BeeSwordSlash>(), (int)(Projectile.damage * 0.65f), 2f, Owner.whoAmI, 0f, 0f);
-                Owner.GetModPlayer<BombusApisBeePlayer>().shakeTimer = 10;
+                Owner.GetModPlayer<BombusApisBeePlayer>().AddShake(10);
                 HasFired = 1f;
             }
             Owner.heldProj = Projectile.whoAmI;

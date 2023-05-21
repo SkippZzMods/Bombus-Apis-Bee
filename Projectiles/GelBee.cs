@@ -147,7 +147,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            Main.player[Projectile.owner].Bombus().shakeTimer += 5;
+            Main.player[Projectile.owner].Bombus().AddShake(5);
             new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(Projectile.Center, 0.15f, 0.1f, 1.15f);
 
             for (int i = 0; i < 25; i++)

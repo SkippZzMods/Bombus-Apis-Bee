@@ -321,7 +321,7 @@ namespace BombusApisBee.Projectiles
             else
             {
                 attackTimer = 40;
-                owner.Bombus().shakeTimer += 8;
+                owner.Bombus().AddShake(8);
                 SoundID.Roar.PlayWith(Projectile.Center);
                 Projectile.velocity = Projectile.DirectionTo(target.Center) * 25f;
                 if (Main.myPlayer == Projectile.owner)
@@ -391,7 +391,7 @@ namespace BombusApisBee.Projectiles
             else
             {
                 attackTimer = 40;
-                owner.Bombus().shakeTimer += 8;
+                owner.Bombus().AddShake(8);
                 SoundID.Roar.PlayWith(Projectile.Center);
                 Projectile.velocity = Projectile.DirectionTo(target.Center) * 20f;
                 if (Main.myPlayer == Projectile.owner)
@@ -468,15 +468,15 @@ namespace BombusApisBee.Projectiles
                     Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.Glow>(), pos.DirectionTo(Projectile.Center), 0, new Color(214, 178, 36), 0.45f);
                 }
 
-                if (attackTimer % 10 == 0)
-                    owner.Bombus().shakeTimer += (int)MathHelper.Lerp(1, 9, attackTimer / 120f);
+                if (attackTimer % 6 == 0)
+                    owner.Bombus().AddShake((int)MathHelper.Lerp(1, 6, attackTimer / 120f), false);
             }
             else
             {
                 if (switchTimer == 0)
                 {
                     SoundID.Item74.PlayWith(Projectile.Center, -0.15f, 0.25f, 1.35f);
-                    owner.Bombus().shakeTimer += 20;
+                    owner.Bombus().AddShake(20, false);
                     laserRot = Projectile.DirectionTo(target.Center).ToRotation();
                 }
 
@@ -503,8 +503,8 @@ namespace BombusApisBee.Projectiles
                 if (switchTimer % 7 == 0)
                     SoundID.Item60.PlayWith(Projectile.Center, 0.25f, 0.15f, 1.15f);
 
-                if (switchTimer % 15 == 0)
-                    owner.Bombus().shakeTimer += (int)MathHelper.Lerp(12, 2, switchTimer / 240f);
+                if (switchTimer % 7 == 0)
+                    owner.Bombus().AddShake((int)MathHelper.Lerp(6, 2, switchTimer / 240f), false);
 
                 if (++switchTimer >= 240)
                 {

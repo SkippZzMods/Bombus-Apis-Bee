@@ -58,7 +58,7 @@ namespace BombusApisBee.Projectiles
                 {
                     if (Main.myPlayer == Projectile.owner)
                     {
-                        Owner.Bombus().shakeTimer += 4;
+                        Owner.Bombus().AddShake(4);
                         SoundID.Item109.PlayWith(Projectile.Center, -0.15f, 0.1f, 1.25f);
 
                         for (int i = 0; i < 5; i++)

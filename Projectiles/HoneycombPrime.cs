@@ -306,8 +306,7 @@ namespace BombusApisBee.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            if (owner.Bombus().shakeTimer < 4)
-                owner.Bombus().shakeTimer += 4;
+            owner.Bombus().AddShake(4);
             new SoundStyle("BombusApisBee/Sounds/Item/StabTiny").PlayWith(Projectile.Center, pitchVariance: 0.6f);
             for (int i = 0; i < 15; i++)
             {
@@ -492,7 +491,7 @@ namespace BombusApisBee.Projectiles
                     oldRot = Projectile.rotation;
                     oldDirection = Projectile.direction;
                     laser = true;
-                    owner.Bombus().shakeTimer += 6;
+                    owner.Bombus().AddShake(6);
                 }
                 else
                 {

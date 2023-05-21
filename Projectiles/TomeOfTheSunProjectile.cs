@@ -46,7 +46,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            Main.player[Projectile.owner].Bombus().shakeTimer += 7;
+            Main.player[Projectile.owner].Bombus().AddShake(7);
             for (int i = 0; i < 30; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(4.5f, 4.5f), 0, new Color(245, 245, 149), 0.85f);

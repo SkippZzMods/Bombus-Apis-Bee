@@ -138,7 +138,7 @@ namespace BombusApisBee.Projectiles
             if (Charge < MAX_CHARGE)
             {
                 var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-                modPlayer2.shakeTimer = 4;
+                modPlayer2.AddShake(4);
             }
             // If laser is not charged yet, stop the AI here.
             if (Charge < MAX_CHARGE) return;
@@ -156,7 +156,7 @@ namespace BombusApisBee.Projectiles
             if (Charge == MAX_CHARGE)
             {
                 var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-                modPlayer2.shakeTimer = 8;
+                modPlayer2.AddShake(8);
             }
             if (!someBool)
             {

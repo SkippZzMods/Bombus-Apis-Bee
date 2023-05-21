@@ -18,7 +18,7 @@ namespace BombusApisBee.Buffs
             {
                 new Terraria.Audio.SoundStyle("BombusApisBee/Sounds/Item/LightningStrike").PlayWith(npc.position, 0, 0.1f, 1f);
                 Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center + new Vector2(Main.rand.Next(-200, 200), -900), Vector2.UnitY * 10f, ModContent.ProjectileType<ElectricHoneycombLightning>(), Main.rand.Next(50, 100), 5f, Main.myPlayer);
-                Main.player[npc.FindClosestPlayer()].Bombus().shakeTimer += 10;
+                Main.player[npc.FindClosestPlayer()].Bombus().AddShake(10);
             }
 
             Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0f, 0f, 0, new Color(110, 220, 255), 0.4f);

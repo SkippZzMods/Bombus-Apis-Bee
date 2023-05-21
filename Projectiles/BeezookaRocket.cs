@@ -173,7 +173,7 @@ namespace BombusApisBee.Projectiles
 
                 new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(Projectile.Center, -0.1f, 0.2f, 1.1f);
 
-                Main.player[Projectile.owner].Bombus().shakeTimer += 4;
+                Main.player[Projectile.owner].Bombus().AddShake(4);
 
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BasicExplosion>(), Projectile.damage, 2f, Projectile.owner);
 

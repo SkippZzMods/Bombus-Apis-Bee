@@ -52,7 +52,7 @@ namespace BombusApisBee.Projectiles
                         Vector2 vel = new Vector2(Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-5, 5));
                         Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, vel, ModContent.ProjectileType<MiniStars>(), Projectile.damage * 1 / 2, 1, player.whoAmI);
                         var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-                        modPlayer2.shakeTimer = 17;
+                        modPlayer2.AddShake(17);
                     }
                 }
             }

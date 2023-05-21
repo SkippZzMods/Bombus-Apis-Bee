@@ -262,9 +262,9 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             }
 
             if (numHits >= 3)
-                owner.Bombus().shakeTimer += 6;
+                owner.Bombus().AddShake(6);
             else
-                owner.Bombus().shakeTimer += 2;
+                owner.Bombus().AddShake(2);
         }
     }
 }

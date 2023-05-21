@@ -127,7 +127,7 @@ namespace BombusApisBee.UI
                             drawBackGlowBar[0] = true;
                             chainGlowTimerBar[0] = 30;
 
-                            Main.LocalPlayer.Bombus().shakeTimer += 15;
+                            Main.LocalPlayer.Bombus().AddShake(15);
                         }
                     }
                 }
@@ -168,7 +168,7 @@ namespace BombusApisBee.UI
                             drawBackGlowBar[1] = true;
                             chainGlowTimerBar[1] = 30;
 
-                            Main.LocalPlayer.Bombus().shakeTimer += 15;
+                            Main.LocalPlayer.Bombus().AddShake(15);
                         }
                     }
                 }
@@ -209,7 +209,7 @@ namespace BombusApisBee.UI
                             chainGlowTimerBar[2] = 30;
                             drawBackGlowBar[2] = true;
 
-                            Main.LocalPlayer.Bombus().shakeTimer += 15;
+                            Main.LocalPlayer.Bombus().AddShake(15);
                         }
                     }
                 }
@@ -238,7 +238,7 @@ namespace BombusApisBee.UI
                             chainGlowTimerBar[3] = 30;
                             drawBackGlowBar[3] = true;
 
-                            Main.LocalPlayer.Bombus().shakeTimer += 8;
+                            Main.LocalPlayer.Bombus().AddShake(8);
                         }                    
                     }
                 }
@@ -353,7 +353,7 @@ namespace BombusApisBee.UI
                                     chainGlowTimerNew[i] = 30;
                                     drawBackGlowNew[i] = true;
 
-                                    Main.LocalPlayer.Bombus().shakeTimer += 6;
+                                    Main.LocalPlayer.Bombus().AddShake(6);
                                 }
                             }
                         }
@@ -396,7 +396,7 @@ namespace BombusApisBee.UI
                                     chainGlowTimerNew[i] = 30;
                                     drawBackGlowNew[i] = true;
 
-                                    Main.LocalPlayer.Bombus().shakeTimer += 6;
+                                    Main.LocalPlayer.Bombus().AddShake(6);
                                 }
                             }
                         }
@@ -506,7 +506,7 @@ namespace BombusApisBee.UI
                                     chainGlowTimerClassic[i] = 30;
                                     drawBackGlowClassic[i] = true;
 
-                                    Main.LocalPlayer.Bombus().shakeTimer += 3;
+                                    Main.LocalPlayer.Bombus().AddShake(3);
                                 }
                             }
                         }
@@ -549,7 +549,7 @@ namespace BombusApisBee.UI
                                     chainGlowTimerClassic[i] = 30;
                                     drawBackGlowClassic[i] = true;
 
-                                    Main.LocalPlayer.Bombus().shakeTimer += 3;
+                                    Main.LocalPlayer.Bombus().AddShake(3);
                                 }
                             }
                         }

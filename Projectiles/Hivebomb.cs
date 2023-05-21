@@ -55,7 +55,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            Main.player[Projectile.owner].Bombus().shakeTimer += 4;
+            Main.player[Projectile.owner].Bombus().AddShake(4);
             if (Main.myPlayer == Projectile.owner)
             {
                 for (int i = 0; i < Main.rand.Next(4, 7); i++)

@@ -68,7 +68,7 @@ namespace BombusApisBee.Projectiles
             if (!stuck)
                 return;
 
-            Main.player[Projectile.owner].Bombus().shakeTimer += 7;
+            Main.player[Projectile.owner].Bombus().AddShake(7);
             SoundID.DD2_ExplosiveTrapExplode.PlayWith(Projectile.position, pitchVariance: 0.1f);
             for (int i = 0; i < 35; i++)
             {

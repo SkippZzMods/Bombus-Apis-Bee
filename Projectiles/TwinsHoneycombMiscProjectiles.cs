@@ -80,7 +80,7 @@ namespace BombusApisBee.Projectiles
         public override void Kill(int timeLeft)
         {
             SoundID.Item74.PlayWith(Projectile.Center, 0.25f, 0.15f, 0.85f);
-            Main.player[Projectile.owner].Bombus().shakeTimer += 5;
+            Main.player[Projectile.owner].Bombus().AddShake(5);
 
             if (Main.myPlayer == Projectile.owner)
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<CursedExplosion>(), Projectile.damage, 0f, Projectile.owner, 65);
@@ -434,7 +434,7 @@ namespace BombusApisBee.Projectiles
         public override void Kill(int timeLeft)
         {
             SoundID.Item74.PlayWith(Projectile.Center, 0.35f, 0.1f, 0.65f);
-            Main.player[Projectile.owner].Bombus().shakeTimer += 2;
+            Main.player[Projectile.owner].Bombus().AddShake(2);
 
             if (Main.myPlayer == Projectile.owner)
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<CursedExplosion>(), Projectile.damage, 0f, Projectile.owner, 25);

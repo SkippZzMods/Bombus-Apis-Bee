@@ -96,7 +96,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 Projectile.NewProjectile(source, pos, velocity * 2.5f, ModContent.ProjectileType<AstralStarSplitting>(), (int)(damage * 1.5f), 3.5f, player.whoAmI);
 
                 player.UseBeeResource(4);
-                player.Bombus().shakeTimer += 5;
+                player.Bombus().AddShake(5);
                 player.velocity += -velocity;
                 player.reuseDelay = 30;
                 new SoundStyle("BombusApisBee/Sounds/Item/ProjectileLaunch1").PlayWith(position, -0.1f, 0.1f, 1.15f);
@@ -106,7 +106,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             else
             {
                 SoundID.Item11.PlayWith(position, -0.15f, 0.1f);
-                player.Bombus().shakeTimer += 2;
+                player.Bombus().AddShake(2);
                 Vector2 pos = position + new Vector2(0, -5 * player.direction).RotatedBy(velocity.ToRotation());
                 for (int i = 0; i < 15; i++)
                 {

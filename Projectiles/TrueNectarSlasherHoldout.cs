@@ -90,7 +90,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
-                owner.Bombus().shakeTimer += 7;
+                owner.Bombus().AddShake(7);
             }
 
             Projectile.Center = owner.Center + Projectile.rotation.ToRotationVector2() * 25f;
@@ -128,7 +128,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
-                owner.Bombus().shakeTimer += 7;
+                owner.Bombus().AddShake(7);
             }
 
             Projectile.Center = owner.Center + Projectile.rotation.ToRotationVector2() * 25f;
@@ -191,8 +191,7 @@ namespace BombusApisBee.Projectiles
                 }
 
                 int shakeLerp = (int)MathHelper.Lerp(1, 6, chargeTimer / (maxTimeLeft * 1.5f));
-                if (owner.Bombus().shakeTimer < shakeLerp)
-                    owner.Bombus().shakeTimer = shakeLerp;
+                owner.Bombus().AddShake(shakeLerp);
             }
             else
             {
@@ -200,7 +199,7 @@ namespace BombusApisBee.Projectiles
                 {
                     Projectile.timeLeft = (int)maxTimeLeft;
                     owner.UseBeeResource(3);
-                    owner.Bombus().shakeTimer += 15;
+                    owner.Bombus().AddShake(15);
                     Projectile.friendly = true;
                     SoundID.DD2_SonicBoomBladeSlash.PlayWith(Projectile.Center, -0.25f, 0.1f, 1.25f);
                     thrown = true;
@@ -275,7 +274,7 @@ namespace BombusApisBee.Projectiles
                 if (Main.myPlayer == owner.whoAmI && !thrown)
                 {
                     thrown = true;
-                    owner.Bombus().shakeTimer += 5;
+                    owner.Bombus().AddShake(5);
                     owner.UseBeeResource(3);
                     Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 25f;
                     Projectile.friendly = true;
@@ -381,7 +380,7 @@ namespace BombusApisBee.Projectiles
             if (NPCID.Sets.ProjectileNPC[target.type])
                 return;
 
-            owner.Bombus().shakeTimer += 4;
+            owner.Bombus().AddShake(4);
 
             Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(250f, 250f);
 

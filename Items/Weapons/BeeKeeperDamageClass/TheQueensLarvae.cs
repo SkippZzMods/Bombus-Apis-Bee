@@ -49,7 +49,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.Bombus().shakeTimer += 20;
+            player.Bombus().AddShake(20);
             player.Hymenoptra().BeeResourceCurrent = 0;
             player.Hymenoptra().BeeResourceRegenTimer = -600;
             player.AddBuff<Buffs.TheQueensGuard>(120);

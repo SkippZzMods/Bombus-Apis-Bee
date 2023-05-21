@@ -101,9 +101,9 @@ namespace BombusApisBee.Buffs
         {
             Vector2 center = npc.Center;
 
-            if (Main.LocalPlayer.Distance(center) < 2000 && Main.LocalPlayer.Bombus().shakeTimer < 10)
+            if (Main.LocalPlayer.Distance(center) < 2000)
             {
-                Main.LocalPlayer.Bombus().shakeTimer = 10;
+                Main.LocalPlayer.Bombus().AddShake(10);
             }
 
             float scale;

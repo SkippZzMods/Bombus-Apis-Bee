@@ -35,7 +35,7 @@ namespace BombusApisBee.Projectiles
             SoundEngine.PlaySound(SoundID.Item96, Projectile.Center);
             Player player = Main.player[Projectile.owner];
             var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-            modPlayer2.shakeTimer = 5;
+            modPlayer2.AddShake(5);
         }
         public override void AI()
         {
