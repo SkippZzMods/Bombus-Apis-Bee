@@ -24,7 +24,7 @@ namespace BombusApisBee.Core
 		List<int> hornets = new() { NPCID.Hornet, NPCID.HornetHoney, NPCID.HornetFatty, NPCID.HornetLeafy, NPCID.HornetSpikey, NPCID.HornetStingy};
 		public bool CanDrop(DropAttemptInfo info)
 		{
-			return hornets.Contains(info.npc.type) && info.npc.HasPlayerTarget && !info.IsInSimulation;
+			return NPC.downedQueenBee && hornets.Contains(info.npc.type) && info.npc.HasPlayerTarget && !info.IsInSimulation;
 		}
 
 		public bool CanShowItemDropInUI() => true;

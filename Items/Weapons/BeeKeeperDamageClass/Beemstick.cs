@@ -16,12 +16,12 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 14;
+            Item.damage = 11;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 20;
-            Item.useTime = 70;
-            Item.useAnimation = 70;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2f;
             Item.value = Item.sellPrice(gold: 2, silver: 50);
@@ -31,7 +31,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 6;
             Item.UseSound = new Terraria.Audio.SoundStyle("BombusApisBee/Sounds/Item/HeavyShotgun") with { Volume = 0.6f, PitchVariance = 0.1f };
             Item.scale = 1;
-            beeResourceCost = 4;
+            beeResourceCost = 5;
         }
 
         public override void AddRecipes()
@@ -89,12 +89,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             modPlayer2.AddShake(11);
             for (int i = 0; i < Main.rand.Next(1, 3); i++)
             {
-                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(15f.AsRadians()), player.beeType(), player.beeDamage((int)(damage)), player.beeKB(knockback), player.whoAmI).
-                    DamageType = BeeUtils.BeeDamageClass();
+                BeeUtils.SpawnBee(player, source, position, velocity.RotatedByRandom(15f.AsRadians()), damage, knockback);
             }
             for (int i = 0; i < Main.rand.Next(2, 4); i++)
             {
-                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(10f.AsRadians()), ModContent.ProjectileType<BeeBuckshot>(), damage, knockback * 3, player.whoAmI);
+                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(10f.AsRadians()), ModContent.ProjectileType<BeeBuckshot>(), damage / 2, knockback * 3, player.whoAmI);
             }
             for (int i = 0; i < 3; i++)
             {

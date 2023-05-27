@@ -15,24 +15,23 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 18;
+            Item.damage = 12;
             Item.noMelee = true;
             Item.width = 50;
             Item.height = 18;
-            Item.useTime = 9;
-            Item.useAnimation = 9;
+            Item.useTime = 8;
+            Item.useAnimation = 8;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 1f;
             Item.value = Item.sellPrice(gold: 7);
             Item.rare = ItemRarityID.Green;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<StingerFriendly>();
-            Item.shootSpeed = 17;
+            Item.shootSpeed = 22;
             Item.UseSound = SoundID.Item11;
             Item.scale = 1;
-            Item.crit = 4;
             beeResourceCost = 1;
-            ResourceChance = 0.33f;
+            ResourceChance = 0.25f;
         }
 
 
@@ -43,7 +42,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            velocity = velocity.RotatedByRandom(MathHelper.ToRadians(8));
+            velocity = velocity.RotatedByRandom(MathHelper.ToRadians(10));
             Vector2 muzzleOffset = Vector2.Normalize(velocity) * 50f;
             if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))
                 position += muzzleOffset;

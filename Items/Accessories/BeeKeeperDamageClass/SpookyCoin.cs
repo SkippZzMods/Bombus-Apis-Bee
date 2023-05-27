@@ -1,6 +1,6 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
 
-namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+/*namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class SpookyCoin : BeeKeeperItem
     {
@@ -38,4 +38,4 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             CreateRecipe().AddIngredient(ItemID.SpookyWood, 75).AddIngredient<Pollen>(35).AddTile(TileID.MythrilAnvil).Register();
         }
     }
-}
+}*/

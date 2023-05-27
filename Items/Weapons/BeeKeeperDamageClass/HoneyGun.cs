@@ -14,11 +14,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void SafeSetDefaults()
         {
-            Item.damage = 45;
+            Item.damage = 30;
             Item.width = 32;
             Item.height = 32;
-            Item.useTime = 25;
-            Item.useAnimation = 25;
+            Item.useTime = 35;
+            Item.useAnimation = 35;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 4f;
@@ -26,8 +26,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.rare = ItemRarityID.Blue;
             Item.shoot = ModContent.ProjectileType<HoneyGunHoldout>();
             Item.shootSpeed = 16.5f;
-            beeResourceCost = 2;
+            beeResourceCost = 4;
             Item.noUseGraphic = true;
+            Item.autoReuse = true;
         }
 
         public override void AddRecipes()

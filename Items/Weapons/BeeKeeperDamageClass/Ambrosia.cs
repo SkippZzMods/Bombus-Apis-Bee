@@ -9,6 +9,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
+            DisplayName.SetDefault("Ambrosial Throw");
             Tooltip.SetDefault("Throws a yoyo of pure nectar\nCauses nectar explosions on hit, healing the user");
 
             ItemID.Sets.Yoyo[Item.type] = true;
@@ -21,11 +22,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.width = 24;
             Item.height = 24;
-            Item.useAnimation = 25;
-            Item.useTime = 25;
+            Item.useAnimation = 35;
+            Item.useTime = 35;
             Item.shootSpeed = 16f;
             Item.knockBack = 2.5f;
-            Item.damage = 25;
+            Item.damage = 21;
             Item.value = Item.sellPrice(gold: 1, silver: 45);
             Item.rare = ItemRarityID.Orange;
 
@@ -35,7 +36,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<AmbrosiaProjectile>();
-            beeResourceCost = 1;
+            beeResourceCost = 2;
         }
         public override void AddRecipes()
         {

@@ -68,16 +68,16 @@ namespace BombusApisBee.Projectiles
                     if (shots % 2 == 0)
                     {
                         if (Main.myPlayer == Projectile.owner)
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), barrelPos, Projectile.velocity.RotatedByRandom(0.25f) * 10f, ModContent.ProjectileType<CorruptMiniEater>(), Projectile.damage, 2.5f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), barrelPos, Projectile.velocity.RotatedByRandom(0.25f) * 10f, ModContent.ProjectileType<CorruptMiniEater>(), (int)(Projectile.damage * 0.66f), 2.5f, Projectile.owner);
 
                         SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.position);
-                        owner.UseBeeResource(1);
+                        owner.UseBeeResource(2);
                     }
 
                     BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
 
                     if (Main.myPlayer == Projectile.owner)
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), barrelPos, Projectile.velocity * 6f, ModContent.ProjectileType<CorruptedBee>(), Projectile.damage, 0f, owner.whoAmI);
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), barrelPos, Projectile.velocity * 6f, ModContent.ProjectileType<CorruptedBee>(), (int)(Projectile.damage * 0.66f), 0f, owner.whoAmI);
 
                     for (int i = 0; i < 15; i++)
                     {
@@ -247,7 +247,7 @@ namespace BombusApisBee.Projectiles
             if (Main.myPlayer == Projectile.owner)
                 for (int i = 0; i < 4; i++) 
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(10f, 10f), ModContent.ProjectileType<CorruptMiniEater>(), Projectile.damage, 2.5f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(10f, 10f), ModContent.ProjectileType<CorruptMiniEater>(), Projectile.damage / 2, 2.5f, Projectile.owner);
                 }
 
             SoundID.NPCDeath1.PlayWith(Projectile.Center, pitchVariance: 0.2f);

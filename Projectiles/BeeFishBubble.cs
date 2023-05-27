@@ -76,7 +76,7 @@ namespace BombusApisBee.Projectiles
             if (Main.myPlayer == Projectile.owner)
                 for (int i = 0; i < 2 + Main.rand.Next(3); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.position, Main.rand.NextVector2Circular(2f, 2f), player.beeType(), player.beeDamage(Projectile.damage * 2 / 3), 0f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.position, Main.rand.NextVector2Circular(2f, 2f), player.beeType(), player.beeDamage(Projectile.damage / 2), 0f, Projectile.owner);
                 }
 
             SoundEngine.PlaySound(SoundID.Item54, Projectile.position);

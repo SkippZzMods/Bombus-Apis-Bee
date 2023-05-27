@@ -3,7 +3,7 @@
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
-    public class WaspChestplate : BeeKeeperItem
+    public class WaspBreastplate : BeeKeeperItem
     {
         public override void SetStaticDefaults()
         {

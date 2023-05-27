@@ -13,7 +13,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void SafeSetDefaults()
         {
-            Item.damage = 19;
+            Item.damage = 17;
             Item.width = 28;
             Item.height = 30;
             Item.useTime = 45;
@@ -27,7 +27,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<NectarBoltProjectile>();
             Item.shootSpeed = 9f;
-            beeResourceCost = 3;
+            beeResourceCost = 4;
         }
 
         public override Vector2? HoldoutOffset()

@@ -3,6 +3,7 @@ using BombusApisBee.Buffs;
 using BombusApisBee.Dusts;
 using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
 using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
+using BombusApisBee.Items.Other.OnPickupItems;
 using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
 using BombusApisBee.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
@@ -213,6 +214,37 @@ namespace BombusApisBee.Core
                     }
                 }
             }
+
+            if (enchantedhoney)
+            {
+                for (int i = 0; i < Main.rand.Next(2, 5); i++)
+                {
+                    Item item = Main.item[Item.NewItem(Player.GetSource_Accessory(new Item(ModContent.ItemType<EnchantedApiary>())), Player.getRect(), ModContent.ItemType<HoneyPickup>())];
+
+                    item.noGrabDelay = 60;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI, 1f);
+                    }
+                }
+            }
+
+            if (HimenApiary)
+            {
+                for (int i = 0; i < Main.rand.Next(3, 6); i++)
+                {
+                    Item item = Main.item[Item.NewItem(Player.GetSource_Accessory(new Item(ModContent.ItemType<HimensApiary>())), Player.getRect(), ModContent.ItemType<HoneyPickup2>())];
+
+                    item.noGrabDelay = 60;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                    {
+                        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI, 1f);
+                    }
+                }
+            }
+
             base.PostHurt(pvp, quiet, damage, hitDirection, crit, cooldownCounter);
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

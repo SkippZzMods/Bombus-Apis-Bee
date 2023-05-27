@@ -47,12 +47,15 @@ namespace BombusApisBee.Projectiles
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             if (Main.rand.NextBool(5))
-                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AmbrosiaExplosion>(), Projectile.damage, 0, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AmbrosiaExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
 
             for (int i = 0; i < 10; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(255, 191, 73), 0.35f);
             }
+
+            if (!Main.player[Projectile.owner].UseBeeResource(1))
+                Projectile.ai[0] = -1f;
         }
 
         public override bool PreDraw(ref Color lightColor)

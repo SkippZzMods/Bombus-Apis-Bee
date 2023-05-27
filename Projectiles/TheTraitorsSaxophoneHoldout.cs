@@ -58,7 +58,7 @@ namespace BombusApisBee.Projectiles
 
             if (Charge % MaxCharge == 0)
             {
-                if (owner.UseBeeResource(1))
+                if (owner.UseBeeResource(2))
                 {
                     flashTimer = 15;
                     string sax = "Sax" + Main.rand.Next(1, 7);
@@ -70,7 +70,7 @@ namespace BombusApisBee.Projectiles
                     if (Main.rand.NextBool(3))
                     {
                         int type = Main.rand.Next(new int[] { ModContent.ProjectileType<HoneyNoteQuarter>(), ModContent.ProjectileType<HoneyNoteEighth>(), ModContent.ProjectileType<HoneyNoteEighthTied>() });
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(8f, 15f), type, (int)(Projectile.damage * 1.5f), Projectile.knockBack, Projectile.owner);
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(8f, 15f), type, (int)(Projectile.damage * 1.25f), Projectile.knockBack, Projectile.owner);
                         owner.UseBeeResource(2);
                     }
 

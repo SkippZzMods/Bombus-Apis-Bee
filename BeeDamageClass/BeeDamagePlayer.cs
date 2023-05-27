@@ -114,6 +114,21 @@ namespace BombusApisBee.BeeDamageClass
                 {
                     UpdateGathering();
                 }
+
+                if (HoneyShieldCD > 0)
+                    HoneyShieldCD--;
+                else
+                    HoneyShield = true;
+
+                if (HoneyImmuneTimer > 0)
+                    HoneyImmuneTimer--;
+
+                if (HoneyShieldCD == 1)
+                {
+                    new SoundStyle("BombusApisBee/Sounds/Item/Ricochet").PlayWith(Player.Center, 0, 0.1f, 1f);
+
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.UnitY * -5f, ModContent.ProjectileType<BeePlayerShieldProjectile>(), 0, 0f, Player.whoAmI);
+                }
             }
 
             if (Player.HeldItem.CountsAsClass<HymenoptraDamageClass>())
@@ -149,7 +164,7 @@ namespace BombusApisBee.BeeDamageClass
             {
                 if (HoneyShield)
                 {
-                    MaxHoneyShieldCD = 1200 - (100 * CurrentBees);
+                    MaxHoneyShieldCD = Utils.Clamp(1200 - (100 * CurrentBees), 300, 1200);
                     HoneyShieldCD = MaxHoneyShieldCD;
                     JustShielded = true;
                     HoneyShield = false;
@@ -178,20 +193,8 @@ namespace BombusApisBee.BeeDamageClass
         {
             Player.statDefense += CurrentBees * 2;
 
-            if (HoneyShieldCD > 0)
-                HoneyShieldCD--;
-            else
-                HoneyShield = true;
-
-            if (HoneyImmuneTimer > 0)
-                HoneyImmuneTimer--;
-
             if (HoneyShieldCD == 1)
-            {
-                SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = -0.25f }, Player.Center);
-                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);
-            }
-                
+                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);          
         }
 
         private void UpdateOffense()    
@@ -236,6 +239,42 @@ namespace BombusApisBee.BeeDamageClass
         }
     }
 
+    class BeePlayerShieldProjectile : ModProjectile
+    {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Shield");
+        }
+
+        public override void SetDefaults()
+        {
+            Projectile.width = 18;
+            Projectile.height = 20;
+
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+
+            Projectile.penetrate = -1;
+
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+
+            Projectile.timeLeft = 60;
+        }
+
+        public override void AI()
+        {
+            Projectile.velocity *= 0.93f;
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            lightColor *= Projectile.timeLeft / 60f;
+
+            return base.PreDraw(ref lightColor);
+        }
+    }
+
     public class BeePlayerBeeProjectile : ModProjectile
     {
         public Player Player => Main.player[Projectile.owner];
@@ -266,6 +305,8 @@ namespace BombusApisBee.BeeDamageClass
         private Trail trail2;
 
         float mult;
+
+        float lerper;
 
         public delegate void ExtraAI(Projectile proj);
         public static event ExtraAI ExtraAIEvent;
@@ -394,6 +435,8 @@ namespace BombusApisBee.BeeDamageClass
                 else if (Projectile.Distance(Player.Center) > 450)
                     mult = 0f;
 
+                lerper = 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD;
+
                 if (!Main.dedServ)
                 {
                     ManageCaches();
@@ -420,7 +463,7 @@ namespace BombusApisBee.BeeDamageClass
 
                 if (AttackDelay == 1)
                     if (Player.HeldItem.damage > 0)
-                        Projectile.damage = Player.ApplyHymenoptraDamageTo(Player.HeldItem.damage);
+                        Projectile.damage = Player.ApplyHymenoptraDamageTo((int)(Player.HeldItem.damage * 0.65f));
                     else
                         Projectile.damage = Player.ApplyHymenoptraDamageTo(10);
 
@@ -494,7 +537,7 @@ namespace BombusApisBee.BeeDamageClass
 
                 if (AttackDelay == 1)
                     if (Player.HeldItem.damage > 0)
-                        Projectile.damage = Player.ApplyHymenoptraDamageTo(Player.HeldItem.damage);
+                        Projectile.damage = Player.ApplyHymenoptraDamageTo(Player.HeldItem.damage / 3);
                     else
                         Projectile.damage = Player.ApplyHymenoptraDamageTo(10);
 
@@ -591,8 +634,6 @@ namespace BombusApisBee.BeeDamageClass
 
         private void ManageTrail()
         {
-            float lerper = 1f - Player.Hymenoptra().HoneyShieldCD / (float)Player.Hymenoptra().MaxHoneyShieldCD;
-
             trail = trail ?? new Trail(Main.instance.GraphicsDevice, 16, new TriangularTip(12), factor => 3f, factor =>
             {
                 return (Color.Lerp(Color.Transparent, new Color(255, 50, 20, 0) * mult, lerper) * (Player.Hymenoptra().HoldingBeeWeaponTimer / 15f));

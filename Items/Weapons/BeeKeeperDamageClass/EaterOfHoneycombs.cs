@@ -15,13 +15,13 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 17;
+            Item.damage = 13;
 
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 17;
+            Item.useAnimation = 17;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.value = Item.sellPrice(0, 1, 50, 0);
 
@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<EaterOfHoneycombsHoldout>();
             Item.shootSpeed = 1f;
             Item.noUseGraphic = true;
-            beeResourceCost = 2;
+            beeResourceCost = 4;
         }
     }
 }

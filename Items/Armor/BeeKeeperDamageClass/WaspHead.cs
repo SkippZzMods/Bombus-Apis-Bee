@@ -5,7 +5,7 @@ using System.Linq;
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
-    public class WaspHelmet : BeeKeeperItem
+    public class WaspHead : BeeKeeperItem
     {
         public override void Load()
         {
@@ -110,7 +110,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ModContent.ItemType<WaspChestplate>() && legs.type == ModContent.ItemType<WaspLeggings>();
+            return body.type == ModContent.ItemType<WaspBreastplate>() && legs.type == ModContent.ItemType<WaspGreaves>();
         }
 
         public override void UpdateArmorSet(Player player)

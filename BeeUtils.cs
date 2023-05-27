@@ -20,7 +20,7 @@ namespace BombusApisBee
                 if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
                     player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
 
-                if (showText)
+                if (showText && Main.myPlayer == player.whoAmI)
                     CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)(amount * 0.75f));
 
                 player.Heal((int)(amount * 0.25f));
@@ -33,7 +33,7 @@ namespace BombusApisBee
             if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
                 player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
 
-            if (showText)
+            if (showText && Main.myPlayer == player.whoAmI)
                 CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)amount);
         }
 
@@ -87,8 +87,23 @@ namespace BombusApisBee
         public static Projectile SpawnBee(this Projectile projectile, IEntitySource source, Vector2 pos, Vector2 velocity, float damage, float knockBack = 0f)
         {
             Player player = Main.player[projectile.owner];
-            return Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
+
+            Projectile proj = Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
+
+            proj.DamageType = BeeUtils.BeeDamageClass();
+
+            return proj;
         }
+
+        public static Projectile SpawnBee(this Player player, IEntitySource source, Vector2 pos, Vector2 velocity, float damage, float knockBack = 0f)
+        {
+            Projectile proj = Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
+
+            proj.DamageType = BeeUtils.BeeDamageClass();
+
+            return proj;
+        }
+
         public static void DrawDustImage(Vector2 position, int dustType, float size, Texture2D tex, float dustSize = 1f, int Alpha = 0, Color color = default, bool noGravity = true, float rot = 0.34f)
         {
             if (Main.netMode != NetmodeID.Server)

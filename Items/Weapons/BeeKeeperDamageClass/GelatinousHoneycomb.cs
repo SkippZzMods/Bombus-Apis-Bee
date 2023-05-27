@@ -18,8 +18,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 14;
-            Item.useAnimation = 14;
+            Item.useTime = 15;
+            Item.useAnimation = 15;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 3f;

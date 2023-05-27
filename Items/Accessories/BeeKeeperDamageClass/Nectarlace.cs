@@ -3,12 +3,12 @@
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Neck)]
-    public class HoneyCombNecklace : BeeKeeperItem
+    public class Nectarlace : BeeKeeperItem
     {
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Nectarlace");
-            Tooltip.SetDefault("Increases armor penetration by 5\nReleases bees and gives the honey buff when the user is damaged\nIncreases maximum honey by 10");
+            Tooltip.SetDefault("Increases armor penetration by 5\nReleases bees and douses the user in honey when damaged\nCoats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20");
             SacrificeTotal = 1;
         }
 
@@ -25,11 +25,12 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         {
             player.GetArmorPenetration(DamageClass.Generic) += 5;
             player.honeyCombItem = Item;
-            player.Hymenoptra().BeeResourceMax2 += 10;
+            player.Bombus().NectarVial = true;
+            player.statLifeMax2 += 20;
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemID.StingerNecklace).AddIngredient(ModContent.ItemType<JarOfHoney>()).AddIngredient(ModContent.ItemType<Pollen>(), 15).AddTile(TileID.TinkerersWorkbench).Register();
+            CreateRecipe(1).AddIngredient(ItemID.StingerNecklace).AddIngredient(ModContent.ItemType<NectarVial>()).AddIngredient(ModContent.ItemType<Pollen>(), 15).AddTile(TileID.TinkerersWorkbench).Register();
         }
     }
 }

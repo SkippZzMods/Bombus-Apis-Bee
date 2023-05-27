@@ -68,44 +68,6 @@ namespace BombusApisBee.Core
             return true;
         }
 
-        public override void OnKill(NPC npc)
-        {
-            if (npc.type != NPCID.MotherSlime && npc.type != NPCID.CorruptSlime && npc.type != NPCID.Slimer && npc.lifeMax > 1 && npc.damage > 0)
-            {
-                int playerIndex = npc.lastInteraction;
-                if (!Main.player[playerIndex].active || Main.player[playerIndex].dead)
-                {
-                    playerIndex = npc.FindClosestPlayer();
-                }
-                Player player = Main.player[playerIndex];
-                var modplayer = player.GetModPlayer<BeeDamagePlayer>();
-                var modplayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-                if (modplayer.BeeResourceCurrent < modplayer.BeeResourceMax2 && modplayer2.enchantedhoney)
-                {
-                    if (Main.rand.NextFloat() < 0.5f)
-                    {
-                        Item.NewItem(npc.GetSource_Death(), npc.getRect(), ModContent.ItemType<HoneyPickup>());
-                        if (Main.rand.NextFloat() < 0.25f)
-                        {
-                            Item.NewItem(npc.GetSource_Death(), npc.getRect(), ModContent.ItemType<HoneyPickup>());
-                        }
-                    }
-
-                }
-                if (modplayer.BeeResourceCurrent < modplayer.BeeResourceMax2 && modplayer2.HimenApiary)
-                {
-                    if (Main.rand.NextFloat() < 0.45f)
-                    {
-                        Item.NewItem(npc.GetSource_Death(), npc.getRect(), ModContent.ItemType<HoneyPickup2>());
-                        if (Main.rand.NextFloat() < 0.3f)
-                        {
-                            Item.NewItem(npc.GetSource_Death(), npc.getRect(), ModContent.ItemType<HoneyPickup2>());
-                        }
-                    }
-                }
-            }
-        }
-
         private IItemDropRule onlyInNormalMode(int ItemID, int chanceDenominator = 2)
         {
             return new ItemDropWithConditionRule(ItemID, chanceDenominator, 1, 1, new Conditions.NotExpert(), 1);

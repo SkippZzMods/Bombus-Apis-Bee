@@ -14,11 +14,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void SafeSetDefaults()
         {
-            Item.damage = 13;
+            Item.damage = 14;
             Item.width = 60;
             Item.height = 60;
-            Item.useTime = 36;
-            Item.useAnimation = 36;
+            Item.useTime = 51;
+            Item.useAnimation = 51;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 2f;
@@ -28,7 +28,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<BeeFishBubble>();
             Item.shootSpeed = 12f;
-            beeResourceCost = 3;
+            beeResourceCost = 4;
         }
 
         public override Vector2? HoldoutOrigin()

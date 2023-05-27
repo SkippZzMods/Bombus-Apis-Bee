@@ -15,12 +15,12 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 19;
+            Item.damage = 16;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 20;
-            Item.useTime = 80;
-            Item.useAnimation = 80;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2.5f;
             Item.value = Item.sellPrice(gold: 3, silver: 50);
@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 6f;
             Item.UseSound = new Terraria.Audio.SoundStyle("BombusApisBee/Sounds/Item/HeavyShotgun") with { Volume = 0.75f, Pitch = -0.15f };
             Item.scale = 1;
-            beeResourceCost = 5;
+            beeResourceCost = 7;
         }
 
         public override void AddRecipes()
@@ -66,11 +66,13 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
+            float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
+
             if (Main.myPlayer == player.whoAmI)
                 player.direction = Math.Sign((Main.MouseWorld - player.Center).X);
 
             float itemRotation = player.compositeFrontArm.rotation + 1.5707964f * player.gravDir;
-            Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * 7f;
+            Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * MathHelper.Lerp(-2f, 7f, animProgress);
             Vector2 itemSize = new Vector2(44f, 18f);
 
             Vector2 itemOrigin = new Vector2(-18f, 1f);
@@ -96,8 +98,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             modPlayer2.AddShake(13);
             for (int i = 0; i < Main.rand.Next(2, 4); i++)
             {
-                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(12f.AsRadians()), ModContent.ProjectileType<HellfireBee>(), player.beeDamage(damage),
-                    player.beeKB(1f), player.whoAmI);
+                Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(12f.AsRadians()), ModContent.ProjectileType<HellfireBee>(), player.beeDamage((int)(damage * 0.65f)),
+                    player.beeKB(1f), player.whoAmI).DamageType = BeeUtils.BeeDamageClass();
             }
             for (int i = 0; i < Main.rand.Next(3, 6); i++)
             {

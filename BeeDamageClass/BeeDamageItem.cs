@@ -9,6 +9,8 @@ namespace BombusApisBee.BeeDamageClass
         public int beeResourceCost = 0;
         public float ResourceChance = 0f;
 
+        public int critAdd = 0;
+
         public virtual void SafeSetStaticDefaults() { }
         public sealed override void SetStaticDefaults()
         {
@@ -22,7 +24,7 @@ namespace BombusApisBee.BeeDamageClass
         {
             SafeSetDefaults();
             Item.DamageType = ModContent.GetInstance<HymenoptraDamageClass>();
-            Item.crit = 0;
+            Item.crit = critAdd;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

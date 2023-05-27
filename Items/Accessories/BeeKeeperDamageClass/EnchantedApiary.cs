@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("'Its glistening!'\nKilling an enemy has a chance to spawn up to two droplets of enchanted honey");
+            Tooltip.SetDefault("'Its glistening!'\nDrops enchanted honey droplets when damaged");
             SacrificeTotal = 1;
         }
         public override void SetDefaults()
@@ -17,8 +17,7 @@
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var modPlayer2 = player.GetModPlayer<BombusApisBeePlayer>();
-            modPlayer2.enchantedhoney = true;
+            player.Bombus().enchantedhoney = true;
         }
     }
 }

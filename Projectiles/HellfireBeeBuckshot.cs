@@ -18,10 +18,13 @@ namespace BombusApisBee.Projectiles
             Projectile.width = 16;
             Projectile.height = 16;
             Projectile.friendly = true;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 180;
             Projectile.extraUpdates = 4;
             Projectile.alpha = 255;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 100;
         }
 
         public override void SetStaticDefaults()
@@ -60,7 +63,7 @@ namespace BombusApisBee.Projectiles
             Player player = Main.player[Projectile.owner];
             if (Main.myPlayer == Projectile.owner)
             {
-                int damage = player.beeDamage((int)(Projectile.damage * 0.85f));
+                int damage = player.beeDamage((int)(Projectile.damage * 0.65f));
                 float knockBack = player.beeKB(Projectile.knockBack);
                 Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, initVelo * 0.5f, ModContent.ProjectileType<HellfireBee>(), damage, knockBack, Projectile.owner);
             }

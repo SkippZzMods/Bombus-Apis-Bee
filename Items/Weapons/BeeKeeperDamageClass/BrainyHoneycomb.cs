@@ -13,12 +13,12 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 15;
+            Item.damage = 11;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 22;
-            Item.useAnimation = 22;
+            Item.useTime = 24;
+            Item.useAnimation = 24;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.value = Item.sellPrice(0, 1, 50, 0);
             Item.rare = ItemRarityID.Green;
@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<BrainyBee>();
             Item.shootSpeed = 6f;
             Item.UseSound = BombusApisBee.HoneycombWeapon;
-            beeResourceCost = 2;
+            beeResourceCost = 3;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
