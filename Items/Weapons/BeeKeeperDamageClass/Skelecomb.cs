@@ -15,14 +15,14 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 28;
+            Item.damage = 27;
             Item.noMelee = true;
 
             Item.width = 40;
             Item.height = 40;
 
-            Item.useTime = 45;
-            Item.useAnimation = 45;
+            Item.useTime = 80;
+            Item.useAnimation = 80;
 
             Item.useStyle = ItemUseStyleID.Shoot;
 
@@ -83,7 +83,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 }
 
                 cooldown = 180;
-                player.UseBeeResource(2);
+                player.UseBeeResource(6);
                 return false;
             }
 

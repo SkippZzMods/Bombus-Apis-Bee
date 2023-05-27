@@ -31,7 +31,7 @@ namespace BombusApisBee.Projectiles
             if (Main.rand.NextBool())
             {
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(250f, 250f) * Main.rand.NextFloat(0.5f, 1f);
-                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<SkeletalBeeSlash>(), (int)(Projectile.damage * 0.66f), 2.5f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<SkeletalBeeSlash>(), (int)(Projectile.damage * 0.35f), 2.5f, Projectile.owner);
             }
         }
 

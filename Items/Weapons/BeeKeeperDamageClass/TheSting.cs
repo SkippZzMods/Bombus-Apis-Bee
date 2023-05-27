@@ -15,7 +15,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void SafeSetDefaults()
         {
             Item.expertOnly = true;
-            Item.damage = 55;
+            Item.damage = 28;
             Item.width = 38;
             Item.height = 38;
             Item.useTime = 15;
@@ -29,7 +29,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Item9;
             Item.shoot = ModContent.ProjectileType<TheStingProj>();
             Item.shootSpeed = 10f;
-            beeResourceCost = 3;
+            beeResourceCost = 5;
         }
 
         public override bool SafeCanUseItem(Player player)

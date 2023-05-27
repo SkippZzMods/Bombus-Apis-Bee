@@ -26,7 +26,7 @@ namespace BombusApisBee.Projectiles
                 num430 = (float)num429 / num430;
                 num427 *= num430;
                 num428 *= num430;
-                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), x, y, num427, num428, ModContent.ProjectileType<AstralStar>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), x, y, num427, num428, ModContent.ProjectileType<AstralStar>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
             }
         }
         public override void SafeAI()

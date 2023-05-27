@@ -47,10 +47,10 @@ namespace BombusApisBee.Projectiles
                 if (Main.myPlayer == Projectile.owner)
                 {
                     Vector2 vel = new Vector2(Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-5, 5));
-                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, vel, ProjectileID.Wasp, Projectile.damage, 1, Projectile.owner).DamageType = BeeUtils.BeeDamageClass();
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, vel, ProjectileID.Wasp, Projectile.damage / 2, 1, Projectile.owner).DamageType = BeeUtils.BeeDamageClass();
                     BeeTimer = 0;
 
-                    if (!player.UseBeeResource(1))
+                    if (!player.UseBeeResource(2))
                         Projectile.ai[0] = -1f;
                 }
             }

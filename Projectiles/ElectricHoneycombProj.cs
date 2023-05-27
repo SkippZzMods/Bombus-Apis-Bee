@@ -42,11 +42,11 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(1f, 1f) + ((Projectile.ai[1] + MathHelper.ToRadians(180f)).ToRotationVector2() * -MathHelper.Lerp(35f, 5f, 1f - Projectile.timeLeft / 120f)), ModContent.DustType<Dusts.GlowFastDecelerate>(), Vector2.Zero, Scale: 0.4f, newColor: new Color(110, 220, 255));
             }
 
-            if (Main.rand.NextBool(60))
+            if (Main.rand.NextBool(60) && Main.player[Projectile.owner].UseBeeResource(1))
             {
                 new SoundStyle("BombusApisBee/Sounds/Item/LightningStrike").PlayWith(Projectile.position, 0, 0.1f, 0.85f);
                 Main.player[Projectile.owner].Bombus().AddShake(10);
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(3f, 3f), ModContent.ProjectileType<ElectricHoneycombLightning>(), Projectile.damage * 2 / 3, 0f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(3f, 3f), ModContent.ProjectileType<ElectricHoneycombLightning>(), Projectile.damage * 3 / 4, 0f, Projectile.owner);
             }
         }
 
@@ -73,13 +73,13 @@ namespace BombusApisBee.Projectiles
             {
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<ElectricBee>(), Projectile.damage * 3 / 4, 0f, Projectile.owner);
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center + new Vector2(Main.rand.Next(-200, 200), -900), Vector2.UnitY * 10f, ModContent.ProjectileType<ElectricHoneycombLightning>(), Projectile.damage, 5f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<ElectricBee>(), Projectile.damage * 2 / 3, 0f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center + new Vector2(Main.rand.Next(-200, 200), -900), Vector2.UnitY * 10f, ModContent.ProjectileType<ElectricHoneycombLightning>(), Projectile.damage * 3 / 4, 5f, Projectile.owner);
                 }
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<ElectricBee>(), Projectile.damage * 3 / 4, 0f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<ElectricBee>(), Projectile.damage * 2 / 3, 0f, Projectile.owner);
                 }
             }
 

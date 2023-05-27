@@ -29,7 +29,7 @@ namespace BombusApisBee.Projectiles
             }
 
             if (Main.myPlayer == Projectile.owner)
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(12f, 12f), ModContent.ProjectileType<HomingManaStar>(), Projectile.damage, 3.5f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(12f, 12f), ModContent.ProjectileType<HomingManaStar>(), Projectile.damage / 2, 3.5f, Projectile.owner);
         }
 
         public override void SafeAI()

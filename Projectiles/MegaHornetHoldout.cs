@@ -125,7 +125,7 @@ namespace BombusApisBee.Projectiles
 
         public void ShootThings(Vector2 barrelPos)
         {
-            if (owner.UseBeeResource(1))
+            if (owner.UseBeeResource(2))
             {
                 for (int i = 0; i < 15; i++)
                 {
@@ -133,7 +133,7 @@ namespace BombusApisBee.Projectiles
                 }
                 if (Main.myPlayer == Projectile.owner)
                 {
-                    int damage = (int)(Projectile.damage * MathHelper.Lerp(1f, 1.85f, Heat / MAXHEAT));
+                    int damage = (int)(Projectile.damage * MathHelper.Lerp(0.5f, 1f, Heat / MAXHEAT));
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), barrelPos, (Projectile.velocity.RotatedByRandom(0.15f)) * 17.5f, ModContent.ProjectileType<StingerFriendly>(), damage, Projectile.knockBack, Projectile.owner);
                     if (Main.rand.NextBool())
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), barrelPos, (Projectile.velocity.RotatedByRandom(0.15f)) * 15f, ModContent.ProjectileType<HomingStinger>(), damage, Projectile.knockBack, Projectile.owner);

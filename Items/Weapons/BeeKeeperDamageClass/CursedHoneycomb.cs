@@ -14,14 +14,14 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 55;
+            Item.damage = 41;
             Item.noUseGraphic = true;
             Item.channel = true;
             Item.noMelee = true;
             Item.width = 28;
             Item.height = 28;
-            Item.useTime = 45;
-            Item.useAnimation = 45;
+            Item.useTime = 70;
+            Item.useAnimation = 70;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 4f;
             Item.value = Item.sellPrice(0, 1, 50, 0);
@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 13f;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
             Item.rare = ItemRarityID.LightRed;
-            beeResourceCost = 5;
+            beeResourceCost = 6;
         }
         public override void AddRecipes()
         {

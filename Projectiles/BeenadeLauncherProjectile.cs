@@ -99,7 +99,7 @@ namespace BombusApisBee.Projectiles
             if (Main.myPlayer == Projectile.owner)
                 for (int i = 0; i < Main.rand.Next(5, 9); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, (Projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(6f)).RotatedByRandom(0.3f), player.beeType(), player.beeDamage(Projectile.damage), player.beeKB(0.5f), player.whoAmI);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, (Projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(6f)).RotatedByRandom(0.3f), player.beeType(), player.beeDamage(Projectile.damage / 2), player.beeKB(0.5f), player.whoAmI);
                 }
             for (int i = 0; i < 7; i++)
             {
@@ -112,7 +112,7 @@ namespace BombusApisBee.Projectiles
             }
 
             if (Main.myPlayer == Projectile.owner)
-                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BasicExplosion>(), Projectile.damage * 2, 2f, Projectile.owner, 80);
+                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BasicExplosion>(), (int)(Projectile.damage * 1.5f), 2f, Projectile.owner, 80);
 
             player.Bombus().AddShake(10);
         }

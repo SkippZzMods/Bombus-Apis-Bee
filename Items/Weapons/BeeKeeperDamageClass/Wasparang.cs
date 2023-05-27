@@ -13,10 +13,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 40;
+            Item.damage = 31;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useAnimation = 80;
-            Item.useTime = 80;
+            Item.useAnimation = 100;
+            Item.useTime = 100;
             Item.shootSpeed = 3f;
             Item.knockBack = 4f;
             Item.width = 32;
@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<WasparangHoldout>();
-            beeResourceCost = 4;
+            beeResourceCost = 6;
         }
 
         public override bool SafeCanUseItem(Player player)

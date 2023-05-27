@@ -16,12 +16,12 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 19;
+            Item.damage = 15;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 20;
-            Item.useTime = 7;
-            Item.useAnimation = 21;
+            Item.useTime = 9;
+            Item.useAnimation = 27;
             Item.useStyle = ItemUseStyleID.Shoot;
 
             Item.value = Item.sellPrice(0, 1, 50);
@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<AstralBee>();
             Item.shootSpeed = 6;
 
-            beeResourceCost = 3;
+            beeResourceCost = 5;
         }
 
 

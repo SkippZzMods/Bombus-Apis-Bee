@@ -56,14 +56,14 @@ namespace BombusApisBee.Projectiles
                 {
                     if (StingerTimer > 30 && Collision.CanHitLine(Projectile.Center, 1, 1, target.Center, 1, 1))
                     {
-                        if (!player.UseBeeResource(1))
+                        if (!player.UseBeeResource(2))
                             Projectile.ai[0] = -1f;
                         else
                         {
                             StingerTimer = 0;
                             stingercount++;
 
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.DirectionTo(target.Center) * 14.5f, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage, 2.5f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.DirectionTo(target.Center) * 14.5f, ModContent.ProjectileType<StingerFriendly>(), (int)(Projectile.damage * 0.6f), 2.5f, Projectile.owner);
 
                             for (int i = 0; i < 7; i++)
                             {
@@ -77,7 +77,7 @@ namespace BombusApisBee.Projectiles
             }
             else if (StingerTimer > 45)
             {
-                if (!player.UseBeeResource(1))
+                if (!player.UseBeeResource(4))
                     Projectile.ai[0] = -1f;
                 else
                 {

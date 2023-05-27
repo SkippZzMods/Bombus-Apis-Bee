@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 3f;
-            Item.damage = 60;
+            Item.damage = 49;
             Item.rare = ItemRarityID.Lime;
             Item.crit = 4;
 

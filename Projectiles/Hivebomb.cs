@@ -60,12 +60,12 @@ namespace BombusApisBee.Projectiles
             {
                 for (int i = 0; i < Main.rand.Next(4, 7); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3.5f, 3.5f), ModContent.ProjectileType<HoneySmoke>(), Projectile.damage, 0f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3.5f, 3.5f), ModContent.ProjectileType<HoneySmoke>(), Projectile.damage / 2, 0f, Projectile.owner);
                 }
 
                 for (int i = 0; i < 3; i++)
                 {
-                    Projectile.SpawnBee(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3.5f, 3.5f), Projectile.damage * 0.65f).DamageType = BeeUtils.BeeDamageClass();
+                    Projectile.SpawnBee(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(3.5f, 3.5f), Projectile.damage * 0.45f).DamageType = BeeUtils.BeeDamageClass();
                 }
             }
 

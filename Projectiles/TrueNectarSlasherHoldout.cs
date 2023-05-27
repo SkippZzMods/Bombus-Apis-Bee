@@ -224,7 +224,7 @@ namespace BombusApisBee.Projectiles
                     {
                         Dust.NewDustPerfect(owner.Center + Projectile.rotation.ToRotationVector2() * 40f, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.rotation.ToRotationVector2().RotatedByRandom(0.35f) * Main.rand.NextFloat(3f), 0, new Color(214, 158, 79), 0.75f);
                     }
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center + Projectile.rotation.ToRotationVector2() * 40f, Projectile.rotation.ToRotationVector2() * 15f, ModContent.ProjectileType<TrueHomingNectar>(), (int)(Projectile.damage * 0.66f), 3f, Projectile.owner);   
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center + Projectile.rotation.ToRotationVector2() * 40f, Projectile.rotation.ToRotationVector2() * 15f, ModContent.ProjectileType<TrueHomingNectar>(), (int)(Projectile.damage * 0.25f), 3f, Projectile.owner);   
                 }
 
                 Vector2 swordLength = Vector2.Lerp(owner.Center + Projectile.rotation.ToRotationVector2() * (20f * Projectile.scale), owner.Center + Projectile.rotation.ToRotationVector2() * (70f * Projectile.scale), Main.rand.NextFloat());
@@ -395,7 +395,7 @@ namespace BombusApisBee.Projectiles
                     if (!spawnedProj)
                     {
                         spawnedProj = true;
-                        Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.15f), 2f, Projectile.owner);
+                        Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.05f), 2f, Projectile.owner);
                     }
                     break;
                 case 1: //up
@@ -407,7 +407,7 @@ namespace BombusApisBee.Projectiles
                     if (!spawnedProj)
                     {
                         spawnedProj = true;
-                        Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.15f), 2f, Projectile.owner);
+                        Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.05f), 2f, Projectile.owner);
                     }
                     break;
                 case 2: //heavy
@@ -422,7 +422,7 @@ namespace BombusApisBee.Projectiles
                         for (int i = 0; i < 2; i++)
                         {
                             pos = target.Center + Main.rand.NextVector2CircularEdge(250f, 250f);
-                            Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.75f), 2f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.35f), 2f, Projectile.owner);
                         }
                     }
                     break;
@@ -446,7 +446,7 @@ namespace BombusApisBee.Projectiles
                         for (int i = 0; i < 2; i++)
                         {
                             pos = target.Center + Main.rand.NextVector2CircularEdge(250f, 250f);
-                            Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.75f), 2f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_OnHit(target), pos, pos.DirectionTo(target.Center) * 25f, ModContent.ProjectileType<TrueNectarslash>(), (int)(Projectile.damage * 1.35f), 2f, Projectile.owner);
                         }
                     }
                     break;

@@ -19,12 +19,12 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 39;
+            Item.damage = 30;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 20;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 11;
+            Item.useAnimation = 11;
             Item.useStyle = ItemUseStyleID.Shoot;
 
             Item.value = Item.sellPrice(0, 4, 50);

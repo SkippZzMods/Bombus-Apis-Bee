@@ -17,7 +17,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 45;
+            Item.damage = 35;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 40;
@@ -34,7 +34,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.shootSpeed = 18f;
 
-            beeResourceCost = 3;
+            beeResourceCost = 5;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -53,7 +53,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             if (++shots >= 3)
             {
-                player.reuseDelay = 35;
+                player.reuseDelay = 90;
                 shots = 0;
             }
 

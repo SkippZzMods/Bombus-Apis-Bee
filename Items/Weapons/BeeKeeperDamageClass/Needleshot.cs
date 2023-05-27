@@ -15,7 +15,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 17;
+            Item.damage = 20;
             Item.noMelee = true;
             Item.width = 60;
             Item.height = 20;
@@ -59,7 +59,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             if (++shot >= 5)
             {
                 Vector2 pos = position + new Vector2(-15, 5 * player.direction).RotatedBy(velocity.ToRotation());
-                Projectile.NewProjectile(source, pos, velocity * 0.75f, ModContent.ProjectileType<Hivebomb>(), damage, knockback, player.whoAmI);
+                Projectile.NewProjectile(source, pos, velocity * 0.75f, ModContent.ProjectileType<Hivebomb>(), (int)(damage * 0.65f), knockback, player.whoAmI);
                 for (int i = 0; i < 20; i++)
                 {
                     Dust.NewDustPerfect(pos, ModContent.DustType<Dusts.HoneyDust>(), velocity.RotatedByRandom(0.35f) * Main.rand.NextFloat(0.25f), Main.rand.Next(50, 125)).noGravity = true;

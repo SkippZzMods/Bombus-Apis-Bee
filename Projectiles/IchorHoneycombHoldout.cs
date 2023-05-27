@@ -150,7 +150,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity *= -1f;
             }
 
-            Projectile.NewProjectile(Projectile.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<IchorExplosion>(), Projectile.damage * 2, 0f, Projectile.owner, 55);
+            Projectile.NewProjectile(Projectile.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<IchorExplosion>(), (int)(Projectile.damage * 1.5f), 0f, Projectile.owner, 55);
 
             for (int i = 0; i < 3; i++)
             {
@@ -200,7 +200,7 @@ namespace BombusApisBee.Projectiles
 
         public BeeUtils.CurveSegment pullback = new BeeUtils.CurveSegment(BeeUtils.EasingType.PolyOut, 0f, 0f, -1.35f, 2);
 
-        public BeeUtils.CurveSegment throwout = new BeeUtils.CurveSegment(BeeUtils.EasingType.CircOut, 0.7f, -0.9424779f, 2.2132742f, 3);
+        public BeeUtils.CurveSegment throwout = new BeeUtils.CurveSegment(BeeUtils.EasingType.CircOut, 0.9f, -0.9424779f, 2.2132742f, 3);
     }
     class IchorExplosion : ModProjectile, IDrawPrimitive_
     {

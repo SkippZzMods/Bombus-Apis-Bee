@@ -13,7 +13,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 40;
+            Item.damage = 29;
             Item.noMelee = true;
             Item.width = 70;
             Item.height = 18;
@@ -27,9 +27,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<NectarthrowerProj>();
             Item.shootSpeed = 12.5f;
             Item.UseSound = SoundID.Item34;
-            beeResourceCost = 1;
+            beeResourceCost = 2;
 
-            ResourceChance = 0.15f;
+            ResourceChance = 0.33f;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

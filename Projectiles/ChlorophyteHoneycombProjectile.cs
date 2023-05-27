@@ -40,17 +40,17 @@ namespace BombusApisBee.Projectiles
             {
                 for (int i = 0; i < Main.rand.Next(7, 15); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.6f) * Main.rand.NextFloat(0.25f, 1f), ModContent.ProjectileType<Chlorospore>(), Projectile.damage, 0f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.6f) * Main.rand.NextFloat(0.25f, 1f), ModContent.ProjectileType<Chlorospore>(), (int)(Projectile.damage * 0.66f), 0f, Projectile.owner);
                 }
 
                 for (int i = 0; i < Main.rand.Next(3, 6); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.25f) * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<Chloroshard>(), Projectile.damage * 2/3, 2.5f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.25f) * Main.rand.NextFloat(0.75f, 1f), ModContent.ProjectileType<Chloroshard>(), Projectile.damage / 2, 2.5f, Projectile.owner);
                 }
 
                 for (int i = 0; i < Main.rand.Next(4, 7); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.3f) * 0.25f, ModContent.ProjectileType<ChlorophyteBee>(), Projectile.damage * 2 / 3, 0, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.3f) * 0.25f, ModContent.ProjectileType<ChlorophyteBee>(), Projectile.damage / 2, 0, Projectile.owner);
                 }
 
                 for (int i = 0; i < 30; i++)

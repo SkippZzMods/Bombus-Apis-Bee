@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetDefaults()
         {
-            Item.damage = 55;
+            Item.damage = 50;
             Item.width = 40;
             Item.height = 20;
             Item.useTime = 17;
@@ -24,7 +24,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Item1;
             Item.scale = 1.25f;
             Item.crit = 4;
-            beeResourceCost = 1;
+            beeResourceCost = 3;
         }
 
 
@@ -39,7 +39,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             for (int i = 0; i < numberProjectiles; i++)
             {
                 Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(5));
-                Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage * 1 / 2, knockback, player.whoAmI);
+                Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage / 3, knockback, player.whoAmI);
             }
             return false;
         }

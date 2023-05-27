@@ -171,13 +171,13 @@ namespace BombusApisBee.Projectiles
                     Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), (Projectile.rotation - MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(0.45f) * Main.rand.NextFloat(10f, 20f), 0, new Color(214, 158, 79), 0.45f);
                 }
 
-                new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(Projectile.Center, -0.1f, 0.2f, 1.1f);
+                new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(Projectile.Center, -0.1f, 0.2f, 0.5f);
 
                 Main.player[Projectile.owner].Bombus().AddShake(4);
 
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BasicExplosion>(), Projectile.damage, 2f, Projectile.owner);
 
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < Main.rand.Next(1, 3); i++)
                 {
                     Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, (Projectile.rotation - MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(0.45f) * Main.rand.NextFloat(10f, 20f), ModContent.ProjectileType<BeezookaRocketSmall>(), (int)(Projectile.damage * 0.65f), 3f, Projectile.owner);
                 }
@@ -303,13 +303,13 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            new SoundStyle("BombusApisBee/Sounds/Item/LightGunshot").PlayWith(Projectile.Center, pitchVariance: 0.1f);
+            new SoundStyle("BombusApisBee/Sounds/Item/LightGunshot").PlayWith(Projectile.Center, 0f, 0.1f, 0.5f);
 
-            new SoundStyle("BombusApisBee/Sounds/Item/ScrapExplode").PlayWith(Projectile.Center, 0.4f, 0.35f);
+            new SoundStyle("BombusApisBee/Sounds/Item/ScrapExplode").PlayWith(Projectile.Center, 0.4f, 0.35f, 0.65f);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < Main.rand.Next(1, 3); i++)
             {
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.75f, 2f), ModContent.ProjectileType<BeezookaShrapnel>(), (int)(Projectile.damage * 0.35f), 3.5f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.75f, 2f), ModContent.ProjectileType<BeezookaShrapnel>(), (int)(Projectile.damage * 0.25f), 3.5f, Projectile.owner);
             }
 
             for (int i = 0; i < 10; i++)

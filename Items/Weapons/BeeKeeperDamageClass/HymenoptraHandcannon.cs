@@ -15,7 +15,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 45;
+            Item.damage = 38;
             Item.width = 50;
             Item.height = 36;
             Item.useTime = 5;
@@ -28,7 +28,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<BeeBullet>();
             Item.shootSpeed = 18.5f;
-            beeResourceCost = 6;
+            beeResourceCost = 10;
         }
         public override Vector2? HoldoutOffset()
         {
@@ -59,7 +59,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             if (++delay >= 6)
             {
                 delay = 0;
-                player.reuseDelay = 35;
+                player.reuseDelay = 60;
             }
             player.Hymenoptra().BeeResourceRegenTimer = -120;
             Gore.NewGorePerfect(source, player.Center + Vector2.Normalize(velocity) * 5f, velocity * -0.25f + (Vector2.UnitY * -3f), Mod.Find<ModGore>("ShellEjectGore").Type).timeLeft = 90;

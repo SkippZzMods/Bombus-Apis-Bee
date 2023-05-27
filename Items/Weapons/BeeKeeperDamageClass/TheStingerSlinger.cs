@@ -25,7 +25,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 3.5f;
-            Item.damage = 43;
+            Item.damage = 34;
             Item.value = Item.sellPrice(gold: 6, silver: 75);
             Item.rare = ItemRarityID.LightRed;
             Item.channel = true;
@@ -34,7 +34,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<StingerYoyoProj>();
-            beeResourceCost = 1;
+            beeResourceCost = 2;
         }
         public override void AddRecipes()
         {

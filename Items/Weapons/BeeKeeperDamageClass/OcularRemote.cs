@@ -17,20 +17,20 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             orig(self, i);
 
             if (self.ownedProjectileCounts<RetinaHoneycomb>() > 0)
-                self.Hymenoptra().BeeResourceReserved += 25;
+                self.Hymenoptra().BeeResourceReserved += 35;
 
             if (self.ownedProjectileCounts<SpazHoneycomb>() > 0)
-                self.Hymenoptra().BeeResourceReserved += 25;
+                self.Hymenoptra().BeeResourceReserved += 35;
         }
 
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Calls upon the Retinacomb and Spazacomb to temporarily fight for you\nOnly one pair of twins can be alive at once\nEach twin reserves 25 Honey while alive\n<right> while holding the remote to self destruct them, with a cooldown\n'Good thing the Twins don't hold a grudge'");
+            Tooltip.SetDefault("Calls upon the Retinacomb and Spazacomb to temporarily fight for you\nOnly one pair of twins can be alive at once\nEach twin reserves 35 Honey while alive\n<right> while holding the remote to self destruct them, with a cooldown\n'Good thing the Twins don't hold a grudge'");
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 65;
+            Item.damage = 42;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 40;
@@ -44,7 +44,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<SpazHoneycomb>();
             Item.shootSpeed = 13;
             Item.UseSound = SoundID.Item44;
-            beeResourceCost = 10;
+            beeResourceCost = 15;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

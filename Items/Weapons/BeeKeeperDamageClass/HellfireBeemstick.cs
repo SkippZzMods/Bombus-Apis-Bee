@@ -72,7 +72,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 player.direction = Math.Sign((Main.MouseWorld - player.Center).X);
 
             float itemRotation = player.compositeFrontArm.rotation + 1.5707964f * player.gravDir;
-            Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * MathHelper.Lerp(-2f, 7f, animProgress);
+            Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * MathHelper.Lerp(-2f, 7f, EaseBuilder.EaseQuinticInOut.Ease(animProgress));
             Vector2 itemSize = new Vector2(44f, 18f);
 
             Vector2 itemOrigin = new Vector2(-18f, 1f);
@@ -87,7 +87,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
             float rotation = (player.Center - Main.MouseWorld).ToRotation() * player.gravDir + 1.5707964f;
             if (animProgress < 0.5f)
-                rotation += MathHelper.Lerp(-0.65f, 0, animProgress * 2) * player.direction;
+                rotation += MathHelper.Lerp(-0.65f, 0, EaseBuilder.EaseQuinticInOut.Ease(animProgress) * 2) * player.direction;
 
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, rotation);
         }

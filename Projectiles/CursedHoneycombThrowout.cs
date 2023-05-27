@@ -29,11 +29,13 @@ namespace BombusApisBee.Projectiles
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
             Projectile.friendly = true;
+
+            Projectile.timeLeft = 10;
         }
 
         public override void AI()
         {
-            if (owner.channel && !owner.noItems && !owner.CCed && !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
+            if (owner.channel && !owner.noItems && !owner.CCed && (owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
                 Projectile.timeLeft = 2;
 
             owner.ChangeDir(Projectile.Center.X < owner.Center.X ? -1 : 1);
@@ -57,11 +59,11 @@ namespace BombusApisBee.Projectiles
                     {
                         for (int i = -1; i < 2; i++)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedBy(0.3f * i) * 21f, ModContent.ProjectileType<CursedTooth>(), Projectile.damage, 3.5f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedBy(0.3f * i) * 21f, ModContent.ProjectileType<CursedTooth>(), (int)(Projectile.damage * 0.35f), 3.5f, Projectile.owner);
                         }
                         for (int i = 0; i < 4; i++)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(15f, 18f), ModContent.ProjectileType<CursedEye>(), (int)(Projectile.damage * 0.66f), 1.5f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Main.MouseWorld).RotatedByRandom(0.35f) * Main.rand.NextFloat(15f, 18f), ModContent.ProjectileType<CursedEye>(), (int)(Projectile.damage * 0.5f), 1.5f, Projectile.owner);
                         }
 
                         for (int i = 0; i < 15; i++)
@@ -98,7 +100,7 @@ namespace BombusApisBee.Projectiles
         {
             target.AddBuff(BuffID.CursedInferno, 320);
             if (Main.rand.NextBool())
-                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.One.RotatedByRandom(6.28f) * 2.5f, ModContent.ProjectileType<CursedBee>(), (int)(Projectile.damage * 0.66f), 0f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.One.RotatedByRandom(6.28f) * 2.5f, ModContent.ProjectileType<CursedBee>(), (int)(Projectile.damage * 0.5f), 0f, Projectile.owner);
         }
 
         public override bool PreDraw(ref Color lightColor)

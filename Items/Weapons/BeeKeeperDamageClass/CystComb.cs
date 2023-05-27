@@ -14,10 +14,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 80;
+            Item.damage = 49;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useAnimation = 35;
-            Item.useTime = 35;
+            Item.useAnimation = 70;
+            Item.useTime = 70;
             Item.shootSpeed = 3f;
             Item.knockBack = 4f;
             Item.width = 32;
@@ -29,7 +29,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.noUseGraphic = true;
 
             Item.shoot = ModContent.ProjectileType<IchorHoneycombHoldout>();
-            beeResourceCost = 4;
+            beeResourceCost = 6;
         }
 
         public override bool SafeCanUseItem(Player player)

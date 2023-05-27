@@ -22,6 +22,8 @@ namespace BombusApisBee.Projectiles
 
         public bool flashed;
 
+        public int numHits;
+
         public ref float boomerangTimer => ref Projectile.ai[0];
 
         public override void SetStaticDefaults()
@@ -205,11 +207,17 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity *= -1f;
             }
 
-            for (int i = 0; i < (chargeTimer == maxCharge ? 5 : 3); i++)
+            if (numHits < 3)
             {
-                Projectile.NewProjectileDirect(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.UnitY.RotatedByRandom(0.4f) * Main.rand.NextFloat(-8f, -15f), ModContent.ProjectileType<HomingStinger>(),
-                    (int)(Projectile.damage * MathHelper.Lerp(1f, 1.5f, (float)chargeTimer / (float)maxCharge)), 2.5f, owner.whoAmI);
+                for (int i = 0; i < (chargeTimer == maxCharge ? 5 : 3); i++)
+                {
+                    Projectile.NewProjectileDirect(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.UnitY.RotatedByRandom(0.4f) * Main.rand.NextFloat(-8f, -15f), ModContent.ProjectileType<HomingStinger>(),
+                        (int)(Projectile.damage * MathHelper.Lerp(0.66f, 1.1f, (float)chargeTimer / (float)maxCharge)), 2.5f, owner.whoAmI);
+                }
             }
+
+            numHits++;
+
             if (Main.dedServ)
                 return;
 
@@ -235,6 +243,7 @@ namespace BombusApisBee.Projectiles
                 boomerangTimer = 46f;
                 Projectile.velocity *= -1f;
             }
+
             return false;
         }
         public override bool PreDraw(ref Color lightColor)
