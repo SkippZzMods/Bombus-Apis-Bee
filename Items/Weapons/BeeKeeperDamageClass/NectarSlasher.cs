@@ -4,12 +4,12 @@ using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
-    public class HoneyBeeSkySlasher : BeeDamageItem
+    public class NectarSlasher : BeeDamageItem
     {
         private int swingDirection = 1;
 
         private int combo = 0;
-        public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<HoneybeeSkySlasherHoldout>()] <= 0;
+        public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<NectarSlasherHoldout>()] <= 0;
         public override void SafeSetStaticDefaults()
         {
             DisplayName.SetDefault("Nectar Slasher");
@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2.5f;
             Item.shootSpeed = 5f;
-            Item.shoot = ModContent.ProjectileType<HoneybeeSkySlasherHoldout>();
+            Item.shoot = ModContent.ProjectileType<NectarSlasherHoldout>();
             Item.noUseGraphic = true;
             Item.noMelee = true;
 

@@ -172,7 +172,7 @@ namespace BombusApisbee.NPCs
             nextSlot++;
             shop.item[nextSlot].SetDefaults(ModContent.ItemType<TheTraitorsSaxophone>());
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(ModContent.ItemType<HoneyBeeSkySlasher>());
+            shop.item[nextSlot].SetDefaults(ModContent.ItemType<NectarSlasher>());
             nextSlot++;
             shop.item[nextSlot].SetDefaults(ItemID.BeeKeeper);
             nextSlot++;

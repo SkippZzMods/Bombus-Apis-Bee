@@ -138,9 +138,9 @@ namespace BombusApisBee.BeeDamageClass
 
             if (HeldBeeWeaponTimer > 0)
             {
-                if (Player.ownedProjectileCounts<BeePlayerBeeProjectile>() < CurrentBees)
+                /*if (Player.ownedProjectileCounts<BeePlayerBeeProjectile>() < CurrentBees)
                     Projectile.NewProjectile(Player.GetSource_ReleaseEntity("BombusApisBee: Spawn Player Bee"), Player.Center + Main.rand.NextVector2Circular(50f, 50f),
-                        Main.rand.NextVector2Circular(5f, 5f), ModContent.ProjectileType<BeePlayerBeeProjectile>(), 10, 0f, Player.whoAmI);
+                        Main.rand.NextVector2Circular(5f, 5f), ModContent.ProjectileType<BeePlayerBeeProjectile>(), 10, 0f, Player.whoAmI);*/
 
                 if (HoldingBeeWeaponTimer < 15)
                     HoldingBeeWeaponTimer++;

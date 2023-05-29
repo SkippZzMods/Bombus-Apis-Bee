@@ -10,7 +10,6 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     public class TheStarSwarmer : BeeDamageItem
     {
         int cooldown;
-
         public override bool AltFunctionUse(Player player) => cooldown <= 0;
         public override void SafeSetStaticDefaults()
         {

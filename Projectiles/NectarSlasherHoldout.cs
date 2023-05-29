@@ -6,7 +6,7 @@ using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Projectiles
 {
-    public class HoneybeeSkySlasherHoldout : BeeProjectile
+    public class NectarSlasherHoldout : BeeProjectile
     {
         private List<Vector2> cache;
         private List<Vector2> cache2;
@@ -17,7 +17,7 @@ namespace BombusApisBee.Projectiles
         private List<Vector2> throwcache2;
         private Trail throwtrail;
         private Trail throwtrail2;
-        public override string Texture => BombusApisBee.BeeWeapon + "HoneyBeeSkySlasher";
+        public override string Texture => BombusApisBee.BeeWeapon + "NectarSlasher";
         private Vector2 direction;
         private bool initialized;
         private float maxTimeLeft;
