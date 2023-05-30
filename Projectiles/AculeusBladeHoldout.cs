@@ -382,6 +382,12 @@ namespace BombusApisBee.Projectiles
 
         private int originalDirection;
 
+        private bool swinging;
+
+        int enemyWhoAmI;
+        bool stuck = false;
+        Vector2 offset = Vector2.Zero;
+
         private Vector2 oldPos;
         public float Combo => Projectile.ai[1];
         public Player owner => Main.player[Projectile.owner];
@@ -392,7 +398,7 @@ namespace BombusApisBee.Projectiles
         }
         public override void SafeSetDefaults()
         {
-            Projectile.friendly = true;
+            Projectile.friendly = false;
             Projectile.hostile = false;
             Projectile.tileCollide = false;
             Projectile.Size = new Vector2(60);
@@ -403,7 +409,39 @@ namespace BombusApisBee.Projectiles
             Projectile.Bombus().HeldProj = true;
         }
 
+        public override bool PreAI()
+        {
+            NPC target = Main.npc[enemyWhoAmI];
+            if (stuck)
+            {
+                Projectile.timeLeft = 2;
+
+                Projectile.position = target.position + offset;
+
+                if (!target.active || (Main.myPlayer == owner.whoAmI && Main.mouseRight))
+                {
+                    stuck = false;
+                    pullingBack = true;
+                }
+
+                return false;
+            }
+
+            return true;
+        }
         public override void AI()
+        {
+            if (swinging)
+            {
+
+            }
+            else
+                ThrownBehavior();
+
+            UpdateProj();
+        }
+
+        private void ThrownBehavior()
         {
             if (!initialized)
             {
@@ -415,16 +453,16 @@ namespace BombusApisBee.Projectiles
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 owner.itemTime = Projectile.timeLeft;
                 owner.itemAnimation = owner.itemTime;
-            }   
+            }
 
             if (thrown)
             {
-                if (pullingBack)
+                if (pullingBack && !stuck)
                 {
                     Projectile.rotation = Projectile.DirectionTo(owner.Center).ToRotation() + MathHelper.PiOver4 + MathHelper.Pi;
 
                     owner.ChangeDir(Projectile.Center.X < owner.Center.X ? -1 : 1);
-                    
+
                     owner.heldProj = Projectile.whoAmI;
 
                     Projectile.timeLeft = 2;
@@ -518,6 +556,7 @@ namespace BombusApisBee.Projectiles
 
                 if (Projectile.timeLeft <= 1)
                 {
+                    Projectile.friendly = true;
                     Projectile.velocity *= 25;
                     Projectile.timeLeft = 10;
                     Projectile.tileCollide = false;
@@ -525,17 +564,55 @@ namespace BombusApisBee.Projectiles
                 }
             }
 
-            owner.heldProj = Projectile.whoAmI;
-
             if (Main.myPlayer == owner.whoAmI)
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
+        }
+
+        private void UpdateProj()
+        {
+            if (!(owner.HeldItem.ModItem is BladeOfAculeus))
+                Projectile.Kill();
+
+            owner.heldProj = Projectile.whoAmI;
 
             owner.ChangeDir(Projectile.direction);
+        }
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            if (!stuck && target.life > 0)
+            {
+                stuck = true;
+                pullingBack = false;
+                Projectile.friendly = false;
+                Projectile.tileCollide = false;
+                enemyWhoAmI = target.whoAmI;
+                offset = Projectile.position - target.position;
+                offset += Projectile.velocity * 0.25f;
+
+                Projectile.position = target.position + offset;
+
+                Projectile.netUpdate = true;
+            }
+        }
+
+        public override bool ShouldUpdatePosition()
+        {
+            return !pullingBack && !stuck;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             pullingBack = true;
+            return false;
+        }
+
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            Vector2 tipPoint = Projectile.Center + Vector2.One.RotatedBy(Projectile.rotation - MathHelper.PiOver2) * 50f;
+            if (tipPoint.Distance(targetHitbox.Center.ToVector2()) < 20f)
+                return true;
+
             return false;
         }
     }
