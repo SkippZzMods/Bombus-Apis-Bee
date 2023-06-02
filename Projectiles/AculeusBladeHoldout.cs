@@ -14,6 +14,8 @@ namespace BombusApisBee.Projectiles
 
         private bool swung;
 
+        private bool flipBlade;
+
         private float maxTimeLeft;
         private float originalDirection;
         public float Combo => Projectile.ai[1];
@@ -32,7 +34,7 @@ namespace BombusApisBee.Projectiles
             Projectile.penetrate = -1;
             Projectile.ownerHitCheck = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 25;
             Projectile.Bombus().HeldProj = true;
         }
 
@@ -141,6 +143,10 @@ namespace BombusApisBee.Projectiles
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
 
                 Projectile.scale = MathHelper.Lerp(1f, 0.8f, lerper);
+
+                if (!flipBlade && progress >= 0.35f)
+                    flipBlade = true;
+
             }
             else
             {
@@ -268,6 +274,11 @@ namespace BombusApisBee.Projectiles
             }
             else
             {
+                if (progress < 0.9f)
+                    flipBlade = true;
+                else
+                    flipBlade = false;
+
                 if (!swung && progress >= 0.7f)
                 {
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
@@ -335,6 +346,8 @@ namespace BombusApisBee.Projectiles
 
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
+            hitDirection = (target.Center.X < owner.Center.X ? -1 : 1);
+
             switch (Combo)
             {
                 case 0: //stab
@@ -364,13 +377,23 @@ namespace BombusApisBee.Projectiles
                 return true;
             return false;
         }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D sword = ModContent.Request<Texture2D>(Texture + (flipBlade ? "_Flipped" : "")).Value;
+            SpriteEffects flip = owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
+
+            Main.spriteBatch.Draw(sword, Projectile.Center + new Vector2(0f, owner.gfxOffY) - Main.screenPosition, null, lightColor, Projectile.rotation + (owner.direction == -1 ? MathHelper.PiOver2 : 0f), sword.Size() / 2f, Projectile.scale, flip, 0f);
+
+            return false;
+        }
     }
 
     public class AculeusBladeHoldoutAlt : BeeProjectile
     {
         public override string Texture => BombusApisBee.BeeWeapon + "BladeOfAculeus";
 
-        private int maxTimeLeft;
+        private float maxTimeLeft;
 
         private bool initialized;
 
@@ -383,6 +406,10 @@ namespace BombusApisBee.Projectiles
         private int originalDirection;
 
         private bool swinging;
+
+        private bool swung;
+
+        private bool wasStuck;
 
         int enemyWhoAmI;
         bool stuck = false;
@@ -405,7 +432,7 @@ namespace BombusApisBee.Projectiles
             Projectile.penetrate = -1;
             Projectile.ownerHitCheck = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 25;
             Projectile.Bombus().HeldProj = true;
         }
 
@@ -418,8 +445,26 @@ namespace BombusApisBee.Projectiles
 
                 Projectile.position = target.position + offset;
 
+                Projectile.direction = Math.Sign(Projectile.velocity.X);
+
                 if (!target.active || (Main.myPlayer == owner.whoAmI && Main.mouseRight))
                 {
+                    float mult = target.knockBackResist;
+
+                    if (Main.myPlayer == owner.whoAmI && Main.mouseRight && target.active)
+                    {
+                        if (mult > 0)
+                        {
+                            float speed = MathHelper.Lerp(1.5f, 7.5f, Utils.Clamp(Vector2.Distance(target.Center, owner.Center) / 400f, 0, 1f));
+
+                            target.velocity.Y -= 5f * Utils.Clamp(Vector2.Distance(target.Center, owner.Center) / 400f, .2f, 1f);
+
+                            target.velocity += target.DirectionTo(owner.Center + new Vector2(50f * owner.direction, -100f)) * (speed);
+
+                            owner.GiveIFrames(60, true);
+                        }
+                    }
+
                     stuck = false;
                     pullingBack = true;
                 }
@@ -432,13 +477,77 @@ namespace BombusApisBee.Projectiles
         public override void AI()
         {
             if (swinging)
-            {
-
-            }
+                DoSwing();
             else
                 ThrownBehavior();
 
             UpdateProj();
+        }
+
+        private void DoSwing()
+        {
+            if (!initialized)
+            {
+                initialized = true;
+                Projectile.timeLeft = (int)owner.ApplyHymenoptraSpeedTo((int)(owner.HeldItem.useAnimation * 1.25f));
+                maxTimeLeft = Projectile.timeLeft;
+                Projectile.rotation = owner.DirectionTo(Projectile.Center + Projectile.velocity).ToRotation() + MathHelper.PiOver4;
+                Projectile.netUpdate = true;
+                Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
+                originalDirection = Projectile.direction;
+                owner.itemTime = Projectile.timeLeft;
+                owner.itemAnimation = owner.itemTime;
+                Projectile.friendly = true;
+            }
+
+            float progress = 1f - Projectile.timeLeft / maxTimeLeft;
+
+            if (progress < 0.45f)
+            {
+                float lerper = 1f - (Projectile.timeLeft - maxTimeLeft * 0.55f) / (maxTimeLeft * 0.45f);
+
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4 + MathHelper.Lerp(0f, 2f, EaseBuilder.EaseCubicOut.Ease(lerper)) * originalDirection;
+
+                Vector2 offset = Vector2.Lerp(new Vector2(0), new Vector2(30, 5 * originalDirection), EaseBuilder.EaseCubicOut.Ease(lerper)).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
+
+                Projectile.Center = owner.MountedCenter + (Projectile.rotation).ToRotationVector2() * MathHelper.Lerp(0f, 5f, EaseBuilder.EaseCubicOut.Ease(lerper)) + offset;
+
+                float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(0f, MathHelper.ToRadians(100), EaseBuilder.EaseCubicOut.Ease(lerper)) * originalDirection;
+
+                owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
+
+                Projectile.scale = MathHelper.Lerp(1f, 0.9f, lerper);
+            }
+            else
+            {
+                if (!swung)
+                {
+                    SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
+                    owner.Bombus().AddShake(7);
+                    swung = true;
+
+                    Vector2 vector = owner.DirectionTo(Main.MouseWorld);
+
+                    if (Math.Sign(vector.X) == Math.Sign(owner.velocity.X))
+                        owner.velocity += vector * 7f;
+
+                    owner.GiveIFrames(60, true);
+                }
+
+                float lerper = 1f - (Projectile.timeLeft) / (float)Math.Floor(maxTimeLeft - maxTimeLeft * 0.45f);
+
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4 + MathHelper.Lerp(2f, -2.35f, EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
+
+                Vector2 offset = Vector2.Lerp(new Vector2(30, 5 * originalDirection), new Vector2(5, 5 * originalDirection), EaseBuilder.EaseCubicOut.Ease(lerper)).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
+
+                Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(5f, 50f, EaseBuilder.EaseQuinticOut.Ease(lerper)) + offset;
+
+                float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(100), -MathHelper.ToRadians(130), EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
+
+                owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
+                
+                Projectile.scale = 0.9f + (float)Math.Sin(EaseBuilder.EaseCircularOut.Ease(lerper) * 3.1415927f) * 0.8f * 0.8f;
+            }
         }
 
         private void ThrownBehavior()
@@ -467,27 +576,47 @@ namespace BombusApisBee.Projectiles
 
                     Projectile.timeLeft = 2;
 
-                    lerpTimer++;
-
-                    if (lerpTimer == 1)
+                    if (lerpTimer == 0)
                     {
                         oldPos = Projectile.Center;
                     }
 
-                    if (lerpTimer < 15)
+                    lerpTimer++;             
+
+                    if (wasStuck)
                     {
                         float lerper = lerpTimer / 15f;
 
-                        Projectile.Center = Vector2.Lerp(oldPos, oldPos + Projectile.velocity * 3f, EaseBuilder.EaseCubicOut.Ease(lerper));
+                        Projectile.Center = Vector2.Lerp(oldPos, owner.Center, EaseBuilder.EaseCubicIn.Ease(lerper));
+
+                        if (lerpTimer >= 14)
+                        {
+                            Projectile.velocity = owner.Center.DirectionTo(Main.MouseWorld) * 5f;
+                            swinging = true;
+                            initialized = false;
+                        }
                     }
                     else
                     {
-                        float lerper = (lerpTimer - 15) / 30f;
+                        if (lerpTimer < 15)
+                        {
+                            float lerper = lerpTimer / 15f;
 
-                        Projectile.Center = Vector2.Lerp(oldPos + Projectile.velocity * 3f, owner.Center, EaseBuilder.EaseCubicIn.Ease(lerper));
+                            Projectile.Center = Vector2.Lerp(oldPos, oldPos + Projectile.velocity * 3f, EaseBuilder.EaseCubicOut.Ease(lerper));
+                        }
+                        else
+                        {
+                            float lerper = (lerpTimer - 15) / 30f;
 
-                        if (lerpTimer >= 44)
-                            Projectile.Kill();
+                            Projectile.Center = Vector2.Lerp(oldPos + Projectile.velocity * 3f, owner.Center, EaseBuilder.EaseCubicIn.Ease(lerper));
+
+                            if (lerpTimer >= 44)
+                            {
+                                Projectile.velocity = owner.Center.DirectionTo(Main.MouseWorld) * 5f;
+                                swinging = true;
+                                initialized = false;
+                            }
+                        }
                     }
                 }
                 else
@@ -512,6 +641,7 @@ namespace BombusApisBee.Projectiles
                         Projectile.rotation = Projectile.DirectionTo(owner.Center).ToRotation() + MathHelper.PiOver4 + MathHelper.Pi;
 
                         pullingBack = true;
+                        Projectile.friendly = false;
                     }
                 }
 
@@ -580,7 +710,7 @@ namespace BombusApisBee.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            if (!stuck && target.life > 0)
+            if (!stuck && target.life > 0 && !wasStuck && !swinging)
             {
                 stuck = true;
                 pullingBack = false;
@@ -593,6 +723,8 @@ namespace BombusApisBee.Projectiles
                 Projectile.position = target.position + offset;
 
                 Projectile.netUpdate = true;
+
+                wasStuck = true;
             }
         }
 
@@ -606,12 +738,51 @@ namespace BombusApisBee.Projectiles
             pullingBack = true;
             return false;
         }
+        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            hitDirection = (target.Center.X < owner.Center.X ? -1 : 1);
 
+            if (swinging)
+            {
+                damage = (int)(damage * 2f);
+                knockback = knockback * 1.5f;
+            }
+        }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            Vector2 tipPoint = Projectile.Center + Vector2.One.RotatedBy(Projectile.rotation - MathHelper.PiOver2) * 50f;
-            if (tipPoint.Distance(targetHitbox.Center.ToVector2()) < 20f)
+            float collisionPoint = 0f;
+
+            if (swinging)
+            {
+                if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), owner.Center, owner.Center + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * (70f * Projectile.scale), 10, ref collisionPoint))
+                    return true;
+
+                return false;
+            }
+
+            Vector2 startPoint = Projectile.Center + Vector2.One.RotatedBy(Projectile.rotation - MathHelper.PiOver2) * -30f;
+            Vector2 tipPoint = Projectile.Center + Vector2.One.RotatedBy(Projectile.rotation - MathHelper.PiOver2) * 30f;
+
+            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), startPoint, tipPoint, 15, ref collisionPoint))
                 return true;
+
+            return false;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D sword = ModContent.Request<Texture2D>(Texture).Value;
+            SpriteEffects flip = owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
+
+            if (stuck)
+            {
+                flip = Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
+
+                Main.spriteBatch.Draw(sword, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation + (Projectile.direction == -1 ? MathHelper.PiOver2 : 0f), sword.Size() / 2f, Projectile.scale, flip, 0f);
+
+                return false;
+            }
+
+            Main.spriteBatch.Draw(sword, Projectile.Center + new Vector2(0f, owner.gfxOffY) - Main.screenPosition, null, lightColor, Projectile.rotation + (owner.direction == -1 ? MathHelper.PiOver2 : 0f), sword.Size() / 2f, Projectile.scale, flip, 0f);
 
             return false;
         }

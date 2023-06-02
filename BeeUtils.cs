@@ -442,5 +442,32 @@ namespace BombusApisBee
             Color nextColor = colors[(currentColorIndex + 1) % colors.Length];
             return Color.Lerp(color, nextColor, increment * (float)colors.Length % 1f);
         }
+
+        public static bool GiveIFrames(this Player player, int frames, bool blink = false)
+        {
+            bool anyIFramesWouldBeGiven = false;
+            for (int j = 0; j < player.hurtCooldowns.Length; j++)
+            {
+                if (player.hurtCooldowns[j] < frames)
+                {
+                    anyIFramesWouldBeGiven = true;
+                }
+            }
+            if (!anyIFramesWouldBeGiven)
+            {
+                return false;
+            }
+            player.immune = true;
+            player.immuneNoBlink = !blink;
+            player.immuneTime = frames;
+            for (int i = 0; i < player.hurtCooldowns.Length; i++)
+            {
+                if (player.hurtCooldowns[i] < frames)
+                {
+                    player.hurtCooldowns[i] = frames;
+                }
+            }
+            return true;
+        }
     }
 }

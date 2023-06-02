@@ -16,7 +16,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Blade of Aculeus");
             Tooltip.SetDefault("Performs a heavy combo of swings and stabs\nPress <right> to throw the blade, embedding itself in enemies\n" +
-                "Press <right> whilst the blade is embedded to return it, performing a powerful dash afterwards\nRends the armor of enemies");
+                "Press <right> whilst the blade is embedded to return it, performing an empowered swing\nRends the armor of enemies");
         }
 
         public override void SafeSetDefaults()
