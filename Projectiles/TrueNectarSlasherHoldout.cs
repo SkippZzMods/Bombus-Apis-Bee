@@ -1,10 +1,4 @@
-﻿using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using Terraria.Graphics.Effects;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class TrueNectarSlasherHoldout : BeeProjectile
     {
@@ -224,7 +218,7 @@ namespace BombusApisBee.Projectiles
                     {
                         Dust.NewDustPerfect(owner.Center + Projectile.rotation.ToRotationVector2() * 40f, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.rotation.ToRotationVector2().RotatedByRandom(0.35f) * Main.rand.NextFloat(3f), 0, new Color(214, 158, 79), 0.75f);
                     }
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center + Projectile.rotation.ToRotationVector2() * 40f, Projectile.rotation.ToRotationVector2() * 15f, ModContent.ProjectileType<TrueHomingNectar>(), (int)(Projectile.damage * 0.25f), 3f, Projectile.owner);   
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center + Projectile.rotation.ToRotationVector2() * 40f, Projectile.rotation.ToRotationVector2() * 15f, ModContent.ProjectileType<TrueHomingNectar>(), (int)(Projectile.damage * 0.25f), 3f, Projectile.owner);
                 }
 
                 Vector2 swordLength = Vector2.Lerp(owner.Center + Projectile.rotation.ToRotationVector2() * (20f * Projectile.scale), owner.Center + Projectile.rotation.ToRotationVector2() * (70f * Projectile.scale), Main.rand.NextFloat());
@@ -247,7 +241,7 @@ namespace BombusApisBee.Projectiles
             {
                 pullback,
                 throwout
-            });;
+            }); ;
         }
 
         private void Thrown()
@@ -553,7 +547,7 @@ namespace BombusApisBee.Projectiles
                 throwCache.RemoveAt(0);
             }
         }
-        
+
         private void ManageTrail()
         {
             trail = trail ?? new Trail(Main.instance.GraphicsDevice, 20, new RoundedTip(240), factor => (35f * MathHelper.Lerp(0f, 1f, 1f - Projectile.timeLeft / maxTimeLeft)) * factor * Projectile.scale * (Projectile.timeLeft <= 10 ? MathHelper.Lerp(1f, 0.5f, 1f - Projectile.timeLeft / 10f) : 1f), factor =>

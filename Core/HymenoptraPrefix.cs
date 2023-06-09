@@ -1,7 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using System.Collections.Generic;
-
-namespace BombusApisBee.Core
+﻿namespace BombusApisBee.Core
 {
     public abstract class HymenoptraPrefix : ModPrefix
     {

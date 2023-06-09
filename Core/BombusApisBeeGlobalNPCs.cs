@@ -1,10 +1,5 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-using BombusApisBee.Items.Other.Consumables;
+﻿using BombusApisBee.Items.Other.Consumables;
 using BombusApisBee.Items.Other.Crafting;
-using BombusApisBee.Items.Other.OnPickupItems;
-using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
-using System.Collections.Generic;
 using Terraria.Chat;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Localization;
@@ -96,7 +91,7 @@ namespace BombusApisBee.Core
             if (npc.type == NPCID.Pumpking)
             {
                 Conditions.PumpkinMoonDropGatingChance condition = new();
-                IItemDropRule rule = new LeadingConditionRule(condition);   
+                IItemDropRule rule = new LeadingConditionRule(condition);
                 rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<PumpkinetScepter>(), 5));
                 npcLoot.Add(rule);
             }

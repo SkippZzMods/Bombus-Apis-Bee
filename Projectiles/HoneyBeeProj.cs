@@ -1,11 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Buffs;
-using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     class HoneyBeeGlobalProjectile : GlobalProjectile
     {
@@ -45,7 +38,7 @@ namespace BombusApisBee.Projectiles
 
         public Vector2 IdlePos;
 
-        public Vector2 targetPosAdd; 
+        public Vector2 targetPosAdd;
 
         private enum AttackState : int
         {
@@ -247,7 +240,7 @@ namespace BombusApisBee.Projectiles
                         return;
                     }
 
-                    switch (attackState) 
+                    switch (attackState)
                     {
                         case AttackState.Firing: FiringBehavior(); break;
 
@@ -255,7 +248,7 @@ namespace BombusApisBee.Projectiles
                     }
                 }
                 else
-                {                  
+                {
                     IdleMovement();
                     Projectile.rotation = Projectile.velocity.X * 0.05f;
                     if (Projectile.Distance(IdlePos) > 30f)
@@ -370,7 +363,7 @@ namespace BombusApisBee.Projectiles
                     Vector2 pos = Projectile.Center + new Vector2(Projectile.spriteDirection == -1 ? -20 : 15, 15).RotatedBy(Projectile.rotation + rotIncrease);
 
                     Projectile.NewProjectile(Projectile.GetSource_FromAI(), pos, pos.DirectionTo(attackTarget.Center).RotatedByRandom(1f) * 5f, ModContent.ProjectileType<HoneyHomingMetaballs>(), Projectile.damage / 2, Projectile.knockBack * 0.5f, Owner.whoAmI);
-                    
+
                     for (float k = 0; k < 6.28f; k += 0.1f)
                     {
                         float x = (float)Math.Cos(k) * 50;
@@ -548,7 +541,7 @@ namespace BombusApisBee.Projectiles
 
                     Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 20, 0) * backGlowOpacity * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 1.25f, 0f, 0f);
                 }
-                
+
                 if (slamming)
                 {
                     Rectangle afterImageFrame = tex.Frame(verticalFrames: 4, frameY: Projectile.frame);

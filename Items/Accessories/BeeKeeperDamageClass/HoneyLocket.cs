@@ -1,7 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Projectiles;
-
-namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class HoneyLocket : BeeKeeperItem
     {

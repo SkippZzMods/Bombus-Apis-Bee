@@ -1,10 +1,4 @@
 ﻿using BombusApisBee.Items.Other.OnPickupItems;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BombusApisBee.Projectiles
 {
@@ -126,7 +120,7 @@ namespace BombusApisBee.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            SplitEffects(Projectile.velocity);   
+            SplitEffects(Projectile.velocity);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -201,7 +195,7 @@ namespace BombusApisBee.Projectiles
 
         public override void AI()
         {
-       
+
             if (parent is null)
                 return;
 

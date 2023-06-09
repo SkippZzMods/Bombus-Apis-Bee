@@ -1,9 +1,4 @@
-﻿using BombusApisBee.Dusts;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class Hivebomb : BeeProjectile
     {
@@ -46,7 +41,7 @@ namespace BombusApisBee.Projectiles
                     }
                 }
             }
-                
+
             if (foundTarget)
                 Projectile.velocity = (Projectile.velocity * 20f + Utils.SafeNormalize(targetCenter - Projectile.Center, Vector2.UnitX) * 12f) / 21f;
 

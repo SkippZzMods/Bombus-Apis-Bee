@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Other.Crafting;
-using System.Linq;
+﻿using BombusApisBee.Items.Other.Crafting;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {

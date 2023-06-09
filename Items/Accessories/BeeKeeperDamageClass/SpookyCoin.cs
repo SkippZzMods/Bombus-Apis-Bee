@@ -1,5 +1,4 @@
-﻿using BombusApisBee.Items.Other.Crafting;
-
+﻿
 /*namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class SpookyCoin : BeeKeeperItem

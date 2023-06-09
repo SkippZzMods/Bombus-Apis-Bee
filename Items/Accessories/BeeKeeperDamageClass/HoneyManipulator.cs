@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {

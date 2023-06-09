@@ -1,8 +1,4 @@
 ﻿using BombusApisBee.Core.ScreenTargetSystem;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
-using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Buffs
 {
@@ -17,7 +13,7 @@ namespace BombusApisBee.Buffs
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
         }
-        public override void Update(NPC npc, ref int buffIndex)  
+        public override void Update(NPC npc, ref int buffIndex)
         {
             npc.GetGlobalNPC<FrostbrokenGlobalNPC>().inflicted = true;
         }
@@ -146,7 +142,7 @@ namespace BombusApisBee.Buffs
                     }
 
                     realNPC.AddBuff(BuffID.Frostburn2, 600);
-                    
+
                     for (int i = 0; i < 15; i++)
                     {
                         Dust.NewDustPerfect(realNPC.Center, DustID.Frost, (center.DirectionTo(realNPC.Center).RotatedByRandom(0.3f) * 15f) * Main.rand.NextFloat(0.1f, 1f), Scale: Main.rand.NextFloat(0.5f, 1.75f)).noGravity = true;

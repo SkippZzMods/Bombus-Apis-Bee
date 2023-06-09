@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class SkeletalHornetProjectile : ModProjectile
     {

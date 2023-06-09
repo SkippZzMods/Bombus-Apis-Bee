@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-
-namespace BombusApisBee.PrimitiveDrawing
+﻿namespace BombusApisBee.PrimitiveDrawing
 {
 
     public class SLR_Primitive : IDisposable

@@ -1,8 +1,4 @@
-﻿
-using BombusApisBee.Dusts;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class TrueBeeSwordProjectile : BeeProjectile
     {

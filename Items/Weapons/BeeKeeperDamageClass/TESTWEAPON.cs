@@ -1,8 +1,3 @@
-using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-using BombusApisBee.Projectiles;
-
-
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class TESTWEAPON : BeeDamageItem

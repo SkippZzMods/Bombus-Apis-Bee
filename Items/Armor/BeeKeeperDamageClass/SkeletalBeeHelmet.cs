@@ -1,7 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Projectiles;
-
-namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class SkeletalBeeHelmet : BeeKeeperItem

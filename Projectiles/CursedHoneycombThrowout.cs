@@ -1,10 +1,4 @@
-﻿using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using Terraria.Graphics.Effects;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class CursedHoneycombThrowout : BeeProjectile
     {
@@ -75,7 +69,7 @@ namespace BombusApisBee.Projectiles
                         AttackDelay = 120;
                     }
                     else
-                        Projectile.Kill();                
+                        Projectile.Kill();
                 }
             }
 

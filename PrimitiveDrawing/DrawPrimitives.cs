@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-
-namespace BombusApisBee.PrimitiveDrawing
+﻿namespace BombusApisBee.PrimitiveDrawing
 {
     public static class DrawPrimitives
     {

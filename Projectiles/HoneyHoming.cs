@@ -1,7 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using System.Linq;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class HoneyHoming : BeeProjectile
     {
@@ -53,7 +50,7 @@ namespace BombusApisBee.Projectiles
                 float homingVelocity = 12f;
                 float N = 20f;
                 NPC locatedTarget = Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Projectile.Center) < 1500f).OrderBy(n => Projectile.Distance(n.Center)).FirstOrDefault();
-                
+
                 if (locatedTarget != null)
                 {
                     Vector2 homeDirection = Utils.SafeNormalize(locatedTarget.Center - Projectile.Center, Vector2.UnitY);

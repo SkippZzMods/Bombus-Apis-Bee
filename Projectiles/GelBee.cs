@@ -1,9 +1,4 @@
 ﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace BombusApisBee.Projectiles
 {
@@ -91,7 +86,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath1 with {Pitch = -0.1f }, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.NPCDeath1 with { Pitch = -0.1f }, Projectile.Center);
 
             for (int i = 0; i < 20; i++)
             {

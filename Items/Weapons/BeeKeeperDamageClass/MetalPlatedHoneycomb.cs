@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Projectiles;
-
-
-namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class MetalPlatedHoneycomb : BeeDamageItem
     {

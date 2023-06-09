@@ -1,10 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class SpectralBeeTomeHoldout : BeeProjectile
     {
@@ -277,7 +271,7 @@ namespace BombusApisBee.Projectiles
             effect.Parameters["repeats"].SetValue(2f);
             effect.Parameters["transformMatrix"].SetValue(world * view * projection);
             effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
-            
+
             trail?.Render(effect);
             trail2?.Render(effect);
 

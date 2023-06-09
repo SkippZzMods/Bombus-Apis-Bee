@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Other.Crafting;
-using BombusApisBee.Projectiles;
+﻿using BombusApisBee.Items.Other.Crafting;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
@@ -38,7 +36,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             velocity = velocity.RotatedByRandom(MathHelper.ToRadians(15f));
 
-            type = Main.rand.Next(new int[] {type, ModContent.ProjectileType<HymenoptraFlask_Nectar>(), ModContent.ProjectileType<HymenoptraFlask_Stinger>() });
+            type = Main.rand.Next(new int[] { type, ModContent.ProjectileType<HymenoptraFlask_Nectar>(), ModContent.ProjectileType<HymenoptraFlask_Stinger>() });
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

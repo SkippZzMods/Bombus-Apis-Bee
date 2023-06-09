@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-
-namespace BombusApisBee.Items.Other.OnPickupItems
+﻿namespace BombusApisBee.Items.Other.OnPickupItems
 {
     public class HoneyPickup : ModItem
     {

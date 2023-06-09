@@ -1,15 +1,6 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Graphics.Shaders;
-using BombusApisBee.Core.ScreenTargetSystem;
 
 namespace BombusApisBee.Core
 {

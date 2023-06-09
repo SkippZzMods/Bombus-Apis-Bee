@@ -1,11 +1,4 @@
 ﻿using BombusApisBee.Core.Metaballs;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Dusts
 {
@@ -94,7 +87,7 @@ namespace BombusApisBee.Dusts
             spriteBatch.End();
             spriteBatch.Begin();
         }
-        
+
         public override bool PostDraw(SpriteBatch spriteBatch, Texture2D target)
         {
             Effect effect = Filters.Scene["HoneyNoise"].GetShader().Shader;

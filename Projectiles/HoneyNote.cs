@@ -1,11 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class HoneyNoteQuarter : BeeProjectile
     {
@@ -44,7 +37,7 @@ namespace BombusApisBee.Projectiles
                     Projectile.velocity.Normalize();
                     Projectile.velocity *= 18f;
                 }
-                    
+
             }
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
@@ -286,7 +279,7 @@ namespace BombusApisBee.Projectiles
             {
                 Main.spriteBatch.Draw(tex, (Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f) - Main.screenPosition, null, lightColor * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
                     Projectile.rotation, tex.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.5f, (i / (float)Projectile.oldPos.Length)), Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
-                
+
                 Main.spriteBatch.Draw(texGlow, (Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f) - Main.screenPosition, null, (new Color(229, 114, 0, 0) * 0.5f) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
                     Projectile.rotation, texGlow.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.5f, (i / (float)Projectile.oldPos.Length)), Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             }

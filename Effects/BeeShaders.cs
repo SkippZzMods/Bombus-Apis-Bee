@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
-using System.Reflection;
-using Terraria.Graphics.Effects;
+﻿using System.Reflection;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader.Core;
 using static Terraria.ModLoader.Core.TmodFile;

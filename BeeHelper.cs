@@ -1,9 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.DataStructures;
-using static Terraria.ModLoader.ModContent;
-using Terraria.ID;
+﻿using Terraria.DataStructures;
 
 namespace BombusApisBee.BeeHelperProj
 {

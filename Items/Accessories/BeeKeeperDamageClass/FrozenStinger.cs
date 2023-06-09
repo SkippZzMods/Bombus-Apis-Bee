@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Items.Other.Crafting;
-
-namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class FrozenStinger : BeeKeeperItem
     {

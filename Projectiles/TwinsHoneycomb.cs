@@ -1,9 +1,4 @@
-﻿using BombusApisBee.Dusts;
-using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class RetinaHoneycomb : BeeProjectile
     {
@@ -166,7 +161,7 @@ namespace BombusApisBee.Projectiles
                         chargeDelay = 0;
                         attackDelay = -25f;
                         return;
-                    }   
+                    }
 
                     rotTimer = MathHelper.Lerp(0, -35f, chargeDelay / 25f);
                     if (chargeDelay <= 45f)
@@ -207,7 +202,7 @@ namespace BombusApisBee.Projectiles
                                 flashTimer = 15;
                             }
                         }
-                    }    
+                    }
                     Projectile.rotation = Projectile.DirectionTo(target.Center).ToRotation() - (MathHelper.ToRadians(rotTimer) * target.direction);
                 }
                 else
@@ -384,14 +379,14 @@ namespace BombusApisBee.Projectiles
 
                         for (int i = 0; i < Main.rand.Next(1, 4); i++)
                         {
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<SpazBee>(), Projectile.damage * 2/3, 2f, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<SpazBee>(), Projectile.damage * 2 / 3, 2f, Projectile.owner);
                         }
                         Projectile.velocity = Projectile.DirectionTo(target.Center) * 15f;
                         flashTimer = 25f;
                         dashes++;
                         DashDelay = 60;
                     }
-                    
+
                     else if (DashDelay < 35)
                     {
                         Vector2 toIdlePos = targetPos - Projectile.Center;
@@ -446,7 +441,7 @@ namespace BombusApisBee.Projectiles
                             Projectile.velocity += Projectile.rotation.ToRotationVector2() * -5f;
 
                             flashTimer = 25f;
-                        }                           
+                        }
 
                         if (ChargeDelay >= 120)
                         {

@@ -1,10 +1,4 @@
 ﻿using BombusApisBee.BeeHelperProj;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BombusApisBee.Projectiles
 {
@@ -20,7 +14,7 @@ namespace BombusApisBee.Projectiles
         {
             for (int i = 0; i < 5; i++)
             {
-                Dust.NewDustPerfect(Projectile.Center,DustID.CorruptGibs, Main.rand.NextVector2Circular(1.5f, 1.5f), Main.rand.Next(100), default, 1.35f).noGravity = true;
+                Dust.NewDustPerfect(Projectile.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(1.5f, 1.5f), Main.rand.Next(100), default, 1.35f).noGravity = true;
 
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(140, 169, 44), 0.35f);
             }

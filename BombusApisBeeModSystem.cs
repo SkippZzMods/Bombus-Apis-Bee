@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-using BombusApisBee.UI;
-using System.Collections.Generic;
+﻿using BombusApisBee.UI;
 using Terraria.UI;
 
 namespace BombusApisBee
@@ -20,7 +18,7 @@ namespace BombusApisBee
         {
             _lastUpdateUiGameTime = gameTime;
             if (mod.BeeDamageInterface?.CurrentState != null)
-                mod.BeeDamageInterface.Update(gameTime);    
+                mod.BeeDamageInterface.Update(gameTime);
         }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
@@ -41,14 +39,14 @@ namespace BombusApisBee
                     "BombusApisBee: Bee Player UI",
                     delegate
                     {
-                        if (_lastUpdateUiGameTime != null && mod.BeeDamageInterface?.CurrentState != null)                        
+                        if (_lastUpdateUiGameTime != null && mod.BeeDamageInterface?.CurrentState != null)
                             mod.BeeDamageInterface.Draw(Main.spriteBatch, _lastUpdateUiGameTime);
-                        
+
                         return true;
                     },
                     InterfaceScaleType.UI)
                 );
-            }   
+            }
         }
 
         public override void AddRecipes()

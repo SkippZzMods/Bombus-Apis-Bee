@@ -1,11 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Core.ScreenTargetSystem;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
-using Terraria.Graphics.Effects;
-
-namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class BeeSniperGoggles : BeeKeeperItem
@@ -77,7 +70,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
                     markedEffectTimer = 0;
             }
             else if (markedEffectTimer > 0)
-                markedEffectTimer = 0;           
+                markedEffectTimer = 0;
         }
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

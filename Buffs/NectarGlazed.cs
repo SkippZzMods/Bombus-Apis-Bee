@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.Graphics.Effects;
-
-namespace BombusApisBee.Buffs
+﻿namespace BombusApisBee.Buffs
 {
     public class NectarGlazed : ModBuff
     {

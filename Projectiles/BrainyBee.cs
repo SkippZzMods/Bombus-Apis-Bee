@@ -1,5 +1,4 @@
 ﻿using BombusApisBee.BeeHelperProj;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace BombusApisBee.Projectiles
 {

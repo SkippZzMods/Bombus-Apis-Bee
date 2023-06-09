@@ -1,6 +1,4 @@
-﻿using Terraria.ID;
-
-namespace BombusApisBee.Items.Other.Consumables
+﻿namespace BombusApisBee.Items.Other.Consumables
 {
     public class RoyalJelly : ModItem
     {

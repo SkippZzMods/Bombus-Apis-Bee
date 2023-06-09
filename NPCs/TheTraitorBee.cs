@@ -1,7 +1,4 @@
-﻿using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
-using System.Collections.Generic;
-using Terraria.GameContent.Bestiary;
+﻿using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Personalities;
 using Terraria.Localization;
@@ -190,7 +187,7 @@ namespace BombusApisbee.NPCs
                 nextSlot++;
                 if (NPC.downedMechBossAny)
                 {
-                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<HoneyBee>());
+                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<BombusApisBee.Items.Accessories.BeeKeeperDamageClass.HoneyBee>());
                     nextSlot++;
                 }
                 if (NPC.downedGolemBoss)

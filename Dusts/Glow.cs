@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-//Credits To Starlight River
+﻿//Credits To Starlight River
 namespace BombusApisBee.Dusts
 {
     public class Glow : ModDust

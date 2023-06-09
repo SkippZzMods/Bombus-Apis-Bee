@@ -1,8 +1,4 @@
-﻿using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     class HomingNectar : BeeProjectile
     {

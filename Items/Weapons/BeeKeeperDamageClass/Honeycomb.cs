@@ -1,6 +1,4 @@
-using BombusApisBee.BeeDamageClass;
 using BombusApisBee.Items.Other.Crafting;
-using BombusApisBee.Projectiles;
 
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass

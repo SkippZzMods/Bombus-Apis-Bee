@@ -1,5 +1,4 @@
-﻿using System;
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class PeeperPokerHoldout : BeeProjectile
     {

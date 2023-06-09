@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Other.Crafting;
-using BombusApisBee.Projectiles;
+﻿using BombusApisBee.Items.Other.Crafting;
 using Terraria.DataStructures;
 
 
@@ -17,7 +15,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void SafeSetDefaults()
         {
             Item.damage = 65;
-            Item.noMelee = true; 
+            Item.noMelee = true;
             Item.width = 50;
             Item.height = 18;
             Item.useTime = 15;

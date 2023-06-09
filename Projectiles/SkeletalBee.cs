@@ -1,8 +1,4 @@
 ﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 
 namespace BombusApisBee.Projectiles
 {
@@ -103,7 +99,7 @@ namespace BombusApisBee.Projectiles
 
         private void ManageTrail()
         {
-            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 14, new TriangularTip(1f), 
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 14, new TriangularTip(1f),
                 factor => 20 * (factor < 0.5f ? factor : MathHelper.Lerp(0.5f, 0f, (factor - 0.5f) / 0.5f)), factor =>
             {
                 return new Color(238, 164, 255) * MathHelper.Lerp(1f, 0f, (1f - Projectile.timeLeft / 35f));

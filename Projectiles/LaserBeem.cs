@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Dusts;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria.Enums;
+﻿using Terraria.Enums;
 
 namespace BombusApisBee.Projectiles
 {

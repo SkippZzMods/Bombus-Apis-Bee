@@ -1,11 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class ChlorophyteHoneycombProjectile : BeeProjectile
     {
@@ -35,7 +28,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Item27 with {Pitch = -0.1f, PitchVariance = 0.1f, Volume = 1.25f }, Projectile.position);
+            SoundEngine.PlaySound(SoundID.Item27 with { Pitch = -0.1f, PitchVariance = 0.1f, Volume = 1.25f }, Projectile.position);
             if (Main.myPlayer == Projectile.owner)
             {
                 for (int i = 0; i < Main.rand.Next(7, 15); i++)
@@ -224,7 +217,7 @@ namespace BombusApisBee.Projectiles
                     float num2 = Projectile.Distance(npc.Center);
                     if (num > num2)
                     {
-                        num = num2; 
+                        num = num2;
                         targetCenter = npc.Center;
                         foundTarget = true;
                     }

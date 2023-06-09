@@ -1,8 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using BombusApisBee.Dusts;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class NectarthrowerProj : BeeProjectile
     {
@@ -14,13 +10,13 @@ namespace BombusApisBee.Projectiles
         }
 
         public override void SafeSetDefaults()
-        {   
+        {
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.penetrate = -1;   
-            Projectile.timeLeft = 100;      
-            Projectile.ignoreWater = true;       
-            Projectile.tileCollide = true;       
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 100;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
             Projectile.extraUpdates = 1;
             Projectile.alpha = 255;
             Projectile.scale = 0.25f;

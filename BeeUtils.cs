@@ -1,16 +1,10 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Projectiles;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ReLogic.Utilities;
 using Terraria.DataStructures;
 
 namespace BombusApisBee
 {
     public static class BeeUtils
-    {       
+    {
         public static void IncreaseBeeResource(this Player player, int amount, bool showText = true)
         {
             if (player.Bombus().HoneyedHeart && player.statLife < player.statLifeMax2)

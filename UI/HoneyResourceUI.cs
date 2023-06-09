@@ -1,7 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Graphics;
-using System;
+﻿using ReLogic.Graphics;
 
 namespace BombusApisBee.UI
 {
@@ -70,7 +67,7 @@ namespace BombusApisBee.UI
             Vector2 drawPos2 = new Vector2(Main.screenWidth - 32, 162);
             Main.spriteBatch.Draw(barTexture, drawPos2, barRectangle, Color.White, 0f, barTexture.Size() / 2f, uiScale, SpriteEffects.None, 0f);
 
-            if(modPlayer.BeeResourceReserved > 0)
+            if (modPlayer.BeeResourceReserved > 0)
             {
                 completionRatio = (float)modPlayer.BeeResourceReserved / (float)modPlayer.BeeResourceMax2;
                 barRectangle = new Rectangle(0, 0, reservedTexture.Width, (int)((float)reservedTexture.Height * completionRatio));
@@ -239,7 +236,7 @@ namespace BombusApisBee.UI
                             drawBackGlowBar[3] = true;
 
                             Main.LocalPlayer.Bombus().AddShake(8);
-                        }                    
+                        }
                     }
                 }
                 else

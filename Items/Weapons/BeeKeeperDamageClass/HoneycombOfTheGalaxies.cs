@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Other.Crafting;
-using BombusApisBee.Projectiles;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using BombusApisBee.Items.Other.Crafting;
 
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass

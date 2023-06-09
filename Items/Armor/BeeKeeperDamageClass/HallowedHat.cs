@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-
-namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class HallowedHat : BeeKeeperItem

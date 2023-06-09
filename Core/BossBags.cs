@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
-using Terraria.GameContent.ItemDropRules;
+﻿using Terraria.GameContent.ItemDropRules;
 
 namespace BombusApisBee.Core
 {

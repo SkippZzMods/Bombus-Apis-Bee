@@ -1,11 +1,4 @@
-﻿using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using Terraria.Graphics.Effects;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class AculeusBladeHoldout : BeeProjectile
     {
@@ -14,10 +7,28 @@ namespace BombusApisBee.Projectiles
 
         private bool swung;
 
-        private bool flipBlade;
+        private bool flipBlade = true;
+        private bool drawAfterImages;
 
         private float maxTimeLeft;
         private float originalDirection;
+
+        private int oldTimeLeft;
+        private int pauseTimer;
+
+        private int hits;
+
+        private List<float> oldRotation = new();
+        private List<float> oldScale = new();
+        private List<Vector2> oldPositions = new();
+
+        private List<Vector2> cache;
+        private Trail trail;
+        private Trail trail2;
+        private Trail trail3;
+
+        private Vector2 tipPosition;
+
         public float Combo => Projectile.ai[1];
         public Player owner => Main.player[Projectile.owner];
 
@@ -36,6 +47,20 @@ namespace BombusApisBee.Projectiles
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 25;
             Projectile.Bombus().HeldProj = true;
+
+            Projectile.extraUpdates = 1;
+        }
+
+        public override bool PreAI()
+        {
+            if (pauseTimer > 0)
+            {
+                Projectile.timeLeft = oldTimeLeft;
+
+                pauseTimer--;
+            }
+
+            return true;
         }
 
         public override void AI()
@@ -57,6 +82,50 @@ namespace BombusApisBee.Projectiles
             UpdateProj();
         }
 
+        private void UpdateProj()
+        {
+            if (!(owner.HeldItem.ModItem is BladeOfAculeus))
+                Projectile.Kill();
+
+            if (Main.rand.NextBool(15))
+                Dust.NewDustPerfect(Vector2.Lerp(owner.Center, tipPosition, Main.rand.NextFloat()), DustID.Poisoned, Main.rand.NextVector2Circular(2f, 2f), Main.rand.Next(50, 255), default, 1.5f).noGravity = true;
+
+            if (Main.rand.NextBool(15))
+                Dust.NewDustPerfect(Vector2.Lerp(owner.Center, tipPosition, Main.rand.NextFloat()), DustType<StingerDust>(), Main.rand.NextVector2Circular(2f, 2f), Main.rand.Next(50, 255), default, 1.5f).noGravity = true;
+
+            owner.heldProj = Projectile.whoAmI;
+
+            owner.ChangeDir(Projectile.direction);
+
+            if (!drawAfterImages)
+                return;
+
+            if (Projectile.timeLeft % 3 == 0)
+            {
+                oldRotation.Add(Projectile.rotation);
+
+                if (oldRotation.Count > 15)
+                    oldRotation.RemoveAt(0);
+
+                oldPositions.Add(Projectile.Center - owner.Center);
+
+                if (oldPositions.Count > 15)
+                    oldPositions.RemoveAt(0);
+
+                oldScale.Add(Projectile.scale);
+
+                if (oldScale.Count > 15)
+                    oldScale.RemoveAt(0);
+            }
+
+
+            if (!Main.dedServ && Projectile.timeLeft < maxTimeLeft)
+            {
+                ManageCaches();
+                ManageTrail();
+            }
+        }
+
         private void Stab()
         {
             if (!initialized)
@@ -68,7 +137,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 originalDirection = Projectile.direction;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
             }
 
@@ -83,6 +152,8 @@ namespace BombusApisBee.Projectiles
                 Vector2 offset = Vector2.Lerp(new Vector2(0), new Vector2(6, 6 * originalDirection), EaseBuilder.EaseCubicInOut.Ease(lerper)).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(0f, -25f, EaseBuilder.EaseCubicOut.Ease(lerper)) + offset;
+                
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * ((25f + MathHelper.Lerp(0f, -25f, EaseBuilder.EaseCubicOut.Ease(lerper))) * Projectile.scale);
 
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(0f, MathHelper.ToRadians(200), EaseBuilder.EaseCubicInOut.Ease(lerper)) * originalDirection;
 
@@ -90,11 +161,16 @@ namespace BombusApisBee.Projectiles
             }
             else
             {
+                if (!drawAfterImages)
+                    drawAfterImages = true;
+
                 if (!swung)
                 {
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
                     owner.Bombus().AddShake(7);
                     swung = true;
+
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * 20f, Projectile.velocity * 10f, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
 
                 float lerper = 1f - (Projectile.timeLeft) / (float)Math.Floor(maxTimeLeft - maxTimeLeft * 0.7f);
@@ -104,6 +180,8 @@ namespace BombusApisBee.Projectiles
                 Vector2 offset = Vector2.Lerp(new Vector2(6, 6 * originalDirection), new Vector2(0), EaseBuilder.EaseCubicInOut.Ease(lerper)).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(-25f, 35f, EaseBuilder.EaseQuinticOut.Ease(lerper)) + offset;
+                
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * ((25f + MathHelper.Lerp(-25f, 35f, EaseBuilder.EaseCubicOut.Ease(lerper))) * Projectile.scale);
 
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(200), 0f, EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
 
@@ -122,7 +200,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 originalDirection = Projectile.direction;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
             }
 
@@ -138,18 +216,23 @@ namespace BombusApisBee.Projectiles
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(35f, 30f, EaseBuilder.EaseCubicOut.Ease(lerper)) + offset;
 
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4 - 0.1f * originalDirection).ToRotationVector2() * ((25f + MathHelper.Lerp(35f, 30f, EaseBuilder.EaseCubicOut.Ease(lerper))) * Projectile.scale);
+
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(0f, -MathHelper.ToRadians(120), EaseBuilder.EaseCubicInOut.Ease(lerper)) * originalDirection;
 
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
 
                 Projectile.scale = MathHelper.Lerp(1f, 0.8f, lerper);
 
-                if (!flipBlade && progress >= 0.35f)
-                    flipBlade = true;
+                if (flipBlade && progress >= 0.35f)
+                    flipBlade = false;
 
             }
             else
             {
+                if (!drawAfterImages)
+                    drawAfterImages = true;
+
                 if (!swung)
                 {
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
@@ -164,6 +247,8 @@ namespace BombusApisBee.Projectiles
                 Vector2 offset = Vector2.Lerp(new Vector2(20, -16 * originalDirection), new Vector2(5, 15 * originalDirection), EaseBuilder.EaseQuinticOut.Ease(lerper)).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(30f, 35f, EaseBuilder.EaseQuinticOut.Ease(lerper)) + offset;
+
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4 - 0.1f * originalDirection).ToRotationVector2() * ((25f + MathHelper.Lerp(30f, 35f, EaseBuilder.EaseQuinticOut.Ease(lerper))) * Projectile.scale);
 
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(-MathHelper.ToRadians(120), MathHelper.ToRadians(150), EaseBuilder.EaseCubicOut.Ease(lerper)) * originalDirection;
 
@@ -184,7 +269,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 originalDirection = Projectile.direction;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
             }
 
@@ -200,6 +285,8 @@ namespace BombusApisBee.Projectiles
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(35f, 20f, EaseBuilder.EaseCircularInOut.Ease(lerper)) + offset;
 
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4 + 0.15f * originalDirection).ToRotationVector2() * ((25f + MathHelper.Lerp(35f, 20f, EaseBuilder.EaseQuinticOut.Ease(lerper))) * Projectile.scale);
+
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(150), MathHelper.ToRadians(180), EaseBuilder.EaseCircularInOut.Ease(lerper)) * originalDirection;
 
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
@@ -208,6 +295,9 @@ namespace BombusApisBee.Projectiles
             }
             else
             {
+                if (!drawAfterImages && progress >= 0.6f)
+                    drawAfterImages = true;
+
                 if (!swung && progress >= 0.7f)
                 {
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
@@ -223,11 +313,13 @@ namespace BombusApisBee.Projectiles
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(20f, 40f, EaseBuilder.EaseQuinticOut.Ease(lerper)) + offset;
 
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4 + 0.15f * originalDirection).ToRotationVector2() * ((30f + MathHelper.Lerp(20f, 40f, EaseBuilder.EaseQuinticOut.Ease(lerper))) * Projectile.scale);
+
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(180), -MathHelper.ToRadians(70), EaseBuilder.EaseQuinticInOut.Ease(lerper)) * originalDirection;
 
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
 
-                
+
                 if (progress > 0.65f)
                 {
                     lerper = 1f - (Projectile.timeLeft) / (float)Math.Floor(maxTimeLeft - maxTimeLeft * 0.65f);
@@ -250,7 +342,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 originalDirection = Projectile.direction;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
             }
 
@@ -266,6 +358,8 @@ namespace BombusApisBee.Projectiles
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(40f, 45f, EaseBuilder.EaseCubicInOut.Ease(lerper)) + offset;
 
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * ((25f + MathHelper.Lerp(40f, 45f, EaseBuilder.EaseQuinticOut.Ease(lerper))) * Projectile.scale);
+
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(-MathHelper.ToRadians(70), -MathHelper.ToRadians(100), EaseBuilder.EaseCubicInOut.Ease(lerper)) * originalDirection;
 
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
@@ -274,10 +368,13 @@ namespace BombusApisBee.Projectiles
             }
             else
             {
+                if (!drawAfterImages && progress >= 0.55f)
+                    drawAfterImages = true;
+
                 if (progress < 0.9f)
-                    flipBlade = true;
-                else
                     flipBlade = false;
+                else
+                    flipBlade = true;
 
                 if (!swung && progress >= 0.7f)
                 {
@@ -293,6 +390,8 @@ namespace BombusApisBee.Projectiles
                 Vector2 offset = Vector2.Lerp(new Vector2(10, 5 * originalDirection), new Vector2(-5, 5 * originalDirection), lerper).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(45f, 30f, EaseBuilder.EaseCircularInOut.Ease(lerper)) + offset;
+
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * ((25f + MathHelper.Lerp(45f, 30f, EaseBuilder.EaseQuinticOut.Ease(lerper))) * Projectile.scale);
 
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(-MathHelper.ToRadians(100), MathHelper.ToRadians(380), EaseBuilder.EaseCircularInOut.Ease(lerper)) * originalDirection;
 
@@ -313,7 +412,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 originalDirection = Projectile.direction;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
             }
 
@@ -324,21 +423,14 @@ namespace BombusApisBee.Projectiles
             Vector2 offset = Vector2.Lerp(new Vector2(-5, 5 * originalDirection), new Vector2(0), progress).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
 
             Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(30f, 0f, EaseBuilder.EaseQuinticOut.Ease(progress)) + offset;
+            
+            tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * ((25f + MathHelper.Lerp(30f, 0f, EaseBuilder.EaseCubicOut.Ease(progress))) * Projectile.scale);
 
             float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(380) - MathHelper.ToRadians(360), 0f, EaseBuilder.EaseQuinticOut.Ease(progress)) * originalDirection;
 
             owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
         }
 
-        private void UpdateProj()
-        {
-            if (!(owner.HeldItem.ModItem is BladeOfAculeus))
-                Projectile.Kill();
-
-            owner.heldProj = Projectile.whoAmI;
-
-            owner.ChangeDir(Projectile.direction);
-        }
         public override bool? CanDamage()
         {
             return Combo != 4;
@@ -364,6 +456,35 @@ namespace BombusApisBee.Projectiles
                     break;
             }
         }
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            if (hits <= 0)
+                pauseTimer = 12;
+
+            oldTimeLeft = Projectile.timeLeft;
+
+            hits = 1;
+
+            owner.Bombus().AddShake(3);
+
+            new SoundStyle("BombusApisBee/Sounds/Item/Impale").PlayWith(owner.Center, 0, 0f, 1f);
+
+            for (int i = 0; i < 15; i++)
+            {
+                Dust.NewDustPerfect(target.Center + target.DirectionTo(owner.Center) * (target.width / 2), ModContent.DustType<StingerDust>(), target.DirectionTo(owner.Center).RotatedByRandom(0.6f) * Main.rand.NextFloat(0f, 10f), Main.rand.Next(50, 255), default, 1.5f).noGravity = true;
+
+                Dust.NewDustPerfect(target.Center + target.DirectionTo(owner.Center) * (target.width / 2), DustID.Poisoned, target.DirectionTo(owner.Center).RotatedByRandom(0.6f) * Main.rand.NextFloat(0f, 10f), Main.rand.Next(50, 255), default, 1.5f).noGravity = true;
+
+                Dust.NewDustPerfect(target.Center + target.DirectionTo(owner.Center) * (target.width / 2), ModContent.DustType<StingerDust>(), target.DirectionTo(owner.Center).RotatedByRandom(1.5f) * Main.rand.NextFloat(0f, 10f), Main.rand.Next(50, 255), default, 1.5f).noGravity = true;
+
+                Dust.NewDustPerfect(target.Center + target.DirectionTo(owner.Center) * (target.width / 2), DustID.Poisoned, target.DirectionTo(owner.Center).RotatedByRandom(1.5f) * Main.rand.NextFloat(0f, 10f), Main.rand.Next(50, 255), default, 1.5f).noGravity = true;
+            }
+
+            target.AddBuff(BuffID.Poisoned, 300);
+        }
+
+
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float collisionPoint = 0f;
@@ -380,13 +501,123 @@ namespace BombusApisBee.Projectiles
 
         public override bool PreDraw(ref Color lightColor)
         {
+            DrawPrimitives();
             Texture2D sword = ModContent.Request<Texture2D>(Texture + (flipBlade ? "_Flipped" : "")).Value;
+
+            Texture2D swordBlade = ModContent.Request<Texture2D>(Texture + "_Blade" + (flipBlade ? "_Flipped" : "")).Value;
+
             SpriteEffects flip = owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
+
+            if (drawAfterImages)
+            {
+                for (int i = 15; i > 0; i--)
+                {
+                    float fade = 1f;
+
+                    if (Projectile.timeLeft < 12f)
+                        fade = Projectile.timeLeft / 12f;
+
+                    fade *= 1 - (15f - i) / 15f;
+
+                    if (i > 0 && i < oldRotation.Count)
+                    {
+                        Main.spriteBatch.Draw(swordBlade, owner.Center + oldPositions[i] - Main.screenPosition, null, Color.White * 0.05f * fade, oldRotation[i] + (owner.direction == -1 ? MathHelper.PiOver2 : 0f), sword.Size() / 2f, oldScale[i], flip, 0f);
+                    }
+                }
+            }
 
             Main.spriteBatch.Draw(sword, Projectile.Center + new Vector2(0f, owner.gfxOffY) - Main.screenPosition, null, lightColor, Projectile.rotation + (owner.direction == -1 ? MathHelper.PiOver2 : 0f), sword.Size() / 2f, Projectile.scale, flip, 0f);
 
             return false;
         }
+
+        #region Primitive Drawing
+        private void ManageCaches()
+        {
+            var adjustedPos = tipPosition - owner.Center;
+
+            if (cache == null)
+            {
+                cache = new List<Vector2>();
+                for (int i = 0; i < 15; i++)
+                {
+                    cache.Add(owner.Center + adjustedPos);
+                }
+            }
+
+            cache.Add(owner.Center + adjustedPos);
+
+            while (cache.Count > 15)
+            {
+                cache.RemoveAt(0);
+            }
+        }
+
+        private void ManageTrail()
+        {
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(0), factor => 30f, factor =>
+            {
+                if (factor.X >= 0.85f)
+                    return Color.Transparent;
+
+                return (new Color(40, 150, 20) * 0.3f) * factor.X * (float)Math.Sin(Projectile.timeLeft / maxTimeLeft);
+            });
+
+            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(0), factor => 25f, factor =>
+            {
+                if (factor.X >= 0.85f)
+                    return Color.Transparent;
+
+                return (new Color(100, 215, 15) * 0.2f) * factor.X * (float)Math.Sin(Projectile.timeLeft / maxTimeLeft);
+            });
+
+            trail3 = trail3 ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(0), factor => 40f, factor =>
+            {
+                if (factor.X >= 0.85f)
+                    return Color.Transparent;
+
+                return (new Color(200, 255, 40) * 0.1f) * factor.X * (float)Math.Sin(Projectile.timeLeft / maxTimeLeft);
+            });
+
+            var realCache = new Vector2[15];
+
+            for (int k = 0; k < 15; k++)
+            {
+                realCache[k] = cache[k];
+            }
+
+            trail.Positions = realCache;
+            trail2.Positions = realCache;
+            trail3.Positions = realCache;
+        }
+        public void DrawPrimitives()
+        {
+            Main.spriteBatch.End();
+            Effect effect = Terraria.Graphics.Effects.Filters.Scene["SLRCeirosRing"].GetShader().Shader;
+
+            Matrix world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
+            Matrix view = Main.GameViewMatrix.ZoomMatrix;
+            Matrix projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
+
+            effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.025f);
+            effect.Parameters["repeats"].SetValue(1f);
+            effect.Parameters["transformMatrix"].SetValue(world * view * projection);
+            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
+
+            if (drawAfterImages && Combo > 0 && Combo < 4)
+            {
+                trail?.Render(effect);
+
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
+                trail2?.Render(effect);
+
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/ShadowTrail").Value);
+                trail3?.Render(effect);
+            }
+
+            Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+        }
+        #endregion Primitive Drawing
     }
 
     public class AculeusBladeHoldoutAlt : BeeProjectile
@@ -434,6 +665,8 @@ namespace BombusApisBee.Projectiles
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 25;
             Projectile.Bombus().HeldProj = true;
+
+            Projectile.extraUpdates = 1;
         }
 
         public override bool PreAI()
@@ -495,7 +728,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
                 originalDirection = Projectile.direction;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
                 Projectile.friendly = true;
             }
@@ -545,7 +778,7 @@ namespace BombusApisBee.Projectiles
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(100), -MathHelper.ToRadians(130), EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
 
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
-                
+
                 Projectile.scale = 0.9f + (float)Math.Sin(EaseBuilder.EaseCircularOut.Ease(lerper) * 3.1415927f) * 0.8f * 0.8f;
             }
         }
@@ -560,7 +793,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.rotation = owner.DirectionTo(Projectile.Center + Projectile.velocity).ToRotation() + MathHelper.PiOver4;
                 Projectile.netUpdate = true;
                 Projectile.direction = Main.MouseWorld.X < owner.Center.X ? -1 : 1;
-                owner.itemTime = Projectile.timeLeft;
+                owner.itemTime = Projectile.timeLeft / 2;
                 owner.itemAnimation = owner.itemTime;
             }
 
@@ -581,15 +814,15 @@ namespace BombusApisBee.Projectiles
                         oldPos = Projectile.Center;
                     }
 
-                    lerpTimer++;             
+                    lerpTimer++;
 
                     if (wasStuck)
                     {
-                        float lerper = lerpTimer / 15f;
+                        float lerper = lerpTimer / 30f;
 
                         Projectile.Center = Vector2.Lerp(oldPos, owner.Center, EaseBuilder.EaseCubicIn.Ease(lerper));
 
-                        if (lerpTimer >= 14)
+                        if (lerpTimer >= 29)
                         {
                             Projectile.velocity = owner.Center.DirectionTo(Main.MouseWorld) * 5f;
                             swinging = true;
@@ -598,19 +831,19 @@ namespace BombusApisBee.Projectiles
                     }
                     else
                     {
-                        if (lerpTimer < 15)
+                        if (lerpTimer < 30)
                         {
-                            float lerper = lerpTimer / 15f;
+                            float lerper = lerpTimer / 30f;
 
                             Projectile.Center = Vector2.Lerp(oldPos, oldPos + Projectile.velocity * 3f, EaseBuilder.EaseCubicOut.Ease(lerper));
                         }
                         else
                         {
-                            float lerper = (lerpTimer - 15) / 30f;
+                            float lerper = (lerpTimer - 30) / 60f;
 
                             Projectile.Center = Vector2.Lerp(oldPos + Projectile.velocity * 3f, owner.Center, EaseBuilder.EaseCubicIn.Ease(lerper));
 
-                            if (lerpTimer >= 44)
+                            if (lerpTimer >= 89)
                             {
                                 Projectile.velocity = owner.Center.DirectionTo(Main.MouseWorld) * 5f;
                                 swinging = true;
@@ -726,6 +959,10 @@ namespace BombusApisBee.Projectiles
 
                 wasStuck = true;
             }
+
+            owner.Bombus().AddShake(3);
+
+            new SoundStyle("BombusApisBee/Sounds/Item/Impale").PlayWith(owner.Center, 0, 0f, 1f);
         }
 
         public override bool ShouldUpdatePosition()

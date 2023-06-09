@@ -1,9 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Terraria.GameContent.UI.Elements;
+﻿using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace BombusApisBee.UI
@@ -95,7 +90,7 @@ namespace BombusApisBee.UI
 
             else if (mp.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Gathering)
                 mp.CurrentBeeState = (int)BeeDamagePlayer.BeeState.Defense;
-        }   
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -150,7 +145,7 @@ namespace BombusApisBee.UI
 
             panel.Top.Set(Main.screenHeight / 2 + yOffset, 0f);
 
-            
+
             if (panel.IsMouseHovering)
             {
                 if (UITimer < 5)

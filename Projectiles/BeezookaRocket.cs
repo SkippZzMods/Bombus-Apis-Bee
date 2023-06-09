@@ -1,11 +1,4 @@
-﻿using BombusApisBee.Dusts;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class BeezookaRocket : BeeProjectile
     {
@@ -149,9 +142,9 @@ namespace BombusApisBee.Projectiles
             }
             return false;
         }
-            
+
         public override void Kill(int timeLeft)
-        {       
+        {
             if (exploding)
             {
                 for (int i = 0; i < 10; i++)
@@ -202,7 +195,7 @@ namespace BombusApisBee.Projectiles
 
                 Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, Color.Lerp(Color.Transparent, new Color(214, 158, 79, 0), explodingTimer / 45f), 0f, bloomTex.Size() / 2f, 0.6f, 0, 0);
             }
-                
+
             return false;
         }
         private void ManageCaches()

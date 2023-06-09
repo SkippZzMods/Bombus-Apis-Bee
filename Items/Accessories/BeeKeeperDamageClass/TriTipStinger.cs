@@ -1,12 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
-
-namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class TriTipStinger : BeeKeeperItem
     {
@@ -175,7 +167,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             {
                 Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(npc.width / 2, npc.height / 2), ModContent.DustType<TriTipStingerDust>(), Vector2.Zero, 0, default, Main.rand.NextFloat(scale, scale * 1.5f)).noGravity = true;
                 Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width / 2, npc.height / 2), ModContent.DustType<TriTipStingerDust>(), Vector2.Zero, 0, default, Main.rand.NextFloat(scale, scale * 1.5f)).noGravity = true;
-            }    
+            }
 
             if (Main.rand.NextBool(15))
                 Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width / 2, npc.height / 2), ModContent.DustType<TriTipStingerDust>(), Vector2.UnitY * Main.rand.NextFloat(), 0, default, Main.rand.NextFloat(scale * 0.5f, scale * 2f));

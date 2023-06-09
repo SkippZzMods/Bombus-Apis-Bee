@@ -1,8 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class SkelecombProjectile : BeeProjectile
     {
@@ -37,7 +33,7 @@ namespace BombusApisBee.Projectiles
             {
                 NPC npc = Main.npc[i];
                 if (npc.CanBeChasedBy())
-                {   
+                {
                     float num2 = Projectile.Distance(npc.Center);
                     if (num > num2)
                     {

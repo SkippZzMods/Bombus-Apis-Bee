@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-
-namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class HoneyedEmblem : BeeKeeperItem
     {

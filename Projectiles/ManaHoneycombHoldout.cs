@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class ManaHoneycombHoldout : BeeProjectile
     {
@@ -76,7 +72,7 @@ namespace BombusApisBee.Projectiles
 
                             Dust.NewDustPerfect(tipPos, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(100, 96, 255), 0.55f);
                         }
-                        
+
                         for (int i = 0; i < 12; i++)
                         {
                             Dust.NewDustPerfect(tipPos, ModContent.DustType<Dusts.ManaStardust>(), Projectile.velocity.RotatedByRandom(0.45f) * Main.rand.NextFloat(4f), 0, default, Main.rand.NextFloat(0.5f, 1.3f));

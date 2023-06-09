@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using System;
-using System.Collections.Generic;
-
-namespace BombusApisBee.Core
+﻿namespace BombusApisBee.Core
 {
     public class BombusApisBeeGlobalItem : GlobalItem
     {

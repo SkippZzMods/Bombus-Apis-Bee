@@ -1,7 +1,4 @@
-﻿
-using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Projectiles;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {

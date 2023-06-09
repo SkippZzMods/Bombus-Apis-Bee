@@ -1,5 +1,4 @@
-﻿using BombusApisBee.Projectiles;
-namespace BombusApisBee.Buffs
+﻿namespace BombusApisBee.Buffs
 {
     public class Electrocuted : ModBuff
     {

@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-
-namespace BombusApisBee.Buffs
+﻿namespace BombusApisBee.Buffs
 {
     public class CthulhuEnraged : ModBuff
     {

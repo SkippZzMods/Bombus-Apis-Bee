@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public abstract class BeeProjectile : ModProjectile
     {

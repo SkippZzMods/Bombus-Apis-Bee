@@ -1,12 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Terraria.ID;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     enum QueenAttackState : int
     {
@@ -30,7 +22,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => "Terraria/Images/NPC_" + NPCID.QueenBee;
         public int dashDir = 1;
         public ref float switchTimer => ref Projectile.ai[1];
-        public ref float attackTimer => ref Projectile.ai[0];   
+        public ref float attackTimer => ref Projectile.ai[0];
         public Player owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
@@ -141,7 +133,7 @@ namespace BombusApisBee.Projectiles
             Gore.NewGore(Projectile.GetSource_Death(), new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.velocity, 305, Projectile.scale);
             Gore.NewGore(Projectile.GetSource_Death(), new Vector2(Projectile.position.X, Projectile.position.Y + 20f), Projectile.velocity, 306, Projectile.scale);
             Gore.NewGore(Projectile.GetSource_Death(), new Vector2(Projectile.position.X, Projectile.position.Y + 10f), Projectile.velocity, 307, Projectile.scale);
-            Gore.NewGore(Projectile.GetSource_Death(),new Vector2(Projectile.position.X, Projectile.position.Y - 10f), Projectile.velocity, 308, Projectile.scale);
+            Gore.NewGore(Projectile.GetSource_Death(), new Vector2(Projectile.position.X, Projectile.position.Y - 10f), Projectile.velocity, 308, Projectile.scale);
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -277,7 +269,7 @@ namespace BombusApisBee.Projectiles
                     Dust.NewDustPerfect(pos, DustID.Honey2, pos.DirectionTo(target.Center).RotatedByRandom(0.45f) * Main.rand.NextFloat(2f), Main.rand.Next(50, 150), default, 1.25f).noGravity = true;
                 }
             }
-                    
+
 
             if (++switchTimer >= 480)
             {

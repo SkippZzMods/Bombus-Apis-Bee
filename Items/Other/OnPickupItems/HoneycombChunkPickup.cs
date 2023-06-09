@@ -1,13 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
-
-namespace BombusApisBee.Items.Other.OnPickupItems
+﻿namespace BombusApisBee.Items.Other.OnPickupItems
 {
     public class HoneycombChunkPickup : ModItem
     {

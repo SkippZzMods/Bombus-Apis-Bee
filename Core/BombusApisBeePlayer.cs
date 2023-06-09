@@ -1,13 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Buffs;
-using BombusApisBee.Dusts;
-using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
-using BombusApisBee.Items.Other.OnPickupItems;
-using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
-using BombusApisBee.Projectiles;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
+﻿using BombusApisBee.Items.Other.OnPickupItems;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader.IO;
@@ -468,7 +459,7 @@ namespace BombusApisBee.Core
 
                     for (int i = 0; i < 10; i++)
                     {
-                        Dust.NewDustPerfect(target.Center + Main.rand.NextVector2Circular(10f, 10f), ModContent.DustType<GlowFastDecelerate>(), 
+                        Dust.NewDustPerfect(target.Center + Main.rand.NextVector2Circular(10f, 10f), ModContent.DustType<GlowFastDecelerate>(),
                             Main.rand.NextVector2Circular(5f, 5f), newColor: new Color(153, 212, 242, 150)).scale = 0.4f;
 
                         Dust.NewDustPerfect(target.Center + Main.rand.NextVector2CircularEdge(10f, 10f), ModContent.DustType<GlowFastDecelerate>(),

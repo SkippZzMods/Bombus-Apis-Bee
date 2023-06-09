@@ -1,7 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using BombusApisBee.Dusts;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class SquireBee : ModProjectile
     {

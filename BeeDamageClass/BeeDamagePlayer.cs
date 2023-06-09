@@ -1,12 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 using Terraria.GameInput;
-using System.Linq;
-using BombusApisBee.PrimitiveDrawing;
-using Terraria.Graphics.Shaders;
-using Terraria.Graphics.Effects;
-using System;
 
 namespace BombusApisBee.BeeDamageClass
 {
@@ -170,7 +163,7 @@ namespace BombusApisBee.BeeDamageClass
                     HoneyShield = false;
                     HoneyImmuneTimer = 15;
 
-                    SoundEngine.PlaySound(SoundID.Splash with {Volume = 2f});
+                    SoundEngine.PlaySound(SoundID.Splash with { Volume = 2f });
 
                     for (int i = 0; i < 25; i++)
                     {
@@ -183,7 +176,7 @@ namespace BombusApisBee.BeeDamageClass
                 }
 
                 if (HoneyImmuneTimer > 0)
-                    return false;          
+                    return false;
             }
 
             return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource, ref cooldownCounter);
@@ -194,10 +187,10 @@ namespace BombusApisBee.BeeDamageClass
             Player.statDefense += CurrentBees * 2;
 
             if (HoneyShieldCD == 1)
-                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);          
+                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);
         }
 
-        private void UpdateOffense()    
+        private void UpdateOffense()
         {
             Player.IncreaseBeeCrit(CurrentBees);
             Player.IncreaseBeeDamage(CurrentBees * 0.02f);
@@ -484,7 +477,7 @@ namespace BombusApisBee.BeeDamageClass
                     between.Y *= dist;
 
                     if (Projectile.velocity.X < between.X)
-                    {   
+                    {
                         Projectile.velocity.X += adjust;
                         if (Projectile.velocity.X < 0f && between.X > 0f)
                         {
@@ -820,7 +813,7 @@ namespace BombusApisBee.BeeDamageClass
                     Color glowColor = Color.Lerp(Color.Transparent, new Color(255, 125, 0, 0) * 0.5f, (float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 3f));
 
                     Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, glowColor, Projectile.rotation, glowTex.Size() / 2f, 0.35f, 0f, 0f);
-                } 
+                }
 
                 if (Attacking)
                 {

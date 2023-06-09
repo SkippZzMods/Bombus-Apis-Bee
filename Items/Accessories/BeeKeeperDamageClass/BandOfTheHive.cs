@@ -1,13 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class BandOfTheHive : BeeKeeperItem
     {
@@ -121,27 +112,27 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         int originalTimeLeft;
 
-		private Player owner => Main.player[Projectile.owner];
+        private Player owner => Main.player[Projectile.owner];
 
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Honey Glob");
-		}
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Honey Glob");
+        }
 
-		public override void SetDefaults()
-		{
-			Projectile.CloneDefaults(ProjectileID.Shuriken);
-			Projectile.width = 36;
-			Projectile.height = 36;
-			Projectile.DamageType = BeeUtils.BeeDamageClass();
+        public override void SetDefaults()
+        {
+            Projectile.CloneDefaults(ProjectileID.Shuriken);
+            Projectile.width = 36;
+            Projectile.height = 36;
+            Projectile.DamageType = BeeUtils.BeeDamageClass();
 
-			Projectile.timeLeft = Main.rand.Next(180, 240);
+            Projectile.timeLeft = Main.rand.Next(180, 240);
             originalTimeLeft = Projectile.timeLeft;
 
-			Projectile.friendly = true;
-			Projectile.penetrate = -1;
-			Projectile.hide = true;
-			Projectile.ignoreWater = true;
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.hide = true;
+            Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
 
             Projectile.scale = Main.rand.NextFloat(0.5f, 2f);
@@ -149,7 +140,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 8;
-		}
+        }
 
         public override void AI()
         {

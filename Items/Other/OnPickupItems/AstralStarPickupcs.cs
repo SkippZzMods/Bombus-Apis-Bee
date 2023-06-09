@@ -1,8 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Buffs;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BombusApisBee.Items.Other.OnPickupItems
+﻿namespace BombusApisBee.Items.Other.OnPickupItems
 {
     public class AstralStarPickup : ModItem
     {
@@ -35,7 +31,7 @@ namespace BombusApisBee.Items.Other.OnPickupItems
 
             player.AddBuff<AstralStarBuff>(240);
             return false;
-        }   
+        }
 
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {

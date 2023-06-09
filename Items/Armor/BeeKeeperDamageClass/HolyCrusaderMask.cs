@@ -1,11 +1,4 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using Terraria.DataStructures;
-using BombusApisBee.BeeDamageClass;
-using System.Linq;
-using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -214,7 +207,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             Color color = Color.Lerp(new Color(225, 205, 100, 0), new Color(200, 165, 80, 0) * 0.75f, (float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 3f)) * mult;
             if (hitTimer > 0)
                 color = Color.Lerp(new Color(255, 255, 255, 0) * mult, color, 1f - hitTimer / 60f);
-                
+
 
             effect.Parameters["uColor"].SetValue(color.ToVector4());
             effect.Parameters["noiseImage1"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HolyNoise").Value);
@@ -227,7 +220,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
 
             Main.spriteBatch.Draw(bloomTex, collisionPoint(owner) + new Vector2(0f, owner.gfxOffY) - Main.screenPosition, null, (Color.Lerp(new Color(225, 205, 100, 0), new Color(200, 165, 80, 0) * 0.75f, (float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 3f)) * 0.25f) * mult, 0f, bloomTex.Size() / 2f, 1.85f, 0f, 0f);
-            
+
             return false;
         }
 
@@ -257,7 +250,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
                 Dust.NewDustPerfect(owner.Center + owner.Center.DirectionTo(target.Center) * 65f, ModContent.DustType<Dusts.GlowFastDecelerate>(), (owner.Center.DirectionTo(target.Center) * 5f).RotatedByRandom(0.4f) * Main.rand.NextFloat(0.25f, 1.75f), 0, new Color(255, 205, 100), 0.55f);
 
-             
+
                 Dust.NewDustPerfect(owner.Center + owner.Center.DirectionTo(target.Center) * 65f, ModContent.DustType<Dusts.GlowFastDecelerate>(), (owner.Center.DirectionTo(target.Center) * 5f).RotatedByRandom(1f) * Main.rand.NextFloat(0.25f, 1f), 0, new Color(255, 205, 100), 0.75f);
             }
 

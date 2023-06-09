@@ -1,9 +1,4 @@
 ﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Projectiles
 {
@@ -85,7 +80,7 @@ namespace BombusApisBee.Projectiles
             {
                 float rot = Main.rand.NextFloat(0, 6.28f);
 
-                Dust.NewDustPerfect(Projectile.Center + Vector2.One.RotatedBy(rot) * Radius, ModContent.DustType<Dusts.GlowFastDecelerate>(), 
+                Dust.NewDustPerfect(Projectile.Center + Vector2.One.RotatedBy(rot) * Radius, ModContent.DustType<Dusts.GlowFastDecelerate>(),
                     Vector2.One.RotatedBy(rot) * 0.5f, 0, Main.rand.NextBool() ? new Color(161, 31, 85, 50) : new Color(213, 95, 89, 50), Main.rand.NextFloat(0.35f, 0.4f));
             }
         }

@@ -1,14 +1,4 @@
-﻿using BombusApisBee.Buffs;
-using BombusApisBee.Dusts;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class HymenoptraFlask_Honey : BeeProjectile
     {
@@ -34,7 +24,7 @@ namespace BombusApisBee.Projectiles
             {
                 for (int i = 0; i < Main.rand.Next(8, 12); i++)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(5f, 5f), ModContent.ProjectileType<HoneySmoke>(), Projectile.damage * 2/3, 0f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(5f, 5f), ModContent.ProjectileType<HoneySmoke>(), Projectile.damage * 2 / 3, 0f, Projectile.owner);
                 }
 
                 for (int i = 0; i < 5; i++)
@@ -53,9 +43,9 @@ namespace BombusApisBee.Projectiles
 
                 Dust.NewDustPerfect(Projectile.Center, DustID.Honey2, Main.rand.NextVector2Circular(7f, 7f), Main.rand.Next(50, 100), default, 1.5f).noGravity = true;
             }
-            
 
-            SoundEngine.PlaySound(SoundID.Item107 with {PitchVariance = 0.15f}, Projectile.position);
+
+            SoundEngine.PlaySound(SoundID.Item107 with { PitchVariance = 0.15f }, Projectile.position);
         }
         public override void AI()
         {

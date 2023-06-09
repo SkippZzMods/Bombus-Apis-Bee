@@ -1,7 +1,4 @@
-﻿using BombusApisBee.Dusts;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class ProbeycombHoldout : BeeProjectile
     {
@@ -65,7 +62,7 @@ namespace BombusApisBee.Projectiles
             {
                 if (ProbesToShoot <= 0 || !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
                 {
-                    Projectile.Kill(); 
+                    Projectile.Kill();
                     return;
                 }
 

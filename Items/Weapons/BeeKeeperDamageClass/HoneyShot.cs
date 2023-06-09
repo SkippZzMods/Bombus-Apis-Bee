@@ -1,9 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Projectiles;
-using Terraria.DataStructures;
-
-
-namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
+﻿namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class HoneyShot : BeeDamageItem
     {

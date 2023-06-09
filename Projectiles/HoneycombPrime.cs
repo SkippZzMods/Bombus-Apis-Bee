@@ -1,12 +1,4 @@
-﻿using BombusApisBee.Dusts;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Terraria.Graphics.Effects;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class HoneycombPrime : BeeProjectile
     {
@@ -67,9 +59,9 @@ namespace BombusApisBee.Projectiles
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity * 6f, ModContent.ProjectileType<MetalBee>(), Projectile.damage, 0f, Projectile.owner);
 
                     SoundID.Item11.PlayWith(Projectile.Center);
-                    
+
                     Projectile.velocity += velocity * -4.45f;
-                    
+
                     owner.UseBeeResource(2);
 
                     flashTimer = 25;
@@ -92,7 +84,7 @@ namespace BombusApisBee.Projectiles
                 toIdlePos *= speed;
             }
 
-            Projectile.velocity = (Projectile.velocity * (25f - 1) + toIdlePos) / 25f;  
+            Projectile.velocity = (Projectile.velocity * (25f - 1) + toIdlePos) / 25f;
 
             owner.heldProj = Projectile.whoAmI;
             owner.itemTime = 2;
@@ -301,7 +293,7 @@ namespace BombusApisBee.Projectiles
                         boomerangTimer = 0;
                     }
                 }
-            }        
+            }
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -316,7 +308,7 @@ namespace BombusApisBee.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath14 with { Volume = 0.5f}, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.NPCDeath14 with { Volume = 0.5f }, Projectile.Center);
 
             for (int i = 0; i < 10; i++)
             {
@@ -481,7 +473,7 @@ namespace BombusApisBee.Projectiles
                         shootDelay = 0;
 
                         rotTimer += 18;
-                    }                  
+                    }
                 }
             }
             else if (shots >= 3)

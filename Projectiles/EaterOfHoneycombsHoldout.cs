@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-
-namespace BombusApisBee.Projectiles
+﻿namespace BombusApisBee.Projectiles
 {
     public class EaterOfHoneycombsHoldout : ModProjectile
     {
@@ -148,7 +145,7 @@ namespace BombusApisBee.Projectiles
                 {
                     Projectile.friendly = true;
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
-                    Projectile.velocity = owner.DirectionTo(Main.MouseWorld) * 13f; 
+                    Projectile.velocity = owner.DirectionTo(Main.MouseWorld) * 13f;
                     Projectile.timeLeft = 360;
                     Projectile.penetrate = 1;
                     Projectile.tileCollide = true;
@@ -245,7 +242,7 @@ namespace BombusApisBee.Projectiles
             }
 
             if (Main.myPlayer == Projectile.owner)
-                for (int i = 0; i < 4; i++) 
+                for (int i = 0; i < 4; i++)
                 {
                     Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2CircularEdge(10f, 10f), ModContent.ProjectileType<CorruptMiniEater>(), Projectile.damage / 2, 2.5f, Projectile.owner);
                 }

@@ -1,6 +1,4 @@
 ﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Dusts;
-using System;
 
 namespace BombusApisBee.Projectiles
 {

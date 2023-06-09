@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-
-namespace BombusApisBee
+﻿namespace BombusApisBee
 {
     public class BombusWorld : ModSystem
     {

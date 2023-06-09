@@ -1,5 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 
 namespace BombusApisBee.Projectiles
 {
@@ -96,7 +95,7 @@ namespace BombusApisBee.Projectiles
 
             return base.CanHitNPC(projectile, target);
         }
-          
+
         public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
             if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)

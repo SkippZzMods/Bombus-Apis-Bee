@@ -1,6 +1,4 @@
-﻿using BombusApisBee.BeeDamageClass;
-using BombusApisBee.Items.Other.Crafting;
-using BombusApisBee.Projectiles;
+﻿using BombusApisBee.Items.Other.Crafting;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
@@ -23,8 +21,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             Item.damage = 35;
             Item.DamageType = DamageClass.Melee;
-            Item.useTime = 43;
-            Item.useAnimation = 43;
+            Item.useTime = 86;
+            Item.useAnimation = 86;
             Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 8f;
