@@ -7,7 +7,7 @@
         {
             DisplayName.SetDefault("Honey Locket");
             Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nIncreases your amount of Loyal Bees by 3");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

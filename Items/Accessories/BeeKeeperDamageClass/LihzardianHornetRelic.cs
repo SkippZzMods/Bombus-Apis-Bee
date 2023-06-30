@@ -5,7 +5,7 @@
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("Increases movement speed and wing flight time by 35%\nmodifyTooltips\nWhile channeled, your hymenoptra damage, attack speed, and crit chance are increased by 12%\nYou take 10% more damage and take damage-over-time while channeling\nThis effect has a 45 second cooldown");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

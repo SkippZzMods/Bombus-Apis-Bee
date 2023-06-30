@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class LargeGalaticStar : BeeProjectile
     {
@@ -51,7 +52,7 @@
             }
             return true;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -64,7 +65,7 @@
                     }
                     value15.Normalize();
                     value15 *= (float)Main.rand.Next(70, 101) * 0.1f;
-                    Projectile.NewProjectile(Projectile.GetSource_OnHit(target), target.Center.X, target.Center.Y, value15.X, value15.Y, ModContent.ProjectileType<GalacticSeeker>(), damage * 1 / 4, knockback, Projectile.owner, 0f, 0f);
+                    Projectile.NewProjectile(Projectile.GetSource_OnHit(target), target.Center.X, target.Center.Y, value15.X, value15.Y, ModContent.ProjectileType<GalacticSeeker>(), hit.Damage * 1 / 4, hit.Knockback, Projectile.owner, 0f, 0f);
                 }
             }
         }

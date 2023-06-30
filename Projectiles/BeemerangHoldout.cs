@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class BeemerangHoldout : ModProjectile
     {
@@ -180,13 +181,13 @@
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = (int)(damage * MathHelper.Lerp(1f, 3f, (float)chargeTimer / (float)maxCharge));
-            knockback = knockback * MathHelper.Lerp(1f, 1.5f, (float)chargeTimer / (float)maxCharge);
+            modifiers.SourceDamage *= MathHelper.Lerp(1f, 3f, (float)chargeTimer / (float)maxCharge);
+            modifiers.Knockback *= MathHelper.Lerp(1f, 1.5f, (float)chargeTimer / (float)maxCharge);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (boomerangTimer < 30f)
             {

@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Honey Hoarder Hood");
             Tooltip.SetDefault("20% decreased hymenoptra damage\nIncreases maximum honey by 60\nIncreases your amount of Loyal Bees by 2");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Items.Other.OnPickupItems
+﻿using Terraria;
+namespace BombusApisBee.Items.Other.OnPickupItems
 {
     public class HoneycombChunkPickup : ModItem
     {
@@ -138,7 +139,7 @@
             MaxStacks = 10;
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
             if (proj.CountsAsClass<HymenoptraDamageClass>() && Main.rand.NextFloat() < 0.05f)
             {
@@ -193,7 +194,7 @@
             }
         }
 
-        public override void ModifyBuffTip(ref string tip, ref int rare)
+        public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             HoneycombChunkPlayer hp = Main.LocalPlayer.GetModPlayer<HoneycombChunkPlayer>();
 

@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Holy Crusader Greaves");
             Tooltip.SetDefault("10% increased hymenoptra damage\n10% increase chance to not consume honey\nIncreases your amount of Loyal Bees by 1");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

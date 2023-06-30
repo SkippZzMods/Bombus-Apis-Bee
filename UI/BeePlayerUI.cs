@@ -1,8 +1,43 @@
-﻿using Terraria.GameContent.UI.Elements;
+﻿using BombusApisBee.Core.UILoading;
+using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace BombusApisBee.UI
 {
+    public class BeePlayerUI : UIState
+    {
+        internal static float YOffset => ModContent.GetInstance<BombusConfig>().yOffset;
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI").Value;
+
+            var mp = Main.LocalPlayer.Hymenoptra();
+
+            if (mp.HeldBeeWeaponTimer > 0 || mp.HoldingBeeWeaponTimer > 0)
+            {
+                float fade = mp.HoldingBeeWeaponTimer / 15f;
+
+                Color color = Color.White * fade;
+
+                Rectangle frame = tex.Frame(verticalFrames: 4, frameY: 1);
+
+                Vector2 position = new Vector2(Main.screenWidth / 2, Main.screenHeight / 2) + new Vector2(0f, 25f + YOffset);
+
+                float uiScale = 1f + (Main.UIScale * 0.5f / 100);
+
+                Main.spriteBatch.Draw(tex, position, frame, color, 0, frame.Size() / 2f, uiScale, 0f, 0f);
+  
+                frame = tex.Frame(verticalFrames: 4, frameY: 2);
+                Main.spriteBatch.Draw(tex, position + new Vector2(-35, 0f), frame, color, 0, frame.Size() / 2f, uiScale, 0f, 0f);
+
+                frame = tex.Frame(verticalFrames: 4, frameY: 3);
+                Main.spriteBatch.Draw(tex, position + new Vector2(35, 0f), frame, color, 0, frame.Size() / 2f, uiScale, 0f, 0f);
+            }
+        }
+    }
+}
+/*{
     public class BeePlayerUI : UIState
     {
         internal UIPanel panel;
@@ -59,9 +94,9 @@ namespace BombusApisBee.UI
             panel.Append(Glow);
             panel.Append(Middle);
 
-            Left.OnClick += Left_OnClick;
+            Left.OnLeftClick += Left_OnClick;
 
-            Right.OnClick += Right_OnClick;
+            Right.OnLeftClick += Right_OnClick;
         }
 
         private void Right_OnClick(UIMouseEvent evt, UIElement listeningElement)
@@ -231,4 +266,4 @@ namespace BombusApisBee.UI
             Glow.Color = Color.Lerp(new Color(255, 200, 0, 0) * 0.75f, new Color(255, 200, 0, 0) * 0.35f, (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1.5f) + 1f);
         }
     }
-}
+}*/

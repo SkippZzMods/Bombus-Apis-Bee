@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria.WorldBuilding;
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class CopperBeeIdol : BeeKeeperItem
     {
@@ -58,7 +59,7 @@
                         if (chest.item[inventoryIndex].type == ItemID.None)
                             if (WorldGen.genRand.NextFloat() < 0.2f)
                             {
-                                chest.item[inventoryIndex].SetDefaults(WorldGen.copper == TileID.Copper ? ModContent.ItemType<CopperBeeIdol>() : ModContent.ItemType<TinBeeIdol>());
+                                chest.item[inventoryIndex].SetDefaults(GenVars.copper == TileID.Copper ? ModContent.ItemType<CopperBeeIdol>() : ModContent.ItemType<TinBeeIdol>());
                                 chest.item[inventoryIndex].Prefix(-1);
                                 break;
                             }

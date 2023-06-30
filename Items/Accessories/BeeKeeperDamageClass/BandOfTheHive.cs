@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria;
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class BandOfTheHive : BeeKeeperItem
     {
@@ -6,7 +7,7 @@
         {
             DisplayName.SetDefault("Hive-Touched Band");
             Tooltip.SetDefault("Dealing a large amount of damage in a short amount of time causes your next hit to make a large honey explosion");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -45,24 +46,24 @@
                 explode = true;
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Item, consider using OnHitNPC instead */
         {
             if (!equipped || Player.HasBuff<BandOfTheHiveCooldown>())
                 return;
 
-            this.damage += damage;
+            this.damage += damageDone;
             if (timer <= 0)
                 timer = 120;
 
             Explode(target);
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
             if (!equipped || proj.type == ModContent.ProjectileType<BandHoneyGlob>() || Player.HasBuff<BandOfTheHiveCooldown>())
                 return;
 
-            this.damage += damage;
+            this.damage += damageDone;
             if (timer <= 0)
                 timer = 120;
 
@@ -99,7 +100,7 @@
             SoundEngine.PlaySound(new SoundStyle("BombusApisBee/Sounds/Item/BiggerSplash"), Player.Center);
 
             explode = false;
-            this.damage = 0;
+            damage = 0;
             timer = 0;
 
             Player.AddBuff<BandOfTheHiveCooldown>(1200);

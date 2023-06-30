@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     class HoneyBeeGlobalProjectile : GlobalProjectile
     {
@@ -76,7 +77,7 @@
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
 
-            Projectile.ContinuouslyUpdateDamage = true;
+            Projectile.ContinuouslyUpdateDamageStats = true;
         }
         public override void AI()
         {
@@ -162,7 +163,7 @@
 
                             blockDelay = 60;
 
-                            target.StrikeNPC(Projectile.damage / 2, 10f, target.Center.X < Owner.Center.X ? -1 : 1, Main.rand.NextBool(4));
+                            target.SimpleStrikeNPC(Projectile.damage / 2, target.Center.X < Owner.Center.X ? -1 : 1, Main.rand.NextBool(4), 10f, Projectile.DamageType, true, Owner.luck);
                         }
                     }
                 }
@@ -487,7 +488,7 @@
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Offense && slamming)
             {
@@ -607,7 +608,7 @@
                 Main.spriteBatch.Draw(noise, pos, null, Color.White, 0f, noise.Size() / 2f, 0.16f, 0, 0f);
 
                 Main.spriteBatch.End();
-                Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
                 Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 20, 0) * mult * 0.5f, 0f, glowTex.Size() / 2f, 1f, 0f, 0f);
             }

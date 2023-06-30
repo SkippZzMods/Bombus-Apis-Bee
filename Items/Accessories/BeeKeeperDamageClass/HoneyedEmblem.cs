@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria;
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class HoneyedEmblem : BeeKeeperItem
     {
@@ -6,7 +7,7 @@
         {
             DisplayName.SetDefault("Honeyed Emblem");
             Tooltip.SetDefault("12% increased hymenoptra damage\nIncreases maximum honey by 10");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -26,7 +27,7 @@
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemID.AvengerEmblem).AddCondition(Recipe.Condition.NearHoney).Register();
+            CreateRecipe(1).AddIngredient(ItemID.AvengerEmblem).AddCondition(Condition.NearHoney).Register();
         }
     }
 }

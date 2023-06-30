@@ -1,4 +1,5 @@
-﻿using Terraria.DataStructures;
+﻿using Terraria;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Projectiles
 {
@@ -34,12 +35,12 @@ namespace BombusApisBee.Projectiles
                     projectile.DamageType = proj2.DamageType;
             }
 
-            else if (source is EntitySource_OnHit { EntityStriking: Projectile proj3 })
+            else if (source is EntitySource_OnHit { Attacker: Projectile proj3 })
             {
                 if (proj3.DamageType == BeeUtils.BeeDamageClass())
                     projectile.DamageType = proj3.DamageType;
             }
-            else if (source is EntitySource_OnHit { EntityStriking: Player player })
+            else if (source is EntitySource_OnHit { Attacker: Player player })
             {
                 if (player.HeldItem.DamageType == BeeUtils.BeeDamageClass())
                     projectile.DamageType = player.HeldItem.DamageType;
@@ -76,14 +77,14 @@ namespace BombusApisBee.Projectiles
             return true;
         }
 
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (projectile.CountsAsClass<HymenoptraDamageClass>())
                 if (projectile.CritChance <= 0)
                 {
                     int critChance = (int)Main.player[projectile.owner].GetTotalCritChance<HymenoptraDamageClass>();
                     if (Main.rand.Next(100) < critChance)
-                        crit = true;
+                        modifiers.SetCrit();
                 }
         }
 
@@ -96,7 +97,7 @@ namespace BombusApisBee.Projectiles
             return base.CanHitNPC(projectile, target);
         }
 
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
                 target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[projectile.owner] = 10;

@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria;
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class TriTipStinger : BeeKeeperItem
     {
@@ -30,7 +31,7 @@
             equipped = false;
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Item, consider using OnHitNPC instead */
         {
             if (!equipped)
                 return;
@@ -43,7 +44,7 @@
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
             if (!equipped)
                 return;
@@ -116,7 +117,7 @@
                             n.life = 1;
                             if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                n.StrikeNPCNoInteraction(9999, 0, 0);
+                                n.StrikeNPC(new NPC.HitInfo() { InstantKill = true, Knockback = 0f, HitDirection = 0 }, false, true);
                                 if (Main.netMode == NetmodeID.Server)
                                     NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, whoAmI, 9999f);
                             }

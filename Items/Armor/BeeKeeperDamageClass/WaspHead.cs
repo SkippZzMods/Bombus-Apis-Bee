@@ -94,7 +94,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("40% increased wing flight time and increased jump speed\nIncreases maximum honey by 25");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

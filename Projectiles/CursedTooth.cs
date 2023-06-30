@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
@@ -56,7 +57,7 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center, DustID.Bone, null).noGravity = true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             CursedToothGlobalNPC gnpc = target.GetGlobalNPC<CursedToothGlobalNPC>();
             if (!stuck && target.life > 0 && gnpc.StuckTeeth < 3)

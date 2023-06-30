@@ -6,7 +6,7 @@
         {
             DisplayName.SetDefault("Retina Releaser");
             Tooltip.SetDefault("'I think they're looking at you'\nTaking damage releases a flurry of Cthulhubees and increases hymenoptra damage by 12% for a short time");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

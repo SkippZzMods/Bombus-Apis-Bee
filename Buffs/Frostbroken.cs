@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Core.ScreenTargetSystem;
+using Terraria;
 
 namespace BombusApisBee.Buffs
 {
@@ -30,16 +31,16 @@ namespace BombusApisBee.Buffs
             inflicted = false;
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             if (inflicted)
-                damage = (int)Main.CalculateDamageNPCsTake(damage, (int)(npc.defense * 0.65f));
+                modifiers.Defense.Base *= 0.65f;
         }
 
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (inflicted)
-                damage = (int)Main.CalculateDamageNPCsTake(damage, (int)(npc.defense * 0.65f));
+                modifiers.Defense.Base *= 0.65f;
         }
 
         public override void AI(NPC npc)
@@ -64,7 +65,7 @@ namespace BombusApisBee.Buffs
                 n.life = 1;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    n.StrikeNPCNoInteraction(9999, 0, 0);
+                    n.StrikeNPC(new NPC.HitInfo() { InstantKill = true, Knockback = 0f, HitDirection = 0 }, false, true);
                     if (Main.netMode == NetmodeID.Server)
                         NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, whoAmI, 9999f);
                 }
@@ -136,7 +137,7 @@ namespace BombusApisBee.Buffs
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        realNPC.StrikeNPC(75, 2f, realNPC.Center.X > center.X ? 1 : -1, Main.rand.NextBool(10));
+                        realNPC.SimpleStrikeNPC(75, realNPC.Center.X > center.X ? 1 : -1, Main.rand.NextBool(10), 2f, null, true);
                         if (Main.netMode == NetmodeID.Server)
                             NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, whoAmI, 50f);
                     }
@@ -211,12 +212,12 @@ namespace BombusApisBee.Buffs
         public static ScreenTarget target = new(DrawNPCTarget, () => Main.npc.Any(n => n.active && n.HasBuff<Frostbroken>()), 1);
         public void Load(Mod mod)
         {
-            On.Terraria.Main.DrawNPCs += DrawTarget;
+            Terraria.On_Main.DrawNPCs += DrawTarget;
         }
 
         public void Unload()
         {
-            On.Terraria.Main.DrawNPCs -= DrawTarget;
+            Terraria.On_Main.DrawNPCs -= DrawTarget;
         }
 
         private static void DrawNPCTarget(SpriteBatch spriteBatch)
@@ -249,7 +250,7 @@ namespace BombusApisBee.Buffs
             }
         }
 
-        private static void DrawTarget(On.Terraria.Main.orig_DrawNPCs orig, Main self, bool behindTiles)
+        private static void DrawTarget(Terraria.On_Main.orig_DrawNPCs orig, Main self, bool behindTiles)
         {
             orig(self, behindTiles);
 

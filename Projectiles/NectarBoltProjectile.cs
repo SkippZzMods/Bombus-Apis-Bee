@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class NectarBoltProjectile : BeeProjectile, IDrawPrimitive_
     {
@@ -203,7 +204,7 @@
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
             player.Heal(1);

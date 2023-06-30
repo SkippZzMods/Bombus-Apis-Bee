@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria;
 
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
@@ -8,7 +9,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Jar Of Honey");
             Tooltip.SetDefault("Increases hymenoptra damage by 6%\nIncreases maximum honey by 5\nIncreases life regeneration");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -31,7 +32,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             CreateRecipe(1).
                 AddIngredient(ItemID.Bottle, 1).
                 AddIngredient(ModContent.ItemType<Pollen>(), 20).
-                AddCondition(Recipe.Condition.NearHoney).
+                AddCondition(Condition.NearHoney).
                 Register();
         }
     }

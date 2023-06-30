@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         {
             Tooltip.SetDefault("Summons a large Honeybee which will mimic your loyal bees\nIncreases maximum honey by 25");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 4));
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

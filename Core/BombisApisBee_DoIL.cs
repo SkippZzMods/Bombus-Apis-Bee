@@ -8,12 +8,12 @@ namespace BombusApisBee.Core
     {
         public static void Load()
         {
-            IL.Terraria.Main.DoDraw += IL_InsertShield;
+            Terraria.IL_Main.DoDraw += IL_InsertShield;
         }
 
         public static void Unload()
         {
-            IL.Terraria.Main.DoDraw -= IL_InsertShield;
+            Terraria.IL_Main.DoDraw -= IL_InsertShield;
         }
 
         private static void IL_InsertShield(MonoMod.Cil.ILContext il)

@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.BeeHelperProj;
+using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
@@ -96,7 +97,7 @@ namespace BombusApisBee.Projectiles
             new SoundStyle("BombusApisBee/Sounds/Item/LightningStrike").PlayWith(Projectile.position, 0, 0.1f, 1f);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<Electrocuted>(), Main.rand.Next(new int[] { 120, 240, 360 }));
         }
@@ -209,7 +210,7 @@ namespace BombusApisBee.Projectiles
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             HasHit = true;
             target.AddBuff(ModContent.BuffType<Electrocuted>(), Main.rand.Next(new int[] { 120, 240, 360 }));
@@ -318,7 +319,7 @@ namespace BombusApisBee.Projectiles
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<Electrocuted>(), Main.rand.Next(new int[] { 60, 120, 180 }));
         }

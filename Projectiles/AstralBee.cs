@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.myPlayer == Projectile.owner)
             {
@@ -27,6 +27,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.NewProjectile(Projectile.GetSource_OnHit(target), x, y, num427, num428, ModContent.ProjectileType<AstralStar>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
             }
         }
+
         public override void SafeAI()
         {
             if (Main.rand.NextBool(2))

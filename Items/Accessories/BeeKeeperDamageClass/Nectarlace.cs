@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Nectarlace");
             Tooltip.SetDefault("Increases armor penetration by 5\nReleases bees and douses the user in honey when damaged\nCoats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

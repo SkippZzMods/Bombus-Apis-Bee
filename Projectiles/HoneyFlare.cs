@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
@@ -88,7 +89,7 @@ namespace BombusApisBee.Projectiles
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!stuck && target.life > 0)
             {

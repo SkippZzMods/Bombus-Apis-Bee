@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class HoneycombPrime : BeeProjectile
     {
@@ -296,7 +297,7 @@
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             owner.Bombus().AddShake(4);
             new SoundStyle("BombusApisBee/Sounds/Item/StabTiny").PlayWith(Projectile.Center, pitchVariance: 0.6f);
@@ -531,9 +532,9 @@
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = (int)(damage * 2.65f);
+            modifiers.SourceDamage *= 2.65f;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

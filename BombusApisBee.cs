@@ -66,16 +66,6 @@ namespace BombusApisBee
             }
 
             DrawPrimitives.Load();
-            stinger = TextureAssets.Projectile[ProjectileID.HornetStinger];
-            bee = TextureAssets.Projectile[ProjectileID.Bee];
-            giantBee = TextureAssets.Projectile[ProjectileID.GiantBee];
-            wasp = TextureAssets.Projectile[ProjectileID.Wasp];
-            beeArrow = TextureAssets.Projectile[ProjectileID.BeeArrow];
-            TextureAssets.Projectile[ProjectileID.HornetStinger] = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/StingerRetexture");
-            TextureAssets.Projectile[ProjectileID.Bee] = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/BeeRetexture");
-            TextureAssets.Projectile[ProjectileID.GiantBee] = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GiantBeeRetexture");
-            TextureAssets.Projectile[ProjectileID.Wasp] = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/WaspRetexture");
-            TextureAssets.Projectile[ProjectileID.BeeArrow] = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/BeeArrowRetexture");
 
             HoneyManipulatorHotkey = KeybindLoader.RegisterKeybind(this, "Honey Manipulation", "Y");
 

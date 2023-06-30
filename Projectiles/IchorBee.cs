@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Ichor, 240, true);
         }

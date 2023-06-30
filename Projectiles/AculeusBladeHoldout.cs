@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class AculeusBladeHoldout : BeeProjectile
     {
@@ -65,6 +66,8 @@
 
         public override void AI()
         {
+            UpdateProj();
+
             switch (Combo)
             {
                 case 0:
@@ -78,8 +81,6 @@
                 case 4:
                     SpinToStab(); break;
             }
-
-            UpdateProj();
         }
 
         private void UpdateProj()
@@ -436,28 +437,28 @@
             return Combo != 4;
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = (target.Center.X < owner.Center.X ? -1 : 1);
+            modifiers.HitDirectionOverride = (target.Center.X < owner.Center.X ? -1 : 1);
 
             switch (Combo)
             {
                 case 0: //stab
-                    damage = (int)(damage * 1f);
+                    modifiers.SourceDamage *= 1f;
                     break;
                 case 1: //up
-                    damage = (int)(damage * 1.25f);
+                    modifiers.SourceDamage *= 1.25f;
                     break;
                 case 2: //down
-                    damage = (int)(damage * 1.75f);
+                    modifiers.SourceDamage *= 1.75f;
                     break;
                 case 3: //spin
-                    damage = (int)(damage * 2f);
+                    modifiers.SourceDamage *= 2f;
                     break;
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hits <= 0)
                 pauseTimer = 12;
@@ -615,7 +616,7 @@
                 trail3?.Render(effect);
             }
 
-            Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
         #endregion Primitive Drawing
     }
@@ -941,7 +942,7 @@
             owner.ChangeDir(Projectile.direction);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!stuck && target.life > 0 && !wasStuck && !swinging)
             {
@@ -975,14 +976,14 @@
             pullingBack = true;
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = (target.Center.X < owner.Center.X ? -1 : 1);
+            modifiers.HitDirectionOverride = (target.Center.X < owner.Center.X ? -1 : 1);
 
             if (swinging)
             {
-                damage = (int)(damage * 2f);
-                knockback = knockback * 1.5f;
+                modifiers.SourceDamage *= 2f;
+                modifiers.Knockback *= 1.5f;
             }
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

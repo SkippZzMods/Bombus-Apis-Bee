@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class ChloroHoney : BeeProjectile, IDrawPrimitive_
     {
@@ -79,7 +80,7 @@
             return Projectile.timeLeft <= 345 && hitDelay <= 0;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             hitDelay = 30;
         }

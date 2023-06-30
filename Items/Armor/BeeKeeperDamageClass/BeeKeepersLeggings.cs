@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             Tooltip.SetDefault("15% increased movement speed");
             DisplayName.SetDefault("Bee Keeper's Pants");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

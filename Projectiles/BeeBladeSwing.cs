@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
@@ -167,7 +168,7 @@ namespace BombusApisBee.Projectiles
         public BeeUtils.CurveSegment hold = new BeeUtils.CurveSegment(BeeUtils.EasingType.Linear, 0.5f, 1f, 0.2f, 1);
         public BeeUtils.CurveSegment retract = new BeeUtils.CurveSegment(BeeUtils.EasingType.PolyInOut, 0.7f, 0.9f, -0.9f, 3);
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Owner.whoAmI == Main.myPlayer)
             {

@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class HoneyGunHoldout : BeeProjectile
     {
@@ -114,7 +115,7 @@
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
             player.AddBuff(BuffID.Honey, 240, true);

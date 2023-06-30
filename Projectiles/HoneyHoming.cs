@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class HoneyHoming : BeeProjectile
     {
@@ -21,7 +22,7 @@
             Projectile.extraUpdates = 1;
             Projectile.tileCollide = false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Main.player[Projectile.owner].AddBuff(BuffID.Honey, 240);
             if (Projectile.ai[0] == 0f)
@@ -81,7 +82,7 @@
             Projectile.extraUpdates = 1;
             Projectile.tileCollide = false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundID.NPCDeath19.PlayWith(Projectile.Center);
 

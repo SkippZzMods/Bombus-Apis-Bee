@@ -5,7 +5,7 @@
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("'Its glistening!'\nDrops enchanted honey droplets when damaged");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {

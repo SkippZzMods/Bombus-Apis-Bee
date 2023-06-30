@@ -1,4 +1,5 @@
-﻿using Terraria.DataStructures;
+﻿using Terraria;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.BeeHelperProj
 {
@@ -50,12 +51,12 @@ namespace BombusApisBee.BeeHelperProj
                 if (Main.player[projectile.owner].strongBees)
                     Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
             }
-            else if (source is EntitySource_OnHit { EntityStriking: Projectile proj2 })
+            else if (source is EntitySource_OnHit { Attacker: Projectile proj2 })
             {
                 if (Main.player[proj2.owner].strongBees)
                     Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
             }
-            else if (source is EntitySource_OnHit { EntityStriking: Player player })
+            else if (source is EntitySource_OnHit { Attacker: Player player })
             {
                 if (player.strongBees)
                     Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
@@ -231,24 +232,24 @@ namespace BombusApisBee.BeeHelperProj
             return false;
         }
 
-        public virtual void SafeModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection) { }
-        public sealed override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public virtual void SafeModifyHitNPC(NPC target, ref NPC.HitModifiers  modifiers) { }
+        public sealed override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Giant)
             {
-                damage = (int)(damage * 1.15f);
-                knockback = knockback * 1.25f;
+                modifiers.SourceDamage *= 1.15f;
+                modifiers.Knockback *= 1.25f;
             }
 
-            SafeModifyHitNPC(target, ref damage, ref knockback, ref crit, ref hitDirection);
+            SafeModifyHitNPC(target, ref modifiers);
         }
 
-        public virtual void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit) { }
-        public sealed override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public virtual void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) { }
+        public sealed override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[Projectile.owner] = 10;
 
-            SafeOnHitNPC(target, damage, knockback, crit);
+            SafeOnHitNPC(target, hit, damageDone);
         }
     }
 }

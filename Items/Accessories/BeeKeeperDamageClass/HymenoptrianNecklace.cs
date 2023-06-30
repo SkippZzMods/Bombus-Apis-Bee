@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("Increases armor penetration by 5\nCoats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20\nReleases bees, Cthulhubees, increases hymenoptra damage, movement speed, and douses the user in honey when damaged");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

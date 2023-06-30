@@ -1,4 +1,5 @@
-﻿using Terraria.Enums;
+﻿using Terraria;
+using Terraria.Enums;
 
 namespace BombusApisBee.Projectiles
 {
@@ -96,7 +97,7 @@ namespace BombusApisBee.Projectiles
         }
 
         // Set custom immunity time on hitting an NPC
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int numberProjectiles = 1 + Main.rand.Next(0); // 4 or 5 shots
             for (int i = 0; i < numberProjectiles; i++)

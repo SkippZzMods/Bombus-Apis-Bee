@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Bee Keeper's Hat");
             Tooltip.SetDefault("3% increased hymenoptra critical strike chance\nIncreases maximum honey by 15");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

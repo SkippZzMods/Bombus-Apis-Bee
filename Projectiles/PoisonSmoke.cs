@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class PoisonSmoke : BeeProjectile
     {
@@ -33,7 +34,7 @@
                 Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, Main.rand.NextBool() ? DustID.Poisoned : DustID.CorruptGibs, 0, 0, Projectile.alpha + 50, default, 1.2f);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Poisoned, 360);
             target.AddBuff<ImprovedPoison>(360);

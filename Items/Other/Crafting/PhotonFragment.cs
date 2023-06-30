@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Other.Crafting
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 2));
             ItemID.Sets.ItemIconPulse[Item.type] = true;
             ItemID.Sets.ItemNoGravity[Item.type] = true;
-            SacrificeTotal = 999;
+            Item.ResearchUnlockCount = 999;
         }
         public override void SetDefaults()
         {

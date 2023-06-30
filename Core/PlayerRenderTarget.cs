@@ -44,15 +44,15 @@
 
             Main.QueueMainThreadAction(() => Target = new RenderTarget2D(Main.graphics.GraphicsDevice, Main.screenWidth, Main.screenHeight));
 
-            On.Terraria.Main.CheckMonoliths += DrawTargets;
-            On.Terraria.Lighting.GetColor_int_int += getColorOverride;
-            On.Terraria.Lighting.GetColor_Point += getColorOverride;
-            On.Terraria.Lighting.GetColor_int_int_Color += getColorOverride;
-            On.Terraria.Lighting.GetColor_Point_Color += GetColorOverride;
-            On.Terraria.Lighting.GetColorClamped += GetColorOverride;
+            Terraria.On_Main.CheckMonoliths += DrawTargets;
+            Terraria.On_Lighting.GetColor_int_int += getColorOverride;
+            Terraria.On_Lighting.GetColor_Point += getColorOverride;
+            Terraria.On_Lighting.GetColor_int_int_Color += getColorOverride;
+            Terraria.On_Lighting.GetColor_Point_Color += GetColorOverride;
+            Terraria.On_Lighting.GetColorClamped += GetColorOverride;
         }
 
-        private static Color GetColorOverride(On.Terraria.Lighting.orig_GetColorClamped orig, int x, int y, Color oldColor)
+        private static Color GetColorOverride(Terraria.On_Lighting.orig_GetColorClamped orig, int x, int y, Color oldColor)
         {
             if (canUseTarget)
                 return orig.Invoke(x, y, oldColor);
@@ -60,7 +60,7 @@
             return orig.Invoke(x + (int)((oldPos.X - positionOffset.X) / 16), y + (int)((oldPos.Y - positionOffset.Y) / 16), oldColor);
         }
 
-        private static Color GetColorOverride(On.Terraria.Lighting.orig_GetColor_Point_Color orig, Point point, Color originalColor)
+        private static Color GetColorOverride(Terraria.On_Lighting.orig_GetColor_Point_Color orig, Point point, Color originalColor)
         {
             if (canUseTarget)
                 return orig.Invoke(point, originalColor);
@@ -68,7 +68,7 @@
             return orig.Invoke(new Point(point.X + (int)((oldPos.X - positionOffset.X) / 16), point.Y + (int)((oldPos.Y - positionOffset.Y) / 16)), originalColor);
         }
 
-        public static Color getColorOverride(On.Terraria.Lighting.orig_GetColor_Point orig, Point point)
+        public static Color getColorOverride(Terraria.On_Lighting.orig_GetColor_Point orig, Point point)
         {
             if (canUseTarget)
                 return orig.Invoke(point);
@@ -76,7 +76,7 @@
             return orig.Invoke(new Point(point.X + (int)((oldPos.X - positionOffset.X) / 16), point.Y + (int)((oldPos.Y - positionOffset.Y) / 16)));
         }
 
-        public static Color getColorOverride(On.Terraria.Lighting.orig_GetColor_int_int orig, int x, int y)
+        public static Color getColorOverride(Terraria.On_Lighting.orig_GetColor_int_int orig, int x, int y)
         {
             if (canUseTarget)
                 return orig.Invoke(x, y);
@@ -84,7 +84,7 @@
             return orig.Invoke(x + (int)((oldPos.X - positionOffset.X) / 16), y + (int)((oldPos.Y - positionOffset.Y) / 16));
         }
 
-        public static Color getColorOverride(On.Terraria.Lighting.orig_GetColor_int_int_Color orig, int x, int y, Color c)
+        public static Color getColorOverride(Terraria.On_Lighting.orig_GetColor_int_int_Color orig, int x, int y, Color c)
         {
             if (canUseTarget)
                 return orig.Invoke(x, y, c);
@@ -112,7 +112,7 @@
             return gravPosition - new Vector2(sheetSquareX / 2, sheetSquareY / 2);
         }
 
-        private static void DrawTargets(On.Terraria.Main.orig_CheckMonoliths orig)
+        private static void DrawTargets(Terraria.On_Main.orig_CheckMonoliths orig)
         {
             orig();
 

@@ -7,7 +7,7 @@
         {
             DisplayName.SetDefault("Beekeeper Emblem");
             Tooltip.SetDefault("15% increased hymenoptra damage");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

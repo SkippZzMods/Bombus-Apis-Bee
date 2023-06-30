@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.Bestiary;
+﻿using Terraria;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Personalities;
 using Terraria.Localization;
@@ -61,7 +62,7 @@ namespace BombusApisbee.NPCs
         {
             npcLoot.Add(ItemDropRule.Common(ItemID.Beenade, 1, 5, 10));
         }
-        public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+        public override bool CanTownNPCSpawn(int numTownNPCs)/* tModPorter Suggestion: Copy the implementation of NPC.SpawnAllowed_Merchant in vanilla if you to count money, and be sure to set a flag when unlocked, so you don't count every tick. */
         {
             return NPC.downedQueenBee;
         }
@@ -156,46 +157,28 @@ namespace BombusApisbee.NPCs
         {
             button = Language.GetTextValue("Shop");
         }
-        public override void OnChatButtonClicked(bool firstButton, ref bool shop)
+        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
         {
             if (firstButton)
             {
-                shop = true;
+                shopName = "Shop";
             }
         }
-        public override void SetupShop(Chest shop, ref int nextSlot)
+
+        public override void AddShops()
         {
-            shop.item[nextSlot].SetDefaults(ItemID.BottledHoney);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ModContent.ItemType<TheTraitorsSaxophone>());
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ModContent.ItemType<NectarSlasher>());
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.BeeKeeper);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.BeesKnees);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.BeeGun);
-            nextSlot++;
-            if (Main.hardMode)
-            {
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Wasparang>());
-                nextSlot++;
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Nectarthrower>());
-                nextSlot++;
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<HoneyLocket>());
-                nextSlot++;
-                if (NPC.downedMechBossAny)
-                {
-                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<BombusApisBee.Items.Accessories.BeeKeeperDamageClass.HoneyBee>());
-                    nextSlot++;
-                }
-                if (NPC.downedGolemBoss)
-                {
-                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<BeeInyGun>());
-                    nextSlot++;
-                }
-            }
+            NPCShop shop = new NPCShop(Type, "Shop")
+                .Add(ItemID.BottledHoney)
+                .Add(ModContent.ItemType<TheTraitorsSaxophone>())
+                .Add(ModContent.ItemType<NectarSlasher>())
+                .Add(ItemID.BeeKeeper)
+                .Add(ItemID.BeesKnees)
+                .Add(ItemID.BeeGun)
+                .Add(ModContent.ItemType<Wasparang>(), Condition.Hardmode)
+                .Add(ModContent.ItemType<Nectarthrower>(), Condition.Hardmode)
+                .Add(ModContent.ItemType<HoneyLocket>(), Condition.Hardmode)
+                .Add(ModContent.ItemType<BombusApisBee.Items.Accessories.BeeKeeperDamageClass.HoneyBee>(), Condition.DownedMechBossAny)
+                .Add(ModContent.ItemType<BeeInyGun>(), Condition.DownedGolem);
         }
     }
 }

@@ -12,16 +12,16 @@
             if (Main.dedServ)
                 return;
 
-            On.Terraria.Main.DrawNPCs += DrawTargets;
-            On.Terraria.Main.CheckMonoliths += BuildTargets;
-            On.Terraria.Main.DrawDust += DrawDustTargets;
+            Terraria.On_Main.DrawNPCs += DrawTargets;
+            Terraria.On_Main.CheckMonoliths += BuildTargets;
+            Terraria.On_Main.DrawDust += DrawDustTargets;
         }
 
         public void Unload()
         {
-            On.Terraria.Main.DrawNPCs -= DrawTargets;
-            On.Terraria.Main.CheckMonoliths -= BuildTargets;
-            On.Terraria.Main.DrawDust -= DrawDustTargets;
+            Terraria.On_Main.DrawNPCs -= DrawTargets;
+            Terraria.On_Main.CheckMonoliths -= BuildTargets;
+            Terraria.On_Main.DrawDust -= DrawDustTargets;
 
             Actors = null;
         }
@@ -37,7 +37,7 @@
             oldScreenHeight = height;
         }
 
-        private void DrawTargets(On.Terraria.Main.orig_DrawNPCs orig, Main self, bool behindTiles = false)
+        private void DrawTargets(Terraria.On_Main.orig_DrawNPCs orig, Main self, bool behindTiles = false)
         {
             orig(self, behindTiles);
 
@@ -50,7 +50,7 @@
             }
         }
 
-        private void DrawDustTargets(On.Terraria.Main.orig_DrawDust orig, Main self)
+        private void DrawDustTargets(Terraria.On_Main.orig_DrawDust orig, Main self)
         {
             orig(self);
 
@@ -63,7 +63,7 @@
             }
         }
 
-        private void BuildTargets(On.Terraria.Main.orig_CheckMonoliths orig)
+        private void BuildTargets(Terraria.On_Main.orig_CheckMonoliths orig)
         {
             if (Main.graphics.GraphicsDevice != null)
             {

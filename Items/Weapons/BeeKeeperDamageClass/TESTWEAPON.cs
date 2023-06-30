@@ -1,10 +1,11 @@
+using Terraria;
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class TESTWEAPON : BeeDamageItem
     {
         public override void SafeSetStaticDefaults()
         {
-            // DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
+            DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
             Tooltip.SetDefault("TEST DONT USE");
         }
 
@@ -29,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.crit = 4;
         }
 
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Poisoned, 300, false);
         }

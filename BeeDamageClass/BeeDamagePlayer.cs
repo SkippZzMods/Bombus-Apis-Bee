@@ -1,4 +1,5 @@
-﻿using Terraria.DataStructures;
+﻿using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 
 namespace BombusApisBee.BeeDamageClass
@@ -131,9 +132,9 @@ namespace BombusApisBee.BeeDamageClass
 
             if (HeldBeeWeaponTimer > 0)
             {
-                /*if (Player.ownedProjectileCounts<BeePlayerBeeProjectile>() < CurrentBees)
+                if (Player.ownedProjectileCounts<BeePlayerBeeProjectile>() < CurrentBees)
                     Projectile.NewProjectile(Player.GetSource_ReleaseEntity("BombusApisBee: Spawn Player Bee"), Player.Center + Main.rand.NextVector2Circular(50f, 50f),
-                        Main.rand.NextVector2Circular(5f, 5f), ModContent.ProjectileType<BeePlayerBeeProjectile>(), 10, 0f, Player.whoAmI);*/
+                        Main.rand.NextVector2Circular(5f, 5f), ModContent.ProjectileType<BeePlayerBeeProjectile>(), 10, 0f, Player.whoAmI);
 
                 if (HoldingBeeWeaponTimer < 15)
                     HoldingBeeWeaponTimer++;
@@ -151,7 +152,7 @@ namespace BombusApisBee.BeeDamageClass
                     CurrentBeeState = 1;
         }
 
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+        public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
         {
             if (CurrentBeeState == (int)BeeState.Defense)
             {
@@ -179,7 +180,7 @@ namespace BombusApisBee.BeeDamageClass
                     return false;
             }
 
-            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource, ref cooldownCounter);
+            return base.ImmuneTo(damageSource, cooldownCounter, dodgeable);
         }
 
         private void UpdateDefense()
@@ -707,7 +708,7 @@ namespace BombusApisBee.BeeDamageClass
 
         private NPC FindTarget() { return Main.npc.Where(n => n.CanBeChasedBy() && n.Distance(Player.Center) < 1000f && Collision.CanHitLine(Player.Center, 1, 1, n.Center, 1, 1)).OrderBy(n => n.Distance(Player.Center)).FirstOrDefault(); }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Attacking)
             {

@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Buffs
+﻿using Terraria;
+namespace BombusApisBee.Buffs
 {
     public class SkeletalCurse : ModBuff
     {
@@ -31,16 +32,16 @@
             inflicted = false;
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             if (inflicted)
-                damage = (int)(damage * 1.15f);
+                modifiers.SourceDamage *= 1.15f;
         }
 
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (inflicted)
-                damage = (int)(damage * 1.15f);
+                modifiers.SourceDamage *= 1.15f;
         }
 
         public override void DrawEffects(NPC npc, ref Color drawColor)

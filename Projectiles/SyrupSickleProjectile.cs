@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class SyrupSickleProjectile : BeeProjectile
     {
@@ -56,7 +57,7 @@
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Main.player[Projectile.owner].AddBuff<HeartOfNectar>(240);
             if (Projectile.penetrate == 2)

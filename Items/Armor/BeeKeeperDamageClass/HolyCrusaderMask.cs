@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -8,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("5% increased damage reduction and hymenoptra damage\nIncreases maximum honey by 40\nIncreases your amount of Loyal Bees by 1");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -72,7 +73,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
                 Projectile.NewProjectile(Player.GetSource_Misc("BombusApisBee: Spawn Holy Shield"), Player.Center, Vector2.Zero, ModContent.ProjectileType<HolyShieldProjectile>(), Player.ApplyHymenoptraDamageTo(100), 0f, Player.whoAmI);
         }
 
-        public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
+        public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
             hitProjHitTimer[proj.whoAmI] = 30;
         }
@@ -234,7 +235,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             return Vector2.Distance(collisionPoint(owner), targetHitbox.Center.ToVector2()) < 50f;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (target.knockBackResist > 0)
                 target.velocity += Main.player[Projectile.owner].DirectionTo(target.Center) * 10f;

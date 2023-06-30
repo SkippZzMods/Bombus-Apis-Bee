@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.BeeHelperProj;
+using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
@@ -12,7 +13,7 @@ namespace BombusApisBee.Projectiles
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
         }
 
-        public override void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Confused, 240);
             if (Main.rand.NextBool())
@@ -75,12 +76,12 @@ namespace BombusApisBee.Projectiles
                 stacks = 0;
         }
 
-        public override void ModifyHitPlayer(NPC npc, Player target, ref int damage, ref bool crit)
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
             if (stacks <= 0)
                 return;
 
-            damage = (int)(damage * (1f - 0.05f * stacks));
+            modifiers.SourceDamage *= 1f - 0.05f * stacks;
         }
 
         public override void UpdateLifeRegen(NPC npc, ref int damage)

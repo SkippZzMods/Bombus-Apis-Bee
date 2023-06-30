@@ -6,7 +6,7 @@
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 40\nIncreases your amount of Loyal Bees by 3");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

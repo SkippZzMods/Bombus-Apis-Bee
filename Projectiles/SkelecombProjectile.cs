@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class SkelecombProjectile : BeeProjectile
     {
@@ -48,7 +49,7 @@
 
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 15; i++)
             {

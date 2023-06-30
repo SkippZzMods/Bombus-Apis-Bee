@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class TrueBeeSwordProjectile : BeeProjectile
     {
@@ -51,7 +52,7 @@
                 Projectile.alpha -= 10;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int numberProjectiles = 3 + Main.rand.Next(2); // 4 or 5 shots
             for (int i = 0; i < numberProjectiles; i++)
@@ -68,8 +69,8 @@
                     }
                 }
             }
-            base.OnHitNPC(target, damage, knockback, crit);
         }
+
         public override void Kill(int timeLeft)
         {
             for (int i = 0; i < 25; i++)

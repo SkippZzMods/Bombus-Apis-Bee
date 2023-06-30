@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class PeeperPokerThrow : BeeProjectile
     {
@@ -84,7 +85,7 @@
                 Projectile.ai[0] = -25f;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(SoundID.NPCHit18);
             if (Main.myPlayer == Projectile.owner)

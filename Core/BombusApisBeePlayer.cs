@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Items.Other.OnPickupItems;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader.IO;
@@ -98,10 +99,10 @@ namespace BombusApisBee.Core
                 LihzardRelicTimer--;
         }
 
-        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (LihzardRelicTimer > 0)
-                damage = (int)(damage * 1.1f);
+                modifiers.SourceDamage *= 1.1f;
         }
         public override void LoadData(TagCompound tag)
         {
@@ -191,7 +192,7 @@ namespace BombusApisBee.Core
             }
         }
 
-        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
+        public override void OnHurt(Player.HurtInfo info)
         {
             if (Player.whoAmI == Main.myPlayer)
             {
@@ -201,7 +202,7 @@ namespace BombusApisBee.Core
                     for (int i = 0; i < Main.rand.Next(2, 5); i++)
                     {
                         Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<RetinaReleaser>())), Player.Center,
-                            Vector2.One.RotatedByRandom(6.28f) * Main.rand.NextFloat(5, 6), ModContent.ProjectileType<CthulhuBee>(), Player.ApplyHymenoptraDamageTo((int)(damage * 0.5f)), 2.5f, Player.whoAmI);
+                            Vector2.One.RotatedByRandom(6.28f) * Main.rand.NextFloat(5, 6), ModContent.ProjectileType<CthulhuBee>(), Player.ApplyHymenoptraDamageTo((int)(info.Damage * 0.5f)), 2.5f, Player.whoAmI);
                     }
                 }
             }
@@ -235,8 +236,6 @@ namespace BombusApisBee.Core
                     }
                 }
             }
-
-            base.PostHurt(pvp, quiet, damage, hitDirection, crit, cooldownCounter);
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
@@ -336,20 +335,7 @@ namespace BombusApisBee.Core
             base.OnHitAnything(x, y, victim);
         }
 
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
-        {
-            if (MarkedTimer > 0 && target == MarkedNPC)
-            {
-                damage = (int)(damage * 1.25f);
-
-                if (!crit)
-                    crit = Main.rand.NextFloat() < ((item.crit + Player.GetTotalCritChance<HymenoptraDamageClass>()) * 2 / 100);
-            }
-            else if (MarkedTimer > 0 && MarkedNPC != null)
-                damage = (int)(damage * 0.85f);
-        }
-
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Item, consider using ModifyHitNPC instead */
         {
             if (MarkedNPC != null)
             {
@@ -363,17 +349,45 @@ namespace BombusApisBee.Core
 
                 if (MarkedTimer > 0 && Main.npc[whoAmI] == Main.npc[markedWhoAmI])
                 {
-                    damage = (int)(damage * 1.25f);
+                    modifiers.SourceDamage *= 1.25f;
 
-                    if (!crit)
-                        crit = Main.rand.NextFloat() < ((proj.CritChance * 2) / 100);
+                    if (Main.rand.NextFloat() < ((item.crit + Player.GetTotalCritChance<HymenoptraDamageClass>()) * 2 / 100))
+                        modifiers.SetCrit();
                 }
                 else if (MarkedTimer > 0)
-                    damage = (int)(damage * 0.85f);
+                    modifiers.SourceDamage *= 0.85f;
             }
         }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
         {
+            if (MarkedNPC != null)
+            {
+                int whoAmI = target.whoAmI;
+                if (target.realLife >= 0)
+                    whoAmI = target.realLife;
+
+                int markedWhoAmI = MarkedNPC.whoAmI;
+                if (MarkedNPC.realLife >= 0)
+                    markedWhoAmI = MarkedNPC.realLife;
+
+                if (MarkedTimer > 0 && Main.npc[whoAmI] == Main.npc[markedWhoAmI])
+                {
+                    modifiers.SourceDamage *= 1.25f;
+
+                    if (Main.rand.NextFloat() < ((proj.CritChance * 2) / 100))
+                        modifiers.SetCrit();
+                }
+                else if (MarkedTimer > 0)
+                    modifiers.SourceDamage *= 0.85f;
+            }
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
+        {
+            bool crit = hit.Crit;
+            int damage = damageDone;
+
             if (target == MarkedNPC && target.life <= 0)
             {
                 if (Player.HasBuff<BrokenScope>())

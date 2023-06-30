@@ -7,10 +7,10 @@
             if (Main.dedServ)
                 return;
 
-            On.Terraria.Main.DrawDust += DrawPrims;
+            Terraria.On_Main.DrawDust += DrawPrims;
         }
 
-        private static void DrawPrims(On.Terraria.Main.orig_DrawDust orig, Main self)
+        private static void DrawPrims(Terraria.On_Main.orig_DrawDust orig, Main self)
         {
             orig(self);
 

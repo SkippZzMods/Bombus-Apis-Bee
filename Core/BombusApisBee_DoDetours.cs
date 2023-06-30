@@ -4,7 +4,7 @@
     {
         public static void Load()
         {
-            On.Terraria.Main.DrawInfernoRings += PlayerDraw;
+            Terraria.On_Main.DrawInfernoRings += PlayerDraw;
             //On.Terraria.Main.DoDraw += Main_DoDraw;
         }
 
@@ -53,11 +53,11 @@
 
         public static void Unload()
         {
-            On.Terraria.Main.DrawInfernoRings -= PlayerDraw;
+            Terraria.On_Main.DrawInfernoRings -= PlayerDraw;
             //On.Terraria.Main.DoDraw -= Main_DoDraw;
         }
 
-        private static void PlayerDraw(On.Terraria.Main.orig_DrawInfernoRings orig, Main self)
+        private static void PlayerDraw(Terraria.On_Main.orig_DrawInfernoRings orig, Main self)
         {
             for (int i = 0; i < Main.maxPlayers; i++)
             {

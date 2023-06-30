@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿using Terraria;
+namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class ChlorophyteHat : BeeKeeperItem
@@ -7,7 +8,7 @@
         {
             DisplayName.SetDefault("Chlorophyte Veil");
             Tooltip.SetDefault("16% increased hymenoptra damage\nIncreases maximum honey by 50\nIncreases your amount of Loyal Bees by 5");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {
@@ -63,16 +64,16 @@
                     Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.Glow>(), 0f, 0f, 25, new Color(161, 236, 0), Main.rand.NextFloat(0.3f, 0.5f));
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             if (ChloroStacks > 0)
-                damage = (int)(damage * (1f + (0.03f * ChloroStacks)));
+                modifiers.SourceDamage *= 1f + (0.03f * ChloroStacks);
         }
 
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (ChloroStacks > 0)
-                damage = (int)(damage * (1f + (0.03f * ChloroStacks)));
+                modifiers.SourceDamage *= 1f + (0.03f * ChloroStacks);
         }
     }
 }

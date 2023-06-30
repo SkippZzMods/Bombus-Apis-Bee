@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("6% increased hymenoptra damage and critical strike chance\nIncreases your amount of Loyal Bees by 1");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

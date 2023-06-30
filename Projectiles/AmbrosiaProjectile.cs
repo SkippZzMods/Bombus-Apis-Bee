@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class AmbrosiaProjectile : BeeProjectile
     {
@@ -38,7 +39,7 @@
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(1f, 1f), 0, new Color(255, 191, 73), 0.35f);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.NextBool(5))
                 Projectile.NewProjectile(Projectile.GetSource_OnHit(target), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AmbrosiaExplosion>(), Projectile.damage / 2, 0, Projectile.owner);
@@ -130,7 +131,7 @@
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + line);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Main.player[Projectile.owner].Heal(2);
         }

@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
         {
             DisplayName.SetDefault("Bee Squire Shield");
             Tooltip.SetDefault("'The most noble of bee squires shall protect you!'\nSummons a bee squire that hovers near you, firing arrows at nearby enemies");
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

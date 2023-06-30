@@ -7,10 +7,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<SpazHoneycomb>() <= 0 && player.ownedProjectileCounts<RetinaHoneycomb>() <= 0;
         public override void Load()
         {
-            On.Terraria.Player.UpdateEquips += Player_UpdateEquips;
+            Terraria.On_Player.UpdateEquips += Player_UpdateEquips;
         }
 
-        private void Player_UpdateEquips(On.Terraria.Player.orig_UpdateEquips orig, Player self, int i)
+        private void Player_UpdateEquips(Terraria.On_Player.orig_UpdateEquips orig, Player self, int i)
         {
             orig(self, i);
 

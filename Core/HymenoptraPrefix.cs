@@ -177,11 +177,10 @@
             GlobalItem.honeyBonus = honeyBonus;
             return GlobalItem;
         }
-        public override bool PreReforge(Item item)
+        public override void PreReforge(Item item)/* tModPorter Note: Use CanReforge instead for logic determining if a reforge can happen. */
         {
             chanceBonus = 0f;
             honeyBonus = 0;
-            return true;
         }
         private void BombusAccessoryTooltip(Item item, IList<TooltipLine> tooltips)
         {

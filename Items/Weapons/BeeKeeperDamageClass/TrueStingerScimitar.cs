@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
@@ -42,7 +43,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             return false;
         }
 
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Poisoned, 300, false);
         }

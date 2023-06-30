@@ -12,7 +12,7 @@ namespace BombusApisBee.BeeDamageClass
         public virtual void SafeSetStaticDefaults() { }
         public sealed override void SetStaticDefaults()
         {
-            SacrificeTotal = 1;
+            Item.ResearchUnlockCount = 1;
             SafeSetStaticDefaults();
         }
         public virtual void SafeSetDefaults()

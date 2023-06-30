@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Other.Crafting
         {
             DisplayName.SetDefault("Pollen");
             Tooltip.SetDefault("'Careful if you're allergic'");
-            SacrificeTotal = 999;
+            Item.ResearchUnlockCount = 999;
         }
         public override void SetDefaults()
         {
@@ -34,7 +34,7 @@ namespace BombusApisBee.Items.Other.Crafting
 
             spriteBatch.Draw(tex, position, tex.Frame(), drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
 
-            spriteBatch.Draw(glowTex, position + new Vector2(8, 8), null, new Color(255, 150, 0, 0), 0f, glowTex.Size() / 2f, .4f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(glowTex, position, null, new Color(255, 150, 0, 0), 0f, glowTex.Size() / 2f, .4f, SpriteEffects.None, 0f);
 
             return false;
         }
@@ -60,11 +60,6 @@ namespace BombusApisBee.Items.Other.Crafting
             spriteBatch.Draw(glowTex, Item.position - Main.screenPosition, null, new Color(255, 150, 0, 0) * MathHelper.Lerp(.5f, 1f, Utils.Clamp((float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 4f), 0, 1)), 0f, glowTex.Size() / 2f, 0.4f, SpriteEffects.None, 0f);
 
             return false;
-        }
-
-        public override bool? CanBurnInLava()
-        {
-            return true;
         }
     }
 }

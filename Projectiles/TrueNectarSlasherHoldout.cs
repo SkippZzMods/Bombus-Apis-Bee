@@ -1,4 +1,5 @@
-﻿namespace BombusApisBee.Projectiles
+﻿using Terraria;
+namespace BombusApisBee.Projectiles
 {
     public class TrueNectarSlasherHoldout : BeeProjectile
     {
@@ -347,29 +348,29 @@
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             switch (Combo)
             {
                 case 0: //down
-                    damage = (int)(damage * 1.35f);
+                    modifiers.SourceDamage *= 1.35f;
                     break;
                 case 1: //up
-                    damage = (int)(damage * 1.35f);
+                    modifiers.SourceDamage *= 1.35f;
                     break;
                 case 2: //heavy
-                    damage = (int)(damage * 2.15f);
+                    modifiers.SourceDamage *= 2.15f;
                     break;
                 case 3: //throw
-                    damage = (int)(damage * 0.95f);
+                    modifiers.SourceDamage *= 0.95f;
                     break;
                 case 4: //heavy
-                    damage = (int)(damage * 2.15f);
+                    modifiers.SourceDamage *= 2.15f;
                     break;
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (NPCID.Sets.ProjectileNPC[target.type])
                 return;
@@ -588,7 +589,7 @@
             else
                 trail?.Render(effect);
 
-            Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
         #endregion Primitive Drawing
     }
@@ -637,7 +638,7 @@
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Main.player[Projectile.owner].Heal(2);
 
@@ -694,7 +695,7 @@
             effect.Parameters["transformMatrix"].SetValue(world * view * projection);
             effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/GlowTrail").Value);
             trail?.Render(effect);
-            Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
     }
 
@@ -762,7 +763,7 @@
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Main.player[Projectile.owner].Heal(Main.rand.Next(1, 3));
 
@@ -827,7 +828,7 @@
             effect.Parameters["transformMatrix"].SetValue(world * view * projection);
             effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/GlowTrail").Value);
             trail?.Render(effect);
-            Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
     }
 }

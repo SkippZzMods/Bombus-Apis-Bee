@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.BeeHelperProj;
+using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
@@ -22,7 +23,7 @@ namespace BombusApisBee.Projectiles
             SoundID.NPCHit2.PlayWith(Projectile.Center);
         }
 
-        public override void SafeOnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.NextBool())
             {
@@ -82,7 +83,7 @@ namespace BombusApisBee.Projectiles
             Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), -Projectile.velocity.RotatedByRandom(0.35f) * 0.5f, 0, new Color(238, 164, 255), 0.35f);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.velocity *= 0.5f;
         }
