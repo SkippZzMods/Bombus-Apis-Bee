@@ -1,80 +1,81 @@
-﻿namespace BombusApisBee.Core.Metaballs
+﻿using System.Threading;
+
+namespace BombusApisBee.Core.Metaballs
 {
-    public class MetaballSystem : ILoadable
+    public class MetaballSystem : IOrderedLoadable
     {
-        public static int oldScreenWidth = 0;
-        public static int oldScreenHeight = 0;
+		public static Semaphore actorsSem = new(1, 1);
 
-        public static List<MetaballActor> Actors = new List<MetaballActor>();
+		public static List<MetaballActor> actors = new();
 
-        public void Load(Mod mod)
-        {
-            if (Main.dedServ)
-                return;
+		//We intentionally load after screen targets here so our extra RT swapout applies after the default ones.
+		public float Priority => 1.1f;
 
-            Terraria.On_Main.DrawNPCs += DrawTargets;
-            Terraria.On_Main.CheckMonoliths += BuildTargets;
-            Terraria.On_Main.DrawDust += DrawDustTargets;
-        }
+		public void Load()
+		{
+			if (Main.dedServ)
+				return;
 
-        public void Unload()
-        {
-            Terraria.On_Main.DrawNPCs -= DrawTargets;
-            Terraria.On_Main.CheckMonoliths -= BuildTargets;
-            Terraria.On_Main.DrawDust -= DrawDustTargets;
+			On_Main.DrawNPCs += DrawTargets;
+			On_Main.CheckMonoliths += BuildTargets;
+			On_Main.DrawDust += DrawDustTargets;
+		}
 
-            Actors = null;
-        }
+		public void Unload()
+		{
+			On_Main.DrawNPCs -= DrawTargets;
+			On_Main.CheckMonoliths -= BuildTargets;
+			On_Main.DrawDust -= DrawDustTargets;
 
-        public void UpdateWindowSize(int width, int height)
-        {
-            Main.QueueMainThreadAction(() =>
-            {
-                Actors.ForEach(n => n.ResizeTarget(width, height));
-            });
+			actorsSem.WaitOne();
+			actors = null;
+			actorsSem.Release();
+		}
 
-            oldScreenWidth = width;
-            oldScreenHeight = height;
-        }
+		private void DrawTargets(On_Main.orig_DrawNPCs orig, Main self, bool behindTiles = false)
+		{
+			if (behindTiles)
+			{
+				actorsSem.WaitOne();
+				var toDraw = actors.Where(n => !n.OverEnemies).ToList();
+				toDraw.ForEach(a => a.DrawTarget(Main.spriteBatch));
+				actorsSem.Release();
+			}
 
-        private void DrawTargets(Terraria.On_Main.orig_DrawNPCs orig, Main self, bool behindTiles = false)
-        {
-            orig(self, behindTiles);
+			orig(self, behindTiles);
 
-            foreach (MetaballActor a in Actors)
-            {
-                if (!a.overNPCS && !a.actAsDust && behindTiles)
-                    a.DrawTarget(Main.spriteBatch);
-                else if (a.overNPCS && !a.actAsDust && !behindTiles)
-                    a.DrawTarget(Main.spriteBatch);
-            }
-        }
+			if (!behindTiles)
+			{
+				actorsSem.WaitOne();
+				var toDraw = actors.Where(n => n.OverEnemies).ToList();
+				toDraw.ForEach(a => a.DrawTarget(Main.spriteBatch));
+				actorsSem.Release();
+			}
+		}
 
-        private void DrawDustTargets(Terraria.On_Main.orig_DrawDust orig, Main self)
+		private void BuildTargets(On_Main.orig_CheckMonoliths orig)
+		{
+			orig();
+
+			if (!Main.gameMenu && Main.spriteBatch != null && Main.graphics.GraphicsDevice != null)
+			{
+				actorsSem.WaitOne();
+				actors.ForEach(a => a.DrawToTarget(Main.spriteBatch, Main.graphics.GraphicsDevice));
+				actorsSem.Release();
+			}
+		}
+
+		private void DrawDustTargets(Terraria.On_Main.orig_DrawDust orig, Main self)
         {
             orig(self);
 
-            foreach (MetaballActor a in Actors)
+            foreach (MetaballActor a in actors)
             {
                 if (a.actAsDust)
                 {
                     a.DrawDustTarget(Main.spriteBatch);
                 }
             }
-        }
-
-        private void BuildTargets(Terraria.On_Main.orig_CheckMonoliths orig)
-        {
-            if (Main.graphics.GraphicsDevice != null)
-            {
-                if (Main.screenWidth != oldScreenWidth || Main.screenHeight != oldScreenHeight)
-                    UpdateWindowSize(Main.screenWidth, Main.screenHeight);
-            }
-
-            if (Main.spriteBatch != null && Main.graphics.GraphicsDevice != null)
-                Actors.ForEach(a => a.DrawToTarget(Main.spriteBatch, Main.graphics.GraphicsDevice));
-
-            orig();
         }
     }
 }

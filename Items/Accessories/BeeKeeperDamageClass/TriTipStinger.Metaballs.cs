@@ -6,9 +6,9 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override bool Active => Main.dust.Any(x => x.active && x.type == ModContent.DustType<TriTipStingerDust>());
 
-        public override Color outlineColor => new Color(180, 255, 0);
+        public override Color OutlineColor => new Color(180, 255, 0);
 
-        public override bool overNPCS => false;
+        public override bool OverEnemies => false;
 
         public override void DrawShapes(SpriteBatch spriteBatch)
         {

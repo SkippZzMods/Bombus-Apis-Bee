@@ -1,16 +1,47 @@
 ﻿using BombusApisBee.Core.UILoading;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
+using static BombusApisBee.BeeDamageClass.BeeDamagePlayer;
 
 namespace BombusApisBee.UI
 {
     public class BeePlayerUI : UIState
     {
+        internal BeeState oldState;
+        internal BeeState state;
+
+        internal int switchTimer;
+        internal int[] glowTimer = new int[3];
+
+        internal Vector2 PositionBottom = Vector2.Zero;
+        internal Vector2 PositionRight = new Vector2(25f, -25f);
+        internal Vector2 PositionLeft = new Vector2(-25f, -25f);
+
         internal static float YOffset => ModContent.GetInstance<BombusConfig>().yOffset;
+
+        public override void Update(GameTime gameTime)
+        {
+            if (state == 0)
+            {
+                state = (BeeState)Main.LocalPlayer.Hymenoptra().CurrentBeeState;
+            }
+
+            if ((int)state != Main.LocalPlayer.Hymenoptra().CurrentBeeState)
+            {
+                oldState = state;
+                state = (BeeState)Main.LocalPlayer.Hymenoptra().CurrentBeeState;
+                switchTimer = 20;
+            }
+
+            if (switchTimer > 0)
+                switchTimer--;
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI").Value;
+            Texture2D texOffense = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Offense").Value;
+            Texture2D texGathering = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Gathering").Value;
+            Texture2D texDefense = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Defense").Value;
 
             var mp = Main.LocalPlayer.Hymenoptra();
 
@@ -20,20 +51,242 @@ namespace BombusApisBee.UI
 
                 Color color = Color.White * fade;
 
-                Rectangle frame = tex.Frame(verticalFrames: 4, frameY: 1);
+                
+                
+                float lerper = 1f;
+                if (switchTimer > 0)
+                    lerper = 1f - switchTimer / 20f;
 
-                Vector2 position = new Vector2(Main.screenWidth / 2, Main.screenHeight / 2) + new Vector2(0f, 25f + YOffset);
+                DrawToken(texOffense, color, (int)BeeState.Offense, lerper);
 
-                float uiScale = 1f + (Main.UIScale * 0.5f / 100);
+                DrawToken(texGathering, color, (int)BeeState.Gathering, lerper);
 
-                Main.spriteBatch.Draw(tex, position, frame, color, 0, frame.Size() / 2f, uiScale, 0f, 0f);
-  
-                frame = tex.Frame(verticalFrames: 4, frameY: 2);
-                Main.spriteBatch.Draw(tex, position + new Vector2(-35, 0f), frame, color, 0, frame.Size() / 2f, uiScale, 0f, 0f);
-
-                frame = tex.Frame(verticalFrames: 4, frameY: 3);
-                Main.spriteBatch.Draw(tex, position + new Vector2(35, 0f), frame, color, 0, frame.Size() / 2f, uiScale, 0f, 0f);
+                DrawToken(texDefense, color, (int)BeeState.Defense, lerper);
             }
+        }
+
+        internal void DrawToken(Texture2D tex, Color color, int type, float lerper)
+        {
+            Texture2D texGlow = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Glow").Value;
+            Texture2D glowTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+
+            Vector2 position = new Vector2(Main.screenWidth / 2, Main.screenHeight / 2) + new Vector2(0f, 65f + YOffset);
+            float uiScale = 1f + (Main.UIScale * 0.5f / 100);
+
+            Vector2 offset = Vector2.Lerp(GetOffset((int)oldState, type), GetOffset((int)state, type), lerper);
+
+            float alpha = MathHelper.Lerp(GetAlpha((int)oldState, type), GetAlpha((int)state, type), lerper);
+
+            float scale = MathHelper.Lerp(GetScale((int)oldState, type), GetScale((int)state, type), lerper);
+
+            ref int timer = ref glowTimer[type - 1];
+
+            if (alpha < 1f && timer > 0)
+            {
+                alpha = MathHelper.Lerp(alpha, 1f, timer / 10f);
+            }
+
+
+            if (Vector2.Distance(Main.MouseWorld - Main.screenPosition, position + offset) < 20f * scale)
+            {
+                Main.spriteBatch.Draw(glowTex, position + offset
+                , null, Color.Lerp(Color.Transparent, new Color(220, 155, 20, 0), timer / 10f) * 0.45f, 0, glowTex.Size() / 2f, uiScale * scale, 0f, 0f);
+
+                Main.spriteBatch.Draw(texGlow, position + offset
+                , null, Color.Lerp(Color.Transparent, new Color(220, 155, 20, 0), timer / 10f), 0, texGlow.Size() / 2f, uiScale * scale, 0f, 0f);
+
+                Main.instance.MouseText(GetHoverText((int)state, type), ItemRarityID.Yellow);
+                Main.LocalPlayer.mouseInterface = true;
+
+                if (Main.mouseLeft && Main.mouseLeftRelease && Main.LocalPlayer.Hymenoptra().StateSwitchCooldown <= 0 && Main.LocalPlayer.Hymenoptra().CurrentBeeState != type)
+                {
+                    Main.LocalPlayer.Hymenoptra().StateSwitchCooldown = 20;
+                    Main.LocalPlayer.Hymenoptra().CurrentBeeState = type;
+                }
+
+                if (timer < 10)
+                    timer++;
+            }
+            else
+            {
+                if (timer > 0)
+                    timer--;
+            }
+                
+
+            Main.spriteBatch.Draw(tex, position + offset
+                 , null, color * alpha, 0, tex.Size() / 2f, uiScale * scale, 0f, 0f);
+        }
+
+        internal string GetHoverText(int state, int type)
+        {
+            var mp = Main.LocalPlayer.Hymenoptra();
+
+            switch (state)
+            {
+                case (int)BeeState.Defense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return "Your bees are in Defending Mode\nYour defense is increased by "
+                        + mp.CurrentBees * 2 + ", and you are granted a Honey shield which blocks one attack while your bees are in Defending Mode";
+
+                        case (int)BeeState.Offense: return "Left Click to switch your bees into Attacking Mode\nYou are granted "
+                        + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
+
+                        case (int)BeeState.Gathering: return "Left Click to switch your bees into Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
+                    }
+                    break;
+
+                case (int)BeeState.Offense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return "Left Click to switch your bees into Defending Mode\nYour defense is increased by "
+                        + mp.CurrentBees * 2 + ", and you are granted a Honey shield which blocks one attack while your bees are in Defending Mode";
+
+                        case (int)BeeState.Offense: return "Your bees are in Attacking Mode\nYou are granted "
+                        + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
+
+                        case (int)BeeState.Gathering: return "Left Click to switch your bees into Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
+                    }
+                    break;
+
+                case 3:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return "Left Click to switch your bees into Defending Mode\nYour defense is increased by "
+                        + mp.CurrentBees * 2 + ", and you are granted a Honey shield which blocks one attack while your bees are in Defending Mode";
+
+                        case (int)BeeState.Offense: return "Left Click to switch your bees into Attacking Mode\nYou are granted "
+                        + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
+
+                        case (int)BeeState.Gathering: return "Your bees are in Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
+                    }
+                    break;
+            }
+
+            return "";
+        }
+        internal float GetScale(int state, int type)
+        {
+            switch (state)
+            {
+                case (int)BeeState.Defense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return 1.2f;
+
+                        case (int)BeeState.Offense: return 0.85f;
+
+                        case (int)BeeState.Gathering: return 0.85f;
+                    }
+                    break;
+
+                case (int)BeeState.Offense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return 0.85f;
+
+                        case (int)BeeState.Offense: return 1.2f;
+
+                        case (int)BeeState.Gathering: return 0.85f;
+                    }
+                    break;
+
+                case 3:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return 0.85f;
+
+                        case (int)BeeState.Offense: return 0.85f;
+
+                        case (int)BeeState.Gathering: return 1.2f;
+                    }
+                    break;
+            }
+
+            return 1f;
+        }
+
+        internal float GetAlpha(int state, int type)
+        {
+            switch (state)
+            {
+                case (int)BeeState.Defense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return 1f;
+
+                        case (int)BeeState.Offense: return 0.5f;
+
+                        case (int)BeeState.Gathering: return 0.5f;
+                    }
+                    break;
+
+                case (int)BeeState.Offense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return 0.5f;
+
+                        case (int)BeeState.Offense: return 1f;
+
+                        case (int)BeeState.Gathering: return 0.5f;
+                    }
+                    break;
+
+                case 3:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return 0.5f;
+
+                        case (int)BeeState.Offense: return 0.5f;
+
+                        case (int)BeeState.Gathering: return 1f;
+                    }
+                    break;
+            }
+
+            return 1f;
+        }
+
+        internal Vector2 GetOffset(int state, int type)
+        {
+            switch (state)
+            {
+                case (int)BeeState.Defense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return PositionBottom;
+
+                        case (int)BeeState.Offense: return PositionLeft;
+
+                        case (int)BeeState.Gathering: return PositionRight;
+                    }
+                    break;
+
+                case (int)BeeState.Offense:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return PositionRight;
+
+                        case (int)BeeState.Offense: return PositionBottom;
+
+                        case (int)BeeState.Gathering: return PositionLeft;
+                    }
+                    break;
+
+                case 3:
+                    switch (type)
+                    {
+                        case (int)BeeState.Defense: return PositionLeft;
+
+                        case (int)BeeState.Offense: return PositionRight;
+
+                        case (int)BeeState.Gathering: return PositionBottom;
+                    }
+                    break;
+            }
+
+            return Vector2.Zero;
         }
     }
 }

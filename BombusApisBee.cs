@@ -23,6 +23,7 @@ global using Terraria.ModLoader;
 global using static Terraria.ModLoader.ModContent;
 using BombusApisBee.UI;
 using ReLogic.Content;
+using System.Reflection;
 using Terraria.UI;
 
 namespace BombusApisBee
@@ -49,6 +50,16 @@ namespace BombusApisBee
 
         public BeePlayerUI BeePlayerUI;
 
+        private List<IOrderedLoadable> loadCache;
+
+        public static void SetLoadingText(string text)
+        {
+            FieldInfo Interface_loadMods = typeof(Mod).Assembly.GetType("Terraria.ModLoader.UI.Interface")!.GetField("loadMods", BindingFlags.NonPublic | BindingFlags.Static)!;
+            MethodInfo UIProgress_set_SubProgressText = typeof(Mod).Assembly.GetType("Terraria.ModLoader.UI.UIProgress")!.GetProperty("SubProgressText", BindingFlags.Public | BindingFlags.Instance)!.GetSetMethod()!;
+
+            UIProgress_set_SubProgressText.Invoke(Interface_loadMods.GetValue(null), new object[] { text });
+        }
+
         public override void Load()
         {
             if (!Main.dedServ)
@@ -74,6 +85,26 @@ namespace BombusApisBee
             BeekeeperStateSwitchHotkey = KeybindLoader.RegisterKeybind(this, "Change Beekeeper State", "N");
 
             BeeDamageInterface.SetState(BeePlayerUI);
+
+
+            loadCache = new List<IOrderedLoadable>();
+
+            foreach (Type type in Code.GetTypes())
+            {
+                if (!type.IsAbstract && type.GetInterfaces().Contains(typeof(IOrderedLoadable)))
+                {
+                    object instance = Activator.CreateInstance(type);
+                    loadCache.Add(instance as IOrderedLoadable);
+                }
+
+                loadCache.Sort((n, t) => n.Priority.CompareTo(t.Priority));
+            }
+
+            for (int k = 0; k < loadCache.Count; k++)
+            {
+                loadCache[k].Load();
+                SetLoadingText("Loading " + loadCache[k].GetType().Name);
+            }
         }
 
         public override void Unload()
@@ -89,6 +120,20 @@ namespace BombusApisBee
             HoneyManipulatorHotkey = null;
 
             LihzardianRelicHotkey = null;
+
+            if (loadCache != null)
+            {
+                foreach (IOrderedLoadable loadable in loadCache)
+                {
+                    loadable.Unload();
+                }
+
+                loadCache = null;
+            }
+            else
+            {
+                Logger.Warn("load cache was null, IOrderedLoadable's may not have been unloaded...");
+            }
         }
     }
 }

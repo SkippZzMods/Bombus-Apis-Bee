@@ -2,7 +2,7 @@
 
 namespace BombusApisBee.Core.ScreenTargetSystem
 {
-    internal class ScreenTargetHandler : ModSystem
+    internal class ScreenTargetHandler : ModSystem, IOrderedLoadable
     {
         public static List<ScreenTarget> targets = new();
         public static Semaphore targetSem = new(1, 1);
@@ -11,23 +11,36 @@ namespace BombusApisBee.Core.ScreenTargetSystem
 
         public float Priority => 1;
 
-        public override void Load()
+        new public void Load()
         {
-            Terraria.On_Main.CheckMonoliths += RenderScreens;
-            Main.OnResolutionChanged += ResizeScreens;
+            if (!Main.dedServ)
+            {
+                On_Main.CheckMonoliths += RenderScreens;
+                Main.OnResolutionChanged += ResizeScreens;
+            }
         }
 
-        public override void Unload()
+        new public void Unload()
         {
-            Terraria.On_Main.CheckMonoliths -= RenderScreens;
-            Main.OnResolutionChanged -= ResizeScreens;
-
-            Main.QueueMainThreadAction(() =>
+            if (!Main.dedServ)
             {
-                targets.ForEach(n => n.RenderTarget.Dispose());
-                targets.Clear();
-                targets = null;
-            });
+                On_Main.CheckMonoliths -= RenderScreens;
+                Main.OnResolutionChanged -= ResizeScreens;
+
+                Main.QueueMainThreadAction(() =>
+                {
+                    if (targets != null)
+                    {
+                        targets.ForEach(n => n.RenderTarget?.Dispose());
+                        targets.Clear();
+                        targets = null;
+                    }   
+                    else
+                    {
+                        Mod.Logger.Warn("Screen targets was null, all ScreenTargets may not have been released! (leaking VRAM!)");
+                    }
+                });
+            }
         }
 
         /// <summary>

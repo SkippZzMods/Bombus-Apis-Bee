@@ -6,9 +6,9 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override bool Active => Main.projectile.Any(x => x.active && x.type == ModContent.ProjectileType<BandHoneyGlob>()) || Main.dust.Any(x => x.active && x.type == ModContent.DustType<BandHoneyDust>());
 
-        public override Color outlineColor => new Color(255, 245, 40);
+        public override Color OutlineColor => new Color(255, 245, 40);
 
-        public override bool overNPCS => true;
+        public override bool OverEnemies => true;
 
         public override void DrawShapes(SpriteBatch spriteBatch)
         {

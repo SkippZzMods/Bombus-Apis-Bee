@@ -6,7 +6,7 @@ namespace BombusApisBee.Dusts
     {
         public override bool Active => Main.dust.Any(x => x.active && x.type == ModContent.DustType<HoneyMetaballDustTransparent>());
 
-        public override Color outlineColor => new Color(255, 200, 20);
+        public override Color OutlineColor => new Color(255, 200, 20);
 
         public override bool actAsDust => true;
         public override void DrawShapes(SpriteBatch spriteBatch)
@@ -61,7 +61,7 @@ namespace BombusApisBee.Dusts
     {
         public override bool Active => Main.dust.Any(x => x.active && x.type == ModContent.DustType<HoneyMetaballDust>());
 
-        public override Color outlineColor => new Color(255, 200, 0);
+        public override Color OutlineColor => new Color(255, 200, 0);
 
         public override bool actAsDust => true;
         public override void DrawShapes(SpriteBatch spriteBatch)

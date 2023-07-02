@@ -43,6 +43,8 @@ namespace BombusApisBee.BeeDamageClass
         public int HoldingBeeWeaponTimer;
         public int HeldBeeWeaponTimer;
 
+        public int StateSwitchCooldown;
+
         public bool HasBees => Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > 0;
 
         public static BeeDamagePlayer ModPlayer(Player player)
@@ -84,6 +86,9 @@ namespace BombusApisBee.BeeDamageClass
 
         public override void PostUpdateMiscEffects()
         {
+            if (StateSwitchCooldown > 0)
+                StateSwitchCooldown--;
+
             if (++BeeResourceRegenTimer >= 60)
             {
                 Player.IncreaseBeeResource(BeeResourceIncrease, false);
@@ -145,11 +150,15 @@ namespace BombusApisBee.BeeDamageClass
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (BombusApisBee.BeekeeperStateSwitchHotkey.JustPressed)
+            if (BombusApisBee.BeekeeperStateSwitchHotkey.JustPressed && StateSwitchCooldown <= 0)
+            {
                 if (CurrentBeeState < 3)
                     CurrentBeeState++;
                 else
                     CurrentBeeState = 1;
+
+                StateSwitchCooldown = 20;
+            }
         }
 
         public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)
