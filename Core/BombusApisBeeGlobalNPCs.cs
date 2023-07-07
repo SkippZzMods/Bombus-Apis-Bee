@@ -3,6 +3,7 @@ using BombusApisBee.Items.Other.Crafting;
 using Terraria.Chat;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Localization;
+using Terraria.ID;
 
 namespace BombusApisBee.Core
 {
@@ -69,6 +70,16 @@ namespace BombusApisBee.Core
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
+            if (npc.type == NPCID.ZombieMerman || npc.type == NPCID.EyeballFlyingFish)
+            {
+                npcLoot.Add(new ItemDropWithConditionRule(ItemType<HemocombShard>(), 8, 1, 1, new HemocombShardCondition()));
+            }
+
+            if (npc.type == NPCID.BloodZombie)
+            {
+                npcLoot.Add(new ItemDropWithConditionRule(ItemType<HemocombShard>(), 100, 1, 1, new HemocombShardCondition()));
+            }            
+
             if (npc.type == NPCID.FlyingSnake || npc.type == NPCID.Lihzahrd || npc.type == NPCID.LihzahrdCrawler)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LihzardianHornetRelic>(), 35));
 
@@ -155,6 +166,14 @@ namespace BombusApisBee.Core
 
             if (PillarList.Contains(npc.type))
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<PhotonFragment>(), 5, 4));
+        }
+
+        public override void ModifyShop(NPCShop shop)
+        {
+            if (shop.NpcType == NPCID.Merchant)
+            {
+                shop.InsertBefore(ItemID.PiggyBank, ModContent.ItemType<RottenHoneycombShard>());
+            }
         }
     }
 }

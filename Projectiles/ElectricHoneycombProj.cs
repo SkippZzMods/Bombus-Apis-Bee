@@ -307,7 +307,7 @@ namespace BombusApisBee.Projectiles
             trail?.Render(effect);
         }
     }
-    public class ElectricBee : BeeHelper
+    public class ElectricBee : BaseBeeProjectile
     {
         public override Color? GetAlpha(Color lightColor)
         {

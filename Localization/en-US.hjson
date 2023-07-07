@@ -181,6 +181,7 @@ Mods: {
 			VolatileGel.DisplayName: Bouncy Slimeball
 			WaspAccessory.DisplayName: Wasp
 			WasparangHoldout.DisplayName: Beemerang
+			HellcombShardExplosion.DisplayName: Volatile Explosion
 		}
 
 		DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
@@ -274,6 +275,11 @@ Mods: {
 			HiveBlessingBuff: {
 				DisplayName: Hive Blessing
 				Description: You are blessed by the Hive
+			}
+
+			RottenDebuff: {
+				DisplayName: Rotten
+				Description: u smell gross
 			}
 		}
 
@@ -1226,6 +1232,44 @@ Mods: {
 					Release to throw the wasparang, spawning wasps whilst travelling, and creating homing stingers on hit
 					'''
 			}
+
+			HoneycombShard.Tooltip:
+				'''
+				Increases the chance to strengthen friendly bees by 15%
+				'Crunchy!'
+				'''
+			RottenHoneycombShard.Tooltip:
+				'''
+				Increases the chance to strengthen friendly bees by 20%
+				Strengthened bees apply a weakening debuff
+				'Smells horrible'
+				'''
+			HemocombShard.Tooltip:
+				'''
+				Increases the chance to strengthen friendly bees by 30%
+				Strengthened bees have a chance to explode into healing meat chunks
+				'''
+
+			HemocombShardChunk1: {
+				DisplayName: Meat Chunk
+				Tooltip: You shouldn't see this...
+			}
+
+			HemocombShardChunk2: {
+				DisplayName: Meat Chunk
+				Tooltip: You shouldn't see this...
+			}
+
+			HemocombShardChunk3: {
+				DisplayName: Meat Chunk
+				Tooltip: You shouldn't see this...
+			}
+
+			HellcombShard.Tooltip:
+				'''
+				Increases the chance to strengthen friendly bees by 40%
+				Strengthened bees have a chance to cause volatile explosions
+				'''
 		}
 
 		NPCs: {

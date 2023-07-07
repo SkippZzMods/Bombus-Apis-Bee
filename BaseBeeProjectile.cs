@@ -3,7 +3,7 @@ using Terraria.DataStructures;
 
 namespace BombusApisBee.BeeHelperProj
 {
-    public abstract class BeeHelper : ModProjectile
+    public abstract class BaseBeeProjectile : ModProjectile
     {
         public int BeeAITimer;
         public bool Velocity = true;
@@ -36,45 +36,22 @@ namespace BombusApisBee.BeeHelperProj
             if (!CanBeGiant)
                 return;
 
-            if (source is EntitySource_ItemUse_WithAmmo { Entity: Player owner, Item: Item item })
-            {
-                if (owner.strongBees)
-                    Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
-            }
-            else if (source is EntitySource_Death { Entity: Projectile proj })
-            {
-                if (Main.player[proj.owner].strongBees)
-                    Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
-            }
-            else if (source is EntitySource_Parent { Entity: Projectile projectile })
-            {
-                if (Main.player[projectile.owner].strongBees)
-                    Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
-            }
-            else if (source is EntitySource_OnHit { Attacker: Projectile proj2 })
-            {
-                if (Main.player[proj2.owner].strongBees)
-                    Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
-            }
-            else if (source is EntitySource_OnHit { Attacker: Player player })
-            {
-                if (player.strongBees)
-                    Projectile.ai[0] = Main.rand.NextBool() ? 1f : 0f;
-            }
+            if (Main.player[Projectile.owner].Hymenoptra().BeeStrengthenChance > 0f)
+                Projectile.ai[0] = Main.rand.NextFloat() < Main.player[Projectile.owner].Hymenoptra().BeeStrengthenChance ? 1f : 0f;
 
             Projectile.width = (Giant && CanBeGiant) ? GiantWidth : SmallWidth;
             Projectile.height = (Giant && CanBeGiant) ? GiantHeight : SmallHeight;
+
             if (Giant && CanBeGiant)
                 otherGiant = true;
         }
 
-        public virtual bool? SafeCanHitNPC(NPC target) { return true; }
         public sealed override bool? CanHitNPC(NPC target)
         {
             if (target.GetGlobalNPC<BombusApisBeeGlobalNPCs>().BeeHitCooldown[Projectile.owner] > 0)
                 return false;
 
-            return SafeCanHitNPC(target);
+            return null;
         }
 
         public sealed override void SetDefaults()

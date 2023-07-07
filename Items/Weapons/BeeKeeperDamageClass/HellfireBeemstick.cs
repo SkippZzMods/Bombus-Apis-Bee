@@ -5,6 +5,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class HellfireBeemstick : BeeDamageItem
     {
+        public float shootRotation;
+        public int shootDirection;
         public override void SafeSetStaticDefaults()
         {
             Tooltip.SetDefault("Blasts a hellish spread of bee buckshot and bees, inflicting Hellfire");
@@ -63,10 +65,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
-            float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
-
             if (Main.myPlayer == player.whoAmI)
-                player.direction = Math.Sign((Main.MouseWorld - player.Center).X);
+                player.direction = Math.Sign(shootDirection);
+
+            float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
 
             float itemRotation = player.compositeFrontArm.rotation + 1.5707964f * player.gravDir;
             Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * MathHelper.Lerp(-2f, 7f, EaseBuilder.EaseQuinticInOut.Ease(animProgress));
@@ -79,10 +81,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void UseItemFrame(Player player)
         {
             if (Main.myPlayer == player.whoAmI)
-                player.direction = Math.Sign((Main.MouseWorld - player.Center).X);
+                player.direction = Math.Sign(shootDirection);
 
             float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
-            float rotation = (player.Center - Main.MouseWorld).ToRotation() * player.gravDir + 1.5707964f;
+            float rotation = shootRotation * player.gravDir + 1.5707964f;
             if (animProgress < 0.5f)
                 rotation += MathHelper.Lerp(-0.65f, 0, EaseBuilder.EaseQuinticInOut.Ease(animProgress) * 2) * player.direction;
 
@@ -127,6 +129,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 Dust.NewDustDirect(position, 1, 1, DustID.Torch, velo3.X * 2.5f, velo3.Y * 2.5f, 0, default, Main.rand.NextFloat(1.25f, 1.55f));
             }
             player.velocity += velocity * -1.45f;
+
+            shootRotation = (player.Center - Main.MouseWorld).ToRotation();
+            shootDirection = (Main.MouseWorld.X < player.Center.X) ? -1 : 1;
             return false;
         }
     }

@@ -25,4 +25,15 @@ namespace BombusApisBee.Core
         public bool CanShowItemDropInUI() => true;
         public string GetConditionDescription() => "Drops from Hornets";
     }
+
+    public class HemocombShardCondition : IItemDropRuleCondition, IProvideItemConditionDescription
+    {
+        public bool CanDrop(DropAttemptInfo info)
+        {
+            return NPC.downedBoss1 && info.npc.HasPlayerTarget && !info.IsInSimulation;
+        }
+
+        public bool CanShowItemDropInUI() => true;
+        public string GetConditionDescription() => "Drops from Blood Moon enemies";
+    }
 }

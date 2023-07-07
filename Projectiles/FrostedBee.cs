@@ -2,7 +2,7 @@
 
 namespace BombusApisBee.Projectiles
 {
-    public class FrostedBee : BeeHelper
+    public class FrostedBee : BaseBeeProjectile
     {
         public override void SetStaticDefaults()
         {

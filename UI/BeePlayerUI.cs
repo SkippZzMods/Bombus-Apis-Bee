@@ -7,7 +7,7 @@ namespace BombusApisBee.UI
 {
     public class BeePlayerUI : UIState
     {
-        internal BeeState oldState;
+        internal BeeState oldState; 
         internal BeeState state;
 
         internal int switchTimer;

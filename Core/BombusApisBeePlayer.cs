@@ -50,6 +50,9 @@ namespace BombusApisBee.Core
         public bool RoyalJelly;
         public bool LihzardRelic;
         public int LihzardRelicTimer;
+        public bool HasRottenHoneycombShard;
+        public bool HasHemocombShard;
+        public bool HasHellcombShard;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new[] { new Item(ModContent.ItemType<Honeycomb>(), 1) };
@@ -97,6 +100,9 @@ namespace BombusApisBee.Core
             LihzardRelic = false;
             if (LihzardRelicTimer > 0)
                 LihzardRelicTimer--;
+            HasRottenHoneycombShard = false;
+            HasHemocombShard = false;
+            HasHellcombShard = false;
         }
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)

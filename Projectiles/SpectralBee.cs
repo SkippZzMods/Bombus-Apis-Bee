@@ -2,7 +2,7 @@
 
 namespace BombusApisBee.Projectiles
 {
-    public class SpectralBee : BeeHelper
+    public class SpectralBee : BaseBeeProjectile
     {
         public override int FrameTimer => 4;
         public override void SetStaticDefaults()

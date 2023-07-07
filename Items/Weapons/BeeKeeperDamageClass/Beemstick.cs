@@ -6,6 +6,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class Beemstick : BeeDamageItem
     {
+        public float shootRotation;
+        public int shootDirection;
         public override void SafeSetStaticDefaults()
         {
             Tooltip.SetDefault("Blasts a spread of bee buckshot and bees\n'This... is my BEEMSTICK'");
@@ -56,11 +58,13 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
+            float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
+
             if (Main.myPlayer == player.whoAmI)
-                player.direction = Math.Sign((Main.MouseWorld - player.Center).X);
+                player.direction = shootDirection;
 
             float itemRotation = player.compositeFrontArm.rotation + 1.5707964f * player.gravDir;
-            Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * 7f;
+            Vector2 itemPosition = player.MountedCenter + itemRotation.ToRotationVector2() * MathHelper.Lerp(0f, 7f, EaseBuilder.EaseQuinticInOut.Ease(animProgress));
             Vector2 itemSize = new Vector2(44f, 18f);
 
             Vector2 itemOrigin = new Vector2(-18f, 1f);
@@ -70,12 +74,12 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override void UseItemFrame(Player player)
         {
             if (Main.myPlayer == player.whoAmI)
-                player.direction = Math.Sign((Main.MouseWorld - player.Center).X);
+                player.direction = shootDirection;
 
             float animProgress = 1f - ((float)player.itemTime / (float)player.itemTimeMax);
-            float rotation = (player.Center - Main.MouseWorld).ToRotation() * player.gravDir + 1.5707964f;
+            float rotation = shootRotation * player.gravDir + 1.5707964f;
             if (animProgress < 0.5f)
-                rotation += MathHelper.Lerp(-0.5f, 0, animProgress * 2) * player.direction;
+                rotation += MathHelper.Lerp(-0.5f, 0, EaseBuilder.EaseQuinticInOut.Ease(animProgress) * 2) * player.direction;
 
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, rotation);
         }
@@ -113,6 +117,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 Dust.NewDustDirect(position, 1, 1, ModContent.DustType<Dusts.HoneyDust>(), velo3.X * 3f, velo3.Y * 3f, 0, default, Main.rand.NextFloat(1.25f, 1.65f)).noGravity = true;
             }
             player.velocity += velocity * -1;
+
+            shootRotation = (player.Center - Main.MouseWorld).ToRotation();
+            shootDirection = (Main.MouseWorld.X < player.Center.X) ? -1 : 1;
             return false;
         }
     }

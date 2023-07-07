@@ -3,7 +3,7 @@ using Terraria;
 
 namespace BombusApisBee.Projectiles
 {
-    public class BrainyBee : BeeHelper
+    public class BrainyBee : BaseBeeProjectile
     {
         public override void SetStaticDefaults()
         {

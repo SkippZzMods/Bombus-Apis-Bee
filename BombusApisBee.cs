@@ -112,11 +112,6 @@ namespace BombusApisBee
             //MarkedNPCDrawer.Unload();
             BombusApisBee_DoIL.Unload();
             BombusApisBee_DoDetours.Unload();
-            TextureAssets.Projectile[ProjectileID.HornetStinger] = stinger;
-            TextureAssets.Projectile[ProjectileID.Bee] = bee;
-            TextureAssets.Projectile[ProjectileID.GiantBee] = giantBee;
-            TextureAssets.Projectile[ProjectileID.Wasp] = wasp;
-            TextureAssets.Projectile[ProjectileID.BeeArrow] = beeArrow;
             HoneyManipulatorHotkey = null;
 
             LihzardianRelicHotkey = null;

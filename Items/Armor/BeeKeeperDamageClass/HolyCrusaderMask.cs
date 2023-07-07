@@ -218,7 +218,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition + new Vector2(0f, owner.gfxOffY), null, Color.White, Projectile.rotation, tex.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : 0f, 0f);
 
             spriteBatch.End();
-            spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
             Main.spriteBatch.Draw(bloomTex, collisionPoint(owner) + new Vector2(0f, owner.gfxOffY) - Main.screenPosition, null, (Color.Lerp(new Color(225, 205, 100, 0), new Color(200, 165, 80, 0) * 0.75f, (float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 3f)) * 0.25f) * mult, 0f, bloomTex.Size() / 2f, 1.85f, 0f, 0f);
 

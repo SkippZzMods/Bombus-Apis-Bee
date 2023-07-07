@@ -98,6 +98,7 @@ namespace BombusApisBee.Projectiles
                 {
                     Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, (Projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(6f)).RotatedByRandom(0.3f), player.beeType(), player.beeDamage(Projectile.damage / 2), player.beeKB(0.5f), player.whoAmI);
                 }
+
             for (int i = 0; i < 7; i++)
             {
                 Vector2 velo = Projectile.rotation.ToRotationVector2();

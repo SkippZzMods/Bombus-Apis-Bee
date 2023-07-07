@@ -2,7 +2,7 @@
 
 namespace BombusApisBee.Projectiles
 {
-    public class IchorBee : BeeHelper
+    public class IchorBee : BaseBeeProjectile
     {
         public override void SetStaticDefaults()
         {

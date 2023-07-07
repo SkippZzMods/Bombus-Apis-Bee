@@ -2,7 +2,7 @@
 
 namespace BombusApisBee.Projectiles
 {
-    public class Probee : BeeHelper
+    public class Probee : BaseBeeProjectile
     {
         public int ShootDelay = 45;
 

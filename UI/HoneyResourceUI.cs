@@ -5,16 +5,97 @@ namespace BombusApisBee.UI
     // some of the stuff to make the draw effects is bad i know
     public class HoneyResourceUI
     {
+        internal static int ReservedToBe;
+        internal static bool Dragging;
         public static void Draw()
         {
-            switch (Main.ResourceSetsManager.ActiveSetKeyName)
+            if (ModContent.GetInstance<BombusConfig>().DrawLegacyUI)
             {
-                case "HorizontalBars": DrawHoneyBar(); break;
-                case "New": DrawNewHoney(); break;
-                case "Default": DrawLegacyHoney(); break;
+                switch (Main.ResourceSetsManager.ActiveSetKeyName)
+                {
+                    case "HorizontalBars": DrawHoneyBar(); break;
+                    case "New": DrawNewHoney(); break;
+                    case "Default": DrawLegacyHoney(); break;
+                }
+            }
+            else
+            {
+                DrawModernUI();
             }
         }
 
+        public static void DrawModernUI()
+        {
+            Texture2D slotTex = ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyResourceUI_Slot").Value;
+            Texture2D fillTex = ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyResourceUI_Fill").Value;
+            Texture2D reserveTex = ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyResourceUI_FillReservedl").Value;
+
+            var mp = Main.LocalPlayer.Hymenoptra();
+
+            var cfg = GetInstance<BombusConfig>();
+
+            if (ReservedToBe < mp.BeeResourceReserved)
+                ReservedToBe++;
+            else if (ReservedToBe > mp.BeeResourceReserved)
+                ReservedToBe--;
+
+            for (int i = 0; i < GetHoneyAmount(); i++)
+            {
+                float uiScale = 1f + (Main.UIScale * 0.5f / 100);
+                Vector2 drawPos = new Vector2(Main.screenWidth - (i * 16), (i % 2 == 0 ? -16 : 0f)) + ((cfg.ResourceOffX == 0 && cfg.ResourceOffY == 0) ? new Vector2(-320, 50) : new Vector2(cfg.ResourceOffX, cfg.ResourceOffY));
+                Main.spriteBatch.Draw(slotTex, drawPos, null, Color.White, 0f, slotTex.Size() / 2f, uiScale, 0f, 0f);
+
+                float barScale = Utils.GetLerpValue(15 * i, 15 * (float)(i + 1), mp.BeeResourceCurrent, true);
+
+                Main.spriteBatch.Draw(fillTex, drawPos, null, Color.White * barScale, 0f, fillTex.Size() / 2f, barScale * uiScale, 0f, 0f);
+
+                float reserveRatio = Utils.GetLerpValue(15 * i, 15 * (float)(i + 1), ReservedToBe, true);
+                Rectangle barRectangle = new Rectangle(0, 0, reserveTex.Width, (int)MathHelper.Lerp(0f, reserveTex.Height, reserveRatio));
+
+                Main.spriteBatch.Draw(reserveTex, drawPos, barRectangle, Color.White, 0f, reserveTex.Size() / 2f, uiScale * uiScale, 0f, 0f);
+            }
+
+            Vector2 start = new Vector2(Main.screenWidth, 0f) + ((cfg.ResourceOffX == 0 || cfg.ResourceOffY == 0) ? new Vector2(-320, 30) : new Vector2(cfg.ResourceOffX, cfg.ResourceOffY - 20));
+
+            Rectangle bounds = new Rectangle((int)start.X - 15 * GetHoneyAmount(), (int)start.Y, 25 * GetHoneyAmount(), 35);
+            Rectangle mouse = new Rectangle((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y, Dragging ? 50 : 8, Dragging ? 50 : 8);
+
+            if (Dragging)
+                bounds.Inflate(200, 200);
+
+            if (mouse.Intersects(bounds))
+            {
+                if (mp.BeeResourceMax2 > 0f)
+                {
+                    string reservedString = "";
+                    if (mp.BeeResourceReserved > 0)
+                        reservedString = ", Reserved: " + mp.BeeResourceReserved + "/" + mp.BeeResourceMax2;
+
+                    int HoneyInt = (int)Math.Round((double)(mp.BeeResourceCurrent));
+                    int maxHoneyInt = (int)Math.Round((double)(mp.BeeResourceMax2));
+                    Main.instance.MouseText(string.Concat(new object[]
+                    {"Honey: ", HoneyInt, "/", maxHoneyInt + reservedString}) ?? "", 0, 0, -1, -1, -1, -1);
+                }
+
+                if (Main.mouseLeft && cfg.DragUI)
+                {
+                    cfg.ResourceOffX = (int)(Main.MouseScreen.X - Main.screenWidth);
+                    cfg.ResourceOffY = (int)(Main.MouseScreen.Y);
+                    Dragging = true;
+                }
+            }
+
+            if (Dragging && !Main.mouseLeft)
+                Dragging = false;
+        }
+
+        public static int GetHoneyAmount()
+        {
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            return Utils.Clamp(modPlayer.BeeResourceMax2 / 15, 0, 20);
+        }
+
+        #region Legacy
         public static bool[] doChainEffectBar = new bool[4];
 
         public static bool[] drawBackGlowBar = new bool[4];
@@ -600,5 +681,6 @@ namespace BombusApisBee.UI
             var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
             return Utils.Clamp(modPlayer.BeeResourceMax2 / 10, 0, 20);
         }
+        #endregion Legacy
     }
 }

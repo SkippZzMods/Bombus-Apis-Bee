@@ -45,6 +45,8 @@ namespace BombusApisBee.BeeDamageClass
 
         public int StateSwitchCooldown;
 
+        public float BeeStrengthenChance;
+
         public bool HasBees => Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > 0;
 
         public static BeeDamagePlayer ModPlayer(Player player)
@@ -82,6 +84,13 @@ namespace BombusApisBee.BeeDamageClass
                 HeldBeeWeaponTimer--;
 
             BeeResourceReserved = 0;
+            BeeStrengthenChance = 0;
+        }
+
+        public override void UpdateEquips()
+        {
+            if (Player.strongBees)
+                BeeStrengthenChance += 0.5f;
         }
 
         public override void PostUpdateMiscEffects()
@@ -327,6 +336,12 @@ namespace BombusApisBee.BeeDamageClass
 
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
+        }
+
+        public override void Unload()
+        {
+            ExtraPreAIEvent = null;
+            ExtraAIEvent = null;
         }
 
         public override void SetDefaults()
