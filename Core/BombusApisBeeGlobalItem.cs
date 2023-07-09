@@ -25,9 +25,9 @@
                     {
                         OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), Beefade)
                     }); ;
-                }
-
+                }              
             }
+
             if (item.ModItem != null && item.ModItem is BeeDamageItem)
             {
                 secondtimer++;
@@ -41,7 +41,7 @@
                     {
                         OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), Beefade)
                     }); ;
-                }
+                }             
             }
         }
     }

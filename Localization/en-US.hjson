@@ -304,6 +304,17 @@ Mods: {
 			Succulent.DisplayName: Succulent
 			Sweetened.DisplayName: Sweetened
 			Unwanted.DisplayName: Unwanted
+			Bland.DisplayName: Bland
+			Buzzing.DisplayName: Buzzing
+			Critical.DisplayName: Critical
+			Delectable.DisplayName: Buzzing
+			Delicious.DisplayName: Delicious
+			Juicy.DisplayName: Juicy
+			Moldy.DisplayName: Moldy
+			Piquant.DisplayName: Piquant
+			Punchy.DisplayName: Pungent
+			Pungent.DisplayName: Pungent
+			Snaillike.DisplayName: Snail-like
 		}
 
 		Items: {
@@ -1233,16 +1244,10 @@ Mods: {
 					'''
 			}
 
-			HoneycombShard.Tooltip:
+			HellcombShard.Tooltip:
 				'''
-				Increases the chance to strengthen friendly bees by 15%
-				'Crunchy!'
-				'''
-			RottenHoneycombShard.Tooltip:
-				'''
-				Increases the chance to strengthen friendly bees by 20%
-				Strengthened bees apply a weakening debuff
-				'Smells horrible'
+				Increases the chance to strengthen friendly bees by 40%
+				Strengthened bees have a chance to cause volatile explosions
 				'''
 			HemocombShard.Tooltip:
 				'''
@@ -1265,10 +1270,16 @@ Mods: {
 				Tooltip: You shouldn't see this...
 			}
 
-			HellcombShard.Tooltip:
+			HoneycombShard.Tooltip:
 				'''
-				Increases the chance to strengthen friendly bees by 40%
-				Strengthened bees have a chance to cause volatile explosions
+				Increases the chance to strengthen friendly bees by 15%
+				'Crunchy!'
+				'''
+			RottenHoneycombShard.Tooltip:
+				'''
+				Increases the chance to strengthen friendly bees by 20%
+				Strengthened bees apply a weakening debuff
+				'Smells horrible'
 				'''
 		}
 

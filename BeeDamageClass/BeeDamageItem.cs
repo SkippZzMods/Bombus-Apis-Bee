@@ -28,11 +28,18 @@ namespace BombusApisBee.BeeDamageClass
         {
             if (beeResourceCost > 0)
             {
-                tooltips.Add(new TooltipLine(Mod, "Honey Cost", $"Uses {beeResourceCost} honey"));
+                int index = tooltips.FindIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Knockback"));
+
+                if (index != -1)
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "Honey Cost", $"Uses {beeResourceCost} honey"));
             }
+
             if (ResourceChance > 0 || Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>().ResourceChanceAdd > 0f)
             {
-                tooltips.Add(new TooltipLine(Mod, "Chance to consume honey", $"{Math.Round(Utils.Clamp((ResourceChance + Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>().ResourceChanceAdd) * 100, 0, 50))}% chance to not consume honey"));
+                int index = tooltips.FindIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("Knockback"));
+
+                if (index != -1)
+                    tooltips.Insert(index + 2, new TooltipLine(Mod, "Chance to consume honey", $"{Math.Round(Utils.Clamp((ResourceChance + Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>().ResourceChanceAdd) * 100, 0, 50))}% chance to not consume honey"));
             }
         }
         public virtual bool UseHoney(Player player, float Chance)
@@ -63,25 +70,42 @@ namespace BombusApisBee.BeeDamageClass
 
         public sealed override int ChoosePrefix(UnifiedRandom rand)
         {
-            int hymenoptraPrefixes = Main.rand.Next(new int[] {
-                ModContent.PrefixType<Godlike>(),
-                ModContent.PrefixType<Embarrasing>(),
-                ModContent.PrefixType<Hasty>(),
-                ModContent.PrefixType<Offbalance>(),
-                ModContent.PrefixType<Jammed>(),
-                ModContent.PrefixType<Unwanted>(),
-                ModContent.PrefixType<Accurate>(),
-                ModContent.PrefixType<Acute>(),
-                ModContent.PrefixType<Fast>(),
-                ModContent.PrefixType<Effective>(),
-                ModContent.PrefixType<Succulent>(),
-                ModContent.PrefixType<Poor>(),
-                ModContent.PrefixType<Destroyed>(),
-                ModContent.PrefixType<Snailish>(),
-                ModContent.PrefixType<Speedy>(),
-                ModContent.PrefixType<Rotten>()
-            });
-            return hymenoptraPrefixes;
+            int[] prefixes = new int[] {
+                PrefixType<Rotten>(),
+                PrefixType<Moldy>(),
+                PrefixType<Snaillike>(),
+                PrefixType<Punchy>(),
+                PrefixType<Critical>(),
+                PrefixType<Juicy>(),
+                PrefixType<Piquant>(),
+                PrefixType<Pungent>(),
+                PrefixType<Bland>(),
+                PrefixType<Succulent>(),
+                PrefixType<Buzzing>(),
+                PrefixType<Delectable>(),
+            };
+
+            int hymenoptraPrefixe = Main.rand.Next(prefixes);
+            if (hymenoptraPrefixe == PrefixType<Delectable>() && beeResourceCost < 4)
+            {
+                prefixes = new int[] {
+                    PrefixType<Rotten>(),
+                    PrefixType<Moldy>(),
+                    PrefixType<Snaillike>(),
+                    PrefixType<Punchy>(),
+                    PrefixType<Critical>(),
+                    PrefixType<Juicy>(),
+                    PrefixType<Piquant>(),
+                    PrefixType<Pungent>(),
+                    PrefixType<Bland>(),
+                    PrefixType<Succulent>(),
+                    PrefixType<Buzzing>(),
+                };
+
+                hymenoptraPrefixe = Main.rand.Next(prefixes);
+            }
+
+            return hymenoptraPrefixe;
         }
     }
 }
