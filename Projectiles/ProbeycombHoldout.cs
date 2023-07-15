@@ -36,7 +36,7 @@
                 Charge++;
                 if (Charge % (int)(MaxCharge / 5) == 0)
                 {
-                    owner.UseBeeResource(1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1);
                     ProbesToShoot++;
                     SoundID.MaxMana.PlayWith(Projectile.Center, -0.2f);
                     flashTimer = 15;
@@ -144,7 +144,7 @@
             SoundID.Item11.PlayWith(Projectile.Center);
             owner.velocity += Projectile.velocity * -2.45f;
 
-            owner.UseBeeResource(2);
+            owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost);
         }
 
         public override bool PreDraw(ref Color lightColor)

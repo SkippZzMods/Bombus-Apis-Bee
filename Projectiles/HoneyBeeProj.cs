@@ -104,7 +104,7 @@ namespace BombusApisBee.Projectiles
                     shieldFade++;
 
                 if (blockDelay <= 0 && projectileTarget == null)
-                    projectileTarget = Main.projectile.Where(p => p.active && p.hostile && p.Distance(Owner.Center) < 150f && Owner.GetModPlayer<HolyCrusaderPlayer>().hitProjHitTimer[p.whoAmI] <= 0).OrderBy(p => p.Distance(Owner.Center)).FirstOrDefault();
+                    projectileTarget = Main.projectile.Where(p => p.active && p.hostile && p.Distance(Owner.Center) < 150f && Owner.GetModPlayer<HoneycombCrusaderPlayer>().hitProjHitTimer[p.whoAmI] <= 0).OrderBy(p => p.Distance(Owner.Center)).FirstOrDefault();
 
                 if (blockDelay <= 0)
                 {

@@ -26,10 +26,13 @@ namespace BombusApisBee.Core
         public bool enchantedhoney;
         public bool HimenApiary;
         public bool HoneyBee;
-        public bool HoneyHoarderSet;
-        public bool HoneyCrit;
+
+        public bool HoneyLaser;
+        public int HoneyLaserCharge;
+        public const int HONEY_LASER_CHARGE_MAX = 5000;
+
+        public bool HoneyTeleport;
         public bool WaspArmorSet;
-        public bool ChloroSet;
         public bool SkeletalSet;
         public int SkeletalHornetWhoAmI;
         public float wingFlightTimeBoost;
@@ -53,6 +56,7 @@ namespace BombusApisBee.Core
         public bool HasRottenHoneycombShard;
         public bool HasHemocombShard;
         public bool HasHellcombShard;
+        public bool JustActivatedArmorSetBonus;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new[] { new Item(ModContent.ItemType<Honeycomb>(), 1) };
@@ -73,10 +77,12 @@ namespace BombusApisBee.Core
             enchantedhoney = false;
             HimenApiary = false;
             HoneyBee = false;
-            HoneyHoarderSet = false;
-            HoneyCrit = false;
+            if (!HoneyLaser)
+                HoneyLaserCharge--;
+            HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge, 0, HONEY_LASER_CHARGE_MAX);
+            HoneyLaser = false;
+            HoneyTeleport = false;
             WaspArmorSet = false;
-            ChloroSet = false;
             SkeletalSet = false;
             wingFlightTimeBoost = 1f;
             BeeSniperSet = false;
@@ -103,6 +109,7 @@ namespace BombusApisBee.Core
             HasRottenHoneycombShard = false;
             HasHemocombShard = false;
             HasHellcombShard = false;
+            JustActivatedArmorSetBonus = false;
         }
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
@@ -163,7 +170,7 @@ namespace BombusApisBee.Core
         public override void UpdateEquips()
         {
             if (RoyalJelly)
-                Player.Hymenoptra().BeeResourceMax2 += 15;
+                Player.Hymenoptra().BeeResourceMax2 += 25;
 
             if (LihzardRelicTimer > 0)
             {
@@ -187,15 +194,6 @@ namespace BombusApisBee.Core
                 LivingFlowerRot++;
             else
                 LivingFlowerRot = 0;
-        }
-
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
-            if (HoneyHoarderSet && Main.rand.NextBool(15))
-            {
-                Dust.NewDust(Player.position, Player.width, Player.height, DustID.Honey2, 0f, 0f, 10, default, 1.1f);
-                Dust.NewDust(Player.position, Player.width, Player.height, ModContent.DustType<HoneyDust>(), 0f, 0f, 10, default, 0.9f);
-            }
         }
 
         public override void OnHurt(Player.HurtInfo info)
@@ -400,40 +398,8 @@ namespace BombusApisBee.Core
                     Player.ClearBuff(ModContent.BuffType<BrokenScope>());
             }
 
-            if (proj.CountsAsClass<HymenoptraDamageClass>() && Player.whoAmI == Main.myPlayer && !NPCID.Sets.ProjectileNPC[target.type])
+            if (proj.CountsAsClass<HymenoptraDamageClass>() && !NPCID.Sets.ProjectileNPC[target.type])
             {
-                if (HoneyCrit && crit)
-                {
-                    if (proj.type == ModContent.ProjectileType<HoneyHoming>())
-                    {
-                        return;
-                    }
-                    Vector2 vel = Vector2.One.RotatedByRandom(6.28f) * Main.rand.Next(70, 101) * 0.1f;
-                    Projectile.NewProjectile(proj.GetSource_OnHit(target), target.position, vel, ModContent.ProjectileType<HoneyHoming>(), 15 + proj.damage * 1 / 4, proj.knockBack, Player.whoAmI);
-                }
-
-                if (ChloroSet && proj.type != ModContent.ProjectileType<ChloroHoney>())
-                {
-                    var globalNPC = target.GetGlobalNPC<ChloroInfestedGlobalNPC>();
-                    if (globalNPC.ChloroStacks >= 10)
-                    {
-                        if (crit && Player.ownedProjectileCounts[ModContent.ProjectileType<ChloroHoney>()] <= 10)
-                        {
-                            globalNPC.ChloroStacks = 0;
-                            globalNPC.DebuffTime = 0;
-                            for (int i = 0; i < Main.rand.Next(2, 4); i++)
-                            {
-                                Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, Vector2.One.RotatedByRandom(6.28f) * Main.rand.NextFloat(4f, 5f), ModContent.ProjectileType<ChloroHoney>(), 10 + (int)(proj.damage * 0.55f), proj.knockBack * 0.5f, Player.whoAmI);
-                            }
-                        }
-                    }
-                    else if (Main.rand.NextFloat() < 0.5f)
-                    {
-                        globalNPC.ChloroStacks++;
-                        globalNPC.DebuffTime = 600;
-                    }
-                }
-
                 if (SkeletalSet && (crit || target.life <= 0))
                 {
                     if (Main.projectile[SkeletalHornetWhoAmI].ModProjectile is SkeletalHornetProjectile hornet)
@@ -505,6 +471,7 @@ namespace BombusApisBee.Core
                     {
                         Projectile.NewProjectile(proj.GetSource_OnHit(target), target.Center, Main.rand.NextVector2Circular(3f, 3f), ModContent.ProjectileType<NectarHealingBolt>(), 0, 0f, Player.whoAmI);
                     }
+
                     target.DelBuff(target.FindBuffIndex(ModContent.BuffType<NectarGlazed>()));
                     BeeUtils.DrawDustImage(target.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0.25f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HoneyDustImage").Value, 1f, 0, new Color(255, 255, 150), rot: 0);
 
@@ -517,6 +484,15 @@ namespace BombusApisBee.Core
 
                 if (FrozenStinger && crit)
                     target.AddBuff<Frostbroken>(900);
+            }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.DamageType.CountsAsClass<HymenoptraDamageClass>() && !NPCID.Sets.ProjectileNPC[target.type] && target.CanBeChasedBy())
+            {
+                if (HoneyLaser)
+                    HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge + damageDone, 0, HONEY_LASER_CHARGE_MAX);
             }
         }
     }

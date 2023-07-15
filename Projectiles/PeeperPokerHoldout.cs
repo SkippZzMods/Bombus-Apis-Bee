@@ -83,7 +83,7 @@ namespace BombusApisBee.Projectiles
                     ShootVelocity *= num10;
                     int proj = Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, ShootVelocity, ModContent.ProjectileType<PeeperPokerThrow>(), DamageAmt, 1f, Projectile.owner);
                     Main.projectile[proj].penetrate = Pierce;
-                    Owner.UseBeeResource(2);
+                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 1);
                     Projectile.Kill();
                 }
             }
@@ -117,7 +117,7 @@ namespace BombusApisBee.Projectiles
                 vel.Normalize();
                 vel *= (float)Main.rand.Next(70, 101) * 0.1f;
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, vel, ModContent.ProjectileType<CthulhuBee>(), (int)(Projectile.damage * 0.89f), Projectile.knockBack, Projectile.owner);
-                Owner.UseBeeResource(1);
+                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost);
                 const int Repeats2 = 175;
                 for (int d2 = 0; d2 < Repeats2; ++d2)
                 {

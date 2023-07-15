@@ -10,7 +10,7 @@
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 11;
+            Item.damage = 14;
             Item.noMelee = true;
             Item.width = 40;
             Item.height = 60;

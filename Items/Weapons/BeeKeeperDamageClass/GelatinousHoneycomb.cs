@@ -49,7 +49,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             if (++shots >= 4)
             {
                 shots = 0;
-                player.UseBeeResource(3);
+                player.UseBeeResource(beeResourceCost + 3);
                 Projectile.NewProjectile(source, position, velocity * 2.5f, ModContent.ProjectileType<RubyProjectile>(), damage, 3f, player.whoAmI);
                 for (int i = 0; i < 12; i++)
                 {

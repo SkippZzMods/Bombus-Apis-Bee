@@ -47,7 +47,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.UseBeeResource(1);
+            player.UseBeeResource(beeResourceCost);
             SoundID.Item11.PlayWith(position, -0.05f, 0.1f);
             for (int i = 0; i < 7; i++)
             {

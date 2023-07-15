@@ -68,7 +68,7 @@
                             Projectile.NewProjectile(Projectile.GetSource_FromAI(), barrelPos, Projectile.velocity.RotatedByRandom(0.25f) * 10f, ModContent.ProjectileType<CorruptMiniEater>(), (int)(Projectile.damage * 0.66f), 2.5f, Projectile.owner);
 
                         SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.position);
-                        owner.UseBeeResource(2);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 2);
                     }
 
                     BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
@@ -83,7 +83,7 @@
                         Dust.NewDustPerfect(barrelPos, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.velocity.RotatedByRandom(0.45f) * Main.rand.NextFloat(0.5f, 3f), 0, new Color(140, 169, 44), 0.45f).noGravity = true;
                     }
 
-                    if (!owner.UseBeeResource(1))
+                    if (!owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 3))
                         shots = 11;
                 }
 

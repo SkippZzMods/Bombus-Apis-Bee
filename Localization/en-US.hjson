@@ -182,6 +182,7 @@ Mods: {
 			WaspAccessory.DisplayName: Wasp
 			WasparangHoldout.DisplayName: Beemerang
 			HellcombShardExplosion.DisplayName: Volatile Explosion
+			HoneycombCrusaderShieldProjectile.DisplayName: Honey Shield
 		}
 
 		DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
@@ -1280,6 +1281,71 @@ Mods: {
 				Increases the chance to strengthen friendly bees by 20%
 				Strengthened bees apply a weakening debuff
 				'Smells horrible'
+				'''
+
+			BeekeepersPants: {
+				Tooltip: 15% increased movement speed
+				DisplayName: Beekeeper's Pants
+			}
+
+			BeekeepersRobe: {
+				DisplayName: Beekeeper's Robe
+				Tooltip:
+					'''
+					4% increased hymenoptra damage
+					Increases your amount of Loyal Bees by 1
+					'''
+			}
+
+			BeekeepersVeil: {
+				DisplayName: Beekeeper's Veil
+				Tooltip:
+					'''
+					3% increased hymenoptra critical strike chance
+					Increases maximum honey by 15
+					'''
+			}
+
+			HoneycombCrusaderGreaves: {
+				DisplayName: Honeycomb Crusader Greaves
+				Tooltip: 5% increased hymenoptra damage
+			}
+
+			HoneycombCrusaderHelmet.Tooltip:
+				'''
+				5% increased hymenoptra critical strike chance
+				Maximum honey increased by 75
+				'''
+
+			HoneycombCrusaderPlatemail: {
+				DisplayName: Honeycomb Crusader Platemail
+				Tooltip:
+					'''
+					30% increased chance to not consume honey
+					Loyal Bees increased by 4
+					'''
+			}
+
+			HoneyphyteChestpiece.Tooltip:
+				'''
+				30% increased chance to not consume honey
+				Loyal Bees increased by 5
+				'''
+
+			HoneyphyteGreaves: {
+				DisplayName: Honey Hoarder Leggings
+				Tooltip: 5% increased hymenoptra damage
+			}
+
+			HoneyphyteHeadgear: {
+				DisplayName: Honey Hoarder Hood
+				Tooltip: Increases maximum honey by 100
+			}
+
+			HoneyphyteMask.Tooltip:
+				'''
+				10% increased hymenoptra damage and critical strike chance
+				Increases maximum honey by 75
 				'''
 		}
 

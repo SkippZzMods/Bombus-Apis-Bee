@@ -34,7 +34,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<AmbrosiaProjectile>();
-            beeResourceCost = 2;
+            beeResourceCost = 1;
         }
         public override void AddRecipes()
         {

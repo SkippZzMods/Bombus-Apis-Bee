@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<SpectralBeeTomeHoldout>();
             Item.shootSpeed = 1f;
 
-            beeResourceCost = 1;
+            beeResourceCost = 3;
             Item.noUseGraphic = true;
             Item.channel = true;
             ResourceChance = 0.33f;

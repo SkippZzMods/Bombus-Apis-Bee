@@ -7,7 +7,46 @@ namespace BombusApisBee.Core
         {
             On_Main.DrawInfernoRings += PlayerDraw;
             On_Player.beeType += EditStrongBeeChance;
+            On_Player.KeyDoubleTap += ArmorEffects;
         }
+
+        private static void ArmorEffects(On_Player.orig_KeyDoubleTap orig, Player self, int keyDir)
+        {
+            orig(self, keyDir);
+
+            int num = 0;
+            if (Main.ReversedUpDownArmorSetBonuses)
+                num = 1;
+            if (keyDir != num)
+                return;
+
+            var mp = self.Bombus();
+            if (mp.LivingFlower)
+            {
+                if (self.ownedProjectileCounts<DaybloomProj>() >= 3)
+                {
+                    for (int i = 0; i < Main.maxProjectiles; i++)
+                    {
+                        Projectile proj = Main.projectile[i];
+                        if (proj.active && proj.owner == self.whoAmI && proj.type == ModContent.ProjectileType<DaybloomProj>() && !(proj.ModProjectile as DaybloomProj).fired)
+                        {
+                            var flower = proj.ModProjectile as DaybloomProj;
+                            flower.fired = true;
+                            proj.velocity = proj.DirectionTo(Main.MouseWorld) * 25f;
+                            proj.timeLeft = 300;
+
+                            for (int d = 0; d < 10; d++)
+                            {
+                                Dust.NewDustPerfect(proj.Center, DustID.Grass, Main.rand.NextVector2Circular(5f, 5f), Scale: 0.75f).noGravity = true;
+
+                                Dust.NewDustPerfect(proj.Center, DustID.Grass, proj.velocity.RotatedByRandom(0.5f) * Main.rand.NextFloat(0.5f, 1f), Scale: 0.75f).noGravity = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         // i would IL this but im too lazy
         private static int EditStrongBeeChance(On_Player.orig_beeType orig, Player self)
         {

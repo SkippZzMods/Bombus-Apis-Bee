@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("7% increased hymenoptra damage and critical strike chance\nIncreases your amount of Loyal Bees by 1");
+            Tooltip.SetDefault("10% increased hymenoptra damage");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -20,15 +20,24 @@
 
         public override void UpdateEquip(Player player)
         {
-            player.IncreaseBeeDamage(0.05f);
-            player.IncreaseBeeCrit(5);
-            player.Hymenoptra().CurrentBees += 1;
+            player.IncreaseBeeDamage(0.1f);
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemID.Silk, 9).AddIngredient(ItemID.BeeWax, 15).AddIngredient(ItemID.TitaniumBar, 17).AddTile(TileID.MythrilAnvil).Register();
-            CreateRecipe(1).AddIngredient(ItemID.Silk, 9).AddIngredient(ItemID.BeeWax, 15).AddIngredient(ItemID.AdamantiteBar, 17).AddTile(TileID.MythrilAnvil).Register();
+            CreateRecipe(1).
+                AddIngredient(ItemID.Silk, 9).
+                AddIngredient(ItemID.BeeWax, 15).
+                AddIngredient(ItemID.TitaniumBar, 17).
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
+            CreateRecipe(1).
+                AddIngredient(ItemID.Silk, 9).
+                AddIngredient(ItemID.BeeWax, 15).
+                AddIngredient(ItemID.AdamantiteBar, 17).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
 
     }

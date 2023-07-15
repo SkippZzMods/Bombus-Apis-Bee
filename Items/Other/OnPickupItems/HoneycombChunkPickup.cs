@@ -39,23 +39,27 @@ namespace BombusApisBee.Items.Other.OnPickupItems
                 switch (mp.CurrentBeeState)
                 {
                     case (int)BeeDamagePlayer.BeeState.Defense:
-                        hp.DefenseStacks++;
+                        hp.DefenseStacks = Utils.Clamp(hp.DefenseStacks + 2, 0, hp.MaxStacks);
+
                         hp.DefenseStackDecayTimer = 0;
                         break;
 
                     case (int)BeeDamagePlayer.BeeState.Offense:
-                        hp.OffenseStacks++;
+                        hp.OffenseStacks = Utils.Clamp(hp.OffenseStacks + 2, 0, hp.MaxStacks);
+
                         hp.OffenseStackDecayTimer = 0;
                         break;
 
                     case (int)BeeDamagePlayer.BeeState.Gathering:
-                        player.IncreaseBeeResource(2);
+                        player.IncreaseBeeResource(3);
+                        hp.GatheringStacks = Utils.Clamp(hp.GatheringStacks + 2, 0, hp.MaxStacks);
 
-                        hp.GatheringStacks++;
                         hp.GatheringStackDecayTimer = 0;
                         break;
                 }
             }
+
+            SoundEngine.PlaySound(SoundID.Grab, player.position);
 
             return false;
         }
@@ -66,10 +70,10 @@ namespace BombusApisBee.Items.Other.OnPickupItems
 
             Texture2D tex = ModContent.Request<Texture2D>(TextureString).Value;
 
-            spriteBatch.Draw(tex, Item.position - Main.screenPosition, null, lightColor, 0f, tex.Size() / 2f, scale, SpriteEffects.None, 0f);
-
             spriteBatch.Draw(glowTex, Item.position - Main.screenPosition, null, new Color(255, 150, 20, 0) * MathHelper.Lerp(.5f, 1f, Utils.Clamp((float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 4f), 0, 1)), 0f, glowTex.Size() / 2f, 0.4f, SpriteEffects.None, 0f);
 
+            spriteBatch.Draw(tex, Item.position - Main.screenPosition, null, lightColor, 0f, tex.Size() / 2f, scale, SpriteEffects.None, 0f);
+           
             return false;
         }
     }
@@ -141,7 +145,7 @@ namespace BombusApisBee.Items.Other.OnPickupItems
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
-            if (proj.CountsAsClass<HymenoptraDamageClass>() && Main.rand.NextFloat() < 0.05f)
+            if (proj.CountsAsClass<HymenoptraDamageClass>() && Main.rand.NextFloat() < 0.015f)
             {
                 Item item = Main.item[Item.NewItem(target.GetSource_OnHurt(proj), target.getRect(), ModContent.ItemType<HoneycombChunkPickup>())];
 

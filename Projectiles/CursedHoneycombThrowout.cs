@@ -49,8 +49,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity = (Projectile.velocity * 20f + Utils.SafeNormalize(Main.MouseWorld - Projectile.Center + randomizedVector, Vector2.UnitX) * (Projectile.Distance(Main.MouseWorld) > 100f ? 17f : 12f)) / 21f;
                 if (--AttackDelay <= 0)
                 {
-
-                    if (owner.UseBeeResource(6))
+                    if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost))
                     {
                         for (int i = -1; i < 2; i++)
                         {

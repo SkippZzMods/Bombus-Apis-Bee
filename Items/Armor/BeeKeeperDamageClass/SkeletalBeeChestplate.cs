@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Reduces damage taken by 5%\nIncrease your amount of Loyal Bees by 1");
+            Tooltip.SetDefault("Reduces damage taken by 10%\nLoyal Bees increased by 2");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -15,13 +15,13 @@
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 2);
             Item.rare = ItemRarityID.Orange;
-            Item.defense = 5;
+            Item.defense = 6;
         }
 
         public override void UpdateEquip(Player player)
         {
-            player.endurance += 0.05f;
-            player.Hymenoptra().CurrentBees += 1;
+            player.endurance += 0.1f;   
+            player.Hymenoptra().CurrentBees += 2;
         }
 
         public override void AddRecipes()

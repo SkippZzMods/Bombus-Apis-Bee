@@ -37,7 +37,7 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(1f, 1f) + ((Projectile.ai[1] + MathHelper.ToRadians(180f)).ToRotationVector2() * -MathHelper.Lerp(35f, 5f, 1f - Projectile.timeLeft / 120f)), ModContent.DustType<Dusts.GlowFastDecelerate>(), Vector2.Zero, Scale: 0.4f, newColor: new Color(110, 220, 255));
             }
 
-            if (Main.rand.NextBool(60) && Main.player[Projectile.owner].UseBeeResource(1))
+            if (Main.rand.NextBool(60) && Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 4))
             {
                 new SoundStyle("BombusApisBee/Sounds/Item/LightningStrike").PlayWith(Projectile.position, 0, 0.1f, 0.85f);
                 Main.player[Projectile.owner].Bombus().AddShake(10);

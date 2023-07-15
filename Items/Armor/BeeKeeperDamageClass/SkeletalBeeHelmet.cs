@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 30");
+            Tooltip.SetDefault("10% increased hymenoptra critical strike chance\nIncreases maximum honey by 50");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -26,7 +26,6 @@
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = "Summons a skeletal hornet to protect you\nGetting a kill or critical hit enrages the hornet for a short time\nGetting a kill or critical hit while the hornet is already enraged increases the amount of time it is enraged for";
-            player.IncreaseBeeDamage(0.07f);
             if (player.ownedProjectileCounts[ModContent.ProjectileType<SkeletalHornetProjectile>()] <= 0 && Main.myPlayer == player.whoAmI)
             {
                 int whoami = Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, Vector2.UnitY, ModContent.ProjectileType<SkeletalHornetProjectile>(), player.ApplyHymenoptraDamageTo(18), 2f, player.whoAmI);
@@ -34,15 +33,13 @@
             }
 
             player.Bombus().SkeletalSet = true;
-
         }
 
         public override void UpdateEquip(Player player)
         {
-            player.IncreaseBeeDamage(0.1f);
             player.IncreaseBeeCrit(10);
             var modPlayer = BeeDamagePlayer.ModPlayer(player);
-            modPlayer.BeeResourceMax2 += 30;
+            modPlayer.BeeResourceMax2 += 50;
         }
 
 

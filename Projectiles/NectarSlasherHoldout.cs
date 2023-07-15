@@ -86,7 +86,7 @@ namespace BombusApisBee.Projectiles
                 {
                     if (Main.myPlayer == owner.whoAmI && boomerangTimer == 0)
                     {
-                        owner.UseBeeResource(3);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 1);
                         Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 20f;
                         Projectile.tileCollide = true;
                         Projectile.friendly = true;

@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Living Flower Crown");
-            Tooltip.SetDefault("2% increased hymenoptra damage\nIncreases maximum honey by 5");
+            Tooltip.SetDefault("3% increased hymenoptra critical strike chance\nIncreases maximum honey by 15");
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 
@@ -30,14 +30,13 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "'Get it? Cause yaknow, bees like flowers'\nSpawns dayblooms every 2 seconds, with a max of 3 dayblooms\n+2 defense, +2% hymenoptra damage, and +3% chance to not consume honey per daybloom alive";
+            player.setBonus = "'Get it? Cause yaknow, bees like flowers'\nSpawns dayblooms every 2 seconds, with a maximum of 3 dayblooms\n4% chance to not consume honey per daybloom alive\nWhile you have 3 dayblooms alive, double tap " + (Main.ReversedUpDownArmorSetBonuses ? "Up " : "Down ") + "to fire them toward the cursor, leeching honey on hit";
             player.Bombus().LivingFlower = true;
             for (int i = 0; i < player.ownedProjectileCounts[ModContent.ProjectileType<DaybloomProj>()]; i++)
             {
-                player.statDefense += 2;
-                player.IncreaseBeeDamage(0.02f);
-                player.Hymenoptra().ResourceChanceAdd += 0.03f;
+                player.Hymenoptra().ResourceChanceAdd += 0.04f;
             }
+
             if (player.ownedProjectileCounts[ModContent.ProjectileType<DaybloomProj>()] < 3 && FlowerTimer >= 120)
             {
                 Projectile.NewProjectile(player.GetSource_FromThis(), player.position, Vector2.Zero, ModContent.ProjectileType<DaybloomProj>(), (int)player.ApplyHymenoptraDamageTo(10), 1f, player.whoAmI, GetFlowerInt(player));
@@ -50,8 +49,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateEquip(Player player)
         {
-            player.IncreaseBeeDamage(0.02f);
-            player.Hymenoptra().BeeResourceMax2 += 5;
+            player.IncreaseBeeCrit(3);
+            player.Hymenoptra().BeeResourceMax2 += 15;
         }
 
         public override void AddRecipes()

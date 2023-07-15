@@ -81,7 +81,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 }
 
                 cooldown = 180;
-                player.UseBeeResource(6);
+                player.UseBeeResource(beeResourceCost + 3);
                 return false;
             }
 

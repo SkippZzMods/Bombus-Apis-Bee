@@ -17,7 +17,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 2, silver: 50);
             Item.rare = ItemRarityID.Blue;
-            Item.defense = 5;
+            Item.defense = 4;
         }
 
         public override void UpdateEquip(Player player)

@@ -31,7 +31,7 @@ namespace BombusApisBee.Projectiles
         {
             if (++HoneyDrainTimer % 30 == 0)
             {
-                if (!Main.player[Projectile.owner].UseBeeResource(1))
+                if (!Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost))
                     Projectile.ai[0] = -1f;
             }
 
@@ -49,7 +49,7 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(255, 191, 73), 0.35f);
             }
 
-            if (!Main.player[Projectile.owner].UseBeeResource(1))
+            if (!Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost))
                 Projectile.ai[0] = -1f;
         }
 

@@ -93,7 +93,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("40% increased wing flight time and increased jump speed\nIncreases maximum honey by 25");
+            Tooltip.SetDefault("20% increased wing flight time and increased jump speed\nIncreases maximum honey by 35");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -120,9 +120,9 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override void UpdateEquip(Player player)
         {
             var modPlayer = BeeDamagePlayer.ModPlayer(player);
-            modPlayer.BeeResourceMax2 += 25;
-            player.jumpSpeedBoost += 2.25f;
-            player.Bombus().wingFlightTimeBoost += 0.40f;
+            modPlayer.BeeResourceMax2 += 35;
+            player.jumpSpeedBoost += 2f;
+            player.Bombus().wingFlightTimeBoost += 0.20f;
         }
 
 

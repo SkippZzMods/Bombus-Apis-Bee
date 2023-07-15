@@ -123,7 +123,7 @@
 
         public void ShootThings(Vector2 barrelPos)
         {
-            if (owner.UseBeeResource(2))
+            if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 1))
             {
                 for (int i = 0; i < 15; i++)
                 {

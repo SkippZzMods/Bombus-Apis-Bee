@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased movement speed\nIncreases your amount of Loyal Bees by 1");
+            Tooltip.SetDefault("10% increased hymenoptra damage");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -15,13 +15,12 @@
             Item.height = 18;
             Item.value = Item.sellPrice(silver: 75);
             Item.rare = ItemRarityID.Orange;
-            Item.defense = 4;
+            Item.defense = 5;
         }
 
         public override void UpdateEquip(Player player)
         {
-            player.moveSpeed += 0.15f;
-            player.Hymenoptra().CurrentBees += 1;
+            player.IncreaseBeeDamage(0.1f);
         }
 
         public override void AddRecipes()

@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("2% increased hymenoptra damage");
+            Tooltip.SetDefault("3% increased hymenoptra critical strike chance");
         }
 
         public override void SetDefaults()
@@ -16,12 +16,12 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             Item.height = 18;
             Item.value = Item.sellPrice(copper: 65);
             Item.rare = ItemRarityID.White;
-            Item.defense = 1;
+            Item.defense = 2;
         }
 
         public override void UpdateEquip(Player player)
         {
-            player.IncreaseBeeDamage(0.02f);
+            player.IncreaseBeeCrit(3);
         }
 
         public override void AddRecipes()

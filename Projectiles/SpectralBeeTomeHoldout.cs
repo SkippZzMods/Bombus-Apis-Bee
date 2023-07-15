@@ -84,7 +84,7 @@
                 return;
             }
 
-            if (Owner.UseBeeResource(3))
+            if (Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost))
             {
                 SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
                 for (int i = 0; i < 2; i++)

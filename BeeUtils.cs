@@ -348,6 +348,9 @@ namespace BombusApisBee
         }
         public static bool UseBeeResource(this Player player, int amount)
         {
+            if (amount < 1)
+                amount = 1;
+
             if (player.Hymenoptra().BeeResourceCurrent >= amount + player.Hymenoptra().BeeResourceReserved)
             {
                 if (Main.rand.NextFloat() > player.TrueResourceChance())

@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased chance to not consume honey\nIncreases your amount of Loyal Bees by 1");
+            Tooltip.SetDefault("25% increased chance to not consume honey\nLoyal Bees increased by 3");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -20,8 +20,8 @@
 
         public override void UpdateEquip(Player player)
         {
-            player.Hymenoptra().ResourceChanceAdd += 0.15f;
-            player.Hymenoptra().CurrentBees += 1;
+            player.Hymenoptra().ResourceChanceAdd += 0.25f;
+            player.Hymenoptra().CurrentBees += 3;
         }
 
         public override void AddRecipes()

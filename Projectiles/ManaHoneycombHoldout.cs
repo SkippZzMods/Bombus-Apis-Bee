@@ -79,9 +79,9 @@
                         }
                     }
 
-                    Owner.UseBeeResource(5);
+                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost);
 
-                    Owner.statMana -= 5;
+                    Owner.CheckMana(15, true);
                 }
                 Projectile.Kill();
                 return;
