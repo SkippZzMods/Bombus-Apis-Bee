@@ -39,7 +39,6 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             }
 
             dust.position += dust.velocity;
-            dust.rotation += 0.04f;
 
             if (dust.alpha >= 255)
                 dust.active = false;
@@ -86,14 +85,15 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void Load()
         {
-            BombusApisBeeGlobalProjectile.StrongBeeKillEvent += SpawnBloodsplosion;
+            BombusApisBeeGlobalProjectile.StrongBeeKillEvent += SpawnExplosion;
         }
 
-        private void SpawnBloodsplosion(Projectile proj, int timeLeft)
+        private void SpawnExplosion(Projectile proj, int timeLeft)
         {
             if (Main.player[proj.owner].Bombus().HasHellcombShard && Main.rand.NextBool(15))
             {
-                Projectile.NewProjectileDirect(proj.GetSource_Death(), proj.Center, Vector2.Zero, ProjectileType<HellcombShardExplosion>(), proj.damage * 3, proj.knockBack, proj.owner, 75);
+                if (proj.owner == Main.myPlayer)
+                    Projectile.NewProjectileDirect(proj.GetSource_Death(), proj.Center, Vector2.Zero, ProjectileType<HellcombShardExplosion>(), proj.damage * 3, proj.knockBack, proj.owner, 75);
 
                 new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(proj.Center, 0, 0, 1.25f);
 
@@ -271,7 +271,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
             for (int k = 0; k < 40; k++)
             {
-                cache[k] = (Projectile.Center + Vector2.One.RotatedBy(k / 19f * 6.28f) * (Radius));
+                cache[k] = (Projectile.Center + Vector2.One.RotatedBy(k / 39f * 6.28f) * (Radius));
             }
 
             while (cache.Count > 40)

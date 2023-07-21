@@ -29,9 +29,12 @@ namespace BombusApisBee.Core
 
         public bool HoneyLaser;
         public int HoneyLaserCharge;
-        public const int HONEY_LASER_CHARGE_MAX = 5000;
+        public int HoneyLaserCooldown;
+        public const int HONEY_LASER_CHARGE_MAX = 500;
 
         public bool HoneyTeleport;
+        public int HoneyTeleportCooldown;
+
         public bool WaspArmorSet;
         public bool SkeletalSet;
         public int SkeletalHornetWhoAmI;
@@ -77,11 +80,18 @@ namespace BombusApisBee.Core
             enchantedhoney = false;
             HimenApiary = false;
             HoneyBee = false;
+
             if (!HoneyLaser)
                 HoneyLaserCharge--;
             HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge, 0, HONEY_LASER_CHARGE_MAX);
             HoneyLaser = false;
+            if (HoneyLaserCooldown > 0)
+                HoneyLaserCooldown--;
+
             HoneyTeleport = false;
+            if (HoneyTeleportCooldown > 0)
+                HoneyTeleportCooldown--;
+
             WaspArmorSet = false;
             SkeletalSet = false;
             wingFlightTimeBoost = 1f;
@@ -491,7 +501,7 @@ namespace BombusApisBee.Core
         {
             if (hit.DamageType.CountsAsClass<HymenoptraDamageClass>() && !NPCID.Sets.ProjectileNPC[target.type] && target.CanBeChasedBy())
             {
-                if (HoneyLaser)
+                if (HoneyLaser && HoneyLaserCooldown <= 0)
                     HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge + damageDone, 0, HONEY_LASER_CHARGE_MAX);
             }
         }

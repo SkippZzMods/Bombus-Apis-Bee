@@ -38,4 +38,17 @@
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
     }
+
+    public class HoneyTeleportCooldown : ModBuff
+    {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Honey Teleportation Cooldown");
+            Description.SetDefault("Your molecules need time to align");
+            Main.debuff[Type] = true;
+            Main.pvpBuff[Type] = true;
+            Main.buffNoSave[Type] = true;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
+        }
+    }
 }

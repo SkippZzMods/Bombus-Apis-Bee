@@ -6,17 +6,25 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("HellfireBee");
+            DisplayName.SetDefault("Hellfire Bee");
             Main.projFrames[Projectile.type] = 4;
         }
+
         public override void SafeOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.OnFire3, 300);
         }
-        public override void SafeAI()
+
+        public override bool SafePreDraw(ref Color lightColor)
         {
-            if (Main.rand.NextBool(5))
-                Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Lava, Projectile.velocity.X * 0.25f, Projectile.velocity.Y * 0.25f, 150, default(Color), 0.7f).noGravity = true;
+            lightColor = Color.White;
+            Texture2D glowTex = ModContent.Request<Texture2D>(Giant ? "BombusApisBee/ExtraTextures/BeeGlowGiant" : "BombusApisBee/ExtraTextures/BeeGlowHM").Value;
+
+            Rectangle frame = glowTex.Frame(verticalFrames: 4, frameY: Projectile.frame);
+
+            Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, frame, new Color(255, 100, 20, 0), Projectile.rotation, frame.Size() / 2f, Projectile.scale * 1.25f, Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+
+            return true;
         }
     }
 }

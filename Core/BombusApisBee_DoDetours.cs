@@ -45,6 +45,52 @@ namespace BombusApisBee.Core
                     }
                 }
             }
+
+            if (mp.HoneyTeleport && !self.HasBuff<HoneyTeleportCooldown>())
+            {
+                for (int i = 0; i < 25; i++)
+                {
+                    Vector2 velo = Main.rand.NextVector2Circular(2f, 2f);
+                    Dust dust = Main.dust[Dust.NewDust(self.position, self.width, self.height, DustID.Honey2, velo.X, velo.Y, 100, default, Main.rand.NextFloat(1f, 2f))];
+                    dust.noGravity = true;
+                }
+
+                if (Main.myPlayer == self.whoAmI)
+                {
+                    self.Teleport(Main.MouseWorld, -1, -1);
+                    Projectile.NewProjectile(self.GetSource_Misc("BombusApisBee: Honeyphyte Headgear Teleport"), Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<HoneyphyteHeadgearExplosion>(),
+                        75, 1f, self.whoAmI, 150);
+                }
+
+                self.AddBuff<HoneyTeleportCooldown>(1800);
+
+                mp.AddShake(20);
+
+                self.GiveIFrames(120);
+
+                SoundEngine.PlaySound(new SoundStyle("BombusApisBee/Sounds/Item/LightSplash"), self.Center);
+
+                for (int i = 0; i < 35; i++)
+                {
+                    Dust.NewDustPerfect(self.Center,
+                    ModContent.DustType<HoneyMetaballDust>(), Main.rand.NextVector2Circular(15f, 15f), 0, default, Main.rand.NextFloat(2f, 4f)).noGravity = true;
+                }
+            }
+
+            if (mp.HoneyLaser && mp.HoneyLaserCooldown <= 0 && mp.HoneyLaserCharge >= BombusApisBeePlayer.HONEY_LASER_CHARGE_MAX)
+            {
+                Projectile laser = Main.projectile.Where(p => p.active && p.owner == self.whoAmI && p.type == ModContent.ProjectileType<HoneyphyteMaskLaserHoneycomb>()).FirstOrDefault();
+
+                if (laser != default)
+                {
+                    mp.HoneyLaserCooldown = 120;
+                    (laser.ModProjectile as HoneyphyteMaskLaserHoneycomb).ActivateLaser();
+                }
+                else
+                {
+                    throw new Exception("what the hell where is your laser projectile???");
+                }
+            }
         }
 
         // i would IL this but im too lazy

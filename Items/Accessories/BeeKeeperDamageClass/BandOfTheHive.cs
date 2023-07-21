@@ -264,7 +264,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ichor Explosion");
+            DisplayName.SetDefault("Honey Explosion");
         }
 
         public override void AI()

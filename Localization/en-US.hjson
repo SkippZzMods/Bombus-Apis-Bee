@@ -183,6 +183,10 @@ Mods: {
 			WasparangHoldout.DisplayName: Beemerang
 			HellcombShardExplosion.DisplayName: Volatile Explosion
 			HoneycombCrusaderShieldProjectile.DisplayName: Honey Shield
+			HoneyphyteHeadgearExplosion.DisplayName: Honey Explosion
+			HellfireBeemstickSlug.DisplayName: Hellfire Slug
+			HellfireSlugExplosion.DisplayName: Hellfire Explosion
+			HoneyphyteMaskLaserHoneycomb.DisplayName: Honeyphytecomb
 		}
 
 		DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
@@ -281,6 +285,11 @@ Mods: {
 			RottenDebuff: {
 				DisplayName: Rotten
 				Description: u smell gross
+			}
+
+			HoneyTeleportCooldown: {
+				DisplayName: Honey Teleportation Cooldown
+				Description: Your molecules need time to align
 			}
 		}
 

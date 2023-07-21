@@ -1,11 +1,13 @@
 using Terraria;
+using Terraria.DataStructures;
+
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
     public class TESTWEAPON : BeeDamageItem
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
+            DisplayName.SetDefault("Test Honeycomb"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
             Tooltip.SetDefault("TEST DONT USE");
         }
 
@@ -23,17 +25,19 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.rare = ItemRarityID.Gray;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<BandHoneyGlob>();
+            Item.shoot = ModContent.ProjectileType<HellcombShardExplosion>();
             Item.shootSpeed = 10;
             Item.UseSound = SoundID.Item11;
             Item.scale = 1;
             Item.crit = 4;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            target.AddBuff(BuffID.Poisoned, 300, false);
+            Vector2 pos = Main.MouseWorld;
+            return false;
         }
+
         public override void HoldItem(Player player)
         {
             player.Hymenoptra().BeeResourceReserved = 0;
