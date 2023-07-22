@@ -29,8 +29,7 @@ namespace BombusApisBee.Core
 
         public bool HoneyLaser;
         public int HoneyLaserCharge;
-        public int HoneyLaserCooldown;
-        public const int HONEY_LASER_CHARGE_MAX = 500;
+        public const int HONEY_LASER_CHARGE_MAX = 10000;
 
         public bool HoneyTeleport;
         public int HoneyTeleportCooldown;
@@ -85,8 +84,6 @@ namespace BombusApisBee.Core
                 HoneyLaserCharge--;
             HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge, 0, HONEY_LASER_CHARGE_MAX);
             HoneyLaser = false;
-            if (HoneyLaserCooldown > 0)
-                HoneyLaserCooldown--;
 
             HoneyTeleport = false;
             if (HoneyTeleportCooldown > 0)
@@ -501,7 +498,7 @@ namespace BombusApisBee.Core
         {
             if (hit.DamageType.CountsAsClass<HymenoptraDamageClass>() && !NPCID.Sets.ProjectileNPC[target.type] && target.CanBeChasedBy())
             {
-                if (HoneyLaser && HoneyLaserCooldown <= 0)
+                if (HoneyLaser && !Player.HasBuff<HoneyLaserCooldown>())
                     HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge + damageDone, 0, HONEY_LASER_CHARGE_MAX);
             }
         }

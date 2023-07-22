@@ -77,13 +77,13 @@ namespace BombusApisBee.Core
                 }
             }
 
-            if (mp.HoneyLaser && mp.HoneyLaserCooldown <= 0 && mp.HoneyLaserCharge >= BombusApisBeePlayer.HONEY_LASER_CHARGE_MAX)
+            if (mp.HoneyLaser && !self.HasBuff<HoneyLaserCooldown>() && mp.HoneyLaserCharge >= BombusApisBeePlayer.HONEY_LASER_CHARGE_MAX)
             {
                 Projectile laser = Main.projectile.Where(p => p.active && p.owner == self.whoAmI && p.type == ModContent.ProjectileType<HoneyphyteMaskLaserHoneycomb>()).FirstOrDefault();
 
                 if (laser != default)
                 {
-                    mp.HoneyLaserCooldown = 120;
+                    self.AddBuff<HoneyLaserCooldown>(1800);
                     (laser.ModProjectile as HoneyphyteMaskLaserHoneycomb).ActivateLaser();
                 }
                 else

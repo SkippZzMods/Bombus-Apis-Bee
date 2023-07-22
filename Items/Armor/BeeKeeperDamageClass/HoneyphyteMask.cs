@@ -115,7 +115,14 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
             rotationalVelocity = Vector2.Lerp(rotationalVelocity, Projectile.DirectionTo(Main.MouseWorld), 0.025f);
 
             if (LaserTimer > 0)
+            {
                 UpdateLaser();
+            }
+            else if (Charge >= BombusApisBeePlayer.HONEY_LASER_CHARGE_MAX && StartupTimer <= 0)
+            {
+                if (Main.rand.NextBool(10))
+                    Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(30f, 30f), ModContent.DustType<Dusts.GlowFastDecelerate>(), Vector2.UnitY * -Main.rand.NextFloat(2f, 3f), 0, new Color(200, 100, 20), 0.5f);
+            }
 
             if (!pulsed && Charge >= BombusApisBeePlayer.HONEY_LASER_CHARGE_MAX)
             {

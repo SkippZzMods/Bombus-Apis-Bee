@@ -291,6 +291,11 @@ Mods: {
 				DisplayName: Honey Teleportation Cooldown
 				Description: Your molecules need time to align
 			}
+
+			HoneyLaserCooldown: {
+				DisplayName: Honey Laser Cooldown
+				Description: The honeycomb needs time to cool down
+			}
 		}
 
 		Prefixes: {
