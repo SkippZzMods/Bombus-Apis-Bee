@@ -11,9 +11,6 @@ namespace BombusApisBee.Projectiles
             Projectile.penetrate = 1;
             Projectile.timeLeft = 600;
             Projectile.extraUpdates = 1;
-            Projectile.alpha = 255;
-            Projectile.aiStyle = 1;
-            AIType = ProjectileID.Bullet;
         }
 
         public override void SetStaticDefaults()
@@ -60,7 +57,9 @@ namespace BombusApisBee.Projectiles
                 Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
                 Main.EntitySpriteDraw(texture, drawPos, texture.Frame(verticalFrames: 3, frameY: Projectile.frame), color, Projectile.rotation, texture.Frame(verticalFrames: 3, frameY: Projectile.frame).Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.35f, (k / (float)Projectile.oldPos.Length)), SpriteEffects.None, 0);
             }
+
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, texture.Frame(verticalFrames: 3, frameY: Projectile.frame), lightColor, Projectile.rotation, texture.Frame(verticalFrames: 3, frameY: Projectile.frame).Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
+            
             return false;
         }
     }

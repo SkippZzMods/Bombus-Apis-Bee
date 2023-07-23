@@ -19,7 +19,7 @@ namespace BombusApisBee.Core
         public bool improvedhoney;
         public const int PollenMax = 1;
         public int Pollen;
-        public bool BeeKeeper;
+        public bool BeeKeeper;  
         public int squiredamage;
         public bool improvedhoneyskull;
         public bool IgnoreWater;
