@@ -59,6 +59,8 @@ namespace BombusApisBee.Core
         public bool HasHemocombShard;
         public bool HasHellcombShard;
         public bool JustActivatedArmorSetBonus;
+
+        public bool HasCatacombShard;
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new[] { new Item(ModContent.ItemType<Honeycomb>(), 1) };
@@ -117,6 +119,8 @@ namespace BombusApisBee.Core
             HasHemocombShard = false;
             HasHellcombShard = false;
             JustActivatedArmorSetBonus = false;
+
+            HasCatacombShard = false;
         }
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)

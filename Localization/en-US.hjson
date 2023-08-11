@@ -1361,7 +1361,7 @@ Mods: {
 				10% increased hymenoptra damage and critical strike chance
 				Increases maximum honey by 75
 				'''
-			Beevolver.Tooltip: Press <right> to drain 50% of your honey bank to empower your shots for a short time
+			Beevolver.Tooltip: Press <right> to drain 50% of your honey bank to empower your shots for a short time, causing them to ricochet
 		}
 
 		NPCs: {

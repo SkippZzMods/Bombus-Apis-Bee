@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Items.Other.Crafting;
+﻿/*using BombusApisBee.Items.Other.Crafting;
 using Terraria.DataStructures;
 
 
@@ -10,9 +10,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int shootDirection;
         public bool spawnedGore;
         public int chargedTimer;
+        public bool rightClicked;
+        public float? oldHandRot;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Press <right> to drain 50% of your honey bank to empower your shots for a short time");
+            Tooltip.SetDefault("Press <right> to drain 50% of your honey bank to empower your shots for a short time, causing them to ricochet");
         }
 
         public override void SafeSetDefaults()
@@ -36,6 +38,34 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             beeResourceCost = 3;
         }
 
+        public override bool SafeCanUseItem(Player player)
+        {
+            shootRotation = (player.Center - Main.MouseWorld).ToRotation();
+            shootDirection = (Main.MouseWorld.X < player.Center.X) ? -1 : 1;
+            spawnedGore = false;
+            rightClicked = player.altFunctionUse == 2;
+            oldHandRot = null;
+
+            if (player.altFunctionUse == 2)
+            {
+                Item.useTime = 120;
+                Item.useAnimation = 120;
+            }
+            else
+            {
+                Item.useTime = 36;
+                Item.useAnimation = 36;
+            }
+
+            return true;
+        }
+
+        public override void UpdateInventory(Player player)
+        {
+            if (chargedTimer > 0)
+                chargedTimer--;
+        }
+
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             Vector2 muzzleOffset = new Vector2(36, -5 * player.direction).RotatedBy(velocity.ToRotation());
@@ -52,8 +82,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             if (Main.myPlayer == player.whoAmI)
                 player.direction = shootDirection;
 
-            float itemRotation = player.compositeFrontArm.rotation + 1.5707964f * player.gravDir;
+            float itemRotation = 0f;
             Vector2 itemPosition = player.MountedCenter;
+
+            itemRotation = player.compositeFrontArm.rotation + 1.5707964f * player.gravDir;
 
             if (animProgress < 0.15f)
             {
@@ -65,7 +97,6 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 float lerper = (animProgress - 0.15f) / 0.85f;
                 itemPosition += itemRotation.ToRotationVector2() * MathHelper.Lerp(-5f, 3f, EaseBuilder.EaseCircularInOut.Ease(lerper));
             }
-            
 
             Vector2 itemSize = new Vector2(38f, 24f);
             Vector2 itemOrigin = new Vector2(-18f, 1f);
@@ -95,12 +126,21 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, rotation);
         }
 
+        public override bool AltFunctionUse(Player player)
+        {
+            return true; //player.Hymenoptra().BeeResourceCurrent >= player.Hymenoptra().BeeResourceMax2 * 0.5f;
+        }
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            shootRotation = (player.Center - Main.MouseWorld).ToRotation();
-            shootDirection = (Main.MouseWorld.X < player.Center.X) ? -1 : 1;
-            spawnedGore = false;
+            if (player.altFunctionUse == 2)
+            {
+                //player.Hymenoptra().BeeResourceCurrent -= (int)(player.Hymenoptra().BeeResourceMax2 * 0.5f);
+                chargedTimer = 600;
+                return false;
+            }
+
             return true;
         }
     }
-}
+}*/
