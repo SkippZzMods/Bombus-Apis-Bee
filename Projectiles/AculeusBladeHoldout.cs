@@ -10,6 +10,7 @@ namespace BombusApisBee.Projectiles
 
         private bool flipBlade = true;
         private bool drawAfterImages;
+        private bool spawnedProjectile;
 
         private float maxTimeLeft;
         private float originalDirection;
@@ -22,6 +23,7 @@ namespace BombusApisBee.Projectiles
         private List<float> oldRotation = new();
         private List<float> oldScale = new();
         private List<Vector2> oldPositions = new();
+        private List<bool> oldFlipBlade = new();
 
         private List<Vector2> cache;
         private Trail trail;
@@ -117,6 +119,10 @@ namespace BombusApisBee.Projectiles
 
                 if (oldScale.Count > 15)
                     oldScale.RemoveAt(0);
+
+                oldFlipBlade.Add(flipBlade);
+                if (oldFlipBlade.Count > 15)
+                    oldFlipBlade.RemoveAt(0);
             }
 
 
@@ -171,7 +177,7 @@ namespace BombusApisBee.Projectiles
                     owner.Bombus().AddShake(7);
                     swung = true;
 
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * 20f, Projectile.velocity * 10f, ModContent.ProjectileType<StingerFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * 20f, Projectile.velocity * 5f, ModContent.ProjectileType<AculeusBladeStinger>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
 
                 float lerper = 1f - (Projectile.timeLeft) / (float)Math.Floor(maxTimeLeft - maxTimeLeft * 0.7f);
@@ -239,6 +245,11 @@ namespace BombusApisBee.Projectiles
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
                     owner.Bombus().AddShake(7);
                     swung = true;
+
+                    for (int i = -1; i < 2; i++)
+                    {
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center, Projectile.velocity.RotatedBy(i * 0.2f) * 5f, ModContent.ProjectileType<AculeusBladeStinger>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    }
                 }
 
                 float lerper = 1f - (Projectile.timeLeft) / (float)Math.Floor(maxTimeLeft - maxTimeLeft * 0.55f);
@@ -304,6 +315,11 @@ namespace BombusApisBee.Projectiles
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
                     owner.Bombus().AddShake(7);
                     swung = true;
+
+                    for (int i = -1; i < 2; i++)
+                    {
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center, Projectile.velocity.RotatedBy(i * 0.25f) * 5f, ModContent.ProjectileType<AculeusBladeStinger>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    }
                 }
 
                 float lerper = 1f - (Projectile.timeLeft) / (float)Math.Floor(maxTimeLeft - maxTimeLeft * 0.35f);
@@ -399,6 +415,11 @@ namespace BombusApisBee.Projectiles
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
 
                 Projectile.scale = 1f + (float)Math.Sin(EaseBuilder.EaseCubicInOut.Ease(lerper) * 3.1415927f) * 0.6f * 0.6f;
+
+                if (progress >= 0.55f && progress <= 0.8f && Projectile.timeLeft % 5 == 0 && pauseTimer <= 0)
+                {
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), owner.Center, (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * 20f, ModContent.ProjectileType<AculeusBladeStinger>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                }
             }
         }
 
@@ -504,9 +525,7 @@ namespace BombusApisBee.Projectiles
         {
             DrawPrimitives();
             Texture2D sword = ModContent.Request<Texture2D>(Texture + (flipBlade ? "_Flipped" : "")).Value;
-
-            Texture2D swordBlade = ModContent.Request<Texture2D>(Texture + "_Blade" + (flipBlade ? "_Flipped" : "")).Value;
-
+     
             SpriteEffects flip = owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
 
             if (drawAfterImages)
@@ -515,13 +534,14 @@ namespace BombusApisBee.Projectiles
                 {
                     float fade = 1f;
 
-                    if (Projectile.timeLeft < 12f)
-                        fade = Projectile.timeLeft / 12f;
+                    if (Projectile.timeLeft < 60f)
+                        fade = Projectile.timeLeft / 60f;
 
                     fade *= 1 - (15f - i) / 15f;
 
                     if (i > 0 && i < oldRotation.Count)
                     {
+                        Texture2D swordBlade = ModContent.Request<Texture2D>(Texture + "_Blade" + (oldFlipBlade[i] ? "_Flipped" : "")).Value;
                         Main.spriteBatch.Draw(swordBlade, owner.Center + oldPositions[i] - Main.screenPosition, null, Color.White * 0.05f * fade, oldRotation[i] + (owner.direction == -1 ? MathHelper.PiOver2 : 0f), sword.Size() / 2f, oldScale[i], flip, 0f);
                     }
                 }
@@ -648,6 +668,25 @@ namespace BombusApisBee.Projectiles
         Vector2 offset = Vector2.Zero;
 
         private Vector2 oldPos;
+
+        private Vector2 tipPosition;
+
+        private bool drawAfterImages;
+
+        private int oldTimeLeft;
+        private int pauseTimer;
+
+        private int hits;
+
+        private List<float> oldRotation = new();
+        private List<float> oldScale = new();
+        private List<Vector2> oldPositions = new();
+
+        private List<Vector2> cache;
+        private Trail trail;
+        private Trail trail2;
+        private Trail trail3;
+
         public float Combo => Projectile.ai[1];
         public Player owner => Main.player[Projectile.owner];
 
@@ -746,6 +785,8 @@ namespace BombusApisBee.Projectiles
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation).ToRotationVector2() * MathHelper.Lerp(0f, 5f, EaseBuilder.EaseCubicOut.Ease(lerper)) + offset;
 
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4 + 0.02f * originalDirection).ToRotationVector2() * ((25f + MathHelper.Lerp(0f, 5f, EaseBuilder.EaseCubicOut.Ease(lerper))) * Projectile.scale);
+
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(0f, MathHelper.ToRadians(100), EaseBuilder.EaseCubicOut.Ease(lerper)) * originalDirection;
 
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot);
@@ -756,6 +797,7 @@ namespace BombusApisBee.Projectiles
             {
                 if (!swung)
                 {
+                    drawAfterImages = true;
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);
                     owner.Bombus().AddShake(7);
                     swung = true;
@@ -775,6 +817,8 @@ namespace BombusApisBee.Projectiles
                 Vector2 offset = Vector2.Lerp(new Vector2(30, 5 * originalDirection), new Vector2(5, 5 * originalDirection), EaseBuilder.EaseCubicOut.Ease(lerper)).RotatedBy(Projectile.rotation - MathHelper.PiOver4);
 
                 Projectile.Center = owner.MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * MathHelper.Lerp(5f, 50f, EaseBuilder.EaseQuinticOut.Ease(lerper)) + offset;
+                
+                tipPosition = owner.MountedCenter + offset + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * ((35f + MathHelper.Lerp(5f, 50f, EaseBuilder.EaseCubicOut.Ease(lerper))));
 
                 float armRot = (Projectile.velocity.ToRotation() - MathHelper.PiOver2) + MathHelper.Lerp(MathHelper.ToRadians(100), -MathHelper.ToRadians(130), EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
 
@@ -940,6 +984,30 @@ namespace BombusApisBee.Projectiles
             owner.heldProj = Projectile.whoAmI;
 
             owner.ChangeDir(Projectile.direction);
+
+            if (Projectile.timeLeft % 3 == 0)
+            {
+                oldRotation.Add(Projectile.rotation);
+
+                if (oldRotation.Count > 15)
+                    oldRotation.RemoveAt(0);
+
+                oldPositions.Add(Projectile.Center - owner.Center);
+
+                if (oldPositions.Count > 15)
+                    oldPositions.RemoveAt(0);
+
+                oldScale.Add(Projectile.scale);
+
+                if (oldScale.Count > 15)
+                    oldScale.RemoveAt(0);
+            }
+
+            if (!Main.dedServ && Projectile.timeLeft < maxTimeLeft)
+            {
+                ManageCaches();
+                ManageTrail();
+            }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -1008,6 +1076,7 @@ namespace BombusApisBee.Projectiles
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            DrawPrimitives();
             Texture2D sword = ModContent.Request<Texture2D>(Texture).Value;
             SpriteEffects flip = owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
 
@@ -1024,5 +1093,103 @@ namespace BombusApisBee.Projectiles
 
             return false;
         }
+
+        #region Primitive Drawing
+        private void ManageCaches()
+        {
+            var adjustedPos = tipPosition - owner.Center;
+
+            if (cache == null)
+            {
+                cache = new List<Vector2>();
+                for (int i = 0; i < 15; i++)
+                {
+                    cache.Add(owner.Center + adjustedPos);
+                }
+            }
+
+            cache.Add(owner.Center + adjustedPos);
+
+            while (cache.Count > 15)
+            {
+                cache.RemoveAt(0);
+            }
+        }
+
+        private void ManageTrail()
+        {
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(0), factor => 20f, factor =>
+            {
+                if (factor.X >= 0.85f)
+                    return Color.Transparent;
+
+                return (new Color(40, 150, 20) * 0.5f) * factor.X * TrailFade();
+            });
+
+            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(0), factor => 20f, factor =>
+            {
+                if (factor.X >= 0.85f)
+                    return Color.Transparent;
+
+                return (new Color(100, 215, 15) * 0.3f) * factor.X * TrailFade();
+            });
+
+            trail3 = trail3 ?? new Trail(Main.instance.GraphicsDevice, 15, new TriangularTip(0), factor => 30f, factor =>
+            {
+                if (factor.X >= 0.85f)
+                    return Color.Transparent;
+
+                return (new Color(200, 255, 40) * 0.2f) * factor.X * TrailFade();
+            });
+
+            var realCache = new Vector2[15];
+
+            for (int k = 0; k < 15; k++)
+            {
+                realCache[k] = cache[k];
+            }
+
+            trail.Positions = realCache;
+            trail2.Positions = realCache;
+            trail3.Positions = realCache;
+        }
+
+        public float TrailFade()
+        {
+            float ratio = Projectile.timeLeft / maxTimeLeft;
+            if (ratio > 0.25f)
+                return (Projectile.timeLeft - maxTimeLeft * 0.25f) / (maxTimeLeft * 0.75f);
+            else
+                return 0f;
+        }
+
+        public void DrawPrimitives()
+        {
+            Main.spriteBatch.End();
+            Effect effect = Terraria.Graphics.Effects.Filters.Scene["SLRCeirosRing"].GetShader().Shader;
+
+            Matrix world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
+            Matrix view = Main.GameViewMatrix.ZoomMatrix;
+            Matrix projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
+
+            effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.025f);
+            effect.Parameters["repeats"].SetValue(1f);
+            effect.Parameters["transformMatrix"].SetValue(world * view * projection);
+            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
+
+            if (drawAfterImages && swung)
+            {
+                trail?.Render(effect);
+
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
+                trail2?.Render(effect);
+
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/ShadowTrail").Value);
+                trail3?.Render(effect);
+            }
+
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+        }
+        #endregion Primitive Drawing
     }
 }

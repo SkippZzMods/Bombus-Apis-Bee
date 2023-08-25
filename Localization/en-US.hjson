@@ -187,6 +187,8 @@ Mods: {
 			HellfireBeemstickSlug.DisplayName: Hellfire Slug
 			HellfireSlugExplosion.DisplayName: Hellfire Explosion
 			HoneyphyteMaskLaserHoneycomb.DisplayName: Honeyphytecomb
+			CatacombShardProjectile.DisplayName: Waterbolt
+			AculeusBladeStinger.DisplayName: Stinger
 		}
 
 		DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
@@ -1362,6 +1364,11 @@ Mods: {
 				Increases maximum honey by 75
 				'''
 			Beevolver.Tooltip: Press <right> to drain 50% of your honey bank to empower your shots for a short time, causing them to ricochet
+			CatacombShard.Tooltip:
+				'''
+				Increases the chance to strengthen friendly bees by 60%
+				Strengthened bees have a chance to spawn water bolts on hit
+				'''
 		}
 
 		NPCs: {

@@ -21,8 +21,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         {
             Item.damage = 35;
             Item.DamageType = DamageClass.Melee;
-            Item.useTime = 86;
-            Item.useAnimation = 86;
+            Item.useTime = 80;
+            Item.useAnimation = 80;
             Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 8f;
@@ -45,9 +45,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 }
                 cooldown--;
             }
-
-
         }
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)

@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Items\Accessories\BeeKeeperDamageClass\CatacombShard.png" />
+    <None Remove="Projectiles\AculeusBladeStinger.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
