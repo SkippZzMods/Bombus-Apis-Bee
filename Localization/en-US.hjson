@@ -189,6 +189,8 @@ Mods: {
 			HoneyphyteMaskLaserHoneycomb.DisplayName: Honeyphytecomb
 			CatacombShardProjectile.DisplayName: Waterbolt
 			AculeusBladeStinger.DisplayName: Stinger
+			TrueAculeusBladeHoldout.DisplayName: Blade of Aculeus
+			TrueAculeusBladeHoldoutAlt.DisplayName: Blade of Aculeus
 		}
 
 		DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
@@ -297,6 +299,11 @@ Mods: {
 			HoneyLaserCooldown: {
 				DisplayName: Honey Laser Cooldown
 				Description: The honeycomb needs time to cool down
+			}
+
+			BladeOfAculeusCleave: {
+				DisplayName: Cleaved
+				Description: You're defense is worthless
 			}
 		}
 

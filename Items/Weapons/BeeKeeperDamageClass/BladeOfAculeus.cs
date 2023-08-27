@@ -6,23 +6,19 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     public class BladeOfAculeus : BeeDamageItem
     {
         private int combo = 0;
-
-        int cooldown;
-        public override bool AltFunctionUse(Player player) => cooldown <= 0;
-        public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<AculeusBladeHoldout>()] <= 0 && player.ownedProjectileCounts[ModContent.ProjectileType<AculeusBladeHoldoutAlt>()] <= 0;
+        public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<AculeusBladeHoldout>()] <= 0;
         public override void SafeSetStaticDefaults()
         {
             DisplayName.SetDefault("Blade of Aculeus");
-            Tooltip.SetDefault("Performs a heavy combo of swings and stabs\nPress <right> to throw the blade, embedding itself in enemies\n" +
-                "Press <right> whilst the blade is embedded to return it, performing an empowered swing\nRends the armor of enemies");
+            Tooltip.SetDefault("Performs hefty strikes, flinging piercing stingers with deadly force\nMelee strikes cleave the armor of enemies");
         }
 
         public override void SafeSetDefaults()
         {
-            Item.damage = 35;
+            Item.damage = 12;
             Item.DamageType = DamageClass.Melee;
-            Item.useTime = 80;
-            Item.useAnimation = 80;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 8f;
@@ -35,33 +31,15 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.rare = ItemRarityID.Green;
             Item.Size = new Vector2(50);
         }
-        public override void HoldItem(Player player)
-        {
-            if (cooldown > 0)
-            {
-                if (cooldown == 1)
-                {
-                    SoundID.MaxMana.PlayWith(player.Center);
-                }
-                cooldown--;
-            }
-        }
-
+       
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.altFunctionUse == 2)
+
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, combo);
+            combo++;
+            if (combo > 1)
             {
-                Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<AculeusBladeHoldoutAlt>(), (int)(damage * 1.5f), knockback, player.whoAmI);
                 combo = 0;
-            }
-            else
-            {
-                Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, combo);
-                combo++;
-                if (combo > 4)
-                {
-                    combo = 0;
-                }
             }
 
             return false;

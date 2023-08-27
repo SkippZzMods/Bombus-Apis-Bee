@@ -53,6 +53,7 @@ namespace BombusApisBee.Projectiles
                 Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
                 Main.EntitySpriteDraw(texture, drawPos, null, color, Projectile.rotation, texture.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.75f, (k / (float)Projectile.oldPos.Length)), SpriteEffects.None, 0);
             }
+
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, texture.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
             return false;
         }
