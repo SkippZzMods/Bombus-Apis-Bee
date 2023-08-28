@@ -2,7 +2,6 @@
 {
     public class HoneycombHoldout : ModProjectile
     {
-        public override string Texture => BombusApisBee.BeeWeapon + "Honeycomb";
         public Player owner => Main.player[Projectile.owner];
 
         public int MaxDelay;

@@ -3,7 +3,7 @@
 
 Bombus Apis Bee is a content mod that adds a new class, the Beekeeper! This class utilizes Honey, a custom resource, to use with hymenoptra weapons. Honey is custom resource, which constantly regenerates at a slow rate. This can be increased to much faster via use of the class' gimmick: Loyal Bees. While playing as the Beekeeper, 3 Bees will hover around the player, and you can get more Loyal Bees via accessories and armor sets. The Loyal Bees have three modes, all with their own uses. There is Defense, Offense, and Gathering. While they are in Defense Mode, you are granted defensive bonuses such as defense and dr akin to how many Loyal Bees you currently have. Along with this, you are granted a honey shield which can block attacks. While in Offense mode, you are granted offensive bonuses, and your Loyal Bees will seek out and attack enemies. While your Loyal Bees are in Gathering Mode, they will seek out enemies and lodge themselves in them, granting increased honey regeneration and dealing DoT. Keep in mind damage is decreased in Gathering Mode, so the best way to play is to be constantly switching between modes. The Beekeeper class has a large focus on homing and strong damage, with the drawbacks being very little defense, usually having as much or less than summoner throughout progression.
 
-This mod currently has 56 weapons, 7 armor sets, 2 armor helmets that corrospond to vanilla armor sets, and 21 accessories. 
+This mod currently has 52 weapons, 7 armor sets, and 26 accessories. 
 
 [b]Be sure to join the Discord server linked above to see spoilers of upcoming updates, news and patch notes about the mod, and talk with people who are knowledgeable about the mod, including me[/b]
 

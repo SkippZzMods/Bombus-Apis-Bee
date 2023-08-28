@@ -3,7 +3,7 @@
 
 - This class, uses [c/FFEF00:Honey], a unique resource which is regenerated via the class' gimmick: Loyal Bees. The Beekeeper has Loyal Bees which follow them around everywhere. These Loyal Bees have 3 modes: Defense, Offense, and Gathering. While they are in Defense Mode, they will grant increase defense and DR, and periodically block attacks. While in Offense mode, they grant offensive buffs and attack enemies. While in Gathering mode they decrease your damage, but they will seek out enemies in order to siphon honey from them, dealing DoT. Gathering mode regenerates honey extremely quickly, but while you arent in gathering mode your honey regenerates quite slow, around 4 honey per second.
 
-- Adds many content to progression, currently adding (56) weapons, (21) accessories, (7), armor sets, (2), armor helmets, and one new town npc
+- Adds many content to progression, currently adding (52) weapons, (26) accessories, (7), armor sets, and one new town npc
 
 - The patch notes of all past and future updates, along with other info and knowlegdable people about the mod, including me, can be found on the discord server, which is located on the forum page.
 

@@ -20,10 +20,10 @@
                 index = tooltips.FindIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("ItemName"));
                 if (index != -1)
                 {
-                    float Beefade = (float)((Math.Sin((double)(6.2831855f / secondtimer) * Main.GlobalTimeWrappedHourly) + 1.0) * 0.5);
+                    float lerper = Utils.Clamp((float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f), 0, 1f);
                     tooltips.Insert(index + 1, new TooltipLine(Mod, "BeeKeeperItemTag", "- Bee Keeper Item -")
                     {
-                        OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), Beefade)
+                        OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), lerper)
                     }); ;
                 }              
             }
@@ -36,10 +36,10 @@
                 if (index != -1)
                 {
 
-                    float Beefade = (float)((Math.Sin((double)(6.2831855f / secondtimer) * Main.GlobalTimeWrappedHourly) + 1.0) * 0.5);
+                    float lerper = Utils.Clamp((float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f), 0, 1f);
                     tooltips.Insert(index + 1, new TooltipLine(Mod, "BeeKeeperItemTag", "- Bee Keeper Item -")
                     {
-                        OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), Beefade)
+                        OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), lerper)
                     }); ;
                 }             
             }
