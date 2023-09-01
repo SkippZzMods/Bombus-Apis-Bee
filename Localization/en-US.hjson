@@ -1382,13 +1382,13 @@ Mods: {
 				}
 
 				ResourceOffX: {
-					Label: Used for the dragging properties of the Resource UI. Should not be changed manually, reset this and the Y Offset to 0 to use default posiiton.
-					Tooltip: ""
+					Label: Used for the dragging properties of the Resource UI
+					Tooltip: Should not be changed manually, reset this and the Y Offset to 0 to use default posiiton.
 				}
 
 				ResourceOffY: {
-					Label: Used for the dragging properties of the Resource UI. Should not be changed manually, reset this and the X Offset 0 to use default posiiton.
-					Tooltip: ""
+					Label: Used for the dragging properties of the Resource UI
+					Tooltip: Should not be changed manually, reset this and the X Offset 0 to use default posiiton.
 				}
 			}
 		}
