@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => "BombusApisBee/Projectiles/GalacticStar";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Star");
+            //DisplayName.SetDefault("Star");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

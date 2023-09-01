@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("'The souls of forgotten bees seek vengeance'");
+            //Tooltip.SetDefault("'The souls of forgotten bees seek vengeance'");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
         }
 

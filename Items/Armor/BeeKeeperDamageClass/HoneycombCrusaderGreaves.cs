@@ -1,14 +1,17 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Legs)]
     public class HoneycombCrusaderGreaves : BeeKeeperItem
     {
+        public static int IncreaseDmg = 5;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Crusader Greaves");
-            Tooltip.SetDefault("5% increased hymenoptra damage");
+            //DisplayName.SetDefault("Honeycomb Crusader Greaves");
+            //Tooltip.SetDefault("5% increased hymenoptra damage");
             Item.ResearchUnlockCount = 1;
         }
 

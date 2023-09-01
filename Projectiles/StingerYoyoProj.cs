@@ -9,7 +9,7 @@
             ProjectileID.Sets.YoyosLifeTimeMultiplier[Projectile.type] = 12f;
             ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 350f;
             ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 14f;
-            DisplayName.SetDefault("Stinging Yoyo");
+            //DisplayName.SetDefault("Stinging Yoyo");
 
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;

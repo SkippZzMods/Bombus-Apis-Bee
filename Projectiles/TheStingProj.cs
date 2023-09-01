@@ -8,7 +8,7 @@
         int DashDelay;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Stinging Queen");
+            //DisplayName.SetDefault("The Stinging Queen");
             Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;

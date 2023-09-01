@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Flameball");
+            //DisplayName.SetDefault("Cursed Flameball");
         }
 
         public override void SafeSetDefaults()
@@ -173,7 +173,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Explosion");
+            //DisplayName.SetDefault("Cursed Explosion");
         }
 
         public override void AI()
@@ -275,7 +275,7 @@ namespace BombusApisBee.Projectiles
         internal int SpazLaserTimer = 1;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spazbee");
+            //DisplayName.SetDefault("Spazbee");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

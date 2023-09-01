@@ -1,15 +1,19 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
 using BombusApisBee.Items.Other.OnPickupItems;
 using Terraria;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class HoneycombCrusaderHelmet : BeeKeeperItem
     {
+        public static int IncreaseCrit = 5;
+        public static int MaxHoney = 75;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseCrit, MaxHoney);
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nMaximum honey increased by 75");
+            //Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nMaximum honey increased by 75");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -29,7 +33,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Conjures a honey shield that attempts to protect the bearer\nThe shield breaks into honeycomb chunks upon being struck";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.HoneycombCrusader");
             player.GetModPlayer<HoneycombCrusaderPlayer>().FullArmorSet = true;
         }
         public override void UpdateEquip(Player player)
@@ -88,7 +92,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override bool? CanDamage() => deathTimer <= 0 && hitTimer <= 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Shield");
+            //DisplayName.SetDefault("Honey Shield");
         }
 
         public override void SetDefaults()

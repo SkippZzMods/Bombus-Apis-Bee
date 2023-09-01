@@ -6,7 +6,7 @@
         private Trail trail;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hivebomb");
+            //DisplayName.SetDefault("Hivebomb");
         }
 
         public override void SafeSetDefaults()

@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int shootCount;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of three bees before throwing the empty honeycomb\n'Dude this honeycomb only has like three bees in it'");
+            //Tooltip.SetDefault("Fires a burst of three bees before throwing the empty honeycomb\n'Dude this honeycomb only has like three bees in it'");
         }
 
         public override void SafeSetDefaults()

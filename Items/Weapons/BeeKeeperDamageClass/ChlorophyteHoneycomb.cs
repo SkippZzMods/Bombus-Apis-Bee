@@ -6,8 +6,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Chloro-comb");
-            Tooltip.SetDefault("Throws a fragile honeycomb which shatters into homing fragments, chloro-spores, and chloro-bees\nChloro-bees materialize into chloro-energy upon death");
+            //DisplayName.SetDefault("Chloro-comb");
+            //Tooltip.SetDefault("Throws a fragile honeycomb which shatters into homing fragments, chloro-spores, and chloro-bees\nChloro-bees materialize into chloro-energy upon death");
         }
 
         public override void SafeSetDefaults()

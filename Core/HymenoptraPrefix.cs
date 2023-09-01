@@ -28,7 +28,7 @@ namespace BombusApisBee.Core
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault(displayName);
+            //DisplayName.SetDefault(displayName);
         }
 
         public override bool CanRoll(Item item)
@@ -121,7 +121,7 @@ namespace BombusApisBee.Core
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault(displayName);
+            //DisplayName.SetDefault(displayName);
         }
 
         public override void ModifyValue(ref float valueMult)

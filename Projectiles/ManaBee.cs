@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mana Bee");
+            //DisplayName.SetDefault("Mana Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -60,7 +60,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Mana Star");
+            //DisplayName.SetDefault("Homing Mana Star");
 
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;

@@ -10,8 +10,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<TrueNectarSlasherHoldout>()] <= 0;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("True Nectar Slasher");
-            Tooltip.SetDefault("Performs a five piece combo of light and heavy swings, and throws\nSlashes through enemies on hit\nReplenishes life on hit");
+            //DisplayName.SetDefault("True Nectar Slasher");
+            //Tooltip.SetDefault("Performs a five piece combo of light and heavy swings, and throws\nSlashes through enemies on hit\nReplenishes life on hit");
         }
 
         public override void SafeSetDefaults()

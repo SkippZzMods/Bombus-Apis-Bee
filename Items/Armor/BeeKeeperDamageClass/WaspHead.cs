@@ -1,10 +1,13 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class WaspHead : BeeKeeperItem
     {
+        public static int MaxHoney = 35;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxHoney);
         public override void Load()
         {
             BeePlayerBeeProjectile.ExtraAIEvent += AddStingers;
@@ -93,7 +96,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("20% increased wing flight time and increased jump speed\nIncreases maximum honey by 35");
+            //Tooltip.SetDefault("20% increased wing flight time and increased jump speed\nIncreases maximum honey by 35");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -113,7 +116,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Your Loyal Bees shoot powerful stingers";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.Wasp");
             player.Bombus().WaspArmorSet = true;
         }
 

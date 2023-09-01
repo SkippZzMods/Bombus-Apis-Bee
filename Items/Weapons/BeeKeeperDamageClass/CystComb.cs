@@ -6,8 +6,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Cystcomb");
-            Tooltip.SetDefault("Throws a returning honeycomb infested with tumors\nHitting enemies causes an explosion of ichor\n'A honeycomb overgrown by cysts.. gross'");
+            //DisplayName.SetDefault("Cystcomb");
+            //Tooltip.SetDefault("Throws a returning honeycomb infested with tumors\nHitting enemies causes an explosion of ichor\n'A honeycomb overgrown by cysts.. gross'");
         }
 
         public override void SafeSetDefaults()

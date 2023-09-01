@@ -4,7 +4,7 @@
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws an electric-charged honeycomb, electrifying all that come near and exploding into zapbees");
+            //Tooltip.SetDefault("Throws an electric-charged honeycomb, electrifying all that come near and exploding into zapbees");
         }
 
         public override void SafeSetDefaults()

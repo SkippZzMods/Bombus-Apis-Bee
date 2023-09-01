@@ -1,14 +1,18 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
     public class HoneycombCrusaderPlatemail : BeeKeeperItem
     {
+        public static int HoneySave = 30;
+        public static int LoyalBees = 4;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HoneySave, LoyalBees);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Crusader Platemail");
-            Tooltip.SetDefault("30% increased chance to not consume honey\nLoyal Bees increased by 4");
+            //DisplayName.SetDefault("Honeycomb Crusader Platemail");
+            //Tooltip.SetDefault("30% increased chance to not consume honey\nLoyal Bees increased by 4");
             Item.ResearchUnlockCount = 1;
         }
 

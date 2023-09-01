@@ -10,7 +10,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool AltFunctionUse(Player player) => cooldown <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Rapidly fires star bees\nPress <right> to fire a splitting star\nPicking up the star replenishes honey and grants the user a buff to their damage and attack speed");
+            //Tooltip.SetDefault("Rapidly fires star bees\nPress <right> to fire a splitting star\nPicking up the star replenishes honey and grants the user a buff to their damage and attack speed");
         }
 
         public override void SafeSetDefaults()

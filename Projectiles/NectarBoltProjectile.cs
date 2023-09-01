@@ -9,7 +9,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Bolt");
+            //DisplayName.SetDefault("Nectar Bolt");
         }
 
         public override void SafeSetDefaults()
@@ -150,7 +150,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Bolt");
+            //DisplayName.SetDefault("Nectar Bolt");
         }
 
         public override void SafeSetDefaults()

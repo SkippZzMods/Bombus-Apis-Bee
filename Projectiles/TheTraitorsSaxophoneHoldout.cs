@@ -12,7 +12,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Traitor's Saxophone");
+            //DisplayName.SetDefault("The Traitor's Saxophone");
         }
         public override void SafeSetDefaults()
         {

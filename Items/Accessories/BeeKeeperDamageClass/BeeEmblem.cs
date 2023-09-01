@@ -1,12 +1,16 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.HandsOff)]
     public class BeeEmblem : BeeKeeperItem
     {
+        public static int IncreaseDmg = 15;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beekeeper Emblem");
-            Tooltip.SetDefault("15% increased hymenoptra damage");
+            //DisplayName.SetDefault("Beekeeper Emblem");
+            //Tooltip.SetDefault("15% increased hymenoptra damage");
             Item.ResearchUnlockCount = 1;
         }
 

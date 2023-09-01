@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gel Bee");
+            //DisplayName.SetDefault("Gel Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -29,7 +29,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bouncy Slimeball");
+            //DisplayName.SetDefault("Bouncy Slimeball");
         }
 
         public override void SafeSetDefaults()
@@ -110,7 +110,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Volatile Ruby");
+            //DisplayName.SetDefault("Volatile Ruby");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             Main.projFrames[Type] = 4;
@@ -208,7 +208,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ruby Explosion");
+            //DisplayName.SetDefault("Ruby Explosion");
         }
 
         public override void AI()

@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Petrified Honeycomb");
-            Tooltip.SetDefault("Throws a heavy petrified honeycomb\nThe honeycomb always critically strikes when falling with enough velocity\n'Rocks... bees... what could go wrong?'");
+            //DisplayName.SetDefault("Petrified Honeycomb");
+            //Tooltip.SetDefault("Throws a heavy petrified honeycomb\nThe honeycomb always critically strikes when falling with enough velocity\n'Rocks... bees... what could go wrong?'");
         }
 
         public override void SafeSetDefaults()

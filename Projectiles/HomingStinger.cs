@@ -9,7 +9,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Stinger");
+            //DisplayName.SetDefault("Homing Stinger");
         }
 
         public override void SetDefaults()

@@ -6,7 +6,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Creates a pulse of vibrant nectar energy at the mouse cursor, which splits into homing bolts");
+            //Tooltip.SetDefault("Creates a pulse of vibrant nectar energy at the mouse cursor, which splits into homing bolts");
         }
 
 

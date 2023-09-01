@@ -1,13 +1,18 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
+using Humanizer;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class HoneyphyteMask : BeeKeeperItem
     {
+        public static int IncreaseDmgCrit = 10;
+        public static int MaxHoney = 75;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmgCrit, MaxHoney);
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 75");
+            //Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 75");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -27,7 +32,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Strike enemies to build up honey energy\nConjures a honeycomb to aid you\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "while at full energy to fire a concentrated honey laser from the honeycomb\nIncreases hymenoptra damage by 10% while your Bees are in Attacking mode\nIncreases damage reduction by 10% while your Bees are in Defense mode";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.HoneyphyteMask").FormatWith(Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ");
             var modPlayer = player.Hymenoptra();
             player.Bombus().HoneyLaser = true;
 
@@ -88,7 +93,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyphytecomb");
+            //DisplayName.SetDefault("Honeyphytecomb");
         }
 
         public override void SetDefaults()

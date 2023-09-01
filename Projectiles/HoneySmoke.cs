@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Cloud");
+            //DisplayName.SetDefault("Honey Cloud");
         }
 
         public override void SafeSetDefaults()

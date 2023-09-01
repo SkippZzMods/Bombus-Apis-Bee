@@ -11,7 +11,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Nectar");
+            //DisplayName.SetDefault("Homing Nectar");
         }
 
         public override void SafeSetDefaults()

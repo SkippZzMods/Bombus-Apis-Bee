@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Ambrosial Throw");
-            Tooltip.SetDefault("Throws a yoyo of pure nectar\nCauses nectar explosions on hit, healing the user");
+            //DisplayName.SetDefault("Ambrosial Throw");
+            //Tooltip.SetDefault("Throws a yoyo of pure nectar\nCauses nectar explosions on hit, healing the user");
 
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;

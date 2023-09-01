@@ -5,7 +5,7 @@
         public override string Texture => "BombusApisBee/ExtraTextures/StingerRetexture";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stinger");
+            //DisplayName.SetDefault("Stinger");
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
         }

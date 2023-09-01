@@ -21,7 +21,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Explosion");
+            //DisplayName.SetDefault("Explosion");
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -59,7 +59,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Explosion");
+            //DisplayName.SetDefault("Explosion");
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

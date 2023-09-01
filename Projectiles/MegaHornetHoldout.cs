@@ -16,7 +16,7 @@
         public override bool? CanDamage() => false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Megahornet");
+            //DisplayName.SetDefault("Megahornet");
             Main.projFrames[Type] = 2;
         }
         public override void SafeSetDefaults()

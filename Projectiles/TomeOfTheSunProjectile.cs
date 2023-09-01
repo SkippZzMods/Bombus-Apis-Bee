@@ -7,7 +7,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vibrant Honey Energy");
+            //DisplayName.SetDefault("Vibrant Honey Energy");
         }
 
         public override void SafeSetDefaults()
@@ -100,7 +100,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => Projectile.timeLeft < 460 && hitDelay <= 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sun Energy Bolt");
+            //DisplayName.SetDefault("Sun Energy Bolt");
         }
 
         public override void SafeSetDefaults()

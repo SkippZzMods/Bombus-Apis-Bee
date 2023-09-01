@@ -18,7 +18,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Drains your honey on use\nReserves 65% of your honey while alive\n'Once a royal queen, now your royal guard'");
+            //Tooltip.SetDefault("Drains your honey on use\nReserves 65% of your honey while alive\n'Once a royal queen, now your royal guard'");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
         }
 

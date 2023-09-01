@@ -6,8 +6,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Sickle");
-            Tooltip.SetDefault("Conjures a sickle of shimmering nectar in front of the user\nCritically striking an enemy causes you to have majorly increased life regeneration for a short time");
+            //DisplayName.SetDefault("Nectar Sickle");
+            //Tooltip.SetDefault("Conjures a sickle of shimmering nectar in front of the user\nCritically striking an enemy causes you to have majorly increased life regeneration for a short time");
         }
         public override void SafeSetDefaults()
         {

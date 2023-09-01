@@ -4,8 +4,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enraged");
-            Description.SetDefault("Increased hymenoptra damage");
+            //DisplayName.SetDefault("Enraged");
+            //Description.SetDefault("Increased hymenoptra damage");
             Main.buffNoSave[Type] = true;
         }
 

@@ -9,8 +9,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<AculeusBladeHoldout>()] <= 0;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Blade of Aculeus");
-            Tooltip.SetDefault("Performs hefty strikes, flinging piercing stingers with deadly force\nMelee strikes cleave the armor of enemies");
+            //DisplayName.SetDefault("Blade of Aculeus");
+            //Tooltip.SetDefault("Performs hefty strikes, flinging piercing stingers with deadly force\nMelee strikes cleave the armor of enemies");
         }
 
         public override void SafeSetDefaults()

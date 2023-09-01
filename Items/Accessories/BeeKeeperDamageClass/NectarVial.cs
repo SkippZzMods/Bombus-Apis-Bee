@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Coats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20\n'Its a delicacy in most parts of the world'");
+            //Tooltip.SetDefault("Coats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20\n'Its a delicacy in most parts of the world'");
         }
 
         public override void SetDefaults()

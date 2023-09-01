@@ -4,8 +4,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Himen's Apiary");
-            Tooltip.SetDefault("'The apiary of one of the greatest hymenoptrian monster hunter's in history... he was said to be bested by a large plant-like creature'\nDrops honey droplets when damaged");
+            //DisplayName.SetDefault("Himen's Apiary");
+            //Tooltip.SetDefault("'The apiary of one of the greatest hymenoptrian monster hunter's in history... he was said to be bested by a large plant-like creature'\nDrops honey droplets when damaged");
             Item.ResearchUnlockCount = 1;
         }
 

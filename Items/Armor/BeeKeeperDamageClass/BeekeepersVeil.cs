@@ -1,14 +1,19 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class BeekeepersVeil : BeeKeeperItem
     {
+        public static int IncreaseCrit = 5;
+        public static int MaxHoney = 25;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseCrit, MaxHoney);
+
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beekeeper's Veil");
-            Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nIncreases maximum honey by 25");
+            //DisplayName.SetDefault("Beekeeper's Veil");
+            //Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nIncreases maximum honey by 25");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -28,7 +33,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Bees become friendly\n15% increased chance to not consume honey";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.Beekeepers");
             player.Hymenoptra().ResourceChanceAdd += 0.15f;
             player.npcTypeNoAggro[NPCID.Bee] = true;
             player.npcTypeNoAggro[NPCID.BeeSmall] = true;

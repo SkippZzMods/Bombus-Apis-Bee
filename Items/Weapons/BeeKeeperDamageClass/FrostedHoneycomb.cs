@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a freezing honeycomb which shatters into multiple ice shards\nInflicts Glacialstruck\nCritically striking an enemy which is Glacialstruck causes them to explode into a burst of bees");
+            //Tooltip.SetDefault("Throws a freezing honeycomb which shatters into multiple ice shards\nInflicts Glacialstruck\nCritically striking an enemy which is Glacialstruck causes them to explode into a burst of bees");
         }
 
         public override void SafeSetDefaults()

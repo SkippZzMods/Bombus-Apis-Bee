@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<MegaHornetHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Megahornet");
-            Tooltip.SetDefault("Charges up the longer you fire, dealing increased damage\n'Minihornet's older sister'");
+            //DisplayName.SetDefault("Megahornet");
+            //Tooltip.SetDefault("Charges up the longer you fire, dealing increased damage\n'Minihornet's older sister'");
         }
 
         public override void SafeSetDefaults()

@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("'A near perfect blade, radiating the energy of the Hive'\nCreates a large slash of honey on swing\nStriking an enemie spawns a flurry of stingers behind the player");
+            //Tooltip.SetDefault("'A near perfect blade, radiating the energy of the Hive'\nCreates a large slash of honey on swing\nStriking an enemie spawns a flurry of stingers behind the player");
         }
 
         public override void SafeSetDefaults()

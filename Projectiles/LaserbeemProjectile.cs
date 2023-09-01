@@ -27,7 +27,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bouncing Honey Laser");
+            //DisplayName.SetDefault("Bouncing Honey Laser");
         }
 
         public override void AI()

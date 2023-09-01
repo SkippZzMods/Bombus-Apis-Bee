@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Cloud");
+            //DisplayName.SetDefault("Nectar Cloud");
         }
 
         public override void SafeSetDefaults()

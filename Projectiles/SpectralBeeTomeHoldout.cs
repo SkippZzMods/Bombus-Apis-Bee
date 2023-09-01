@@ -27,7 +27,7 @@
         public int DelayTillNextShot;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spectral Bee Tome");
+            //DisplayName.SetDefault("Spectral Bee Tome");
             Main.projFrames[Projectile.type] = 7;
         }
 
@@ -156,7 +156,7 @@
         public override bool? CanDamage() => Projectile.penetrate > 1;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spectral Soul");
+            //DisplayName.SetDefault("Spectral Soul");
         }
 
         public override void SafeSetDefaults()

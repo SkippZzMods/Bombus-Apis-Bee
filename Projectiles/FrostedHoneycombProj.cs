@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/FrostedHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Frozen Honeycomb");
+            //DisplayName.SetDefault("Frozen Honeycomb");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -88,7 +88,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Icicle");
+            //DisplayName.SetDefault("Homing Icicle");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -179,7 +179,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Solid Icicle");
+            //DisplayName.SetDefault("Solid Icicle");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -244,7 +244,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Piercing Icicle");
+            //DisplayName.SetDefault("Piercing Icicle");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }

@@ -7,7 +7,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey");
+            //DisplayName.SetDefault("Honey");
         }
 
 
@@ -68,7 +68,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey");
+            //DisplayName.SetDefault("Honey");
         }
 
         public override void SafeSetDefaults()

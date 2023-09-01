@@ -84,7 +84,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pumpkinet");
+            //DisplayName.SetDefault("Pumpkinet");
             Main.projFrames[Type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
@@ -278,7 +278,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => Projectile.timeLeft < 465 && hitDelay <= 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pumpkin Stinger");
+            //DisplayName.SetDefault("Pumpkin Stinger");
         }
 
         public override void SetDefaults()

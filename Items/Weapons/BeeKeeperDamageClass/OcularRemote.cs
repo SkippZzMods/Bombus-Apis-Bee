@@ -23,7 +23,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Calls upon the Retinacomb and Spazacomb to temporarily fight for you\nOnly one pair of twins can be alive at once\nEach twin reserves 35 Honey while alive\n<right> while holding the remote to self destruct them, with a cooldown\n'Good thing the Twins don't hold a grudge'");
+            //Tooltip.SetDefault("Calls upon the Retinacomb and Spazacomb to temporarily fight for you\nOnly one pair of twins can be alive at once\nEach twin reserves 35 Honey while alive\n<right> while holding the remote to self destruct them, with a cooldown\n'Good thing the Twins don't hold a grudge'");
         }
 
         public override void SafeSetDefaults()

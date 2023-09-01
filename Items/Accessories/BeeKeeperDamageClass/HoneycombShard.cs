@@ -12,7 +12,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 15%\n'Crunchy!'");
+            //Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 15%\n'Crunchy!'");
         }
 
         public override void SetDefaults()

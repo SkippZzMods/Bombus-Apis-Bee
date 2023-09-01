@@ -7,9 +7,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Of The Cosmos"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-            Tooltip.SetDefault("'An almighty honeycomb, said to be born at the center of the Cosmos'\nHold left click to channel a honeycomb radiating with universal energy\nThe honeycomb charges up, weakening the fabric of the Cosmos\n" +
-                "Upon releasing the mouse button, the honeycomb will be channeled back to the owner\nThis action breaks the fabric of the cosmos, releasing powerful energies and galactic bees");
+            //DisplayName.SetDefault("Honeycomb Of The Cosmos"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
+            //Tooltip.SetDefault("'An almighty honeycomb, said to be born at the center of the Cosmos'\nHold left click to channel a honeycomb radiating with universal energy\nThe honeycomb charges up, weakening the fabric of the Cosmos\n" +
+                //"Upon releasing the mouse button, the honeycomb will be channeled back to the owner\nThis action breaks the fabric of the cosmos, releasing powerful energies and galactic bees");
         }
 
         public override void SafeSetDefaults()

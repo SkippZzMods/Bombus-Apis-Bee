@@ -6,8 +6,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Heart Of Honey");
-            Tooltip.SetDefault("25% of Honey gained is instead granted as health");
+            //DisplayName.SetDefault("Heart Of Honey");
+            //Tooltip.SetDefault("25% of Honey gained is instead granted as health");
         }
 
         public override void SetDefaults()

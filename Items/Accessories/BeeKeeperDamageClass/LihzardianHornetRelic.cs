@@ -1,10 +1,13 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Humanizer;
+using Terraria.Localization;
+
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class LihzardianHornetRelic : BeeKeeperItem
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases movement speed and wing flight time by 35%\nmodifyTooltips\nWhile channeled, your hymenoptra damage, attack speed, and crit chance are increased by 12%\nYou take 10% more damage and take damage-over-time while channeling\nThis effect has a 45 second cooldown");
+            //Tooltip.SetDefault("Increases movement speed and wing flight time by 35%\nmodifyTooltips\nWhile channeled, your hymenoptra damage, attack speed, and crit chance are increased by 12%\nYou take 10% more damage and take damage-over-time while channeling\nThis effect has a 45 second cooldown");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -24,7 +27,7 @@
             {
                 if (line1.Mod == "Terraria" && line1.Name == "Tooltip1")
                 {
-                    line1.Text = "Press " + hotkey + " to channel the power of the sun for a short time";
+                    line1.Text = Language.GetTextValue("Mods.BombusApisBee.Items.LihzardianHornetRelic.Hotkey").FormatWith(hotkey);
                 }
             }
         }

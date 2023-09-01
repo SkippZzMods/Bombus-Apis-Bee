@@ -4,7 +4,7 @@
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Press <right> to charge up a returning wasparang\nRelease to throw the wasparang, spawning wasps whilst travelling, and creating homing stingers on hit");
+            //Tooltip.SetDefault("Press <right> to charge up a returning wasparang\nRelease to throw the wasparang, spawning wasps whilst travelling, and creating homing stingers on hit");
         }
 
         public override void SafeSetDefaults()

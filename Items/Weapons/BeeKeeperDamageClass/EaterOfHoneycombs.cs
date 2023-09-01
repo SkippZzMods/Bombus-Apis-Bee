@@ -5,7 +5,7 @@
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<EaterOfHoneycombsHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires corrupted bees and mini eaters, before being thrown and seeking out targets\n'It looks... alive?'");
+            //Tooltip.SetDefault("Fires corrupted bees and mini eaters, before being thrown and seeking out targets\n'It looks... alive?'");
         }
 
         public override void SafeSetDefaults()

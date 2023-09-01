@@ -5,7 +5,7 @@
         public override string Texture => "BombusApisBee/Projectiles/PeeperPokerHoldout";
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Rapidly spins an eyeball infested javelin around the player\nRelease the mouse button to throw the javelin\nThe javelin travels faster, does more damage, and pierces more the longer you spin the javelin\nSpawns Cthulubees whilst spinning the javelin, and whilst the javelin is travelling");
+            //Tooltip.SetDefault("Rapidly spins an eyeball infested javelin around the player\nRelease the mouse button to throw the javelin\nThe javelin travels faster, does more damage, and pierces more the longer you spin the javelin\nSpawns Cthulubees whilst spinning the javelin, and whilst the javelin is travelling");
         }
 
         public override void SafeSetDefaults()

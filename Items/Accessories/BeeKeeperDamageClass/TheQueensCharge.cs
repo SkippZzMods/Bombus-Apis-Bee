@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Double tap any direction to dash\nCreates bees as you dash");
+            //Tooltip.SetDefault("Double tap any direction to dash\nCreates bees as you dash");
             Item.ResearchUnlockCount = 1;
         }
 

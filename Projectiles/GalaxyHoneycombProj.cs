@@ -15,7 +15,7 @@
         public bool HasScaled = false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Galactic Honeycomb");
+            //DisplayName.SetDefault("Galactic Honeycomb");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

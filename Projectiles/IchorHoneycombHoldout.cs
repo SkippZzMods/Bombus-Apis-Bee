@@ -11,7 +11,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beemerang");
+            //DisplayName.SetDefault("Beemerang");
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             ProjectileID.Sets.TrailingMode[Type] = 2;
         }
@@ -223,7 +223,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ichor Explosion");
+            //DisplayName.SetDefault("Ichor Explosion");
         }
 
         public override void AI()

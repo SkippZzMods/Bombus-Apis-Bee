@@ -1,15 +1,20 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
+using Humanizer;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class LivingFlowerCrown : BeeKeeperItem
     {
+        public static int IncreaseCrit = 3;
+        public static int MaxHoney = 15;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseCrit, MaxHoney);
         public int FlowerTimer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Living Flower Crown");
-            Tooltip.SetDefault("3% increased hymenoptra critical strike chance\nIncreases maximum honey by 15");
+            //DisplayName.SetDefault("Living Flower Crown");
+            //Tooltip.SetDefault("3% increased hymenoptra critical strike chance\nIncreases maximum honey by 15");
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 
@@ -30,7 +35,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "'Get it? Cause yaknow, bees like flowers'\nSpawns dayblooms every 2 seconds, with a maximum of 3 dayblooms\n4% chance to not consume honey per daybloom alive\nWhile you have 3 dayblooms alive, double tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "to fire them toward the cursor, leeching honey on hit";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.LivingFlower").FormatWith(Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ");
             player.Bombus().LivingFlower = true;
             for (int i = 0; i < player.ownedProjectileCounts[ModContent.ProjectileType<DaybloomProj>()]; i++)
             {

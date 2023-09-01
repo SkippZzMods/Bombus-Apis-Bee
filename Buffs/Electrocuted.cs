@@ -5,8 +5,8 @@
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Electrocuted");
-            Description.SetDefault("Zap!");
+            //DisplayName.SetDefault("Electrocuted");
+            //Description.SetDefault("Zap!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

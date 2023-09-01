@@ -6,8 +6,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Beenopopper");
-            Tooltip.SetDefault("'Aliens really like bubbles... that shoot bullets'");
+            //DisplayName.SetDefault("Beenopopper");
+            //Tooltip.SetDefault("'Aliens really like bubbles... that shoot bullets'");
         }
 
 

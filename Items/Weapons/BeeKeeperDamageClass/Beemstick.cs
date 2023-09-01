@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public bool spawnedGore;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Blasts a spread of bee buckshot and bees\n'This... is my BEEMSTICK'");
+            //Tooltip.SetDefault("Blasts a spread of bee buckshot and bees\n'This... is my BEEMSTICK'");
         }
 
         public override void SafeSetDefaults()

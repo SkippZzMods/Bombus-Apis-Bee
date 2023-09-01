@@ -1,14 +1,18 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
+using Humanizer;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class HoneyphyteHeadgear : BeeKeeperItem
     {
+        public static int MaxHoney = 100;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxHoney);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Hoarder Hood");
-            Tooltip.SetDefault("Increases maximum honey by 100");
+            //DisplayName.SetDefault("Honey Hoarder Hood");
+            //Tooltip.SetDefault("Increases maximum honey by 100");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -28,7 +32,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "20% increased chance to not use honey\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "to teleport to the cursor, creating a honey explosion, leeching honey from hit enemies";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.HoneyphyteHeadgear").FormatWith(Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ");
             player.Hymenoptra().ResourceChanceAdd += 0.2f;
             player.Bombus().HoneyTeleport = true;
         }
@@ -73,7 +77,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Explosion");
+            //DisplayName.SetDefault("Honey Explosion");
         }
 
         public override void AI()

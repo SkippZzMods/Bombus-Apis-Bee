@@ -1,11 +1,16 @@
 ﻿using Terraria.WorldBuilding;
+using Terraria.Localization;
+
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class CopperBeeIdol : BeeKeeperItem
     {
+        public static int HoneySave = 10;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HoneySave);
+
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased chance to not consume honey\n'Clearly ancient civilizations didn't know what bees looked like'");
+            //Tooltip.SetDefault("10% increased chance to not consume honey\n'Clearly ancient civilizations didn't know what bees looked like'");
         }
 
         public override void SetDefaults()
@@ -24,9 +29,11 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     }
     public class TinBeeIdol : BeeKeeperItem
     {
+        public static int IncreaseDmgCrit = 4;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmgCrit);
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("4% increased hymenoptra damage and critical strike chance\n'Clearly ancient civilizations didn't know what bees looked like'");
+            //Tooltip.SetDefault("4% increased hymenoptra damage and critical strike chance\n'Clearly ancient civilizations didn't know what bees looked like'");
         }
 
         public override void SetDefaults()

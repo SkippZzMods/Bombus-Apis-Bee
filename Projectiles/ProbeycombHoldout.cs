@@ -17,7 +17,7 @@
         public override bool? CanDamage() => false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Probeycomb");
+            //DisplayName.SetDefault("Probeycomb");
         }
         public override void SafeSetDefaults()
         {

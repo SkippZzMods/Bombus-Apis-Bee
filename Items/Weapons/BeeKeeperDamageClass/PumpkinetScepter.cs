@@ -5,7 +5,7 @@
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<PumpkinetScepterHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Conjures a pumpkinet to attack enemies near the mouse cursor");
+            //Tooltip.SetDefault("Conjures a pumpkinet to attack enemies near the mouse cursor");
         }
 
         public override void SafeSetDefaults()

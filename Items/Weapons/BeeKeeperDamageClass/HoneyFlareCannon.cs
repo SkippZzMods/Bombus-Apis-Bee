@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Rapidly fires honey flares");
+            //Tooltip.SetDefault("Rapidly fires honey flares");
         }
 
         public override void SafeSetDefaults()

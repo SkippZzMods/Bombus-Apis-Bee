@@ -16,7 +16,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb");
+            //DisplayName.SetDefault("Honeycomb");
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }

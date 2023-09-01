@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         int shots;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires royal bees which cause bouncy slimeballs to rain from the sky\nFires a volatile ruby every few shots\n'A honeycomb fit for a king'");
+            //Tooltip.SetDefault("Fires royal bees which cause bouncy slimeballs to rain from the sky\nFires a volatile ruby every few shots\n'A honeycomb fit for a king'");
         }
 
         public override void SafeSetDefaults()

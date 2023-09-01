@@ -11,7 +11,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int cooldown;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Blasts a hellish spread of bee buckshot and bees, inflicting Hellfire\nPress <right> to fire a hellfire slug, exploding on contact");
+            //Tooltip.SetDefault("Blasts a hellish spread of bee buckshot and bees, inflicting Hellfire\nPress <right> to fire a hellfire slug, exploding on contact");
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
         }
 

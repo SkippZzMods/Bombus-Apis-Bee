@@ -5,8 +5,8 @@
         public int secondtimer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enchanted Honey");
-            Tooltip.SetDefault("you shouldn't see this....");
+            //DisplayName.SetDefault("Enchanted Honey");
+            //Tooltip.SetDefault("you shouldn't see this....");
         }
         public override void SetDefaults()
         {

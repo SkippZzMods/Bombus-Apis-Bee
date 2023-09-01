@@ -37,7 +37,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Blade of Aculeus");
+            //DisplayName.SetDefault("Blade of Aculeus");
         }
         public override void SafeSetDefaults()
         {
@@ -692,7 +692,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Blade of Aculeus");
+            //DisplayName.SetDefault("Blade of Aculeus");
         }
         public override void SafeSetDefaults()
         {
