@@ -1,10 +1,14 @@
 ﻿using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Balloon)]
     public class HoneyBee : BeeKeeperItem
     {
+        public static int MaxHoney = 25;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxHoney);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("Summons a large Honeybee which will mimic your loyal bees\nIncreases maximum honey by 25");

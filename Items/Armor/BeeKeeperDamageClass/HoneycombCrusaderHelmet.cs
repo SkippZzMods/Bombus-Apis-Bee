@@ -8,6 +8,9 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     [AutoloadEquip(EquipType.Head)]
     public class HoneycombCrusaderHelmet : BeeKeeperItem
     {
+        public static int IncreaseCrit = 5;
+        public static int MaxHoney = 75;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseCrit, MaxHoney);
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nMaximum honey increased by 75");

@@ -1,8 +1,12 @@
-﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
     public class SkeletalBeeChestplate : BeeKeeperItem
     {
+        public static int LoyalBees = 2;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(LoyalBees);
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("Reduces damage taken by 10%\nLoyal Bees increased by 2");

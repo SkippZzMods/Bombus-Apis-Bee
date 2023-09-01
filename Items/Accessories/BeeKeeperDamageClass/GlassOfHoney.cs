@@ -1,10 +1,15 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
 using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class GlassOfHoney : BeeKeeperItem
     {
+        public static int IncreaseDmg = 10;
+        public static int MaxHoney = 10;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg, MaxHoney);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("10% increased hymenoptra damage\nIncreases maximum honey by 10\nGreatly increases life regeneration");

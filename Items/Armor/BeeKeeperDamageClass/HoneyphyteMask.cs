@@ -7,6 +7,9 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     [AutoloadEquip(EquipType.Head)]
     public class HoneyphyteMask : BeeKeeperItem
     {
+        public static int IncreaseDmgCrit = 10;
+        public static int MaxHoney = 75;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmgCrit, MaxHoney);
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 75");

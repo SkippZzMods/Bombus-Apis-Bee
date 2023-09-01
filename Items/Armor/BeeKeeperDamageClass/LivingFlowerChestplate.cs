@@ -1,10 +1,13 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
     public class LivingFlowerChestplate : BeeKeeperItem
     {
+        public static int IncreaseDmg = 4;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg);
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Living Flower Chestplate");

@@ -1,10 +1,15 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
     public class BeekeepersRobe : BeeKeeperItem
     {
+        public static int IncreaseDmg = 5;
+        public static int LoyalBees = 1;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg, LoyalBees);
+
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Beekeeper's Robe");

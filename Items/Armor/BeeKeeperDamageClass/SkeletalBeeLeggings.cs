@@ -1,8 +1,13 @@
-﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Legs)]
     public class SkeletalBeeLeggings : BeeKeeperItem
     {
+        public static int IncreaseDmg = 10;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("10% increased hymenoptra damage");

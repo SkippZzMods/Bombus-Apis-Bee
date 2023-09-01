@@ -1,8 +1,14 @@
-﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
     public class BeeSniperArmor : BeeKeeperItem
     {
+        public static int HoneySave = 25;
+        public static int LoyalBees = 3;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HoneySave, LoyalBees);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("25% increased chance to not consume honey\nLoyal Bees increased by 3");

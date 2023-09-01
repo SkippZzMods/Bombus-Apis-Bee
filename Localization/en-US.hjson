@@ -1,5 +1,14 @@
 Mods: {
 	BombusApisBee: {
+		Common: {
+			IncreaseDmg: "{0}% increased hymenoptra damage"
+			IncreaseCrit: "{0}% increased hymenoptra critical strike chance"
+			IncreaseDmgCrit: "{0}% increased hymenoptra damage and critical strike chance"
+			MaxHoney: Increases maximum honey by {0}
+			LoyalBees: Increases your amount of Loyal Bees by {0}
+			HoneySave: "{0}% increased chance to not consume honey"
+		}
+
 		TownNPCMood: {
 			TheTraitorBee: {
 				Content: I feel fine, I guess.
@@ -349,7 +358,7 @@ Mods: {
 
 			BeeEmblem: {
 				DisplayName: Beekeeper Emblem
-				Tooltip: 15% increased hymenoptra damage
+				Tooltip: "{$Common.IncreaseDmg}"
 			}
 
 			BeeSquireShield: {
@@ -365,7 +374,7 @@ Mods: {
 				DisplayName: Copper Bee Idol
 				Tooltip:
 					'''
-					10% increased chance to not consume honey
+					{$Common.HoneySave}
 					'Clearly ancient civilizations didn't know what bees looked like'
 					'''
 			}
@@ -383,7 +392,7 @@ Mods: {
 				DisplayName: Frozen Stinger
 				Tooltip:
 					'''
-					8% increased hymenoptra critical strike chance
+					{$Common.IncreaseCrit}
 					Hymenoptra critical strikes inflict Frostbroken
 					Enemies inflicted with Frostbroken have their defense reduced by 35%, and shatter at low hp, damaging enemies around them
 					'''
@@ -393,8 +402,8 @@ Mods: {
 				DisplayName: Glass Of Honey
 				Tooltip:
 					'''
-					10% increased hymenoptra damage
-					Increases maximum honey by 10
+					{$Common.IncreaseDmg}
+					{$Common.MaxHoney@1}
 					Greatly increases life regeneration
 					'''
 			}
@@ -413,7 +422,7 @@ Mods: {
 				Tooltip:
 					'''
 					Summons a large Honeybee which will mimic your loyal bees
-					Increases maximum honey by 25
+					{$Common.MaxHoney}
 					'''
 			}
 
@@ -421,8 +430,8 @@ Mods: {
 				DisplayName: Honeyed Emblem
 				Tooltip:
 					'''
-					12% increased hymenoptra damage
-					Increases maximum honey by 10
+					{$Common.IncreaseDmg}
+					{$Common.MaxHoney@1}
 					'''
 			}
 
@@ -436,7 +445,7 @@ Mods: {
 				Tooltip:
 					'''
 					'It seems to have a deep connection to the Hive'
-					Increases your amount of Loyal Bees by 3
+					{$Common.LoyalBees}
 					'''
 			}
 
@@ -445,11 +454,12 @@ Mods: {
 				Tooltip:
 					'''
 
-					TP
-					+20 max Honey
+
+					{$Common.MaxHoney}
 					This effect has a cooldown of 90 seconds
 					You cannot regenerate honey for 5 seconds after activating the ability
 					'''
+				Hotkey: Press {0} while at maximum honey capacity to convert 65% of your maximum honey into health
 			}
 
 			HymenoptrianNecklace: {
@@ -467,8 +477,8 @@ Mods: {
 				DisplayName: Jar Of Honey
 				Tooltip:
 					'''
-					Increases hymenoptra damage by 6%
-					Increases maximum honey by 5
+					{$Common.IncreaseDmg}
+					{$Common.MaxHoney@1}
 					Increases life regeneration
 					'''
 			}
@@ -478,11 +488,12 @@ Mods: {
 				Tooltip:
 					'''
 					Increases movement speed and wing flight time by 35%
-					modifyTooltips
+
 					While channeled, your hymenoptra damage, attack speed, and crit chance are increased by 12%
 					You take 10% more damage and take damage-over-time while channeling
 					This effect has a 45 second cooldown
 					'''
+				Hotkey: Press {0} to channel the power of the sun for a short time
 			}
 
 			Nectarlace: {
@@ -528,7 +539,7 @@ Mods: {
 				DisplayName: Tin Bee Idol
 				Tooltip:
 					'''
-					4% increased hymenoptra damage and critical strike chance
+					{$Common.IncreaseDmgCrit}
 					'Clearly ancient civilizations didn't know what bees looked like'
 					'''
 			}
@@ -542,35 +553,35 @@ Mods: {
 					'''
 			}
 
-			BeeKeepersChestplate: {
+			BeekeepersRobe: {
 				DisplayName: Bee Keeper's Shirt
 				Tooltip:
 					'''
-					4% increased hymenoptra damage
-					Increases your amount of Loyal Bees by 1
+					{$Common.IncreaseDmg}
+					{$Common.LoyalBees@1}
 					'''
 			}
 
-			BeeKeepersHelmet: {
+			BeekeepersVeil: {
 				DisplayName: Bee Keeper's Hat
 				Tooltip:
 					'''
-					3% increased hymenoptra critical strike chance
-					Increases maximum honey by 15
+					{$Common.IncreaseCrit}
+					{$Common.MaxHoney@1}
 					'''
 			}
 
-			BeeKeepersLeggings: {
+			BeekeepersPants: {
 				DisplayName: Bee Keeper's Pants
-				Tooltip: 15% increased movement speed
+				Tooltip: "{$Common.IncreaseCrit}"
 			}
 
 			BeeSniperArmor: {
 				DisplayName: Bee Sniper Armor
 				Tooltip:
 					'''
-					15% increased chance to not consume honey
-					Increases your amount of Loyal Bees by 1
+					{$Common.HoneySave}
+					{$Common.LoyalBees@1}
 					'''
 			}
 
@@ -578,137 +589,41 @@ Mods: {
 				DisplayName: Bee Sniper Goggles
 				Tooltip:
 					'''
-					15% increased hymenoptra critical strike chance
-					Increases maximum honey by 35
-					Increases your amount of Loyal Bees by 1
+					{$Common.IncreaseCrit}
+					{$Common.MaxHoney@1}
 					'''
 			}
 
 			BeeSniperLeggings: {
 				DisplayName: Bee Sniper Leggings
-				Tooltip:
-					'''
-					7% increased hymenoptra damage and critical strike chance
-					Increases your amount of Loyal Bees by 1
-					'''
-			}
-
-			ChlorophyteHat: {
-				DisplayName: Chlorophyte Veil
-				Tooltip:
-					'''
-					16% increased hymenoptra damage
-					Increases maximum honey by 50
-					Increases your amount of Loyal Bees by 5
-					'''
-			}
-
-			HallowedHat: {
-				DisplayName: Hallowed Hat
-				Tooltip:
-					'''
-					10% increased hymenoptra damage and critical strike chance
-					Increases maximum honey by 40
-					Increases your amount of Loyal Bees by 3
-					'''
-			}
-
-			HolyCrusaderArmor: {
-				DisplayName: Holy Crusader Armor
-				Tooltip:
-					'''
-					8% increased hymenoptra critical strike chance
-					Reduces damage taken by 10%
-					Increases your amount of Loyal Bees by 2
-					'''
-			}
-
-			HolyCrusaderGreaves: {
-				DisplayName: Holy Crusader Greaves
-				Tooltip:
-					'''
-					10% increased hymenoptra damage
-					10% increase chance to not consume honey
-					Increases your amount of Loyal Bees by 1
-					'''
-			}
-
-			HolyCrusaderMask: {
-				DisplayName: Holy Crusader Mask
-				Tooltip:
-					'''
-					5% increased damage reduction and hymenoptra damage
-					Increases maximum honey by 40
-					Increases your amount of Loyal Bees by 1
-					'''
-			}
-
-			HoneyHoarderChestpiece: {
-				DisplayName: Honey Hoarder Chestpiece
-				Tooltip:
-					'''
-					8% increased hymenoptra damage and critical strike chance
-					Increases maximum honey by 25
-					Increases your amount of Loyal Bees by 2
-					'''
-			}
-
-			HoneyHoarderHat: {
-				DisplayName: Honey Hoarder Hood
-				Tooltip:
-					'''
-					20% decreased hymenoptra damage
-					Increases maximum honey by 60
-					Increases your amount of Loyal Bees by 2
-					'''
-			}
-
-			HoneyHoarderMask: {
-				DisplayName: Honey Hoarder Mask
-				Tooltip:
-					'''
-					10% increased hymenoptra damage and critical strike chance
-					Increases maximum honey by 20
-					Increases your amount of Loyal Bees by 1
-					'''
-			}
-
-			HoneyHoarderPantalones: {
-				DisplayName: Honey Hoarder Leggings
-				Tooltip:
-					'''
-					8% increased hymenoptra damage
-					15% increased movement speed
-					Increases maximum honey by 25
-					Increases your amount of Loyal Bees by 2
-					'''
+				Tooltip: "{$Common.IncreaseDmg}"
 			}
 
 			LivingFlowerChestplate: {
 				DisplayName: Living Flower Chestplate
-				Tooltip: 3% increased hymenoptra damage
+				Tooltip: "{$Common.IncreaseDmg}"
 			}
 
 			LivingFlowerCrown: {
 				DisplayName: Living Flower Crown
 				Tooltip:
 					'''
-					2% increased hymenoptra damage
-					Increases maximum honey by 5
+					{$Common.IncreaseCrit}
+					{$Common.MaxHoney@1}
 					'''
 			}
 
 			LivingFlowerLeggings: {
 				DisplayName: Living Flower Leggings
-				Tooltip: 2% increased hymenoptra damage
+				Tooltip: "{$Common.IncreaseCrit}"
 			}
 
 			SkeletalBeeChestplate: {
 				DisplayName: Skeletal Bee Chestplate
 				Tooltip:
 					'''
-					Reduces damage taken by 5%
-					Increase your amount of Loyal Bees by 1
+					Reduces damage taken by 10%
+					{$Common.LoyalBees}
 					'''
 			}
 
@@ -716,26 +631,22 @@ Mods: {
 				DisplayName: Skeletal Bee Helmet
 				Tooltip:
 					'''
-					10% increased hymenoptra damage and critical strike chance
-					Increases maximum honey by 30
+					{$Common.IncreaseDmgCrit}
+					{$Common.MaxHoney@1}
 					'''
 			}
 
 			SkeletalBeeLeggings: {
 				DisplayName: Skeletal Bee Leggings
-				Tooltip:
-					'''
-					15% increased movement speed
-					Increases your amount of Loyal Bees by 1
-					'''
+				Tooltip: "{$Common.IncreaseDmg}"
 			}
 
 			WaspBreastplate: {
 				DisplayName: Wasp Breastplate
 				Tooltip:
 					'''
-					6% increased hymenoptra damage and critical strike chance
-					Increases your amount of Loyal Bees by 1
+					{$Common.IncreaseDmgCrit}
+					{$Common.LoyalBees}
 					'''
 			}
 
@@ -748,8 +659,8 @@ Mods: {
 				DisplayName: Wasp Head
 				Tooltip:
 					'''
-					40% increased wing flight time and increased jump speed
-					Increases maximum honey by 25
+					20% increased wing flight time and increased jump speed
+					{$Common.MaxHoney}
 					'''
 			}
 
@@ -757,7 +668,7 @@ Mods: {
 				DisplayName: Royal Jelly
 				Tooltip:
 					'''
-					Permanently increases maximum honey by 15
+					Permanently increases maximum honey by 25
 					'A delicacy that's highly sought after for its refined taste and healing properties'
 					'''
 			}
@@ -1320,40 +1231,17 @@ Mods: {
 					'''
 			}
 
-			BeekeepersPants: {
-				Tooltip: 15% increased movement speed
-				DisplayName: Beekeeper's Pants
-			}
-
-			BeekeepersRobe: {
-				DisplayName: Beekeeper's Robe
-				Tooltip:
-					'''
-					4% increased hymenoptra damage
-					Increases your amount of Loyal Bees by 1
-					'''
-			}
-
-			BeekeepersVeil: {
-				DisplayName: Beekeeper's Veil
-				Tooltip:
-					'''
-					3% increased hymenoptra critical strike chance
-					Increases maximum honey by 15
-					'''
-			}
-
 			HoneycombCrusaderGreaves: {
 				DisplayName: Honeycomb Crusader Greaves
-				Tooltip: 5% increased hymenoptra damage
+				Tooltip: "{$Common.IncreaseDmg}"
 			}
 
 			HoneycombCrusaderHelmet: {
 				DisplayName: Honeycomb Crusader Helmet
 				Tooltip:
 					'''
-					5% increased hymenoptra critical strike chance 
-					Maximum honey increased by 75
+					{$Common.IncreaseCrit} 
+					{$Common.MaxHoney@1}
 					'''
 			}
 
@@ -1361,8 +1249,8 @@ Mods: {
 				DisplayName: Honeycomb Crusader Platemail
 				Tooltip:
 					'''
-					30% increased chance to not consume honey
-					Loyal Bees increased by 4
+					{$Common.HoneySave}
+					{$Common.LoyalBees@1}
 					'''
 			}
 
@@ -1370,27 +1258,27 @@ Mods: {
 				DisplayName: Honeyphyte Chestpiece
 				Tooltip:
 					'''
-					30% increased chance to not consume honey
-					Loyal Bees increased by 5
+					{$Common.HoneySave}
+					{$Common.LoyalBees@1}
 					'''
 			}
 
 			HoneyphyteGreaves: {
-				DisplayName: Honey Hoarder Leggings
-				Tooltip: 5% increased hymenoptra damage
+				DisplayName: Honeyphyte Leggings
+				Tooltip: "{$Common.IncreaseDmg}"
 			}
 
 			HoneyphyteHeadgear: {
-				DisplayName: Honey Hoarder Hood
-				Tooltip: Increases maximum honey by 100
+				DisplayName: Honeyphyte Hood
+				Tooltip: "{$Common.MaxHoney}"
 			}
 
 			HoneyphyteMask: {
 				DisplayName: Honeyphyte Mask
 				Tooltip:
 					'''
-					10% increased hymenoptra damage and critical strike chance
-					Increases maximum honey by 75
+					{$Common.IncreaseDmgCrit}
+					{$Common.MaxHoney@1}
 					'''
 			}
 		}
@@ -1440,10 +1328,7 @@ Mods: {
 				Getting a kill or critical hit enrages the hornet for a short time
 				Getting a kill or critical hit while the hornet is already enraged increases the amount of time it is enraged for
 				'''
-			Wasp:
-				'''
-				Your Loyal Bees shoot powerful stingers
-				'''
+			Wasp: Your Loyal Bees shoot powerful stingers
 		}
 
 		NPCs: {
@@ -1472,9 +1357,9 @@ Mods: {
 		}
 
 		Keybinds: {
-			"Honey Manipulation.DisplayName": Honey  Manipulation
-			"Lihzardian Hornet Relic.DisplayName": Lihzardian  Hornet  Relic
-			"Change Beekeeper State.DisplayName": Change  Beekeeper  State
+			"Honey Manipulation.DisplayName": Honey Manipulation
+			"Lihzardian Hornet Relic.DisplayName": Lihzardian Hornet Relic
+			"Change Beekeeper State.DisplayName": Change Beekeeper State
 		}
 
 		Configs: {

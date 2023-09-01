@@ -1,7 +1,12 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class HoneyLocket : BeeKeeperItem
     {
+        public static int LoyalBees = 3;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(LoyalBees);
+
         public int timer;
         public override void SetStaticDefaults()
         {

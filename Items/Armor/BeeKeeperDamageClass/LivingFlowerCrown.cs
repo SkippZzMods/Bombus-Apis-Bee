@@ -7,6 +7,9 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     [AutoloadEquip(EquipType.Head)]
     public class LivingFlowerCrown : BeeKeeperItem
     {
+        public static int IncreaseCrit = 3;
+        public static int MaxHoney = 15;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseCrit, MaxHoney);
         public int FlowerTimer;
         public override void SetStaticDefaults()
         {

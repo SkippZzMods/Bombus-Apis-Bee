@@ -1,10 +1,15 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Body)]
     public class WaspBreastplate : BeeKeeperItem
     {
+        public static int IncreaseDmgCrit = 6;
+        public static int LoyalBees = 1;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmgCrit, LoyalBees);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("6% increased hymenoptra damage and critical strike chance\nIncreases your amount of Loyal Bees by 1");

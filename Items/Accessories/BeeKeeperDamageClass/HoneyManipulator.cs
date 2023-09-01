@@ -1,9 +1,14 @@
-﻿using Terraria.DataStructures;
+﻿using Humanizer;
+using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class HoneyManipulator : BeeKeeperItem
     {
+        public static int MaxHoney = 20;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxHoney);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("\nTP\n+20 max Honey\nThis effect has a cooldown of 90 seconds\nYou cannot regenerate honey for 5 seconds after activating the ability");
@@ -25,7 +30,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
             {
                 if (line1.Mod == "Terraria" && line1.Name == "Tooltip1")
                 {
-                    line1.Text = "Press " + hotkey + " while at maximum honey capacity to convert 65% of your maximum honey into health";
+                    
+                    line1.Text = Language.GetTextValue("Mods.BombusApisBee.Items.HoneyManipulator.Hotkey").FormatWith(hotkey);
                 }
             }
         }

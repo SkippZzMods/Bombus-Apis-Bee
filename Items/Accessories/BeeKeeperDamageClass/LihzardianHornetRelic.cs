@@ -1,4 +1,7 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Humanizer;
+using Terraria.Localization;
+
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class LihzardianHornetRelic : BeeKeeperItem
     {
@@ -24,7 +27,7 @@
             {
                 if (line1.Mod == "Terraria" && line1.Name == "Tooltip1")
                 {
-                    line1.Text = "Press " + hotkey + " to channel the power of the sun for a short time";
+                    line1.Text = Language.GetTextValue("Mods.BombusApisBee.Items.LihzardianHornetRelic.Hotkey").FormatWith(hotkey);
                 }
             }
         }

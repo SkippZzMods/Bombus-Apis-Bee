@@ -1,10 +1,14 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
 using Terraria;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class JarOfHoney : BeeKeeperItem
     {
+        public static int IncreaseDmg = 6;
+        public static int MaxHoney = 5;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg, MaxHoney);
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Jar Of Honey");

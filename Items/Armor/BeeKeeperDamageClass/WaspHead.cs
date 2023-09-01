@@ -6,6 +6,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     [AutoloadEquip(EquipType.Head)]
     public class WaspHead : BeeKeeperItem
     {
+        public static int MaxHoney = 35;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxHoney);
         public override void Load()
         {
             BeePlayerBeeProjectile.ExtraAIEvent += AddStingers;

@@ -1,8 +1,14 @@
 ﻿using Terraria;
+using Terraria.Localization;
+
 namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     public class HoneyedEmblem : BeeKeeperItem
     {
+        public static int IncreaseDmg = 12;
+        public static int MaxHoney = 10;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg, MaxHoney);
+
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Honeyed Emblem");

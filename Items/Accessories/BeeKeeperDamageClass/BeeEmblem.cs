@@ -1,8 +1,12 @@
-﻿namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.HandsOff)]
     public class BeeEmblem : BeeKeeperItem
     {
+        public static int IncreaseDmg = 15;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseDmg);
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Beekeeper Emblem");

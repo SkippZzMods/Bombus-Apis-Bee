@@ -6,6 +6,10 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     [AutoloadEquip(EquipType.Head)]
     public class BeekeepersVeil : BeeKeeperItem
     {
+        public static int IncreaseCrit = 5;
+        public static int MaxHoney = 25;
+ 		public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreaseCrit, MaxHoney);
+
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Beekeeper's Veil");

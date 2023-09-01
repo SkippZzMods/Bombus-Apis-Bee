@@ -1,10 +1,14 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Legs)]
     public class BeekeepersPants : BeeKeeperItem
     {
+        public static int IncreasedCrit = 5;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(IncreasedCrit);
+
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("5% increased hymenoptra critical strike chance");

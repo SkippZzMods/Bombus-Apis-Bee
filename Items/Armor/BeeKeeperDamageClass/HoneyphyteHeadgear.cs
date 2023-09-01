@@ -7,6 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     [AutoloadEquip(EquipType.Head)]
     public class HoneyphyteHeadgear : BeeKeeperItem
     {
+        public static int MaxHoney = 100;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MaxHoney);
         public override void SetStaticDefaults()
         {
             //DisplayName.SetDefault("Honey Hoarder Hood");
