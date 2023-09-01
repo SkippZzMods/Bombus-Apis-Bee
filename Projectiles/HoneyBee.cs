@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeybee");
+            //DisplayName.SetDefault("Honeybee");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;

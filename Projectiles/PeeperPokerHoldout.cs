@@ -14,7 +14,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Peeper Poker");
+            //DisplayName.SetDefault("Peeper Poker");
         }
         public override void SafeSetDefaults()
         {

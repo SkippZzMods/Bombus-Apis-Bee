@@ -8,7 +8,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => !bouncing;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pipebeeoms");
+            //DisplayName.SetDefault("Pipebeeoms");
         }
 
         public override void SetDefaults()

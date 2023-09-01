@@ -255,7 +255,7 @@ namespace BombusApisBee.BeeDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shield");
+            //DisplayName.SetDefault("Shield");
         }
 
         public override void SetDefaults()
@@ -330,7 +330,7 @@ namespace BombusApisBee.BeeDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee");
+            //DisplayName.SetDefault("Bee");
 
             Main.projFrames[Type] = 8;
 

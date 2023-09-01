@@ -22,7 +22,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee Buckshot");
+            //DisplayName.SetDefault("Bee Buckshot");
         }
 
         public override void AI()

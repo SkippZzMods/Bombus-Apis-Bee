@@ -6,7 +6,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("\nTP\n+20 max Honey\nThis effect has a cooldown of 90 seconds\nYou cannot regenerate honey for 5 seconds after activating the ability");
+            //Tooltip.SetDefault("\nTP\n+20 max Honey\nThis effect has a cooldown of 90 seconds\nYou cannot regenerate honey for 5 seconds after activating the ability");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(12, 6));
         }
 

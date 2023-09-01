@@ -4,8 +4,8 @@
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("'This one is gonna sting'\nConjures a miniature Queen Bee that attacks the mouse cursor\nShe cycles through 3 attacks:\nCircling the cursor and firing stingers\nDashing at the cursor\nStaying above the cursor and spawning bees" +
-                "\nUses 2 honey for every seconds that she is alive");
+            //Tooltip.SetDefault("'This one is gonna sting'\nConjures a miniature Queen Bee that attacks the mouse cursor\nShe cycles through 3 attacks:\nCircling the cursor and firing stingers\nDashing at the cursor\nStaying above the cursor and spawning bees" +
+                //"\nUses 2 honey for every seconds that she is alive");
             Item.staff[Item.type] = true;
         }
 

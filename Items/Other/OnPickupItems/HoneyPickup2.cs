@@ -4,8 +4,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Droplet");
-            Tooltip.SetDefault("you shouldn't see this....");
+            //DisplayName.SetDefault("Honey Droplet");
+            //Tooltip.SetDefault("you shouldn't see this....");
         }
 
         public override void SetDefaults()

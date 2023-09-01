@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
         public override Color? GetAlpha(Color lightColor) => Color.White;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Astral Splitting Star");
+            //DisplayName.SetDefault("Astral Splitting Star");
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
         }
@@ -172,7 +172,7 @@ namespace BombusApisBee.Projectiles
         public override Color? GetAlpha(Color lightColor) => Color.White;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Astral Shard");
+            //DisplayName.SetDefault("Astral Shard");
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
             Main.projFrames[Type] = 5;

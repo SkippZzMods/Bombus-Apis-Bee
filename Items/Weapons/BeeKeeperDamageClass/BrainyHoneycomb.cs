@@ -6,7 +6,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires genius bees that inflict Confused and stacks of Cerebral Disorientation\nEach stack of Cerebral Disorientation causes the target to deal 5% less damage and take 5 damage over time, up to a maxmium of 5 stacks\n'The IQ of this honeycomb is off the charts'");
+            //Tooltip.SetDefault("Fires genius bees that inflict Confused and stacks of Cerebral Disorientation\nEach stack of Cerebral Disorientation causes the target to deal 5% less damage and take 5 damage over time, up to a maxmium of 5 stacks\n'The IQ of this honeycomb is off the charts'");
         }
 
         public override void SafeSetDefaults()

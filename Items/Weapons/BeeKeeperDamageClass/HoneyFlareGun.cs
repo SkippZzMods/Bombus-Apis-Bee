@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int shootDirection;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires honey flares which stick into enemies and explode into homing honey and honey clouds\nThe honey clouds grant the user the Honey Buff when they are in the cloud");
+            //Tooltip.SetDefault("Fires honey flares which stick into enemies and explode into homing honey and honey clouds\nThe honey clouds grant the user the Honey Buff when they are in the cloud");
         }
 
         public override void SafeSetDefaults()

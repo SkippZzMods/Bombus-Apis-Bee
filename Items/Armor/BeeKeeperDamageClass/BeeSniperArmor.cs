@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("25% increased chance to not consume honey\nLoyal Bees increased by 3");
+            //Tooltip.SetDefault("25% increased chance to not consume honey\nLoyal Bees increased by 3");
             Item.ResearchUnlockCount = 1;
         }
 

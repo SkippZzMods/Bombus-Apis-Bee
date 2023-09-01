@@ -6,7 +6,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold <left> to charge up a returning beemerang\nThe beemerang has increased knockback, velocity, damage, and amount of bees spawned on hit depending on charge");
+            //Tooltip.SetDefault("Hold <left> to charge up a returning beemerang\nThe beemerang has increased knockback, velocity, damage, and amount of bees spawned on hit depending on charge");
         }
 
         public override void SafeSetDefaults()

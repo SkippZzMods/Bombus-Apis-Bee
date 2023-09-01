@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cthulhu Bee");
+            //DisplayName.SetDefault("Cthulhu Bee");
             Main.projFrames[Projectile.type] = 2;
         }
 

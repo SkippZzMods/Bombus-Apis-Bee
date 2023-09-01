@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Jar Of Honey");
-            Tooltip.SetDefault("Increases hymenoptra damage by 6%\nIncreases maximum honey by 5\nIncreases life regeneration");
+            //DisplayName.SetDefault("Jar Of Honey");
+            //Tooltip.SetDefault("Increases hymenoptra damage by 6%\nIncreases maximum honey by 5\nIncreases life regeneration");
             Item.ResearchUnlockCount = 1;
         }
 

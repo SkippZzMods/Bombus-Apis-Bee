@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a variety of bee related flasks\n'Might wanna wear some goggles'");
+            //Tooltip.SetDefault("Throws a variety of bee related flasks\n'Might wanna wear some goggles'");
         }
 
         public override void SafeSetDefaults()

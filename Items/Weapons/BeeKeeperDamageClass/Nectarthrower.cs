@@ -6,7 +6,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Blasts out molten nectar, encasing enemies in a glaze of nectar\nEnemies who are glazed send out healing bolts when struck");
+            //Tooltip.SetDefault("Blasts out molten nectar, encasing enemies in a glaze of nectar\nEnemies who are glazed send out healing bolts when struck");
         }
 
         public override void SafeSetDefaults()

@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Living Flower Chestplate");
-            Tooltip.SetDefault("4% increased hymenoptra damage");
+            //DisplayName.SetDefault("Living Flower Chestplate");
+            //Tooltip.SetDefault("4% increased hymenoptra damage");
         }
 
         public override void SetDefaults()

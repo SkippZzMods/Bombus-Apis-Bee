@@ -5,8 +5,8 @@
         public int timer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Locket");
-            Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nIncreases your amount of Loyal Bees by 3");
+            //DisplayName.SetDefault("Honey Locket");
+            //Tooltip.SetDefault("'It seems to have a deep connection to the Hive'\nIncreases your amount of Loyal Bees by 3");
             Item.ResearchUnlockCount = 1;
         }
 

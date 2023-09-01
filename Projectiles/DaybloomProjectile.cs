@@ -5,7 +5,7 @@
         public bool fired;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Flower");
+            //DisplayName.SetDefault("Flower");
         }
 
         public override void SafeSetDefaults()

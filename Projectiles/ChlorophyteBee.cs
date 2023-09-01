@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chlorophyte Bee");
+            //DisplayName.SetDefault("Chlorophyte Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -43,7 +43,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chloro-energy");
+            //DisplayName.SetDefault("Chloro-energy");
         }
 
         public override void SafeSetDefaults()

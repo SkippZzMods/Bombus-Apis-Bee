@@ -12,8 +12,8 @@ namespace BombusApisBee.Buffs
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rotten");
-            Description.SetDefault("u smell gross");
+            //DisplayName.SetDefault("Rotten");
+            //Description.SetDefault("u smell gross");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

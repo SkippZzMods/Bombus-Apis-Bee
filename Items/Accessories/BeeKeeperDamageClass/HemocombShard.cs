@@ -51,7 +51,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 30%\nStrengthened bees have a chance to explode into healing meat chunks");
+            //Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 30%\nStrengthened bees have a chance to explode into healing meat chunks");
         }
 
         public override void SetDefaults()
@@ -73,8 +73,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Meat Chunk");
-            Tooltip.SetDefault("You shouldn't see this...");
+            //DisplayName.SetDefault("Meat Chunk");
+            //Tooltip.SetDefault("You shouldn't see this...");
         }
 
         public override void SetDefaults()

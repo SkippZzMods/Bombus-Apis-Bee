@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Reduces damage taken by 10%\nLoyal Bees increased by 2");
+            //Tooltip.SetDefault("Reduces damage taken by 10%\nLoyal Bees increased by 2");
             Item.ResearchUnlockCount = 1;
         }
 

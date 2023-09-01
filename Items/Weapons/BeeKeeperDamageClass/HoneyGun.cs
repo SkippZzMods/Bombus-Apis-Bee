@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<HoneyGunHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Gun");
-            Tooltip.SetDefault("Fires a high velocity stream of honey");
+            //DisplayName.SetDefault("Honey Gun");
+            //Tooltip.SetDefault("Fires a high velocity stream of honey");
         }
         public override void SafeSetDefaults()
         {

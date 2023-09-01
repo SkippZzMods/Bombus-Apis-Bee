@@ -5,8 +5,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyed Emblem");
-            Tooltip.SetDefault("12% increased hymenoptra damage\nIncreases maximum honey by 10");
+            //DisplayName.SetDefault("Honeyed Emblem");
+            //Tooltip.SetDefault("12% increased hymenoptra damage\nIncreases maximum honey by 10");
             Item.ResearchUnlockCount = 1;
         }
 

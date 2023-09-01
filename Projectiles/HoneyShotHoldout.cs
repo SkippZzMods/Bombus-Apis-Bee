@@ -6,7 +6,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyshot");
+            //DisplayName.SetDefault("Honeyshot");
         }
 
         public Player owner => Main.player[Projectile.owner];
@@ -174,7 +174,7 @@
         private Trail trail2;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Arrow");
+            //DisplayName.SetDefault("Honey Arrow");
         }
 
         public override void SafeSetDefaults()

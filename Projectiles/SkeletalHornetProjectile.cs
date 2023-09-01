@@ -14,7 +14,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Hornet");
+            //DisplayName.SetDefault("Skeletal Hornet");
             Main.projFrames[Type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 6;

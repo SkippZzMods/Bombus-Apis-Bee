@@ -6,7 +6,7 @@
         public int gotoplayerSquirebeeTimer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("SquireBee");
+            //DisplayName.SetDefault("SquireBee");
             Main.projFrames[Projectile.type] = 4;
         }
 

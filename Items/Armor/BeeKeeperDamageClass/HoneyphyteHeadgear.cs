@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Hoarder Hood");
-            Tooltip.SetDefault("Increases maximum honey by 100");
+            //DisplayName.SetDefault("Honey Hoarder Hood");
+            //Tooltip.SetDefault("Increases maximum honey by 100");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -73,7 +73,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Explosion");
+            //DisplayName.SetDefault("Honey Explosion");
         }
 
         public override void AI()

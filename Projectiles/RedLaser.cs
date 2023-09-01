@@ -23,7 +23,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Laser");
+            //DisplayName.SetDefault("Laser");
         }
 
         public override void AI()
@@ -133,7 +133,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Laser");
+            //DisplayName.SetDefault("Laser");
         }
 
         public override void AI()

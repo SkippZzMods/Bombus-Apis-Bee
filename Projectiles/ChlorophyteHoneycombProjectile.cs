@@ -5,7 +5,7 @@
         public override string Texture => "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/ChlorophyteHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chloro-comb");
+            //DisplayName.SetDefault("Chloro-comb");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -92,7 +92,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chloro-fragment");
+            //DisplayName.SetDefault("Chloro-fragment");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
             Main.projFrames[Type] = 3;
@@ -178,7 +178,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chloro-spore");
+            //DisplayName.SetDefault("Chloro-spore");
         }
 
         public override void SafeSetDefaults()

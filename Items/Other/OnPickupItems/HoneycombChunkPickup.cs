@@ -13,8 +13,8 @@ namespace BombusApisBee.Items.Other.OnPickupItems
         }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Chunk");
-            Tooltip.SetDefault("you shouldn't see this....");
+            //DisplayName.SetDefault("Honeycomb Chunk");
+            //Tooltip.SetDefault("you shouldn't see this....");
         }
 
         public override void SetDefaults()
@@ -178,8 +178,8 @@ namespace BombusApisBee.Items.Other.OnPickupItems
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hive Blessing");
-            Description.SetDefault("You are blessed by the Hive");
+            //DisplayName.SetDefault("Hive Blessing");
+            //Description.SetDefault("You are blessed by the Hive");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

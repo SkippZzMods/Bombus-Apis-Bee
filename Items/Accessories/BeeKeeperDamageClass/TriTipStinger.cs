@@ -5,8 +5,8 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tri-Tip Stinger");
-            Tooltip.SetDefault("Grants a chance on hit for hymenoptra attacks to apply an improved poison\nThe improved poison deals a percentage of the inflicted enemies max hp, and spreads between enemies");
+            //DisplayName.SetDefault("Tri-Tip Stinger");
+            //Tooltip.SetDefault("Grants a chance on hit for hymenoptra attacks to apply an improved poison\nThe improved poison deals a percentage of the inflicted enemies max hp, and spreads between enemies");
         }
 
         public override void SetDefaults()

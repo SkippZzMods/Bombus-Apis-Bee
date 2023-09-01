@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Crusader Platemail");
-            Tooltip.SetDefault("30% increased chance to not consume honey\nLoyal Bees increased by 4");
+            //DisplayName.SetDefault("Honeycomb Crusader Platemail");
+            //Tooltip.SetDefault("30% increased chance to not consume honey\nLoyal Bees increased by 4");
             Item.ResearchUnlockCount = 1;
         }
 

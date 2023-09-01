@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Gun");
+            //DisplayName.SetDefault("Honey Gun");
         }
         public override void SafeSetDefaults()
         {
@@ -99,7 +99,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Stream");
+            //DisplayName.SetDefault("Honey Stream");
         }
 
         public override void SetDefaults()

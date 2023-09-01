@@ -14,7 +14,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public float? oldHandRot;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Press <right> to drain 50% of your honey bank to empower your shots for a short time, causing them to ricochet");
+            //Tooltip.SetDefault("Press <right> to drain 50% of your honey bank to empower your shots for a short time, causing them to ricochet");
         }
 
         public override void SafeSetDefaults()

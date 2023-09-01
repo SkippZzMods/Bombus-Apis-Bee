@@ -8,8 +8,8 @@ namespace BombusApisBee.Buffs
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Frostbroken");
-            Description.SetDefault("Brr!.. Part two!");
+            //DisplayName.SetDefault("Frostbroken");
+            //Description.SetDefault("Brr!.. Part two!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

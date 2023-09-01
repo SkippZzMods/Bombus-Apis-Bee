@@ -4,8 +4,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Manipulator Cooldown");
-            Description.SetDefault("The Honey Manipulator needs to recharge");
+            //DisplayName.SetDefault("Honey Manipulator Cooldown");
+            //Description.SetDefault("The Honey Manipulator needs to recharge");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -17,8 +17,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lihzardian Hornet Relic Cooldown");
-            Description.SetDefault("The relic seems to no longer work.. for now");
+            //DisplayName.SetDefault("Lihzardian Hornet Relic Cooldown");
+            //Description.SetDefault("The relic seems to no longer work.. for now");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -30,8 +30,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hive-Touched Band Cooldown");
-            Description.SetDefault("The band needs to recharge");
+            //DisplayName.SetDefault("Hive-Touched Band Cooldown");
+            //Description.SetDefault("The band needs to recharge");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -43,8 +43,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Teleportation Cooldown");
-            Description.SetDefault("Your molecules need time to align");
+            //DisplayName.SetDefault("Honey Teleportation Cooldown");
+            //Description.SetDefault("Your molecules need time to align");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -56,8 +56,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Laser Cooldown");
-            Description.SetDefault("The honeycomb needs time to cool down");
+            //DisplayName.SetDefault("Honey Laser Cooldown");
+            //Description.SetDefault("The honeycomb needs time to cool down");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

@@ -5,8 +5,8 @@
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Toxin'd up");
-            Description.SetDefault("Better find that antidote");
+            //DisplayName.SetDefault("Toxin'd up");
+            //Description.SetDefault("Better find that antidote");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

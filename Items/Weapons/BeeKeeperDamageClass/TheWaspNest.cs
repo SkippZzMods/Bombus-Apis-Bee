@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a wasps nest that spawns wasps while it is in the air\nUses 1 honey everytime a wasp is spawned");
+            //Tooltip.SetDefault("Throws a wasps nest that spawns wasps while it is in the air\nUses 1 honey everytime a wasp is spawned");
 
             // These are all related to gamepad controls and don't seem to affect anything else
             ItemID.Sets.Yoyo[Item.type] = true;

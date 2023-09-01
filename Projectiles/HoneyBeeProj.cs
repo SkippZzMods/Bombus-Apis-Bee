@@ -57,7 +57,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => Offense;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Bee");
+            //DisplayName.SetDefault("Honey Bee");
             Main.projFrames[Projectile.type] = 4;
 
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;

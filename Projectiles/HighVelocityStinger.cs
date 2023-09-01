@@ -5,7 +5,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("High Velocity Stinger");
+            //DisplayName.SetDefault("High Velocity Stinger");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
         }

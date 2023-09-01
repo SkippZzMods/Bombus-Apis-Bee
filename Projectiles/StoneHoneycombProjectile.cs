@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.BeeWeapon + "StoneHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Petrified Honeycomb");
+            //DisplayName.SetDefault("Petrified Honeycomb");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }

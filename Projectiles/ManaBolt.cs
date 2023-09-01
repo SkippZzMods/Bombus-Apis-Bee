@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("ManaBolt");
+            //DisplayName.SetDefault("ManaBolt");
         }
 
         public override void SafeSetDefaults()

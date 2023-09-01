@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int shootDirection;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires bouncing pipebeeoms full of bees\n'Oh they're goin to hav' to glue you back togetha'\n'IN HELL'");
+            //Tooltip.SetDefault("Fires bouncing pipebeeoms full of bees\n'Oh they're goin to hav' to glue you back togetha'\n'IN HELL'");
         }
 
         public override void SafeSetDefaults()

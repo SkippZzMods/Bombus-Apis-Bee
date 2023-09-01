@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Corrupt Mini Eater");
+            //DisplayName.SetDefault("Corrupt Mini Eater");
             Main.projFrames[Projectile.type] = 2;
 
             ProjectileID.Sets.TrailingMode[Type] = 0;

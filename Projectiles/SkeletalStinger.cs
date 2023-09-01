@@ -5,7 +5,7 @@
         public bool EnragedStinger => Projectile.ai[0] == 1f;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Stinger");
+            //DisplayName.SetDefault("Skeletal Stinger");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
         }

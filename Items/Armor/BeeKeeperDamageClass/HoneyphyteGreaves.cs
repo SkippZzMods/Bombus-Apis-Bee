@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Hoarder Leggings");
-            Tooltip.SetDefault("5% increased hymenoptra damage");
+            //DisplayName.SetDefault("Honey Hoarder Leggings");
+            //Tooltip.SetDefault("5% increased hymenoptra damage");
             Item.ResearchUnlockCount = 1;
         }
 

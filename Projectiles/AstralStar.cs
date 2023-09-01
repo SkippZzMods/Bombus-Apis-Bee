@@ -5,7 +5,7 @@
         public override Color? GetAlpha(Color lightColor) => Color.White;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Astral Star");
+            //DisplayName.SetDefault("Astral Star");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
         }

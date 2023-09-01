@@ -1268,16 +1268,23 @@ Mods: {
 					'''
 			}
 
-			HellcombShard.Tooltip:
-				'''
-				Increases the chance to strengthen friendly bees by 40%
-				Strengthened bees have a chance to cause volatile explosions
-				'''
-			HemocombShard.Tooltip:
-				'''
-				Increases the chance to strengthen friendly bees by 30%
-				Strengthened bees have a chance to explode into healing meat chunks
-				'''
+			HellcombShard: {
+				DisplayName: Hellcomb Shard
+				Tooltip:
+					'''
+					Increases the chance to strengthen friendly bees by 40%
+					Strengthened bees have a chance to cause volatile explosions
+					'''
+			}
+
+			HemocombShard: {
+				DisplayName: Hemocomb Shard
+				Tooltip:
+					'''
+					Increases the chance to strengthen friendly bees by 30%
+					Strengthened bees have a chance to explode into healing meat chunks
+					'''
+			}
 
 			HemocombShardChunk1: {
 				DisplayName: Meat Chunk
@@ -1294,17 +1301,24 @@ Mods: {
 				Tooltip: You shouldn't see this...
 			}
 
-			HoneycombShard.Tooltip:
-				'''
-				Increases the chance to strengthen friendly bees by 15%
-				'Crunchy!'
-				'''
-			RottenHoneycombShard.Tooltip:
-				'''
-				Increases the chance to strengthen friendly bees by 20%
-				Strengthened bees apply a weakening debuff
-				'Smells horrible'
-				'''
+			HoneycombShard: {
+				DisplayName: Honeycomb Shard
+				Tooltip:
+					'''
+					Increases the chance to strengthen friendly bees by 15%
+					'Crunchy!'
+					'''
+			}
+
+			RottenHoneycombShard: {
+				DisplayName: Rotten Honeycomb Shard
+				Tooltip:
+					'''
+					Increases the chance to strengthen friendly bees by 20%
+					Strengthened bees apply a weakening debuff
+					'Smells horrible'
+					'''
+			}
 
 			BeekeepersPants: {
 				Tooltip: 15% increased movement speed
@@ -1334,11 +1348,14 @@ Mods: {
 				Tooltip: 5% increased hymenoptra damage
 			}
 
-			HoneycombCrusaderHelmet.Tooltip:
-				'''
-				5% increased hymenoptra critical strike chance
-				Maximum honey increased by 75
-				'''
+			HoneycombCrusaderHelmet: {
+				DisplayName: Honeycomb Crusader Helmet
+				Tooltip:
+					'''
+					5% increased hymenoptra critical strike chance 
+					Maximum honey increased by 75
+					'''
+			}
 
 			HoneycombCrusaderPlatemail: {
 				DisplayName: Honeycomb Crusader Platemail
@@ -1349,11 +1366,14 @@ Mods: {
 					'''
 			}
 
-			HoneyphyteChestpiece.Tooltip:
-				'''
-				30% increased chance to not consume honey
-				Loyal Bees increased by 5
-				'''
+			HoneyphyteChestpiece: {
+				DisplayName: Honeyphyte Chestpiece
+				Tooltip:
+					'''
+					30% increased chance to not consume honey
+					Loyal Bees increased by 5
+					'''
+			}
 
 			HoneyphyteGreaves: {
 				DisplayName: Honey Hoarder Leggings
@@ -1365,17 +1385,14 @@ Mods: {
 				Tooltip: Increases maximum honey by 100
 			}
 
-			HoneyphyteMask.Tooltip:
-				'''
-				10% increased hymenoptra damage and critical strike chance
-				Increases maximum honey by 75
-				'''
-			Beevolver.Tooltip: Press <right> to drain 50% of your honey bank to empower your shots for a short time, causing them to ricochet
-			CatacombShard.Tooltip:
-				'''
-				Increases the chance to strengthen friendly bees by 60%
-				Strengthened bees have a chance to spawn water bolts on hit
-				'''
+			HoneyphyteMask: {
+				DisplayName: Honeyphyte Mask
+				Tooltip:
+					'''
+					10% increased hymenoptra damage and critical strike chance
+					Increases maximum honey by 75
+					'''
+			}
 		}
 
 		NPCs: {
@@ -1415,6 +1432,26 @@ Mods: {
 
 				yOffset: {
 					Label: Honey UI Y-Offset
+					Tooltip: ""
+				}
+
+				DrawLegacyUI: {
+					Label: Draw Legacy Honey Resource UI (Outdated)
+					Tooltip: ""
+				}
+
+				DragUI: {
+					Label: Drag Honey Resource UI
+					Tooltip: ""
+				}
+
+				ResourceOffX: {
+					Label: Used for the dragging properties of the Resource UI. Should not be changed manually, reset this and the Y Offset to 0 to use default posiiton.
+					Tooltip: ""
+				}
+
+				ResourceOffY: {
+					Label: Used for the dragging properties of the Resource UI. Should not be changed manually, reset this and the X Offset 0 to use default posiiton.
 					Tooltip: ""
 				}
 			}

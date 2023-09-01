@@ -42,7 +42,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beenigun");
+            //DisplayName.SetDefault("Beenigun");
         }
         public override void SafeSetDefaults()
         {

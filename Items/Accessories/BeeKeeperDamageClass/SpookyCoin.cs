@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases hymenoptra damage and critical strike chance by 6% when above 35% honey\nMassively increases honey regeneration when below 35% honey");
+            //Tooltip.SetDefault("Increases hymenoptra damage and critical strike chance by 6% when above 35% honey\nMassively increases honey regeneration when below 35% honey");
             SacrificeTotal = 1;
         }
 

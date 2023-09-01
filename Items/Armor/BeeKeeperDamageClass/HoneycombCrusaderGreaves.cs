@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Crusader Greaves");
-            Tooltip.SetDefault("5% increased hymenoptra damage");
+            //DisplayName.SetDefault("Honeycomb Crusader Greaves");
+            //Tooltip.SetDefault("5% increased hymenoptra damage");
             Item.ResearchUnlockCount = 1;
         }
 

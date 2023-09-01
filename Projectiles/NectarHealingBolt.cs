@@ -8,7 +8,7 @@
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Healing Bolt");
+            //DisplayName.SetDefault("Nectar Healing Bolt");
         }
 
         public override void SafeSetDefaults()

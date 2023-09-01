@@ -9,7 +9,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Electric Honeycomh");
+            //DisplayName.SetDefault("Electric Honeycomh");
         }
 
         public override void SafeSetDefaults()
@@ -123,7 +123,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lightning");
+            //DisplayName.SetDefault("Lightning");
         }
 
         public override void SafeSetDefaults()
@@ -315,7 +315,7 @@ namespace BombusApisBee.Projectiles
         }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Electric Bee");
+            //DisplayName.SetDefault("Electric Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 

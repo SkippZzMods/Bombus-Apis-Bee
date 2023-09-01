@@ -5,7 +5,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Skull");
+            //DisplayName.SetDefault("Cursed Skull");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
         }

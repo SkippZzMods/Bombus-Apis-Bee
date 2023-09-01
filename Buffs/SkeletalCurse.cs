@@ -6,8 +6,8 @@ namespace BombusApisBee.Buffs
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Curse");
-            Description.SetDefault("You cannot feel your soul");
+            //DisplayName.SetDefault("Skeletal Curse");
+            //Description.SetDefault("You cannot feel your soul");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

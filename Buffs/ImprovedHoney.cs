@@ -5,8 +5,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Improved Honey");
-            Description.SetDefault("Life regeneration increased substantially");
+            //DisplayName.SetDefault("Improved Honey");
+            //Description.SetDefault("Life regeneration increased substantially");
             Main.buffNoTimeDisplay[Type] = false;
             Main.debuff[Type] = false;
         }

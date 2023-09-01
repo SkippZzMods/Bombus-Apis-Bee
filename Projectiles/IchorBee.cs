@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ichor Bee");
+            //DisplayName.SetDefault("Ichor Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 

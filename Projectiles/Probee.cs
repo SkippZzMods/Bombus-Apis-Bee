@@ -14,7 +14,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Probee");
+            //DisplayName.SetDefault("Probee");
             Main.projFrames[Projectile.type] = 1;
         }
 

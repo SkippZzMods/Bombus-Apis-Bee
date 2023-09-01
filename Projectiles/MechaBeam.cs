@@ -15,7 +15,7 @@
         }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cosmic Beam");
+            //DisplayName.SetDefault("Cosmic Beam");
         }
         public override string Texture
         {

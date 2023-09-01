@@ -117,7 +117,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 40%\nStrengthened bees have a chance to cause volatile explosions");
+            //Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 40%\nStrengthened bees have a chance to cause volatile explosions");
         }
 
         public override void SetDefaults()
@@ -171,7 +171,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Volatile Explosion");
+            //DisplayName.SetDefault("Volatile Explosion");
         }
 
         public override void AI()

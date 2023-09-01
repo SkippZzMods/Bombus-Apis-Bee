@@ -4,8 +4,8 @@
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("The Traitor's Saxophone");
-            Tooltip.SetDefault("'Ya like jazz?'");
+            //DisplayName.SetDefault("The Traitor's Saxophone");
+            //Tooltip.SetDefault("'Ya like jazz?'");
         }
 
         public override void SafeSetDefaults()

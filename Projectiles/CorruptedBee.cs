@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Corrupted Bee");
+            //DisplayName.SetDefault("Corrupted Bee");
 
             Main.projFrames[Projectile.type] = 4;
         }

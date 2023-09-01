@@ -9,8 +9,8 @@ namespace BombusApisBee.Items.Other.Crafting
         public override string Texture => "BombusApisBee/Items/Other/Crafting/PollenOne";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pollen");
-            Tooltip.SetDefault("'Careful if you're allergic'");
+            //DisplayName.SetDefault("Pollen");
+            //Tooltip.SetDefault("'Careful if you're allergic'");
             Item.ResearchUnlockCount = 999;
         }
         public override void SetDefaults()

@@ -5,7 +5,7 @@
         public override bool SafeCanUseItem(Player player) => player.statMana > 5 && player.ownedProjectileCounts<ManaHoneycombHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold <left> to charge up a burst of mana infused bees\nMana bees spawn homing mana stars on hit");
+            //Tooltip.SetDefault("Hold <left> to charge up a burst of mana infused bees\nMana bees spawn homing mana stars on hit");
         }
 
         public override void SafeSetDefaults()

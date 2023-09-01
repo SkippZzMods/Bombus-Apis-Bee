@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int delay;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of 6 bee bullets\n'Fear the swarm!'");
+            //Tooltip.SetDefault("Fires a burst of 6 bee bullets\n'Fear the swarm!'");
         }
 
         public override void SafeSetDefaults()

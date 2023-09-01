@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased hymenoptra critical strike chance\nIncreases maximum honey by 60");
+            //Tooltip.SetDefault("15% increased hymenoptra critical strike chance\nIncreases maximum honey by 60");
             Item.ResearchUnlockCount = 1;
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }

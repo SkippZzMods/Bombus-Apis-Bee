@@ -8,7 +8,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public int shot;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of high velocity stingers and hivebombs");
+            //Tooltip.SetDefault("Fires a burst of high velocity stingers and hivebombs");
         }
 
         public override void SafeSetDefaults()

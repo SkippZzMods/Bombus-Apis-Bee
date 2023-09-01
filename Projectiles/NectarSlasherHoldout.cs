@@ -26,7 +26,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Slasher");
+            //DisplayName.SetDefault("Nectar Slasher");
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             ProjectileID.Sets.TrailingMode[Type] = 2;
         }
@@ -452,7 +452,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectarslash");
+            //DisplayName.SetDefault("Nectarslash");
         }
 
         public override void SafeSetDefaults()

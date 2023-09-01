@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased movement speed");
+            //Tooltip.SetDefault("15% increased movement speed");
             Item.ResearchUnlockCount = 1;
         }
 

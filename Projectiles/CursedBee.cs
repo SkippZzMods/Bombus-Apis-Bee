@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Bee");
+            //DisplayName.SetDefault("Cursed Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 

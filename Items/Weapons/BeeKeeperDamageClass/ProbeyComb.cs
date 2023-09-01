@@ -5,8 +5,8 @@
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<ProbeycombHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold <left> to charge up a burst of Probees\nProbees fire deadly lasers at enemies");
-            DisplayName.SetDefault("Probeecomb");
+            //Tooltip.SetDefault("Hold <left> to charge up a burst of Probees\nProbees fire deadly lasers at enemies");
+            //DisplayName.SetDefault("Probeecomb");
         }
 
         public override void SafeSetDefaults()

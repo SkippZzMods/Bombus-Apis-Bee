@@ -11,7 +11,7 @@ namespace BombusApisbee.NPCs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Traitor Bee");
+            //DisplayName.SetDefault("Traitor Bee");
             Main.npcFrameCount[NPC.type] = 23;
             NPCID.Sets.ExtraFramesCount[NPC.type] = 9;
             NPCID.Sets.AttackFrameCount[NPC.type] = 4;

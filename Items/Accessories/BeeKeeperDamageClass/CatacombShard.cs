@@ -24,7 +24,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 60%\nStrengthened bees have a chance to spawn water bolts on hit");
+            //Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 60%\nStrengthened bees have a chance to spawn water bolts on hit");
         }
 
         public override void SetDefaults()
@@ -58,7 +58,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Waterbolt");
+            //DisplayName.SetDefault("Waterbolt");
         }
 
 

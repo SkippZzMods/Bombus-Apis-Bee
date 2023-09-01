@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Note");
+            //DisplayName.SetDefault("Honey Note");
         }
         public override void SafeSetDefaults()
         {

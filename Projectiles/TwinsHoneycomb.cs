@@ -15,7 +15,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => Projectile.penetrate > 1 && dash;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Retinacomb");
+            //DisplayName.SetDefault("Retinacomb");
             Main.projFrames[Type] = 2;
         }
 
@@ -318,7 +318,7 @@ namespace BombusApisBee.Projectiles
         public override bool? CanDamage() => DashDelay > 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spazacomb");
+            //DisplayName.SetDefault("Spazacomb");
             Main.projFrames[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

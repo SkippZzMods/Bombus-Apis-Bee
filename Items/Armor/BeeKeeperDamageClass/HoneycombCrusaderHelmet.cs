@@ -9,7 +9,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nMaximum honey increased by 75");
+            //Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nMaximum honey increased by 75");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -88,7 +88,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
         public override bool? CanDamage() => deathTimer <= 0 && hitTimer <= 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Shield");
+            //DisplayName.SetDefault("Honey Shield");
         }
 
         public override void SetDefaults()

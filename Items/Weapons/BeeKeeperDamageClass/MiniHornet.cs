@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Minihornet");
-            Tooltip.SetDefault("'Half hornet, half gun, completely awesome.'");
+            //DisplayName.SetDefault("Minihornet");
+            //Tooltip.SetDefault("'Half hornet, half gun, completely awesome.'");
         }
 
         public override void SafeSetDefaults()

@@ -7,7 +7,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 75");
+            //Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 75");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -88,7 +88,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyphytecomb");
+            //DisplayName.SetDefault("Honeyphytecomb");
         }
 
         public override void SetDefaults()

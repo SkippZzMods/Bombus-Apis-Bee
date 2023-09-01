@@ -7,7 +7,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Bee");
+            //DisplayName.SetDefault("Skeletal Bee");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -52,7 +52,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Slash");
+            //DisplayName.SetDefault("Skeletal Slash");
         }
         public override void SafeSetDefaults()
         {

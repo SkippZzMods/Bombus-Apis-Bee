@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("5% increased hymenoptra critical strike chance");
-            DisplayName.SetDefault("Beekeeper's Pants");
+            //Tooltip.SetDefault("5% increased hymenoptra critical strike chance");
+            //DisplayName.SetDefault("Beekeeper's Pants");
             Item.ResearchUnlockCount = 1;
         }
 

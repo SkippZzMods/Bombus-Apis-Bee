@@ -14,7 +14,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/CursedHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Honeycomb");
+            //DisplayName.SetDefault("Cursed Honeycomb");
         }
 
         public override void SafeSetDefaults()

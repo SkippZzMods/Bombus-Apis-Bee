@@ -4,8 +4,8 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Queen's Guard");
-            Description.SetDefault("The Queen will protect you!");
+            //DisplayName.SetDefault("The Queen's Guard");
+            //Description.SetDefault("The Queen will protect you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

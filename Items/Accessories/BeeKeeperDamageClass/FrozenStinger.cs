@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("8% increased hymenoptra critical strike chance\nHymenoptra critical strikes inflict Frostbroken\nEnemies inflicted with Frostbroken have their defense reduced by 35%, and shatter at low hp, damaging enemies around them");
+            //Tooltip.SetDefault("8% increased hymenoptra critical strike chance\nHymenoptra critical strikes inflict Frostbroken\nEnemies inflicted with Frostbroken have their defense reduced by 35%, and shatter at low hp, damaging enemies around them");
             Item.ResearchUnlockCount = 1;
         }
 

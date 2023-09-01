@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
         public Vector2 startPos;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyed Sickle");
+            //DisplayName.SetDefault("Honeyed Sickle");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
         }

@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("hymenoptra damage");
+            //DisplayName.SetDefault("hymenoptra damage");
         }
 
         public override StatInheritanceData GetModifierInheritance(DamageClass damageClass)

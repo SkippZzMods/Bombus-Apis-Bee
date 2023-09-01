@@ -6,7 +6,7 @@ namespace BombusApisBee.Projectiles
         public override string Texture => "BombusApisBee/Projectiles/PeeperPokerHoldout";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Peeper Poker");
+            //DisplayName.SetDefault("Peeper Poker");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }

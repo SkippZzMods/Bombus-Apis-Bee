@@ -17,7 +17,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Eater of Honeycombs");
+            //DisplayName.SetDefault("Eater of Honeycombs");
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }

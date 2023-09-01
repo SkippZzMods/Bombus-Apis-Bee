@@ -5,7 +5,7 @@ namespace BombusApisBee.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Slash");
+            //DisplayName.SetDefault("Honey Slash");
         }
         public override void SafeSetDefaults()
         {

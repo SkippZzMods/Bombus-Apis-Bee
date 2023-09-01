@@ -21,7 +21,7 @@ namespace BombusApisBee.Items.Accessories.BeeKeeperDamageClass
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 20%\nStrengthened bees apply a weakening debuff\n'Smells horrible'");
+            //Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 20%\nStrengthened bees apply a weakening debuff\n'Smells horrible'");
         }
 
         public override void SetDefaults()

@@ -7,7 +7,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Eye");
+            //DisplayName.SetDefault("Cursed Eye");
             Main.projFrames[Type] = 3;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
             ProjectileID.Sets.TrailingMode[Type] = 0;

@@ -25,7 +25,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Bee Buckshot");
+            //DisplayName.SetDefault("Hellfire Bee Buckshot");
         }
 
         public override void AI()
@@ -183,7 +183,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Slug");
+            //DisplayName.SetDefault("Hellfire Slug");
         }
 
         public override void AI()
@@ -327,7 +327,7 @@ namespace BombusApisBee.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Explosion");
+            //DisplayName.SetDefault("Hellfire Explosion");
         }
 
         public override void AI()

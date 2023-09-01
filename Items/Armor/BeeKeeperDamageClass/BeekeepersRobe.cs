@@ -7,8 +7,8 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beekeeper's Robe");
-            Tooltip.SetDefault("5% increased hymenoptra damage\nLoyal Bees increased by 1");
+            //DisplayName.SetDefault("Beekeeper's Robe");
+            //Tooltip.SetDefault("5% increased hymenoptra damage\nLoyal Bees increased by 1");
             Item.ResearchUnlockCount = 1;
         }
 
