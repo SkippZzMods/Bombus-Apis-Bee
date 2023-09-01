@@ -1,4 +1,6 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
+using Humanizer;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -28,7 +30,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "20% increased chance to not use honey\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "to teleport to the cursor, creating a honey explosion, leeching honey from hit enemies";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.HoneyphyteHeadgear").FormatWith(Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ");
             player.Hymenoptra().ResourceChanceAdd += 0.2f;
             player.Bombus().HoneyTeleport = true;
         }

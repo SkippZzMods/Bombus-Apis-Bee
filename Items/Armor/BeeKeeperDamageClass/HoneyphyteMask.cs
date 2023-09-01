@@ -1,4 +1,6 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
+using Humanizer;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -27,7 +29,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Strike enemies to build up honey energy\nConjures a honeycomb to aid you\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "while at full energy to fire a concentrated honey laser from the honeycomb\nIncreases hymenoptra damage by 10% while your Bees are in Attacking mode\nIncreases damage reduction by 10% while your Bees are in Defense mode";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.HoneyphyteMask").FormatWith(Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ");
             var modPlayer = player.Hymenoptra();
             player.Bombus().HoneyLaser = true;
 

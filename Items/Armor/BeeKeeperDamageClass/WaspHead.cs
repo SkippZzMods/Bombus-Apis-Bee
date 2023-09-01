@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -113,7 +114,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Your Loyal Bees shoot powerful stingers";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.Wasp");
             player.Bombus().WaspArmorSet = true;
         }
 

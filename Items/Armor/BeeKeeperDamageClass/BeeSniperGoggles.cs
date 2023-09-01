@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class BeeSniperGoggles : BeeKeeperItem
@@ -26,8 +28,7 @@
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Striking enemies has a chance to mark them for 10 seconds\nMarked enemies take 25% more damage and have double the chance to be critically striked\n" +
-                "While an enemy is marked, non-marked enemies take 15% less damage\nMarking enemies has a cooldown of 15 seconds\nKilling the Marked enemy resets the cooldown";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.BeeSniper");
             player.Bombus().BeeSniperSet = true;
         }
 

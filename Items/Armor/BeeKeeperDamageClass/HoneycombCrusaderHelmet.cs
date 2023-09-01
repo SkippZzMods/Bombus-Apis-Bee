@@ -1,6 +1,7 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
 using BombusApisBee.Items.Other.OnPickupItems;
 using Terraria;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -29,7 +30,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Conjures a honey shield that attempts to protect the bearer\nThe shield breaks into honeycomb chunks upon being struck";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.HoneycombCrusader");
             player.GetModPlayer<HoneycombCrusaderPlayer>().FullArmorSet = true;
         }
         public override void UpdateEquip(Player player)

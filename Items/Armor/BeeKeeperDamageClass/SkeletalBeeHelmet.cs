@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
+﻿using Terraria.Localization;
+
+namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
     [AutoloadEquip(EquipType.Head)]
     public class SkeletalBeeHelmet : BeeKeeperItem
@@ -25,7 +27,7 @@
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Summons a skeletal hornet to protect you\nGetting a kill or critical hit enrages the hornet for a short time\nGetting a kill or critical hit while the hornet is already enraged increases the amount of time it is enraged for";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.SkeletalBee");
             if (player.ownedProjectileCounts[ModContent.ProjectileType<SkeletalHornetProjectile>()] <= 0 && Main.myPlayer == player.whoAmI)
             {
                 int whoami = Projectile.NewProjectile(player.GetSource_FromThis(), player.Center, Vector2.UnitY, ModContent.ProjectileType<SkeletalHornetProjectile>(), player.ApplyHymenoptraDamageTo(18), 2f, player.whoAmI);

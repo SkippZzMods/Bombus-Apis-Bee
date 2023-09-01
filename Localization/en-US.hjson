@@ -1395,6 +1395,57 @@ Mods: {
 			}
 		}
 
+		ArmorSet: {
+			Beekeepers:
+				'''
+				Bees become friendly
+				15% increased chance to not consume honey
+				'''
+			BeeSniper:
+				'''
+				Striking enemies has a chance to mark them for 10 seconds
+				Marked enemies take 25% more damage and have double the chance to be critically striked
+				While an enemy is marked, non-marked enemies take 15% less damage
+				Marking enemies has a cooldown of 15 seconds
+				Killing the Marked enemy resets the cooldown
+				'''
+			HoneycombCrusader:
+				'''
+				Conjures a honey shield that attempts to protect the bearer
+				The shield breaks into honeycomb chunks upon being struck
+				'''
+			HoneyphyteHeadgear:
+				'''
+				20% increased chance to not use honey
+				Double tap {0} to teleport to the cursor, creating a honey explosion, leeching honey from hit enemies
+				'''
+			HoneyphyteMask:
+				'''
+				Strike enemies to build up honey energy
+				Conjures a honeycomb to aid you
+				Double tap {0} while at full energy to fire a concentrated honey laser from the honeycomb
+				Increases hymenoptra damage by 10% while your Bees are in Attacking mode
+				Increases damage reduction by 10% while your Bees are in Defense mode
+				'''
+			LivingFlower:
+				'''
+				'Get it? Cause yaknow, bees like flowers'
+				Spawns dayblooms every 2 seconds, with a maximum of 3 dayblooms
+				4% chance to not consume honey per daybloom alive
+				While you have 3 dayblooms alive, double tap {0} to fire them toward the cursor, leeching honey on hit
+				'''
+			SkeletalBee:
+				'''
+				Summons a skeletal hornet to protect you
+				Getting a kill or critical hit enrages the hornet for a short time
+				Getting a kill or critical hit while the hornet is already enraged increases the amount of time it is enraged for
+				'''
+			Wasp:
+				'''
+				Your Loyal Bees shoot powerful stingers
+				'''
+		}
+
 		NPCs: {
 			TheTraitorBee: {
 				DisplayName: Traitor Bee

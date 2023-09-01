@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Items.Other.Crafting;
+using Terraria.Localization;
 
 namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 {
@@ -28,7 +29,7 @@ namespace BombusApisBee.Items.Armor.BeeKeeperDamageClass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Bees become friendly\n15% increased chance to not consume honey";
+            player.setBonus = Language.GetTextValue("Mods.BombusApisBee.ArmorSet.Beekeepers");
             player.Hymenoptra().ResourceChanceAdd += 0.15f;
             player.npcTypeNoAggro[NPCID.Bee] = true;
             player.npcTypeNoAggro[NPCID.BeeSmall] = true;
