@@ -155,7 +155,7 @@ namespace BombusApisbee.NPCs
         }
         public override void SetChatButtons(ref string button, ref string button2)
         {
-            button = Language.GetTextValue("Shop");
+            button = Language.GetTextValue("LegacyInterface.28");
         }
         public override void OnChatButtonClicked(bool firstButton, ref string shopName)
         {
