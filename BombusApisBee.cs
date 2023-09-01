@@ -73,7 +73,8 @@ namespace BombusApisBee
                 BeeDamageInterface = new UserInterface();
 
                 BeePlayerUI = new BeePlayerUI();
-                BeePlayerUI.Activate();
+                BeePlayerUI.Activate(); 
+                BeeDamageInterface.SetState(BeePlayerUI);
             }
 
             DrawPrimitives.Load();
@@ -83,8 +84,6 @@ namespace BombusApisBee
             LihzardianRelicHotkey = KeybindLoader.RegisterKeybind(this, "Lihzardian Hornet Relic", "L");
 
             BeekeeperStateSwitchHotkey = KeybindLoader.RegisterKeybind(this, "Change Beekeeper State", "N");
-
-            BeeDamageInterface.SetState(BeePlayerUI);
 
 
             loadCache = new List<IOrderedLoadable>();
