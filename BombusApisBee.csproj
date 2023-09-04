@@ -16,5 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bosses\HoneyConglomerate\" />
+    <Folder Include="Localization\" />
   </ItemGroup>
 </Project>

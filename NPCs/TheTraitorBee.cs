@@ -179,6 +179,8 @@ namespace BombusApisbee.NPCs
                 .Add(ModContent.ItemType<HoneyLocket>(), Condition.Hardmode)
                 .Add(ModContent.ItemType<BombusApisBee.Items.Accessories.BeeKeeperDamageClass.HoneyBee>(), Condition.DownedMechBossAny)
                 .Add(ModContent.ItemType<BeeInyGun>(), Condition.DownedGolem);
+
+            shop.Register();
         }
     }
 }

@@ -1,0 +1,1297 @@
+Keybinds: {
+	"Honey Manipulation.DisplayName": Honey  Manipulation
+	"Lihzardian Hornet Relic.DisplayName": Lihzardian  Hornet  Relic
+	"Change Beekeeper State.DisplayName": Change  Beekeeper  State
+}
+
+Projectiles: {
+	BeePlayerBeeProjectile.DisplayName: Bee
+	BeePlayerShieldProjectile.DisplayName: Shield
+	BandHoneyExplosion.DisplayName: Honey Explosion
+	BandHoneyGlob.DisplayName: Honey Glob
+	HellcombShardExplosion.DisplayName: Volatile Explosion
+	HoneycombCrusaderShieldProjectile.DisplayName: Honey Shield
+	HoneyphyteHeadgearExplosion.DisplayName: Honey Explosion
+	HoneyphyteMaskLaserHoneycomb.DisplayName: Honeyphytecomb
+	AculeusBladeHoldout.DisplayName: Blade of Aculeus
+	AculeusBladeStinger.DisplayName: Stinger
+	AmbrosiaExplosion.DisplayName: Ambrosia Explosion
+	AmbrosiaProjectile.DisplayName: Ambrosia
+	AstralBee.DisplayName: Astral Bee
+	AstralStar.DisplayName: Astral Star
+	AstralStarSplitting.DisplayName: Astral Splitting Star
+	AstralStarSplittingShards.DisplayName: Astral Shard
+	BasicExplosion.DisplayName: Explosion
+	BasicExplosionDebuff.DisplayName: Explosion
+	BeeBladeStinger.DisplayName: Stinger
+	BeeBladeSwing.DisplayName: Bee Blade
+	BeeBubble.DisplayName: Bee Bubble
+	BeeBuckshot.DisplayName: Bee Buckshot
+	BeeBullet.DisplayName: Bee Bullet
+	BeeFishBubble.DisplayName: Honey Bubble
+	BeemerangHoldout.DisplayName: Beemerang
+	BeeMinigunHoldout.DisplayName: Beenigun
+	BeenadeLauncherProjectile.DisplayName: Pipebeeoms
+	BeeResourceIncreaseProjectile.DisplayName: Honey
+	BeeSwordProjectile.DisplayName: BeeSwordProjectile
+	BeeSwordSlash.DisplayName: Honey Slash
+	BeezookaRocket.DisplayName: Bee Rocket
+	BeezookaRocketSmall.DisplayName: Mini-Bee Rocket
+	BeezookaShrapnel.DisplayName: Beezooka Shrapnel
+	BigStar.DisplayName: Big Star
+	BrainyBee.DisplayName: Brainy Bee
+	ChloroEnergy.DisplayName: Chloro-energy
+	ChlorophyteBee.DisplayName: Chlorophyte Bee
+	ChlorophyteHoneycombProjectile.DisplayName: Chloro-comb
+	Chloroshard.DisplayName: Chloro-fragment
+	Chlorospore.DisplayName: Chloro-spore
+	CorruptedBee.DisplayName: Corrupted Bee
+	CorruptMiniEater.DisplayName: Corrupt Mini Eater
+	CthulhuBee.DisplayName: Cthulhu Bee
+	CursedBee.DisplayName: Cursed Bee
+	CursedExplosion.DisplayName: Cursed Explosion
+	CursedEye.DisplayName: Cursed Eye
+	CursedFlameball.DisplayName: Cursed Flameball
+	CursedHoneycombThrowout.DisplayName: Cursed Honeycomb
+	CursedTooth.DisplayName: Cursed Tooth
+	DaybloomProj.DisplayName: Flower
+	EaterOfHoneycombsHoldout.DisplayName: Eater of Honeycombs
+	ElectricBee.DisplayName: Electric Bee
+	ElectricHoneycombLightning.DisplayName: Lightning
+	ElectricHoneycombProj.DisplayName: Electric Honeycomh
+	FrostedBee.DisplayName: FrostedBee
+	FrostedHoneycombProj.DisplayName: Frozen Honeycomb
+	FrostedProjectile_Homing.DisplayName: Homing Icicle
+	FrostedProjectile_Piercing.DisplayName: Piercing Icicle
+	FrostedProjectile_Solid.DisplayName: Solid Icicle
+	GalacticBee.DisplayName: Galactic Bee
+	GalacticSeeker.DisplayName: Galaxy Seeker
+	GalacticStar.DisplayName: Galactic Star
+	GalaxyHoneycombProj.DisplayName: Galactic Honeycomb
+	GelBee.DisplayName: Gel Bee
+	GolemLaser.DisplayName: Golem Laser
+	HealingProjectile.DisplayName: Galactic Healing Orb
+	HellfireBee.DisplayName: Hellfire Bee
+	HellfireBeeBuckshot.DisplayName: Hellfire Bee Buckshot
+	HellfireBeemstickSlug.DisplayName: Hellfire Slug
+	HellfireSlugExplosion.DisplayName: Hellfire Explosion
+	HighVelocityStinger.DisplayName: High Velocity Stinger
+	Hivebomb.DisplayName: Hivebomb
+	HomingManaStar.DisplayName: Homing Mana Star
+	HomingNectar.DisplayName: Homing Nectar
+	HomingStinger.DisplayName: Homing Stinger
+	HoneyArrow.DisplayName: Honey Arrow
+	HoneyBee.DisplayName: Honeybee
+	HoneyBeeProj.DisplayName: Honey Bee
+	HoneycombHoldout.DisplayName: Honeycomb
+	HoneycombPrime.DisplayName: Honeycomb Prime
+	HoneycombPrime_Laser.DisplayName: Honeycomb Prime Laser
+	HoneycombPrime_Saw.DisplayName: Honeycomb Prime Saw
+	HoneyEighthNote.DisplayName: Honey Note
+	HoneyEnergyBee.DisplayName: Pure Honey Bee
+	HoneyFlare.DisplayName: Honey Flare
+	HoneyGunHoldout.DisplayName: Honey Gun
+	HoneyGunShot.DisplayName: Honey Stream
+	HoneyHoming.DisplayName: Honey
+	HoneyHomingMetaballs.DisplayName: Honey
+	HoneyNoteEighth.DisplayName: Honey Eighth Note
+	HoneyNoteEighthTied.DisplayName: Honey Tied Eighth Note
+	HoneyNoteQuarter.DisplayName: Honey Quarter Note
+	HoneyQuarterNote.DisplayName: Honey Note
+	HoneyShotHoldout.DisplayName: Honeyshot
+	HoneySmoke.DisplayName: Honey Cloud
+	HoneyTiedEighthNote.DisplayName: Honey Note
+	HymenoptraFlask_Honey.DisplayName: Honey Flask
+	HymenoptraFlask_Nectar.DisplayName: Nectar Flask
+	HymenoptraFlask_Stinger.DisplayName: Stinger Flask
+	IchorBee.DisplayName: Ichor Bee
+	IchorExplosion.DisplayName: Ichor Explosion
+	IchorHoneycombHoldout.DisplayName: Beemerang
+	LargeGalaticStar.DisplayName: Star
+	LaserbeemProjectile.DisplayName: Bouncing Honey Laser
+	ManaBee.DisplayName: Mana Bee
+	ManaBolt.DisplayName: ManaBolt
+	MechaBeam.DisplayName: Cosmic Beam
+	MegaHornetHoldout.DisplayName: Megahornet
+	MetalBee.DisplayName: Metal Bee
+	MetalBeeExplosion.DisplayName: Explosion
+	MiniHoneyNoteEighth.DisplayName: Mini Honey Eighth Note
+	MiniHoneyNoteEighthTied.DisplayName: Mini Honey Tied Eighth Note
+	MiniHoneyNoteQuarter.DisplayName: Mini Honey Quarter Note
+	MiniStars.DisplayName: Mini Star
+	NectarBoltHoming.DisplayName: Nectar Bolt
+	NectarBoltProjectile.DisplayName: Nectar Bolt
+	NectarHealingBolt.DisplayName: Nectar Healing Bolt
+	Nectarslash.DisplayName: Nectarslash
+	NectarSlasherHoldout.DisplayName: Nectar Slasher
+	NectarSmoke.DisplayName: Nectar Cloud
+	NectarthrowerProj.DisplayName: Molten Nectar
+	PeeperPokerHoldout.DisplayName: Peeper Poker
+	PeeperPokerThrow.DisplayName: Peeper Poker
+	PoisonSmoke.DisplayName: Poison Cloud
+	Probee.DisplayName: Probee
+	ProbeycombHoldout.DisplayName: Probeycomb
+	PumpkinetHornet.DisplayName: Pumpkinet
+	PumpkinStinger.DisplayName: Pumpkin Stinger
+	RedLaser.DisplayName: Laser
+	RedLaserHoming.DisplayName: Laser
+	RetinaHoneycomb.DisplayName: Retinacomb
+	RubyExplosion.DisplayName: Ruby Explosion
+	RubyProjectile.DisplayName: Volatile Ruby
+	SkelecombProjectile.DisplayName: Cursed Skull
+	SkeletalBee.DisplayName: Skeletal Bee
+	SkeletalBeeSlash.DisplayName: Skeletal Slash
+	SkeletalHornetProjectile.DisplayName: Skeletal Hornet
+	SkeletalStinger.DisplayName: Skeletal Stinger
+	SpazBee.DisplayName: Spazbee
+	SpazHoneycomb.DisplayName: Spazacomb
+	SpectralBee.DisplayName: Spectral Bee
+	SpectralBeeTomeHoldout.DisplayName: Spectral Bee Tome
+	SpectralSoul.DisplayName: Spectral Soul
+	SquireBee.DisplayName: SquireBee
+	StingerFriendly.DisplayName: Stinger
+	StingerGravity.DisplayName: Stinger
+	StingerYoyoProj.DisplayName: Stinging Yoyo
+	StoneHoneycombProjectile.DisplayName: Petrified Honeycomb
+	SyrupSickleProjectile.DisplayName: Honeyed Sickle
+	TheQueen.DisplayName: The Queen
+	TheStingProj.DisplayName: The Stinging Queen
+	TheTraitorsSaxophoneHoldout.DisplayName: The Traitor's Saxophone
+	TheWaspNestProjectile.DisplayName: Wasp Nest
+	TomeOfTheSunProjectile.DisplayName: Vibrant Honey Energy
+	TomeOfTheSunProjectileHoming.DisplayName: Sun Energy Bolt
+	TrueAculeusBladeHoldout.DisplayName: Blade of Aculeus
+	TrueAculeusBladeHoldoutAlt.DisplayName: Blade of Aculeus
+	TrueBeeSwordProjectile.DisplayName: TrueBeeSwordProjectile
+	TrueHomingNectar.DisplayName: True Homing Nectar
+	TrueNectarslash.DisplayName: True Nectarslash
+	TrueNectarSlasherHoldout.DisplayName: True Nectar Slasher
+	VolatileGel.DisplayName: Bouncy Slimeball
+	WaspAccessory.DisplayName: Wasp
+	WasparangHoldout.DisplayName: Beemerang
+	ManaHoneycombHoldout.DisplayName: Mana Honeycomb Holdout
+	PumpkinetScepterHoldout.DisplayName: Pumpkinet Scepter Holdout
+}
+
+DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
+
+Buffs: {
+	AstralStarBuff: {
+		DisplayName: Blessed by the Heavens
+		Description: Increased hymenoptra damage and attack speed
+	}
+
+	BandOfTheHiveCooldown: {
+		DisplayName: Hive-Touched Band Cooldown
+		Description: The band needs to recharge
+	}
+
+	BladeOfAculeusCleave: {
+		DisplayName: Cleaved
+		Description: You're defense is worthless
+	}
+
+	BrokenScope: {
+		DisplayName: Broken Goggles
+		Description: You seem unable to mark enemies
+	}
+
+	CthulhuEnraged: {
+		DisplayName: Enraged
+		Description: Increased hymenoptra damage
+	}
+
+	Electrocuted: {
+		DisplayName: Electrocuted
+		Description: Zap!
+	}
+
+	Frostbroken: {
+		DisplayName: Frostbroken
+		Description: Brr!.. Part two!
+	}
+
+	Glacialstruck: {
+		DisplayName: Glacialstruck
+		Description: Brr!
+	}
+
+	HeartOfNectar: {
+		DisplayName: Heart of Nectar
+		Description: Majorly increased life regeneration
+	}
+
+	HoneyBeeBuff: {
+		DisplayName: The Honey Bee
+		Description: The honey bee will collect honey for you!
+	}
+
+	HoneyLaserCooldown: {
+		DisplayName: Honey Laser Cooldown
+		Description: The honeycomb needs time to cool down
+	}
+
+	HoneyManipulatorCooldown: {
+		DisplayName: Honey Manipulator Cooldown
+		Description: The Honey Manipulator needs to recharge
+	}
+
+	HoneyTeleportCooldown: {
+		DisplayName: Honey Teleportation Cooldown
+		Description: Your molecules need time to align
+	}
+
+	ImprovedHoney: {
+		DisplayName: Improved Honey
+		Description: Life regeneration increased substantially
+	}
+
+	ImprovedPoison: {
+		DisplayName: Toxin'd up
+		Description: Better find that antidote
+	}
+
+	LihzardianHornetRelicCooldown: {
+		DisplayName: Lihzardian Hornet Relic Cooldown
+		Description: The relic seems to no longer work.. for now
+	}
+
+	NectarGlazed: {
+		DisplayName: Nectarglazed
+		Description: Yum!
+	}
+
+	RottenDebuff: {
+		DisplayName: Rotten
+		Description: u smell gross
+	}
+
+	SkeletalCurse: {
+		DisplayName: Skeletal Curse
+		Description: You cannot feel your soul
+	}
+
+	SquireBuff: {
+		DisplayName: Bee Squire!
+		Description: The Bee Squire will protect you with his life!
+	}
+
+	TheQueensGuard: {
+		DisplayName: The Queen's Guard
+		Description: The Queen will protect you!
+	}
+
+	HiveBlessingBuff: {
+		DisplayName: Hive Blessing
+		Description: You are blessed by the Hive
+	}
+}
+
+Prefixes: {
+	Bittersweet.DisplayName: Bittersweet
+	Bland.DisplayName: Bland
+	Buzzing.DisplayName: Buzzing
+	Conserving.DisplayName: Conserving
+	Critical.DisplayName: Critical
+	Delectable.DisplayName: Delectable
+	Delicious.DisplayName: Delicious
+	Frugal.DisplayName: Frugal
+	Juicy.DisplayName: Juicy
+	Moldy.DisplayName: Moldy
+	Piquant.DisplayName: Piquant
+	Punchy.DisplayName: Punchy
+	Pungent.DisplayName: Pungent
+	Rotten.DisplayName: Rotten
+	Snaillike.DisplayName: Snail-like
+	Succulent.DisplayName: Succulent
+	Sweetened.DisplayName: Sweetened
+}
+
+Items: {
+	BandOfTheHive: {
+		DisplayName: Hive-Touched Band
+		Tooltip: Dealing a large amount of damage in a short amount of time causes your next hit to make a large honey explosion
+	}
+
+	BeeEmblem: {
+		DisplayName: Beekeeper Emblem
+		Tooltip: 15% increased hymenoptra damage
+	}
+
+	BeeSquireShield: {
+		DisplayName: Bee Squire Shield
+		Tooltip:
+			'''
+			'The most noble of bee squires shall protect you!'
+			Summons a bee squire that hovers near you, firing arrows at nearby enemies
+			'''
+	}
+
+	CopperBeeIdol: {
+		Tooltip:
+			'''
+			10% increased chance to not consume honey
+			'Clearly ancient civilizations didn't know what bees looked like'
+			'''
+		DisplayName: Copper Bee Idol
+	}
+
+	EnchantedApiary: {
+		Tooltip:
+			'''
+			'Its glistening!'
+			Drops enchanted honey droplets when damaged
+			'''
+		DisplayName: Enchanted Apiary
+	}
+
+	FrozenStinger: {
+		Tooltip:
+			'''
+			8% increased hymenoptra critical strike chance
+			Hymenoptra critical strikes inflict Frostbroken
+			Enemies inflicted with Frostbroken have their defense reduced by 35%, and shatter at low hp, damaging enemies around them
+			'''
+		DisplayName: Frozen Stinger
+	}
+
+	GlassOfHoney: {
+		Tooltip:
+			'''
+			10% increased hymenoptra damage
+			Increases maximum honey by 10
+			Greatly increases life regeneration
+			'''
+		DisplayName: Glass Of Honey
+	}
+
+	HellcombShard: {
+		Tooltip:
+			'''
+			Increases the chance to strengthen friendly bees by 40%
+			Strengthened bees have a chance to cause volatile explosions
+			'''
+		DisplayName: Hellcomb Shard
+	}
+
+	HemocombShard: {
+		Tooltip:
+			'''
+			Increases the chance to strengthen friendly bees by 30%
+			Strengthened bees have a chance to explode into healing meat chunks
+			'''
+		DisplayName: Hemocomb Shard
+	}
+
+	HemocombShardChunk1: {
+		DisplayName: Meat Chunk
+		Tooltip: You shouldn't see this...
+	}
+
+	HemocombShardChunk2: {
+		DisplayName: Meat Chunk
+		Tooltip: You shouldn't see this...
+	}
+
+	HemocombShardChunk3: {
+		DisplayName: Meat Chunk
+		Tooltip: You shouldn't see this...
+	}
+
+	HimensApiary: {
+		DisplayName: Himen's Apiary
+		Tooltip:
+			'''
+			'The apiary of one of the greatest hymenoptrian monster hunter's in history... he was said to be bested by a large plant-like creature'
+			Drops honey droplets when damaged
+			'''
+	}
+
+	HoneyBee: {
+		Tooltip:
+			'''
+			Summons a large Honeybee which will mimic your loyal bees
+			Increases maximum honey by 25
+			'''
+		DisplayName: Honey Bee
+	}
+
+	HoneycombShard: {
+		Tooltip:
+			'''
+			Increases the chance to strengthen friendly bees by 15%
+			'Crunchy!'
+			'''
+		DisplayName: Honeycomb Shard
+	}
+
+	HoneyedEmblem: {
+		DisplayName: Honeyed Emblem
+		Tooltip:
+			'''
+			12% increased hymenoptra damage
+			Increases maximum honey by 10
+			'''
+	}
+
+	HoneyedHeart: {
+		DisplayName: Heart Of Honey
+		Tooltip: 25% of Honey gained is instead granted as health
+	}
+
+	HoneyLocket: {
+		DisplayName: Honey Locket
+		Tooltip:
+			'''
+			'It seems to have a deep connection to the Hive'
+			Increases your amount of Loyal Bees by 3
+			'''
+	}
+
+	HoneyManipulator: {
+		Tooltip:
+			'''
+
+			TP
+			+20 max Honey
+			This effect has a cooldown of 90 seconds
+			You cannot regenerate honey for 5 seconds after activating the ability
+			'''
+		DisplayName: Honey Manipulator
+	}
+
+	HymenoptrianNecklace: {
+		Tooltip:
+			'''
+			Increases armor penetration by 5
+			Coats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes
+			Maximum health increased by 20
+			Releases bees, Cthulhubees, increases hymenoptra damage, movement speed, and douses the user in honey when damaged
+			'''
+		DisplayName: Hymenoptrian Necklace
+	}
+
+	JarOfHoney: {
+		DisplayName: Jar Of Honey
+		Tooltip:
+			'''
+			Increases hymenoptra damage by 6%
+			Increases maximum honey by 5
+			Increases life regeneration
+			'''
+	}
+
+	LihzardianHornetRelic: {
+		Tooltip:
+			'''
+			Increases movement speed and wing flight time by 35%
+			modifyTooltips
+			While channeled, your hymenoptra damage, attack speed, and crit chance are increased by 12%
+			You take 10% more damage and take damage-over-time while channeling
+			This effect has a 45 second cooldown
+			'''
+		DisplayName: Lihzardian Hornet Relic
+	}
+
+	Nectarlace: {
+		DisplayName: Nectarlace
+		Tooltip:
+			'''
+			Increases armor penetration by 5
+			Releases bees and douses the user in honey when damaged
+			Coats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes
+			Maximum health increased by 20
+			'''
+	}
+
+	NectarVial: {
+		Tooltip:
+			'''
+			Coats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes
+			Maximum health increased by 20
+			'Its a delicacy in most parts of the world'
+			'''
+		DisplayName: Nectar Vial
+	}
+
+	RetinaReleaser: {
+		DisplayName: Retina Releaser
+		Tooltip:
+			'''
+			'I think they're looking at you'
+			Taking damage releases a flurry of Cthulhubees and increases hymenoptra damage by 12% for a short time
+			'''
+	}
+
+	RottenHoneycombShard: {
+		Tooltip:
+			'''
+			Increases the chance to strengthen friendly bees by 20%
+			Strengthened bees apply a weakening debuff
+			'Smells horrible'
+			'''
+		DisplayName: Rotten Honeycomb Shard
+	}
+
+	TheQueensCharge: {
+		Tooltip:
+			'''
+			Double tap any direction to dash
+			Creates bees as you dash
+			'''
+		DisplayName: The Queens Charge
+	}
+
+	TinBeeIdol: {
+		Tooltip:
+			'''
+			4% increased hymenoptra damage and critical strike chance
+			'Clearly ancient civilizations didn't know what bees looked like'
+			'''
+		DisplayName: Tin Bee Idol
+	}
+
+	TriTipStinger: {
+		DisplayName: Tri-Tip Stinger
+		Tooltip:
+			'''
+			Grants a chance on hit for hymenoptra attacks to apply an improved poison
+			The improved poison deals a percentage of the inflicted enemies max hp, and spreads between enemies
+			'''
+	}
+
+	BeekeepersPants: {
+		Tooltip: 5% increased hymenoptra critical strike chance
+		DisplayName: Beekeeper's Pants
+	}
+
+	BeekeepersRobe: {
+		DisplayName: Beekeeper's Robe
+		Tooltip:
+			'''
+			5% increased hymenoptra damage
+			Loyal Bees increased by 1
+			'''
+	}
+
+	BeekeepersVeil: {
+		DisplayName: Beekeeper's Veil
+		Tooltip:
+			'''
+			5% increased hymenoptra critical strike chance
+			Increases maximum honey by 25
+			'''
+	}
+
+	BeeSniperArmor: {
+		Tooltip:
+			'''
+			25% increased chance to not consume honey
+			Loyal Bees increased by 3
+			'''
+		DisplayName: Bee Sniper Armor
+	}
+
+	BeeSniperGoggles: {
+		Tooltip:
+			'''
+			15% increased hymenoptra critical strike chance
+			Increases maximum honey by 60
+			'''
+		DisplayName: Bee Sniper Goggles
+	}
+
+	BeeSniperLeggings: {
+		Tooltip: 10% increased hymenoptra damage
+		DisplayName: Bee Sniper Leggings
+	}
+
+	HoneycombCrusaderGreaves: {
+		DisplayName: Honeycomb Crusader Greaves
+		Tooltip: 5% increased hymenoptra damage
+	}
+
+	HoneycombCrusaderHelmet: {
+		Tooltip:
+			'''
+			5% increased hymenoptra critical strike chance
+			Maximum honey increased by 75
+			'''
+		DisplayName: Honeycomb Crusader Helmet
+	}
+
+	HoneycombCrusaderPlatemail: {
+		DisplayName: Honeycomb Crusader Platemail
+		Tooltip:
+			'''
+			30% increased chance to not consume honey
+			Loyal Bees increased by 4
+			'''
+	}
+
+	HoneyphyteChestpiece: {
+		Tooltip:
+			'''
+			30% increased chance to not consume honey
+			Loyal Bees increased by 5
+			'''
+		DisplayName: Honeyphyte Chestpiece
+	}
+
+	HoneyphyteGreaves: {
+		DisplayName: Honey Hoarder Leggings
+		Tooltip: 5% increased hymenoptra damage
+	}
+
+	HoneyphyteHeadgear: {
+		DisplayName: Honey Hoarder Hood
+		Tooltip: Increases maximum honey by 100
+	}
+
+	HoneyphyteMask: {
+		Tooltip:
+			'''
+			10% increased hymenoptra damage and critical strike chance
+			Increases maximum honey by 75
+			'''
+		DisplayName: Honeyphyte Mask
+	}
+
+	LivingFlowerChestplate: {
+		DisplayName: Living Flower Chestplate
+		Tooltip: 4% increased hymenoptra damage
+	}
+
+	LivingFlowerCrown: {
+		DisplayName: Living Flower Crown
+		Tooltip:
+			'''
+			3% increased hymenoptra critical strike chance
+			Increases maximum honey by 15
+			'''
+	}
+
+	LivingFlowerLeggings: {
+		Tooltip: 3% increased hymenoptra critical strike chance
+		DisplayName: Living Flower Leggings
+	}
+
+	SkeletalBeeChestplate: {
+		Tooltip:
+			'''
+			Reduces damage taken by 10%
+			Loyal Bees increased by 2
+			'''
+		DisplayName: Skeletal Bee Chestplate
+	}
+
+	SkeletalBeeHelmet: {
+		Tooltip:
+			'''
+			10% increased hymenoptra critical strike chance
+			Increases maximum honey by 50
+			'''
+		DisplayName: Skeletal Bee Helmet
+	}
+
+	SkeletalBeeLeggings: {
+		Tooltip: 10% increased hymenoptra damage
+		DisplayName: Skeletal Bee Leggings
+	}
+
+	WaspBreastplate: {
+		Tooltip:
+			'''
+			6% increased hymenoptra damage and critical strike chance
+			Increases your amount of Loyal Bees by 1
+			'''
+		DisplayName: Wasp Breastplate
+	}
+
+	WaspGreaves: {
+		Tooltip: 15% increased movement speed
+		DisplayName: Wasp Greaves
+	}
+
+	WaspHead: {
+		Tooltip:
+			'''
+			20% increased wing flight time and increased jump speed
+			Increases maximum honey by 35
+			'''
+		DisplayName: Wasp Head
+	}
+
+	RoyalJelly: {
+		Tooltip:
+			'''
+			Permanently increases maximum honey by 25
+			'A delicacy that's highly sought after for its refined taste and healing properties'
+			'''
+		DisplayName: Royal Jelly
+	}
+
+	PhotonFragment: {
+		DisplayName: Photonic Particle
+		Tooltip: "'An incessant buzzing sound can be heard coming from this particle'"
+	}
+
+	Pollen: {
+		DisplayName: Pollen
+		Tooltip: "'Careful if you're allergic'"
+	}
+
+	AstralStarPickup: {
+		DisplayName: Astral Star
+		Tooltip: you shouldn't see this....
+	}
+
+	HoneycombChunkPickup: {
+		DisplayName: Honeycomb Chunk
+		Tooltip: you shouldn't see this....
+	}
+
+	Honeycomb: {
+		Tooltip:
+			'''
+			Fires a burst of three bees before throwing the empty honeycomb
+			'Dude this honeycomb only has like three bees in it'
+			'''
+		DisplayName: Honeycomb
+	}
+
+	HoneyPickup: {
+		DisplayName: Enchanted Honey
+		Tooltip: you shouldn't see this....
+	}
+
+	HoneyPickup2: {
+		DisplayName: Honey Droplet
+		Tooltip: you shouldn't see this....
+	}
+
+	Ambrosia: {
+		DisplayName: Ambrosial Throw
+		Tooltip:
+			'''
+			Throws a yoyo of pure nectar
+			Causes nectar explosions on hit, healing the user
+			'''
+	}
+
+	BeeBubbleBlaster: {
+		DisplayName: Beenopopper
+		Tooltip: "'Aliens really like bubbles... that shoot bullets'"
+	}
+
+	BeeFinTuna: {
+		DisplayName: Bee-Fin Tuna
+		Tooltip:
+			'''
+			Spews a spread of honey bubbles which burst into bees
+			'The meat is said to be incredibly sweet and tender'
+			'''
+	}
+
+	BeeInyGun: {
+		DisplayName: Beenigun
+		Tooltip: "'It costs four hundred thousand bottles of honey to fire this weapon... for twelve seconds'"
+	}
+
+	Beemerang: {
+		Tooltip:
+			'''
+			Hold <left> to charge up a returning beemerang
+			The beemerang has increased knockback, velocity, damage, and amount of bees spawned on hit depending on charge
+			'''
+		DisplayName: Beemerang
+	}
+
+	Beemstick: {
+		Tooltip:
+			'''
+			Blasts a spread of bee buckshot and bees
+			'This... is my BEEMSTICK'
+			'''
+		DisplayName: Beemstick
+	}
+
+	BeenadeLauncher: {
+		Tooltip:
+			'''
+			Fires bouncing pipebeeoms full of bees
+			'Oh they're goin to hav' to glue you back togetha'
+			'IN HELL'
+			'''
+		DisplayName: Beenade Launcher
+	}
+
+	BeeZooka: {
+		Tooltip:
+			'''
+			Fires a burst of homing bee-rockets, which explode into mini-missiles
+			Mini-missiles target the closest enemy to the mouse cursor, and explode into shrapnel
+			'If God had wanted you to live, he would not have created me!'
+			'''
+		DisplayName: Beezooka
+	}
+
+	BladeOfAculeus: {
+		DisplayName: Blade of Aculeus
+		Tooltip:
+			'''
+			Performs hefty strikes, flinging piercing stingers with deadly force
+			Melee strikes cleave the armor of enemies
+			'''
+	}
+
+	BrainyHoneycomb: {
+		Tooltip:
+			'''
+			Fires genius bees that inflict Confused and stacks of Cerebral Disorientation
+			Each stack of Cerebral Disorientation causes the target to deal 5% less damage and take 5 damage over time, up to a maxmium of 5 stacks
+			'The IQ of this honeycomb is off the charts'
+			'''
+		DisplayName: Brainy Honeycomb
+	}
+
+	ChlorophyteHoneycomb: {
+		DisplayName: Chloro-comb
+		Tooltip:
+			'''
+			Throws a fragile honeycomb which shatters into homing fragments, chloro-spores, and chloro-bees
+			Chloro-bees materialize into chloro-energy upon death
+			'''
+	}
+
+	CursedHoneycomb: {
+		Tooltip:
+			'''
+			Hold <left> to control a cursed honeycomb
+			The cursed honeycomb spits out cursed teeth and eyes
+			Teeth stick to enemies, dealing stacking damage-over-time, and eyes home in on enemies
+			Spawns cursed bees on hit
+			'''
+		DisplayName: Cursed Honeycomb
+	}
+
+	CystComb: {
+		DisplayName: Cystcomb
+		Tooltip:
+			'''
+			Throws a returning honeycomb infested with tumors
+			Hitting enemies causes an explosion of ichor
+			'A honeycomb overgrown by cysts.. gross'
+			'''
+	}
+
+	EaterOfHoneycombs: {
+		Tooltip:
+			'''
+			Fires corrupted bees and mini eaters, before being thrown and seeking out targets
+			'It looks... alive?'
+			'''
+		DisplayName: Eater Of Honeycombs
+	}
+
+	ElectricHoneycomb: {
+		Tooltip: Throws an electric-charged honeycomb, electrifying all that come near and exploding into zapbees
+		DisplayName: Electric Honeycomb
+	}
+
+	FrostedHoneycomb: {
+		Tooltip:
+			'''
+			Throws a freezing honeycomb which shatters into multiple ice shards
+			Inflicts Glacialstruck
+			Critically striking an enemy which is Glacialstruck causes them to explode into a burst of bees
+			'''
+		DisplayName: Frosted Honeycomb
+	}
+
+	GelatinousHoneycomb: {
+		Tooltip:
+			'''
+			Fires royal bees which cause bouncy slimeballs to rain from the sky
+			Fires a volatile ruby every few shots
+			'A honeycomb fit for a king'
+			'''
+		DisplayName: Gelatinous Honeycomb
+	}
+
+	HellfireBeemstick: {
+		Tooltip:
+			'''
+			Blasts a hellish spread of bee buckshot and bees, inflicting Hellfire
+			Press <right> to fire a hellfire slug, exploding on contact
+			'''
+		DisplayName: Hellfire Beemstick
+	}
+
+	HoneycombOfTheGalaxies: {
+		DisplayName: Honeycomb Of The Cosmos
+		Tooltip:
+			'''
+			'An almighty honeycomb, said to be born at the center of the Cosmos'
+			Hold left click to channel a honeycomb radiating with universal energy
+			The honeycomb charges up, weakening the fabric of the Cosmos
+			Upon releasing the mouse button, the honeycomb will be channeled back to the owner
+			This action breaks the fabric of the cosmos, releasing powerful energies and galactic bees
+			'''
+	}
+
+	HoneyFlareCannon: {
+		Tooltip: Rapidly fires honey flares
+		DisplayName: Honey Flare Cannon
+	}
+
+	HoneyFlareGun: {
+		Tooltip:
+			'''
+			Fires honey flares which stick into enemies and explode into homing honey and honey clouds
+			The honey clouds grant the user the Honey Buff when they are in the cloud
+			'''
+		DisplayName: Honey Flare Gun
+	}
+
+	HoneyGun: {
+		DisplayName: Honey Gun
+		Tooltip: Fires a high velocity stream of honey
+	}
+
+	HoneyShot: {
+		DisplayName: Honeyshot
+		Tooltip: Fires a volley of honey arrows
+	}
+
+	HymenoptraFlasks: {
+		Tooltip:
+			'''
+			Throws a variety of bee related flasks
+			'Might wanna wear some goggles'
+			'''
+		DisplayName: Hymenoptra Flasks
+	}
+
+	HymenoptraHandcannon: {
+		Tooltip:
+			'''
+			Fires a burst of 6 bee bullets
+			'Fear the swarm!'
+			'''
+		DisplayName: Hymenoptra Handcannon
+	}
+
+	LaserbeemBlaster: {
+		Tooltip:
+			'''
+			Fires pure concentrations of bouncing honey energy, which ricochet between enemies
+			Spawns bees of pure honey energy on bounce
+			'''
+		DisplayName: Laserbeem Blaster
+	}
+
+	ManaInfusedHoneycomb: {
+		Tooltip:
+			'''
+			Hold <left> to charge up a burst of mana infused bees
+			Mana bees spawn homing mana stars on hit
+			'''
+		DisplayName: Mana Infused Honeycomb
+	}
+
+	MegaHornet: {
+		DisplayName: Megahornet
+		Tooltip:
+			'''
+			Charges up the longer you fire, dealing increased damage
+			'Minihornet's older sister'
+			'''
+	}
+
+	MetalPlatedHoneycomb: {
+		Tooltip:
+			'''
+			Hold <left> to channel the power of Honeycomb Prime
+			'Initializing proj.Ubersaw'
+			'Initializing proj.MetalBee'
+			'Initializing proj.DeathLaser'
+			'Compiling Honeycomb Prime'
+			'''
+		DisplayName: Metal Plated Honeycomb
+	}
+
+	MiniHornet: {
+		DisplayName: Minihornet
+		Tooltip: "'Half hornet, half gun, completely awesome.'"
+	}
+
+	NectarBolt: {
+		Tooltip:
+			'''
+			Casts a bolt of glistening nectar, which bounces off of tiles
+			Spawns homing nectar on bounce, which have slight lifesteal
+			'''
+		DisplayName: Nectar Bolt
+	}
+
+	NectarSlasher: {
+		DisplayName: Nectar Slasher
+		Tooltip:
+			'''
+			Performs a three piece combo of swift strikes and throws
+			Slashes through enemies on hit
+			Replenishes life on hit
+			'''
+	}
+
+	Nectarthrower: {
+		Tooltip:
+			'''
+			Blasts out molten nectar, encasing enemies in a glaze of nectar
+			Enemies who are glazed send out healing bolts when struck
+			'''
+		DisplayName: Nectarthrower
+	}
+
+	Needleshot: {
+		Tooltip: Fires a burst of high velocity stingers and hivebombs
+		DisplayName: Needleshot
+	}
+
+	OcularRemote: {
+		Tooltip:
+			'''
+			Calls upon the Retinacomb and Spazacomb to temporarily fight for you
+			Only one pair of twins can be alive at once
+			Each twin reserves 35 Honey while alive
+			<right> while holding the remote to self destruct them, with a cooldown
+			'Good thing the Twins don't hold a grudge'
+			'''
+		DisplayName: Ocular Remote
+	}
+
+	ProbeyComb: {
+		Tooltip:
+			'''
+			Hold <left> to charge up a burst of Probees
+			Probees fire deadly lasers at enemies
+			'''
+		DisplayName: Probeecomb
+	}
+
+	PumpkinetScepter: {
+		Tooltip: Conjures a pumpkinet to attack enemies near the mouse cursor
+		DisplayName: Pumpkinet Scepter
+	}
+
+	Skelecomb: {
+		Tooltip:
+			'''
+			Conjures skeletal bees which slash enemies
+			Press <right> to fire a cursed skull, cursing enemies, causing them to take 15% more damage from all sources
+			'''
+		DisplayName: Skelecomb
+	}
+
+	SpectralBeeTome: {
+		Tooltip: "'The souls of forgotten bees seek vengeance'"
+		DisplayName: Spectral Bee Tome
+	}
+
+	StoneHoneycomb: {
+		DisplayName: Petrified Honeycomb
+		Tooltip:
+			'''
+			Throws a heavy petrified honeycomb
+			The honeycomb always critically strikes when falling with enough velocity
+			'Rocks... bees... what could go wrong?'
+			'''
+	}
+
+	SyrupSickle: {
+		DisplayName: Nectar Sickle
+		Tooltip:
+			'''
+			Conjures a sickle of shimmering nectar in front of the user
+			Critically striking an enemy causes you to have majorly increased life regeneration for a short time
+			'''
+	}
+
+	TESTWEAPON: {
+		DisplayName: Test Honeycomb
+		Tooltip: TEST DONT USE
+	}
+
+	TheBeeBlade: {
+		Tooltip:
+			'''
+			'A near perfect blade, radiating the energy of the Hive'
+			Creates a large slash of honey on swing
+			Striking an enemie spawns a flurry of stingers behind the player
+			'''
+		DisplayName: The Bee Blade
+	}
+
+	ThePeeperPoker: {
+		Tooltip:
+			'''
+			Rapidly spins an eyeball infested javelin around the player
+			Release the mouse button to throw the javelin
+			The javelin travels faster, does more damage, and pierces more the longer you spin the javelin
+			Spawns Cthulubees whilst spinning the javelin, and whilst the javelin is travelling
+			'''
+		DisplayName: The Peeper Poker
+	}
+
+	TheQueensLarvae: {
+		Tooltip:
+			'''
+			Drains your honey on use
+			Reserves 65% of your honey while alive
+			'Once a royal queen, now your royal guard'
+			'''
+		DisplayName: The Queens Larvae
+	}
+
+	TheStarStrap: {
+		Tooltip:
+			'''
+			'Stay strapped.'
+			Fires a burst of star bees, which spawn stars from the heavens on hit
+			'''
+		DisplayName: The Star Strap
+	}
+
+	TheStarSwarmer: {
+		Tooltip:
+			'''
+			Rapidly fires star bees
+			Press <right> to fire a splitting star
+			Picking up the star replenishes honey and grants the user a buff to their damage and attack speed
+			'''
+		DisplayName: The Star Swarmer
+	}
+
+	TheSting: {
+		Tooltip:
+			'''
+			'This one is gonna sting'
+			Conjures a miniature Queen Bee that attacks the mouse cursor
+			She cycles through 3 attacks:
+			Circling the cursor and firing stingers
+			Dashing at the cursor
+			Staying above the cursor and spawning bees
+			Uses 2 honey for every seconds that she is alive
+			'''
+		DisplayName: The Sting
+	}
+
+	TheStingerSlinger: {
+		Tooltip:
+			'''
+			Throws a yoyo that shoots stingers at enemies
+			Periodically fires out a burst of homing stingers
+			'''
+		DisplayName: The Stinger Slinger
+	}
+
+	TheTraitorsSaxophone: {
+		DisplayName: The Traitor's Saxophone
+		Tooltip: "'Ya like jazz?'"
+	}
+
+	TheWaspNest: {
+		Tooltip:
+			'''
+			Throws a wasps nest that spawns wasps while it is in the air
+			Uses 1 honey everytime a wasp is spawned
+			'''
+		DisplayName: The Wasp Nest
+	}
+
+	TomeOfTheSun: {
+		Tooltip: Creates a pulse of vibrant nectar energy at the mouse cursor, which splits into homing bolts
+		DisplayName: Tome Of The Sun
+	}
+
+	TrueNectarSlasher: {
+		DisplayName: True Nectar Slasher
+		Tooltip:
+			'''
+			Performs a five piece combo of light and heavy swings, and throws
+			Slashes through enemies on hit
+			Replenishes life on hit
+			'''
+	}
+
+	Wasparang: {
+		Tooltip:
+			'''
+			Press <right> to charge up a returning wasparang
+			Release to throw the wasparang, spawning wasps whilst travelling, and creating homing stingers on hit
+			'''
+		DisplayName: Wasparang
+	}
+
+	TrueStingerScimitar: {
+		DisplayName: True Stinger Scimitar
+		Tooltip: ""
+	}
+}
+
+NPCs: {
+	TheTraitorBee: {
+		DisplayName: Traitor Bee
+
+		TownNPCMood: {
+			Content: I am content.
+			NoHome: I hate not having a home.
+			FarFromHome: I am too far from home.
+			LoveSpace: I love having so much space.
+			DislikeCrowded: I dislike how crowded I am.
+			HateCrowded: I hate how crowded I am.
+			LoveBiome: I love {BiomeName}.
+			LikeBiome: I like {BiomeName}.
+			DislikeBiome: I dislike {BiomeName}.
+			HateBiome: I hate {BiomeName}.
+			LoveNPC: I love {NPCName}.
+			LikeNPC: I like {NPCName}.
+			DislikeNPC: I dislike {NPCName}.
+			HateNPC: I hate {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+	}
+}
+
+Configs: {
+	BombusConfig: {
+		DisplayName: Bombus Config
+
+		yOffset: {
+			Label: Honey Player UI Y-Offset
+			Tooltip: ""
+		}
+
+		DrawLegacyUI: {
+			Label: Draw Legacy Honey Resource UI (Outdated)
+			Tooltip: ""
+		}
+
+		DragUI: {
+			Label: Drag Honey Resource UI
+			Tooltip: ""
+		}
+
+		ResourceOffX: {
+			Label: Used for the dragging properties of the Resource UI. Should not be changed manually, reset this and the Y Offset to 0 to use default posiiton.
+			Tooltip: ""
+		}
+
+		ResourceOffY: {
+			Label: Used for the dragging properties of the Resource UI. Should not be changed manually, reset this and the X Offset 0 to use default posiiton.
+			Tooltip: ""
+		}
+	}
+}
