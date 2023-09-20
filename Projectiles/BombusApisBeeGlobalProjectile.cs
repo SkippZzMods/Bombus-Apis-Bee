@@ -14,6 +14,8 @@ namespace BombusApisBee.Projectiles
         {
             StrongBeeKillEvent = null;
             StrongBeeOnHitEvent = null;
+            StrongBeePreDrawEvent = null;
+            StrongBeePostDrawEvent = null;
         }
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
@@ -126,6 +128,22 @@ namespace BombusApisBee.Projectiles
             bool giantModdedBee = (projectile.ModProjectile as BaseBeeProjectile) != null && (projectile.ModProjectile as BaseBeeProjectile).Giant;
             if (giantBee || giantModdedBee)
                 StrongBeeOnHitEvent?.Invoke(projectile, target, hit, damageDone);
+        }
+
+        public delegate void StrongBeePostDraw(Projectile proj, Color lightColor);
+        public static event StrongBeePostDraw StrongBeePostDrawEvent;
+        public override void PostDraw(Projectile projectile, Color lightColor)
+        {
+            StrongBeePostDrawEvent?.Invoke(projectile, lightColor);
+        }
+
+        public delegate void StrongBeePreDraw(Projectile proj, ref Color lightColor);
+        public static event StrongBeePreDraw StrongBeePreDrawEvent;
+        public override bool PreDraw(Projectile projectile, ref Color lightColor)
+        {
+            StrongBeePreDrawEvent?.Invoke(projectile, ref lightColor);
+
+            return base.PreDraw(projectile, ref lightColor);
         }
     }
 }
