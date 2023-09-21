@@ -134,14 +134,20 @@ namespace BombusApisBee.Projectiles
         public static event StrongBeePostDraw StrongBeePostDrawEvent;
         public override void PostDraw(Projectile projectile, Color lightColor)
         {
-            StrongBeePostDrawEvent?.Invoke(projectile, lightColor);
+            bool giantBee = projectile.type == ProjectileID.GiantBee;
+            bool giantModdedBee = (projectile.ModProjectile as BaseBeeProjectile) != null && (projectile.ModProjectile as BaseBeeProjectile).Giant;
+            if (giantBee || giantModdedBee)
+                StrongBeePostDrawEvent?.Invoke(projectile, lightColor);
         }
 
         public delegate void StrongBeePreDraw(Projectile proj, ref Color lightColor);
         public static event StrongBeePreDraw StrongBeePreDrawEvent;
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
-            StrongBeePreDrawEvent?.Invoke(projectile, ref lightColor);
+            bool giantBee = projectile.type == ProjectileID.GiantBee;
+            bool giantModdedBee = (projectile.ModProjectile as BaseBeeProjectile) != null && (projectile.ModProjectile as BaseBeeProjectile).Giant;
+            if (giantBee || giantModdedBee)
+                StrongBeePreDrawEvent?.Invoke(projectile, ref lightColor);
 
             return base.PreDraw(projectile, ref lightColor);
         }
