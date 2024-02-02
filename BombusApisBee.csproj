@@ -8,6 +8,9 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Core\PixellationSystem\README.txt" />
+    <None Remove="Effects\EasyCompile\PixelShader.fx" />
+    <None Remove="Effects\PaletteCorrection.fx" />
     <None Remove="Items\Accessories\BeeKeeperDamageClass\CatacombShard.png" />
     <None Remove="Projectiles\AculeusBladeStinger.png" />
   </ItemGroup>
@@ -16,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bosses\HoneyConglomerate\" />
+    <Folder Include="ExtraTextures\Palettes\" />
     <Folder Include="Localization\" />
   </ItemGroup>
 </Project>

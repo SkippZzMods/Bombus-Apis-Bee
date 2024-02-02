@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.PixellationSystem;
+using Terraria;
 namespace BombusApisBee.Projectiles
 {
     public class HellfireBeeBuckshot : BeeProjectile, IDrawPrimitive_
@@ -150,16 +151,16 @@ namespace BombusApisBee.Projectiles
                 color = Color.Lerp(new Color(250, 150, 30), Color.Black, dust.alpha / 255f);
 
             Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SmokeTransparent_" + dust.customData).Value;
+            ModContent.GetInstance<PixellateSystem>().QueueRenderAction("Projectiles", () =>
+            {
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
 
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation, tex.Size() / 2f, dust.scale, 0f, 0f);
 
-            Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation, tex.Size() / 2f, dust.scale, 0f, 0f);
+                Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation + MathHelper.PiOver2, tex.Size() / 2f, dust.scale, 0f, 0f);
 
-            Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation + MathHelper.PiOver2, tex.Size() / 2f, dust.scale, 0f, 0f);
-
-            Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.End();
+            });
 
             return false;
         }
@@ -410,26 +411,26 @@ namespace BombusApisBee.Projectiles
 
         public void DrawPrimitives()
         {
-            Main.spriteBatch.End();
-            Effect effect = Filters.Scene["SLRCeirosRing"].GetShader().Shader;
+            ModContent.GetInstance<PixellateSystem>().QueueRenderAction("Projectiles", () =>
+            {
+                Effect effect = Filters.Scene["SLRCeirosRing"].GetShader().Shader;
 
-            Matrix world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
-            Matrix view = Main.GameViewMatrix.ZoomMatrix;
-            Matrix projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
+                Matrix world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
+                Matrix view = Main.GameViewMatrix.ZoomMatrix;
+                Matrix projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
-            effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-            effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
-            effect.Parameters["repeats"].SetValue(5f);
-            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
+                effect.Parameters["transformMatrix"].SetValue(world * view * projection);
+                effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
+                effect.Parameters["repeats"].SetValue(5f);
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/FireTrail").Value);
 
-            trail?.Render(effect);
-            trail2?.Render(effect);
+                trail?.Render(effect);
+                trail2?.Render(effect);
 
-            effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
+                effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
 
-            trail2?.Render(effect);
-
-            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+                trail2?.Render(effect);
+            });
         }
     }
 }

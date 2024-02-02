@@ -21,6 +21,7 @@ global using Terraria.Graphics.Effects;
 global using Terraria.ID;
 global using Terraria.ModLoader;
 global using static Terraria.ModLoader.ModContent;
+using BombusApisBee.Core.PixellationSystem;
 using BombusApisBee.UI;
 using ReLogic.Content;
 using System.Reflection;
@@ -35,6 +36,7 @@ namespace BombusApisBee
         public static readonly SoundStyle HoneycombWeapon = SoundID.NPCDeath1 with { Pitch = -0.2f, PitchVariance = 0.2f };
         public static string BeeWeapon = "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/";
         public static string Invisible = "BombusApisBee/ExtraTextures/Invisible";
+        public static string Palettes = "BombusApisBee/ExtraTextures/Palettes/";
 
         public static ModKeybind HoneyManipulatorHotkey;
         public static ModKeybind LihzardianRelicHotkey;
@@ -58,6 +60,12 @@ namespace BombusApisBee
             MethodInfo UIProgress_set_SubProgressText = typeof(Mod).Assembly.GetType("Terraria.ModLoader.UI.UIProgress")!.GetProperty("SubProgressText", BindingFlags.Public | BindingFlags.Instance)!.GetSetMethod()!;
 
             UIProgress_set_SubProgressText.Invoke(Interface_loadMods.GetValue(null), new object[] { text });
+        }
+
+        public override void PostSetupContent()
+        {
+            ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Projectiles");
+            ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Dusts", RenderType.Dust);
         }
 
         public override void Load()
