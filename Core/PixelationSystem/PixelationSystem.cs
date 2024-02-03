@@ -219,7 +219,7 @@ namespace BombusApisBee.Core.PixelationSystem
             PixelationTarget target =  pixelationTargets.Find(t => t.id == id);
 
             target.pixelationDrawActions.Add(renderAction);
-            target.renderTimer = 20;
+            target.renderTimer = 2;
         }
     }
 
