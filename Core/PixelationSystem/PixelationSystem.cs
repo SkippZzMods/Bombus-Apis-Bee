@@ -58,7 +58,7 @@ namespace BombusApisBee.Core.PixelationSystem
                     sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
                         DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
 
-                    sb.Draw(target.pixelationTarget.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
+                    sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
 
                     sb.End();
                     sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
@@ -96,7 +96,7 @@ namespace BombusApisBee.Core.PixelationSystem
             PixelationTarget target =  pixelationTargets.Find(t => t.id == id);
 
             target.pixelationDrawActions.Add(renderAction);
-            target.renderTimer = 2;
+            target.renderTimer = 20;
         }
     }
 
@@ -110,6 +110,8 @@ namespace BombusApisBee.Core.PixelationSystem
 
         public ScreenTarget pixelationTarget;
 
+        public ScreenTarget pixelationTarget2;
+
         public PixelPalette palette;
 
         public RenderType renderType;
@@ -120,7 +122,8 @@ namespace BombusApisBee.Core.PixelationSystem
         {
             pixelationDrawActions = new List<Action>();
 
-            pixelationTarget = new(DrawPixelTarget, () => Active, 1, Resize);
+            pixelationTarget = new(DrawPixelTarget, () => Active, 1f);
+            pixelationTarget2 = new(DrawPixelTarget, () => Active, 1.1f);
 
             this.palette = palette;
 
@@ -132,6 +135,19 @@ namespace BombusApisBee.Core.PixelationSystem
         private Vector2? Resize(Vector2 obj)
         {
             return new Vector2(obj.X / 2, obj.Y / 2);
+        }
+
+        private void DrawPixelTarget2(SpriteBatch sb)
+        {
+            Main.graphics.GraphicsDevice.Clear(Color.Transparent);
+
+            sb.End();
+            sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, null, Main.GameViewMatrix.EffectMatrix);
+
+            sb.Draw(pixelationTarget.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
+            sb.End();
+            sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
 
         private void DrawPixelTarget(SpriteBatch sb)
@@ -151,7 +167,13 @@ namespace BombusApisBee.Core.PixelationSystem
 
             sb.End();
             sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-
         }
+    }
+
+    public enum RenderType : int
+    {
+        Projectile = 0,
+        Dust = 1,
+        NPC = 2,
     }
 }

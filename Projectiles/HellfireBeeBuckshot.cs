@@ -1,6 +1,4 @@
 ﻿using BombusApisBee.Core.PixelationSystem;
-using BombusApisBee.Core.PixellationSystem;
-using Terraria;
 namespace BombusApisBee.Projectiles
 {
     public class HellfireBeeBuckshot : BeeProjectile, IDrawPrimitive_
@@ -433,6 +431,8 @@ namespace BombusApisBee.Projectiles
                 effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
 
                 trail2?.Render(effect);
+
+                //Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(0, 0, Main.screenWidth / 2, Main.screenHeight / 2), Color.White);
             });
         }
     }
