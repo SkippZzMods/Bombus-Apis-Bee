@@ -23,6 +23,11 @@ namespace BombusApisBee.Projectiles
             Projectile.localNPCHitCooldown = 100;
         }
 
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            base.DrawBehind(index, behindNPCsAndTiles, behindNPCs, behindProjectiles, overPlayers, overWiresUI);
+        }
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Hellfire Bee Buckshot");
@@ -150,7 +155,7 @@ namespace BombusApisBee.Projectiles
                 color = Color.Lerp(new Color(250, 150, 30), Color.Black, dust.alpha / 255f);
 
             Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SmokeTransparent_" + dust.customData).Value;
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("Projectiles", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
             {
                 Main.spriteBatch.End();
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
@@ -412,7 +417,7 @@ namespace BombusApisBee.Projectiles
 
         public void DrawPrimitives()
         {
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("Projectiles", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
             {
                 Effect effect = Filters.Scene["SLRCeirosRing"].GetShader().Shader;
 
