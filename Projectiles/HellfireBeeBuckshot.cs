@@ -1,4 +1,5 @@
-﻿using BombusApisBee.Core.PixellationSystem;
+﻿using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.PixellationSystem;
 using Terraria;
 namespace BombusApisBee.Projectiles
 {
@@ -151,8 +152,9 @@ namespace BombusApisBee.Projectiles
                 color = Color.Lerp(new Color(250, 150, 30), Color.Black, dust.alpha / 255f);
 
             Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SmokeTransparent_" + dust.customData).Value;
-            ModContent.GetInstance<PixellateSystem>().QueueRenderAction("Projectiles", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("Projectiles", () =>
             {
+                Main.spriteBatch.End();
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
 
                 Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation, tex.Size() / 2f, dust.scale, 0f, 0f);
@@ -160,6 +162,7 @@ namespace BombusApisBee.Projectiles
                 Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation + MathHelper.PiOver2, tex.Size() / 2f, dust.scale, 0f, 0f);
 
                 Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             });
 
             return false;
@@ -411,7 +414,7 @@ namespace BombusApisBee.Projectiles
 
         public void DrawPrimitives()
         {
-            ModContent.GetInstance<PixellateSystem>().QueueRenderAction("Projectiles", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("Projectiles", () =>
             {
                 Effect effect = Filters.Scene["SLRCeirosRing"].GetShader().Shader;
 

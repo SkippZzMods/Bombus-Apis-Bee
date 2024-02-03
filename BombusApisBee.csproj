@@ -8,7 +8,7 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Core\PixellationSystem\README.txt" />
+    <None Remove="Core\PixelationSystem\README.txt" />
     <None Remove="Effects\EasyCompile\PixelShader.fx" />
     <None Remove="Effects\PaletteCorrection.fx" />
     <None Remove="Items\Accessories\BeeKeeperDamageClass\CatacombShard.png" />

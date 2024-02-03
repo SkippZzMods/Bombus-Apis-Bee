@@ -21,6 +21,7 @@ global using Terraria.Graphics.Effects;
 global using Terraria.ID;
 global using Terraria.ModLoader;
 global using static Terraria.ModLoader.ModContent;
+using BombusApisBee.Core.PixelationSystem;
 using BombusApisBee.Core.PixellationSystem;
 using BombusApisBee.UI;
 using ReLogic.Content;
@@ -64,8 +65,10 @@ namespace BombusApisBee
 
         public override void PostSetupContent()
         {
-            ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Projectiles");
-            ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Dusts", RenderType.Dust);
+            //ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Projectiles");
+            //ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Dusts", RenderType.Dust);
+
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("Projectiles");
         }
 
         public override void Load()
