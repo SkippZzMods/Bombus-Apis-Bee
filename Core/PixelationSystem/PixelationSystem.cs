@@ -29,6 +29,8 @@ namespace BombusApisBee.Core.PixelationSystem
                 return;
 
             On_Main.DrawNPCs -= DrawNPCTargets;
+            On_Main.DrawProjectiles -= DrawProjectileTargets;
+            On_Main.DrawPlayers_AfterProjectiles -= DrawPlayerTargets;
         }
 
         private void DrawPlayerTargets(On_Main.orig_DrawPlayers_AfterProjectiles orig, Main self)
