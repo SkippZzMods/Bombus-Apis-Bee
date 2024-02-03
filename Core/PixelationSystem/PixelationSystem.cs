@@ -1,5 +1,4 @@
 ﻿using BombusApisBee.Core.PixellateSystem;
-using BombusApisBee.Core.PixellationSystem;
 using BombusApisBee.Core.ScreenTargetSystem;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -123,7 +122,7 @@ namespace BombusApisBee.Core.PixelationSystem
             pixelationDrawActions = new List<Action>();
 
             pixelationTarget = new(DrawPixelTarget, () => Active, 1f);
-            pixelationTarget2 = new(DrawPixelTarget, () => Active, 1.1f);
+            pixelationTarget2 = new(DrawPixelTarget2, () => Active, 1.1f);
 
             this.palette = palette;
 
