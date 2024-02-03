@@ -19,8 +19,10 @@ namespace BombusApisBee.Core.PixelationSystem
                 return;
 
             On_Main.DrawNPCs += DrawNPCTargets;
-            On_Main.DrawProjectiles += DrawProjectileTargets;
+            On_Main.DrawSuperSpecialProjectiles += DrawUnderProjectileTargets;
+            //On_Main.DrawProjectiles += DrawUnderProjectileTargets;
             On_Main.DrawPlayers_AfterProjectiles += DrawPlayerTargets;
+            On_Main.DrawCachedProjs += DrawOverProjectileTargets;
         }
 
         public override void Unload()
@@ -29,8 +31,10 @@ namespace BombusApisBee.Core.PixelationSystem
                 return;
 
             On_Main.DrawNPCs -= DrawNPCTargets;
-            On_Main.DrawProjectiles -= DrawProjectileTargets;
+            //On_Main.DrawProjectiles -= DrawUnderProjectileTargets;
             On_Main.DrawPlayers_AfterProjectiles -= DrawPlayerTargets;
+            On_Main.DrawCachedProjs -= DrawOverProjectileTargets;
+            On_Main.DrawSuperSpecialProjectiles -= DrawUnderProjectileTargets;
         }
 
         private void DrawPlayerTargets(On_Main.orig_DrawPlayers_AfterProjectiles orig, Main self)
@@ -85,7 +89,77 @@ namespace BombusApisBee.Core.PixelationSystem
             }
         }
 
-        private void DrawProjectileTargets(On_Main.orig_DrawProjectiles orig, Main self)
+        private void DrawUnderProjectileTargets(On_Main.orig_DrawSuperSpecialProjectiles orig, Main self, List<int> projCache, bool startSpriteBatch)
+        {
+            SpriteBatch sb = Main.spriteBatch;
+
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.UnderProjectiles))
+            {
+                PixelPalette palette = target.palette;
+
+                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
+
+                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
+
+                if (paletteCorrection != null)
+                {
+                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
+                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
+                }
+
+                if (!startSpriteBatch)
+                    sb.End();
+
+                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
+                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
+
+                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
+
+                sb.End();
+
+                if (!startSpriteBatch)
+                    sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
+            }
+
+            orig(self, projCache, startSpriteBatch);
+        }
+
+        private void DrawOverProjectileTargets(On_Main.orig_DrawCachedProjs orig, Main self, List<int> projCache, bool startSpriteBatch)
+        {
+            SpriteBatch sb = Main.spriteBatch;
+
+            orig(self, projCache, startSpriteBatch);
+
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.OverProjectiles))
+            {
+                PixelPalette palette = target.palette;
+
+                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
+
+                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
+
+                if (paletteCorrection != null)
+                {
+                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
+                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
+                }
+
+                if (!startSpriteBatch)
+                    sb.End();
+
+                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
+                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
+
+                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
+
+                sb.End();
+
+                if (!startSpriteBatch)
+                    sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
+            }
+        }
+
+        /*private void DrawUnderProjectileTargets(On_Main.orig_DrawProjectiles orig, Main self)
         {
             SpriteBatch sb = Main.spriteBatch;
 
@@ -112,29 +186,7 @@ namespace BombusApisBee.Core.PixelationSystem
             }
 
             orig(self);
-
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.OverProjectiles))
-            {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
-            }
-        }
+        }*/
 
         private void DrawNPCTargets(On_Main.orig_DrawNPCs orig, Main self, bool behindTiles)
         {
