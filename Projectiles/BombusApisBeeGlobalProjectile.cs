@@ -20,6 +20,14 @@ namespace BombusApisBee.Projectiles
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
+            Player owner = Main.player[projectile.owner];
+            if ((projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp) && owner.GetModPlayer<BombusApisBeePlayer>().IgnoreWater)
+            {
+                projectile.ignoreWater = true;
+                projectile.wet = false;
+            }
+                
+
             if (source is EntitySource_ItemUse_WithAmmo { Entity: Player p, Item: Item i })
             {
                 if (i.DamageType == BeeUtils.BeeDamageClass())
@@ -83,6 +91,7 @@ namespace BombusApisBee.Projectiles
             Player player = Main.player[projectile.owner];
             if ((projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp) && player.GetModPlayer<BombusApisBeePlayer>().IgnoreWater)
                 projectile.ignoreWater = true;
+
             return true;
         }
 
