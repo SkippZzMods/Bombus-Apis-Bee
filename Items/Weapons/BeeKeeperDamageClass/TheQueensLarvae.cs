@@ -42,7 +42,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Roar;
 
             Item.noMelee = true;
-            beeResourceCost = 5;
+            honeyCost = 5;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

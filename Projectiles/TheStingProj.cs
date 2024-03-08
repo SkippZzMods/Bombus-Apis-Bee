@@ -36,7 +36,7 @@
             var BeeDamagePlayer2 = player.Hymenoptra();
             if (HoneyTimer >= 60)
             {
-                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 3))
+                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 3))
                     Projectile.Kill();
 
                 BeeDamagePlayer2.BeeResourceRegenTimer = -240;

@@ -27,8 +27,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ProjectileID.PurificationPowder;
             Item.shootSpeed = 15f;
             Item.value = Item.sellPrice(gold: 12);
-            beeResourceCost = 4;
-            ResourceChance = 0.25f;
+            honeyCost = 4;
+            resourceChance = 0.25f;
         }
         public override bool SafeCanUseItem(Player player)
         {

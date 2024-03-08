@@ -32,7 +32,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 6f;
             Item.UseSound = new Terraria.Audio.SoundStyle("BombusApisBee/Sounds/Item/HeavyShotgun") with { Volume = 0.75f, Pitch = -0.15f };
             Item.scale = 1;
-            beeResourceCost = 7;
+            honeyCost = 5;
+            altHoneyCost = 7;
         }
 
         public override void AddRecipes()

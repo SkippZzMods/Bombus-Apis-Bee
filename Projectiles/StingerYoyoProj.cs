@@ -53,7 +53,7 @@
                 {
                     if (StingerTimer > 30 && Collision.CanHitLine(Projectile.Center, 1, 1, target.Center, 1, 1))
                     {
-                        if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost))
+                        if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
                             Projectile.ai[0] = -1f;
                         else
                         {
@@ -74,7 +74,7 @@
             }
             else if (StingerTimer > 45)
             {
-                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 2))
+                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 2))
                     Projectile.ai[0] = -1f;
                 else
                 {

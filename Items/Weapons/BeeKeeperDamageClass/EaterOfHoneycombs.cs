@@ -25,7 +25,7 @@
             Item.shoot = ModContent.ProjectileType<EaterOfHoneycombsHoldout>();
             Item.shootSpeed = 1f;
             Item.noUseGraphic = true;
-            beeResourceCost = 4;
+            honeyCost = 4;
         }
     }
 }

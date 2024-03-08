@@ -27,8 +27,8 @@
             Item.UseSound = SoundID.Item11;
             Item.scale = 1;
             Item.crit = 4;
-            beeResourceCost = 1;
-            ResourceChance = 0.33f;
+            honeyCost = 1;
+            resourceChance = 0.33f;
             Item.channel = true;
             Item.noUseGraphic = true;
         }

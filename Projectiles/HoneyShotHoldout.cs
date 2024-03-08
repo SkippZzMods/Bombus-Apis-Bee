@@ -73,7 +73,7 @@
                     Dust.NewDustPerfect(owner.Center + offset * 15f * Projectile.direction, ModContent.DustType<Dusts.HoneyDustSolid>(), new Vector2(x, y).RotatedBy(Projectile.rotation + MathHelper.PiOver2) * 0.075f, 0, default, 1.45f).noGravity = true;
                 }
                 new SoundStyle("BombusApisBee/Sounds/Item/BowFire").PlayWith(owner.Center);
-                owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 5);
+                owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 5);
                 owner.Bombus().AddShake(4);
                 Projectile.timeLeft = 20;
                 updateTime = false;

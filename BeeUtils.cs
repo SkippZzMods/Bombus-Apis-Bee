@@ -5,6 +5,33 @@ namespace BombusApisBee
 {
     public static class BeeUtils
     {
+        /// <summary>
+        /// returns a string which is lerped via chat tags from color_1 to color_2
+        /// </summary>
+        /// <param name="color_1">the color to lerp from</param>
+        /// <param name="color_2">the color to lerp to</param>
+        /// <param name="str">the original string</param>
+        /// <returns></returns>
+        public static string StringColorLerp(Color color_1, Color color_2, string str)
+        {
+            string newString = "";
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char c = str[i];
+
+                float lerper = i / (float)str.Length;
+
+                Color color = Color.Lerp(color_1, color_2, lerper);
+
+                string hex = BitConverter.ToString([color.R, color.G, color.B]).Replace("-", "");
+
+                newString += $"[c/{hex}:{c}]";
+            }
+
+            return newString;
+        }
+
         public static void IncreaseBeeResource(this Player player, int amount, bool showText = true)
         {
             if (player.Bombus().HoneyedHeart && player.statLife < player.statLifeMax2)
@@ -327,9 +354,9 @@ namespace BombusApisBee
         }
         public static float GetBeeItemResourceChance(this Player player)
         {
-            if (player.GetActiveItem().ModItem is BeeDamageItem damageItem && damageItem.ResourceChance > 0f)
+            if (player.GetActiveItem().ModItem is BeeDamageItem damageItem && damageItem.resourceChance > 0f)
             {
-                float Chance = damageItem.ResourceChance;
+                float Chance = damageItem.resourceChance;
                 return Chance;
             }
             return 0f;

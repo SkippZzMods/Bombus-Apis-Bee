@@ -28,7 +28,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 13f;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
             Item.rare = ItemRarityID.LightRed;
-            beeResourceCost = 6;
+            honeyCost = 6;
         }
         public override void AddRecipes()
         {

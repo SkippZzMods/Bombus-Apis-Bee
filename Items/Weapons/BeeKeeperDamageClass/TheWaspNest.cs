@@ -35,7 +35,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(gold: 7);
             Item.shoot = ModContent.ProjectileType<TheWaspNestProjectile>();
-            beeResourceCost = 2;
+            honeyCost = 2;
         }
         public override void AddRecipes()
         {

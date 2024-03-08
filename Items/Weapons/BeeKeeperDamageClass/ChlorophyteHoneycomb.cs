@@ -31,7 +31,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
             Item.noUseGraphic = true;
 
-            beeResourceCost = 7;
+            honeyCost = 7;
         }
 
         public override void AddRecipes()

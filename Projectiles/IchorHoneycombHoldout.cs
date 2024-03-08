@@ -55,7 +55,7 @@ namespace BombusApisBee.Projectiles
                 if (Main.myPlayer == owner.whoAmI && boomerangTimer == 0)
                 {
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center, 0.15f);
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 4);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 4);
                     Projectile.friendly = true;
                     Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 25f;
                     Projectile.tileCollide = true;

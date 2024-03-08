@@ -28,7 +28,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<AstralBee>();
             Item.shootSpeed = 6;
 
-            beeResourceCost = 5;
+            honeyCost = 5;
         }
 
 

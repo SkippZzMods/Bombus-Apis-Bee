@@ -32,7 +32,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<StingerYoyoProj>();
-            beeResourceCost = 2;
+            honeyCost = 2;
         }
         public override void AddRecipes()
         {

@@ -92,7 +92,7 @@
                 }
                 if (ShotDelay >= FramesToNextShot)
                 {
-                    if (Owner.UseBeeResource((Owner.HeldItem.ModItem as BeeDamageItem).beeResourceCost))
+                    if (Owner.UseBeeResource((Owner.HeldItem.ModItem as BeeDamageItem).honeyCost))
                     {
                         Item heldItem = Owner.GetActiveItem();
                         float shootSpeed = heldItem.shootSpeed;

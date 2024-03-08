@@ -26,8 +26,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<HoneyFlare>();
             Item.shootSpeed = 20f;
             Item.UseSound = SoundID.Item11;
-            beeResourceCost = 2;
-            ResourceChance = 0.15f;
+            honeyCost = 2;
+            resourceChance = 0.15f;
         }
 
         public override void AddRecipes()

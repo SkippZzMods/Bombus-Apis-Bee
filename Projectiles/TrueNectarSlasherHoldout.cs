@@ -193,7 +193,7 @@ namespace BombusApisBee.Projectiles
                 if (!thrown)
                 {
                     Projectile.timeLeft = (int)maxTimeLeft;
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 1);
                     owner.Bombus().AddShake(15);
                     Projectile.friendly = true;
                     SoundID.DD2_SonicBoomBladeSlash.PlayWith(Projectile.Center, -0.25f, 0.1f, 1.25f);
@@ -214,7 +214,7 @@ namespace BombusApisBee.Projectiles
 
                 if (Projectile.timeLeft % (Math.Floor(maxTimeLeft / 5)) == 0 && Main.myPlayer == Projectile.owner)
                 {
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
                     for (int i = 0; i < 15; i++)
                     {
                         Dust.NewDustPerfect(owner.Center + Projectile.rotation.ToRotationVector2() * 40f, ModContent.DustType<Dusts.GlowFastDecelerate>(), Projectile.rotation.ToRotationVector2().RotatedByRandom(0.35f) * Main.rand.NextFloat(3f), 0, new Color(214, 158, 79), 0.75f);
@@ -270,7 +270,7 @@ namespace BombusApisBee.Projectiles
                 {
                     thrown = true;
                     owner.Bombus().AddShake(5);
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost + 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 1);
                     Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 25f;
                     Projectile.friendly = true;
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center);

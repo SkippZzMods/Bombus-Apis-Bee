@@ -63,7 +63,7 @@ namespace BombusApisBee.Projectiles
 
                     Projectile.velocity += velocity * -4.45f;
 
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
 
                     flashTimer = 25;
                 }
@@ -225,7 +225,7 @@ namespace BombusApisBee.Projectiles
             {
                 if (!thrown)
                 {
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
                     fadeTimer = 30f;
                     Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 25f;
                     for (int i = 0; i < 35; i++)
@@ -468,7 +468,7 @@ namespace BombusApisBee.Projectiles
 
                         Projectile.velocity += velocity * -2.45f;
 
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 2);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 2);
 
                         shots++;
                         shootDelay = 0;
@@ -520,7 +520,7 @@ namespace BombusApisBee.Projectiles
                         SoundID.Item60.PlayWith(Projectile.Center, -0.5f, 0.1f, 1f);
 
                     if (laserTimer % 15 == 0)
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
                 }
                 else
                 {

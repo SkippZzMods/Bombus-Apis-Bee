@@ -28,7 +28,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 15f;
             Item.UseSound = SoundID.Item1;
             Item.scale = 1;
-            beeResourceCost = 5;
+            honeyCost = 5;
             critAdd = 8;
             Item.noUseGraphic = true;
         }

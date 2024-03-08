@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<BeeFishBubble>();
             Item.shootSpeed = 12f;
-            beeResourceCost = 4;
+            honeyCost = 4;
         }
 
         public override Vector2? HoldoutOrigin()

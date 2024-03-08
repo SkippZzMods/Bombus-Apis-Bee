@@ -29,7 +29,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Item8;
             Item.shootSpeed = 1f;
 
-            beeResourceCost = 5;
+            honeyCost = 5;
         }
 
         public override Vector2? HoldoutOffset()

@@ -6,6 +6,7 @@ namespace BombusApisBee.Projectiles
 {
     public class BombusApisBeeGlobalProjectile : GlobalProjectile
     {
+        public bool fromApiary;
         public bool ForceBee;
         public bool HeldProj;
         public override bool InstancePerEntity => true;
@@ -32,6 +33,10 @@ namespace BombusApisBee.Projectiles
             {
                 if (i.DamageType == BeeUtils.BeeDamageClass())
                     projectile.DamageType = i.DamageType;
+
+                if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
+                    if (i.ModItem is ApiaryItem)
+                        fromApiary = true;
             }
 
             else if (source is EntitySource_Parent { Entity: Item item })
@@ -79,6 +84,7 @@ namespace BombusApisBee.Projectiles
                 projectile.idStaticNPCHitCooldown = 10;
             }
         }
+
         public override void AI(Projectile projectile)
         {
             if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
@@ -86,11 +92,15 @@ namespace BombusApisBee.Projectiles
             if (projectile.CountsAsClass<HymenoptraDamageClass>() && projectile.CritChance == 0)
                 projectile.CritChance = (int)Main.player[projectile.owner].GetTotalCritChance<HymenoptraDamageClass>();
         }
+
         public override bool PreAI(Projectile projectile)
         {
             Player player = Main.player[projectile.owner];
-            if ((projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp) && player.GetModPlayer<BombusApisBeePlayer>().IgnoreWater)
-                projectile.ignoreWater = true;
+            if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
+            {
+                if (player.GetModPlayer<BombusApisBeePlayer>().IgnoreWater)
+                    projectile.ignoreWater = true;
+            }        
 
             return true;
         }

@@ -29,7 +29,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 15;
             Item.UseSound = SoundID.Item11;
 
-            beeResourceCost = 4;
+            honeyCost = 4;
         }
 
         public override void AddRecipes()

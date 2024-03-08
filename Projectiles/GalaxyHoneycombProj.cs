@@ -94,7 +94,7 @@
                     }
                 }
 
-                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 4);
+                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 4);
                 StarTimer = 0f;
             }
             Projectile.rotation += 0.25f / Projectile.MaxUpdates;

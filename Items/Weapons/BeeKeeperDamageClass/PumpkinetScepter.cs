@@ -20,7 +20,7 @@
             Item.rare = ItemRarityID.Yellow;
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<PumpkinetScepterHoldout>();
-            beeResourceCost = 5;
+            honeyCost = 5;
             Item.noUseGraphic = true;
             Item.channel = true;
         }

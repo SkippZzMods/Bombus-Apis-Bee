@@ -24,7 +24,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.rare = ItemRarityID.Blue;
             Item.shoot = ModContent.ProjectileType<HoneyGunHoldout>();
             Item.shootSpeed = 16.5f;
-            beeResourceCost = 4;
+            honeyCost = 4;
             Item.noUseGraphic = true;
             Item.autoReuse = true;
         }

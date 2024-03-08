@@ -26,7 +26,7 @@
             Item.UseSound = SoundID.Item9;
             Item.shoot = ModContent.ProjectileType<TheStingProj>();
             Item.shootSpeed = 10f;
-            beeResourceCost = 5;
+            honeyCost = 5;
         }
 
         public override bool SafeCanUseItem(Player player)

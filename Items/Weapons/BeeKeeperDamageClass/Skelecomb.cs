@@ -36,7 +36,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item43;
 
-            beeResourceCost = 3;
+            honeyCost = 3;
+            altHoneyCost = 6;
         }
 
         public override void HoldItem(Player player)
@@ -81,7 +82,6 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
                 }
 
                 cooldown = 180;
-                player.UseBeeResource(beeResourceCost + 3);
                 return false;
             }
 

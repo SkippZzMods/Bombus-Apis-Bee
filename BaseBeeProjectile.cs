@@ -5,9 +5,9 @@ namespace BombusApisBee.BeeHelperProj
 {
     public abstract class BaseBeeProjectile : ModProjectile
     {
-        public int BeeAITimer;
-        public bool Velocity = true;
+        public int beeAITimer;
         public bool otherGiant;
+        public bool fromApiary;
         public bool Giant => CanBeGiant && Projectile.ai[0] == 1f;
 
         public virtual int GiantWidth => 16;
@@ -35,6 +35,12 @@ namespace BombusApisBee.BeeHelperProj
         {
             if (!CanBeGiant)
                 return;
+
+            if (source is EntitySource_ItemUse_WithAmmo { Entity: Player p, Item: Item i })
+            {
+                if (i.ModItem is ApiaryItem)
+                    fromApiary = true;
+            }
 
             if (Main.player[Projectile.owner].Hymenoptra().BeeStrengthenChance > 0f)
                 Projectile.ai[0] = Main.rand.NextFloat() < Main.player[Projectile.owner].Hymenoptra().BeeStrengthenChance ? 1f : 0f;
@@ -119,10 +125,10 @@ namespace BombusApisBee.BeeHelperProj
             float num262 = Projectile.position.X;
             float num263 = Projectile.position.Y;
             bool flag63 = false;
-            BeeAITimer++;
-            if (BeeAITimer > 30f)
+            beeAITimer++;
+            if (beeAITimer > 30f)
             {
-                BeeAITimer = 30;
+                beeAITimer = 30;
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];

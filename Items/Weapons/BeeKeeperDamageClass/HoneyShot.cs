@@ -31,7 +31,7 @@
             Item.shootSpeed = 17.5f;
             Item.autoReuse = true;
 
-            beeResourceCost = 1;
+            honeyCost = 1;
             Item.UseSound = new SoundStyle("BombusApisBee/Sounds/Item/BowPull");
         }
     }

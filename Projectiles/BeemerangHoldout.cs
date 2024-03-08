@@ -75,7 +75,7 @@ namespace BombusApisBee.Projectiles
                     flashed = true;
                     flashTimer = 10;
                     SoundEngine.PlaySound(SoundID.MaxMana, Projectile.position);
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 3);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 3);
                 }
 
                 if (Main.myPlayer == owner.whoAmI)
@@ -107,7 +107,7 @@ namespace BombusApisBee.Projectiles
                 {
                     if (Main.myPlayer == owner.whoAmI && boomerangTimer == 0)
                     {
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
                         Projectile.friendly = true;
                         Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * MathHelper.Lerp(15f, 22.5f, (float)chargeTimer / (float)maxCharge);
                         Projectile.tileCollide = true;

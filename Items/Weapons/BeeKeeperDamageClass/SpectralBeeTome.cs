@@ -30,10 +30,10 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<SpectralBeeTomeHoldout>();
             Item.shootSpeed = 1f;
 
-            beeResourceCost = 3;
+            honeyCost = 3;
             Item.noUseGraphic = true;
             Item.channel = true;
-            ResourceChance = 0.33f;
+            resourceChance = 0.33f;
         }
         public override Vector2? HoldoutOffset()
         {

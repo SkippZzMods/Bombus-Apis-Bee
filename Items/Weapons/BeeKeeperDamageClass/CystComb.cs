@@ -27,7 +27,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.noUseGraphic = true;
 
             Item.shoot = ModContent.ProjectileType<IchorHoneycombHoldout>();
-            beeResourceCost = 6;
+            honeyCost = 6;
         }
 
         public override bool SafeCanUseItem(Player player)

@@ -1,17 +1,11 @@
 ﻿using BombusApisBee.Core.PixellateSystem;
 using BombusApisBee.Core.ScreenTargetSystem;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BombusApisBee.Core.PixelationSystem
 {
     public class PixelationSystem : ModSystem
     {
-        public List<PixelationTarget> pixelationTargets = new List<PixelationTarget>();
+        public List<PixelationTarget> pixelationTargets = new();
 
         public override void Load()
         {
@@ -20,9 +14,23 @@ namespace BombusApisBee.Core.PixelationSystem
 
             On_Main.DrawNPCs += DrawNPCTargets;
             On_Main.DrawSuperSpecialProjectiles += DrawUnderProjectileTargets;
-            //On_Main.DrawProjectiles += DrawUnderProjectileTargets;
             On_Main.DrawPlayers_AfterProjectiles += DrawPlayerTargets;
             On_Main.DrawCachedProjs += DrawOverProjectileTargets;
+        }
+
+        public override void PostSetupContent()
+        {
+            // IDK if i need to call GetInstance here
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderTiles", RenderLayer.UnderTiles);
+
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderProjectiles", RenderLayer.UnderProjectiles);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverProjectiles", RenderLayer.OverProjectiles);
+
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderPlayers", RenderLayer.UnderPlayers);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverPlayers", RenderLayer.OverPlayers);
+
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderNPCs", RenderLayer.UnderNPCs);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverNPCs", RenderLayer.OverNPCs);
         }
 
         public override void Unload()
@@ -31,7 +39,6 @@ namespace BombusApisBee.Core.PixelationSystem
                 return;
 
             On_Main.DrawNPCs -= DrawNPCTargets;
-            //On_Main.DrawProjectiles -= DrawUnderProjectileTargets;
             On_Main.DrawPlayers_AfterProjectiles -= DrawPlayerTargets;
             On_Main.DrawCachedProjs -= DrawOverProjectileTargets;
             On_Main.DrawSuperSpecialProjectiles -= DrawUnderProjectileTargets;
@@ -41,51 +48,17 @@ namespace BombusApisBee.Core.PixelationSystem
         {
             SpriteBatch sb = Main.spriteBatch;
 
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.UnderPlayers))
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.UnderPlayers))
             {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
+                DrawTarget(target, Main.spriteBatch, false);
             }
 
             orig(self);
 
-            
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.OverPlayers))
+
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.OverPlayers))
             {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
+                DrawTarget(target, Main.spriteBatch, false);
             }
         }
 
@@ -93,32 +66,9 @@ namespace BombusApisBee.Core.PixelationSystem
         {
             SpriteBatch sb = Main.spriteBatch;
 
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.UnderProjectiles))
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.UnderProjectiles))
             {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                if (!startSpriteBatch)
-                    sb.End();
-
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
-
-                if (!startSpriteBatch)
-                    sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
+                DrawTarget(target, Main.spriteBatch, !startSpriteBatch);
             }
 
             orig(self, projCache, startSpriteBatch);
@@ -130,129 +80,72 @@ namespace BombusApisBee.Core.PixelationSystem
 
             orig(self, projCache, startSpriteBatch);
 
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.OverProjectiles))
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.OverProjectiles))
             {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                if (!startSpriteBatch)
-                    sb.End();
-
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
-
-                if (!startSpriteBatch)
-                    sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
+                DrawTarget(target, Main.spriteBatch, !startSpriteBatch);
             }
         }
-
-        /*private void DrawUnderProjectileTargets(On_Main.orig_DrawProjectiles orig, Main self)
-        {
-            SpriteBatch sb = Main.spriteBatch;
-
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.UnderProjectiles))
-            {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
-            }
-
-            orig(self);
-        }*/
 
         private void DrawNPCTargets(On_Main.orig_DrawNPCs orig, Main self, bool behindTiles)
         {
             SpriteBatch sb = Main.spriteBatch;
 
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.UnderNPCs))
+            if (behindTiles)
             {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
+                foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.UnderTiles))
                 {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
+                    DrawTarget(target, Main.spriteBatch, true);
                 }
+            }
 
-                sb.End();
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
-                sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.UnderNPCs))
+            {
+                DrawTarget(target, Main.spriteBatch, true);
             }
 
             orig(self, behindTiles);
 
-            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderType.OverNPCs))
+            foreach (PixelationTarget target in pixelationTargets.Where(t => t.Active && t.renderType == RenderLayer.OverNPCs))
             {
-                PixelPalette palette = target.palette;
-
-                bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
-
-                Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
-
-                if (paletteCorrection != null)
-                {
-                    paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
-                    paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
-                }
-
-                sb.End();
-                sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
-                    DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.EffectMatrix);
-
-                sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
-                sb.End();
-                sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
+                DrawTarget(target, Main.spriteBatch, true);
             }
+        }
+
+        private void DrawTarget(PixelationTarget target, SpriteBatch sb, bool endSpriteBatch = true)
+        {
+            PixelPalette palette = target.palette;
+
+            bool doNotApplyCorrection = palette.NoCorrection || Main.graphics.GraphicsProfile == GraphicsProfile.Reach;
+
+            Effect paletteCorrection = doNotApplyCorrection ? null : Filters.Scene["PaletteCorrection"].GetShader().Shader;
+
+            if (paletteCorrection != null)
+            {
+                paletteCorrection.Parameters["palette"].SetValue(palette.Colors);
+                paletteCorrection.Parameters["colorCount"].SetValue(palette.ColorCount);
+            }
+
+            if (endSpriteBatch)
+                sb.End();
+
+            sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp,
+                DepthStencilState.None, RasterizerState.CullNone, paletteCorrection, Main.GameViewMatrix.TransformationMatrix);
+
+            sb.Draw(target.pixelationTarget2.RenderTarget, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
+
+            sb.End();
+
+            if (endSpriteBatch)
+                sb.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
         }
 
         /// <summary>
         /// Registers a ScreenTarget for use with a drawing action or list of drawing actions.
         /// </summary>
         /// <param name="id">ID of the rendertarget and its layer.</param>
-        public void RegisterScreenTarget(string id, RenderType renderType = RenderType.UnderProjectiles)
+        public void RegisterScreenTarget(string id, RenderLayer renderType = RenderLayer.UnderProjectiles)
         {
-            Main.QueueMainThreadAction(() =>
-            {
-                pixelationTargets.Add(new PixelationTarget(id, new PixelPalette(), renderType));
-            });
+            Main.QueueMainThreadAction(() => pixelationTargets.Add(new PixelationTarget(id, new PixelPalette(), renderType)));
         }
 
         /// <summary>
@@ -260,17 +153,14 @@ namespace BombusApisBee.Core.PixelationSystem
         /// </summary>
         /// <param name="id">ID of the rendertarget and its layer.</param>
         /// <param name="palettePath">The given palette's texture path.</param>
-        public void RegisterScreenTarget(string id, string palettePath, RenderType renderType = RenderType.UnderProjectiles)
+        public void RegisterScreenTarget(string id, string palettePath, RenderLayer renderType = RenderLayer.UnderProjectiles)
         {
-            Main.QueueMainThreadAction(() =>
-            {
-                pixelationTargets.Add(new PixelationTarget(id, PixelPalette.From(palettePath), renderType));
-            });
+            Main.QueueMainThreadAction(() => pixelationTargets.Add(new PixelationTarget(id, PixelPalette.From(palettePath), renderType)));
         }
 
         public void QueueRenderAction(string id, Action renderAction)
         {
-            PixelationTarget target =  pixelationTargets.Find(t => t.id == id);
+            PixelationTarget target = pixelationTargets.Find(t => t.id == id);
 
             target.pixelationDrawActions.Add(renderAction);
             target.renderTimer = 2;
@@ -291,11 +181,11 @@ namespace BombusApisBee.Core.PixelationSystem
 
         public PixelPalette palette;
 
-        public RenderType renderType;
+        public RenderLayer renderType;
 
         public bool Active => renderTimer > 0;
 
-        public PixelationTarget(string id, PixelPalette palette, RenderType renderType)
+        public PixelationTarget(string id, PixelPalette palette, RenderLayer renderType)
         {
             pixelationDrawActions = new List<Action>();
 
@@ -342,7 +232,7 @@ namespace BombusApisBee.Core.PixelationSystem
         }
     }
 
-    public enum RenderType : int
+    public enum RenderLayer : int
     {
         UnderProjectiles = 0,
         OverProjectiles = 1,
@@ -350,5 +240,6 @@ namespace BombusApisBee.Core.PixelationSystem
         OverPlayers = 3,
         UnderNPCs = 4,
         OverNPCs = 5,
+        UnderTiles = 6,
     }
 }

@@ -79,7 +79,7 @@
                         }
                     }
 
-                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost);
+                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost);
 
                     Owner.CheckMana(15, true);
                 }

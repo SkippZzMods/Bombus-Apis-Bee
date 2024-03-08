@@ -25,9 +25,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<NectarthrowerProj>();
             Item.shootSpeed = 12.5f;
             Item.UseSound = SoundID.Item34;
-            beeResourceCost = 2;
+            honeyCost = 2;
 
-            ResourceChance = 0.33f;
+            resourceChance = 0.33f;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

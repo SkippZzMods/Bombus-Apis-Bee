@@ -18,7 +18,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<SyrupSickleProjectile>();
             Item.knockBack = 3f;
             Item.rare = ItemRarityID.Orange;
-            beeResourceCost = 5;
+            honeyCost = 5;
             Item.width = 32;
             Item.height = 32;
             Item.noMelee = true;

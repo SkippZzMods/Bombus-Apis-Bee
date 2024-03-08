@@ -26,8 +26,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<MegaHornetHoldout>();
             Item.shootSpeed = 19f;
-            beeResourceCost = 1;
-            ResourceChance = 0.33f;
+            honeyCost = 1;
+            resourceChance = 0.33f;
             Item.channel = true;
             Item.noUseGraphic = true;
         }

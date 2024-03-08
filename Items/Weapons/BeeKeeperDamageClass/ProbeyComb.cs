@@ -24,7 +24,7 @@
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<ProbeycombHoldout>();
             Item.shootSpeed = 1f;
-            beeResourceCost = 2;
+            honeyCost = 2;
 
             Item.channel = true;
             Item.noUseGraphic = true;

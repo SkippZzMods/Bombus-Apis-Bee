@@ -26,7 +26,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<BeeBullet>();
             Item.shootSpeed = 18.5f;
-            beeResourceCost = 10;
+            honeyCost = 10;
         }
         public override Vector2? HoldoutOffset()
         {

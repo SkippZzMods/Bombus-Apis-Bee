@@ -67,14 +67,14 @@ namespace BombusApisBee
             //ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Projectiles");
             //ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Dusts", RenderType.Dust);
 
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderProjectiles", RenderType.UnderProjectiles);
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverProjectiles", RenderType.OverProjectiles);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderProjectiles", RenderLayer.UnderProjectiles);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverProjectiles", RenderLayer.OverProjectiles);
 
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderPlayers", RenderType.UnderPlayers);
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverPlayers", RenderType.OverPlayers);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderPlayers", RenderLayer.UnderPlayers);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverPlayers", RenderLayer.OverPlayers);
 
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderNPCs", RenderType.UnderNPCs);
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverNPCs", RenderType.OverNPCs);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderNPCs", RenderLayer.UnderNPCs);
+            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverNPCs", RenderLayer.OverNPCs);
         }
 
         public override void Load()

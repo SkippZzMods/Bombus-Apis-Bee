@@ -29,7 +29,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<BeemerangHoldout>();
-            beeResourceCost = 4;
+            honeyCost = 4;
         }
 
         public override bool SafeCanUseItem(Player player)

@@ -27,7 +27,7 @@ namespace BombusApisBee.Projectiles
             }
 
             if (++Projectile.ai[0] % 10 == 0)
-                if (!Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).beeResourceCost - 1))
+                if (!Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1))
                 {
                     Owner.reuseDelay = 60;
                     Projectile.Kill();

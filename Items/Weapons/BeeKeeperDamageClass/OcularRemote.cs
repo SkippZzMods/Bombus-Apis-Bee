@@ -42,7 +42,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<SpazHoneycomb>();
             Item.shootSpeed = 13;
             Item.UseSound = SoundID.Item44;
-            beeResourceCost = 15;
+            honeyCost = 15;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

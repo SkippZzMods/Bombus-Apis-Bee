@@ -158,7 +158,7 @@ namespace BombusApisBee.Projectiles
             ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
             {
                 Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.EffectMatrix);
 
                 Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, color * lerper, dust.rotation, tex.Size() / 2f, dust.scale, 0f, 0f);
 
@@ -422,7 +422,7 @@ namespace BombusApisBee.Projectiles
                 Effect effect = Filters.Scene["SLRCeirosRing"].GetShader().Shader;
 
                 Matrix world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
-                Matrix view = Main.GameViewMatrix.ZoomMatrix;
+                Matrix view = Main.GameViewMatrix.EffectMatrix;
                 Matrix projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
                 effect.Parameters["transformMatrix"].SetValue(world * view * projection);
@@ -436,8 +436,6 @@ namespace BombusApisBee.Projectiles
                 effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("BombusApisBee/ShaderTextures/EnergyTrail").Value);
 
                 trail2?.Render(effect);
-
-                //Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(0, 0, Main.screenWidth / 2, Main.screenHeight / 2), Color.White);
             });
         }
     }

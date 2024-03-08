@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 6f;
             Item.UseSound = BombusApisBee.HoneycombWeapon;
 
-            beeResourceCost = 1;
+            honeyCost = 1;
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
@@ -49,7 +49,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             if (++shots >= 4)
             {
                 shots = 0;
-                player.UseBeeResource(beeResourceCost + 3);
+                player.UseBeeResource(honeyCost + 3);
                 Projectile.NewProjectile(source, position, velocity * 2.5f, ModContent.ProjectileType<RubyProjectile>(), damage, 3f, player.whoAmI);
                 for (int i = 0; i < 12; i++)
                 {

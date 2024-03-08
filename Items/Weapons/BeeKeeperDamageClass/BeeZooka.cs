@@ -31,7 +31,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.shootSpeed = 18f;
 
-            beeResourceCost = 3;
+            honeyCost = 3;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -55,7 +55,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             }
 
             SoundID.Item61.PlayWith(position, -0.1f, 0.1f);
-            player.UseBeeResource(beeResourceCost);
+            player.UseBeeResource(honeyCost);
 
             for (float k = 0; k < 6.28f; k += 0.1f)
             {

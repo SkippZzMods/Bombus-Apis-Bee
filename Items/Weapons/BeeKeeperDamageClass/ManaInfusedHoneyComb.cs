@@ -24,7 +24,7 @@
             Item.rare = ItemRarityID.Orange;
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<ManaHoneycombHoldout>();
-            beeResourceCost = 5;
+            honeyCost = 5;
             Item.noUseGraphic = true;
             Item.channel = true;
 

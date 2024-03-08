@@ -35,12 +35,9 @@
                 index = tooltips.FindIndex(tt => tt.Mod.Equals("Terraria") && tt.Name.Equals("ItemName"));
                 if (index != -1)
                 {
+                    string gradient = BeeUtils.StringColorLerp(new Color(255, 255, 0), new Color(255, 100, 0), "- Bee Keeper Item -");
 
-                    float lerper = Utils.Clamp((float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f), 0, 1f);
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "BeeKeeperItemTag", "- Bee Keeper Item -")
-                    {
-                        OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), lerper)
-                    }); ;
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "BeeKeeperItemTag", gradient));
                 }             
             }
         }

@@ -28,8 +28,8 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<HighVelocityStinger>();
             Item.shootSpeed = 25f;
 
-            beeResourceCost = 1;
-            ResourceChance = 0.25f;
+            honeyCost = 1;
+            resourceChance = 0.25f;
         }
 
         public override Vector2? HoldoutOffset()
@@ -47,7 +47,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.UseBeeResource(beeResourceCost);
+            player.UseBeeResource(honeyCost);
             SoundID.Item11.PlayWith(position, -0.05f, 0.1f);
             for (int i = 0; i < 7; i++)
             {

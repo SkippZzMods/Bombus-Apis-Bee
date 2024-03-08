@@ -27,7 +27,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<StoneHoneycombProjectile>();
             Item.shootSpeed = 13;
-            beeResourceCost = 5;
+            honeyCost = 5;
             Item.noUseGraphic = true;
         }
 

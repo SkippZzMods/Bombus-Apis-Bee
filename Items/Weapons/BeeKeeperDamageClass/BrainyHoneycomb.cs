@@ -24,7 +24,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<BrainyBee>();
             Item.shootSpeed = 6f;
             Item.UseSound = BombusApisBee.HoneycombWeapon;
-            beeResourceCost = 3;
+            honeyCost = 3;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

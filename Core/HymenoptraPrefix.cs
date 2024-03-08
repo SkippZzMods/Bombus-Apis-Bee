@@ -48,10 +48,10 @@ namespace BombusApisBee.Core
                 return;
 
             if (resourceBonus != 0)
-                realItem.beeResourceCost -= resourceBonus;
+                realItem.honeyCost -= resourceBonus;
 
             if (chanceBonus != 0)
-                realItem.ResourceChance += chanceBonus;
+                realItem.resourceChance += chanceBonus;
         }
 
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)

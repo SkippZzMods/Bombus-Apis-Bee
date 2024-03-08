@@ -1238,6 +1238,15 @@ Items: {
 		DisplayName: True Stinger Scimitar
 		Tooltip: ""
 	}
+
+	WoodenApiary: {
+		DisplayName: Wooden Apiary
+		Tooltip:
+			'''
+			Rapidly ejects bees from their habitat
+			Hold <right> to take control of these bees, causing them to deal 35% increased damage
+			'''
+	}
 }
 
 NPCs: {

@@ -26,7 +26,7 @@
 
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<WasparangHoldout>();
-            beeResourceCost = 6;
+            honeyCost = 6;
         }
 
         public override bool SafeCanUseItem(Player player)

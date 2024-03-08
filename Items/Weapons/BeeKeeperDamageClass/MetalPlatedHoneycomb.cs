@@ -23,7 +23,7 @@
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<HoneycombPrime>();
             Item.shootSpeed = 7f;
-            beeResourceCost = 3;
+            honeyCost = 3;
 
             Item.channel = true;
             Item.noUseGraphic = true;

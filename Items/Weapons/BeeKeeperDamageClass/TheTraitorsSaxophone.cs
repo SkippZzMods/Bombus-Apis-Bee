@@ -27,8 +27,8 @@
             Item.shoot = ModContent.ProjectileType<TheTraitorsSaxophoneHoldout>();
             Item.shootSpeed = 1f;
 
-            beeResourceCost = 2;
-            ResourceChance = 0.25f;
+            honeyCost = 2;
+            resourceChance = 0.25f;
 
             Item.noUseGraphic = true;
             Item.channel = true;

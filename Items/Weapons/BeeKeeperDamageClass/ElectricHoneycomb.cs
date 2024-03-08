@@ -24,7 +24,7 @@
             Item.shoot = ModContent.ProjectileType<ElectricHoneycombProj>();
             Item.shootSpeed = 15f;
             Item.UseSound = SoundID.Item1;
-            beeResourceCost = 5;
+            honeyCost = 5;
             Item.noUseGraphic = true;
         }
     }

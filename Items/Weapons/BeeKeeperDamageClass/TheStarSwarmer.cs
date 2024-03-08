@@ -30,8 +30,9 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shoot = ModContent.ProjectileType<AstralBee>();
             Item.shootSpeed = 6;
 
-            beeResourceCost = 2;
-            ResourceChance = 0.33f;
+            honeyCost = 2;
+            altHoneyCost = 4;
+            resourceChance = 0.33f;
         }
 
         public override void HoldItem(Player player)
@@ -91,7 +92,6 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
                 Projectile.NewProjectile(source, pos, velocity * 2.5f, ModContent.ProjectileType<AstralStarSplitting>(), (int)(damage * 1.5f), 3.5f, player.whoAmI);
 
-                player.UseBeeResource(beeResourceCost + 2);
                 player.Bombus().AddShake(5);
                 player.velocity += -velocity;
                 player.reuseDelay = 30;

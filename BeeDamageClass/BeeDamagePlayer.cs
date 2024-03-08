@@ -555,7 +555,11 @@ namespace BombusApisBee.BeeDamageClass
 
                 if (AttackDelay == 1)
                     if (Player.HeldItem.damage > 0)
+                    {
                         Projectile.damage = Player.ApplyHymenoptraDamageTo(Player.HeldItem.damage / 3);
+                        if (Projectile.damage < 6)
+                            Projectile.damage = 6;
+                    }
                     else
                         Projectile.damage = Player.ApplyHymenoptraDamageTo(10);
 

@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.value = Item.sellPrice(gold: 3, silver: 25);
             Item.rare = ItemRarityID.Green;
             Item.Size = new Vector2(50);
-            beeResourceCost = 3;
+            honeyCost = 3;
         }
        
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

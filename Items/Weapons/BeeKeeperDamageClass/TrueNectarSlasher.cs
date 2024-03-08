@@ -30,7 +30,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.value = Item.sellPrice(gold: 15);
             Item.rare = ItemRarityID.Yellow;
-            beeResourceCost = 2;
+            honeyCost = 2;
 
             Item.Size = new Vector2(60);
         }

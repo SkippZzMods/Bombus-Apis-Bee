@@ -24,7 +24,7 @@
             Item.shootSpeed = 1f;
             Item.scale = 1f;
             Item.crit = 4;
-            beeResourceCost = 1;
+            honeyCost = 1;
             Item.noUseGraphic = true;
             Item.channel = true;
         }

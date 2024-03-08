@@ -30,11 +30,11 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Item120;
             Item.scale = 1;
             Item.crit = 4;
-            beeResourceCost = 5;
+            honeyCost = 5;
             Item.channel = true;
             Item.noUseGraphic = true;
 
-            ResourceChance = 0.33f;
+            resourceChance = 0.33f;
         }
         public override void AddRecipes()
         {

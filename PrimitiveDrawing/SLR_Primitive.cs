@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.PrimitiveDrawing
+﻿using Microsoft.Xna.Framework.Graphics;
+
+namespace BombusApisBee.PrimitiveDrawing
 {
 
     public class SLR_Primitive : IDisposable
@@ -37,6 +39,17 @@
                 pass.Apply();
                 device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount, 0, indexBuffer.IndexCount / 3);
             }
+        }
+
+        public void RenderEffectless()
+        {
+            if (vertexBuffer is null || indexBuffer is null)
+                return;
+
+            device.SetVertexBuffer(vertexBuffer);
+            device.Indices = indexBuffer;
+
+            device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount, 0, indexBuffer.IndexCount / 3);
         }
 
         public void SetVertices(VertexPositionColorTexture[] vertices)
@@ -241,7 +254,7 @@
             primitives.SetIndices(mainIndices.FastUnion(tipIndices));
         }
 
-        public void Render(Effect effect)
+        public void Render(Effect effect, bool effectless = false)
         {
             if (Positions == null && !(primitives?.IsDisposed ?? true))
             {
@@ -250,7 +263,10 @@
 
             SetupMeshes();
 
-            primitives.Render(effect);
+            if (effectless)
+                primitives.RenderEffectless();
+            else
+                primitives.Render(effect);
         }
 
         public void Dispose()

@@ -28,7 +28,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.shootSpeed = 15f;
 
 
-            beeResourceCost = 3;
+            honeyCost = 3;
             Item.noUseGraphic = true;
         }
 
@@ -42,7 +42,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             SoundID.Item106.PlayWith(player.Center, pitchVariance: 0.1f);
-            player.UseBeeResource(beeResourceCost);
+            player.UseBeeResource(honeyCost);
             return true;
         }
 

@@ -23,7 +23,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             Item.UseSound = SoundID.Item1;
             Item.scale = 1.25f;
             Item.crit = 4;
-            beeResourceCost = 3;
+            honeyCost = 3;
         }
 
 

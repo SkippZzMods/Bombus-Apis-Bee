@@ -57,7 +57,7 @@ namespace BombusApisBee.UI
 
             Vector2 start = new Vector2(Main.screenWidth, 0f) + ((cfg.ResourceOffX == 0 || cfg.ResourceOffY == 0) ? new Vector2(-320, 30) : new Vector2(cfg.ResourceOffX, cfg.ResourceOffY - 20));
 
-            Rectangle bounds = new Rectangle((int)start.X - 15 * GetHoneyAmount(), (int)start.Y, 25 * GetHoneyAmount(), 35);
+            Rectangle bounds = new Rectangle((int)start.X - 15 * GetHoneyAmount(), (int)start.Y, 18 * GetHoneyAmount(), 35);
             Rectangle mouse = new Rectangle((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y, Dragging ? 50 : 8, Dragging ? 50 : 8);
 
             if (Dragging)
