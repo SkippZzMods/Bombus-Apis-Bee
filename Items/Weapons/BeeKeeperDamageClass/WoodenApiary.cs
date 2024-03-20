@@ -2,12 +2,12 @@
 
 namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 {
-    internal class WoodenApiary : ApiaryItem
+    public class WoodenApiary : ApiaryItem
     {
         public override void AddStaticDefaults()
         {
             DisplayName.SetDefault("Wooden Apiary");
-            Tooltip.SetDefault("Rapidly ejects bees\nHold <right> to take control of the bees, causing them to deal 50% increased damage");
+            Tooltip.SetDefault("Hold <left> to rapidly fire bees\nHold <right> to fire bees slower, but take control over the bees causing them to deal 55% more damage");
         }
 
         public override void AddDefaults()
@@ -29,7 +29,7 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
 
             Item.autoReuse = true;
 
-            Item.shoot = ProjectileID.Bee;
+            Item.shoot = ProjectileType<WoodenApiaryHoldout>();
 
             Item.shootSpeed = 6f;
 
@@ -38,14 +38,27 @@ namespace BombusApisBee.Items.Weapons.BeeKeeperDamageClass
             honeyCost = 1;
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool SafeCanUseItem(Player player)
         {
-            for (int i = 0; i < 1 + Main.rand.Next(1, 3); i++)
+            if (player.altFunctionUse == 2)
             {
-                BeeUtils.SpawnBee(player, source, position + Main.rand.NextVector2Circular(15f, 15f), velocity.RotatedByRandom(0.05f), damage, knockback);
+                Item.useTime = 28;
+                Item.useAnimation = 28;
+
+            }
+            else
+            {
+                Item.useTime = 14;
+                Item.useAnimation = 14;
+
             }
 
-            return false;
+            return true;
         }
+    }
+
+    public class WoodenApiaryHoldout : ApiaryHoldout
+    {
+        public override string Texture => "BombusApisBee/Items/Weapons/BeeKeeperDamageClass/WoodenApiary";
     }
 }

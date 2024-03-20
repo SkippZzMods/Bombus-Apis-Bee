@@ -179,11 +179,13 @@ namespace BombusApisBee
             {
                 return "";
             }
+
             List<string> keys = mhk.GetAssignedKeys(0);
             if (keys.Count == 0)
             {
                 return "[NONE]";
             }
+
             StringBuilder sb = new StringBuilder(16);
             sb.Append(keys[0]);
             for (int i = 1; i < keys.Count; i++)
@@ -197,6 +199,7 @@ namespace BombusApisBee
         {
             return player.ownedProjectileCounts[ModContent.ProjectileType<T>()];
         }
+
         public static HymenoptraDamageClass BeeDamageClass()
         {
             return ModContent.GetInstance<HymenoptraDamageClass>();
@@ -344,6 +347,7 @@ namespace BombusApisBee
             }
             return ratio;
         }
+
         public static Item GetActiveItem(this Player player)
         {
             if (!Main.mouseItem.IsAir)
@@ -352,6 +356,7 @@ namespace BombusApisBee
             }
             return player.HeldItem;
         }
+
         public static float GetBeeItemResourceChance(this Player player)
         {
             if (player.GetActiveItem().ModItem is BeeDamageItem damageItem && damageItem.resourceChance > 0f)
@@ -359,18 +364,21 @@ namespace BombusApisBee
                 float Chance = damageItem.resourceChance;
                 return Chance;
             }
+
             return 0f;
         }
         public static float TrueResourceChance(this Player player)
         {
             return Utils.Clamp((player.GetBeeItemResourceChance() + player.GetModPlayer<BeeDamagePlayer>().ResourceChanceAdd), 0f, 0.5f);
         }
+
         public static Vector2 SafeDirectionTo(this Entity entity, Vector2 destination, Vector2? fallback = null)
         {
             if (fallback == null)
             {
                 fallback = new Vector2?(Vector2.Zero);
             }
+
             return Utils.SafeNormalize(destination - entity.Center, fallback.Value);
         }
         public static bool UseBeeResource(this Player player, int amount)

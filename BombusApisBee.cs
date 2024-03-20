@@ -64,17 +64,7 @@ namespace BombusApisBee
 
         public override void PostSetupContent()
         {
-            //ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Projectiles");
-            //ModContent.GetInstance<PixellateSystem>().RegisterRenderTarget("Dusts", RenderType.Dust);
-
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderProjectiles", RenderLayer.UnderProjectiles);
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverProjectiles", RenderLayer.OverProjectiles);
-
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderPlayers", RenderLayer.UnderPlayers);
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverPlayers", RenderLayer.OverPlayers);
-
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("UnderNPCs", RenderLayer.UnderNPCs);
-            ModContent.GetInstance<PixelationSystem>().RegisterScreenTarget("OverNPCs", RenderLayer.OverNPCs);
+            NetEasy.NetEasy.Register(this);
         }
 
         public override void Load()

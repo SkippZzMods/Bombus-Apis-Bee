@@ -22,4 +22,12 @@
     <Folder Include="ExtraTextures\Palettes\" />
     <Folder Include="Localization\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="NetEasy">
+      <HintPath>lib\NetEasy_v0.1.8.dll</HintPath>
+    </Reference>
+    <Reference Include="NetSerializer">
+      <HintPath>lib\NetSerializer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

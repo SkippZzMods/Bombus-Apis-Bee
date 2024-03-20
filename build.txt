@@ -2,3 +2,4 @@ displayName = [c/FFEF00:Bombus Apis (The Bee Mod)]
 author = SkippZz
 version = 2.2.0.4
 homepage = https://forums.terraria.org/index.php?threads/the-terraria-bee-mod-bombusapis.109431/
+dllReferences = NetEasy_v0.1.8, NetSerializer

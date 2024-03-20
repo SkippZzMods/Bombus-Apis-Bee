@@ -12,11 +12,30 @@ namespace BombusApisBee.BeeDamageClass
     {
         /// <summary>
         /// Called on bees spawned from the apiary when holding right click
+        /// Call base to keep homing toward mouse behavior
         /// </summary>
         /// <param name="projectile">The projectile whos ai is being changed</param>
-        public virtual void HoldAI(Projectile projectile)
+        /// <param name="controlsPlayer">The controls player used for player input</param>
+        public virtual void HoldAI(Projectile Projectile, ControlsPlayer controlsPlayer)
         {
-            
+            controlsPlayer.mouseListener = true;
+
+            Player player = Main.player[Projectile.owner];
+
+            Projectile.spriteDirection = Projectile.direction;
+            Projectile.rotation = Projectile.velocity.ToRotation() + (float)(Projectile.spriteDirection == 1 ? 0f : Math.PI) +Projectile.spriteDirection * MathHelper.ToRadians(45f);
+
+            if (++Projectile.frameCounter >= 3)
+            {
+                Projectile.frameCounter = 0;
+                if (++Projectile.frame >= Main.projFrames[Projectile.type])
+                    Projectile.frame = 0;
+            }
+
+            bool modded = Projectile.ModProjectile != null && Projectile.ModProjectile is BaseBeeProjectile;
+            bool giant = modded && (Projectile.ModProjectile as BaseBeeProjectile).otherGiant;
+
+            Projectile.velocity = (Projectile.velocity * 35f + Utils.SafeNormalize(controlsPlayer.mouseWorld - Projectile.Center, Vector2.UnitX) * 7f) / 36f;
         }
 
         // see below
@@ -27,7 +46,7 @@ namespace BombusApisBee.BeeDamageClass
 
         public sealed override void SafeSetStaticDefaults()
         {
-            ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+            //ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
             DisplayName.SetDefault("Apiary");
             AddStaticDefaults();
         }
@@ -40,6 +59,8 @@ namespace BombusApisBee.BeeDamageClass
 
         public sealed override void SafeSetDefaults()
         {
+            Item.channel = true;
+            Item.noUseGraphic = true;
             AddDefaults();
         }
 
@@ -47,34 +68,16 @@ namespace BombusApisBee.BeeDamageClass
         {
             return true;
         }
-
-        public override bool SafeCanUseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                Item.channel = true;
-                Item.noUseGraphic = true;
-            }
-            else
-            {
-                Item.channel = false;
-                Item.noUseGraphic = false;
-            }             
-
-            return true;
-        }
     }
 
     public class ApiaryPlayer : ModPlayer
     {
-        public bool apiaryActive => Player.HeldItem.ModItem is ApiaryItem && Player.channel;
-
+        public bool apiaryActive => Player.HeldItem.ModItem is ApiaryItem && Main.mouseRight;
     }
 
     class ApiaryGlobalProjectile : GlobalProjectile
     {
         public bool fromApiary;
-        public bool Active(int playerWhoAmI) => Main.player[playerWhoAmI].GetModPlayer<ApiaryPlayer>().apiaryActive;
         public override bool InstancePerEntity => true;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
@@ -92,13 +95,20 @@ namespace BombusApisBee.BeeDamageClass
 
         public override bool PreAI(Projectile projectile)
         {
-            if (Active(projectile.owner))
+            if (fromApiary)
             {
                 Player player = Main.player[projectile.owner];
 
-                (player.HeldItem.ModItem as ApiaryItem).HoldAI(projectile);
+                player.TryGetModPlayer(out ControlsPlayer controlsPlayer);
+                controlsPlayer.rightClickListener = true;
 
-                return false;
+                if (player.HeldItem.ModItem != null && player.HeldItem.ModItem is ApiaryItem && controlsPlayer.mouseRight)
+                {
+                    (player.HeldItem.ModItem as ApiaryItem).HoldAI(projectile, controlsPlayer);
+                    Main.NewText(projectile.timeLeft);
+
+                    return false;
+                }                     
             }
 
             return true;

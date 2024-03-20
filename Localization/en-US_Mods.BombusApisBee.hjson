@@ -171,6 +171,7 @@ Projectiles: {
 	WasparangHoldout.DisplayName: Beemerang
 	ManaHoneycombHoldout.DisplayName: Mana Honeycomb Holdout
 	PumpkinetScepterHoldout.DisplayName: Pumpkinet Scepter Holdout
+	WoodenApiaryHoldout.DisplayName: Apiary
 }
 
 DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage

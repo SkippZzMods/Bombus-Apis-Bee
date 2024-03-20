@@ -29,7 +29,7 @@ namespace BombusApisBee.Core
 
 		public static LocalizedText DefaultText(string key, string english)
 		{
-			LocalizedText text = Language.GetOrRegister($"Mods.StarlightRiver.{key}", () => english);
+			LocalizedText text = Language.GetOrRegister($"Mods.BombusApisBee.{key}", () => english);
 			text.SetDefault(english);
 
 			return text;
