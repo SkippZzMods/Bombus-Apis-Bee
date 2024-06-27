@@ -60,7 +60,7 @@ namespace BombusApisBee.Projectiles
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Main.player[Projectile.owner].Bombus().AddShake(12);
 

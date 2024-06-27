@@ -26,7 +26,7 @@
             Projectile.velocity *= 1.01f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item27 with { Pitch = -0.1f, PitchVariance = 0.1f, Volume = 1.25f }, Projectile.position);
             if (Main.myPlayer == Projectile.owner)
@@ -143,7 +143,7 @@
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 + (Projectile.frame == 0 ? MathHelper.ToRadians(20f) : 0f);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundID.DD2_WitherBeastDeath.PlayWith(Projectile.Center, pitch: -0.05f, 0.1f);
 

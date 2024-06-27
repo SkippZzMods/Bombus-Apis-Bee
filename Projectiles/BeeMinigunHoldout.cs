@@ -217,7 +217,7 @@
                 Projectile.timeLeft = 2;
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (ChargeUp > 50f)
             {

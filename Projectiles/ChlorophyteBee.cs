@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Main.rand.NextVector2Circular(12f, 12f), ModContent.ProjectileType<ChloroEnergy>(), Projectile.damage / 2, 1f, Projectile.owner);
 

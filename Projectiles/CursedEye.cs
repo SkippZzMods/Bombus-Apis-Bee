@@ -53,7 +53,7 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), null, 0, new Color(97, 130, 30), 0.3f);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath19, Projectile.Center);
 

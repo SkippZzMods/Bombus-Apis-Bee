@@ -34,7 +34,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity.Y = 16f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item27, Projectile.position);
 
@@ -140,7 +140,7 @@ namespace BombusApisBee.Projectiles
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundID.DD2_WitherBeastDeath.PlayWith(Projectile.Center, pitch: 0.35f);
             for (int i = 0; i < 5; i++)
@@ -206,7 +206,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity.Y = 16f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundID.DD2_WitherBeastDeath.PlayWith(Projectile.Center, pitch: 0.35f);
             for (int i = 0; i < 5; i++)
@@ -272,7 +272,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.velocity.Y = 16f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundID.DD2_WitherBeastDeath.PlayWith(Projectile.Center, pitch: 0.35f);
             for (int i = 0; i < 5; i++)

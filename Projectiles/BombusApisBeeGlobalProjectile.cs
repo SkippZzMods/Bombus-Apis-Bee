@@ -128,7 +128,7 @@ namespace BombusApisBee.Projectiles
         public delegate void StrongBeeKill(Projectile proj, int timeLeft);
         public static event StrongBeeKill StrongBeeKillEvent;
 
-        public override void Kill(Projectile projectile, int timeLeft)
+        public override void OnKill(Projectile projectile, int timeLeft)
         {
             bool giantBee = projectile.type == ProjectileID.GiantBee;
             bool giantModdedBee = (projectile.ModProjectile as BaseBeeProjectile) != null && (projectile.ModProjectile as BaseBeeProjectile).Giant;

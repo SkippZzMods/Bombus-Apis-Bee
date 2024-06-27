@@ -20,7 +20,7 @@ namespace BombusApisBee.Projectiles
             Projectile.light = 0.1f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 5; i++)
             {

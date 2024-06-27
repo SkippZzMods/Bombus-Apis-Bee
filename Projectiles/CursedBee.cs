@@ -15,7 +15,7 @@ namespace BombusApisBee.Projectiles
         {
             target.AddBuff(BuffID.CursedInferno, 720);
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int numberDust = 9 + Main.rand.Next(2);
             for (int i = 0; i < numberDust; i++)

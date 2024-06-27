@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             float rot;
             if (Projectile.rotation < 0) { rot = Main.rand.NextFloat(0, (float)Math.PI * 2); }
@@ -131,7 +131,7 @@ namespace BombusApisBee.Projectiles
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), ModContent.DustType<Dusts.ManaStardust>(), Main.rand.NextVector2Circular(3.5f, 3.5f));
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item10 with { Pitch = 0.1f }, Projectile.position);
 

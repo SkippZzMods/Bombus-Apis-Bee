@@ -36,7 +36,7 @@ namespace BombusApisBee.Dusts.Pixelized
         {
             float lerper = 1f - dust.alpha / 255f;
 
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("UnderProjectiles", () =>
             {
                 Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/Dusts/ImpactLineDust").Value;
 
@@ -80,7 +80,7 @@ namespace BombusApisBee.Dusts.Pixelized
 
             Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/Dusts/ImpactLineDust").Value;
 
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("UnderProjectiles", () =>
             {
                 Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, dust.color * lerper, dust.rotation, tex.Size() / 2f, new Vector2(dust.scale * lerper, dust.scale), 0f, 0f);
 
@@ -127,7 +127,7 @@ namespace BombusApisBee.Dusts.Pixelized
 
             if (dust.customData is Color fadeColor)
             {
-                ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
+                ModContent.GetInstance<PixelationSystem>().QueueRenderAction("UnderProjectiles", () =>
                 {
                     Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, Color.Lerp(dust.color, fadeColor, 1f - lerper) * lerper, dust.rotation, tex.Size() / 2f, new Vector2(dust.scale * lerper, dust.scale), 0f, 0f);
 

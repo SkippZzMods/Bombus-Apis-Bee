@@ -20,7 +20,7 @@
             Projectile.extraUpdates = 1;
             Projectile.alpha = 255;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int numberDust = 15 + Main.rand.Next(5);
             for (int i = 0; i < numberDust; i++)

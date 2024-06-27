@@ -144,7 +144,7 @@ namespace BombusApisBee.Projectiles
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (exploding)
             {
@@ -295,7 +295,7 @@ namespace BombusApisBee.Projectiles
             Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Vector2.Zero, 0, new Color(214, 158, 79), 0.3f);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             new SoundStyle("BombusApisBee/Sounds/Item/LightGunshot").PlayWith(Projectile.Center, 0f, 0.1f, 0.5f);
 

@@ -15,7 +15,7 @@ namespace BombusApisBee.Projectiles
             target.AddBuff(BuffID.Ichor, 240, true);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 10; i++)
             {

@@ -260,7 +260,7 @@ namespace BombusApisBee.Projectiles
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             owner.Bombus().AddShake(12);
             SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.Center);
@@ -479,7 +479,7 @@ namespace BombusApisBee.Projectiles
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.Center);
             SoundID.Item74.PlayWith(Projectile.Center, 0.25f, 0.15f, 0.85f);

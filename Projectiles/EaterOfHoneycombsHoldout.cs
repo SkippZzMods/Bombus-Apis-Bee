@@ -228,7 +228,7 @@
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Gore.NewGorePerfect(Projectile.GetSource_Death(), Projectile.Center + new Vector2(15, -5 * Projectile.direction).RotatedBy(Projectile.velocity.ToRotation()), Projectile.velocity * 0.5f, Mod.Find<ModGore>("EaterOfHoneycombs_Gore1").Type).timeLeft = 90;
             Gore.NewGorePerfect(Projectile.GetSource_Death(), Projectile.Center + new Vector2(15, 5 * Projectile.direction).RotatedBy(Projectile.velocity.ToRotation()), Projectile.velocity * 0.5f, Mod.Find<ModGore>("EaterOfHoneycombs_Gore1").Type).timeLeft = 90;

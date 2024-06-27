@@ -80,7 +80,7 @@ namespace BombusApisBee.Projectiles
             bouncing = true;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
             new Terraria.Audio.SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(pos: Projectile.position, pitchVariance: 0.1f);

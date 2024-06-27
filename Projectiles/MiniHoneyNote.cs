@@ -44,7 +44,7 @@ namespace BombusApisBee.Projectiles
             Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.HoneyDustSolid>(), Vector2.Zero, 100, default, 0.8f).noGravity = true;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
             for (int i = 0; i < 5; i++)
@@ -152,7 +152,7 @@ namespace BombusApisBee.Projectiles
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
             for (int i = 0; i < 5; i++)
@@ -231,7 +231,7 @@ namespace BombusApisBee.Projectiles
                     Projectile.Kill();
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
             for (int i = 0; i < 5; i++)

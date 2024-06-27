@@ -19,7 +19,7 @@ namespace BombusApisBee.Projectiles
             Projectile.timeLeft = 600;
 
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.myPlayer == Projectile.owner)
             {
@@ -97,7 +97,7 @@ namespace BombusApisBee.Projectiles
             Projectile.timeLeft = 600;
 
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.myPlayer == Projectile.owner)
             {
@@ -180,7 +180,7 @@ namespace BombusApisBee.Projectiles
             Projectile.timeLeft = 600;
 
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.myPlayer == Projectile.owner)
             {

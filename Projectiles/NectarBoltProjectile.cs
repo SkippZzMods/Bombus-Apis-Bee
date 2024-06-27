@@ -66,7 +66,7 @@ namespace BombusApisBee.Projectiles
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 20; i++)
             {
@@ -209,7 +209,7 @@ namespace BombusApisBee.Projectiles
             Player player = Main.player[Projectile.owner];
             player.Heal(1);
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 15; i++)
             {

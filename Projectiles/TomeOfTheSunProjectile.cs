@@ -37,7 +37,7 @@ namespace BombusApisBee.Projectiles
                 new SoundStyle("BombusApisBee/Sounds/Item/FireCast").PlayWith(Projectile.Center);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Main.player[Projectile.owner].Bombus().AddShake(7);
             for (int i = 0; i < 30; i++)
@@ -162,7 +162,7 @@ namespace BombusApisBee.Projectiles
 
             hitDelay = 15;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 10; i++)
             {

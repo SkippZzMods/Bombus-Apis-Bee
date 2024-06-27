@@ -37,7 +37,7 @@
                 Main.dust[dust].noGravity = true;
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int num465 = 0; num465 < 8; num465++)
             {

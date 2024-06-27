@@ -10,7 +10,7 @@ namespace BombusApisBee.Projectiles
             Main.projFrames[Projectile.type] = 4;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.myPlayer == Projectile.owner && Main.rand.NextBool(3))
             {
@@ -84,7 +84,7 @@ namespace BombusApisBee.Projectiles
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath1 with { Pitch = -0.1f }, Projectile.Center);
 
@@ -140,7 +140,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Main.player[Projectile.owner].Bombus().AddShake(5);
             new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(Projectile.Center, 0.15f, 0.1f, 1.15f);

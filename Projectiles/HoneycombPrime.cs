@@ -101,7 +101,7 @@ namespace BombusApisBee.Projectiles
             Dust.NewDustPerfect(Main.GetPlayerArmPosition(Projectile) + Main.rand.NextVector2Circular(5f, 5f), ModContent.DustType<Glow>(), Vector2.Zero, 0, new Color(213, 95, 89, 50), 0.4f);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.Center);
 
@@ -307,7 +307,7 @@ namespace BombusApisBee.Projectiles
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath14 with { Volume = 0.5f }, Projectile.Center);
 
@@ -544,7 +544,7 @@ namespace BombusApisBee.Projectiles
                 Projectile.Center + Vector2.One.RotatedBy(Projectile.rotation - MathHelper.PiOver4) * 500f, 5, ref useless);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCDeath14 with { Volume = 0.5f }, Projectile.Center);
 

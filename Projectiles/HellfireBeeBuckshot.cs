@@ -59,7 +59,7 @@ namespace BombusApisBee.Projectiles
             target.AddBuff(BuffID.OnFire3, 300);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
             if (Main.myPlayer == Projectile.owner)
@@ -155,7 +155,7 @@ namespace BombusApisBee.Projectiles
                 color = Color.Lerp(new Color(250, 150, 30), Color.Black, dust.alpha / 255f);
 
             Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/SmokeTransparent_" + dust.customData).Value;
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("UnderProjectiles", () =>
             {
                 Main.spriteBatch.End();
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, Main.DefaultSamplerState, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.EffectMatrix);
@@ -209,7 +209,7 @@ namespace BombusApisBee.Projectiles
             target.AddBuff(BuffID.OnFire3, 300);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Projectile.owner == Main.myPlayer)
                 Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ProjectileType<HellfireSlugExplosion>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner, 55);
@@ -417,7 +417,7 @@ namespace BombusApisBee.Projectiles
 
         public void DrawPrimitives()
         {
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverNPCs", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("UnderProjectiles", () =>
             {
                 Effect effect = Filters.Scene["SLRCeirosRing"].GetShader().Shader;
 

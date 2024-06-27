@@ -71,7 +71,7 @@
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundID.NPCDeath19.PlayWith(Projectile.Center);
 

@@ -195,7 +195,7 @@ namespace BombusApisBee.BeeDamageClass
                 }
 
                 if (HoneyImmuneTimer > 0)
-                    return false;
+                    return true;
             }
 
             return base.ImmuneTo(damageSource, cooldownCounter, dodgeable);

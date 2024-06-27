@@ -71,7 +71,7 @@ namespace BombusApisBee.Projectiles
             Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * 1.5f, ModContent.DustType<Dusts.GlowFastDecelerate>(), -Vector2.UnitX.RotatedBy(Projectile.velocity.ToRotation() - MathHelper.PiOver2) * 1.85f, 0, new Color(181, 127, 207), 0.35f);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (split)
             {
@@ -251,7 +251,7 @@ namespace BombusApisBee.Projectiles
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 8; i++)
             {

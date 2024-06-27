@@ -51,7 +51,7 @@ namespace BombusApisBee.Projectiles
             return true;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { Volume = 0.85f, PitchVariance = 0.15f }, Projectile.position);
             for (int i = 1; i < 4; i++)

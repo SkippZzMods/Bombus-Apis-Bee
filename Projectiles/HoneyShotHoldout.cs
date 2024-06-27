@@ -209,7 +209,7 @@
             Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(1.5f, 1.5f), 0, Main.rand.NextBool() ? new Color(180, 90, 0) : new Color(251, 172, 17), 0.45f);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 15; i++)
             {

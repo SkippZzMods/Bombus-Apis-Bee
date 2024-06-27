@@ -2,7 +2,7 @@
 
 namespace BombusApisBee.Dusts.Pixelized
 {
-    public class PixelatedGlow : ModDust
+    public class PixelStar : ModDust
     {
         public override string Texture => BombusApisBee.Invisible;
 
@@ -26,14 +26,15 @@ namespace BombusApisBee.Dusts.Pixelized
 
             return false;
         }
-
+            
         public override bool PreDraw(Dust dust)
         {
             float lerper = 1f - dust.alpha / 255f;
 
-            Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+            Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/StarTexture").Value;
+            Texture2D bloomTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
 
-            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("UnderProjectiles", () =>
+            ModContent.GetInstance<PixelationSystem>().QueueRenderAction("OverPlayers", () =>
             {
                 Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, dust.color * lerper, dust.rotation, tex.Size() / 2f, dust.scale * lerper, 0f, 0f);
 

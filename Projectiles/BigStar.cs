@@ -38,7 +38,7 @@
             return true;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int numberProjectiles = 5 + Main.rand.Next(5); // 4 or 5 shots
             for (int i = 0; i < numberProjectiles; i++)
