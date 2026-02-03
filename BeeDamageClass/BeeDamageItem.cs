@@ -8,7 +8,10 @@ namespace BombusApisBee.BeeDamageClass
         public int altHoneyCost = 0;
         public int critAdd = 0;
 
-        public float resourceChance = 0f;        
+        public float resourceChance = 0f;
+
+        //ONLY FOR SHOWCASING WEAPONS- DO NOT USE FOR GAMEPLAY- DISABLES KEY FEATURES OF THE CLASS FOR VISUAL CLARITY WHEN SHOWCASING
+        public bool SHOWCASEMODE = false;
 
         public virtual void SafeSetStaticDefaults() { }
         public sealed override void SetStaticDefaults()
@@ -49,7 +52,7 @@ namespace BombusApisBee.BeeDamageClass
                     tooltips.Add(new TooltipLine(Mod, "KeywordInfo", "[c/646464:Press UP for more info]"));
                 else
                 {
-                    int index = tooltips.FindIndex(tt => tt.Mod.Equals("BombusApisBee") && tt.Name.Equals("Honey Cost"));
+                    int index = tooltips.FindIndex(tt => (tt.Mod.Equals("BombusApisBee") || tt.Mod.Equals("BombusApisCalamity")) && tt.Name.Equals("Honey Cost"));
 
                     if (index != -1)
                         tooltips.Insert(index + 1, new TooltipLine(Mod, "HoneyCostDescription", "Uses [c/FFBC00:{Honey Cost On Left Click}] [c/FFA200:|] [c/FF9100:{Honey Cost On Right Click}] honey"));
@@ -69,6 +72,12 @@ namespace BombusApisBee.BeeDamageClass
 
         public override bool CanUseItem(Player player)
         {
+            if (SHOWCASEMODE)
+            {
+                player.GetModPlayer<BeeDamagePlayer>().HeldBeeWeaponTimer = 0;
+                player.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent = 100;
+            }
+
             bool bee = false;
             var BeeDamagePlayer = player.GetModPlayer<BeeDamagePlayer>();
 

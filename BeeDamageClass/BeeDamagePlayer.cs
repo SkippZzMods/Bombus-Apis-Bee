@@ -47,6 +47,8 @@ namespace BombusApisBee.BeeDamageClass
 
         public float BeeStrengthenChance;
 
+        public int SHOWCASEMODETIMER;
+
         public bool HasBees => Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > 0;
 
         public static BeeDamagePlayer ModPlayer(Player player)
@@ -85,6 +87,9 @@ namespace BombusApisBee.BeeDamageClass
 
             BeeResourceReserved = 0;
             BeeStrengthenChance = 0;
+
+            if (SHOWCASEMODETIMER > 0)
+                SHOWCASEMODETIMER--;
         }
 
         public override void UpdateEquips()
@@ -139,7 +144,7 @@ namespace BombusApisBee.BeeDamageClass
                 }
             }
 
-            if (Player.HeldItem.CountsAsClass<HymenoptraDamageClass>())
+            if (Player.HeldItem.ModItem != null && Player.HeldItem.CountsAsClass<HymenoptraDamageClass>() && (Player.HeldItem.ModItem as BeeDamageItem).SHOWCASEMODE == false && SHOWCASEMODETIMER <= 0)
                 HeldBeeWeaponTimer = 900;
             else if (HoldingBeeWeaponTimer > 0 && HeldBeeWeaponTimer <= 0)
                 HoldingBeeWeaponTimer--;
