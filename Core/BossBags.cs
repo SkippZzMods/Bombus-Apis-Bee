@@ -1,4 +1,20 @@
-﻿using Terraria.GameContent.ItemDropRules;
+﻿using BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs;
+using BombusApisBee.Content.Crimson.Items.BrainyHoneycomb;
+using BombusApisBee.Content.Dungeon.Items.Skelecomb;
+using BombusApisBee.Content.Forest.Items.GelatinousHoneycomb;
+using BombusApisBee.Content.Forest.Items.PeeperPoker;
+using BombusApisBee.Content.Forest.Items.QueensLarvae;
+using BombusApisBee.Content.Forest.Items.RetinaReleaser;
+using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
+using BombusApisBee.Content.Hell.Items.Honeyshot;
+using BombusApisBee.Content.Jungle.Items.Needleshot;
+using BombusApisBee.Content.Jungle.Items.QueensCharge;
+using BombusApisBee.Content.Jungle.Items.TheSting;
+using BombusApisBee.Content.Jungle.Items.TomeOfTheSun;
+using BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb;
+using BombusApisBee.Content.MechBoss.Items.OcularRemote;
+using BombusApisBee.Content.MechBoss.Items.Probeecomb;
+using Terraria.GameContent.ItemDropRules;
 
 namespace BombusApisBee.Core
 {
@@ -46,8 +62,8 @@ namespace BombusApisBee.Core
             if (item.type == ItemID.DestroyerBossBag)
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ProbeyComb>()));
 
-            if (item.type == ItemID.PlanteraBossBag)
-                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HimensApiary>()));
+            //if (item.type == ItemID.PlanteraBossBag)
+            //    itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HimensApiary>()));
 
             if (item.type == ItemID.GolemBossBag)
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TomeOfTheSun>()));

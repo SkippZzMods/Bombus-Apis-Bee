@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Buffs
+﻿using BombusApisBee.Content.Space.Items.ElectricHoneycomb;
+
+namespace BombusApisBee.Buffs
 {
     public class Electrocuted : ModBuff
     {
@@ -20,7 +22,7 @@
                 Main.player[npc.FindClosestPlayer()].Bombus().AddShake(10);
             }
 
-            Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0f, 0f, 0, new Color(110, 220, 255), 0.4f);
+            Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<GlowFastDecelerate>(), 0f, 0f, 0, new Color(110, 220, 255), 0.4f);
 
             npc.GetGlobalNPC<ElectrocutedGlobalNPC>().inflicted = true;
         }

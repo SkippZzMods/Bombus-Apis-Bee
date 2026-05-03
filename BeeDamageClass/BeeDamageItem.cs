@@ -52,7 +52,7 @@ namespace BombusApisBee.BeeDamageClass
                     tooltips.Add(new TooltipLine(Mod, "KeywordInfo", "[c/646464:Press UP for more info]"));
                 else
                 {
-                    int index = tooltips.FindIndex(tt => (tt.Mod.Equals("BombusApisBee") || tt.Mod.Equals("BombusApisCalamity")) && tt.Name.Equals("Honey Cost"));
+                    int index = tooltips.FindIndex(tt => tt.Mod.Equals("BombusApisBee") && tt.Name.Equals("Honey Cost"));
 
                     if (index != -1)
                         tooltips.Insert(index + 1, new TooltipLine(Mod, "HoneyCostDescription", "Uses [c/FFBC00:{Honey Cost On Left Click}] [c/FFA200:|] [c/FF9100:{Honey Cost On Right Click}] honey"));

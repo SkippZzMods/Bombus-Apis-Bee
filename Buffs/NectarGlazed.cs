@@ -18,10 +18,10 @@
                 if (Main.rand.NextBool(3))
                 {
                     Vector2 velo = Vector2.UnitY * Main.rand.NextFloat(3f);
-                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.GlowFastDecelerate>(), velo.X, velo.Y, 0, new Color(214, 158, 79, 50), 0.35f);
+                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<GlowFastDecelerate>(), velo.X, velo.Y, 0, new Color(214, 158, 79, 50), 0.35f);
                 }
                 else
-                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.HoneyDust>(), 0f, 0f, Main.rand.Next(70, 125), default).velocity *= 0.25f;
+                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<HoneyDust>(), 0f, 0f, Main.rand.Next(70, 125), default).velocity *= 0.25f;
             }
         }
     }

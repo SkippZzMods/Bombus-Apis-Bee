@@ -1,0 +1,51 @@
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using Terraria.DataStructures;
+
+
+namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
+{
+    public class SpectralBeeTome : BeeDamageItem
+    {
+        public override void SafeSetStaticDefaults()
+        {
+            Tooltip.SetDefault("'The souls of forgotten bees seek vengeance'");
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
+        }
+
+        public override void SafeSetDefaults()
+        {
+            Item.damage = 65;
+            Item.noMelee = true;
+            Item.width = 50;
+            Item.height = 18;
+            Item.useTime = 15;
+            Item.useAnimation = 15;
+
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.knockBack = 2f;
+            Item.value = Item.sellPrice(0, 10, 50, 0);
+
+            Item.rare = ItemRarityID.Yellow;
+            Item.autoReuse = false;
+            Item.shoot = ProjectileType<SpectralBeeTomeHoldout>();
+            Item.shootSpeed = 1f;
+
+            honeyCost = 3;
+            Item.noUseGraphic = true;
+            Item.channel = true;
+            resourceChance = 0.33f;
+        }
+        public override Vector2? HoldoutOffset()
+        {
+            return new Vector2(3, 0);
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe(1).AddIngredient(ItemID.SpectreBar, 12).AddIngredient(ItemID.Book, 1).AddIngredient(ItemType<PollenItem>(), 35).AddTile(TileID.Bookcases).Register();
+        }
+        public override bool SafeCanUseItem(Player player)
+        {
+            return player.ownedProjectileCounts[ProjectileType<SpectralBeeTomeHoldout>()] <= 0;
+        }
+    }
+}

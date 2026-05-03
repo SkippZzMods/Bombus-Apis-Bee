@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Content.Projectiles;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 
@@ -196,7 +197,7 @@ namespace BombusApisBee.BeeDamageClass
                         Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Honey2, 0f, 0f, 90, default, 1.25f).velocity *= 0.25f;
                     }
 
-                    BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.5f, 0, null, 2.5f);
+                    BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<HoneyMetaballDustTransparent>(), 3.5f, 0, null, 2.5f);
                 }
 
                 if (HoneyImmuneTimer > 0)
@@ -211,7 +212,7 @@ namespace BombusApisBee.BeeDamageClass
             Player.statDefense += CurrentBees * 2;
 
             if (HoneyShieldCD == 1)
-                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<Dusts.HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);
+                BeeUtils.CircleDust(Player.Center, 50, ModContent.DustType<HoneyMetaballDustTransparent>(), 3.75f, 0, null, 2f);
         }
 
         private void UpdateOffense()
@@ -385,7 +386,7 @@ namespace BombusApisBee.BeeDamageClass
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f) + Projectile.velocity, DustID.Honey2, Vector2.Zero, Main.rand.Next(100), default, 0.75f);
 
                 if (++HoneyTimer % 150 == 0)
-                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Player.Center) * 10f, ModContent.ProjectileType<Projectiles.BeeResourceIncreaseProjectile>(), 0, 0f, Player.whoAmI, 0, Player.Hymenoptra().GatheringIncrease).tileCollide = false;
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center + Projectile.velocity, Projectile.DirectionTo(Player.Center) * 10f, ModContent.ProjectileType<BeeResourceIncreaseProjectile>(), 0, 0f, Player.whoAmI, 0, Player.Hymenoptra().GatheringIncrease).tileCollide = false;
 
                 if (Player.Hymenoptra().HoldingBeeWeaponTimer <= 0)
                     Projectile.Kill();
@@ -446,11 +447,11 @@ namespace BombusApisBee.BeeDamageClass
                 if (Player.Hymenoptra().JustShielded)
                     for (int i = 0; i < 5; i++)
                     {
-                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Main.rand.NextVector2Circular(3f, 3f), 0, new Color(255, 205, 0), 0.45f);
+                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(3f, 3f), 0, new Color(255, 205, 0), 0.45f);
                     }
 
                 if (Player.Hymenoptra().HoneyShieldCD == 1)
-                    BeeUtils.CircleDust(Projectile.Center, 10, ModContent.DustType<Dusts.GlowFastDecelerate>(), 1f, 0, new Color(255, 205, 0), 0.5f);
+                    BeeUtils.CircleDust(Projectile.Center, 10, ModContent.DustType<GlowFastDecelerate>(), 1f, 0, new Color(255, 205, 0), 0.5f);
 
                 mult = 1f;
                 if (Projectile.Distance(Player.Center) > 150 && Projectile.Distance(Player.Center) < 450)
@@ -571,7 +572,7 @@ namespace BombusApisBee.BeeDamageClass
                 if (attackTarget != null && AttackDelay <= 0)
                 {
                     if (Main.rand.NextBool(5))
-                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Vector2.Zero, 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.25f);
+                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), Vector2.Zero, 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.25f);
 
                     FrameOffset = 4;
                     Attacking = true;
@@ -760,7 +761,7 @@ namespace BombusApisBee.BeeDamageClass
 
                     for (int i = 0; i < 5; i++)
                     {
-                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), (-Projectile.velocity * Main.rand.NextFloat(0.2f)).RotatedByRandom(0.55f), 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.45f);
+                        Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<GlowFastDecelerate>(), (-Projectile.velocity * Main.rand.NextFloat(0.2f)).RotatedByRandom(0.55f), 0, Main.rand.NextBool() ? new Color(255, 125, 0) : new Color(255, 200, 0), 0.45f);
                     }
 
                     attackTarget = null;

@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Buffs
+﻿using BombusApisBee.Content.Forest.Items.QueensLarvae;
+
+namespace BombusApisBee.Buffs
 {
     public class TheQueensGuard : ModBuff
     {
@@ -12,7 +14,7 @@
 
         public override void Update(Player player, ref int buffIndex)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<TheQueen>()] > 0)
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<QueensLarvaeProjectile>()] > 0)
                 player.buffTime[buffIndex] = 18000;
             else
             {

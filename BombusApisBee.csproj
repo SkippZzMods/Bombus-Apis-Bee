@@ -6,13 +6,31 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\ExtraTextures\GenericBarBack.png" />
+    <None Remove="Assets\ExtraTextures\GenericBarBack_Glow.png" />
+    <None Remove="Assets\ExtraTextures\GenericBarFront.png" />
+    <None Remove="Assets\ExtraTextures\GenericBarFront_Glow.png" />
+    <None Remove="Assets\ExtraTextures\GlowHarshAlpha.png" />
+    <None Remove="Assets\ExtraTextures\GlowWithRing.png" />
+    <None Remove="Assets\ExtraTextures\Shine.png" />
+    <None Remove="Assets\ExtraTextures\SmokeAlpha_1.png" />
+    <None Remove="Assets\ExtraTextures\SmokeAlpha_2.png" />
+    <None Remove="Assets\ExtraTextures\SmokeAlpha_3.png" />
+    <None Remove="Assets\ExtraTextures\SmokeTransparent_1.png" />
+    <None Remove="Assets\ExtraTextures\SmokeTransparent_2.png" />
+    <None Remove="Assets\ExtraTextures\SmokeTransparent_3.png" />
+    <None Remove="Assets\ExtraTextures\StarAlpha.png" />
+    <None Remove="Assets\ExtraTextures\Star_01.png" />
+    <None Remove="Content\Dusts\CoralcombDust.png" />
+    <None Remove="Content\Dusts\GraveBlood.png" />
+    <None Remove="Content\Dusts\HitSlashDust.png" />
+    <None Remove="Content\Dusts\SmokeDust2.png" />
+    <None Remove="Content\Dusts\WaterBubble.png" />
+    <None Remove="Content\Forest\Items\HoneyFlareGun\HoneyFlareGun.png" />
     <None Remove="Core\PixelationSystem\README.txt" />
     <None Remove="Effects\EasyCompile\PixelShader.fx" />
     <None Remove="Effects\PaletteCorrection.fx" />
-    <None Remove="Items\Accessories\BeeKeeperDamageClass\CatacombShard.png" />
-    <None Remove="Projectiles\AculeusBladeStinger.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Remove="Sounds\Crossmod\Calamity\README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bosses\HoneyConglomerate\" />
@@ -20,6 +38,12 @@
     <Folder Include="Localization\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CalamityMod">
+      <HintPath>Content\Crossmod\Calamity\lib\CalamityMod.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_CalamityMod">
+      <HintPath>lib\MMHOOK_CalamityMod.dll</HintPath>
+    </Reference>
     <Reference Include="NetEasy">
       <HintPath>lib\NetEasy_v0.1.8.dll</HintPath>
     </Reference>

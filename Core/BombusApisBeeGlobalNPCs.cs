@@ -1,9 +1,34 @@
-﻿using BombusApisBee.Items.Other.Consumables;
-using BombusApisBee.Items.Other.Crafting;
-using Terraria.Chat;
+﻿using Terraria.Chat;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Localization;
 using Terraria.ID;
+using BombusApisBee.Content.Space.Items.ElectricHoneycomb;
+using BombusApisBee.Content.Forest.Items.GelatinousHoneycomb;
+using BombusApisBee.Content.Hell.Items.Honeyshot;
+using BombusApisBee.Content.Martian.Items.LazerbeemBlaster;
+using BombusApisBee.Content.Martian.Items.Beenopopper;
+using BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb;
+using BombusApisBee.Content.Dungeon.Items.Skelecomb;
+using BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb;
+using BombusApisBee.Content.Jungle.Items.Needleshot;
+using BombusApisBee.Content.MechBoss.Items.OcularRemote;
+using BombusApisBee.Content.MechBoss.Items.Probeecomb;
+using BombusApisBee.Content.Forest.Items.PeeperPoker;
+using BombusApisBee.Content.Forest.Items.QueensLarvae;
+using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Content.Jungle.Items.RoyalJelly;
+using BombusApisBee.Content.Jungle.Items.HiveBandAccessory;
+using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
+using BombusApisBee.Content.Snow.Items.FrozenStinger;
+using BombusApisBee.Content.BloodMoon.Items.HemocombShard;
+using BombusApisBee.Content.Martian.Items.HoneyManipulator;
+using BombusApisBee.Content.Jungle.Items.LihzardianHornetRelic;
+using BombusApisBee.Content.Jungle.Items.NectarVial;
+using BombusApisBee.Content.Forest.Items.RetinaReleaser;
+using BombusApisBee.Content.Forest.Items.RottenHoneycombShard;
+using BombusApisBee.Content.Jungle.Items.TriTipStinger;
+using BombusApisBee.Content.Pillars.Items.PhotonFragment;
+using BombusApisBee.Content.Jungle.Items.TomeOfTheSun;
 
 namespace BombusApisBee.Core
 {
@@ -25,6 +50,7 @@ namespace BombusApisBee.Core
                     BeeHitCooldown[i]--;
             }
         }
+
         public override bool PreKill(NPC npc)
         {
             if (npc.type == NPCID.Golem && !NPC.downedGolemBoss)
@@ -39,6 +65,7 @@ namespace BombusApisBee.Core
                     ChatHelper.BroadcastChatMessage(NetworkText.FromKey(NPCShopKey1, new object[0]), new Color?(Color.Orange).Value, -1);
                 }
             }
+
             bool lastTwinStanding = false;
             if (npc.type == NPCID.Retinazer)
             {
@@ -48,6 +75,7 @@ namespace BombusApisBee.Core
             {
                 lastTwinStanding = !NPC.AnyNPCs(125);
             }
+
             bool mechBossFirst = !NPC.downedMechBossAny && (lastTwinStanding || npc.type == NPCID.TheDestroyer || npc.type == NPCID.SkeletronPrime);
             if (!NPC.downedMechBossAny && mechBossFirst)
             {
@@ -61,6 +89,7 @@ namespace BombusApisBee.Core
                     ChatHelper.BroadcastChatMessage(NetworkText.FromKey(NPCShopKey2, new object[0]), new Color?(Color.Orange).Value, -1);
                 }
             }
+
             return true;
         }
 
@@ -99,13 +128,13 @@ namespace BombusApisBee.Core
                 npcLoot.Add(rule);
             }
 
-            if (npc.type == NPCID.Pumpking)
+            /*if (npc.type == NPCID.Pumpking)
             {
                 Conditions.PumpkinMoonDropGatingChance condition = new();
                 IItemDropRule rule = new LeadingConditionRule(condition);
                 rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<PumpkinetScepter>(), 5));
                 npcLoot.Add(rule);
-            }
+            }*/
 
             if (npc.type == NPCID.AngryNimbus)
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<ElectricHoneycomb>(), 15, 10));
@@ -162,7 +191,7 @@ namespace BombusApisBee.Core
             }
 
             if (npc.lifeMax > 5 && npc.value > 0f && !NPCID.Sets.CountsAsCritter[npc.type] && !npc.boss)
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pollen>(), 5, 1, 3));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PollenItem>(), 5, 1, 3));
 
             if (PillarList.Contains(npc.type))
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<PhotonFragment>(), 5, 4));

@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Buffs
+﻿using BombusApisBee.Content.Projectiles;
+
+namespace BombusApisBee.Buffs
 {
     public class HoneyBeeBuff : ModBuff
     {

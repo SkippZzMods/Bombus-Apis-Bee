@@ -2,7 +2,7 @@
 {
     public class BombusWorld : ModSystem
     {
-        public override void PostWorldGen()
+        /*public override void PostWorldGen()
         {
             // gold chest gen
             int itemsToPlaceInGoldChests = ModContent.ItemType<EnchantedApiary>();
@@ -43,6 +43,6 @@
                     }
                 }
             }
-        }
+        }*/
     }
 }

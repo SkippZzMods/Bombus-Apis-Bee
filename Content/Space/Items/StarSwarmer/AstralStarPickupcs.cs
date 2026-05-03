@@ -1,0 +1,46 @@
+﻿namespace BombusApisBee.Content.Space.Items.StarSwarmer
+{
+    public class AstralStarPickup : ModItem
+    {
+        public override string Texture => "BombusApisBee/Content/Space/Items/StarSwarmer/AstralStarSplitting";
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Astral Star");
+            Tooltip.SetDefault("you shouldn't see this....");
+            ItemID.Sets.ItemNoGravity[Item.type] = true;
+        }
+        public override void SetDefaults()
+        {
+            Item.width = 22;
+            Item.height = 24;
+            Item.rare = ItemRarityID.Pink;
+        }
+        public override void GrabRange(Player player, ref int grabRange)
+        {
+            grabRange = 100;
+        }
+        public override bool ItemSpace(Player player)
+        {
+            return false;
+        }
+        public override bool OnPickup(Player player)
+        {
+            player.IncreaseBeeResource(6);
+
+            BeeUtils.DrawStar(Item.Center, DustType<GlowFastDecelerate>(), 0, new Color(181, 127, 207), true, 5, 0.85f, 1f, 0.4f, 0.3f);
+
+            player.AddBuff<AstralStarBuff>(240);
+            return false;
+        }
+
+        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        {
+            Texture2D bloomTex = Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
+            Texture2D texGlow = Request<Texture2D>("BombusApisBee/Projectiles/AstralStar_Glow").Value;
+
+            Main.spriteBatch.Draw(bloomTex, Item.Center - Main.screenPosition, null, new Color(181, 127, 207, 0) * 0.65f, 0f, bloomTex.Size() / 2f, 0.65f, 0, 0);
+            Main.spriteBatch.Draw(texGlow, Item.Center - Main.screenPosition, null, new Color(181, 127, 207, 0) * 0.5f, rotation, texGlow.Size() / 2f, scale, 0f, 0f);
+            Main.spriteBatch.Draw(bloomTex, Item.Center - Main.screenPosition, null, new Color(181, 127, 207, 0) * 0.65f, 0f, bloomTex.Size() / 2f, 0.65f, 0, 0);
+        }
+    }
+}

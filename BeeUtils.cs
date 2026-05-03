@@ -1,8 +1,11 @@
-﻿using ReLogic.Utilities;
+﻿using BombusApisBee.BeeHelperProj;
+using BombusApisBee.Content.Projectiles;
+using ReLogic.Utilities;
 using Terraria.DataStructures;
 
 namespace BombusApisBee
 {
+    // TODO: partial classes and organization for this :D
     public static class BeeUtils
     {
         /// <summary>
@@ -491,7 +494,25 @@ namespace BombusApisBee
         {
             return (float)MathHelper.ToRadians(amount);
         }
+        public static bool IsBee(int whoAmI)
+        {
+            Projectile proj = Main.projectile[whoAmI];
 
+            if (proj.type == ProjectileID.Bee || proj.type == ProjectileID.GiantBee || proj.ModProjectile is BaseBeeProjectile)
+                return true;
+
+            return false;
+        }
+
+        public static bool IsStrongBee(int whoAmI)
+        {
+            Projectile proj = Main.projectile[whoAmI];
+
+            if (proj.type == ProjectileID.GiantBee || (proj.ModProjectile is BaseBeeProjectile && (proj.ModProjectile as BaseBeeProjectile).Giant))
+                return true;
+
+            return false;
+        }
         public static Vector3 Vec3(this Vector2 vector) => new Vector3(vector.X, vector.Y, 0);
         /// <summary>
         /// fancy slr utility
@@ -548,6 +569,17 @@ namespace BombusApisBee
         public static SlotId PlayWith(this SoundStyle sound, Vector2? pos = null, float pitch = 0f, float pitchVariance = 0f, float volume = 1f)
         {
             return SoundEngine.PlaySound(sound with { Pitch = pitch, PitchVariance = pitchVariance, Volume = volume }, pos);
+        }
+        public static bool IsFleshy(NPC NPC)
+        {
+            return !
+                (
+                    NPC.HitSound == SoundID.NPCHit2 ||
+                    NPC.HitSound == SoundID.NPCHit3 ||
+                    NPC.HitSound == SoundID.NPCHit4 ||
+                    NPC.HitSound == SoundID.NPCHit41 ||
+                    NPC.HitSound == SoundID.NPCHit42
+                );
         }
 
         public static Color MulticolorLerp(float increment, params Color[] colors)

@@ -1,4 +1,13 @@
-﻿using BombusApisBee.Items.Other.OnPickupItems;
+﻿using BombusApisBee.Content.Dungeon.Items.Skelecomb;
+using BombusApisBee.Content.Dungeon.Items.SkeletalBeeArmor;
+using BombusApisBee.Content.Forest.Items.BeefinTuna;
+using BombusApisBee.Content.Forest.Items.BeeSniperArmor;
+using BombusApisBee.Content.Forest.Items.Honeycomb;
+using BombusApisBee.Content.Forest.Items.PeeperPoker;
+using BombusApisBee.Content.Forest.Items.RetinaReleaser;
+using BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb;
+using BombusApisBee.Content.Projectiles;
+using BombusApisBee.Content.Snow.Items.FrostedHoneycomb;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -6,6 +15,7 @@ using Terraria.ModLoader.IO;
 
 namespace BombusApisBee.Core
 {
+    // TODO: Partial classing using delegate loading so that this doesnt suck!
     public partial class BombusApisBeePlayer : ModPlayer
     {
         public bool RetinaReleaser;
@@ -15,7 +25,10 @@ namespace BombusApisBee.Core
         public bool squire;
         public bool hivemind;
         public bool queenroar;
+
         public int shakeTimer = 0;
+        internal Vector2? screenShakeVector;
+
         public bool improvedhoney;
         public const int PollenMax = 1;
         public int Pollen;
@@ -221,37 +234,8 @@ namespace BombusApisBee.Core
                     }
                 }
             }
-
-            if (enchantedhoney)
-            {
-                for (int i = 0; i < Main.rand.Next(2, 5); i++)
-                {
-                    Item item = Main.item[Item.NewItem(Player.GetSource_Accessory(new Item(ModContent.ItemType<EnchantedApiary>())), Player.getRect(), ModContent.ItemType<HoneyPickup>())];
-
-                    item.noGrabDelay = 60;
-
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
-                    {
-                        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI, 1f);
-                    }
-                }
-            }
-
-            if (HimenApiary)
-            {
-                for (int i = 0; i < Main.rand.Next(3, 6); i++)
-                {
-                    Item item = Main.item[Item.NewItem(Player.GetSource_Accessory(new Item(ModContent.ItemType<HimensApiary>())), Player.getRect(), ModContent.ItemType<HoneyPickup2>())];
-
-                    item.noGrabDelay = 60;
-
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
-                    {
-                        NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI, 1f);
-                    }
-                }
-            }
         }
+
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 Speed = velocity;
@@ -322,14 +306,27 @@ namespace BombusApisBee.Core
             }
         }
 
+        // TODO: redo screen shake logic
         public override void ModifyScreenPosition()
         {
+            if (screenShakeVector.HasValue)
+            {
+                Main.screenPosition += screenShakeVector.Value + Main.rand.NextVector2Circular(screenShakeVector.Value.Length() * 0.15f, screenShakeVector.Value.Length() * 0.15f);
+                screenShakeVector *= 0.9f;
+                if (screenShakeVector.Value.Length() < 1f)
+                    screenShakeVector = null;
+            }
+
             if (shakeTimer > 0)
             {
                 shakeTimer--;
                 Vector2 shake = new Vector2(Main.rand.NextFloat(shakeTimer), Main.rand.NextFloat(shakeTimer));
                 Main.screenPosition += shake;
             }
+        }
+        public void AddDirectionalShake(Vector2 shakeVector)
+        {
+            screenShakeVector = shakeVector;
         }
 
         public void AddShake(int amount, bool clamped = true)
@@ -484,12 +481,12 @@ namespace BombusApisBee.Core
                     }
 
                     target.DelBuff(target.FindBuffIndex(ModContent.BuffType<NectarGlazed>()));
-                    BeeUtils.DrawDustImage(target.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0.25f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HoneyDustImage").Value, 1f, 0, new Color(255, 255, 150), rot: 0);
+                    BeeUtils.DrawDustImage(target.Center, ModContent.DustType<GlowFastDecelerate>(), 0.25f, ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/HoneyDustImage").Value, 1f, 0, new Color(255, 255, 150), rot: 0);
 
                     for (int i = 0; i < 45; ++i)
                     {
                         float angle2 = 6.28f * (float)i / (float)45;
-                        Dust.NewDustPerfect(target.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), Utils.ToRotationVector2(angle2) * 4.25f, 0, new Color(255, 255, 150), 1.15f);
+                        Dust.NewDustPerfect(target.Center, ModContent.DustType<GlowFastDecelerate>(), Utils.ToRotationVector2(angle2) * 4.25f, 0, new Color(255, 255, 150), 1.15f);
                     }
                 }
 

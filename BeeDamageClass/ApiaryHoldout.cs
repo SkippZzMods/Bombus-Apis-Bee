@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Dusts.Pixelized;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
 
 namespace BombusApisBee.BeeDamageClass
 {

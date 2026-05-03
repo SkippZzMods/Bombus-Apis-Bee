@@ -1,4 +1,5 @@
-﻿using BombusApisBee.UI;
+﻿using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
+using BombusApisBee.UI;
 using Terraria.UI;
 
 namespace BombusApisBee

@@ -75,7 +75,7 @@ namespace BombusApisBee.Buffs
             {
                 float lerper = 1f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 3f);
                 Color color = Color.Lerp(new Color(75, 150, 200), new Color(100, 170, 200), lerper);
-                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Glow>(), Main.rand.NextVector2Circular(.5f, .5f), 0, color, 0.75f);
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Glow>(), Main.rand.NextVector2Circular(.5f, .5f), 0, color, 0.75f);
             }
 
             float scale;
@@ -89,9 +89,9 @@ namespace BombusApisBee.Buffs
             if (scale < 3f)
                 scale = 3f;
 
-            Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(0.25f, 0.25f), newColor: new Color(255, 255, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+            Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Gas>(), Main.rand.NextVector2Circular(0.25f, 0.25f), newColor: new Color(255, 255, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
 
-            Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(0.5f, 0.5f), newColor: new Color(100, 150, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+            Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Gas>(), Main.rand.NextVector2Circular(0.5f, 0.5f), newColor: new Color(100, 150, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
         }
 
         private void Explode(NPC npc)
@@ -116,9 +116,9 @@ namespace BombusApisBee.Buffs
 
             for (int i = 0; i < 20; i++)
             {
-                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(5.25f, 5.25f), newColor: new Color(255, 255, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Gas>(), Main.rand.NextVector2Circular(5.25f, 5.25f), newColor: new Color(255, 255, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
 
-                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Dusts.Gas>(), Main.rand.NextVector2Circular(5.5f, 5.5f), newColor: new Color(100, 150, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2Circular(npc.width, npc.height), ModContent.DustType<Gas>(), Main.rand.NextVector2Circular(5.5f, 5.5f), newColor: new Color(100, 150, 255)).scale = Main.rand.NextFloat(scale, scale * 1.5f);
             }
 
             SoundID.DD2_WitherBeastDeath.PlayWith(npc.Center, pitch: 0.35f);
@@ -150,7 +150,7 @@ namespace BombusApisBee.Buffs
 
                         float lerper = 1f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 3f);
                         Color color = Color.Lerp(new Color(75, 150, 200), new Color(100, 170, 200), lerper);
-                        Dust.NewDustPerfect(realNPC.Center, ModContent.DustType<Dusts.GlowFastDecelerate>(), (center.DirectionTo(realNPC.Center).RotatedByRandom(0.3f) * 15f) * Main.rand.NextFloat(0.1f, 1f), 0, color, Main.rand.NextFloat(0.25f, .6f)).noGravity = true;
+                        Dust.NewDustPerfect(realNPC.Center, ModContent.DustType<GlowFastDecelerate>(), (center.DirectionTo(realNPC.Center).RotatedByRandom(0.3f) * 15f) * Main.rand.NextFloat(0.1f, 1f), 0, color, Main.rand.NextFloat(0.25f, .6f)).noGravity = true;
                     }
                 }
             }
@@ -168,7 +168,7 @@ namespace BombusApisBee.Buffs
                 if (npc.boss)
                     life = npc.lifeMax * 0.15f;
 
-                Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/Items/Accessories/BeeKeeperDamageClass/FrozenStinger_Bar").Value;
+                Texture2D tex = ModContent.Request<Texture2D>("BombusApisBee/Content/Snow/Items/FrozenStinger/FrozenStinger_Bar").Value;
 
                 float factor = Math.Min(life / (float)npc.lifeMax, 1);
 

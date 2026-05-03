@@ -1,13 +1,11 @@
+global using BombusApisBee;
 global using BombusApisBee.BeeDamageClass;
 global using BombusApisBee.Buffs;
 global using BombusApisBee.Core;
-global using BombusApisBee.Dusts;
+global using BombusApisBee.Content.Dusts;
+global using BombusApisBee.Content.Projectiles;
 global using BombusApisBee.Effects;
-global using BombusApisBee.Items.Accessories.BeeKeeperDamageClass;
-global using BombusApisBee.Items.Armor.BeeKeeperDamageClass;
-global using BombusApisBee.Items.Weapons.BeeKeeperDamageClass;
 global using BombusApisBee.PrimitiveDrawing;
-global using BombusApisBee.Projectiles;
 global using Microsoft.Xna.Framework;
 global using Microsoft.Xna.Framework.Graphics;
 global using System;
@@ -21,7 +19,7 @@ global using Terraria.Graphics.Effects;
 global using Terraria.ID;
 global using Terraria.ModLoader;
 global using static Terraria.ModLoader.ModContent;
-using BombusApisBee.Core.PixelationSystem;
+
 using BombusApisBee.UI;
 using ReLogic.Content;
 using System.Reflection;

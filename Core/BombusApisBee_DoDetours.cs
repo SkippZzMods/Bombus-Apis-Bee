@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using BombusApisBee.Content.Jungle.Items.HoneyphyteArmor;
+using BombusApisBee.Content.Projectiles;
 namespace BombusApisBee.Core
 {
     public static class BombusApisBee_DoDetours

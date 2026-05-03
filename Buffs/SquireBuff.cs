@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Buffs
+﻿using BombusApisBee.Content.Hallow.Items.BeeSquireShield;
+
+namespace BombusApisBee.Buffs
 {
 
 

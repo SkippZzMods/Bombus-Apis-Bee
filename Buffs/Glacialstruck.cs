@@ -17,10 +17,10 @@
             {
                 if (Main.rand.NextBool(3))
                 {
-                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0f, 0f, 0, new Color(153, 212, 242, 150), 0.35f);
+                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<GlowFastDecelerate>(), 0f, 0f, 0, new Color(153, 212, 242, 150), 0.35f);
                 }
                 else
-                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.FrostedDust>(), 0f, 0f, 0, default).velocity *= 0.5f;
+                    Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<FrostedDust>(), 0f, 0f, 0, default).velocity *= 0.5f;
             }
 
             npc.GetGlobalNPC<GlacialstruckGlobalNPC>().inflicted = true;

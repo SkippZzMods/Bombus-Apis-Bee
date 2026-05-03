@@ -17,7 +17,7 @@ namespace BombusApisBee.Buffs
             npc.GetGlobalNPC<SkeletalCurseGlobalNPC>().inflicted = true;
 
             if (Main.rand.NextBool(3))
-                Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0f, 0f, 0, new Color(238, 164, 255), 0.4f).velocity *= 0.25f;
+                Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<GlowFastDecelerate>(), 0f, 0f, 0, new Color(238, 164, 255), 0.4f).velocity *= 0.25f;
         }
     }
 
