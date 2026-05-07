@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Projectiles
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
+
+namespace BombusApisBee.Content.Projectiles
 {
     class NectarHealingBolt : BeeProjectile, IDrawPrimitive_
     {

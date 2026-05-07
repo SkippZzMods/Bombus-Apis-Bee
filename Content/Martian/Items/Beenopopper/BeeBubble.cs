@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Martian.Items.Beenopopper
+﻿namespace BombusApisBee.Content.Martian.Items.Beenopopper
 {
     public class BeeBubble : BeeProjectile
     {

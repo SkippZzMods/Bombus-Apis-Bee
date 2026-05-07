@@ -1,5 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Jungle.Items.Ambrosia
 {
     public class AmbrosiaProjectile : BeeProjectile
@@ -32,7 +32,7 @@ namespace BombusApisBee.Content.Jungle.Items.Ambrosia
         {
             if (++HoneyDrainTimer % 30 == 0)
             {
-                if (!Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+                if (!Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                     Projectile.ai[0] = -1f;
             }
 
@@ -50,7 +50,7 @@ namespace BombusApisBee.Content.Jungle.Items.Ambrosia
                 Dust.NewDustPerfect(Projectile.Center, DustType<GlowFastDecelerate>(), Main.rand.NextVector2Circular(2f, 2f), 0, new Color(255, 191, 73), 0.35f);
             }
 
-            if (!Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+            if (!Main.player[Projectile.owner].UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                 Projectile.ai[0] = -1f;
         }
 

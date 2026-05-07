@@ -1,5 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Forest.Items.NectarSlasher
 {
     public class NectarSlasherHoldout : BeeProjectile
@@ -13,7 +13,7 @@ namespace BombusApisBee.Content.Forest.Items.NectarSlasher
         private List<Vector2> throwcache2;
         private Trail throwtrail;
         private Trail throwtrail2;
-        public override string Texture => "BombusApisBee/Content/Forest/Items/NectarSlasher/NectarSlasher";        
+        public override string Texture => "BombusApisBee/Content/Forest/Items/NectarSlasher/NectarSlasher";
         private Vector2 direction;
         private bool initialized;
         private float maxTimeLeft;
@@ -63,7 +63,7 @@ namespace BombusApisBee.Content.Forest.Items.NectarSlasher
 
         public override void AI()
         {
-            owner.Hymenoptra().BeeResourceRegenTimer = -60;
+            owner.Beekeeper().BeeResourceRegenTimer = -60;
             if (Combo >= 2)
             {
                 owner.itemTime = 2;
@@ -87,7 +87,7 @@ namespace BombusApisBee.Content.Forest.Items.NectarSlasher
                 {
                     if (Main.myPlayer == owner.whoAmI && boomerangTimer == 0)
                     {
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 1);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost + 1);
                         Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 20f;
                         Projectile.tileCollide = true;
                         Projectile.friendly = true;

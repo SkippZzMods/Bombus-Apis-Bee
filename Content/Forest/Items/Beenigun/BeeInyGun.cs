@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Forest.Items.Beenigun
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Forest.Items.Beenigun
 {
-    public class BeeInyGun : BeeDamageItem
+    public class BeeInyGun : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

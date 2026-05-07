@@ -1,5 +1,5 @@
 ﻿using BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor;
-using Terraria;
+using BombusApisBee.Core.BeekeeperClass;
 namespace BombusApisBee.Content.Projectiles
 {
     class HoneyBeeGlobalProjectile : GlobalProjectile
@@ -13,9 +13,9 @@ namespace BombusApisBee.Content.Projectiles
     {
         public Player Owner => Main.player[Projectile.owner];
 
-        public bool Defense => Owner.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense;
-        public bool Offense => Owner.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Offense;
-        public bool Gathering => Owner.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Gathering;
+        public bool Defense => Owner.Beekeeper().CurrentBeeState == (int)BeekeeperPlayer.BeeState.Defense;
+        public bool Offense => Owner.Beekeeper().CurrentBeeState == (int)BeekeeperPlayer.BeeState.Offense;
+        public bool Gathering => Owner.Beekeeper().CurrentBeeState == (int)BeekeeperPlayer.BeeState.Gathering;
 
         public int AttackDelay;
         public int shotsFired;
@@ -82,7 +82,7 @@ namespace BombusApisBee.Content.Projectiles
         }
         public override void AI()
         {
-            if (Owner.Hymenoptra().HoldingBeeWeaponTimer <= 0)
+            if (Owner.Beekeeper().HoldingBeeWeaponTimer <= 0)
                 Projectile.Kill();
 
             if (Owner.Bombus().HoneyBee && Owner.active)
@@ -525,13 +525,13 @@ namespace BombusApisBee.Content.Projectiles
 
             Texture2D glowTex = Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
 
-            lightColor = lightColor * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+            lightColor = lightColor * (Owner.Beekeeper().HoldingBeeWeaponTimer / 15f);
 
-            float mult = (1f - blockDelay / 180f) * (shieldFade / 15f) * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f);
+            float mult = (1f - blockDelay / 180f) * (shieldFade / 15f) * (Owner.Beekeeper().HoldingBeeWeaponTimer / 15f);
 
             if (honeyTimer > 0)
             {
-                Main.spriteBatch.Draw(glowTex, BottleVector - new Vector2(Projectile.spriteDirection == -1 ? -20 : 15, 5) - Main.screenPosition, null, new Color(255, 150, 20, 0) * (honeyTimer / 100f) * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 0.6f, 0f, 0f);
+                Main.spriteBatch.Draw(glowTex, BottleVector - new Vector2(Projectile.spriteDirection == -1 ? -20 : 15, 5) - Main.screenPosition, null, new Color(255, 150, 20, 0) * (honeyTimer / 100f) * (Owner.Beekeeper().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 0.6f, 0f, 0f);
             }
 
             if (Offense)
@@ -539,9 +539,9 @@ namespace BombusApisBee.Content.Projectiles
                 if (backGlowOpacity > 0)
                 {
                     Rectangle glowFrame = texGlow.Frame(verticalFrames: 4, frameY: Projectile.frame);
-                    Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, glowFrame, new Color(250, 170, 20, 0) * backGlowOpacity * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), Projectile.rotation + rotIncrease, glowFrame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, glowFrame, new Color(250, 170, 20, 0) * backGlowOpacity * (Owner.Beekeeper().HoldingBeeWeaponTimer / 15f), Projectile.rotation + rotIncrease, glowFrame.Size() / 2f, Projectile.scale, Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 
-                    Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 20, 0) * backGlowOpacity * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 1.25f, 0f, 0f);
+                    Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 20, 0) * backGlowOpacity * (Owner.Beekeeper().HoldingBeeWeaponTimer / 15f), 0f, glowTex.Size() / 2f, 1.25f, 0f, 0f);
                 }
 
                 if (slamming)
@@ -558,7 +558,7 @@ namespace BombusApisBee.Content.Projectiles
                     {
                         Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + Projectile.Size / 2f;
                         Color color = new Color(250, 200, 0, 0) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-                        Main.spriteBatch.Draw(tex, drawPos, afterImageFrame, color * (Owner.Hymenoptra().HoldingBeeWeaponTimer / 15f) * fadeout, Projectile.rotation + rotIncrease, afterImageFrame.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.35f, k / (float)Projectile.oldPos.Length), Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                        Main.spriteBatch.Draw(tex, drawPos, afterImageFrame, color * (Owner.Beekeeper().HoldingBeeWeaponTimer / 15f) * fadeout, Projectile.rotation + rotIncrease, afterImageFrame.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.35f, k / (float)Projectile.oldPos.Length), Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
                     }
                 }
             }

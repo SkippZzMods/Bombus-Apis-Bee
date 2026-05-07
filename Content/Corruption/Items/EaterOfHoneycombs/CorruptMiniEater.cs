@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
+﻿namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
 {
     public class CorruptMiniEater : BeeProjectile
     {

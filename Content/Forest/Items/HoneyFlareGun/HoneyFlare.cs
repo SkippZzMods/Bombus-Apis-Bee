@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using BombusApisBee.Content.Projectiles;
-using Terraria;
 
 namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
 {

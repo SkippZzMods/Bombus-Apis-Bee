@@ -1,8 +1,9 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Projectiles
 {
-    public class MetalBee : BaseBeeProjectile
+    public class MetalBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

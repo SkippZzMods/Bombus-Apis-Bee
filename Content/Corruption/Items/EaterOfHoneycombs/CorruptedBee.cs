@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
 {
-    public class CorruptedBee : BaseBeeProjectile
+    public class CorruptedBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

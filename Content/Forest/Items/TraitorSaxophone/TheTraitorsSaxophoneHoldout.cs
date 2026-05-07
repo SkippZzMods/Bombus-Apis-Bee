@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
@@ -53,7 +53,7 @@ namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
 
             if (Charge % MaxCharge == 0)
             {
-                if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+                if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                 {
                     flashTimer = 15;
                     string sax = "Sax" + Main.rand.Next(1, 7);
@@ -66,7 +66,7 @@ namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
                     {
                         int type = Main.rand.Next(new int[] { ProjectileType<HoneyNoteQuarter>(), ProjectileType<HoneyNoteEighth>(), ProjectileType<HoneyNoteEighthTied>() });
                         Projectile.NewProjectile(Projectile.GetSource_FromAI(), armPos + new Vector2(12, 15 * Projectile.direction).RotatedBy(Projectile.rotation), Vector2.UnitY * -Main.rand.NextFloat(8f, 15f), type, (int)(Projectile.damage * 1.25f), Projectile.knockBack, Projectile.owner);
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost);
                     }
 
                     for (float k = 0; k < 6.28f; k += 0.1f)

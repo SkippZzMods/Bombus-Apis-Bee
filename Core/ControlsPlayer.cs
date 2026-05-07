@@ -1,6 +1,5 @@
-﻿using System;
+﻿using NetEasy;
 using Terraria.GameInput;
-using NetEasy;
 
 namespace BombusApisBee.Core
 {

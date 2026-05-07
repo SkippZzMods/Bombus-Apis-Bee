@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+
 namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
 {
     public class HoneycombChunkPickup : ModItem
@@ -30,7 +31,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
 
         public override bool OnPickup(Player player)
         {
-            BeeDamagePlayer mp = player.Hymenoptra();
+            BeekeeperPlayer mp = player.Beekeeper();
 
             HoneycombChunkPlayer hp = player.GetModPlayer<HoneycombChunkPlayer>();
 
@@ -38,19 +39,19 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
             {
                 switch (mp.CurrentBeeState)
                 {
-                    case (int)BeeDamagePlayer.BeeState.Defense:
+                    case (int)BeekeeperPlayer.BeeState.Defense:
                         hp.DefenseStacks = Utils.Clamp(hp.DefenseStacks + 2, 0, hp.MaxStacks);
 
                         hp.DefenseStackDecayTimer = 0;
                         break;
 
-                    case (int)BeeDamagePlayer.BeeState.Offense:
+                    case (int)BeekeeperPlayer.BeeState.Offense:
                         hp.OffenseStacks = Utils.Clamp(hp.OffenseStacks + 2, 0, hp.MaxStacks);
 
                         hp.OffenseStackDecayTimer = 0;
                         break;
 
-                    case (int)BeeDamagePlayer.BeeState.Gathering:
+                    case (int)BeekeeperPlayer.BeeState.Gathering:
                         player.IncreaseBeeResource(3);
                         hp.GatheringStacks = Utils.Clamp(hp.GatheringStacks + 2, 0, hp.MaxStacks);
 
@@ -145,7 +146,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
-            if (proj.CountsAsClass<HymenoptraDamageClass>() && Main.rand.NextFloat() < 0.015f)
+            if (proj.CountsAsClass<BeekeeperDamage>() && Main.rand.NextFloat() < 0.015f)
             {
                 Item item = Main.item[Item.NewItem(target.GetSource_OnHurt(proj), target.getRect(), ItemType<HoneycombChunkPickup>())];
 
@@ -162,12 +163,12 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
 
         public override void UpdateEquips()
         {
-            Player.Hymenoptra().BeeResourceIncrease += GatheringStacks * 2;
+            Player.Beekeeper().BeeResourceIncrease += GatheringStacks * 2;
 
             Player.statDefense += DefenseStacks;
 
             Player.IncreaseBeeCrit(OffenseStacks);
-            Player.GetArmorPenetration<HymenoptraDamageClass>() += OffenseStacks;
+            Player.GetArmorPenetration<BeekeeperDamage>() += OffenseStacks;
 
             if (AnyStacks && !Player.HasBuff<HiveBlessingBuff>())
                 Player.AddBuff<HiveBlessingBuff>(120);

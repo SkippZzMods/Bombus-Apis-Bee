@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Dusts;
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Projectiles
 {

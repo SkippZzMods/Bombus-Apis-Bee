@@ -1,10 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.HymenoptraHandcannon
 {
-    public class HymenoptraHandcannon : BeeDamageItem
+    public class HymenoptraHandcannon : BeekeeperWeapon
     {
         public int delay;
         public override void SafeSetStaticDefaults()
@@ -60,7 +60,7 @@ namespace BombusApisBee.Content.Forest.Items.HymenoptraHandcannon
                 delay = 0;
                 player.reuseDelay = 60;
             }
-            player.Hymenoptra().BeeResourceRegenTimer = -120;
+            player.Beekeeper().BeeResourceRegenTimer = -120;
             Gore.NewGorePerfect(source, player.Center + Vector2.Normalize(velocity) * 5f, velocity * -0.25f + Vector2.UnitY * -3f, Mod.Find<ModGore>("ShellEjectGore").Type).timeLeft = 90;
             return true;
         }

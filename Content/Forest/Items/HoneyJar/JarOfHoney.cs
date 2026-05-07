@@ -1,5 +1,4 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using Terraria;
 
 namespace BombusApisBee.Content.Forest.Items.HoneyJar
 {
@@ -25,7 +24,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyJar
         {
             player.lifeRegen += 1;
             player.IncreaseBeeDamage(0.06f);
-            player.Hymenoptra().BeeResourceMax2 += 5;
+            player.Beekeeper().BeeResourceMax2 += 5;
         }
         public override void AddRecipes()
         {

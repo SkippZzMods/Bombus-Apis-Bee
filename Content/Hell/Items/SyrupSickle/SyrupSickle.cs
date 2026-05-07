@@ -1,9 +1,10 @@
 ﻿using BombusApisBee.Content.Jungle.Items.NectarBolt;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Hell.Items.SyrupSickle
 {
-    public class SyrupSickle : BeeDamageItem
+    public class SyrupSickle : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Crimson.Items.Cystcomb
 {
-    public class IchorBee : BaseBeeProjectile
+    public class IchorBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

@@ -1,5 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
 {
     public class CursedFlameball : BeeProjectile, IDrawPrimitive_

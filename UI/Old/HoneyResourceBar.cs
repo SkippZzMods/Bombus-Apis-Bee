@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.UI.Elements;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace BombusApisBee.UI.Old
@@ -41,7 +42,7 @@ namespace BombusApisBee.UI.Old
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (!Main.LocalPlayer.HeldItem.CountsAsClass<HymenoptraDamageClass>())
+            if (!Main.LocalPlayer.HeldItem.CountsAsClass<BeekeeperDamage>())
                 return;
 
             base.Draw(spriteBatch);
@@ -51,7 +52,7 @@ namespace BombusApisBee.UI.Old
         {
             base.DrawSelf(spriteBatch);
 
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             float quotient = (float)modPlayer.BeeResourceCurrent / modPlayer.BeeResourceMax2;
             quotient = Utils.Clamp(quotient, 0f, 1f);
 
@@ -72,10 +73,10 @@ namespace BombusApisBee.UI.Old
         }
         public override void Update(GameTime gameTime)
         {
-            if (!Main.LocalPlayer.HeldItem.CountsAsClass<HymenoptraDamageClass>())
+            if (!Main.LocalPlayer.HeldItem.CountsAsClass<BeekeeperDamage>())
                 return;
 
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             text.SetText($"       Honey: {modPlayer.BeeResourceCurrent} / {modPlayer.BeeResourceMax2}");
             base.Update(gameTime);
         }

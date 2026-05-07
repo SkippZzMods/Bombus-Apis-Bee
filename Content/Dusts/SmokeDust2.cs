@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Core.PixelationSystem;
+﻿using BombusApisBee.Core.Systems.PixelationSystem;
 
 namespace BombusApisBee.Content.Dusts
 {

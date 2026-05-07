@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
+﻿namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
 {
     public class GalacticSeeker : BeeProjectile
     {

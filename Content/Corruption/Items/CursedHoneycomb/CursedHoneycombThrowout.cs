@@ -1,5 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
 {
     public class CursedHoneycombThrowout : BeeProjectile
@@ -31,12 +31,12 @@ namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
 
         public override void AI()
         {
-            if (owner.channel && !owner.noItems && !owner.CCed && owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved)
+            if (owner.channel && !owner.noItems && !owner.CCed && owner.Beekeeper().BeeResourceCurrent > owner.Beekeeper().BeeResourceReserved)
                 Projectile.timeLeft = 2;
 
             owner.ChangeDir(Projectile.Center.X < owner.Center.X ? -1 : 1);
             owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, owner.Center.DirectionTo(Projectile.Center).ToRotation() - MathHelper.PiOver2);
-            owner.Hymenoptra().BeeResourceRegenTimer = -120;
+            owner.Beekeeper().BeeResourceRegenTimer = -120;
 
             if (--RandomizePositionTimer <= 0)
             {
@@ -50,7 +50,7 @@ namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
                 Projectile.velocity = (Projectile.velocity * 20f + (Main.MouseWorld - Projectile.Center + randomizedVector).SafeNormalize(Vector2.UnitX) * (Projectile.Distance(Main.MouseWorld) > 100f ? 17f : 12f)) / 21f;
                 if (--AttackDelay <= 0)
                 {
-                    if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+                    if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                     {
                         for (int i = -1; i < 2; i++)
                         {

@@ -1,10 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Eclipse.Items.BeeFlasks
 {
-    public class HymenoptraFlasks : BeeDamageItem
+    public class HymenoptraFlasks : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

@@ -1,10 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Jungle.Items.Ambrosia;
+using BombusApisBee.Core.BeekeeperClass;
 
 
 namespace BombusApisBee.Content.Jungle.Items.WaspYoyo
 {
-    public class TheWaspNest : BeeDamageItem
+    public class TheWaspNest : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

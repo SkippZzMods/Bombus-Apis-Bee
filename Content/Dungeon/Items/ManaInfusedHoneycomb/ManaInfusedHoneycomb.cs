@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
 {
-    public class ManaInfusedHoneycomb : BeeDamageItem
+    public class ManaInfusedHoneycomb : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.statMana > 5 && player.ownedProjectileCounts<ManaHoneycombHoldout>() <= 0;
         public override void SafeSetStaticDefaults()

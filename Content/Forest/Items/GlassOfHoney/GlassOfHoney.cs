@@ -24,7 +24,7 @@ namespace BombusApisBee.Content.Forest.Items.GlassOfHoney
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.IncreaseBeeDamage(0.1f);
-            player.Hymenoptra().BeeResourceMax2 += 10;
+            player.Beekeeper().BeeResourceMax2 += 10;
             player.lifeRegen += 4;
         }
         public override void AddRecipes()

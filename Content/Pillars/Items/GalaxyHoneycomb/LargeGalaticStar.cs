@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
+﻿namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
 {
     public class LargeGalaticStar : BeeProjectile
     {

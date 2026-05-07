@@ -1,10 +1,10 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
 {
-    public class SpectralBee : BaseBeeProjectile
+    public class SpectralBee : CommonBeeProjectile
     {
-        public override int FrameTimer => 4;
+        public SpectralBee() : base(frameTimer: 4) { }
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Spectral Bee");

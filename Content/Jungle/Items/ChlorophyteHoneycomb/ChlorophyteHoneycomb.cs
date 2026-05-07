@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb
 {
-    public class ChlorophyteHoneycomb : BeeDamageItem
+    public class ChlorophyteHoneycomb : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

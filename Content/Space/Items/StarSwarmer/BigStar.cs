@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Space.Items.StarSwarmer
+﻿namespace BombusApisBee.Content.Space.Items.StarSwarmer
 {
     public class BigStar : BeeProjectile
     {

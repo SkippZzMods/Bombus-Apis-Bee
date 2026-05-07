@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.BeefinTuna
 {
-    public class BeeFinTuna : BeeDamageItem
+    public class BeeFinTuna : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

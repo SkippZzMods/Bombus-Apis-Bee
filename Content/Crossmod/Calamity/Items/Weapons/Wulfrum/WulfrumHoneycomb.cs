@@ -1,4 +1,4 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 using CalamityMod;
 using CalamityMod.Graphics.Primitives;
 using Terraria.DataStructures;
@@ -77,7 +77,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
             return base.CanUseItem(Player);
         }
 
-        public override bool AltFunctionUse(Player player) => chargeTimer <= 0 && player.Hymenoptra().BeeResourceCurrent >= 20;
+        public override bool AltFunctionUse(Player player) => chargeTimer <= 0 && player.Beekeeper().BeeResourceCurrent >= 20;
 
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
@@ -224,7 +224,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
     }
 
     [JITWhenModsEnabled("CalamityMod")]
-    class WulfrumBeeProjectile : BaseBeeProjectile
+    class WulfrumBeeProjectile : CommonBeeProjectile
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public bool Supercharged => Projectile.ai[2] == 1f;

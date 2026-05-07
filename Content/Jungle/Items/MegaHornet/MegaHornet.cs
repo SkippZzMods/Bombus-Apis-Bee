@@ -1,6 +1,7 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 namespace BombusApisBee.Content.Jungle.Items.MegaHornet;
-public class MegaHornet : BeeDamageItem
+public class MegaHornet : BeekeeperWeapon
 {
     public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<MegaHornetHoldout>() <= 0;
     public override void SafeSetStaticDefaults()

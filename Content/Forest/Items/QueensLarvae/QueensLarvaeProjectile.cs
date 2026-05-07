@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Forest.Items.QueensLarvae
 {
@@ -257,7 +257,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
             {
                 Vector2 pos = Projectile.Center + new Vector2(15 * Projectile.direction, 15) + Main.rand.NextVector2Circular(25f, 15f);
                 if (Main.myPlayer == Projectile.owner)
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), pos, pos.DirectionTo(target.Center).RotatedByRandom(0.45f) * 6f, Main.rand.Next(new int[] { ProjectileID.Bee, ProjectileID.GiantBee, ProjectileID.Wasp }), (int)(Projectile.damage * 0.65f), 0.5f, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), pos, pos.DirectionTo(target.Center).RotatedByRandom(0.45f) * 6f, ModContent.ProjectileType<RegularBeeProjectile>(), (int)(Projectile.damage * 0.65f), 0.5f, Projectile.owner);
                 BombusApisBee.HoneycombWeapon.PlayWith(pos);
 
                 for (int i = 0; i < 20; i++)

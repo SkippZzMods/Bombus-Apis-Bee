@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
 {
-    public class CursedHoneycomb : BeeDamageItem
+    public class CursedHoneycomb : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<CursedHoneycombThrowout>() <= 0;
         public override void SafeSetStaticDefaults()

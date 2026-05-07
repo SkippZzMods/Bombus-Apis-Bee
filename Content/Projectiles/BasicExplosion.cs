@@ -1,5 +1,4 @@
-﻿using Terraria;
-namespace BombusApisBee.Content.Projectiles
+﻿namespace BombusApisBee.Content.Projectiles
 {
     internal class BasicExplosion : ModProjectile
     {

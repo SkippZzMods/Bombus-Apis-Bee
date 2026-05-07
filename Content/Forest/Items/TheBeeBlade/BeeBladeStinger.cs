@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Forest.Items.TheBeeBlade
+﻿namespace BombusApisBee.Content.Forest.Items.TheBeeBlade
 {
     public class BeeBladeStinger : BeeProjectile
     {

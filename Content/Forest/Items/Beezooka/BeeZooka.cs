@@ -1,10 +1,10 @@
-﻿using BombusApisBee.Content.Forest.Items.BeenadeLauncher;
-using BombusApisBee.Content.Forest.Items.Pollen;
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.Beezooka
 {
-    public class BeeZooka : BeeDamageItem
+    public class BeeZooka : BeekeeperWeapon
     {
         int shots;
         public override void SafeSetStaticDefaults()

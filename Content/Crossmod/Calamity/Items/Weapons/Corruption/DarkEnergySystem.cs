@@ -1,12 +1,4 @@
-﻿using BombusApisBee;
-using BombusApisBee.Content.Dusts;
-using BombusApisBee.Content.Dusts.Pixelized;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 {
@@ -56,7 +48,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
         public override void ResetEffects(NPC npc)
         {
-            if (cooldown == 1 )
+            if (cooldown == 1)
             {
                 darkEnergy--;
 
@@ -116,7 +108,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
                     Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
                         velocity, Main.rand.Next(90, 220), new Color(52, 42, 81), Main.rand.NextFloat(1f, 1.7f)).noGravity = true;
-                }              
+                }
             }
 
             darkEnergy = 0;

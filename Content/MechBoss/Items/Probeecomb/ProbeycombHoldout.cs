@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
 {
@@ -38,7 +38,7 @@ namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
                 Charge++;
                 if (Charge % (int)(MaxCharge / 5) == 0)
                 {
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 1);
                     ProbesToShoot++;
                     SoundID.MaxMana.PlayWith(Projectile.Center, -0.2f);
                     flashTimer = 15;
@@ -51,18 +51,18 @@ namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
             if (MaxCharge == 0f)
                 MaxCharge = owner.ApplyHymenoptraSpeedTo(owner.GetActiveItem().useAnimation);
 
-            if (!owner.channel || owner.Hymenoptra().BeeResourceCurrent <= 0)
+            if (!owner.channel || owner.Beekeeper().BeeResourceCurrent <= 0)
                 shooting = true;
 
 
             Vector2 armPos = owner.RotatedRelativePoint(owner.MountedCenter, true);
             armPos += Projectile.velocity.SafeNormalize(owner.direction * Vector2.UnitX) * 25f;
 
-            owner.Hymenoptra().BeeResourceRegenTimer = -120;
+            owner.Beekeeper().BeeResourceRegenTimer = -120;
 
             if (shooting)
             {
-                if (ProbesToShoot <= 0 || !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
+                if (ProbesToShoot <= 0 || !(owner.Beekeeper().BeeResourceCurrent > owner.Beekeeper().BeeResourceReserved))
                 {
                     Projectile.Kill();
                     return;
@@ -146,7 +146,7 @@ namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
             SoundID.Item11.PlayWith(Projectile.Center);
             owner.velocity += Projectile.velocity * -2.45f;
 
-            owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost);
+            owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost);
         }
 
         public override bool PreDraw(ref Color lightColor)

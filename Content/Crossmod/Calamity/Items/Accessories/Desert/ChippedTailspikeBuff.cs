@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Desert
+﻿namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Desert
 {
     [JITWhenModsEnabled("CalamityMod")]
     public class ChippedTailspikeBuff : ModBuff

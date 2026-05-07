@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.HoneyGun
+﻿namespace BombusApisBee.Content.Forest.Items.HoneyGun
 {
     public class HoneyGunHoldout : BeeProjectile
     {

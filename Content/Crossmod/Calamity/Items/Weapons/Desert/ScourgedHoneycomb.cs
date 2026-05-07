@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.Content.Crossmod.Calamity.Dusts;
 using BombusApisBee.Content.Crossmod.Calamity.NPCs.Enemies.Wulfrum;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using CalamityMod.DataStructures;
 using Terraria.DataStructures;
 

@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Crimson.Items.Cystcomb
 {
-    public class CystComb : BeeDamageItem
+    public class CystComb : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

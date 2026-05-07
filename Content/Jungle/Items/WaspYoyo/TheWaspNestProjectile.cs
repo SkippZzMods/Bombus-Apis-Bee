@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.WaspYoyo
 {
@@ -48,7 +48,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspYoyo
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, vel, ProjectileID.Wasp, Projectile.damage / 2, 1, Projectile.owner).DamageType = BeeUtils.BeeDamageClass();
                     BeeTimer = 0;
 
-                    if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+                    if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                         Projectile.ai[0] = -1f;
                 }
             }

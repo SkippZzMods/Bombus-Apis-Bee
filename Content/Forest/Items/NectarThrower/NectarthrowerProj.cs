@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.NectarThrower
+﻿namespace BombusApisBee.Content.Forest.Items.NectarThrower
 {
     public class NectarthrowerProj : BeeProjectile
     {

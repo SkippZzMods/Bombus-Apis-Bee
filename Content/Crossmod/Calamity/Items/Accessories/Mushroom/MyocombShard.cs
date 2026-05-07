@@ -1,13 +1,7 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Crossmod.Calamity.Core;
+﻿using BombusApisBee.Content.Crossmod.Calamity.Core;
 using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
-using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Materials;
-using CalamityMod.Particles;
-using Terraria.DataStructures;
-using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Mushroom
 {
@@ -28,7 +22,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Mushroom
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeStrengthenChance += 0.25f;
+            player.Beekeeper().BeeStrengthenChance += 0.25f;
             player.GetModPlayer<BombusApisCalamityPlayer>().MyocombShard = true;
         }
 

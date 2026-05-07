@@ -1,5 +1,4 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
 
 namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
 {
@@ -35,7 +34,7 @@ namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
             player.Bombus().LivingFlower = true;
             for (int i = 0; i < player.ownedProjectileCounts[ProjectileType<DaybloomProj>()]; i++)
             {
-                player.Hymenoptra().ResourceChanceAdd += 0.04f;
+                player.Beekeeper().ResourceChanceAdd += 0.04f;
             }
 
             if (player.ownedProjectileCounts[ProjectileType<DaybloomProj>()] < 3 && FlowerTimer >= 120)
@@ -51,7 +50,7 @@ namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
         public override void UpdateEquip(Player player)
         {
             player.IncreaseBeeCrit(3);
-            player.Hymenoptra().BeeResourceMax2 += 15;
+            player.Beekeeper().BeeResourceMax2 += 15;
         }
 
         public override void AddRecipes()

@@ -1,10 +1,9 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
 {
-    public class SkeletalBee : BaseBeeProjectile
+    public class SkeletalBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

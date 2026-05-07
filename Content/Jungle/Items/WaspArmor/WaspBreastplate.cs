@@ -24,7 +24,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspArmor
         {
             player.IncreaseBeeDamage(0.06f);
             player.IncreaseBeeCrit(6);
-            player.Hymenoptra().CurrentBees += 1;
+            player.Beekeeper().CurrentBees += 1;
         }
 
         public override void AddRecipes()

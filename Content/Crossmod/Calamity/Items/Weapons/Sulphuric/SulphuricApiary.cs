@@ -1,7 +1,9 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Crossmod;
-using BombusApisBee.Content.Dusts.Pixelized;
-using BombusApisBee.Core.PixelationSystem;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
+using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Common.Apiary;
+using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 {
@@ -166,7 +168,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
     }
 
     [JITWhenModsEnabled("CalamityMod")]
-    class SulphuricBee : BaseBeeProjectile
+    class SulphuricBee : CommonBeeProjectile
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
@@ -245,7 +247,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
             if (inflicted)
             {
                 // increase damage of non-bee hymenoptra damage by 15%
-                if (projectile.CountsAsClass<HymenoptraDamageClass>() && !BeeUtils.IsBee(projectile.whoAmI))
+                if (projectile.CountsAsClass<BeekeeperDamage>() && !BeeUtils.IsBee(projectile.whoAmI))
                 {
                     modifiers.FinalDamage *= 1.15f;
                 }
@@ -282,7 +284,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                             Dust.NewDustPerfect(closest.Center + Main.rand.NextVector2CircularEdge(25f, 25f), DustType<SmokeDust2>(),
                                 Main.rand.NextVector2Circular(4f, 4f), Main.rand.Next(120, 200), new Color(80, 93, 48), Main.rand.NextFloat(1f, 1.2f)).noGravity = true;
-                            
+
                             Dust.NewDustPerfect(closest.Center + Main.rand.NextVector2CircularEdge(25f, 25f), DustType<SmokeDust2>(),
                                 Main.rand.NextVector2Circular(5f, 5f), Main.rand.Next(120, 200), new Color(137, 162, 74), Main.rand.NextFloat(1f, 1.4f)).noGravity = true;
 
@@ -371,7 +373,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
                 target.AddBuff<Ionized>(500);
                 target.GetGlobalNPC<IonizedGlobalNPC>().owner = Projectile.owner;
                 target.GetGlobalNPC<IonizedGlobalNPC>().spread = false;
-            }           
+            }
         }
 
         private void ManageCaches()

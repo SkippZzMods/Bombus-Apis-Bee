@@ -1,6 +1,7 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 namespace BombusApisBee.Content.Jungle.Items.TomeOfTheSun;
-public class TomeOfTheSun : BeeDamageItem
+public class TomeOfTheSun : BeekeeperWeapon
 {
     public override void SafeSetStaticDefaults()
     {

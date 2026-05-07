@@ -1,9 +1,9 @@
-﻿using BombusApisBee.Content.Pillars.Items.PhotonFragment;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
 {
     // TODO: MAKE THIS NOT SUCK!!
-    public class HoneycombOfTheGalaxies : BeeDamageItem
+    public class HoneycombOfTheGalaxies : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

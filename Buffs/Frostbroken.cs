@@ -1,5 +1,4 @@
-﻿using BombusApisBee.Core.ScreenTargetSystem;
-using Terraria;
+﻿using BombusApisBee.Core.Systems.ScreenTargetSystem;
 
 namespace BombusApisBee.Buffs
 {

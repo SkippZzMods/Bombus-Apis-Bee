@@ -21,7 +21,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.SunkenSea
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeStrengthenChance += 0.1f;
+            player.Beekeeper().BeeStrengthenChance += 0.1f;
             player.GetModPlayer<BombusApisCalamityPlayer>().MolluscanShard = true;
         }
 

@@ -1,14 +1,11 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Crossmod.Calamity.Core;
+﻿using BombusApisBee.Content.Crossmod.Calamity.Core;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
+using BombusApisBee.Core.Common.BeeProjectile;
 using CalamityMod;
 using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Materials;
 using CalamityMod.Particles;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.Graphics.Effects;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
 {
@@ -16,9 +13,9 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
     {
         public override void Load()
         {
-            BombusApisBeeGlobalProjectile.StrongBeePostDrawEvent += PostDrawShield;
-            BombusApisBeeGlobalProjectile.StrongBeeOnHitEvent += CheckShield;
-            BombusApisBeeGlobalProjectile.StrongBeeKillEvent += DestroyShield;
+            CommonBeeGlobalProjectile.StrongBeePostDrawEvent += PostDrawShield;
+            CommonBeeGlobalProjectile.StrongBeeOnHitEvent += CheckShield;
+            CommonBeeGlobalProjectile.StrongBeeKillEvent += DestroyShield;
         }
 
         private void DestroyShield(Projectile proj, int timeLeft)
@@ -106,7 +103,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
         {
             var mp = player.GetModPlayer<BombusApisCalamityPlayer>();
 
-            player.Hymenoptra().BeeStrengthenChance += 0.20f;
+            player.Beekeeper().BeeStrengthenChance += 0.20f;
             mp.WulfrumHCShard = true;
             mp.WulfrumHCShardDraw = !hideVisual;
         }
@@ -133,7 +130,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             bool giantBee = projectile.type == ProjectileID.GiantBee;
-            bool giantModdedBee = projectile.ModProjectile as BaseBeeProjectile != null && (projectile.ModProjectile as BaseBeeProjectile).Giant;
+            bool giantModdedBee = projectile.ModProjectile as CommonBeeProjectile != null && (projectile.ModProjectile as CommonBeeProjectile).Giant;
             if ((giantBee || giantModdedBee) && Main.player[projectile.owner].GetModPlayer<BombusApisCalamityPlayer>().WulfrumHCShard)
                 HasShield = true;
         }

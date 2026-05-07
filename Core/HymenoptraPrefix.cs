@@ -1,5 +1,4 @@
-﻿using Terraria.ID;
-using Terraria.Localization;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Core
 {
@@ -33,7 +32,7 @@ namespace BombusApisBee.Core
 
         public override bool CanRoll(Item item)
         {
-            return item.CountsAsClass<HymenoptraDamageClass>();
+            return item.CountsAsClass<BeekeeperDamage>();
         }
 
         public override void ModifyValue(ref float valueMult)
@@ -43,7 +42,7 @@ namespace BombusApisBee.Core
 
         public override void Apply(Item item)
         {
-            var realItem = item.ModItem as BeeDamageItem;
+            var realItem = item.ModItem as BeekeeperWeapon;
             if (realItem is null)
                 return;
 
@@ -59,7 +58,7 @@ namespace BombusApisBee.Core
             bool bad = resourceBonus < 0 ? true : false;
 
             string bonus = Math.Abs(resourceBonus).ToString();
-            
+
             if (resourceBonus != 0)
             {
                 yield return new TooltipLine(Mod, "BombusApisBee : PrefixBonusResource", (bad ? "+" : "-") + bonus + " honey cost")
@@ -132,10 +131,10 @@ namespace BombusApisBee.Core
         public override void ApplyAccessoryEffects(Player player)
         {
             if (honeyBonus > 0)
-                player.Hymenoptra().BeeResourceMax2 += honeyBonus;
+                player.Beekeeper().BeeResourceMax2 += honeyBonus;
 
             if (chanceBonus > 0f)
-                player.Hymenoptra().ResourceChanceAdd += chanceBonus;
+                player.Beekeeper().ResourceChanceAdd += chanceBonus;
         }
 
         public override float RollChance(Item item)

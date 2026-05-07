@@ -1,6 +1,5 @@
-﻿using BombusApisBee.Content.Crossmod;
-using BombusApisBee.Content.Crossmod.Calamity;
-using BombusApisBee.Content.Forest.Items.Pollen;
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using CalamityMod.Items.Materials;
 using Terraria.DataStructures;
 

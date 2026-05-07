@@ -1,5 +1,4 @@
-﻿using Terraria;
-namespace BombusApisBee.Buffs
+﻿namespace BombusApisBee.Buffs
 {
     public class SkeletalCurse : ModBuff
     {

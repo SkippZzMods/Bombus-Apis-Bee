@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Space.Items.ElectricHoneycomb
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Space.Items.ElectricHoneycomb
 {
-    public class ElectricHoneycomb : BeeDamageItem
+    public class ElectricHoneycomb : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

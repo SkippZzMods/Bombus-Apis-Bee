@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.BeenadeLauncher
+﻿namespace BombusApisBee.Content.Forest.Items.BeenadeLauncher
 {
     public class BeenadeLauncherProjectile : ModProjectile
     {

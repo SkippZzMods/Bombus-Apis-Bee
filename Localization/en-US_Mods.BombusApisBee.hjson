@@ -210,9 +210,16 @@ Projectiles: {
 	WulfrumStingerPowerCellItemProjectile.DisplayName: Wulfrum Power Cell
 	WulfrumStingerPowerCellProjectile.DisplayName: Wulfrum Power Cell
 	WulfrumStingerProjectile.DisplayName: Wulfrum Stinger
+	BorealApiaryHoldout.DisplayName: Apiary
+	SnowBee.DisplayName: Snowy Bee
+	RegularBeeProjectile.DisplayName: Bee
+	WeakBeeProjectile.DisplayName: Bee
 }
 
-DamageClasses.HymenoptraDamageClass.DisplayName: hymenoptra damage
+DamageClasses: {
+	HymenoptraDamageClass.DisplayName: hymenoptra damage
+	BeekeeperDamage.DisplayName: beekeeper damage
+}
 
 Buffs: {
 	AstralStarBuff: {
@@ -1474,6 +1481,20 @@ Items: {
 		Power cells can be picked up, and are thrown with <right>
 		Power cells can be hit mid air to supercharge them, causing them to detonate with an even more violent explosion
 		'''
+
+	BorealApiary: {
+		DisplayName: Boreal Apiary
+		Tooltip:
+			'''
+			Hold <left> to rapidly fire snowy bees
+			Hold <right> to fire the bees slower, but take control over the bees causing them to inflict Frostburn
+			'''
+	}
+
+	EnchantedCharm: {
+		DisplayName: Enchanted Charm
+		Tooltip: Apiaries conjure enchanted bolts on use
+	}
 }
 
 NPCs: {

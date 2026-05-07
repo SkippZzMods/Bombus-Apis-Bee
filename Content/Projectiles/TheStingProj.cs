@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Projectiles
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Projectiles
 {
     public class TheStingProj : BeeProjectile
     {
@@ -33,10 +35,10 @@
             DrawOriginOffsetY = -30;
             Player player = Main.player[Projectile.owner];
             HoneyTimer++;
-            var BeeDamagePlayer2 = player.Hymenoptra();
+            var BeeDamagePlayer2 = player.Beekeeper();
             if (HoneyTimer >= 60)
             {
-                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 3))
+                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 3))
                     Projectile.Kill();
 
                 BeeDamagePlayer2.BeeResourceRegenTimer = -240;

@@ -6,9 +6,8 @@ using BombusApisBee.Content.Forest.Items.Honeycomb;
 using BombusApisBee.Content.Forest.Items.PeeperPoker;
 using BombusApisBee.Content.Forest.Items.RetinaReleaser;
 using BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb;
-using BombusApisBee.Content.Projectiles;
 using BombusApisBee.Content.Snow.Items.FrostedHoneycomb;
-using Terraria;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader.IO;
@@ -32,7 +31,7 @@ namespace BombusApisBee.Core
         public bool improvedhoney;
         public const int PollenMax = 1;
         public int Pollen;
-        public bool BeeKeeper;  
+        public bool BeeKeeper;
         public int squiredamage;
         public bool improvedhoneyskull;
         public bool IgnoreWater;
@@ -166,7 +165,7 @@ namespace BombusApisBee.Core
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            var modPlayer2 = BeeDamagePlayer.ModPlayer(Player);
+            var modPlayer2 = BeekeeperPlayer.ModPlayer(Player);
             if (BombusApisBee.HoneyManipulatorHotkey.JustPressed && modPlayer2.BeeResourceCurrent == modPlayer2.BeeResourceMax2 && modPlayer2.BeeResourceReserved < modPlayer2.BeeResourceMax2 && Main.myPlayer == Player.whoAmI && HoneyManipulator && !Player.HasBuff<HoneyManipulatorCooldown>())
             {
                 Player.AddBuff(ModContent.BuffType<HoneyManipulatorCooldown>(), 5400, false);
@@ -194,7 +193,7 @@ namespace BombusApisBee.Core
         public override void UpdateEquips()
         {
             if (RoyalJelly)
-                Player.Hymenoptra().BeeResourceMax2 += 25;
+                Player.Beekeeper().BeeResourceMax2 += 25;
 
             if (LihzardRelicTimer > 0)
             {
@@ -240,7 +239,7 @@ namespace BombusApisBee.Core
         {
             Vector2 Speed = velocity;
             Vector2 ShootSpeed = Vector2.Clamp(Speed, Vector2.One * -6, Vector2.One * 6);
-            if (item.CountsAsClass<HymenoptraDamageClass>() && Player.whoAmI == Main.myPlayer)
+            if (item.CountsAsClass<BeekeeperDamage>() && Player.whoAmI == Main.myPlayer)
             {
                 if (BeeShoot)
                 {
@@ -258,7 +257,7 @@ namespace BombusApisBee.Core
                     {
                         Vector2 perturbedSpeed = Vector2.Normalize(position - Main.MouseWorld) * 16f;
                         Projectile.NewProjectileDirect(source, position, perturbedSpeed.RotatedByRandom(MathHelper.ToRadians(6f)), ProjectileID.BeeArrow, damage * 1 / 2, knockback, Player.whoAmI).
-                            DamageType = ModContent.GetInstance<HymenoptraDamageClass>();
+                            DamageType = ModContent.GetInstance<BeekeeperDamage>();
                     }
                     SoundEngine.PlaySound(SoundID.Item97, position);
                 }
@@ -276,7 +275,7 @@ namespace BombusApisBee.Core
         }
         public override void UpdateLifeRegen()
         {
-            var BeeDamagePlayer = Player.GetModPlayer<BeeDamagePlayer>();
+            var BeeDamagePlayer = Player.GetModPlayer<BeekeeperPlayer>();
             if (BeeDamagePlayer.BeeResourceCurrent >= BeeDamagePlayer.BeeResourceMax2 * 0.5f)
             {
                 Player.lifeRegen += 2;
@@ -363,7 +362,7 @@ namespace BombusApisBee.Core
                 {
                     modifiers.SourceDamage *= 1.25f;
 
-                    if (Main.rand.NextFloat() < ((item.crit + Player.GetTotalCritChance<HymenoptraDamageClass>()) * 2 / 100))
+                    if (Main.rand.NextFloat() < ((item.crit + Player.GetTotalCritChance<BeekeeperDamage>()) * 2 / 100))
                         modifiers.SetCrit();
                 }
                 else if (MarkedTimer > 0)
@@ -406,7 +405,7 @@ namespace BombusApisBee.Core
                     Player.ClearBuff(ModContent.BuffType<BrokenScope>());
             }
 
-            if (proj.CountsAsClass<HymenoptraDamageClass>() && !NPCID.Sets.ProjectileNPC[target.type])
+            if (proj.CountsAsClass<BeekeeperDamage>() && !NPCID.Sets.ProjectileNPC[target.type])
             {
                 if (SkeletalSet && (crit || target.life <= 0))
                 {
@@ -497,7 +496,7 @@ namespace BombusApisBee.Core
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hit.DamageType.CountsAsClass<HymenoptraDamageClass>() && !NPCID.Sets.ProjectileNPC[target.type] && target.CanBeChasedBy())
+            if (hit.DamageType.CountsAsClass<BeekeeperDamage>() && !NPCID.Sets.ProjectileNPC[target.type] && target.CanBeChasedBy())
             {
                 if (HoneyLaser && !Player.HasBuff<HoneyLaserCooldown>())
                     HoneyLaserCharge = Utils.Clamp(HoneyLaserCharge + damageDone, 0, HONEY_LASER_CHARGE_MAX);

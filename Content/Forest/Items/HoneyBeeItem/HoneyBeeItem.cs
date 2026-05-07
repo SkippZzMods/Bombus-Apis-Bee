@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.HoneyBeeItem
@@ -23,11 +23,11 @@ namespace BombusApisBee.Content.Forest.Items.HoneyBeeItem
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var modPlayer = BeeDamagePlayer.ModPlayer(player);
+            var modPlayer = BeekeeperPlayer.ModPlayer(player);
             modPlayer.BeeResourceMax2 += 25;
             player.Bombus().HoneyBee = true;
 
-            if (player.Hymenoptra().HoldingBeeWeaponTimer > 0)
+            if (player.Beekeeper().HoldingBeeWeaponTimer > 0)
             {
                 if (player.ownedProjectileCounts[ProjectileType<HoneyBeeProj>()] < 1)
                 {

@@ -1,6 +1,6 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
-using BombusApisBee.Content.Projectiles;
-using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom

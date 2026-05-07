@@ -1,10 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Jungle.Items.MiniHornet
 {
-    public class MiniHornet : BeeDamageItem
+    public class MiniHornet : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

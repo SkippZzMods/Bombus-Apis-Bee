@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+
 namespace BombusApisBee.Content.Forest.Items.Beemerang
 {
     public class BeemerangHoldout : ModProjectile
@@ -63,7 +64,7 @@ namespace BombusApisBee.Content.Forest.Items.Beemerang
 
             if (maxCharge == 0)
             {
-                maxCharge = (int)(owner.GetActiveItem().useAnimation * (1f - (owner.GetTotalAttackSpeed<HymenoptraDamageClass>() - 1f)));
+                maxCharge = (int)(owner.GetActiveItem().useAnimation * (1f - (owner.GetTotalAttackSpeed<BeekeeperDamage>() - 1f)));
                 originalDirection = owner.direction;
             }
             if (owner.channel || chargeTimer < maxCharge * 0.35f)
@@ -75,7 +76,7 @@ namespace BombusApisBee.Content.Forest.Items.Beemerang
                     flashed = true;
                     flashTimer = 10;
                     SoundEngine.PlaySound(SoundID.MaxMana, Projectile.position);
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 3);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 3);
                 }
 
                 if (Main.myPlayer == owner.whoAmI)
@@ -85,7 +86,7 @@ namespace BombusApisBee.Content.Forest.Items.Beemerang
                 Projectile.Center = owner.MountedCenter + Vector2.UnitY.RotatedBy((double)(armRot * owner.gravDir), default) * -20f * owner.gravDir;
                 Projectile.rotation = (-MathHelper.PiOver2 + armRot) * owner.gravDir;
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, 3.1415927f + armRot);
-                owner.Hymenoptra().BeeResourceRegenTimer = -60;
+                owner.Beekeeper().BeeResourceRegenTimer = -60;
             }
             else
             {
@@ -107,7 +108,7 @@ namespace BombusApisBee.Content.Forest.Items.Beemerang
                 {
                     if (Main.myPlayer == owner.whoAmI && boomerangTimer == 0)
                     {
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 1);
                         Projectile.friendly = true;
                         Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * MathHelper.Lerp(15f, 22.5f, chargeTimer / (float)maxCharge);
                         Projectile.tileCollide = true;

@@ -1,5 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
 {
     public class HoneycombPrime : BeeProjectile
@@ -30,7 +30,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
             if (flashTimer > 0)
                 flashTimer--;
 
-            if (!owner.channel && owner.itemAnimation == 0 || !(owner.Hymenoptra().BeeResourceCurrent > owner.Hymenoptra().BeeResourceReserved))
+            if (!owner.channel && owner.itemAnimation == 0 || !(owner.Beekeeper().BeeResourceCurrent > owner.Beekeeper().BeeResourceReserved))
             {
                 Projectile.Kill();
                 return;
@@ -45,7 +45,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
                 (proj2.ModProjectile as HoneycombPrime_Laser).parent = Projectile;
             }
 
-            owner.Hymenoptra().BeeResourceRegenTimer = -120;
+            owner.Beekeeper().BeeResourceRegenTimer = -120;
 
             if (++shootDelay >= maxShootDelay)
             {
@@ -64,7 +64,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
 
                     Projectile.velocity += velocity * -4.45f;
 
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 1);
 
                     flashTimer = 25;
                 }
@@ -226,7 +226,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
             {
                 if (!thrown)
                 {
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 1);
                     fadeTimer = 30f;
                     Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 25f;
                     for (int i = 0; i < 35; i++)
@@ -469,7 +469,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
 
                         Projectile.velocity += velocity * -2.45f;
 
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 2);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 2);
 
                         shots++;
                         shootDelay = 0;
@@ -521,7 +521,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
                         SoundID.Item60.PlayWith(Projectile.Center, -0.5f, 0.1f, 1f);
 
                     if (laserTimer % 15 == 0)
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 1);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 1);
                 }
                 else
                 {

@@ -1,7 +1,6 @@
-﻿using BombusApisBee.Content.Dusts;
-using BombusApisBee.Content.Dusts.Pixelized;
-using BombusApisBee.Content.Projectiles;
-using BombusApisBee.Core.PixelationSystem;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
@@ -65,7 +64,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             altHoneyCost = 10;
         }
 
-        public override bool AltFunctionUse(Player player) => !player.HasBuff<ShadestingerScytheCooldown>(); 
+        public override bool AltFunctionUse(Player player) => !player.HasBuff<ShadestingerScytheCooldown>();
 
         public override void UpdateInventory(Player player)
         {
@@ -335,7 +334,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
             scaleVec = new Vector2(0.9f, 1.1f);
-            
+
             float armRotation = Projectile.velocity.ToRotation() + (originalDirection == -1 ? MathHelper.Pi : 0f);
 
             if (progress < 0.6f)
@@ -343,7 +342,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                 float lerper = 1f - (Projectile.timeLeft - maxTimeLeft * 0.4f) / (maxTimeLeft * 0.6f);
 
                 Projectile.rotation += MathHelper.Lerp(-3f, -1f, EaseBuilder.EaseBackIn.Ease(lerper)) * originalDirection;
-                
+
                 armRotation += MathHelper.Lerp(-3f, -1f, EaseBuilder.EaseBackIn.Ease(lerper)) * originalDirection;
 
                 scaleVec = Vector2.Lerp(new Vector2(0.9f, 1.1f), new Vector2(0.9f, 1.5f), EaseBuilder.EaseQuinticIn.Ease(lerper));
@@ -367,7 +366,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                 float lerper = 1f - Projectile.timeLeft / (maxTimeLeft * 0.4f);
 
                 Projectile.rotation += MathHelper.Lerp(-1f, 2.25f, EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
-                
+
                 armRotation += MathHelper.Lerp(-1f, 0.25f, EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
 
                 scaleVec = Vector2.Lerp(new Vector2(0.9f, 1.5f), new Vector2(0.9f, 1.1f), EaseBuilder.EaseQuinticOut.Ease(lerper));
@@ -378,11 +377,11 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                 {
                     Dust.NewDustPerfect(Projectile.Center, DustType<StarDustWhite>(),
                                             Owner.Center.DirectionTo(Projectile.Center) * 3f, 0, new Color(119, 89, 227, 0), MathHelper.Lerp(1f, 0.25f, lerper)).customData = true;
-                }        
+                }
             }
 
             Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRotation);
-            
+
             Owner.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, armRotation);
 
             Projectile.Center = Owner.MountedCenter + new Vector2(22f * originalDirection, -25f).RotatedBy(Projectile.rotation);
@@ -407,7 +406,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                 float lerper = 1f - (Projectile.timeLeft - maxTimeLeft * 0.4f) / (maxTimeLeft * 0.6f);
 
                 Projectile.rotation += MathHelper.Lerp(2.25f, 0f, EaseBuilder.EaseBackIn.Ease(lerper)) * originalDirection;
-                
+
                 armRotation += MathHelper.Lerp(0.25f, -0.5f, EaseBuilder.EaseBackIn.Ease(lerper)) * originalDirection;
 
                 scaleVec = Vector2.Lerp(new Vector2(0.9f, 1.1f), new Vector2(0.9f, 1.5f), EaseBuilder.EaseQuinticIn.Ease(lerper));
@@ -431,7 +430,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                 float lerper = 1f - Projectile.timeLeft / (maxTimeLeft * 0.4f);
 
                 Projectile.rotation += MathHelper.Lerp(0f, -3f, EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
-                
+
                 armRotation += MathHelper.Lerp(-0.5f, -3f, EaseBuilder.EaseQuinticOut.Ease(lerper)) * originalDirection;
 
                 scaleVec = Vector2.Lerp(new Vector2(0.9f, 1.5f), new Vector2(0.9f, 1.1f), EaseBuilder.EaseQuinticOut.Ease(lerper));
@@ -446,7 +445,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             }
 
             Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRotation);
-            
+
             Owner.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, armRotation);
 
             Projectile.Center = Owner.MountedCenter + new Vector2(22f * originalDirection, -25f).RotatedBy(Projectile.rotation);
@@ -537,7 +536,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                     pauseTimer = 12;
 
                 hits++;
-            }          
+            }
 
             oldTimeLeft = Projectile.timeLeft;
 
@@ -686,7 +685,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
             Texture2D bladeTexture = ModContent.Request<Texture2D>(Texture + (Combo == 1 ? "_FlippedBlade" : "_Blade")).Value;
             Texture2D bladeTextureBlur = ModContent.Request<Texture2D>(Texture + (Combo == 1 ? "_FlippedBlade" : "_Blade") + "Blur").Value;
-            
+
             Texture2D glowTex = ModContent.Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
             Texture2D starTex = ModContent.Request<Texture2D>("BombusApisBee/Assets/ExtraTextures/StarAlpha").Value;
 
@@ -780,7 +779,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                     null, new Color(119, 89, 227, 0) * flash * 0.25f, 0f, glowTex.Size() / 2f, 1.5f, 0f, 0f);
 
                     Main.spriteBatch.Draw(starTex, Projectile.Center - Main.screenPosition,
-                        null, new Color(119, 89, 227, 0) * flash , 0f, starTex.Size() / 2f, 1.5f, 0f, 0f);
+                        null, new Color(119, 89, 227, 0) * flash, 0f, starTex.Size() / 2f, 1.5f, 0f, 0f);
 
                     Main.spriteBatch.Draw(starTex, Projectile.Center - Main.screenPosition,
                         null, new Color(255, 255, 255, 0) * flash, 0f, starTex.Size() / 2f, 0.5f, 0f, 0f);
@@ -889,7 +888,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             Main.spriteBatch.Draw(textureBlur, Projectile.Center + new Vector2(0f, Owner.gfxOffY) - Main.screenPosition, null, new Color(255, 255, 255, 0) * fadeOut,
                Projectile.rotation + (Owner.direction == -1 ? MathHelper.TwoPi : 0f) + addRot, textureBlur.Size() / 2f, scaleVec, flip, 0f);
 
-            Main.spriteBatch.Draw(texture, Projectile.Center + new Vector2(0f, Owner.gfxOffY) - Main.screenPosition, null, lightColor * fadeOut, 
+            Main.spriteBatch.Draw(texture, Projectile.Center + new Vector2(0f, Owner.gfxOffY) - Main.screenPosition, null, lightColor * fadeOut,
                 Projectile.rotation + (Owner.direction == -1 ? MathHelper.TwoPi : 0f) + addRot, texture.Size() / 2f, scaleVec, flip, 0f);
 
             if (flashTimer > 0)
@@ -901,9 +900,9 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
                 Main.spriteBatch.Draw(textureWhite, Projectile.Center + new Vector2(0f, Owner.gfxOffY) - Main.screenPosition, null, new Color(255, 255, 255) * flash * fadeOut,
                     Projectile.rotation + (Owner.direction == -1 ? MathHelper.TwoPi : 0f) + addRot, textureWhite.Size() / 2f, scaleVec, flip, 0f);
-                
+
                 //Main.spriteBatch.Draw(glowTex, Projectile.Center + new Vector2(0f, Owner.gfxOffY) + new Vector2(5f * originalDirection, -35f).RotatedBy(Projectile.rotation) - Main.screenPosition,
-                    //null, new Color(119, 89, 227, 0) * flash * fadeOut * 0.25f, 0f, glowTex.Size() / 2f, 1.5f, flip, 0f);
+                //null, new Color(119, 89, 227, 0) * flash * fadeOut * 0.25f, 0f, glowTex.Size() / 2f, 1.5f, flip, 0f);
 
                 Main.spriteBatch.Draw(starTex, Projectile.Center + new Vector2(0f, Owner.gfxOffY) + new Vector2(5f * originalDirection, -35f).RotatedBy(Projectile.rotation) - Main.screenPosition,
                     null, new Color(119, 89, 227, 0) * flash * fadeOut, 0f, starTex.Size() / 2f, 1.5f, flip, 0f);
@@ -1121,8 +1120,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
                                                    velocity, 0, color, 1.2f).customData = true;
                             }
                         }
-                    }                       
-                }             
+                    }
+                }
             }
         }
     }

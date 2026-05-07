@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
 {
-    public class GalacticBee : BaseBeeProjectile
+    public class GalacticBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

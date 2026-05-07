@@ -10,7 +10,7 @@ namespace BombusApisBee.Content.Dusts
             dust.noGravity = true;
             dust.frame = new Rectangle(0, 0, 64, 64);
 
-            dust.shader = new Terraria.Graphics.Shaders.ArmorShaderData(new Ref<Effect>(ModContent.GetInstance<BombusApisBee>().Assets.Request<Effect>("Effects/SLRGlowingDust", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value), "GlowingDustPass");
+            dust.shader = new Terraria.Graphics.Shaders.ArmorShaderData(new Ref<Effect>(ModContent.GetInstance<BombusApisBee>().Assets.Request<Effect>("Assets/Shaders/SLRGlowingDust", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value), "GlowingDustPass");
         }
 
         public override Color? GetAlpha(Dust dust, Color lightColor)

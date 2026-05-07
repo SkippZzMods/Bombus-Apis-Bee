@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Forest.Items.PeeperPoker
+﻿namespace BombusApisBee.Content.Forest.Items.PeeperPoker
 {
     public class CthulhuBee : BeeProjectile
     {

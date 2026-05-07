@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Core.Metaballs;
+﻿using BombusApisBee.Core.Systems.MetaballSystem;
 
 namespace BombusApisBee.Content.Dusts
 {

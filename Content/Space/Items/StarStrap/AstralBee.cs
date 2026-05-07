@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Space.Items.StarStrap
 {
-    public class AstralBee : BaseBeeProjectile
+    public class AstralBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

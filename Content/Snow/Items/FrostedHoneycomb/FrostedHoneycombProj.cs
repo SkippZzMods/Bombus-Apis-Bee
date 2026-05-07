@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Snow.Items.FrostedHoneycomb
+﻿namespace BombusApisBee.Content.Snow.Items.FrostedHoneycomb
 {
     public class FrostedHoneycombProj : BeeProjectile
     {

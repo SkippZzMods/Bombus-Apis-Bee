@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.HoneyFlareGun;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 
 namespace BombusApisBee.Content.Forest.Items.HoneyFlareCannon
 {
-    public class HoneyFlareCannon : BeeDamageItem
+    public class HoneyFlareCannon : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

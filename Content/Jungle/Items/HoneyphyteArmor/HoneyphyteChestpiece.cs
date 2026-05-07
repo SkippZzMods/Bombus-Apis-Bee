@@ -22,8 +22,8 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 
         public override void UpdateEquip(Player player)
         {
-            player.Hymenoptra().CurrentBees += 5;
-            player.Hymenoptra().ResourceChanceAdd += 0.3f;
+            player.Beekeeper().CurrentBees += 5;
+            player.Beekeeper().ResourceChanceAdd += 0.3f;
         }
 
         public override void AddRecipes()

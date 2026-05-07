@@ -29,7 +29,7 @@ namespace BombusApisBee.Content.Forest.Items.BeekeeperArmor
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = "Bees become friendly\n15% increased chance to not consume honey";
-            player.Hymenoptra().ResourceChanceAdd += 0.15f;
+            player.Beekeeper().ResourceChanceAdd += 0.15f;
             player.npcTypeNoAggro[NPCID.Bee] = true;
             player.npcTypeNoAggro[NPCID.BeeSmall] = true;
         }
@@ -37,7 +37,7 @@ namespace BombusApisBee.Content.Forest.Items.BeekeeperArmor
         public override void UpdateEquip(Player player)
         {
             player.IncreaseBeeCrit(5);
-            player.Hymenoptra().BeeResourceMax2 += 25;
+            player.Beekeeper().BeeResourceMax2 += 25;
         }
 
 

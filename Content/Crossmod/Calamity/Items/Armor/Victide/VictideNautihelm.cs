@@ -1,8 +1,7 @@
-﻿using CalamityMod.Items.Armor.Victide;
-using CalamityMod.Items.Materials;
-using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Crossmod;
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using CalamityMod;
+using CalamityMod.Items.Armor.Victide;
+using CalamityMod.Items.Materials;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Armor.Victide
 {
@@ -38,7 +37,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Armor.Victide
                 "This seashell does true damage and does not benefit from any damage class\n" +
                 "Provides increased underwater mobility and slightly reduces breath loss in the abyss";
 
-            player.Hymenoptra().BeeResourceMax2 += 30;
+            player.Beekeeper().BeeResourceMax2 += 30;
 
             if (player.honeyWet)
                 player.IncreaseBeeDamage(0.15f);

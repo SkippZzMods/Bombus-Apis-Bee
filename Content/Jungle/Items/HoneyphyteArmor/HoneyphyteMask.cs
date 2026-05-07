@@ -1,4 +1,6 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 {
@@ -28,16 +30,16 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = "Strike enemies to build up honey energy\nConjures a honeycomb to aid you\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "while at full energy to fire a concentrated honey laser from the honeycomb\nIncreases hymenoptra damage by 10% while your Bees are in Attacking mode\nIncreases damage reduction by 10% while your Bees are in Defense mode";
-            var modPlayer = player.Hymenoptra();
+            var modPlayer = player.Beekeeper();
             player.Bombus().HoneyLaser = true;
 
             if (modPlayer.HasBees)
             {
-                if (modPlayer.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense)
+                if (modPlayer.CurrentBeeState == (int)BeekeeperPlayer.BeeState.Defense)
                 {
                     player.IncreaseBeeDamage(0.1f);
                 }
-                else if (modPlayer.CurrentBeeState == (int)BeeDamagePlayer.BeeState.Offense)
+                else if (modPlayer.CurrentBeeState == (int)BeekeeperPlayer.BeeState.Offense)
                 {
                     player.endurance += 0.1f;
                 }
@@ -50,12 +52,12 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
                 proj.originalDamage = 50;
             }
         }
-        
+
         public override void UpdateEquip(Player player)
         {
             player.IncreaseBeeDamage(0.10f);
             player.IncreaseBeeCrit(10);
-            player.Hymenoptra().BeeResourceMax2 += 75;
+            player.Beekeeper().BeeResourceMax2 += 75;
         }
 
         public override void AddRecipes()
@@ -149,7 +151,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
                 Vector2 pos = Projectile.Center + Vector2.One.RotatedBy(rotationalVelocity.ToRotation() - MathHelper.PiOver4) * 17.5f - Projectile.velocity;
 
                 for (int i = 0; i < 4; i++)
-                {   
+                {
                     Dust.NewDustPerfect(pos + Vector2.One.RotatedBy(1.57f * i).RotatedBy(6.28f * lerper) * 50f * lerper, ModContent.DustType<Glow>(), Vector2.Zero, 0, new Color(255, 150, 20), 0.35f);
                 }
 
@@ -211,7 +213,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 
             float chargeProgress = Charge / BombusApisBeePlayer.HONEY_LASER_CHARGE_MAX;
 
-            if (LaserTimer > 0) 
+            if (LaserTimer > 0)
                 chargeProgress = TrailFade() * 1.25f;
 
             Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 20, 0) * chargeProgress, Projectile.rotation, bloomTex.Size() / 2f, 0.75f, 0f, 0f);
@@ -290,7 +292,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
             if (LaserTimer == 1)
             {
                 pulsed = false;
-            }            
+            }
         }
 
         internal void DoIdleMovement()
@@ -314,7 +316,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
                     speed = MathHelper.Lerp(0.15f, 20f, dist / 100f);
 
                 toIdlePos.Normalize();
-                toIdlePos *= speed; 
+                toIdlePos *= speed;
             }
 
             Projectile.velocity = (Projectile.velocity * (25f - 1) + toIdlePos) / 25f;

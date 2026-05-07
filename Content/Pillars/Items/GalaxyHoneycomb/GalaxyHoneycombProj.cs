@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
 {
@@ -64,7 +64,7 @@ namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
         };
         public override void AI()
         {
-            Owner.Hymenoptra().BeeResourceRegenTimer = -120;
+            Owner.Beekeeper().BeeResourceRegenTimer = -120;
             StarTimer += 1f;
             Time += 1f;
             if (StarTimer >= 10f)
@@ -96,11 +96,11 @@ namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
                     }
                 }
 
-                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 4);
+                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 4);
                 StarTimer = 0f;
             }
             Projectile.rotation += 0.25f / Projectile.MaxUpdates;
-            if (Owner.channel && Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent > Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceReserved)
+            if (Owner.channel && Owner.GetModPlayer<BeekeeperPlayer>().BeeResourceCurrent > Owner.GetModPlayer<BeekeeperPlayer>().BeeResourceReserved)
             {
                 HomeTowardsMouse();
             }
@@ -117,7 +117,7 @@ namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
                     SpawnDeathProjectiles();
                     Boolean = true;
                 }
-                Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceRegenTimer = -180;
+                Owner.GetModPlayer<BeekeeperPlayer>().BeeResourceRegenTimer = -180;
             }
             Owner.itemTime = 2;
             Owner.itemAnimation = 2;

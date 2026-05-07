@@ -24,7 +24,7 @@ namespace BombusApisBee.Content.Forest.Items.BeekeeperArmor
         public override void UpdateEquip(Player player)
         {
             player.IncreaseBeeDamage(0.05f);
-            player.Hymenoptra().CurrentBees += 1;
+            player.Beekeeper().CurrentBees += 1;
         }
 
         public override void AddRecipes()

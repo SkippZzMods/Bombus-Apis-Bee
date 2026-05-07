@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.WaspArmor
 {
@@ -119,7 +120,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspArmor
 
         public override void UpdateEquip(Player player)
         {
-            var modPlayer = BeeDamagePlayer.ModPlayer(player);
+            var modPlayer = BeekeeperPlayer.ModPlayer(player);
             modPlayer.BeeResourceMax2 += 35;
             player.jumpSpeedBoost += 2f;
             player.Bombus().wingFlightTimeBoost += 0.20f;

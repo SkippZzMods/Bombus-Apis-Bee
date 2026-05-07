@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
+using BombusApisBee.Core.Systems.ParticleSystem;
 using BombusApisBee.UI;
 using Terraria.UI;
 
@@ -20,6 +21,11 @@ namespace BombusApisBee
             _lastUpdateUiGameTime = gameTime;
             if (mod.BeeDamageInterface?.CurrentState != null)
                 mod.BeeDamageInterface.Update(gameTime);
+        }
+        public override void PreUpdateItems()
+        {
+            if (Main.netMode != NetmodeID.Server)
+                ParticleHandler.UpdateAllParticles();
         }
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {

@@ -1,11 +1,13 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using Terraria.DataStructures;
+using BombusApisBee.Core.Common.Apiary;
 
 namespace BombusApisBee.Content.Forest.Items.WoodenApiary
 {
     public class WoodenApiary : ApiaryItem
     {
+        public override int baseUseTime => 20;
+        public override int altUseTime => 28;
         public override void AddStaticDefaults()
         {
             DisplayName.SetDefault("Wooden Apiary");
@@ -18,9 +20,6 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
             Item.noMelee = true;
             Item.width = 32;
             Item.height = 32;
-
-            Item.useTime = 14;
-            Item.useAnimation = 14;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0.15f;
@@ -39,24 +38,6 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
 
             honeyCost = 1;
             altHoneyCost = 2;
-        }
-
-        public override bool SafeCanUseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                Item.useTime = 28;
-                Item.useAnimation = 28;
-
-            }
-            else
-            {
-                Item.useTime = 20;
-                Item.useAnimation = 20;
-
-            }
-
-            return base.SafeCanUseItem(player);
         }
 
         public override void ModifyApiaryHit(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)

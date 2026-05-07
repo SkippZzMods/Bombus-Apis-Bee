@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Projectiles
 {
-    public class HoneyBee : BaseBeeProjectile
+    public class HoneyBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

@@ -1,8 +1,8 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.TheSting
 {
-    public class TheSting : BeeDamageItem
+    public class TheSting : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

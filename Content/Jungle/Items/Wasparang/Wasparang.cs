@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Jungle.Items.Wasparang
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Jungle.Items.Wasparang
 {
-    public class Wasparang : BeeDamageItem
+    public class Wasparang : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

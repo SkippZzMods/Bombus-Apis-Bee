@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
 {
@@ -48,7 +48,7 @@ namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
 
             //Owner.Bombus().shakeTimer = 2;
 
-            var modPlayer = Owner.Hymenoptra();
+            var modPlayer = Owner.Beekeeper();
             modPlayer.BeeResourceRegenTimer = -120;
             if (!Owner.channel || modPlayer.BeeResourceCurrent <= 0)
             {
@@ -81,7 +81,7 @@ namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
                         }
                     }
 
-                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost);
+                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost);
 
                     Owner.CheckMana(15, true);
                 }

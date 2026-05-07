@@ -19,7 +19,7 @@ namespace BombusApisBee.Content.Forest.Items.BeeIdols
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().ResourceChanceAdd += 0.1f;
+            player.Beekeeper().ResourceChanceAdd += 0.1f;
         }
     }
     public class TinBeeIdol : BeeKeeperItem
@@ -58,7 +58,7 @@ namespace BombusApisBee.Content.Forest.Items.BeeIdols
                     {
                         if (chest.item[inventoryIndex].type == ItemID.None)
                         {
-                            if (WorldGen.genRand.NextFloat() < 0.2f)
+                            if (WorldGen.genRand.NextFloat() < 0.4f)
                             {
                                 chest.item[inventoryIndex].SetDefaults(GenVars.copper == TileID.Copper ? ItemType<CopperBeeIdol>() : ItemType<TinBeeIdol>());
                                 chest.item[inventoryIndex].Prefix(-1);

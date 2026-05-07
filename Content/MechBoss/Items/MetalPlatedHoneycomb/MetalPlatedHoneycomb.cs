@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
 {
-    public class MetalPlatedHoneycomb : BeeDamageItem
+    public class MetalPlatedHoneycomb : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<HoneycombPrime>() <= 0;
         public override void SafeSetStaticDefaults()

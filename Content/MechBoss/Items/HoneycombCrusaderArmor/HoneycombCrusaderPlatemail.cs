@@ -23,8 +23,8 @@ namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
 
         public override void UpdateEquip(Player player)
         {
-            player.Hymenoptra().ResourceChanceAdd += 0.3f;
-            player.Hymenoptra().CurrentBees += 4;
+            player.Beekeeper().ResourceChanceAdd += 0.3f;
+            player.Beekeeper().CurrentBees += 4;
         }
 
         public override void AddRecipes()

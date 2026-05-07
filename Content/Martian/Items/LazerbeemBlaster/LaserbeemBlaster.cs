@@ -1,9 +1,9 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Martian.Items.LazerbeemBlaster
 {
-    public class LaserbeemBlaster : BeeDamageItem
+    public class LaserbeemBlaster : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

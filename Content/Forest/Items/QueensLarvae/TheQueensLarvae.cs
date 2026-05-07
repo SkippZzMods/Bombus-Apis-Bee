@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.QueensLarvae
 {
-    public class TheQueensLarvae : BeeDamageItem
+    public class TheQueensLarvae : BeekeeperWeapon
     {
         public override void Load()
         {
@@ -14,7 +15,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
             orig(self, i);
 
             if (self.ownedProjectileCounts<QueensLarvaeProjectile>() > 0)
-                self.Hymenoptra().BeeResourceReserved += (int)(self.Hymenoptra().BeeResourceMax2 * 0.65f);
+                self.Beekeeper().BeeResourceReserved += (int)(self.Beekeeper().BeeResourceMax2 * 0.65f);
         }
 
         public override void SafeSetStaticDefaults()
@@ -49,8 +50,8 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.Bombus().AddShake(20);
-            player.Hymenoptra().BeeResourceCurrent = 0;
-            player.Hymenoptra().BeeResourceRegenTimer = -600;
+            player.Beekeeper().BeeResourceCurrent = 0;
+            player.Beekeeper().BeeResourceRegenTimer = -600;
             player.AddBuff<TheQueensGuard>(120);
             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.One, ProjectileType<QueensLarvaeProjectile>(), damage, knockback, player.whoAmI);
             for (int i = 0; i < 30; i++)
@@ -64,7 +65,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
 
         public override bool CanUseItem(Player player)
         {
-            return player.ownedProjectileCounts<QueensLarvaeProjectile>() <= 0 && player.Hymenoptra().BeeResourceCurrent >= player.Hymenoptra().BeeResourceMax2;
+            return player.ownedProjectileCounts<QueensLarvaeProjectile>() <= 0 && player.Beekeeper().BeeResourceCurrent >= player.Beekeeper().BeeResourceMax2;
         }
     }
 }

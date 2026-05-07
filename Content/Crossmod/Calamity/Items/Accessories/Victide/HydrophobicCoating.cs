@@ -1,9 +1,7 @@
-using BombusApisBee.Core.ScreenTargetSystem;
-using CalamityMod.Items.Materials;
-using BombusApisBee.Core.PixelationSystem;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.Graphics.Effects;
 using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using CalamityMod.Items.Materials;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Victide
 {
@@ -69,7 +67,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Victide
             if (wetTimer > 0)
                 wetTimer--;
 
-            if (Collision.WetCollision(projectile.Center, projectile.width, projectile.height) && Main.player[projectile.owner].GetModPlayer<HydrophobicCoatingPlayer>().equipped && projectile.DamageType == GetInstance<HymenoptraDamageClass>())
+            if (Collision.WetCollision(projectile.Center, projectile.width, projectile.height) && Main.player[projectile.owner].GetModPlayer<HydrophobicCoatingPlayer>().equipped && projectile.DamageType == GetInstance<BeekeeperDamage>())
                 wetTimer = 600;
         }
 

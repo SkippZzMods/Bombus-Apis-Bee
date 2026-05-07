@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
+﻿namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
 {
     public class SkelecombProjectile : BeeProjectile
     {

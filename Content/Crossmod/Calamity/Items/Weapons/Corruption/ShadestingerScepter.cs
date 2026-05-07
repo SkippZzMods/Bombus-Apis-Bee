@@ -1,6 +1,6 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
-using BombusApisBee.Content.Projectiles;
-using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
@@ -167,18 +167,18 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(default, default, default, default, default, default, Main.GameViewMatrix.TransformationMatrix);
-           
+
             Vector2 tipPos = Projectile.Center + new Vector2(0f, -20f);
-            
+
             Main.spriteBatch.Draw(texGlow, Projectile.Center + offset - Main.screenPosition, null, new Color(164, 168, 80, 0) * (Progress < 1f ? Progress : fade), rot, texGlow.Size() / 2f, Projectile.scale, flip, 0f);
 
             Main.spriteBatch.Draw(tex, Projectile.Center + offset - Main.screenPosition, null, lightColor * fade, rot, tex.Size() / 2f, Projectile.scale, flip, 0f);
-            
+
             Main.spriteBatch.Draw(glowTex, tipPos - Main.screenPosition, null, new Color(164, 168, 80, 0) * (Progress < 1f ? Progress : fade), 0f, glowTex.Size() / 2f, 0.5f, 0f, 0f);
 
             if (dyingTimer > 0)
             {
-                Main.spriteBatch.Draw(starTex, Projectile.Center + new Vector2(0f, -20f) - Main.screenPosition, 
+                Main.spriteBatch.Draw(starTex, Projectile.Center + new Vector2(0f, -20f) - Main.screenPosition,
                     null, new Color(200, 255, 120, 0) * fade, 0f, starTex.Size() / 2f, new Vector2(MathHelper.Lerp(0.6f, 1f, 1f - fade), 0.6f), 0f, 0f);
 
                 Main.spriteBatch.Draw(starTex, Projectile.Center + new Vector2(0f, -20f) - Main.screenPosition,
@@ -193,7 +193,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         /// </summary>
         protected virtual void ProjEffects(Vector2 pos)
         {
-     
+
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             SoundID.Item4.PlayWith(Projectile.Center, volume: 0.5f);
 
             Owner.Bombus().AddShake(1, false);
-            
+
             for (int i = 0; i < 2; i++)
             {
                 Color color = Main.rand.NextBool() ? new Color(152, 137, 255, 0) : new Color(164, 168, 74, 0);
@@ -331,7 +331,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         {
             Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(15f, 15f),
                    ModContent.DustType<PixelatedEmber>(), Main.rand.NextVector2Circular(2.5f, 2.5f), 0, new Color(152, 137, 255, 0), 0.15f).customData = Main.rand.NextBool() ? -1 : 1;
-            
+
             Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(15f, 15f),
                                ModContent.DustType<PixelatedEmber>(), Main.rand.NextVector2Circular(2.5f, 2.5f), 0, new Color(201, 255, 119, 0), 0.15f).customData = Main.rand.NextBool() ? -1 : 1;
         }

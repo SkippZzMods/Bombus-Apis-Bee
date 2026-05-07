@@ -1,5 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
-using BombusApisBee.Core.PixelationSystem;
+﻿using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
 {
     public class HellfireBeeBuckshot : BeeProjectile, IDrawPrimitive_

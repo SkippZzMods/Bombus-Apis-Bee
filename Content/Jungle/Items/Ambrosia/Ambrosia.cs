@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.Ambrosia
 {
-    public class Ambrosia : BeeDamageItem
+    public class Ambrosia : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

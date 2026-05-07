@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.MegaHornet
 {
@@ -33,7 +33,7 @@ namespace BombusApisBee.Content.Jungle.Items.MegaHornet
 
         public override void AI()
         {
-            if (!CanHold || owner.Hymenoptra().BeeResourceCurrent <= 0)
+            if (!CanHold || owner.Beekeeper().BeeResourceCurrent <= 0)
                 Projectile.Kill();
 
             if (SpinUp < MaxSpinUp)
@@ -125,7 +125,7 @@ namespace BombusApisBee.Content.Jungle.Items.MegaHornet
 
         public void ShootThings(Vector2 barrelPos)
         {
-            if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 1))
+            if (owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost + 1))
             {
                 for (int i = 0; i < 15; i++)
                 {

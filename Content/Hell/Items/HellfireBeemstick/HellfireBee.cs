@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
 {
-    public class HellfireBee : BaseBeeProjectile
+    public class HellfireBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

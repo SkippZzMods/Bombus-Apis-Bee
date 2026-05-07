@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
 {
     public class EaterOfHoneycombsHoldout : ModProjectile
     {
@@ -46,7 +48,7 @@
 
         public override void AI()
         {
-            owner.Hymenoptra().BeeResourceRegenTimer = -120;
+            owner.Beekeeper().BeeResourceRegenTimer = -120;
             if (shots < 10)
             {
                 if (MaxDelay == 0)
@@ -68,7 +70,7 @@
                             Projectile.NewProjectile(Projectile.GetSource_FromAI(), barrelPos, Projectile.velocity.RotatedByRandom(0.25f) * 10f, ProjectileType<CorruptMiniEater>(), (int)(Projectile.damage * 0.66f), 2.5f, Projectile.owner);
 
                         SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.position);
-                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 2);
+                        owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 2);
                     }
 
                     BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center);
@@ -83,7 +85,7 @@
                         Dust.NewDustPerfect(barrelPos, DustType<Dusts.GlowFastDecelerate>(), Projectile.velocity.RotatedByRandom(0.45f) * Main.rand.NextFloat(0.5f, 3f), 0, new Color(140, 169, 44), 0.45f).noGravity = true;
                     }
 
-                    if (!owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 3))
+                    if (!owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 3))
                         shots = 11;
                 }
 

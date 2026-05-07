@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Hell.Items.SyrupSickle
+﻿namespace BombusApisBee.Content.Hell.Items.SyrupSickle
 {
     public class SyrupSickleProjectile : BeeProjectile
     {

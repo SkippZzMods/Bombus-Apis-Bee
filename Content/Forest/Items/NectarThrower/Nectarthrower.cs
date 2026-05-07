@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.NectarThrower
 {
-    public class Nectarthrower : BeeDamageItem
+    public class Nectarthrower : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

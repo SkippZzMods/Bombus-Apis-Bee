@@ -55,7 +55,7 @@
             effect.CurrentTechnique.Passes[0].Apply();
 
             Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, Color.White, dust.rotation, tex.Size() / 2f, dust.scale, 0f, 0f);
-            
+
             color = new Color(70, 70, 70, 0) * 0.2f * lerper;
             effect.Parameters["uColor"].SetValue(color.ToVector4());
 

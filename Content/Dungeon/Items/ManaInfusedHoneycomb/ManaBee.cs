@@ -1,9 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
 {
-    public class ManaBee : BaseBeeProjectile
+    public class ManaBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

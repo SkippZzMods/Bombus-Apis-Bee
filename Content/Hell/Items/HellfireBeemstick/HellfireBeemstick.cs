@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Content.Jungle.Items.Beemstick;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
 {
-    public class HellfireBeemstick : BeeDamageItem
+    public class HellfireBeemstick : BeekeeperWeapon
     {
         public float shootRotation;
         public int shootDirection;
@@ -31,7 +32,7 @@ namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
             Item.autoReuse = false;
             Item.shoot = ProjectileType<HellfireBee>();
             Item.shootSpeed = 6f;
-            Item.UseSound = new SoundStyle("BombusApisBee/Sounds/Item/HeavyShotgun") with { Volume = 0.75f, Pitch = -0.15f };
+            Item.UseSound = new SoundStyle("BombusApisBee/Sounds/Item/HeavyShotgun") with { Volume = 0.25f, Pitch = -0.15f };
             Item.scale = 1;
             honeyCost = 5;
             altHoneyCost = 7;
@@ -160,7 +161,7 @@ namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
                         Vector2 pos = player.MountedCenter + (rotation + 1.5707964f * player.gravDir).ToRotationVector2() * 5f;
 
                         Gore.NewGorePerfect(null, pos, -(rotation + 1.5707964f * player.gravDir).ToRotationVector2() * 3f + Vector2.UnitY * -2f, Mod.Find<ModGore>("HoneyShotgunShell").Type);
-                        new SoundStyle("BombusApisBee/Sounds/Item/PlinkLever").PlayWith(player.Center, 0f, 0f, 1f);
+                        new SoundStyle("BombusApisBee/Sounds/Item/PlinkLever").PlayWith(player.Center, 0f, 0f, 0.25f);
 
                         for (int i = 0; i < 10; i++)
                         {

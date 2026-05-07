@@ -1,12 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Jungle.Items.BladeOfAculeus;
-using BombusApisBee.Content.Projectiles;
-using Terraria;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Jungle.Items.TrueStingerScimitar
 {
-    public class TrueStingerScimitar : BeeDamageItem
+    public class TrueStingerScimitar : BeekeeperWeapon
     {
         public override void SafeSetDefaults()
         {

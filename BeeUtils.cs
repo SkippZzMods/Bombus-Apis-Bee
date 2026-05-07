@@ -1,5 +1,5 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Common.BeeProjectile;
 using ReLogic.Utilities;
 using Terraria.DataStructures;
 
@@ -122,10 +122,10 @@ namespace BombusApisBee
         {
             if (player.Bombus().HoneyedHeart && player.statLife < player.statLifeMax2)
             {
-                if (player.Hymenoptra().BeeResourceCurrent < player.Hymenoptra().BeeResourceMax2)
-                    player.Hymenoptra().BeeResourceCurrent += (int)(amount * 0.75f);
-                if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
-                    player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
+                if (player.Beekeeper().BeeResourceCurrent < player.Beekeeper().BeeResourceMax2)
+                    player.Beekeeper().BeeResourceCurrent += (int)(amount * 0.75f);
+                if (player.Beekeeper().BeeResourceCurrent > player.Beekeeper().BeeResourceMax2)
+                    player.Beekeeper().BeeResourceCurrent = player.Beekeeper().BeeResourceMax2;
 
                 if (showText && Main.myPlayer == player.whoAmI)
                     CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)(amount * 0.75f));
@@ -135,10 +135,10 @@ namespace BombusApisBee
                 return;
             }
 
-            if (player.Hymenoptra().BeeResourceCurrent < player.Hymenoptra().BeeResourceMax2)
-                player.Hymenoptra().BeeResourceCurrent += (int)(amount);
-            if (player.Hymenoptra().BeeResourceCurrent > player.Hymenoptra().BeeResourceMax2)
-                player.Hymenoptra().BeeResourceCurrent = player.Hymenoptra().BeeResourceMax2;
+            if (player.Beekeeper().BeeResourceCurrent < player.Beekeeper().BeeResourceMax2)
+                player.Beekeeper().BeeResourceCurrent += (int)(amount);
+            if (player.Beekeeper().BeeResourceCurrent > player.Beekeeper().BeeResourceMax2)
+                player.Beekeeper().BeeResourceCurrent = player.Beekeeper().BeeResourceMax2;
 
             if (showText && Main.myPlayer == player.whoAmI)
                 CombatText.NewText(player.getRect(), BombusApisBee.honeyIncreaseColor, (int)amount);
@@ -195,7 +195,7 @@ namespace BombusApisBee
         {
             Player player = Main.player[projectile.owner];
 
-            Projectile proj = Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, pos, velocity, ModContent.ProjectileType<RegularBeeProjectile>(), (int)damage, knockBack, player.whoAmI);
 
             proj.DamageType = BeeUtils.BeeDamageClass();
 
@@ -204,7 +204,7 @@ namespace BombusApisBee
 
         public static Projectile SpawnBee(this Player player, IEntitySource source, Vector2 pos, Vector2 velocity, float damage, float knockBack = 0f)
         {
-            Projectile proj = Projectile.NewProjectileDirect(source, pos, velocity, player.beeType(), player.beeDamage((int)damage), player.beeKB(knockBack), player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, pos, velocity, ModContent.ProjectileType<RegularBeeProjectile>(), (int)damage, knockBack, player.whoAmI);
 
             proj.DamageType = BeeUtils.BeeDamageClass();
 
@@ -286,9 +286,9 @@ namespace BombusApisBee
             return player.ownedProjectileCounts[ModContent.ProjectileType<T>()];
         }
 
-        public static HymenoptraDamageClass BeeDamageClass()
+        public static BeekeeperDamage BeeDamageClass()
         {
-            return ModContent.GetInstance<HymenoptraDamageClass>();
+            return ModContent.GetInstance<BeekeeperDamage>();
         }
         public static BombusApisBeeGlobalItem Bombus(this Item item)
         {
@@ -298,29 +298,29 @@ namespace BombusApisBee
         {
             return player.GetModPlayer<BombusApisBeePlayer>();
         }
-        public static BeeDamagePlayer Hymenoptra(this Player player)
+        public static BeekeeperPlayer Beekeeper(this Player player)
         {
-            return player.GetModPlayer<BeeDamagePlayer>();
+            return player.GetModPlayer<BeekeeperPlayer>();
         }
-        public static BombusApisBeeGlobalProjectile Bombus(this Projectile proj)
+        public static CommonBeeGlobalProjectile Bombus(this Projectile proj)
         {
-            return proj.GetGlobalProjectile<BombusApisBeeGlobalProjectile>();
+            return proj.GetGlobalProjectile<CommonBeeGlobalProjectile>();
         }
         public static void IncreaseBeeDamage(this Player player, float damage)
         {
-            player.GetDamage<HymenoptraDamageClass>() += damage;
+            player.GetDamage<BeekeeperDamage>() += damage;
         }
         public static void IncreaseBeeCrit(this Player player, float crit)
         {
-            player.GetCritChance<HymenoptraDamageClass>() += crit;
+            player.GetCritChance<BeekeeperDamage>() += crit;
         }
         public static void IncreaseBeeKnockback(this Player player, float knockback)
         {
-            player.GetKnockback<HymenoptraDamageClass>() += knockback;
+            player.GetKnockback<BeekeeperDamage>() += knockback;
         }
         public static void IncreaseBeeUseSpeed(this Player player, float speed)
         {
-            player.GetAttackSpeed<HymenoptraDamageClass>() += speed;
+            player.GetAttackSpeed<BeekeeperDamage>() += speed;
         }
         public enum EasingType
         {
@@ -445,7 +445,7 @@ namespace BombusApisBee
 
         public static float GetBeeItemResourceChance(this Player player)
         {
-            if (player.GetActiveItem().ModItem is BeeDamageItem damageItem && damageItem.resourceChance > 0f)
+            if (player.GetActiveItem().ModItem is BeekeeperWeapon damageItem && damageItem.resourceChance > 0f)
             {
                 float Chance = damageItem.resourceChance;
                 return Chance;
@@ -455,7 +455,7 @@ namespace BombusApisBee
         }
         public static float TrueResourceChance(this Player player)
         {
-            return Utils.Clamp((player.GetBeeItemResourceChance() + player.GetModPlayer<BeeDamagePlayer>().ResourceChanceAdd), 0f, 0.5f);
+            return Utils.Clamp((player.GetBeeItemResourceChance() + player.GetModPlayer<BeekeeperPlayer>().ResourceChanceAdd), 0f, 0.5f);
         }
 
         public static Vector2 SafeDirectionTo(this Entity entity, Vector2 destination, Vector2? fallback = null)
@@ -472,12 +472,12 @@ namespace BombusApisBee
             if (amount < 1)
                 amount = 1;
 
-            if (player.Hymenoptra().BeeResourceCurrent >= amount + player.Hymenoptra().BeeResourceReserved)
+            if (player.Beekeeper().BeeResourceCurrent >= amount + player.Beekeeper().BeeResourceReserved)
             {
                 if (Main.rand.NextFloat() > player.TrueResourceChance())
                 {
-                    player.Hymenoptra().BeeResourceRegenTimer = -120;
-                    player.Hymenoptra().BeeResourceCurrent -= amount;
+                    player.Beekeeper().BeeResourceRegenTimer = -120;
+                    player.Beekeeper().BeeResourceCurrent -= amount;
                 }
 
                 return true;
@@ -498,7 +498,7 @@ namespace BombusApisBee
         {
             Projectile proj = Main.projectile[whoAmI];
 
-            if (proj.type == ProjectileID.Bee || proj.type == ProjectileID.GiantBee || proj.ModProjectile is BaseBeeProjectile)
+            if (proj.type == ProjectileID.Bee || proj.type == ProjectileID.GiantBee || proj.ModProjectile is CommonBeeProjectile)
                 return true;
 
             return false;
@@ -508,7 +508,7 @@ namespace BombusApisBee
         {
             Projectile proj = Main.projectile[whoAmI];
 
-            if (proj.type == ProjectileID.GiantBee || (proj.ModProjectile is BaseBeeProjectile && (proj.ModProjectile as BaseBeeProjectile).Giant))
+            if (proj.type == ProjectileID.GiantBee || (proj.ModProjectile is CommonBeeProjectile && (proj.ModProjectile as CommonBeeProjectile).Giant))
                 return true;
 
             return false;
@@ -562,9 +562,9 @@ namespace BombusApisBee
             player.itemLocation = finalPosition + new Vector2(spriteSize.X * 0.5f, 0f);
         }
 
-        public static int ApplyHymenoptraDamageTo(this Player player, int damage) => (int)player.GetTotalDamage<HymenoptraDamageClass>().ApplyTo(damage);
+        public static int ApplyHymenoptraDamageTo(this Player player, int damage) => (int)player.GetTotalDamage<BeekeeperDamage>().ApplyTo(damage);
 
-        public static float ApplyHymenoptraSpeedTo(this Player player, int input) => input * (1f - (player.GetTotalAttackSpeed<HymenoptraDamageClass>() - 1f));
+        public static float ApplyHymenoptraSpeedTo(this Player player, int input) => input * (1f - (player.GetTotalAttackSpeed<BeekeeperDamage>() - 1f));
 
         public static SlotId PlayWith(this SoundStyle sound, Vector2? pos = null, float pitch = 0f, float pitchVariance = 0f, float volume = 1f)
         {

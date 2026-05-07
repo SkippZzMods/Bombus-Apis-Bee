@@ -1,9 +1,9 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
 {
-    public class GelBee : BaseBeeProjectile
+    public class GelBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

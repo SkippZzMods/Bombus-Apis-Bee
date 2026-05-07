@@ -1,5 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+
 namespace BombusApisBee.Content.Forest.Items.PeeperPoker
 {
     public class PeeperPokerHoldout : BeeProjectile
@@ -33,7 +33,7 @@ namespace BombusApisBee.Content.Forest.Items.PeeperPoker
         {
             Projectile.timeLeft = 2;
             Player player = Main.player[Projectile.owner];
-            var modPlayer = Owner.Hymenoptra();
+            var modPlayer = Owner.Beekeeper();
             modPlayer.BeeResourceRegenTimer = -120;
             Vector2? fallback = null;
             fallback = new Vector2?(Vector2.Zero);
@@ -84,7 +84,7 @@ namespace BombusApisBee.Content.Forest.Items.PeeperPoker
                     ShootVelocity *= num10;
                     int proj = Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, ShootVelocity, ProjectileType<PeeperPokerThrow>(), DamageAmt, 1f, Projectile.owner);
                     Main.projectile[proj].penetrate = Pierce;
-                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 1);
+                    Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost + 1);
                     Projectile.Kill();
                 }
             }
@@ -118,7 +118,7 @@ namespace BombusApisBee.Content.Forest.Items.PeeperPoker
                 vel.Normalize();
                 vel *= Main.rand.Next(70, 101) * 0.1f;
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, vel, ProjectileType<CthulhuBee>(), (int)(Projectile.damage * 0.89f), Projectile.knockBack, Projectile.owner);
-                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost);
+                Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost);
                 const int Repeats2 = 175;
                 for (int d2 = 0; d2 < Repeats2; ++d2)
                 {

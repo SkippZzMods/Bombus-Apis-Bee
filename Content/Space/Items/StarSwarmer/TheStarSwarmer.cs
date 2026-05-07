@@ -1,11 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Content.Space.Items.StarStrap;
-using BombusApisBee.Content.Space.Items.StarSwarmer;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Space.Items.StarSwarmer
 {
-    public class TheStarSwarmer : BeeDamageItem
+    public class TheStarSwarmer : BeekeeperWeapon
     {
         int cooldown;
         public override bool AltFunctionUse(Player player) => cooldown <= 0;

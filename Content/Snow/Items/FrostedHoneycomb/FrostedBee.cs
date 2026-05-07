@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Snow.Items.FrostedHoneycomb
 {
-    public class FrostedBee : BaseBeeProjectile
+    public class FrostedBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

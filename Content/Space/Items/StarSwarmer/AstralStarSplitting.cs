@@ -1,6 +1,4 @@
-﻿using Terraria;
-
-namespace BombusApisBee.Content.Space.Items.StarSwarmer
+﻿namespace BombusApisBee.Content.Space.Items.StarSwarmer
 {
     public class AstralStarSplitting : ModProjectile
     {

@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
 {
-    public class OcularRemote : BeeDamageItem
+    public class OcularRemote : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<SpazHoneycomb>() <= 0 && player.ownedProjectileCounts<RetinaHoneycomb>() <= 0;
         public override void Load()
@@ -15,10 +16,10 @@ namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
             orig(self, i);
 
             if (self.ownedProjectileCounts<RetinaHoneycomb>() > 0)
-                self.Hymenoptra().BeeResourceReserved += 35;
+                self.Beekeeper().BeeResourceReserved += 35;
 
             if (self.ownedProjectileCounts<SpazHoneycomb>() > 0)
-                self.Hymenoptra().BeeResourceReserved += 35;
+                self.Beekeeper().BeeResourceReserved += 35;
         }
 
         public override void SafeSetStaticDefaults()

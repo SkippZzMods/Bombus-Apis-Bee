@@ -1,4 +1,6 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 {
@@ -29,13 +31,13 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus = "20% increased chance to not use honey\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "to teleport to the cursor, creating a honey explosion, leeching honey from hit enemies";
-            player.Hymenoptra().ResourceChanceAdd += 0.2f;
+            player.Beekeeper().ResourceChanceAdd += 0.2f;
             player.Bombus().HoneyTeleport = true;
         }
 
         public override void UpdateEquip(Player player)
         {
-            var modPlayer = BeeDamagePlayer.ModPlayer(player);
+            var modPlayer = BeekeeperPlayer.ModPlayer(player);
             modPlayer.BeeResourceMax2 += 100;
         }
         public override void AddRecipes()
@@ -91,7 +93,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
                 Dust.NewDustPerfect(Projectile.Center + Vector2.One.RotatedBy(rot) * Radius, ModContent.DustType<GlowFastDecelerate>(),
                     Vector2.One.RotatedBy(rot) * 0.5f, 0, new Color(200, 100, 10), Main.rand.NextFloat(0.35f, 0.4f));
 
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + Vector2.One.RotatedBy(rot) * Radius, 
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + Vector2.One.RotatedBy(rot) * Radius,
                     ModContent.DustType<HoneyMetaballDust>(), Vector2.One.RotatedBy(rot) * 0.5f + Main.rand.NextVector2Circular(2f, 2f), 0, default, Main.rand.NextFloat(1f, 2f));
 
                 dust.noGravity = true;

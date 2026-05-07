@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Hell.Items.Honeyshot
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Hell.Items.Honeyshot
 {
-    public class HoneyShot : BeeDamageItem
+    public class HoneyShot : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<HoneyShotHoldout>() <= 0;
         public override void SafeSetStaticDefaults()

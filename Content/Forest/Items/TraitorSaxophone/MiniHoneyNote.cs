@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
+﻿namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
 {
     public class MiniHoneyNoteQuarter : BeeProjectile
     {

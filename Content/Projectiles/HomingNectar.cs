@@ -1,4 +1,4 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Projectiles
 {
     class HomingNectar : BeeProjectile

@@ -1,10 +1,6 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Hell.Items.HellcombShard
 {
@@ -86,7 +82,7 @@ namespace BombusApisBee.Content.Hell.Items.HellcombShard
     {
         public override void Load()
         {
-            BombusApisBeeGlobalProjectile.StrongBeeKillEvent += SpawnExplosion;
+            CommonBeeGlobalProjectile.StrongBeeKillEvent += SpawnExplosion;
         }
 
         private void SpawnExplosion(Projectile proj, int timeLeft)
@@ -131,7 +127,7 @@ namespace BombusApisBee.Content.Hell.Items.HellcombShard
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeStrengthenChance += 0.4f;
+            player.Beekeeper().BeeStrengthenChance += 0.4f;
             player.Bombus().HasHellcombShard = true;
         }
 

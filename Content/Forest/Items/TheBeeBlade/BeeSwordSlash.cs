@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.TheBeeBlade
+﻿namespace BombusApisBee.Content.Forest.Items.TheBeeBlade
 {
     public class BeeSwordSlash : BeeProjectile
     {

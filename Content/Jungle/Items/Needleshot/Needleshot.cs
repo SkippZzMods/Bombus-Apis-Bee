@@ -1,9 +1,10 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 
 namespace BombusApisBee.Content.Jungle.Items.Needleshot
 {
-    public class Needleshot : BeeDamageItem
+    public class Needleshot : BeekeeperWeapon
     {
         public int shot;
         public override void SafeSetStaticDefaults()

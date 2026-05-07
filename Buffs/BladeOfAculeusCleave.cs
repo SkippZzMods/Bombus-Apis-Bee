@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BombusApisBee.Buffs
+﻿namespace BombusApisBee.Buffs
 {
     public class BladeOfAculeusCleave : ModBuff
     {
@@ -40,7 +34,7 @@ namespace BombusApisBee.Buffs
                 modifiers.Defense.Base *= 0.75f;
                 modifiers.FinalDamage *= 1.1f;
             }
-                
+
         }
 
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
@@ -49,7 +43,7 @@ namespace BombusApisBee.Buffs
             {
                 modifiers.Defense.Base *= 0.75f;
                 modifiers.FinalDamage *= 1.1f;
-            }          
+            }
         }
     }
 }

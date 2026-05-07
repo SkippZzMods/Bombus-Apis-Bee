@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
-using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
@@ -206,7 +207,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                 rot = MathHelper.Lerp(-0.05f, 0.1f, lerper) * rotDir;
             }
-            
+
             Projectile.Center = Owner.MountedCenter + offset.RotatedBy(Projectile.rotation);
 
             Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation - MathHelper.PiOver2);
@@ -307,7 +308,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
             if (Progress < 0.4f)
             {
                 fade = Progress / 0.4f;
-            }           
+            }
             else if (Progress > 0.8f)
             {
                 fade = 1f - (Progress - 0.8f) / 0.2f;
@@ -332,7 +333,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
             }
 
             Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition + new Vector2(0, Main.player[Projectile.owner].gfxOffY) + offset, null, Color.White * fade, Projectile.rotation + MathHelper.PiOver4, tex.Size() / 2f, Projectile.scale, 0, 0);
-            
+
             if (Progress < 0.7f)
             {
                 float lerper = Progress / 0.7f;
@@ -380,7 +381,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.tileCollide = true;
-           
+
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
 
@@ -457,7 +458,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f) + -velocity * 30f, DustType<PixelatedGlowAlt>(),
                         Main.rand.NextVector2Circular(5f, 5f), 0, new Color(80, 93, 48, 0), 0.8f);
-                    
+
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f) + -velocity * 30f, DustType<PixelatedGlowAlt>(),
                         Main.rand.NextVector2Circular(5f, 5f), 0, new Color(137, 162, 74, 0), 0.8f);
 
@@ -514,10 +515,10 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
                         velocity.RotatedByRandom(0.25f) * Main.rand.NextFloat(5.5f), Main.rand.Next(120, 200), new Color(101, 13, 13), Main.rand.NextFloat(0.2f, 0.3f)).noGravity = true;
-                    
+
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
                         velocity.RotatedByRandom(0.25f) * Main.rand.NextFloat(6.5f), Main.rand.Next(120, 200), new Color(215, 29, 29), Main.rand.NextFloat(0.3f, 0.4f)).noGravity = true;
-                    
+
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
                         velocity.RotatedByRandom(0.25f) * Main.rand.NextFloat(7.5f), Main.rand.Next(120, 200), new Color(150, 15, 15), Main.rand.NextFloat(0.4f, 0.5f)).noGravity = true;
 
@@ -594,13 +595,13 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
             {
                 fade = Projectile.timeLeft / 60f;
             }
-            
+
             Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition + offset, null, new Color(137, 162, 74, 0) * fade, Projectile.rotation + MathHelper.PiOver4, texGlow.Size() / 2f, Projectile.scale, 0, 0);
 
             Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition + offset, null, Color.White * fade, Projectile.rotation + MathHelper.PiOver4, tex.Size() / 2f, Projectile.scale, 0, 0);
-            
+
             Main.spriteBatch.Draw(texOutline, Projectile.Center - Main.screenPosition + offset, null, new Color(140, 234, 87) * fade, Projectile.rotation + MathHelper.PiOver4, texOutline.Size() / 2f, Projectile.scale, 0, 0);
-            
+
             Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition + offset, null, new Color(140, 234, 87, 0) * fade * 0.5f, Projectile.rotation + MathHelper.PiOver4, texGlow.Size() / 2f, Projectile.scale, 0, 0);
 
             if (Projectile.timeLeft > 330)
@@ -733,7 +734,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                 if (explosionTimer == 1)
                 {
-                  
+
                     Explode(npc);
 
                     npc.DelBuff(npc.FindBuffIndex(ModContent.BuffType<Sulphurstruck>()));
@@ -792,7 +793,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                 Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(25f, 25f), DustType<SmokeDust2>(),
                     Main.rand.NextVector2Circular(6f, 6f), Main.rand.Next(120, 200), new Color(140, 234, 87), Main.rand.NextFloat(1f, 1.6f)).noGravity = true;
-            } 
+            }
 
             Projectile.NewProjectileDirect(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ProjectileType<SulphuricExplosion>(), 65, 2f, owner, 60).ai[2] = 1f;
         }

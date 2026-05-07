@@ -1,5 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Forest.Items.Beezooka
 {
     public class BeezookaRocket : BeeProjectile

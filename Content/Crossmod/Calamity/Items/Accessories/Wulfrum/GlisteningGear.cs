@@ -17,7 +17,7 @@
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeResourceMax2 += 10;
+            player.Beekeeper().BeeResourceMax2 += 10;
             player.IncreaseBeeUseSpeed(0.07f);
         }
     }

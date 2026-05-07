@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Content.Hell.Items.HellfireBeemstick;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.BeenadeLauncher
 {
-    public class BeenadeLauncher : BeeDamageItem
+    public class BeenadeLauncher : BeekeeperWeapon
     {
         public float shootRotation;
         public int shootDirection;

@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Space.Items.StarSwarmer
+﻿namespace BombusApisBee.Content.Space.Items.StarSwarmer
 {
     public class MiniStars : BeeProjectile
     {
@@ -8,24 +6,24 @@ namespace BombusApisBee.Content.Space.Items.StarSwarmer
         public override string Texture => "BombusApisBee/Content/Space/Items/StarStrap/AstralStar";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Star");     
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;  
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;        
+            DisplayName.SetDefault("Mini Star");
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
 
         public override void SafeSetDefaults()
         {
             Projectile.scale = 0.8f;
-            Projectile.width = 8;               
-            Projectile.height = 8;             
-            Projectile.aiStyle = 5;           
-            Projectile.friendly = true;       
-            Projectile.hostile = false;        
-            Projectile.penetrate = -1;        
-            Projectile.timeLeft = 400;       
-            Projectile.alpha = 255;            
-            Projectile.ignoreWater = true;          
-            Projectile.tileCollide = false;       
+            Projectile.width = 8;
+            Projectile.height = 8;
+            Projectile.aiStyle = 5;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 400;
+            Projectile.alpha = 255;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
             Projectile.extraUpdates = 1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;

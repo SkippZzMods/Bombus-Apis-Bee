@@ -1,10 +1,10 @@
-﻿using BombusApisBee.Content.Forest.Items.NectarSlasher;
-using BombusApisBee.Content.Forest.Items.Pollen;
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.TrueNectarSlasher
 {
-    public class TrueNectarSlasher : BeeDamageItem
+    public class TrueNectarSlasher : BeekeeperWeapon
     {
 
         private int combo = 0;

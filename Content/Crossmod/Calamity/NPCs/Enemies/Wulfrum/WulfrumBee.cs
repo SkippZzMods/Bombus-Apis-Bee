@@ -1,13 +1,8 @@
-﻿using CalamityMod.Items.Materials;
+﻿using CalamityMod;
+using CalamityMod.Items.Materials;
 using CalamityMod.Sounds;
-using Terraria.DataStructures;
-using Terraria.Enums;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.Utilities;
-using Terraria.ID;
 using Terraria.GameContent.Bestiary;
-using BombusApisBee.Content.Crossmod;
-using CalamityMod;
+using Terraria.GameContent.ItemDropRules;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.NPCs.Enemies.Wulfrum
 {

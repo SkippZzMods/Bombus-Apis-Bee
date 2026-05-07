@@ -74,7 +74,7 @@
 
             float glowScale = dust.scale * 0.75f;
 
-			Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, Color.White with { A = 0 } * lerper, dust.rotation, tex.Size() / 2f, new Vector2(glowScale * lerper, glowScale), 0f, 0f);
+            Main.spriteBatch.Draw(tex, dust.position - Main.screenPosition, null, Color.White with { A = 0 } * lerper, dust.rotation, tex.Size() / 2f, new Vector2(glowScale * lerper, glowScale), 0f, 0f);
 
             return false;
         }

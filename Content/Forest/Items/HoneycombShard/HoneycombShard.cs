@@ -1,10 +1,4 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
 
 namespace BombusApisBee.Content.Forest.Items.HoneycombShard
 {
@@ -24,7 +18,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombShard
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeStrengthenChance += 0.15f;
+            player.Beekeeper().BeeStrengthenChance += 0.15f;
         }
 
         public override void AddRecipes()

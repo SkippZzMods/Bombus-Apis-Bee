@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
 {
-    public class CursedBee : BaseBeeProjectile
+    public class CursedBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

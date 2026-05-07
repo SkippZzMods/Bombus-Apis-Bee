@@ -1,11 +1,7 @@
-global using BombusApisBee;
-global using BombusApisBee.BeeDamageClass;
 global using BombusApisBee.Buffs;
-global using BombusApisBee.Core;
 global using BombusApisBee.Content.Dusts;
 global using BombusApisBee.Content.Projectiles;
-global using BombusApisBee.Effects;
-global using BombusApisBee.PrimitiveDrawing;
+global using BombusApisBee.Core;
 global using Microsoft.Xna.Framework;
 global using Microsoft.Xna.Framework.Graphics;
 global using System;
@@ -19,7 +15,8 @@ global using Terraria.Graphics.Effects;
 global using Terraria.ID;
 global using Terraria.ModLoader;
 global using static Terraria.ModLoader.ModContent;
-
+using BombusApisBee.Core.Loading;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using BombusApisBee.UI;
 using ReLogic.Content;
 using System.Reflection;
@@ -69,7 +66,7 @@ namespace BombusApisBee
         {
             if (!Main.dedServ)
             {
-                BeeShaders.Load();
+                LoadShaders.Load();
                 //MarkedNPCDrawer.Load();
                 PlayerRenderTarget.Load();
                 BombusApisBee_DoIL.Load();
@@ -78,7 +75,7 @@ namespace BombusApisBee
                 BeeDamageInterface = new UserInterface();
 
                 BeePlayerUI = new BeePlayerUI();
-                BeePlayerUI.Activate(); 
+                BeePlayerUI.Activate();
                 BeeDamageInterface.SetState(BeePlayerUI);
             }
 

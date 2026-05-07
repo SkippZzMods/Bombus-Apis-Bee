@@ -1,11 +1,13 @@
-﻿namespace BombusApisBee
+﻿using BombusApisBee.Content.Underground;
+
+namespace BombusApisBee
 {
     public class BombusWorld : ModSystem
     {
-        /*public override void PostWorldGen()
+        public override void PostWorldGen()
         {
             // gold chest gen
-            int itemsToPlaceInGoldChests = ModContent.ItemType<EnchantedApiary>();
+            int itemsToPlaceInGoldChests = ModContent.ItemType<EnchantedCharm>();
             for (int chestIndex = 0; chestIndex < 1000; chestIndex++)
             {
                 Chest chest = Main.chest[chestIndex];
@@ -23,6 +25,7 @@
                                     chest.item[1].TurnToAir();
                                     chest.item[0].SetDefaults(itemsToPlaceInGoldChests);
                                     chest.item[0].Prefix(-1);
+
                                     for (int i = 1; i < 39; i++)
                                     {
                                         chest.item[i] = chest.item[i + 1];
@@ -37,12 +40,13 @@
                                     chest.item[0].SetDefaults(itemsToPlaceInGoldChests);
                                     chest.item[0].Prefix(-1);
                                 }
+
                                 break;
                             }
                         }
                     }
                 }
             }
-        }*/
+        }
     }
 }

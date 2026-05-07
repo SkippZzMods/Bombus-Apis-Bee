@@ -1,10 +1,10 @@
-﻿using BombusApisBee.Content.Forest.Items.HoneyFlareGun;
-using BombusApisBee.Content.Forest.Items.Pollen;
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
 {
-    public class HoneyFlareGun : BeeDamageItem
+    public class HoneyFlareGun : BeekeeperWeapon
     {
         public float shootRotation;
         public int shootDirection;

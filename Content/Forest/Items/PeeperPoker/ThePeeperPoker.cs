@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Forest.Items.PeeperPoker
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Forest.Items.PeeperPoker
 {
-    public class ThePeeperPoker : BeeDamageItem
+    public class ThePeeperPoker : BeekeeperWeapon
     {
         public override string Texture => "BombusApisBee/Content/Forest/Items/PeeperPoker/PeeperPokerHoldout";
         public override void SafeSetStaticDefaults()

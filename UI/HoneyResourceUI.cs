@@ -1,4 +1,5 @@
-﻿using ReLogic.Graphics;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using ReLogic.Graphics;
 
 namespace BombusApisBee.UI
 {
@@ -30,7 +31,7 @@ namespace BombusApisBee.UI
             Texture2D fillTex = ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyResourceUI_Fill").Value;
             Texture2D reserveTex = ModContent.Request<Texture2D>("BombusApisBee/UI/HoneyResourceUI_FillReservedl").Value;
 
-            var mp = Main.LocalPlayer.Hymenoptra();
+            var mp = Main.LocalPlayer.Beekeeper();
 
             var cfg = GetInstance<BombusConfig>();
 
@@ -91,7 +92,7 @@ namespace BombusApisBee.UI
 
         public static int GetHoneyAmount()
         {
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             return Utils.Clamp(modPlayer.BeeResourceMax2 / 15, 0, 20);
         }
 
@@ -122,7 +123,7 @@ namespace BombusApisBee.UI
 
         public static void DrawHoneyBar()
         {
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             Texture2D honeyTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/BarStyle_HoneyBarHoney");
             Texture2D barTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/BarStyle_HoneyBar");
             Texture2D frameTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/BarStyle_HoneyBarFrame");
@@ -371,7 +372,7 @@ namespace BombusApisBee.UI
 
         public static void DrawNewHoney()
         {
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             Texture2D frameTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/NewStyle_HoneyFrame");
             Texture2D barTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/NewStyle_HoneyBar");
 
@@ -523,13 +524,13 @@ namespace BombusApisBee.UI
 
         public static int GetNewHoneyAmount()
         {
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             return Utils.Clamp(modPlayer.BeeResourceMax2 / 20, 0, 10);
         }
 
         public static void DrawLegacyHoney()
         {
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             Texture2D barTexture = (Texture2D)ModContent.Request<Texture2D>("BombusApisBee/UI/NewStyle_HoneyBar");
             Texture2D chainTexture = ModContent.Request<Texture2D>("BombusApisBee/UI/NewStyle_HoneyBarReserved").Value;
             Texture2D chainGlowTex = ModContent.Request<Texture2D>("BombusApisBee/UI/NewStyle_HoneyBarReserved_Glow").Value;
@@ -678,7 +679,7 @@ namespace BombusApisBee.UI
         }
         public static int GetLegacyHoneyAmount()
         {
-            var modPlayer = Main.LocalPlayer.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();
             return Utils.Clamp(modPlayer.BeeResourceMax2 / 10, 0, 20);
         }
         #endregion Legacy

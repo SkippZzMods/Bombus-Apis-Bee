@@ -20,8 +20,8 @@
 
         public override void UpdateEquip(Player player)
         {
-            player.Hymenoptra().ResourceChanceAdd += 0.25f;
-            player.Hymenoptra().CurrentBees += 3;
+            player.Beekeeper().ResourceChanceAdd += 0.25f;
+            player.Beekeeper().CurrentBees += 3;
         }
 
         public override void AddRecipes()

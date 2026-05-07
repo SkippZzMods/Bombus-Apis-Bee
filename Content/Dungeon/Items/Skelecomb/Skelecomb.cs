@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
 {
-    public class Skelecomb : BeeDamageItem
+    public class Skelecomb : BeekeeperWeapon
     {
         int cooldown;
         public override bool AltFunctionUse(Player player) => cooldown <= 0;

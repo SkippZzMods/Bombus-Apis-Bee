@@ -1,10 +1,10 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Dusts.Pixelized;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
+using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 {
     [JITWhenModsEnabled("CalamityMod")]
-    class DarksentBee : BaseBeeProjectile
+    class DarksentBee : CommonBeeProjectile
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
@@ -71,7 +71,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             Rectangle sourceRectangle = drawTex.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
             Main.spriteBatch.Draw(drawTex, Projectile.Center - Main.screenPosition, sourceRectangle, Projectile.GetAlpha(lightColor), Projectile.rotation, sourceRectangle.Size() / 2f,
                 Projectile.scale, Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
-            
+
             sourceRectangle = texGlow.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
             Main.spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, sourceRectangle, new Color(152, 137, 255, 0), Projectile.rotation, sourceRectangle.Size() / 2f,
                 Projectile.scale, Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);

@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Forest.Items.BeeSniperArmor
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Forest.Items.BeeSniperArmor
 {
     [AutoloadEquip(EquipType.Head)]
     public class BeeSniperGoggles : BeeKeeperItem
@@ -33,7 +35,7 @@
 
         public override void UpdateEquip(Player player)
         {
-            BeeDamagePlayer.ModPlayer(player).BeeResourceMax2 += 60;
+            BeekeeperPlayer.ModPlayer(player).BeeResourceMax2 += 60;
             player.IncreaseBeeCrit(15);
         }
 

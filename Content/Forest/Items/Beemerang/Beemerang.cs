@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Forest.Items.Beemerang
 {
-    public class Beemerang : BeeDamageItem
+    public class Beemerang : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

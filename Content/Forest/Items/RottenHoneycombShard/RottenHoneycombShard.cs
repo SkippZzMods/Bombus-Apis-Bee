@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Forest.Items.RottenHoneycombShard
 {
@@ -11,7 +6,7 @@ namespace BombusApisBee.Content.Forest.Items.RottenHoneycombShard
     {
         public override void Load()
         {
-            BombusApisBeeGlobalProjectile.StrongBeeOnHitEvent += InflictRotten;
+            CommonBeeGlobalProjectile.StrongBeeOnHitEvent += InflictRotten;
         }
 
         private void InflictRotten(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -35,7 +30,7 @@ namespace BombusApisBee.Content.Forest.Items.RottenHoneycombShard
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeStrengthenChance += 0.20f;
+            player.Beekeeper().BeeStrengthenChance += 0.20f;
             player.Bombus().HasRottenHoneycombShard = true;
         }
     }

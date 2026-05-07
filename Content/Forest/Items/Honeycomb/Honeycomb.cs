@@ -1,8 +1,9 @@
 using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Forest.Items.Honeycomb
 {
-    public class Honeycomb : BeeDamageItem
+    public class Honeycomb : BeekeeperWeapon
     {
         public int shootCount;
         public override void SafeSetStaticDefaults()

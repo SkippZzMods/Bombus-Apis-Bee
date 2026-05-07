@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
 {
-    public class EaterOfHoneycombs : BeeDamageItem
+    public class EaterOfHoneycombs : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<EaterOfHoneycombsHoldout>() <= 0;
         public override void SafeSetStaticDefaults()

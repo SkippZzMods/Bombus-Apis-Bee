@@ -6,6 +6,11 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\ExtraTextures\Apiary_Glowy.png" />
+    <None Remove="Assets\ExtraTextures\Apiary_Outline.png" />
+    <None Remove="Assets\ExtraTextures\BeeGlow.png" />
+    <None Remove="Assets\ExtraTextures\BeeGlow_Giant.png" />
+    <None Remove="Assets\ExtraTextures\BeeGlow_Wasp.png" />
     <None Remove="Assets\ExtraTextures\GenericBarBack.png" />
     <None Remove="Assets\ExtraTextures\GenericBarBack_Glow.png" />
     <None Remove="Assets\ExtraTextures\GenericBarFront.png" />
@@ -27,13 +32,18 @@
     <None Remove="Content\Dusts\SmokeDust2.png" />
     <None Remove="Content\Dusts\WaterBubble.png" />
     <None Remove="Content\Forest\Items\HoneyFlareGun\HoneyFlareGun.png" />
-    <None Remove="Core\PixelationSystem\README.txt" />
-    <None Remove="Effects\EasyCompile\PixelShader.fx" />
+    <None Remove="Content\Snow\Items\BorealApiary\BorealApiary_Glowy.png" />
+    <None Remove="Content\Snow\Items\BorealApiary\BorealApiary_Outline.png" />
+    <None Remove="Core\Systems\PixelationSystem\README.txt" />
+    <None Remove="core\systems\particlesystem\README.txt" />
+    <None Remove="Assets\Shaders\EasyCompile\PixelShader.fx" />
     <None Remove="Effects\PaletteCorrection.fx" />
     <None Remove="Sounds\Crossmod\Calamity\README.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BeeDamageClass\" />
     <Folder Include="Bosses\HoneyConglomerate\" />
+    <Folder Include="Effects\" />
     <Folder Include="ExtraTextures\Palettes\" />
     <Folder Include="Localization\" />
   </ItemGroup>

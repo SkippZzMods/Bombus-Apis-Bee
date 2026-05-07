@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Forest.Items.HoneyGun
 {
-    public class HoneyGun : BeeDamageItem
+    public class HoneyGun : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<HoneyGunHoldout>() <= 0;
         public override void SafeSetStaticDefaults()

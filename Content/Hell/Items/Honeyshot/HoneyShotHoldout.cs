@@ -1,4 +1,7 @@
-﻿namespace BombusApisBee.Content.Hell.Items.Honeyshot
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
+
+namespace BombusApisBee.Content.Hell.Items.Honeyshot
 {
     public class HoneyShotHoldout : BeeProjectile
     {
@@ -73,7 +76,7 @@
                     Dust.NewDustPerfect(owner.Center + offset * 15f * Projectile.direction, DustType<Dusts.HoneyDustSolid>(), new Vector2(x, y).RotatedBy(Projectile.rotation + MathHelper.PiOver2) * 0.075f, 0, default, 1.45f).noGravity = true;
                 }
                 new SoundStyle("BombusApisBee/Sounds/Item/BowFire").PlayWith(owner.Center);
-                owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 5);
+                owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost + 5);
                 owner.Bombus().AddShake(4);
                 Projectile.timeLeft = 20;
                 updateTime = false;

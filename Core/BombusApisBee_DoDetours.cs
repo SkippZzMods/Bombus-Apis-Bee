@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using BombusApisBee.Content.Jungle.Items.HoneyphyteArmor;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Content.Jungle.Items.HoneyphyteArmor;
+using System.Reflection;
 namespace BombusApisBee.Core
 {
     public static class BombusApisBee_DoDetours
@@ -98,9 +97,9 @@ namespace BombusApisBee.Core
         // i would IL this but im too lazy
         private static int EditStrongBeeChance(On_Player.orig_beeType orig, Player self)
         {
-            if (self.Hymenoptra().BeeStrengthenChance > 0f && Main.rand.NextFloat() < self.Hymenoptra().BeeStrengthenChance)
+            if (self.Beekeeper().BeeStrengthenChance > 0f && Main.rand.NextFloat() < self.Beekeeper().BeeStrengthenChance)
             {
-                typeof(Player).GetField("makeStrongBee", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(self, true);       
+                typeof(Player).GetField("makeStrongBee", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(self, true);
                 return ProjectileID.GiantBee;
             }
 

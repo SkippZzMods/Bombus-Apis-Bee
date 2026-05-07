@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.PeeperPoker
+﻿namespace BombusApisBee.Content.Forest.Items.PeeperPoker
 {
     public class PeeperPokerThrow : BeeProjectile
     {

@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Forest.Items.PetrifiedHoneycomb
+﻿namespace BombusApisBee.Content.Forest.Items.PetrifiedHoneycomb
 {
     public class StoneHoneycombProjectile : BeeProjectile
     {

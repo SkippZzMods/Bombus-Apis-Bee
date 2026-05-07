@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Crossmod.Calamity
 {
@@ -14,7 +10,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity
     }
 
     [JITWhenModsEnabled("CalamityMod")]
-    public abstract class CalamityDamageItem : BeeDamageItem
+    public abstract class CalamityDamageItem : BeekeeperWeapon
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
     }

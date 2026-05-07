@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+
 namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
 {
     public class TriTipStinger : BeeKeeperItem
@@ -37,7 +38,7 @@ namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
             if (!equipped)
                 return;
 
-            if (item.CountsAsClass<HymenoptraDamageClass>() && Main.rand.NextBool(10))
+            if (item.CountsAsClass<BeekeeperDamage>() && Main.rand.NextBool(10))
             {
                 target.GetGlobalNPC<TriTipStingerNPC>().inflictionTimer = 600;
                 target.GetGlobalNPC<TriTipStingerNPC>().inflicted = true;
@@ -50,7 +51,7 @@ namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
             if (!equipped)
                 return;
 
-            if (proj.CountsAsClass<HymenoptraDamageClass>() && Main.rand.NextBool(10))
+            if (proj.CountsAsClass<BeekeeperDamage>() && Main.rand.NextBool(10))
             {
                 target.GetGlobalNPC<TriTipStingerNPC>().inflictionTimer = 600;
                 target.GetGlobalNPC<TriTipStingerNPC>().inflicted = true;

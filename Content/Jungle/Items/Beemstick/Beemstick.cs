@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 
 namespace BombusApisBee.Content.Jungle.Items.Beemstick
 {
-    public class Beemstick : BeeDamageItem
+    public class Beemstick : BeekeeperWeapon
     {
         public float shootRotation;
         public int shootDirection;

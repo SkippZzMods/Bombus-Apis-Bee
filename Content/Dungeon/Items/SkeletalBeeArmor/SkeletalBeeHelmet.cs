@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Dungeon.Items.SkeletalBeeArmor
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Dungeon.Items.SkeletalBeeArmor
 {
     [AutoloadEquip(EquipType.Head)]
     public class SkeletalBeeHelmet : BeeKeeperItem
@@ -38,7 +40,7 @@
         public override void UpdateEquip(Player player)
         {
             player.IncreaseBeeCrit(10);
-            var modPlayer = BeeDamagePlayer.ModPlayer(player);
+            var modPlayer = BeekeeperPlayer.ModPlayer(player);
             modPlayer.BeeResourceMax2 += 50;
         }
 

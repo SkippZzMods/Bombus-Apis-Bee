@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Forest.Items.BeefinTuna
+﻿namespace BombusApisBee.Content.Forest.Items.BeefinTuna
 {
     public class BeeFishBubble : BeeProjectile
     {

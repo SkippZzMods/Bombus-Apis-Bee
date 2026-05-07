@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Core
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Core
 {
     public class BombusApisBeeGlobalItem : GlobalItem
     {
@@ -25,10 +27,10 @@
                     {
                         OverrideColor = Color.Lerp(new Color(255, 155, 0), new Color(255, 255, 0), lerper)
                     }); ;
-                }              
+                }
             }
 
-            if (item.ModItem != null && item.ModItem is BeeDamageItem)
+            if (item.ModItem != null && item.ModItem is BeekeeperWeapon)
             {
                 secondtimer++;
                 int index;
@@ -38,7 +40,7 @@
                     string gradient = BeeUtils.StringColorLerp(new Color(255, 255, 0), new Color(255, 100, 0), "- Bee Keeper Item -");
 
                     tooltips.Insert(index + 1, new TooltipLine(Mod, "BeeKeeperItemTag", gradient));
-                }             
+                }
             }
         }
     }

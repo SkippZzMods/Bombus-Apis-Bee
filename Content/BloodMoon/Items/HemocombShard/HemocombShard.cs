@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
 {
@@ -11,7 +6,7 @@ namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
     {
         public override void Load()
         {
-            BombusApisBeeGlobalProjectile.StrongBeeKillEvent += SpawnBloodsplosion;
+            CommonBeeGlobalProjectile.StrongBeeKillEvent += SpawnBloodsplosion;
         }
 
         private void SpawnBloodsplosion(Projectile proj, int timeLeft)
@@ -65,7 +60,7 @@ namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().BeeStrengthenChance += 0.3f;
+            player.Beekeeper().BeeStrengthenChance += 0.3f;
             player.Bombus().HasHemocombShard = true;
         }
     }

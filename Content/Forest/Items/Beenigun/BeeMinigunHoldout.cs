@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Forest.Items.Beenigun
 {
@@ -62,7 +62,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
             armPosition += Projectile.velocity.SafeNormalize(Owner.direction * Vector2.UnitX) * 32f;
             armPosition.Y += 22f;
             Vector2 BarrelPosition = armPosition + Projectile.velocity * Projectile.width * 0.5f;
-            var modPlayer = Owner.GetModPlayer<BeeDamagePlayer>();
+            var modPlayer = Owner.GetModPlayer<BeekeeperPlayer>();
             modPlayer.BeeResourceRegenTimer = -90;
             var modPlayer2 = Owner.GetModPlayer<BombusApisBeePlayer>();
             if (!OwnerCanShoot || modPlayer.BeeResourceCurrent <= 0)
@@ -90,11 +90,11 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                 ShotDelay += 1f;
                 if (FramesToNextShot == 0f)
                 {
-                    FramesToNextShot = Owner.GetActiveItem().useAnimation * (1f - (Owner.GetTotalAttackSpeed<HymenoptraDamageClass>() - 1f));
+                    FramesToNextShot = Owner.GetActiveItem().useAnimation * (1f - (Owner.GetTotalAttackSpeed<BeekeeperDamage>() - 1f));
                 }
                 if (ShotDelay >= FramesToNextShot)
                 {
-                    if (Owner.UseBeeResource((Owner.HeldItem.ModItem as BeeDamageItem).honeyCost))
+                    if (Owner.UseBeeResource((Owner.HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                     {
                         Item heldItem = Owner.GetActiveItem();
                         float shootSpeed = heldItem.shootSpeed;
@@ -171,8 +171,8 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                 return;
             }
             Item heldItem = Owner.GetActiveItem();
-            var modPlayer = Owner.GetModPlayer<BeeDamagePlayer>();
-            int honeyDamage = (int)Owner.GetTotalDamage<HymenoptraDamageClass>().ApplyTo(heldItem.damage);
+            var modPlayer = Owner.GetModPlayer<BeekeeperPlayer>();
+            int honeyDamage = (int)Owner.GetTotalDamage<BeekeeperDamage>().ApplyTo(heldItem.damage);
             float shootSpeed = heldItem.shootSpeed;
             float knockback = heldItem.knockBack;
             knockback = Owner.GetWeaponKnockback(heldItem, knockback);
@@ -223,7 +223,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
         {
             if (ChargeUp > 50f)
             {
-                var modPlayer = Owner.GetModPlayer<BeeDamagePlayer>();
+                var modPlayer = Owner.GetModPlayer<BeekeeperPlayer>();
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
                 int goreType = Mod.Find<ModGore>("BeeInyGunGore1").Type;
                 Vector2 shootDirection = Projectile.velocity;

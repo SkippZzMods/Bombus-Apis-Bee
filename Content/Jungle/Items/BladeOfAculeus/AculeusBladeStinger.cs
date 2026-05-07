@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Jungle.Items.BladeOfAculeus
 {

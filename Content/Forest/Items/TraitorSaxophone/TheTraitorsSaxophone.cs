@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Forest.Items.TraitorSaxophone
 {
-    public class TheTraitorsSaxophone : BeeDamageItem
+    public class TheTraitorsSaxophone : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

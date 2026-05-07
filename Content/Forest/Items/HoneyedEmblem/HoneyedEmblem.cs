@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+
 namespace BombusApisBee.Content.Forest.Items.HoneyedEmblem
 {
     public class HoneyedEmblem : BeeKeeperItem
@@ -21,7 +22,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyedEmblem
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var modPlayer = BeeDamagePlayer.ModPlayer(player);
+            var modPlayer = BeekeeperPlayer.ModPlayer(player);
             modPlayer.BeeResourceMax2 += 10;
             player.IncreaseBeeDamage(0.12f);
         }

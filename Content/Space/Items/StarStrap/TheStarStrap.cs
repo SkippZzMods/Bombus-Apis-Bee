@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 
 namespace BombusApisBee.Content.Space.Items.StarStrap
 {
-    public class TheStarStrap : BeeDamageItem
+    public class TheStarStrap : BeekeeperWeapon
     {
         public int delay;
         public override void SafeSetStaticDefaults()
@@ -65,7 +66,7 @@ namespace BombusApisBee.Content.Space.Items.StarStrap
                 delay = 0;
                 player.reuseDelay = 35;
             }
-            player.Hymenoptra().BeeResourceRegenTimer = -120;
+            player.Beekeeper().BeeResourceRegenTimer = -120;
             return true;
         }
         public override void AddRecipes()

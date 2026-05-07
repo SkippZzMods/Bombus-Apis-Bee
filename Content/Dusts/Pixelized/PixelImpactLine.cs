@@ -1,9 +1,4 @@
-﻿using BombusApisBee.Core.PixelationSystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BombusApisBee.Core.Systems.PixelationSystem;
 
 namespace BombusApisBee.Content.Dusts.Pixelized
 {

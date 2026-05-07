@@ -1,4 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.StingerSlinger
 {
@@ -33,7 +33,7 @@ namespace BombusApisBee.Content.Jungle.Items.StingerSlinger
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            player.Hymenoptra().BeeResourceRegenTimer = -120;
+            player.Beekeeper().BeeResourceRegenTimer = -120;
 
             if (Main.rand.NextBool())
             {
@@ -55,7 +55,7 @@ namespace BombusApisBee.Content.Jungle.Items.StingerSlinger
                 {
                     if (StingerTimer > 30 && Collision.CanHitLine(Projectile.Center, 1, 1, target.Center, 1, 1))
                     {
-                        if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+                        if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
                             Projectile.ai[0] = -1f;
                         else
                         {
@@ -76,7 +76,7 @@ namespace BombusApisBee.Content.Jungle.Items.StingerSlinger
             }
             else if (StingerTimer > 45)
             {
-                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost + 2))
+                if (!player.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost + 2))
                     Projectile.ai[0] = -1f;
                 else
                 {

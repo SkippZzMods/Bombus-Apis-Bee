@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 namespace BombusApisBee.Content.Crimson.Items.Cystcomb
 {
     public class IchorHoneycombHoldout : ModProjectile
@@ -48,14 +49,14 @@ namespace BombusApisBee.Content.Crimson.Items.Cystcomb
                 Projectile.Center = owner.MountedCenter + Vector2.UnitY.RotatedBy((double)(armRot * owner.gravDir), default) * -20f * owner.gravDir;
                 Projectile.rotation = (-MathHelper.PiOver2 + armRot) * owner.gravDir;
                 owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, 3.1415927f + armRot);
-                owner.Hymenoptra().BeeResourceRegenTimer = -60;
+                owner.Beekeeper().BeeResourceRegenTimer = -60;
             }
             else
             {
                 if (Main.myPlayer == owner.whoAmI && boomerangTimer == 0)
                 {
                     SoundID.DD2_MonkStaffSwing.PlayWith(Projectile.Center, 0.15f);
-                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost - 4);
+                    owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost - 4);
                     Projectile.friendly = true;
                     Projectile.velocity = Projectile.DirectionTo(Main.MouseWorld) * 25f;
                     Projectile.tileCollide = true;

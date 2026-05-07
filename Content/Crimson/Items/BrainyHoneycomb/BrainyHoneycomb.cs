@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crimson.Items.BrainyHoneycomb
 {
-    public class BrainyHoneycomb : BeeDamageItem
+    public class BrainyHoneycomb : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Content.Jungle.Items.TrueStingerScimitar;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.TheBeeBlade
 {
-    public class TheBeeBlade : BeeDamageItem
+    public class TheBeeBlade : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

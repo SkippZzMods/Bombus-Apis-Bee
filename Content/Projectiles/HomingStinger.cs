@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Projectiles
+﻿using BombusApisBee.Core.Systems.PrimitiveSystem;
+
+namespace BombusApisBee.Content.Projectiles
 {
     public class HomingStinger : ModProjectile
     {
@@ -46,6 +48,7 @@
                     }
                 }
             }
+
             if (foundTarget && Projectile.timeLeft < 465)
             {
                 Projectile.velocity = (Projectile.velocity * 20f + (targetCenter - Projectile.Center).SafeNormalize(Vector2.UnitX) * 15f) / 21f;

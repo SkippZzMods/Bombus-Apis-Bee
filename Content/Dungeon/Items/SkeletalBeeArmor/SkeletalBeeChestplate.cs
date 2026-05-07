@@ -21,7 +21,7 @@
         public override void UpdateEquip(Player player)
         {
             player.endurance += 0.1f;
-            player.Hymenoptra().CurrentBees += 2;
+            player.Beekeeper().CurrentBees += 2;
         }
 
         public override void AddRecipes()

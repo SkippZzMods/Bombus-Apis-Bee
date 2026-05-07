@@ -1,9 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Jungle.Items.NectarBolt
 {
-    public class NectarBolt : BeeDamageItem
+    public class NectarBolt : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

@@ -1,9 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
-using Terraria;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.Crimson.Items.BrainyHoneycomb
 {
-    public class BrainyBee : BaseBeeProjectile
+    public class BrainyBee : CommonBeeProjectile
     {
         public override void SetStaticDefaults()
         {

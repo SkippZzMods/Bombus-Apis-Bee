@@ -1,8 +1,8 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Dusts.Pixelized;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
-using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using CalamityMod.Items.Materials;
 
 using Terraria.DataStructures;
@@ -378,7 +378,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         }
     }
 
-    class StormsentBee : BaseBeeProjectile
+    class StormsentBee : CommonBeeProjectile
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()

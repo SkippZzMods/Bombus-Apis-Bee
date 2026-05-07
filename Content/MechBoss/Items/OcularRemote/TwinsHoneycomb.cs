@@ -1,7 +1,4 @@
-﻿using BombusApisBee.Content.Dusts;
-using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
+﻿namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
 {
     public class RetinaHoneycomb : BeeProjectile
     {
@@ -54,7 +51,7 @@ namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
             if (flashTimer > 0)
                 flashTimer--;
 
-            if (Projectile.timeLeft < 130 || owner.Hymenoptra().BeeResourceCurrent <= 0)
+            if (Projectile.timeLeft < 130 || owner.Beekeeper().BeeResourceCurrent <= 0)
                 deathAnimation = true;
 
             if (deathAnimation)
@@ -352,7 +349,7 @@ namespace BombusApisBee.Content.MechBoss.Items.OcularRemote
                 Projectile.frame = ++Projectile.frame % Main.projFrames[Projectile.type];
 
 
-            if (owner.Hymenoptra().BeeResourceCurrent <= 0)
+            if (owner.Beekeeper().BeeResourceCurrent <= 0)
                 Projectile.Kill();
 
             if (flashTimer > 0)

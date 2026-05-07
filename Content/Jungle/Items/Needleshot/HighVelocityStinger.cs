@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Jungle.Items.Needleshot
+﻿namespace BombusApisBee.Content.Jungle.Items.Needleshot
 {
     public class HighVelocityStinger : BeeProjectile
     {

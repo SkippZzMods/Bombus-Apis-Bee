@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Hallow.Items.BeeSquireShield
 {
@@ -21,7 +22,7 @@ namespace BombusApisBee.Content.Hallow.Items.BeeSquireShield
             Item.defense = 5;
             Item.buffType = BuffType<SquireBuff>();
             Item.damage = 45;
-            Item.DamageType = GetInstance<HymenoptraDamageClass>();
+            Item.DamageType = GetInstance<BeekeeperDamage>();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -31,7 +32,7 @@ namespace BombusApisBee.Content.Hallow.Items.BeeSquireShield
             modPlayer.squire = true;
             if (player.ownedProjectileCounts[ProjectileType<SquireBee>()] < 1)
             {
-                Projectile.NewProjectileDirect(player.GetSource_Accessory(Item), player.Center, Vector2.One, ProjectileType<SquireBee>(), (int)player.GetTotalDamage<HymenoptraDamageClass>().ApplyTo(Item.damage), 1, player.whoAmI)
+                Projectile.NewProjectileDirect(player.GetSource_Accessory(Item), player.Center, Vector2.One, ProjectileType<SquireBee>(), (int)player.GetTotalDamage<BeekeeperDamage>().ApplyTo(Item.damage), 1, player.whoAmI)
                     .originalDamage = Item.damage;
             }
         }

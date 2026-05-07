@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb
+﻿namespace BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb
 {
     public class ChlorophyteHoneycombProjectile : BeeProjectile
     {

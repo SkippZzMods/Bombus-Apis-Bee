@@ -45,7 +45,7 @@
 
         public override void AI()
         {
-            owner.Hymenoptra().BeeResourceRegenTimer = -120;
+            owner.Beekeeper().BeeResourceRegenTimer = -120;
             if (shots < 3)
             {
                 if (MaxDelay == 0)

@@ -1,4 +1,5 @@
-﻿using Mono.Cecil.Cil;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System.Reflection;
 
@@ -33,14 +34,14 @@ namespace BombusApisBee.Core
             for (int i = 0; i < Main.maxPlayers; i++)
             {
                 Player player = Main.player[i];
-                if (player.active && !player.outOfRange && !player.dead && player.Hymenoptra().CurrentBeeState == (int)BeeDamagePlayer.BeeState.Defense && player.Hymenoptra().HoldingBeeWeaponTimer > 0)
+                if (player.active && !player.outOfRange && !player.dead && player.Beekeeper().CurrentBeeState == (int)BeekeeperPlayer.BeeState.Defense && player.Beekeeper().HoldingBeeWeaponTimer > 0)
                 {
                     Effect effect = Terraria.Graphics.Effects.Filters.Scene["HoneyShieldShader"].GetShader().Shader;
                     effect.Parameters["time"].SetValue(Main.GlobalTimeWrappedHourly * 0.1f);
                     effect.Parameters["blowUpPower"].SetValue(3f);
                     effect.Parameters["blowUpSize"].SetValue(1f);
 
-                    float mult = (1f - player.Hymenoptra().HoneyShieldCD / (float)player.Hymenoptra().MaxHoneyShieldCD) * player.Hymenoptra().HoldingBeeWeaponTimer / 15f;
+                    float mult = (1f - player.Beekeeper().HoneyShieldCD / (float)player.Beekeeper().MaxHoneyShieldCD) * player.Beekeeper().HoldingBeeWeaponTimer / 15f;
 
 
                     float noiseScale = MathHelper.Lerp(0.45f, 0.65f, (float)Math.Sin(Main.GlobalTimeWrappedHourly * 0.1f) + 1f);

@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-using Terraria;
-namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
+﻿namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
 {
     public class CursedEye : BeeProjectile
     {

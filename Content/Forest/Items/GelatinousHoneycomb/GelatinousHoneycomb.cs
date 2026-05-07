@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
 {
-    public class GelatinousHoneycomb : BeeDamageItem
+    public class GelatinousHoneycomb : BeekeeperWeapon
     {
         int shots;
         public override void SafeSetStaticDefaults()

@@ -1,9 +1,10 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Jungle.Items.BladeOfAculeus
 {
-    public class BladeOfAculeus : BeeDamageItem
+    public class BladeOfAculeus : BeekeeperWeapon
     {
         private int combo = 0;
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ProjectileType<AculeusBladeHoldout>()] <= 0;

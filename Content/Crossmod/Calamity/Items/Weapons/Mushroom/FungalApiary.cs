@@ -1,8 +1,10 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Dusts.Pixelized;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Content.Forest.Items.WoodenApiary;
-using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.Common.Apiary;
+using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using CalamityMod.Items.Materials;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
@@ -172,7 +174,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
     }
 
     [JITWhenModsEnabled("CalamityMod")]
-    class FungalBee : BaseBeeProjectile
+    class FungalBee : CommonBeeProjectile
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()

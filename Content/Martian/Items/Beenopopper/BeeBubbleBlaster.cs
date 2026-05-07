@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Martian.Items.Beenopopper
 {
-    public class BeeBubbleBlaster : BeeDamageItem
+    public class BeeBubbleBlaster : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

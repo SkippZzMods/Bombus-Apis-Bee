@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Jungle.Items.HoneyLocket
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Jungle.Items.HoneyLocket
 {
     public class HoneyLocket : BeeKeeperItem
     {
@@ -18,12 +20,12 @@
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(gold: 3);
             Item.damage = 35;
-            Item.DamageType = GetInstance<HymenoptraDamageClass>();
+            Item.DamageType = GetInstance<BeekeeperDamage>();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Hymenoptra().CurrentBees += 3;
+            player.Beekeeper().CurrentBees += 3;
         }
     }
 }

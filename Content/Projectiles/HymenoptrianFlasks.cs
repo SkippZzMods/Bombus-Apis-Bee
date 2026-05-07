@@ -1,5 +1,4 @@
-﻿using Terraria;
-namespace BombusApisBee.Content.Projectiles
+﻿namespace BombusApisBee.Content.Projectiles
 {
     public class HymenoptraFlask_Honey : BeeProjectile
     {

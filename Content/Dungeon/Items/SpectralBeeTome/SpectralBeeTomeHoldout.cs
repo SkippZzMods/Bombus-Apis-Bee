@@ -1,4 +1,5 @@
-﻿using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
 {
@@ -65,7 +66,7 @@ namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
 
             AdjustPlayerValues();
             Projectile.timeLeft = 2;
-            Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceRegenTimer = -60;
+            Owner.GetModPlayer<BeekeeperPlayer>().BeeResourceRegenTimer = -60;
 
         }
         public void ShootBees()
@@ -73,13 +74,13 @@ namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
             if (Main.myPlayer != Projectile.owner)
                 return;
 
-            if (Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceCurrent == Owner.GetModPlayer<BeeDamagePlayer>().BeeResourceReserved)
+            if (Owner.GetModPlayer<BeekeeperPlayer>().BeeResourceCurrent == Owner.GetModPlayer<BeekeeperPlayer>().BeeResourceReserved)
             {
                 Projectile.Kill();
                 return;
             }
 
-            if (Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeeDamageItem).honeyCost))
+            if (Owner.UseBeeResource((Main.player[Projectile.owner].HeldItem.ModItem as BeekeeperWeapon).honeyCost))
             {
                 SoundEngine.PlaySound(SoundID.NPCDeath52, Projectile.Center);
                 for (int i = 0; i < 2; i++)

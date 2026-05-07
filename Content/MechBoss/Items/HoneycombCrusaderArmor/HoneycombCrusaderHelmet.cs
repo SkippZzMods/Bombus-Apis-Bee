@@ -1,6 +1,5 @@
 ﻿using BombusApisBee.Content.Forest.Items.HoneycombChunkPickup;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using Terraria;
 
 namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
 {
@@ -35,7 +34,7 @@ namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
         public override void UpdateEquip(Player player)
         {
             player.IncreaseBeeCrit(5);
-            player.Hymenoptra().BeeResourceMax2 += 75;
+            player.Beekeeper().BeeResourceMax2 += 75;
         }
 
         public override void AddRecipes()

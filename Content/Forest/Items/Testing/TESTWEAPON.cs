@@ -1,10 +1,10 @@
 using BombusApisBee.Content.Hell.Items.HellcombShard;
-using Terraria;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.Testing
 {
-    public class TESTWEAPON : BeeDamageItem
+    public class TESTWEAPON : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {
@@ -38,15 +38,15 @@ namespace BombusApisBee.Content.Forest.Items.Testing
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.Hymenoptra().SHOWCASEMODETIMER = 0;
+            player.Beekeeper().SHOWCASEMODETIMER = 0;
             Vector2 pos = Main.MouseWorld;
             return false;
         }
 
         public override void HoldItem(Player player)
         {
-            player.Hymenoptra().SHOWCASEMODETIMER = 6000;
-            player.Hymenoptra().BeeResourceReserved = 0;
+            player.Beekeeper().SHOWCASEMODETIMER = 6000;
+            player.Beekeeper().BeeResourceReserved = 0;
             player.IncreaseBeeCrit(100);
         }
     }

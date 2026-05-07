@@ -32,7 +32,7 @@ namespace BombusApisBee.Content.Martian.Items.HoneyManipulator
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.Bombus().HoneyManipulator = true;
-            player.Hymenoptra().BeeResourceMax2 += 20;
+            player.Beekeeper().BeeResourceMax2 += 20;
         }
     }
 }

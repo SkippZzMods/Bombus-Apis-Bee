@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Jungle.Items.StingerSlinger
 {
-    public class TheStingerSlinger : BeeDamageItem
+    public class TheStingerSlinger : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

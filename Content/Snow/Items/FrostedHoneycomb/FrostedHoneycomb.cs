@@ -1,8 +1,9 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 
 namespace BombusApisBee.Content.Snow.Items.FrostedHoneycomb
 {
-    public class FrostedHoneycomb : BeeDamageItem
+    public class FrostedHoneycomb : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

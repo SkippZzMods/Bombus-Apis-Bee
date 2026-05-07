@@ -1,9 +1,7 @@
-﻿using BombusApisBee.Content.Crossmod;
-using BombusApisBee.Content.Crossmod.Calamity;
-using BombusApisBee.Content.Dusts.Pixelized;
+﻿using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Projectiles;
-using BombusApisBee.Core.PixelationSystem;
+using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 using CalamityMod;
 using CalamityMod.Items.Materials;
 using CalamityMod.Items.Placeables.SunkenSea;

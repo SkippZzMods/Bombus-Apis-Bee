@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Content.Projectiles
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.Projectiles
 {
     //TODO: REMOVE THIS BRO  WHAT 
     public abstract class BeeProjectile : ModProjectile
@@ -7,7 +9,7 @@
         public sealed override void SetDefaults()
         {
             SafeSetDefaults();
-            Projectile.DamageType = GetInstance<HymenoptraDamageClass>();
+            Projectile.DamageType = GetInstance<BeekeeperDamage>();
 
             Projectile.hostile = false;
         }

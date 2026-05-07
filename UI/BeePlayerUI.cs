@@ -1,13 +1,11 @@
-﻿using BombusApisBee.Core.UILoading;
-using Terraria.GameContent.UI.Elements;
-using Terraria.UI;
-using static BombusApisBee.BeeDamageClass.BeeDamagePlayer;
+﻿using Terraria.UI;
+using static BombusApisBee.Core.BeekeeperClass.BeekeeperPlayer;
 
 namespace BombusApisBee.UI
 {
     public class BeePlayerUI : UIState
     {
-        internal BeeState oldState; 
+        internal BeeState oldState;
         internal BeeState state;
 
         internal int switchTimer;
@@ -23,13 +21,13 @@ namespace BombusApisBee.UI
         {
             if (state == 0)
             {
-                state = (BeeState)Main.LocalPlayer.Hymenoptra().CurrentBeeState;
+                state = (BeeState)Main.LocalPlayer.Beekeeper().CurrentBeeState;
             }
 
-            if ((int)state != Main.LocalPlayer.Hymenoptra().CurrentBeeState)
+            if ((int)state != Main.LocalPlayer.Beekeeper().CurrentBeeState)
             {
                 oldState = state;
-                state = (BeeState)Main.LocalPlayer.Hymenoptra().CurrentBeeState;
+                state = (BeeState)Main.LocalPlayer.Beekeeper().CurrentBeeState;
                 switchTimer = 20;
             }
 
@@ -43,7 +41,7 @@ namespace BombusApisBee.UI
             Texture2D texGathering = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Gathering").Value;
             Texture2D texDefense = ModContent.Request<Texture2D>("BombusApisBee/UI/BeePlayerUI_Defense").Value;
 
-            var mp = Main.LocalPlayer.Hymenoptra();
+            var mp = Main.LocalPlayer.Beekeeper();
 
             if (mp.HeldBeeWeaponTimer > 0 || mp.HoldingBeeWeaponTimer > 0)
             {
@@ -51,8 +49,8 @@ namespace BombusApisBee.UI
 
                 Color color = Color.White * fade;
 
-                
-                
+
+
                 float lerper = 1f;
                 if (switchTimer > 0)
                     lerper = 1f - switchTimer / 20f;
@@ -98,10 +96,10 @@ namespace BombusApisBee.UI
                 Main.instance.MouseText(GetHoverText((int)state, type), ItemRarityID.Yellow);
                 Main.LocalPlayer.mouseInterface = true;
 
-                if (Main.mouseLeft && Main.mouseLeftRelease && Main.LocalPlayer.Hymenoptra().StateSwitchCooldown <= 0 && Main.LocalPlayer.Hymenoptra().CurrentBeeState != type)
+                if (Main.mouseLeft && Main.mouseLeftRelease && Main.LocalPlayer.Beekeeper().StateSwitchCooldown <= 0 && Main.LocalPlayer.Beekeeper().CurrentBeeState != type)
                 {
-                    Main.LocalPlayer.Hymenoptra().StateSwitchCooldown = 20;
-                    Main.LocalPlayer.Hymenoptra().CurrentBeeState = type;
+                    Main.LocalPlayer.Beekeeper().StateSwitchCooldown = 20;
+                    Main.LocalPlayer.Beekeeper().CurrentBeeState = type;
                 }
 
                 if (timer < 10)
@@ -112,7 +110,7 @@ namespace BombusApisBee.UI
                 if (timer > 0)
                     timer--;
             }
-                
+
 
             Main.spriteBatch.Draw(tex, position + offset
                  , null, color * alpha, 0, tex.Size() / 2f, uiScale * scale, 0f, 0f);
@@ -120,17 +118,19 @@ namespace BombusApisBee.UI
 
         internal string GetHoverText(int state, int type)
         {
-            var mp = Main.LocalPlayer.Hymenoptra();
+            var mp = Main.LocalPlayer.Beekeeper();
 
             switch (state)
             {
                 case (int)BeeState.Defense:
                     switch (type)
                     {
-                        case (int)BeeState.Defense: return "Your bees are in Defending Mode\nYour defense is increased by "
+                        case (int)BeeState.Defense:
+                            return "Your bees are in Defending Mode\nYour defense is increased by "
                         + mp.CurrentBees * 2 + ", and you are granted a Honey shield which blocks one attack while your bees are in Defending Mode";
 
-                        case (int)BeeState.Offense: return "Left Click to switch your bees into Attacking Mode\nYou are granted "
+                        case (int)BeeState.Offense:
+                            return "Left Click to switch your bees into Attacking Mode\nYou are granted "
                         + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
 
                         case (int)BeeState.Gathering: return "Left Click to switch your bees into Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
@@ -140,10 +140,12 @@ namespace BombusApisBee.UI
                 case (int)BeeState.Offense:
                     switch (type)
                     {
-                        case (int)BeeState.Defense: return "Left Click to switch your bees into Defending Mode\nYour defense is increased by "
+                        case (int)BeeState.Defense:
+                            return "Left Click to switch your bees into Defending Mode\nYour defense is increased by "
                         + mp.CurrentBees * 2 + ", and you are granted a Honey shield which blocks one attack while your bees are in Defending Mode";
 
-                        case (int)BeeState.Offense: return "Your bees are in Attacking Mode\nYou are granted "
+                        case (int)BeeState.Offense:
+                            return "Your bees are in Attacking Mode\nYou are granted "
                         + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
 
                         case (int)BeeState.Gathering: return "Left Click to switch your bees into Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
@@ -153,10 +155,12 @@ namespace BombusApisBee.UI
                 case 3:
                     switch (type)
                     {
-                        case (int)BeeState.Defense: return "Left Click to switch your bees into Defending Mode\nYour defense is increased by "
+                        case (int)BeeState.Defense:
+                            return "Left Click to switch your bees into Defending Mode\nYour defense is increased by "
                         + mp.CurrentBees * 2 + ", and you are granted a Honey shield which blocks one attack while your bees are in Defending Mode";
 
-                        case (int)BeeState.Offense: return "Left Click to switch your bees into Attacking Mode\nYou are granted "
+                        case (int)BeeState.Offense:
+                            return "Left Click to switch your bees into Attacking Mode\nYou are granted "
                         + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
 
                         case (int)BeeState.Gathering: return "Your bees are in Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";

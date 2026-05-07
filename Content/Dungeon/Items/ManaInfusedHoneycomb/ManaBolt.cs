@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Projectiles;
-
-namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
+﻿namespace BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb
 {
     public class ManaBolt : BeeProjectile
     {

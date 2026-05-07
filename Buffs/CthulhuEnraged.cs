@@ -1,4 +1,6 @@
-﻿namespace BombusApisBee.Buffs
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Buffs
 {
     public class CthulhuEnraged : ModBuff
     {
@@ -11,7 +13,7 @@
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetDamage<HymenoptraDamageClass>() += 0.12f;
+            player.GetDamage<BeekeeperDamage>() += 0.12f;
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
+﻿using BombusApisBee.Core.BeekeeperClass;
+
+namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
 {
-    public class ProbeyComb : BeeDamageItem
+    public class ProbeyComb : BeekeeperWeapon
     {
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<ProbeycombHoldout>() <= 0;
         public override void SafeSetStaticDefaults()

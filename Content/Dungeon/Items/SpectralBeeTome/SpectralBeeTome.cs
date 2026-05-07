@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using Terraria.DataStructures;
 
 
 namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
 {
-    public class SpectralBeeTome : BeeDamageItem
+    public class SpectralBeeTome : BeekeeperWeapon
     {
         public override void SafeSetStaticDefaults()
         {

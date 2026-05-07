@@ -1,8 +1,9 @@
-﻿using Terraria.DataStructures;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.NectarSlasher
 {
-    public class NectarSlasher : BeeDamageItem
+    public class NectarSlasher : BeekeeperWeapon
     {
         private int swingDirection = 1;
 

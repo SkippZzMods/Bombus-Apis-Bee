@@ -1,8 +1,5 @@
-﻿using BombusApisBee.Core.PixelationSystem;
-using BombusApisBee.PrimitiveDrawing;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.Graphics.Effects;
+﻿using BombusApisBee.Core.Systems.PixelationSystem;
+using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Dusts
 {
@@ -127,7 +124,7 @@ namespace BombusApisBee.Content.Dusts
 
                     trail_2?.Render(effect);
                 }
-            });       
+            });
 
             return false;
         }

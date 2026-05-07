@@ -1,6 +1,4 @@
-﻿using BombusApisBee.Content.Forest.Items.Nectarlace;
-using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Forest.Items.RetinaReleaser;
+﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Content.Jungle.Items.NectarVial;
 
 namespace BombusApisBee.Content.Forest.Items.HymenoptrianNecklace

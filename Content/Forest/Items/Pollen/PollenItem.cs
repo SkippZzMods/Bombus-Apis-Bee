@@ -49,11 +49,11 @@ namespace BombusApisBee.Content.Forest.Items.Pollen
             Texture2D tex = Request<Texture2D>(Texture + "_Frame").Value;
 
             Rectangle frame = tex.Frame(1, 2, 0, useAltTex ? 1 : 0);
-            
+
             spriteBatch.Draw(glowTex, Item.position - Main.screenPosition, null, new Color(255, 150, 0, 0) * MathHelper.Lerp(.5f, 1f, Utils.Clamp((float)Math.Sin(1f + Main.GlobalTimeWrappedHourly * 4f), 0, 1)), 0f, glowTex.Size() / 2f, 0.4f, SpriteEffects.None, 0f);
 
             spriteBatch.Draw(tex, Item.position - Main.screenPosition, frame, lightColor, 0f, frame.Size() / 2f, scale, SpriteEffects.None, 0f);
-            
+
             return false;
         }
     }

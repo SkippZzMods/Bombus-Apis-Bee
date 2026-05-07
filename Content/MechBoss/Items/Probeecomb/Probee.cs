@@ -1,18 +1,11 @@
-﻿using BombusApisBee.BeeHelperProj;
-using BombusApisBee.Content.Projectiles;
+﻿using BombusApisBee.Core.Common.BeeProjectile;
 
 namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
 {
-    public class Probee : BaseBeeProjectile
+    public class Probee : CommonBeeProjectile
     {
         public int ShootDelay = 45;
-
-        public override int SmallHeight => 16;
-
-        public override int SmallWidth => 16;
-
-        public override bool CanBeGiant => false;
-
+        public Probee() : base(canBeGiant: false, size: new(16)) { }
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Probee");

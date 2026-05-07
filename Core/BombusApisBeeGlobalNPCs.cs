@@ -1,34 +1,33 @@
-﻿using Terraria.Chat;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.Localization;
-using Terraria.ID;
-using BombusApisBee.Content.Space.Items.ElectricHoneycomb;
-using BombusApisBee.Content.Forest.Items.GelatinousHoneycomb;
-using BombusApisBee.Content.Hell.Items.Honeyshot;
-using BombusApisBee.Content.Martian.Items.LazerbeemBlaster;
-using BombusApisBee.Content.Martian.Items.Beenopopper;
+﻿using BombusApisBee.Content.BloodMoon.Items.HemocombShard;
 using BombusApisBee.Content.Dungeon.Items.ManaInfusedHoneycomb;
 using BombusApisBee.Content.Dungeon.Items.Skelecomb;
-using BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb;
-using BombusApisBee.Content.Jungle.Items.Needleshot;
-using BombusApisBee.Content.MechBoss.Items.OcularRemote;
-using BombusApisBee.Content.MechBoss.Items.Probeecomb;
+using BombusApisBee.Content.Forest.Items.GelatinousHoneycomb;
 using BombusApisBee.Content.Forest.Items.PeeperPoker;
-using BombusApisBee.Content.Forest.Items.QueensLarvae;
 using BombusApisBee.Content.Forest.Items.Pollen;
-using BombusApisBee.Content.Jungle.Items.RoyalJelly;
-using BombusApisBee.Content.Jungle.Items.HiveBandAccessory;
-using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
-using BombusApisBee.Content.Snow.Items.FrozenStinger;
-using BombusApisBee.Content.BloodMoon.Items.HemocombShard;
-using BombusApisBee.Content.Martian.Items.HoneyManipulator;
-using BombusApisBee.Content.Jungle.Items.LihzardianHornetRelic;
-using BombusApisBee.Content.Jungle.Items.NectarVial;
+using BombusApisBee.Content.Forest.Items.QueensLarvae;
 using BombusApisBee.Content.Forest.Items.RetinaReleaser;
 using BombusApisBee.Content.Forest.Items.RottenHoneycombShard;
-using BombusApisBee.Content.Jungle.Items.TriTipStinger;
-using BombusApisBee.Content.Pillars.Items.PhotonFragment;
+using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
+using BombusApisBee.Content.Hell.Items.Honeyshot;
+using BombusApisBee.Content.Jungle.Items.HiveBandAccessory;
+using BombusApisBee.Content.Jungle.Items.LihzardianHornetRelic;
+using BombusApisBee.Content.Jungle.Items.NectarVial;
+using BombusApisBee.Content.Jungle.Items.Needleshot;
+using BombusApisBee.Content.Jungle.Items.RoyalJelly;
 using BombusApisBee.Content.Jungle.Items.TomeOfTheSun;
+using BombusApisBee.Content.Jungle.Items.TriTipStinger;
+using BombusApisBee.Content.Martian.Items.Beenopopper;
+using BombusApisBee.Content.Martian.Items.HoneyManipulator;
+using BombusApisBee.Content.Martian.Items.LazerbeemBlaster;
+using BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb;
+using BombusApisBee.Content.MechBoss.Items.OcularRemote;
+using BombusApisBee.Content.MechBoss.Items.Probeecomb;
+using BombusApisBee.Content.Pillars.Items.PhotonFragment;
+using BombusApisBee.Content.Snow.Items.FrozenStinger;
+using BombusApisBee.Content.Space.Items.ElectricHoneycomb;
+using Terraria.Chat;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.Localization;
 
 namespace BombusApisBee.Core
 {
@@ -107,7 +106,7 @@ namespace BombusApisBee.Core
             if (npc.type == NPCID.BloodZombie)
             {
                 npcLoot.Add(new ItemDropWithConditionRule(ItemType<HemocombShard>(), 100, 1, 1, new HemocombShardCondition()));
-            }            
+            }
 
             if (npc.type == NPCID.FlyingSnake || npc.type == NPCID.Lihzahrd || npc.type == NPCID.LihzahrdCrawler)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LihzardianHornetRelic>(), 35));
