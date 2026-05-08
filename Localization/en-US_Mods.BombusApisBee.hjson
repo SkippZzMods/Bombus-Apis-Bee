@@ -214,6 +214,7 @@ Projectiles: {
 	SnowBee.DisplayName: Snowy Bee
 	RegularBeeProjectile.DisplayName: Bee
 	WeakBeeProjectile.DisplayName: Bee
+	FlamingApiaryHoldout.DisplayName: Apiary
 }
 
 DamageClasses: {
@@ -1494,6 +1495,16 @@ Items: {
 	EnchantedCharm: {
 		DisplayName: Enchanted Charm
 		Tooltip: Apiaries conjure enchanted bolts on use
+	}
+
+	FlamingApiary: {
+		DisplayName: Flaming Apiary
+		Tooltip:
+			'''
+			Hold <left> to rapidly fire bees
+			Hold <right> to fire the bees slower, but take control over the bees, lighting them on fire
+			Controlled bees move 20% faster, have 5% increased critical strike chance, and their crits inflict On Fire!
+			'''
 	}
 }
 

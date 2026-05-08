@@ -7,6 +7,7 @@ namespace BombusApisBee.Core.Common.Apiary
     public abstract class ApiaryHoldout : ModProjectile
     {
         public int shakeTimer;
+        public virtual int ProjectileTypeToFire => ProjectileType<RegularBeeProjectile>();
         public virtual bool UseDefaultTextures => false;
         public virtual Color GlowColor => Color.White;
 
@@ -126,7 +127,7 @@ namespace BombusApisBee.Core.Common.Apiary
             {
                 Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
 
-                Projectile.SpawnBee(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(7f, 8f), Projectile.damage, Projectile.knockBack);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(7f, 8f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
 

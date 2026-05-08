@@ -6,8 +6,17 @@ namespace BombusApisBee.Core.Common.Apiary
 {
     public abstract class ApiaryItem : BeekeeperWeapon
     {
-        public virtual int baseUseTime => 20;
-        public virtual int altUseTime => 40;
+        public virtual int BaseUseTime => 20;
+        public virtual int AltUseTime => 40;
+
+        /// <summary>
+        /// PreAI method for bees spawned from an apiary
+        /// Modifiers for speed and range should go here
+        /// </summary>
+        public virtual void PreApiaryAI(Projectile projectile)
+        {
+
+        }
 
         /// <summary>
         /// PreDraw method for bees spawned from an apiary
@@ -56,7 +65,11 @@ namespace BombusApisBee.Core.Common.Apiary
 
             bool modded = Projectile.ModProjectile != null && Projectile.ModProjectile is CommonBeeProjectile;
 
-            Projectile.velocity = (Projectile.velocity * 35f + (controlsPlayer.mouseWorld - Projectile.Center).SafeNormalize(Vector2.UnitX) * 7f) / 36f;
+            float speed = 7f;
+            if (modded)
+                speed = (Projectile.ModProjectile as CommonBeeProjectile).Speed;
+
+            Projectile.velocity = (Projectile.velocity * 35f + (controlsPlayer.mouseWorld - Projectile.Center).SafeNormalize(Vector2.UnitX) * speed) / 36f;
         }
 
         /// <summary>
@@ -104,8 +117,8 @@ namespace BombusApisBee.Core.Common.Apiary
             Item.channel = true;
             Item.noUseGraphic = true; 
 
-            Item.useTime = baseUseTime;
-            Item.useAnimation = baseUseTime;
+            Item.useTime = BaseUseTime;
+            Item.useAnimation = BaseUseTime;
 
             AddDefaults();
         }
@@ -124,8 +137,8 @@ namespace BombusApisBee.Core.Common.Apiary
         {
             if (player.altFunctionUse == 2)
             {
-                float leftClickTime = baseUseTime;
-                float rightClickTime = altUseTime;
+                float leftClickTime = BaseUseTime;
+                float rightClickTime = AltUseTime;
 
                 return rightClickTime / leftClickTime;
             }
@@ -137,8 +150,8 @@ namespace BombusApisBee.Core.Common.Apiary
         {
             if (player.altFunctionUse == 2)
             {
-                float leftClickTime = baseUseTime;
-                float rightClickTime = altUseTime;
+                float leftClickTime = BaseUseTime;
+                float rightClickTime = AltUseTime;
 
                 return rightClickTime / leftClickTime;
             }
@@ -243,6 +256,10 @@ namespace BombusApisBee.Core.Common.Apiary
 
                 if (player.GetModPlayer<ApiaryPlayer>().apiaryActive)
                 {
+                    if (projectile.ModProjectile != null)
+                        (projectile.ModProjectile as CommonBeeProjectile).speedMultiplier = 1f;
+                    
+                    apiaryParent.PreApiaryAI(projectile);
                     apiaryParent.HoldAI(projectile);
 
                     return false;

@@ -6,17 +6,62 @@ using BombusApisBee.Core.Common.Apiary;
 using BombusApisBee.Core.Systems.ParticleSystem;
 using BombusApisBee.Core.Systems.PixelationSystem;
 using BombusApisBee.Core.Systems.PrimitiveSystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BombusApisBee.Content.Underground
+namespace BombusApisBee.Content.Underground.Items.EnchantedCharm
 {
+    internal sealed class GenEnchantedCharms : ModSystem
+    {
+        public override void PostWorldGen()
+        {
+            // gold chest gen
+            int itemsToPlaceInGoldChests = ItemType<EnchantedCharm>();
+            for (int chestIndex = 0; chestIndex < 1000; chestIndex++)
+            {
+                Chest chest = Main.chest[chestIndex];
+                if (chest != null && Main.tile[chest.x, chest.y].TileType == TileID.Containers && (Main.tile[chest.x, chest.y].TileFrameX == 1 * 36 || Main.tile[chest.x, chest.y].TileFrameX == 8 * 36 || Main.tile[chest.x, chest.y].TileFrameX == 32 * 36 || Main.tile[chest.x, chest.y].TileFrameX == 51 * 36 || Main.tile[chest.x, chest.y].TileFrameX == 50 * 36))
+                {
+                    for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                    {
+                        if (inventoryIndex == 0)
+                        {
+                            if (chest.item[inventoryIndex].type == ItemID.FlareGun)
+                            {
+                                if (WorldGen.genRand.NextFloat() < 0.25f)
+                                {
+                                    chest.item[0].TurnToAir();
+                                    chest.item[1].TurnToAir();
+                                    chest.item[0].SetDefaults(itemsToPlaceInGoldChests);
+                                    chest.item[0].Prefix(-1);
+
+                                    for (int i = 1; i < 39; i++)
+                                    {
+                                        chest.item[i] = chest.item[i + 1];
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                if (WorldGen.genRand.NextFloat() < 0.25f)
+                                {
+                                    chest.item[0].SetDefaults(itemsToPlaceInGoldChests);
+                                    chest.item[0].Prefix(-1);
+                                }
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    [AutoloadEquip(EquipType.Neck)]
     public class EnchantedCharm : BeekeeperAccessory
     {
-        public EnchantedCharm() : base("Enchanted Charm", "Apiaries conjure damaging stars at night") { }
+        internal int _cooldown;
+        public EnchantedCharm() : base("Starshot Pendant", "Apiaries conjure damaging stars at night\n'Twinkle twinkle little star'") { }
 
         public override void SafeSetDefaults()
         {
@@ -24,20 +69,46 @@ namespace BombusApisBee.Content.Underground
             Item.value = Item.buyPrice(gold: 1);
         }
 
+        public override void ResetEffects(Player player)
+        {
+            if (IsEquipped(player))
+            {
+                EnchantedCharm acc = GetEquippedInstance(player) as EnchantedCharm;
+                if (acc._cooldown > 0)
+                {
+                    acc._cooldown--;
+
+                    if (acc._cooldown == 0)
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Dust.NewDustPerfect(player.Center + Main.rand.NextVector2Circular(7f, 7f),
+                                DustType<StarDustWhite>(), Main.rand.NextVector2Circular(0.5f, 0.5f), 20, new Color(241, 238, 92, 0), 0.2f);
+
+                            SoundID.MaxMana.PlayWith(player.Center);
+                        }
+                }
+            }
+        }
+
         public override void OnWeaponUse(Player player, int damage, float knockBack)
         {
-            if (!Main.dayTime && player.HeldItem.ModItem is ApiaryItem && Main.rand.NextFloat() < 0.2f)
+            EnchantedCharm acc = GetEquippedInstance(player) as EnchantedCharm;
+
+            if (!Main.dayTime && player.HeldItem.ModItem is ApiaryItem && acc._cooldown <= 0)
             {
                 Vector2 pos = player.Center + new Vector2(-50f * player.direction, -80f) + Main.rand.NextVector2Circular(50f, 50f);
 
-                Projectile.NewProjectile(player.GetSource_Accessory(Item, "BombusApisBee: Enchanted Charm"), 
+                Projectile.NewProjectile(player.GetSource_Accessory(Item, "BombusApisBee: Enchanted Charm"),
                     pos,
-                    pos.DirectionTo(Main.MouseWorld)  , 
-                    ModContent.ProjectileType<EnchantedBolt>(),
-                    20, 
+                    pos.DirectionTo(Main.MouseWorld),
+                    ProjectileType<EnchantedBolt>(),
+                    Main.rand.Next(15, 25),
                     5f,
                     player.whoAmI
                     );
+
+                // 3 - 6 second cooldown
+                acc._cooldown = Main.rand.Next(3, 7) * 60;
             }
         }
 
@@ -46,7 +117,7 @@ namespace BombusApisBee.Content.Underground
             CreateRecipe().
                 AddIngredient(ItemID.FallenStar, 10).
                 AddIngredient(ItemID.SilverBar, 15).
-                AddIngredient(ModContent.ItemType<PollenItem>(), 5).
+                AddIngredient(ItemType<PollenItem>(), 5).
                 AddTile(TileID.Anvils).
                 Register();
         }
@@ -114,10 +185,10 @@ namespace BombusApisBee.Content.Underground
                     {
                         Color[] colors = [new Color(241, 238, 92, 0), new Color(20, 80, 150, 0)];
 
-                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(25f, 25f), ModContent.DustType<PixelatedEmber>(), -Projectile.velocity * 0.1f, 50, Main.rand.Next(colors), 0.2f).customData = Main.rand.NextBool() ? -1 : 1;
+                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(25f, 25f), DustType<PixelatedEmber>(), -Projectile.velocity * 0.1f, 50, Main.rand.Next(colors), 0.2f).customData = Main.rand.NextBool() ? -1 : 1;
                     }
                 }
-            }           
+            }
             else
             {
                 if (Timer == 60)
@@ -136,7 +207,7 @@ namespace BombusApisBee.Content.Underground
                 {
                     Color[] colors = [new Color(241, 238, 92, 0), new Color(20, 80, 150, 0)];
 
-                    Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(25f, 25f), ModContent.DustType<PixelatedEmber>(), -Vector2.UnitY, 50, Main.rand.Next(colors), 0.2f).customData = Main.rand.NextBool() ? -1 : 1;
+                    Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(25f, 25f), DustType<PixelatedEmber>(), -Vector2.UnitY, 50, Main.rand.Next(colors), 0.2f).customData = Main.rand.NextBool() ? -1 : 1;
                 }
 
                 if (Main.rand.NextBool(20))
@@ -187,13 +258,13 @@ namespace BombusApisBee.Content.Underground
             for (int i = 0; i < 7; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f),
-                    ModContent.DustType<StarDust>(), -Projectile.velocity.RotatedByRandom(0.2f) * Main.rand.NextFloat(0.5f), 100, new Color(241, 238, 92, 0), 0.3f).customData = true;
+                    DustType<StarDust>(), -Projectile.velocity.RotatedByRandom(0.2f) * Main.rand.NextFloat(0.5f), 100, new Color(241, 238, 92, 0), 0.3f).customData = true;
 
                 Dust.NewDustPerfect(target.Center + Main.rand.NextVector2Circular(target.width, target.height),
-                    ModContent.DustType<StarDustWhite>(), -Vector2.UnitY * Main.rand.NextFloat(2f), 100, new Color(241, 238, 92, 0), 0.3f);
+                    DustType<StarDustWhite>(), -Vector2.UnitY * Main.rand.NextFloat(2f), 100, new Color(241, 238, 92, 0), 0.3f);
 
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f),
-                    ModContent.DustType<StarDustWhite>(), Main.rand.NextVector2Circular(5f, 5f), 20, new Color(40, 150, 255, 0), 0.5f).customData = true;
+                    DustType<StarDustWhite>(), Main.rand.NextVector2Circular(5f, 5f), 20, new Color(40, 150, 255, 0), 0.5f).customData = true;
 
                 if (Main.rand.NextBool())
                     ParticleHandler.SpawnParticle(new FallenStarParticle(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f),
@@ -224,7 +295,7 @@ namespace BombusApisBee.Content.Underground
 
         private void ManageTrail()
         {
-            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(14f, 4f, EaseBuilder.EaseCircularIn.Ease(1f - factor)), factor =>
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(14f, 4f, EaseFunction.EaseCircularIn.Ease(1f - factor)), factor =>
             {
                 return BeeUtils.MulticolorLerp(factor.X, [new(102, 250, 226), new(96, 72, 250), new(223, 69, 249), new(87, 255, 188, 0)]) * factor.X * 0.5f;
             });
@@ -232,7 +303,7 @@ namespace BombusApisBee.Content.Underground
             trail.Positions = cache.ToArray();
             trail.NextPosition = Projectile.Center;
 
-            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(12f, 3f, EaseBuilder.EaseCircularIn.Ease(1f - factor)), factor =>
+            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(12f, 3f, EaseFunction.EaseCircularIn.Ease(1f - factor)), factor =>
             {
                 return Color.Lerp(new Color(40, 100, 230), Color.LightCyan, factor.X) * factor.X * 0.2f;
             });
@@ -265,7 +336,7 @@ namespace BombusApisBee.Content.Underground
                 }
 
                 Vector2 shake = Main.rand.NextVector2CircularEdge(1f, 1f) * SpawnProgress;
-                
+
                 Main.spriteBatch.Draw(bloom, Projectile.Center + shake - Main.screenPosition, null, new Color(241, 238, 92, 0) * SpawnProgress, Projectile.rotation, bloom.Size() / 2f, Projectile.scale * 0.5f, 0f, 0f);
 
                 Main.spriteBatch.Draw(starTexture, Projectile.Center + shake - Main.screenPosition, null, new Color(241, 238, 92) * SpawnProgress, Projectile.rotation, starTexture.Size() / 2f, Projectile.scale, 0f, 0f);
@@ -302,18 +373,18 @@ namespace BombusApisBee.Content.Underground
                     {
                         float fade = (Projectile.velocity.Length() - 3f) / 3f * Utils.Clamp((Timer - 60f) / 40f, 0f, 1f);
                         fade = Utils.Clamp(fade, 0, 1) * fadeOut;
-                        
+
                         Vector2 pos = cache[i] + new Vector2(-24f, 0f).RotatedBy(Projectile.velocity.ToRotation());
 
                         Main.spriteBatch.Draw(trail, pos - Main.screenPosition, null, new Color(40, 100, 230, 0) * 0.4f * fade * lerp, Projectile.velocity.ToRotation() + MathHelper.PiOver2, trail.Size() / 2f, 1.25f * fade * lerp, 0f, 0f);
 
                         DrawGlow(trail, pos, new Color(40, 100, 230, 0), Projectile.velocity.ToRotation() + MathHelper.PiOver2, 1.25f * fade * lerp, 0.3f * fade * lerp);
                     }
-                        
+
                     Main.spriteBatch.Draw(bloom, cache[i] - Main.screenPosition, null, new Color(241, 238, 92, 0) * lerp, Projectile.rotation, bloom.Size() / 2f, Projectile.scale * 0.4f, 0f, 0f);
 
                     Main.spriteBatch.Draw(starTexture, cache[i] - Main.screenPosition, null, new Color(241, 238, 92) * 0.5f * lerp, Projectile.rotation, starTexture.Size() / 2f, Projectile.scale, 0f, 0f);
-                    
+
                     DrawGlow(starTexture, cache[i], new Color(241, 238, 92, 0), Projectile.rotation, Projectile.scale, 0.25f * lerp);
                 }
 

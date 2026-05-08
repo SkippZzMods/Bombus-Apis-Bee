@@ -38,8 +38,10 @@ namespace BombusApisBee.Core.Common.BeeProjectile
         internal Vector2 _giantSize = new(DEFAULT_GIANT_SIZE);
         internal Vector2 _size = new(DEFAULT_SIZE);
 
+        public float speedMultiplier = 1f;
+
         public bool Giant => _canBeGiant && Projectile.ai[0] == 1f;
-        public float Speed => Giant ? _giantHomingSpeed : _homingSpeed;
+        public float Speed => (Giant ? _giantHomingSpeed : _homingSpeed) * speedMultiplier;
         public float Range => Giant ? _giantHomingRange : _homingRange;
         public Vector2 Size => Giant ? _giantSize : _size;
         public int Timer
@@ -166,6 +168,8 @@ namespace BombusApisBee.Core.Common.BeeProjectile
         public virtual void SafePreAI() { }
         public sealed override bool PreAI()
         {
+            speedMultiplier = 1f;
+
             SafePreAI();
             Player player = Main.player[Projectile.owner];
 
@@ -173,7 +177,7 @@ namespace BombusApisBee.Core.Common.BeeProjectile
                 Projectile.ignoreWater = true;
             else if (Projectile.wet && !Projectile.honeyWet)
                 Projectile.Kill();
-
+            
             return base.PreAI();
         }
         public sealed override void AI()
@@ -257,10 +261,10 @@ namespace BombusApisBee.Core.Common.BeeProjectile
 
             Projectile.timeLeft--;
 
-            if (Projectile.velocity.Length() < Speed)
-                Projectile.velocity = Projectile.velocity * 1.03f;
+            if (Projectile.velocity.Length() < Speed * 0.66f)
+                Projectile.velocity = Projectile.velocity * 1.05f;
             else
-                Projectile.velocity = Utils.SafeNormalize(Projectile.velocity, Vector2.One) * Speed;
+                Projectile.velocity = Utils.SafeNormalize(Projectile.velocity, Vector2.One) * Speed * 0.66f;
         }
 
         internal void HomingBehavior(NPC target)

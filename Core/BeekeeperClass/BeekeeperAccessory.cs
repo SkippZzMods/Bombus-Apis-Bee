@@ -33,6 +33,28 @@ namespace BombusApisBee.Core.BeekeeperClass
 
             return false;
         }
+        /// <summary>
+		/// Gets the instance of the accessory thats equipped in a player's normal slots or that is being simulated by other accessories.
+		/// </summary>
+		/// <param name="player">The player to get the equipped instance from.</param>
+		/// <returns>The SmartAccessory instance if one is found, null if the item is not equipped or simulated.</returns>
+		public BeekeeperAccessory GetEquippedInstance(Player player)
+        {
+            return GetEquippedInstance(player, Item.type);
+        }
+
+        /// <summary>
+        /// Gets the instance of an equipped accessory based on it's type in a given player's normal slots, or being simulated by other accessories.
+        /// </summary>
+        /// <param name="player">The player to get the equipped instance from.</param>
+        /// <param name="type">The type of accessory to look for, this should be the ID of an item extending SmartAccessory</param>
+        /// <returns>The SmartAccessory instance if one is found, null if the item is not equipped or simulated.</returns>
+        public static BeekeeperAccessory GetEquippedInstance(Player player, int type)
+        {
+            AccessoryPlayer mp = player.GetModPlayer<AccessoryPlayer>();
+
+            return mp.equippedAccessories.FirstOrDefault(n => n.type == type)?.ModItem as BeekeeperAccessory;
+        }
 
         public override void SetStaticDefaults()
         {
@@ -67,6 +89,11 @@ namespace BombusApisBee.Core.BeekeeperClass
             SafeUpdateEquip(player);
         }
 
+        /// <summary>
+        /// Mirrors ModPlayer.ResetEffects()
+        /// </summary>
+        public virtual void ResetEffects(Player player) { }
+
         public virtual void OnEquippedHit(Player player, NPC target, NPC.HitInfo hit, int damageDone) { }
         public virtual void OnEquippedHit(Player player, Item item, NPC target, NPC.HitInfo hit, int damageDone) { }
         public virtual void OnEquippedHit(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) { }
@@ -88,6 +115,13 @@ namespace BombusApisBee.Core.BeekeeperClass
         public List<int> equippedTypes = new();
         public override void ResetEffects()
         {
+            foreach (Item item in equippedAccessories)
+            {
+                var accessory = item.ModItem as BeekeeperAccessory;
+
+                accessory.ResetEffects(Player);
+            }
+
             equippedAccessories.RemoveAll(n => !equippedTypes.Contains(n.type));
 
             equippedTypes.Clear();

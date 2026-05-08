@@ -6,8 +6,8 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
 {
     public class WoodenApiary : ApiaryItem
     {
-        public override int baseUseTime => 20;
-        public override int altUseTime => 28;
+        public override int BaseUseTime => 20;
+        public override int AltUseTime => 28;
         public override void AddStaticDefaults()
         {
             DisplayName.SetDefault("Wooden Apiary");
@@ -83,6 +83,7 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
 
     public class WoodenApiaryHoldout : ApiaryHoldout
     {
+        public override int ProjectileTypeToFire => ProjectileType<WeakBeeProjectile>();
         public override Color GlowColor => Color.Lerp(new Color(255, 180, 0), new Color(255, 225, 0), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
         public override string Texture => "BombusApisBee/Content/Forest/Items/WoodenApiary/WoodenApiary";
 

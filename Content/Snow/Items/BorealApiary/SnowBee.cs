@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Snow.Items.BorealApiary
 {
     public class SnowBee : CommonBeeProjectile
     {
-        public SnowBee() : base(name: "Snowy Bee", penetrate: 2, speed: 6f, giantSpeed: 7f) { }
+        public SnowBee() : base(name: "Snowy Bee", penetrate: 2, speed: 4.5f, giantSpeed: 5.5f, hitCooldown: 15) { }
 
         public override void SafeAI()
         {

@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Projectiles
     public class WeakBeeProjectile : CommonBeeProjectile
     {
         //public override string Texture => "BombusApisBee/Content/Projectiles/RegularBeeProjectile";
-        public WeakBeeProjectile() : base(penetrate: 2, speed: 5f, giantSpeed: 6f) { }
+        public WeakBeeProjectile() : base(penetrate: 2, speed: 4f, giantSpeed: 5f, hitCooldown: 15) { }
 
         public override bool SafePreDraw(ref Color lightColor)
         {

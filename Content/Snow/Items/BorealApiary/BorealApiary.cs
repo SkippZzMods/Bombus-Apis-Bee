@@ -6,8 +6,8 @@ namespace BombusApisBee.Content.Snow.Items.BorealApiary
 {
     public class BorealApiary : ApiaryItem
     {
-        public override int baseUseTime => 21;
-        public override int altUseTime => 30;
+        public override int BaseUseTime => 21;
+        public override int AltUseTime => 30;
 
         public override void AddStaticDefaults()
         {
@@ -20,10 +20,12 @@ namespace BombusApisBee.Content.Snow.Items.BorealApiary
 
         public override void AddDefaults()
         {
-            Item.damage = 7;
+            Item.damage = 6;
             Item.noMelee = true;
             Item.width = 32;
             Item.height = 32;
+
+            critAdd = 4;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0.15f;
