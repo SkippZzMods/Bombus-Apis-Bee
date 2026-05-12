@@ -32,7 +32,7 @@ namespace BombusApisBee.Core
 
         public override bool CanRoll(Item item)
         {
-            return item.CountsAsClass<BeekeeperDamage>();
+            return item.CountsAsClass<BeekeeperDamageClass>();
         }
 
         public override void ModifyValue(ref float valueMult)

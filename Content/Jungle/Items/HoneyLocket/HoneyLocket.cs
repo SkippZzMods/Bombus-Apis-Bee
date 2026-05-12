@@ -20,7 +20,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyLocket
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(gold: 3);
             Item.damage = 35;
-            Item.DamageType = GetInstance<BeekeeperDamage>();
+            Item.DamageType = GetInstance<BeekeeperDamageClass>();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

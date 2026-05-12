@@ -1,6 +1,7 @@
 ﻿using BombusApisBee.Content.Hell.Items.BeekeeperEmblem;
 using BombusApisBee.Core.Systems.ParticleSystem;
 using BombusApisBee.UI;
+using Terraria.Localization;
 using Terraria.UI;
 
 namespace BombusApisBee
@@ -12,10 +13,14 @@ namespace BombusApisBee
 
         private GameTime _lastUpdateUiGameTime;
 
+        public static int CopperBarGroupID;
+        public static int SilverBarGroupID;
+
         public override void Load()
         {
             mod = ModContent.GetInstance<BombusApisBee>();
         }
+
         public override void UpdateUI(GameTime gameTime)
         {
             _lastUpdateUiGameTime = gameTime;
@@ -54,6 +59,19 @@ namespace BombusApisBee
                     InterfaceScaleType.UI)
                 );
             }
+        }
+
+        public override void AddRecipeGroups()
+        {
+            RecipeGroup SilverBarRecipeGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.SilverBar)}",
+            ItemID.SilverBar, ItemID.TungstenBar);
+
+            SilverBarGroupID = RecipeGroup.RegisterGroup(nameof(ItemID.SilverBar), SilverBarRecipeGroup);
+
+            RecipeGroup CopperBarRecipeGroup = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.CopperBar)}",
+            ItemID.CopperBar, ItemID.TinBar);
+
+            CopperBarGroupID = RecipeGroup.RegisterGroup(nameof(ItemID.CopperBar), CopperBarRecipeGroup);
         }
 
         public override void AddRecipes()

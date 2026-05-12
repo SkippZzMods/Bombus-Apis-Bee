@@ -17,7 +17,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
             Tooltip.SetDefault("Hold <left> to fire sulphuric bees\n" +
                 "Hold <right> to fire bees slower, but take control over the bees causing them to inflict Ionized\n" +
                 "Ionized spreads between enemies causing explosions\n" +
-                "Ionized enemies take 15% more damage from non-bee sources of hymenoptra damage");
+                "Ionized enemies take 15% more damage from non-bee sources of beekeeper damage");
         }
 
         public override void AddDefaults()
@@ -246,8 +246,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         {
             if (inflicted)
             {
-                // increase damage of non-bee hymenoptra damage by 15%
-                if (projectile.CountsAsClass<BeekeeperDamage>() && !BeeUtils.IsBee(projectile.whoAmI))
+                // increase damage of non-bee beekeeper damage by 15%
+                if (projectile.CountsAsClass<BeekeeperDamageClass>() && !BeeUtils.IsBee(projectile.whoAmI))
                 {
                     modifiers.FinalDamage *= 1.15f;
                 }

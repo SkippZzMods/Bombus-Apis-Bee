@@ -41,7 +41,6 @@
     <None Remove="Sounds\Crossmod\Calamity\README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BeeDamageClass\" />
     <Folder Include="Bosses\HoneyConglomerate\" />
     <Folder Include="Effects\" />
     <Folder Include="ExtraTextures\Palettes\" />

@@ -72,7 +72,7 @@ namespace BombusApisBee.Core.Common.BeeProjectile
         {
             if (projectile.GetGlobalProjectile<CommonBeeGlobalProjectile>().ForceBee)
             {
-                projectile.DamageType = GetInstance<BeekeeperDamage>();
+                projectile.DamageType = GetInstance<BeekeeperDamageClass>();
                 projectile.minion = false;
                 projectile.friendly = true;
                 projectile.hostile = false;
@@ -90,8 +90,8 @@ namespace BombusApisBee.Core.Common.BeeProjectile
             //if (projectile.type == ProjectileID.Bee || projectile.type == ProjectileID.GiantBee || projectile.type == ProjectileID.Wasp)
             //    projectile.extraUpdates = 1;
 
-            if (projectile.CountsAsClass<BeekeeperDamage>() && projectile.CritChance == 0)
-                projectile.CritChance = (int)Main.player[projectile.owner].GetTotalCritChance<BeekeeperDamage>();
+            if (projectile.CountsAsClass<BeekeeperDamageClass>() && projectile.CritChance == 0)
+                projectile.CritChance = (int)Main.player[projectile.owner].GetTotalCritChance<BeekeeperDamageClass>();
         }
 
         public override bool PreAI(Projectile projectile)
@@ -109,10 +109,10 @@ namespace BombusApisBee.Core.Common.BeeProjectile
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.CountsAsClass<BeekeeperDamage>())
+            if (projectile.CountsAsClass<BeekeeperDamageClass>())
                 if (projectile.CritChance <= 0)
                 {
-                    int critChance = (int)Main.player[projectile.owner].GetTotalCritChance<BeekeeperDamage>();
+                    int critChance = (int)Main.player[projectile.owner].GetTotalCritChance<BeekeeperDamageClass>();
                     if (Main.rand.Next(100) < critChance)
                         modifiers.SetCrit();
                 }

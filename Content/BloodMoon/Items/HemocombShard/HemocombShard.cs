@@ -1,9 +1,12 @@
 ﻿using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Common.HoneycombShard;
 
 namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
 {
-    public class HemocombShard : BeeKeeperItem
+    public class HemocombShard : HoneycombShardItem
     {
+        public HemocombShard() : base("Hemocomb Shard", "Increases the chance to strengthen friendly bees by 30%\nStrengthened bees have a chance to explode into healing meat chunks", 600) { }
+
         public override void Load()
         {
             CommonBeeGlobalProjectile.StrongBeeKillEvent += SpawnBloodsplosion;
@@ -11,8 +14,10 @@ namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
 
         private void SpawnBloodsplosion(Projectile proj, int timeLeft)
         {
-            if (Main.player[proj.owner].Bombus().HasHemocombShard && Main.rand.NextBool(10))
+            if (CanActivateEffect(Main.player[proj.owner]))
             {
+                ActivateEffect(Main.player[proj.owner]);
+
                 for (int i = 0; i < 5; i++)
                 {
                     int item = Item.NewItem(proj.GetSource_Death(), proj.getRect(), Main.rand.Next(new int[] { ItemType<HemocombShardChunk1>(), ItemType<HemocombShardChunk2>(), ItemType<HemocombShardChunk3>() }));
@@ -45,15 +50,8 @@ namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
             }
         }
 
-        public override void SetStaticDefaults()
+        public override void SafeSetDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 30%\nStrengthened bees have a chance to explode into healing meat chunks");
-        }
-
-        public override void SetDefaults()
-        {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(gold: 1);
         }

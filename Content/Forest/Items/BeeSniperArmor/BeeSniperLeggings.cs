@@ -5,7 +5,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage");
+            Tooltip.SetDefault("10% increased beekeeper damage");
             Item.ResearchUnlockCount = 1;
         }
 

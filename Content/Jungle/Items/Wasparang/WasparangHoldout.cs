@@ -65,7 +65,7 @@ namespace BombusApisBee.Content.Jungle.Items.Wasparang
 
             if (maxCharge == 0)
             {
-                maxCharge = (int)(owner.GetActiveItem().useAnimation * (1f - (owner.GetTotalAttackSpeed<BeekeeperDamage>() - 1f)));
+                maxCharge = (int)(owner.GetActiveItem().useAnimation * (1f - (owner.GetTotalAttackSpeed<BeekeeperDamageClass>() - 1f)));
                 originalDirection = owner.direction;
             }
             if (owner.channel || chargeTimer < maxCharge * 0.35f)

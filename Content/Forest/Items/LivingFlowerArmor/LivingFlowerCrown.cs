@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Living Flower Crown");
-            Tooltip.SetDefault("3% increased hymenoptra critical strike chance\nIncreases maximum honey by 15");
+            Tooltip.SetDefault("3% increased beekeeper critical strike chance\nIncreases maximum honey by 15");
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 

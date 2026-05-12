@@ -1,6 +1,6 @@
 ﻿namespace BombusApisBee.Core.BeekeeperClass
 {
-    public class BeekeeperDamage : DamageClass
+    public class BeekeeperDamageClass : DamageClass
     {
         public override void SetStaticDefaults()
         {

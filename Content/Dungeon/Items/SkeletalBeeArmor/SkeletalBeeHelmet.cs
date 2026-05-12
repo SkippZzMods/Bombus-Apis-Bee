@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Dungeon.Items.SkeletalBeeArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra critical strike chance\nIncreases maximum honey by 50");
+            Tooltip.SetDefault("10% increased beekeeper critical strike chance\nIncreases maximum honey by 50");
             Item.ResearchUnlockCount = 1;
         }
 

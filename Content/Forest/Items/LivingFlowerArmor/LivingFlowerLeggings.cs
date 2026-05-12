@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("3% increased hymenoptra critical strike chance");
+            Tooltip.SetDefault("3% increased beekeeper critical strike chance");
         }
 
         public override void SetDefaults()

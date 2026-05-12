@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Forest.Items.GlassOfHoney
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage\nIncreases maximum honey by 10\nGreatly increases life regeneration");
+            Tooltip.SetDefault("10% increased beekeeper damage\nIncreases maximum honey by 10\nGreatly increases life regeneration");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(9, 7));
         }
 

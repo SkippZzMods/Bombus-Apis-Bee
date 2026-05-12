@@ -42,7 +42,7 @@ namespace BombusApisBee.UI.Old
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (!Main.LocalPlayer.HeldItem.CountsAsClass<BeekeeperDamage>())
+            if (!Main.LocalPlayer.HeldItem.CountsAsClass<BeekeeperDamageClass>())
                 return;
 
             base.Draw(spriteBatch);
@@ -73,7 +73,7 @@ namespace BombusApisBee.UI.Old
         }
         public override void Update(GameTime gameTime)
         {
-            if (!Main.LocalPlayer.HeldItem.CountsAsClass<BeekeeperDamage>())
+            if (!Main.LocalPlayer.HeldItem.CountsAsClass<BeekeeperDamageClass>())
                 return;
 
             var modPlayer = Main.LocalPlayer.GetModPlayer<BeekeeperPlayer>();

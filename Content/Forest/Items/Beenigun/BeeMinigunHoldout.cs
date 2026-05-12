@@ -90,7 +90,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                 ShotDelay += 1f;
                 if (FramesToNextShot == 0f)
                 {
-                    FramesToNextShot = Owner.GetActiveItem().useAnimation * (1f - (Owner.GetTotalAttackSpeed<BeekeeperDamage>() - 1f));
+                    FramesToNextShot = Owner.GetActiveItem().useAnimation * (1f - (Owner.GetTotalAttackSpeed<BeekeeperDamageClass>() - 1f));
                 }
                 if (ShotDelay >= FramesToNextShot)
                 {
@@ -172,7 +172,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
             }
             Item heldItem = Owner.GetActiveItem();
             var modPlayer = Owner.GetModPlayer<BeekeeperPlayer>();
-            int honeyDamage = (int)Owner.GetTotalDamage<BeekeeperDamage>().ApplyTo(heldItem.damage);
+            int honeyDamage = (int)Owner.GetTotalDamage<BeekeeperDamageClass>().ApplyTo(heldItem.damage);
             float shootSpeed = heldItem.shootSpeed;
             float knockback = heldItem.knockBack;
             knockback = Owner.GetWeaponKnockback(heldItem, knockback);

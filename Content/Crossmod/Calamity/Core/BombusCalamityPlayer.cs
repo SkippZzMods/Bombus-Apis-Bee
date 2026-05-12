@@ -30,7 +30,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Core
 
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (Player.Calamity().victideSet && item.CountsAsClass<BeekeeperDamage>() && Main.rand.NextBool(10) && !item.channel && Player.whoAmI == Main.myPlayer)
+            if (Player.Calamity().victideSet && item.CountsAsClass<BeekeeperDamageClass>() && Main.rand.NextBool(10) && !item.channel && Player.whoAmI == Main.myPlayer)
             {
                 int seashellDamage = CalamityUtils.DamageSoftCap(damage * 2, 46);
                 Projectile.NewProjectile(source, position, Player.DirectionTo(Main.MouseWorld) * 12f, ModContent.ProjectileType<Seashell>(), seashellDamage, 1f, Player.whoAmI, 0f, 0f);

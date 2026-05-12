@@ -5,7 +5,7 @@
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Retina Releaser");
-            Tooltip.SetDefault("'I think they're looking at you'\nTaking damage releases a flurry of Cthulhubees and increases hymenoptra damage by 12% for a short time");
+            Tooltip.SetDefault("'I think they're looking at you'\nTaking damage releases a flurry of Cthulhubees and increases beekeeper damage by 12% for a short time");
             Item.ResearchUnlockCount = 1;
         }
 

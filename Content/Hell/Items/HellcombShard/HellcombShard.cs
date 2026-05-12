@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Common.HoneycombShard;
 using BombusApisBee.Core.Systems.PrimitiveSystem;
 
 namespace BombusApisBee.Content.Hell.Items.HellcombShard
@@ -78,8 +79,10 @@ namespace BombusApisBee.Content.Hell.Items.HellcombShard
         }
     }
 
-    public class HellcombShard : BeeKeeperItem
+    public class HellcombShard : HoneycombShardItem
     {
+        public HellcombShard() : base("Hellcomb Shard", "Increases the chance to strengthen friendly bees by 40%\nStrengthened bees have a chance to cause volatile explosions", 720) { }
+
         public override void Load()
         {
             CommonBeeGlobalProjectile.StrongBeeKillEvent += SpawnExplosion;
@@ -87,8 +90,10 @@ namespace BombusApisBee.Content.Hell.Items.HellcombShard
 
         private void SpawnExplosion(Projectile proj, int timeLeft)
         {
-            if (Main.player[proj.owner].Bombus().HasHellcombShard && Main.rand.NextBool(15))
+            if (CanActivateEffect(Main.player[proj.owner]))
             {
+                ActivateEffect(Main.player[proj.owner]);
+
                 if (proj.owner == Main.myPlayer)
                     Projectile.NewProjectileDirect(proj.GetSource_Death(), proj.Center, Vector2.Zero, ProjectileType<HellcombShardExplosion>(), proj.damage * 3, proj.knockBack, proj.owner, 75);
 
@@ -112,15 +117,8 @@ namespace BombusApisBee.Content.Hell.Items.HellcombShard
             }
         }
 
-        public override void SetStaticDefaults()
+        public override void SafeSetDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 40%\nStrengthened bees have a chance to cause volatile explosions");
-        }
-
-        public override void SetDefaults()
-        {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(gold: 5);
         }

@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Projectiles
         public sealed override void SetDefaults()
         {
             SafeSetDefaults();
-            Projectile.DamageType = GetInstance<BeekeeperDamage>();
+            Projectile.DamageType = GetInstance<BeekeeperDamageClass>();
 
             Projectile.hostile = false;
         }

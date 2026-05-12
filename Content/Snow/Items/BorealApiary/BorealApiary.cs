@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.BeekeeperClass;
 using BombusApisBee.Core.Common.Apiary;
 
 namespace BombusApisBee.Content.Snow.Items.BorealApiary
@@ -48,7 +49,7 @@ namespace BombusApisBee.Content.Snow.Items.BorealApiary
 
         public override void ModifyApiaryHit(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Main.rand.NextFloat() < 0.1f)
+            if (Main.player[projectile.owner].Beekeeper().RerollCrit(10))
                 modifiers.SetCrit();
         }
 

@@ -146,7 +146,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
         {
-            if (proj.CountsAsClass<BeekeeperDamage>() && Main.rand.NextFloat() < 0.015f)
+            if (proj.CountsAsClass<BeekeeperDamageClass>() && Main.rand.NextFloat() < 0.015f)
             {
                 Item item = Main.item[Item.NewItem(target.GetSource_OnHurt(proj), target.getRect(), ItemType<HoneycombChunkPickup>())];
 
@@ -168,7 +168,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
             Player.statDefense += DefenseStacks;
 
             Player.IncreaseBeeCrit(OffenseStacks);
-            Player.GetArmorPenetration<BeekeeperDamage>() += OffenseStacks;
+            Player.GetArmorPenetration<BeekeeperDamageClass>() += OffenseStacks;
 
             if (AnyStacks && !Player.HasBuff<HiveBlessingBuff>())
                 Player.AddBuff<HiveBlessingBuff>(120);
@@ -208,8 +208,8 @@ namespace BombusApisBee.Content.Forest.Items.HoneycombChunkPickup
             tip = "You have been blessed by the Hive!:\n" +
                 "Stacks of Sweetness: " + hp.GatheringStacks + ", Effects: \n" + "Honey regeneration per second increased by " + hp.GatheringStacks * 2 + "\n" +
                 "Stacks of Shielding: " + hp.DefenseStacks + ", Effects: \n" + "Defense increased by " + hp.DefenseStacks + "\n" +
-                "Stacks of Strength: " + hp.OffenseStacks + ", Effects: \n" + "Hymenoptra critical strike chance increased by " + hp.OffenseStacks + "%\n" +
-                "Hymenoptra armor penetration increased by " + hp.OffenseStacks + "\n";
+                "Stacks of Strength: " + hp.OffenseStacks + ", Effects: \n" + "Beekeeper critical strike chance increased by " + hp.OffenseStacks + "%\n" +
+                "Beekeeper armor penetration increased by " + hp.OffenseStacks + "\n";
         }
     }
 }

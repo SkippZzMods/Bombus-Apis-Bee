@@ -7,13 +7,13 @@ namespace BombusApisBee.Buffs
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Enraged");
-            Description.SetDefault("Increased hymenoptra damage");
+            Description.SetDefault("Increased beekeeper damage");
             Main.buffNoSave[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetDamage<BeekeeperDamage>() += 0.12f;
+            player.GetDamage<BeekeeperDamageClass>() += 0.12f;
         }
     }
 }

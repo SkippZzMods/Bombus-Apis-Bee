@@ -54,7 +54,7 @@ namespace BombusApisBee.Content.Underground.Items.FlamingApiary
 
         public override void ModifyApiaryHit(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Main.rand.NextFloat() < 0.05f)
+            if (Main.player[projectile.owner].Beekeeper().RerollCrit(5))
                 modifiers.SetCrit();
         }
 
@@ -144,16 +144,7 @@ namespace BombusApisBee.Content.Underground.Items.FlamingApiary
                 AddIngredient<WoodenApiary>().
                 AddIngredient<PollenItem>(5).
                 AddIngredient(ItemID.StoneBlock, 30).
-                AddIngredient(ItemID.CopperBar, 9).
-                AddIngredient(ItemID.Torch, 20).
-                AddTile(TileID.Anvils).
-                Register();
-
-            CreateRecipe().
-                AddIngredient<WoodenApiary>().
-                AddIngredient<PollenItem>(5).
-                AddIngredient(ItemID.StoneBlock, 30).
-                AddIngredient(ItemID.TinBar, 9).
+                AddRecipeGroup(BombusApisBeeModSystem.CopperBarGroupID, 9).
                 AddIngredient(ItemID.Torch, 20).
                 AddTile(TileID.Anvils).
                 Register();

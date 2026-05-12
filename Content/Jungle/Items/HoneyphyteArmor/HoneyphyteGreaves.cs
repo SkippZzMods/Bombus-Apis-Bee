@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honey Hoarder Leggings");
-            Tooltip.SetDefault("5% increased hymenoptra damage");
+            Tooltip.SetDefault("5% increased beekeeper damage");
             Item.ResearchUnlockCount = 1;
         }
 

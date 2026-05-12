@@ -13,7 +13,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Armor.Victide
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Victide Nauti-helm");
-            Tooltip.SetDefault("5% increased hymenoptra damage");
+            Tooltip.SetDefault("5% increased beekeeper damage");
         }
         public override void SetDefaults()
         {
@@ -31,8 +31,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Armor.Victide
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Increases maximum honey by 30\n+3 life regen and 10% increased hymenoptra damage when submerged in liquid\n" +
-                "15% further increased hymenoptra damage when submerged in honey\n" +
+            player.setBonus = "Increases maximum honey by 30\n+3 life regen and 10% increased beekeeper damage when submerged in liquid\n" +
+                "15% further increased beekeeper damage when submerged in honey\n" +
                 "When using any weapon you have a 10% chance to throw a returning seashell projectile\n" +
                 "This seashell does true damage and does not benefit from any damage class\n" +
                 "Provides increased underwater mobility and slightly reduces breath loss in the abyss";

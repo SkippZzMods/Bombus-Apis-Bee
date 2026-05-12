@@ -127,7 +127,7 @@ namespace BombusApisBee.Core.Common.Apiary
             {
                 Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
 
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(7f, 8f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(5f, 6f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
 

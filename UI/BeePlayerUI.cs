@@ -131,7 +131,7 @@ namespace BombusApisBee.UI
 
                         case (int)BeeState.Offense:
                             return "Left Click to switch your bees into Attacking Mode\nYou are granted "
-                        + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
+                        + mp.CurrentBees + "% increased beekeeper crit chance and " + mp.CurrentBees * 2 + "% increased beekeeper damage while your bees are in Attacking Mode";
 
                         case (int)BeeState.Gathering: return "Left Click to switch your bees into Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
                     }
@@ -146,7 +146,7 @@ namespace BombusApisBee.UI
 
                         case (int)BeeState.Offense:
                             return "Your bees are in Attacking Mode\nYou are granted "
-                        + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
+                        + mp.CurrentBees + "% increased beekeeper crit chance and " + mp.CurrentBees * 2 + "% increased beekeeper damage while your bees are in Attacking Mode";
 
                         case (int)BeeState.Gathering: return "Left Click to switch your bees into Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
                     }
@@ -161,7 +161,7 @@ namespace BombusApisBee.UI
 
                         case (int)BeeState.Offense:
                             return "Left Click to switch your bees into Attacking Mode\nYou are granted "
-                        + mp.CurrentBees + "% increased hymenoptra crit chance and " + mp.CurrentBees * 2 + "% increased hymenoptra damage while your bees are in Attacking Mode";
+                        + mp.CurrentBees + "% increased beekeeper crit chance and " + mp.CurrentBees * 2 + "% increased beekeeper damage while your bees are in Attacking Mode";
 
                         case (int)BeeState.Gathering: return "Your bees are in Gathering Mode\nYou are granted increased Honey regeneration, but deal 15% less damage while your bees are in Gathering Mode";
                     }

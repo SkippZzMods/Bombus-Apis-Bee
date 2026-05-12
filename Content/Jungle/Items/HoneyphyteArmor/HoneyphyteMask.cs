@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased hymenoptra damage and critical strike chance\nIncreases maximum honey by 75");
+            Tooltip.SetDefault("10% increased beekeeper damage and critical strike chance\nIncreases maximum honey by 75");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -29,7 +29,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Strike enemies to build up honey energy\nConjures a honeycomb to aid you\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "while at full energy to fire a concentrated honey laser from the honeycomb\nIncreases hymenoptra damage by 10% while your Bees are in Attacking mode\nIncreases damage reduction by 10% while your Bees are in Defense mode";
+            player.setBonus = "Strike enemies to build up honey energy\nConjures a honeycomb to aid you\nDouble tap " + (Main.ReversedUpDownArmorSetBonuses ? "UP " : "DOWN ") + "while at full energy to fire a concentrated honey laser from the honeycomb\nIncreases beekeeper damage by 10% while your Bees are in Attacking mode\nIncreases damage reduction by 10% while your Bees are in Defense mode";
             var modPlayer = player.Beekeeper();
             player.Bombus().HoneyLaser = true;
 

@@ -1,9 +1,11 @@
 ﻿using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Common.HoneycombShard;
 
 namespace BombusApisBee.Content.Forest.Items.RottenHoneycombShard
 {
-    public class RottenHoneycombShard : BeeKeeperItem
+    public class RottenHoneycombShard : HoneycombShardItem
     {
+        public RottenHoneycombShard() : base("Rotten Honeycomb Shard", "Increases the chance to strengthen friendly bees by 20%\nStrengthened bees apply a weakening debuff\n'Smells horrible'", 300) { }
         public override void Load()
         {
             CommonBeeGlobalProjectile.StrongBeeOnHitEvent += InflictRotten;
@@ -11,19 +13,15 @@ namespace BombusApisBee.Content.Forest.Items.RottenHoneycombShard
 
         private void InflictRotten(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.player[proj.owner].Bombus().HasRottenHoneycombShard)
-                target.AddBuff<RottenDebuff>(600);
+            if (CanActivateEffect(Main.player[proj.owner]))
+            {
+                ActivateEffect(Main.player[proj.owner]);
+                target.AddBuff<RottenDebuff>(180);
+            }            
         }
 
-        public override void SetStaticDefaults()
+        public override void SafeSetDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 20%\nStrengthened bees apply a weakening debuff\n'Smells horrible'");
-        }
-
-        public override void SetDefaults()
-        {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Green;
             Item.value = Item.buyPrice(gold: 2);
         }

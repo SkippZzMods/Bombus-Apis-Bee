@@ -24,7 +24,7 @@ namespace BombusApisBee.Core.BeekeeperClass
         public sealed override void SetDefaults()
         {
             SafeSetDefaults();
-            Item.DamageType = GetInstance<BeekeeperDamage>();
+            Item.DamageType = GetInstance<BeekeeperDamageClass>();
             Item.crit = critAdd;
         }
 
@@ -100,7 +100,7 @@ namespace BombusApisBee.Core.BeekeeperClass
 
         public sealed override int ChoosePrefix(UnifiedRandom rand)
         {
-            int[] prefixes = new int[] {
+            List<int> prefixes = [
                 PrefixType<Rotten>(),
                 PrefixType<Moldy>(),
                 PrefixType<Snaillike>(),
@@ -112,30 +112,30 @@ namespace BombusApisBee.Core.BeekeeperClass
                 PrefixType<Bland>(),
                 PrefixType<Succulent>(),
                 PrefixType<Buzzing>(),
-                PrefixType<Delectable>(),
-            };
+                PrefixID.Keen,
+                PrefixID.Superior,
+                PrefixID.Forceful,
+                PrefixID.Shoddy,
+                PrefixID.Hurtful,
+                PrefixID.Ruthless,
+                PrefixID.Godly,
+                PrefixID.Demonic,
+                PrefixID.Zealous,
+                PrefixID.Quick,
+                PrefixID.Deadly,
+                PrefixID.Agile,
+                PrefixID.Ruthless,
+                PrefixID.Nimble,
+                PrefixID.Murderous,
+                PrefixID.Slow,
+                PrefixID.Annoying,
+                PrefixID.Nasty,
+            ];
 
-            int hymenoptraPrefixe = Main.rand.Next(prefixes);
-            if (hymenoptraPrefixe == PrefixType<Delectable>() && honeyCost < 4)
-            {
-                prefixes = new int[] {
-                    PrefixType<Rotten>(),
-                    PrefixType<Moldy>(),
-                    PrefixType<Snaillike>(),
-                    PrefixType<Punchy>(),
-                    PrefixType<Critical>(),
-                    PrefixType<Juicy>(),
-                    PrefixType<Piquant>(),
-                    PrefixType<Pungent>(),
-                    PrefixType<Bland>(),
-                    PrefixType<Succulent>(),
-                    PrefixType<Buzzing>(),
-                };
+            if (honeyCost >= 4)
+                prefixes.Add(PrefixType<Delectable>());
 
-                hymenoptraPrefixe = Main.rand.Next(prefixes);
-            }
-
-            return hymenoptraPrefixe;
+            return rand.Next(prefixes);
         }
     }
 }

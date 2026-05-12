@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Victide
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Coats your hymenoptra attacks with a special hydrophobic coating, causing them to deal more damage when wet\nCauses your bee projectiles no longer die in water\nDisable visibility on accessory to disable water aura drawing on wet projectiles");
+            Tooltip.SetDefault("Coats your beekeeper attacks with a special hydrophobic coating, causing them to deal more damage when wet\nCauses your bee projectiles no longer die in water\nDisable visibility on accessory to disable water aura drawing on wet projectiles");
         }
 
         public override void SetDefaults()
@@ -67,7 +67,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Victide
             if (wetTimer > 0)
                 wetTimer--;
 
-            if (Collision.WetCollision(projectile.Center, projectile.width, projectile.height) && Main.player[projectile.owner].GetModPlayer<HydrophobicCoatingPlayer>().equipped && projectile.DamageType == GetInstance<BeekeeperDamage>())
+            if (Collision.WetCollision(projectile.Center, projectile.width, projectile.height) && Main.player[projectile.owner].GetModPlayer<HydrophobicCoatingPlayer>().equipped && projectile.DamageType == GetInstance<BeekeeperDamageClass>())
                 wetTimer = 600;
         }
 

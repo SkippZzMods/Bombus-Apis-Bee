@@ -5,7 +5,7 @@
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Blessed by the Heavens");
-            Description.SetDefault("Increased hymenoptra damage and attack speed");
+            Description.SetDefault("Increased beekeeper damage and attack speed");
             Main.buffNoSave[Type] = true;
         }
 

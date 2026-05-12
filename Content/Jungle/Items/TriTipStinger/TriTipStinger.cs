@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
         {
             DisplayName.SetDefault("Tri-Tip Stinger");
             // TODO: Change to Beekeeper attacks apply a stacking poison
-            Tooltip.SetDefault("Grants a chance on hit for hymenoptra attacks to apply an improved poison\nThe improved poison deals a percentage of the inflicted enemies max hp, and spreads between enemies");
+            Tooltip.SetDefault("Grants a chance on hit for beekeeper attacks to apply an improved poison\nThe improved poison deals a percentage of the inflicted enemies max hp, and spreads between enemies");
         }
 
         public override void SetDefaults()
@@ -38,7 +38,7 @@ namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
             if (!equipped)
                 return;
 
-            if (item.CountsAsClass<BeekeeperDamage>() && Main.rand.NextBool(10))
+            if (item.CountsAsClass<BeekeeperDamageClass>() && Main.rand.NextBool(10))
             {
                 target.GetGlobalNPC<TriTipStingerNPC>().inflictionTimer = 600;
                 target.GetGlobalNPC<TriTipStingerNPC>().inflicted = true;
@@ -51,7 +51,7 @@ namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
             if (!equipped)
                 return;
 
-            if (proj.CountsAsClass<BeekeeperDamage>() && Main.rand.NextBool(10))
+            if (proj.CountsAsClass<BeekeeperDamageClass>() && Main.rand.NextBool(10))
             {
                 target.GetGlobalNPC<TriTipStingerNPC>().inflictionTimer = 600;
                 target.GetGlobalNPC<TriTipStingerNPC>().inflicted = true;

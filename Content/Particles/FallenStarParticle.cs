@@ -1,10 +1,11 @@
 ﻿using BombusApisBee.Core.Systems.ParticleSystem;
-using ReLogic.Content;
 
 namespace BombusApisBee.Content.Particles
 {
     public class FallenStarParticle : Particle
     {
+        internal Color[] _bloomColors;
+        internal Color[] _starColors;
         public override ParticleDrawType DrawType => ParticleDrawType.Custom;
 
         public FallenStarParticle(Vector2 position, Vector2 velocity, Color color, float scale, int maxTime)
@@ -14,7 +15,14 @@ namespace BombusApisBee.Content.Particles
             Rotation = Main.rand.NextFloat(MathHelper.TwoPi);
             Scale = scale;
             MaxTime = maxTime;
-            Color = color;
+            _bloomColors = [color];
+            _starColors = [color];
+        }
+
+        public FallenStarParticle(Vector2 position, Vector2 velocity, Color[] starColors, Color[] bloomColors, float scale, int maxTime) : this(position, velocity, Color.White, scale, maxTime)
+        {
+            _bloomColors = bloomColors;
+            _starColors = starColors;
         }
 
         public override void Update()
@@ -33,9 +41,23 @@ namespace BombusApisBee.Content.Particles
 
             float progress = EaseBuilder.EaseCircularIn.Ease(1f - Progress);
 
-            spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, Color, Rotation, starTexture.Size() / 2, Scale * progress, SpriteEffects.None, 0);
+            Color starColor = _starColors[0];
+            Color bloomColor = _bloomColors[0];
 
-            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, Color * 0.2f, Rotation, bloomTex.Size() / 2, Scale * progress, SpriteEffects.None, 0);
+            if (_starColors.Length == 2)
+                starColor = Color.Lerp(_starColors[0], _starColors[1], progress);
+            else if (_starColors.Length > 2)
+                starColor = BeeUtils.MulticolorLerp(progress, _starColors);
+
+            if (_bloomColors.Length == 2)
+                bloomColor = Color.Lerp(_bloomColors[0], _bloomColors[1], progress);
+            else if (_bloomColors.Length > 2)
+                starColor = BeeUtils.MulticolorLerp(progress, _bloomColors);
+
+
+            spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, starColor, Rotation, starTexture.Size() / 2, Scale * progress, SpriteEffects.None, 0);
+
+            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, bloomColor * 0.2f, Rotation, bloomTex.Size() / 2, Scale * progress, SpriteEffects.None, 0);
         }
     }
 }

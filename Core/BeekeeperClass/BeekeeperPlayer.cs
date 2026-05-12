@@ -49,7 +49,27 @@ namespace BombusApisBee.Core.BeekeeperClass
 
         public int SHOWCASEMODETIMER;
 
+        public float BeeSpeedMultiplier;
+
         public bool HasBees => Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > 0;
+
+        /// <summary>
+        /// Rerolls a mathematically sound critical strike
+        /// </summary>
+        /// <param name="player">The modPlayer to check critical strike chance</param>
+        /// <param name="chanceToAdd">the critical strike chance, in whole numbers ex: (10 = 10% increase)</param>
+        /// <returns></returns>
+        public bool RerollCrit(float chanceToAdd)
+        {
+            chanceToAdd /= 100f;
+            float baseCrit = Player.GetCritChance<BeekeeperDamageClass>() / 100f;
+
+            // safety check. This method should theoretically only be called when the hit did not crit.
+            if (baseCrit >= 1f)
+                return true;
+
+            return Main.rand.NextFloat() < (chanceToAdd / (1f - baseCrit));
+        }
 
         public static BeekeeperPlayer ModPlayer(Player player)
         {
@@ -81,6 +101,7 @@ namespace BombusApisBee.Core.BeekeeperClass
             ResourceChanceAdd = 0f;
             BeeResourceMax2 = BeeResourceMax;
             CurrentBees = DefaultBees;
+            BeeSpeedMultiplier = 0f;
 
             if (HeldBeeWeaponTimer > 0)
                 HeldBeeWeaponTimer--;
@@ -144,7 +165,7 @@ namespace BombusApisBee.Core.BeekeeperClass
                 }
             }
 
-            if (Player.HeldItem.ModItem != null && Player.HeldItem.CountsAsClass<BeekeeperDamage>() && (Player.HeldItem.ModItem as BeekeeperWeapon).SHOWCASEMODE == false && SHOWCASEMODETIMER <= 0)
+            if (Player.HeldItem.ModItem != null && Player.HeldItem.CountsAsClass<BeekeeperDamageClass>() && (Player.HeldItem.ModItem as BeekeeperWeapon).SHOWCASEMODE == false && SHOWCASEMODETIMER <= 0)
                 HeldBeeWeaponTimer = 900;
             else if (HoldingBeeWeaponTimer > 0 && HeldBeeWeaponTimer <= 0)
                 HoldingBeeWeaponTimer--;

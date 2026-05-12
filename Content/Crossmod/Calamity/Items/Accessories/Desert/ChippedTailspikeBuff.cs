@@ -7,7 +7,7 @@
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Extra Spiky");
-            Description.SetDefault("Hymenoptra critical strike chance increased by 25%");
+            Description.SetDefault("Beekeeper critical strike chance increased by 25%");
             Main.buffNoSave[Type] = true;
         }
         public override void Update(Player player, ref int buffIndex)

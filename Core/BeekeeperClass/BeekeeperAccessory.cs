@@ -9,12 +9,6 @@ namespace BombusApisBee.Core.BeekeeperClass
 {
     public abstract class BeekeeperAccessory : ModItem
     {
-        public static int ACCESSORY_START_INDEX = 3;
-        public static int ACCESSORY_END_INDEX = 9;
-        public static int VANITY_ACCESSORY_START_INDEX = 13;
-        public static int VANITY_ACCESSORY_END_INDEX = 19;
-        public static int DEFAULT_ACCESSORY_SLOT_COUNT = 5;
-        
         private readonly string name;
         private readonly string tooltip;
 
@@ -33,6 +27,7 @@ namespace BombusApisBee.Core.BeekeeperClass
 
             return false;
         }
+
         /// <summary>
 		/// Gets the instance of the accessory thats equipped in a player's normal slots or that is being simulated by other accessories.
 		/// </summary>
@@ -97,6 +92,8 @@ namespace BombusApisBee.Core.BeekeeperClass
         public virtual void OnEquippedHit(Player player, NPC target, NPC.HitInfo hit, int damageDone) { }
         public virtual void OnEquippedHit(Player player, Item item, NPC target, NPC.HitInfo hit, int damageDone) { }
         public virtual void OnEquippedHit(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) { }
+
+        public virtual void ModifyEquippedHit(Player player, NPC target, ref NPC.HitModifiers modifiers) { }
 
         public virtual void OnHurtWhileEquipped(Player player, Player.HurtInfo info) { }
 
@@ -164,6 +161,16 @@ namespace BombusApisBee.Core.BeekeeperClass
                 var accessory = item.ModItem as BeekeeperAccessory;
 
                 accessory.OnEquippedHit(Player, proj, target, hit, damageDone);
+            }
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            foreach (Item item in equippedAccessories)
+            {
+                var accessory = item.ModItem as BeekeeperAccessory;
+
+                accessory.ModifyEquippedHit(Player, target, ref modifiers);
             }
         }
 

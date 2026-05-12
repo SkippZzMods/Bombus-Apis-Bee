@@ -286,9 +286,9 @@ namespace BombusApisBee
             return player.ownedProjectileCounts[ModContent.ProjectileType<T>()];
         }
 
-        public static BeekeeperDamage BeeDamageClass()
+        public static BeekeeperDamageClass BeeDamageClass()
         {
-            return ModContent.GetInstance<BeekeeperDamage>();
+            return ModContent.GetInstance<BeekeeperDamageClass>();
         }
         public static BombusApisBeeGlobalItem Bombus(this Item item)
         {
@@ -308,19 +308,19 @@ namespace BombusApisBee
         }
         public static void IncreaseBeeDamage(this Player player, float damage)
         {
-            player.GetDamage<BeekeeperDamage>() += damage;
+            player.GetDamage<BeekeeperDamageClass>() += damage;
         }
         public static void IncreaseBeeCrit(this Player player, float crit)
         {
-            player.GetCritChance<BeekeeperDamage>() += crit;
+            player.GetCritChance<BeekeeperDamageClass>() += crit;
         }
         public static void IncreaseBeeKnockback(this Player player, float knockback)
         {
-            player.GetKnockback<BeekeeperDamage>() += knockback;
+            player.GetKnockback<BeekeeperDamageClass>() += knockback;
         }
         public static void IncreaseBeeUseSpeed(this Player player, float speed)
         {
-            player.GetAttackSpeed<BeekeeperDamage>() += speed;
+            player.GetAttackSpeed<BeekeeperDamageClass>() += speed;
         }
         public enum EasingType
         {
@@ -562,9 +562,9 @@ namespace BombusApisBee
             player.itemLocation = finalPosition + new Vector2(spriteSize.X * 0.5f, 0f);
         }
 
-        public static int ApplyHymenoptraDamageTo(this Player player, int damage) => (int)player.GetTotalDamage<BeekeeperDamage>().ApplyTo(damage);
+        public static int ApplyHymenoptraDamageTo(this Player player, int damage) => (int)player.GetTotalDamage<BeekeeperDamageClass>().ApplyTo(damage);
 
-        public static float ApplyHymenoptraSpeedTo(this Player player, int input) => input * (1f - (player.GetTotalAttackSpeed<BeekeeperDamage>() - 1f));
+        public static float ApplyHymenoptraSpeedTo(this Player player, int input) => input * (1f - (player.GetTotalAttackSpeed<BeekeeperDamageClass>() - 1f));
 
         public static SlotId PlayWith(this SoundStyle sound, Vector2? pos = null, float pitch = 0f, float pitchVariance = 0f, float volume = 1f)
         {

@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Forest.Items.HymenoptrianNecklace
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases armor penetration by 5\nCoats hymenoptra attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20\nReleases bees, Cthulhubees, increases hymenoptra damage, movement speed, and douses the user in honey when damaged");
+            Tooltip.SetDefault("Increases armor penetration by 5\nCoats beekeeper attacks in a sweet nectar, granting them lifesteal on critical strikes\nMaximum health increased by 20\nReleases bees, Cthulhubees, increases beekeeper damage, movement speed, and douses the user in honey when damaged");
             Item.ResearchUnlockCount = 1;
         }
 

@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("7% increased hymenoptra attack speed\nIncreases maximum honey by 10\n'How in the world does making a gear sticky help anything?!'");
+            Tooltip.SetDefault("7% increased beekeeper attack speed\nIncreases maximum honey by 10\n'How in the world does making a gear sticky help anything?!'");
         }
 
         public override void SetDefaults()

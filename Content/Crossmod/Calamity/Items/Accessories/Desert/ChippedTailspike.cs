@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Causes spikes to grow on your back over time\nGetting hit from behind breaks the spikes, reflecting damage back at the attacker\nOnce spikes have fully grown, getting hit reflects 500% of the damage back to the attacker, and grants a buff to hymenoptra critical strike chance for a short time");
+            Tooltip.SetDefault("Causes spikes to grow on your back over time\nGetting hit from behind breaks the spikes, reflecting damage back at the attacker\nOnce spikes have fully grown, getting hit reflects 500% of the damage back to the attacker, and grants a buff to beekeeper critical strike chance for a short time");
         }
 
         public override void SetDefaults()

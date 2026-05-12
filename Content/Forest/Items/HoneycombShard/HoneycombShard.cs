@@ -1,19 +1,16 @@
 ﻿using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.Common.HoneycombShard;
 
 namespace BombusApisBee.Content.Forest.Items.HoneycombShard
 {
-    public class HoneycombShard : BeeKeeperItem
+    public class HoneycombShard : HoneycombShardItem
     {
-        public override void SetStaticDefaults()
-        {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 15%\n'Crunchy!'");
-        }
+        public HoneycombShard() : base("Honeycomb Shard", "Increases the chance to strengthen friendly bees by 15%\n'Crunchy!'", 0) { }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
+            Item.value = Item.sellPrice(silver: 2);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

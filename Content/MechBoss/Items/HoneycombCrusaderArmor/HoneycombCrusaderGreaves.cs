@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Honeycomb Crusader Greaves");
-            Tooltip.SetDefault("5% increased hymenoptra damage");
+            Tooltip.SetDefault("5% increased beekeeper damage");
             Item.ResearchUnlockCount = 1;
         }
 

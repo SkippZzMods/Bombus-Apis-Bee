@@ -5,7 +5,7 @@
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Beekeeper Emblem");
-            Tooltip.SetDefault("15% increased hymenoptra damage");
+            Tooltip.SetDefault("15% increased beekeeper damage");
             Item.ResearchUnlockCount = 1;
         }
 

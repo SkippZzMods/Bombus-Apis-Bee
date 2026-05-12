@@ -116,7 +116,7 @@ namespace BombusApisBee.Content.Underground.Items.EnchantedCharm
         {
             CreateRecipe().
                 AddIngredient(ItemID.FallenStar, 10).
-                AddIngredient(ItemID.SilverBar, 15).
+                AddRecipeGroup(BombusApisBeeModSystem.SilverBarGroupID, 15).
                 AddIngredient(ItemType<PollenItem>(), 5).
                 AddTile(TileID.Anvils).
                 Register();

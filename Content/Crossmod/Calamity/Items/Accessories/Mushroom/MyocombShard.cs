@@ -1,21 +1,39 @@
 ﻿using BombusApisBee.Content.Crossmod.Calamity.Core;
 using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Core.Common.HoneycombShard;
 using CalamityMod.Items.Materials;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Mushroom
 {
-    public class MyocombShard : CalamityItem
+    [JITWhenModsEnabled("CalamityMod")]
+    public class MyocombShard : HoneycombShardItem
     {
-        public override void SetStaticDefaults()
+        internal class MyocombGlobalProjectile : GlobalProjectile
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 25%\nStrengthened bees leave behind spore clouds");
+            public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
+            public override bool PreAI(Projectile projectile)
+            {
+                Player player = Main.player[projectile.owner];
+
+                if (player.GetModPlayer<BombusApisCalamityPlayer>().MyocombShard && !player.HasBuff<HoneycombShardCooldown>())
+                {
+                    if (BeeUtils.IsStrongBee(projectile.whoAmI))
+                        if (Main.rand.NextBool(30) && Main.myPlayer == projectile.owner && player.ownedProjectileCounts<SporeCloud>() < 6)
+                        {
+                            Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, Main.rand.NextVector2Circular(2f, 2f),
+                                ModContent.ProjectileType<SporeCloud>(), projectile.damage / 2, 0f, projectile.owner);
+                        }
+                }
+
+                return true;
+            }
         }
 
-        public override void SetDefaults()
+        public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
+        public MyocombShard() : base("Myocomb Shard", "Increases the chance to strengthen friendly bees by 25%\nStrengthened bees leave behind spore clouds", 240) { }
+        public override void SafeSetDefaults()
         {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(silver: 20);
         }

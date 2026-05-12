@@ -26,7 +26,7 @@ namespace BombusApisBee.Content.Forest.Items.BeeIdols
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("4% increased hymenoptra damage and critical strike chance\n'Clearly ancient civilizations didn't know what bees looked like'");
+            Tooltip.SetDefault("4% increased beekeeper damage and critical strike chance\n'Clearly ancient civilizations didn't know what bees looked like'");
         }
 
         public override void SetDefaults()

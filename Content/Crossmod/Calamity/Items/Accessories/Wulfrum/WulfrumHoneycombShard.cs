@@ -1,6 +1,7 @@
 ﻿using BombusApisBee.Content.Crossmod.Calamity.Core;
 using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Common.HoneycombShard;
 using CalamityMod;
 using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Materials;
@@ -9,8 +10,10 @@ using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
 {
-    public class WulfrumHoneycombShard : CalamityItem
+    [JITWhenModsEnabled("CalamityMod")]
+    public class WulfrumHoneycombShard : HoneycombShardItem
     {
+        public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void Load()
         {
             CommonBeeGlobalProjectile.StrongBeePostDrawEvent += PostDrawShield;
@@ -86,15 +89,10 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
             }
         }
 
-        public override void SetStaticDefaults()
-        {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 20%\nStrengthened bees spawn with a shield, allowing them to strike an extra time\nDisable visibility on accessory to disable shield drawing and breaking effects on strengthened bees");
-        }
+        public WulfrumHoneycombShard() : base("Wulfrum Honeycomb Shard","Increases the chance to strengthen friendly bees by 25%\nStrengthened bees spawn with a shield, allowing them to strike an extra time\nDisable visibility on accessory to disable shield drawing and breaking effects on strengthened bees", 120) { }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(gold: 1);
         }
@@ -103,7 +101,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
         {
             var mp = player.GetModPlayer<BombusApisCalamityPlayer>();
 
-            player.Beekeeper().BeeStrengthenChance += 0.20f;
+            player.Beekeeper().BeeStrengthenChance += 0.25f;
             mp.WulfrumHCShard = true;
             mp.WulfrumHCShardDraw = !hideVisual;
         }
@@ -131,7 +129,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
         {
             bool giantBee = projectile.type == ProjectileID.GiantBee;
             bool giantModdedBee = projectile.ModProjectile as CommonBeeProjectile != null && (projectile.ModProjectile as CommonBeeProjectile).Giant;
-            if ((giantBee || giantModdedBee) && Main.player[projectile.owner].GetModPlayer<BombusApisCalamityPlayer>().WulfrumHCShard)
+            if ((giantBee || giantModdedBee) && Main.player[projectile.owner].GetModPlayer<BombusApisCalamityPlayer>().WulfrumHCShard && !Main.player[projectile.owner].HasBuff<HoneycombShardCooldown>())
                 HasShield = true;
         }
     }

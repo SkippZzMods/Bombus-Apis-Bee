@@ -133,7 +133,7 @@ namespace BombusApisBee.Core.Common.BeeProjectile
 
         public sealed override void SetDefaults()
         {
-            Projectile.DamageType = GetInstance<BeekeeperDamage>();
+            Projectile.DamageType = GetInstance<BeekeeperDamageClass>();
 
             Projectile.extraUpdates = 1;
 
@@ -168,11 +168,14 @@ namespace BombusApisBee.Core.Common.BeeProjectile
         public virtual void SafePreAI() { }
         public sealed override bool PreAI()
         {
-            speedMultiplier = 1f;
-
-            SafePreAI();
             Player player = Main.player[Projectile.owner];
 
+            speedMultiplier = 1f + player.Beekeeper().BeeSpeedMultiplier;
+
+            Main.NewText(speedMultiplier);
+
+            SafePreAI();
+            
             if (player.GetModPlayer<BombusApisBeePlayer>().IgnoreWater)
                 Projectile.ignoreWater = true;
             else if (Projectile.wet && !Projectile.honeyWet)

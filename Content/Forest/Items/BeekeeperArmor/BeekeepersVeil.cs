@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Forest.Items.BeekeeperArmor
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Beekeeper's Veil");
-            Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nIncreases maximum honey by 25");
+            Tooltip.SetDefault("5% increased beekeeper critical strike chance\nIncreases maximum honey by 25");
             Item.ResearchUnlockCount = 1;
         }
 

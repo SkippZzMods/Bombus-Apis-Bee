@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("5% increased hymenoptra critical strike chance\nMaximum honey increased by 75");
+            Tooltip.SetDefault("5% increased beekeeper critical strike chance\nMaximum honey increased by 75");
             Item.ResearchUnlockCount = 1;
         }
 

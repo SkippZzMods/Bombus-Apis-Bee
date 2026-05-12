@@ -67,7 +67,9 @@ namespace BombusApisBee.Core.Common.Apiary
 
             float speed = 7f;
             if (modded)
-                speed = (Projectile.ModProjectile as CommonBeeProjectile).Speed;
+                speed = Math.Max((Projectile.ModProjectile as CommonBeeProjectile).Speed, 1f);
+
+            Main.NewText(speed);
 
             Projectile.velocity = (Projectile.velocity * 35f + (controlsPlayer.mouseWorld - Projectile.Center).SafeNormalize(Vector2.UnitX) * speed) / 36f;
         }
@@ -101,7 +103,6 @@ namespace BombusApisBee.Core.Common.Apiary
 
         public sealed override void SafeSetStaticDefaults()
         {
-            //ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
             DisplayName.SetDefault("Apiary");
             AddStaticDefaults();
         }
@@ -257,7 +258,7 @@ namespace BombusApisBee.Core.Common.Apiary
                 if (player.GetModPlayer<ApiaryPlayer>().apiaryActive)
                 {
                     if (projectile.ModProjectile != null)
-                        (projectile.ModProjectile as CommonBeeProjectile).speedMultiplier = 1f;
+                        (projectile.ModProjectile as CommonBeeProjectile).speedMultiplier = 1f + player.Beekeeper().BeeSpeedMultiplier;
                     
                     apiaryParent.PreApiaryAI(projectile);
                     apiaryParent.HoldAI(projectile);
