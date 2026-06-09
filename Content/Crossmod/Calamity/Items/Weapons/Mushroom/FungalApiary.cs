@@ -12,6 +12,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
     [JITWhenModsEnabled("CalamityMod")]
     public class FungalApiary : ApiaryItem
     {
+        public override int BaseUseTime => 28;
+        public override int AltUseTime => 40;
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void AddStaticDefaults()
         {
@@ -46,24 +48,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
             honeyCost = 2;
             altHoneyCost = 3;
-        }
-
-        public override bool SafeCanUseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                Item.useTime = 40;
-                Item.useAnimation = 40;
-
-            }
-            else
-            {
-                Item.useTime = 28;
-                Item.useAnimation = 28;
-
-            }
-
-            return base.SafeCanUseItem(player);
         }
 
         public override void ModifyApiaryHit(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -137,8 +121,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override Color GlowColor => Color.Lerp(new Color(65, 232, 236), new Color(108, 72, 196), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
-        public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Mushroom/FungalApiary";
-
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -146,29 +128,29 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         protected override void Shoot()
         {
-            if (Main.myPlayer == Projectile.owner)
+            flashTimer = 20;
+            int direction = Main.rand.NextBool() ? -1 : 1;
+            swingRotation += Main.rand.NextFloat(0.25f) * direction;
+            if (Owner.altFunctionUse == 2)
+                swingRotation += Main.rand.NextFloat(0.4f) * direction;
+
+            shakeTimer = 15;
+
+            SoundID.Item97.PlayWith(Projectile.Center, 0, 0.1f, 1.25f);
+            BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center, volume: 0.5f);
+
+            for (int j = 0; j < 4; j++)
             {
-                if (Owner.UseBeeResource(Owner.altFunctionUse == 2 ? (Owner.HeldItem.ModItem as ApiaryItem).altHoneyCost : (Owner.HeldItem.ModItem as ApiaryItem).honeyCost))
-                {
-                    shakeTimer = 15;
+                Dust.NewDustPerfect(Projectile.Center, DustID.Honey2, Main.rand.NextVector2Circular(3f, 3f), 50, default, 1.2f).noGravity = true;
 
-                    SoundID.Item97.PlayWith(Projectile.Center, 0, 0.1f, 1.25f);
-                    BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center, volume: 0.5f);
+                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlow>(), Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.25f);
+            }
 
-                    for (int j = 0; j < 4; j++)
-                    {
-                        Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlow>(), Projectile.velocity.RotatedByRandom(1.5f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.25f);
-                    }
+            for (int i = 0; i < 1 + Main.rand.Next(0, 3); i++)
+            {
+                Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
 
-                    for (int i = 0; i < 1 + Main.rand.Next(1, 4); i++)
-                    {
-                        Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
-
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(7f, 8f), ProjectileType<FungalBee>(), Projectile.damage, Projectile.knockBack);
-                    }
-                }
-                else
-                    Projectile.Kill();
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(3f) + Main.rand.NextVector2Circular(1.5f, 1.5f), ProjectileType<FungalBee>(), Projectile.damage, Projectile.knockBack);
             }
         }
     }
@@ -185,15 +167,15 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SafeAI()
         {
-            if (Main.rand.NextBool(90))
+            if (Main.rand.NextBool(180))
             {
                 for (int i = 0; i < 2; i++)
                 {
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<SmokeDust2>(),
-                       Main.rand.NextVector2Circular(.5f, .5f), Main.rand.Next(120, 200), new Color(70, 90, 166), Main.rand.NextFloat(0.85f, 1f)).noGravity = true;
+                       Main.rand.NextVector2Circular(.5f, .5f), Main.rand.Next(120, 200), new Color(70, 90, 166), Main.rand.NextFloat(0.25f, 0.35f)).noGravity = true;
 
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<SmokeDust2>(),
-                       Main.rand.NextVector2Circular(2.5f, 2.5f), Main.rand.Next(120, 200), new Color(90, 167, 209), Main.rand.NextFloat(0.85f, 1f)).noGravity = true;
+                       Main.rand.NextVector2Circular(2.5f, 2.5f), Main.rand.Next(120, 200), new Color(90, 167, 209), Main.rand.NextFloat(0.25f, 0.35f)).noGravity = true;
                 }
             }
 

@@ -39,6 +39,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                 return ref Projectile.ai[0];
             }
         }
+
         public override string Texture => "BombusApisBee/Content/Forest/Items/Beenigun/BeeInyGun";
         public bool SpinningDown;
 
@@ -48,8 +49,8 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
         }
         public override void SafeSetDefaults()
         {
-            Projectile.width = 140;
-            Projectile.height = 58;
+            Projectile.width = 106;
+            Projectile.height = 42;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
@@ -58,9 +59,8 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
         }
         public override void AI()
         {
-            Vector2 armPosition = Owner.RotatedRelativePoint(Owner.MountedCenter, true);
-            armPosition += Projectile.velocity.SafeNormalize(Owner.direction * Vector2.UnitX) * 32f;
-            armPosition.Y += 22f;
+            Vector2 armPosition = Owner.RotatedRelativePoint(Owner.MountedCenter, true) + new Vector2(30f, 22f * Projectile.direction).RotatedBy(Projectile.velocity.ToRotation());
+            //armPosition += new Vector2(32f, 22f * Owner.direction).RotatedBy(Projectile.velocity.ToRotation());
             Vector2 BarrelPosition = armPosition + Projectile.velocity * Projectile.width * 0.5f;
             var modPlayer = Owner.GetModPlayer<BeekeeperPlayer>();
             modPlayer.BeeResourceRegenTimer = -90;
@@ -123,9 +123,53 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                 }
             }
 
-            ManipulatePlayerVariables();
-            UpdateProjectileHeldVariables(armPosition, !SpinningDown);
+            Owner.ChangeDir(Projectile.direction);
+            Owner.heldProj = Projectile.whoAmI;
+            Owner.itemTime = 2;
+            Owner.itemAnimation = 2;
+
+            if (!SpinningDown)
+                Projectile.timeLeft = 2;
+
+            Projectile.rotation = Projectile.velocity.ToRotation();
+            Owner.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
+
+            Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation - (Projectile.direction == 1 ? MathHelper.ToRadians(70f) : MathHelper.ToRadians(110f)));
+
+            if (Projectile.spriteDirection == -1)
+                Projectile.rotation += 3.1415927f;
+
+            Projectile.position = armPosition - Projectile.Size * 0.5f;
+
+            if (Main.myPlayer == Projectile.owner)
+            {
+                float interpolant = Utils.GetLerpValue(5f, 25f, Projectile.Distance(Main.MouseWorld), true);
+
+                Vector2 oldVelocity = Projectile.velocity;
+
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Owner.DirectionTo(Main.MouseWorld), interpolant);
+                if (Projectile.velocity != oldVelocity)
+                {
+                    Projectile.netSpam = 0;
+                    Projectile.netUpdate = true;
+                }
+            }
+
+            Projectile.spriteDirection = Projectile.direction;
+
         }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D tex = Request<Texture2D>(Texture).Value;
+
+            SpriteEffects spriteEffects = Owner.direction == -1 ? (SpriteEffects)1 : 0;
+
+            Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2f, Projectile.scale, spriteEffects, 0f);
+
+            return false;
+        }
+
         public void ShootShells(Vector2 armPosition)
         {
             int goreType = Mod.Find<ModGore>("ShellEjectGore").Type;
@@ -184,6 +228,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
         {
             return false;
         }
+
         private void ManipulatePlayerVariables()
         {
             Owner.ChangeDir(Projectile.direction);
@@ -191,7 +236,10 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
             Owner.itemTime = 2;
             Owner.itemAnimation = 2;
             Owner.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
+
+            Projectile.position = Owner.RotatedRelativePoint(Owner.MountedCenter, true) - Projectile.Size * 0.5f;
         }
+
         private void UpdateProjectileHeldVariables(Vector2 armPosition, bool UpdateTime)
         {
             if (Main.myPlayer == Projectile.owner)
@@ -206,7 +254,6 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                 }
             }
 
-            Projectile.position = armPosition - Projectile.Size * 0.5f;
             Projectile.rotation = Projectile.velocity.ToRotation();
 
             if (Owner.direction == -1)
@@ -214,14 +261,17 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
 
             Projectile.spriteDirection = Projectile.direction;
 
+            Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.velocity.ToRotation() + Owner.direction == -1 ? MathHelper.PiOver2 : 0f);
+
             if (UpdateTime)
             {
                 Projectile.timeLeft = 2;
             }
         }
+
         public override void OnKill(int timeLeft)
         {
-            if (ChargeUp > 50f)
+            /*if (ChargeUp > 50f)
             {
                 var modPlayer = Owner.GetModPlayer<BeekeeperPlayer>();
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
@@ -233,7 +283,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
                     int gore = Gore.NewGore(Projectile.GetSource_Death(), spawnPosition, Projectile.velocity * 0.5f + shootDirection * -5f, goreType, Projectile.scale);
                     Main.gore[gore].timeLeft = 120;
                 }
-            }
+            }*/
         }
     }
 }

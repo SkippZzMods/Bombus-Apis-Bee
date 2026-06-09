@@ -2,6 +2,7 @@ global using BombusApisBee.Buffs;
 global using BombusApisBee.Content.Dusts;
 global using BombusApisBee.Content.Projectiles;
 global using BombusApisBee.Core;
+global using BombusApisBee.Content.Particles;
 global using Microsoft.Xna.Framework;
 global using Microsoft.Xna.Framework.Graphics;
 global using System;

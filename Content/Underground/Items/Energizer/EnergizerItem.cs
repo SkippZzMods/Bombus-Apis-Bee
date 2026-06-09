@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Underground.Items.Energizer
 {
     public class EnergizerItem : BeekeeperAccessory
     {
-        public EnergizerItem() : base("Energizer", "Increases the speed of friendly bees by 25%\nBees provide a small amount of light\nToggle this effect with accessory visibility") { }
+        public EnergizerItem() : base("Energizer", "Increases beekeeper attack speed by 15%\nBees provide a small amount of light\nToggle this effect with accessory visibility") { }
 
         public override void SafeSetDefaults()
         {
@@ -31,7 +31,7 @@ namespace BombusApisBee.Content.Underground.Items.Energizer
 
         public override void SafeUpdateEquip(Player Player)
         {
-            Player.Beekeeper().BeeSpeedMultiplier += 0.25f;      
+            Player.GetAttackSpeed<BeekeeperDamageClass>() += 0.15f;
         }
 
         public override void Update(ref float gravity, ref float maxFallSpeed)

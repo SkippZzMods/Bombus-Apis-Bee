@@ -6,8 +6,8 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
 {
     public class WoodenApiary : ApiaryItem
     {
-        public override int BaseUseTime => 20;
-        public override int AltUseTime => 28;
+        public override int BaseUseTime => 27;
+        public override int AltUseTime => 45;
         public override void AddStaticDefaults()
         {
             DisplayName.SetDefault("Wooden Apiary");
@@ -63,12 +63,12 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
 
             Player player = Main.player[projectile.owner];
 
-            int holdTimer = player.GetModPlayer<ApiaryPlayer>().holdTimer;
+            int holdTimer = player.GetModPlayer<ApiaryPlayer>().apiaryVisualTimer;
 
             Color color = Color.Lerp(new Color(255, 150, 0, 0), new Color(255, 225, 0, 0), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
 
             if (holdTimer > 0)
-                Main.spriteBatch.Draw(tex, projectile.Center - Main.screenPosition, null, color * (holdTimer / 20f) * 0.2f, 0f, tex.Size() / 2f, 0.25f, 0, 0f);
+                Main.spriteBatch.Draw(tex, projectile.Center - Main.screenPosition, null, color * (holdTimer / (float)player.GetModPlayer<ApiaryPlayer>().maxVisualTimer) * 0.2f, 0f, tex.Size() / 2f, 0.25f, 0, 0f);
         }
 
         public override void AddRecipes()
@@ -85,7 +85,7 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
     {
         public override int ProjectileTypeToFire => ProjectileType<WeakBeeProjectile>();
         public override Color GlowColor => Color.Lerp(new Color(255, 180, 0), new Color(255, 225, 0), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
-        public override string Texture => "BombusApisBee/Content/Forest/Items/WoodenApiary/WoodenApiary";
+        //public override string Texture => "BombusApisBee/Content/Forest/Items/WoodenApiary/WoodenApiary";
 
         public override void SetDefaults()
         {

@@ -111,6 +111,8 @@ namespace BombusApisBee.Core.BeekeeperClass
 
             if (SHOWCASEMODETIMER > 0)
                 SHOWCASEMODETIMER--;
+
+            //BeeResourceCurrent = 100;
         }
 
         public override void UpdateEquips()

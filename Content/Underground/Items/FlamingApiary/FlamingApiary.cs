@@ -119,23 +119,18 @@ namespace BombusApisBee.Content.Underground.Items.FlamingApiary
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), DustID.Torch, Main.rand.NextVector2Circular(3f, 3f), 0, default, 2.5f).noGravity = true;
         }
 
-        public override void PreDrawApiaryBees(Projectile projectile, ref Color lightColor, bool active)
-        {
-
-        }
-
         public override void PostDrawApiaryBees(Projectile projectile, Color lightColor, bool active)
         {
             Texture2D tex = Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
 
             Player player = Main.player[projectile.owner];
 
-            int holdTimer = player.GetModPlayer<ApiaryPlayer>().holdTimer;
+            int holdTimer = player.GetModPlayer<ApiaryPlayer>().apiaryVisualTimer;
 
             Color color = Color.Lerp(new Color(244, 42, 10, 0), new Color(252, 145, 28, 0), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
 
             if (holdTimer > 0)
-                Main.spriteBatch.Draw(tex, projectile.Center - Main.screenPosition, null, color * (holdTimer / 20f) * 0.2f, 0f, tex.Size() / 2f, 0.25f, 0, 0f);
+                Main.spriteBatch.Draw(tex, projectile.Center - Main.screenPosition, null, color * (holdTimer / (float)player.GetModPlayer<ApiaryPlayer>().maxVisualTimer) * 0.2f, 0f, tex.Size() / 2f, 0.25f, 0, 0f);
         }
 
         public override void AddRecipes()
@@ -155,37 +150,34 @@ namespace BombusApisBee.Content.Underground.Items.FlamingApiary
     {
         public override Color GlowColor => Color.Lerp(new Color(244, 42, 10, 0), new Color(252, 145, 28, 0), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
         public override bool UseDefaultTextures => true;
-        public override string Texture => "BombusApisBee/Content/Underground/Items/FlamingApiary/FlamingApiary";
-
         protected override void Shoot()
         {
-            shakeTimer = 12;
+            flashTimer = 20;
+            swingRotation += Main.rand.NextFloat(-0.25f, 0.25f);
+            shakeTimer = 13;
 
             SoundID.Item97.PlayWith(Projectile.Center, 0, 0.1f, 1.25f);
             BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center, volume: 0.5f);
 
             for (int j = 0; j < 2; j++)
             {
-                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlow>(), Projectile.velocity.RotatedByRandom(1.5f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.1f);
+                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlow>(), Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.1f);
 
-                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedEmber>(), Projectile.velocity.RotatedByRandom(1.5f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.15f).customData = Main.rand.NextBool() ? -1 : 1;
+                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedEmber>(), Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.15f).customData = Main.rand.NextBool() ? -1 : 1;
             }
 
             for (int i = 0; i < 5; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * 10f + Main.rand.NextVector2Circular(20f, 20f), DustID.Torch, Main.rand.NextVector2Circular(1f, 1f), 20, default, 2.5f).noGravity = true;
 
-                Dust.NewDustPerfect(Projectile.Center, DustType<SmokeDust2>(), Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(1f, 4f), 200, new Color(20, 20, 20), 1f);
+                Dust.NewDustPerfect(Projectile.Center, DustType<SmokeDust2>(), Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(1f, 4f), 200, new Color(20, 20, 20), 1f);
 
-                Dust.NewDustPerfect(Projectile.Center, DustType<SmokeDust2>(), Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(1f, 3f), 200, new Color(50, 50, 50), 0.8f);
+                Dust.NewDustPerfect(Projectile.Center, DustType<SmokeDust2>(), Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(1f, 3f), 200, new Color(50, 50, 50), 0.8f);
             }
 
-            for (int i = 0; i < 1 + Main.rand.Next(1, 4); i++)
-            {
-                Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
+            Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
 
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(4f, 5f), ProjectileType<WeakBeeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-            }
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(3f) + Main.rand.NextVector2Circular(2f, 2f), ProjectileType<WeakBeeProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
     }
 }

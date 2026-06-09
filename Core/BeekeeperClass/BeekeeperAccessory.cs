@@ -116,7 +116,7 @@ namespace BombusApisBee.Core.BeekeeperClass
             {
                 var accessory = item.ModItem as BeekeeperAccessory;
 
-                accessory.ResetEffects(Player);
+                accessory?.ResetEffects(Player);
             }
 
             equippedAccessories.RemoveAll(n => !equippedTypes.Contains(n.type));

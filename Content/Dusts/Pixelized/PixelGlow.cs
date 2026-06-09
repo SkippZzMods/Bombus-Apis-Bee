@@ -96,7 +96,7 @@ namespace BombusApisBee.Content.Dusts.Pixelized
             return false;
         }
     }
-    public class PixeelatedGlowAltWhite : ModDust
+    public class PixelatedGlowAltWhite : ModDust
     {
         public override string Texture => BombusApisBee.Invisible;
 

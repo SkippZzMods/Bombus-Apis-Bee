@@ -172,8 +172,6 @@ namespace BombusApisBee.Core.Common.BeeProjectile
 
             speedMultiplier = 1f + player.Beekeeper().BeeSpeedMultiplier;
 
-            Main.NewText(speedMultiplier);
-
             SafePreAI();
             
             if (player.GetModPlayer<BombusApisBeePlayer>().IgnoreWater)
@@ -183,6 +181,7 @@ namespace BombusApisBee.Core.Common.BeeProjectile
             
             return base.PreAI();
         }
+
         public sealed override void AI()
         {
             SafeAI();
@@ -300,11 +299,10 @@ namespace BombusApisBee.Core.Common.BeeProjectile
         {
             if (SafePreDraw(ref lightColor))
             {
-                Texture2D tex = Request<Texture2D>(Texture).Value;
-                Texture2D giantTex = Giant ? Request<Texture2D>(Texture + "_Giant").Value : Request<Texture2D>(Texture).Value;
-                Rectangle sourceRectangle = Giant ? giantTex.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame) : tex.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
+                Texture2D tex = Giant ? Request<Texture2D>(Texture + "_Giant").Value : Request<Texture2D>(Texture).Value;
+                Rectangle sourceRectangle = tex.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
 
-                Main.spriteBatch.Draw(Giant ? giantTex : tex, Projectile.Center - Main.screenPosition, sourceRectangle, Projectile.GetAlpha(lightColor), Projectile.rotation, sourceRectangle.Size() / 2f,
+                Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, sourceRectangle, Projectile.GetAlpha(lightColor), Projectile.rotation, sourceRectangle.Size() / 2f,
                     Projectile.scale, Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
             }
 

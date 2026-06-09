@@ -76,11 +76,11 @@ namespace BombusApisBee.Content.Jungle.Items.MegaHornet
             owner.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
 
             owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation - (Projectile.direction == 1 ? MathHelper.ToRadians(70f) : MathHelper.ToRadians(110f)));
+
             if (Projectile.spriteDirection == -1)
                 Projectile.rotation += 3.1415927f;
 
             Projectile.position = armPos - Projectile.Size * 0.5f;
-
 
             if (Main.myPlayer == Projectile.owner)
             {

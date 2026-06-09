@@ -20,7 +20,7 @@
 
         public override void AI()
         {
-            Projectile.rotation += 0.35f * (Projectile.velocity.X * 0.15f) * Projectile.direction;
+            Projectile.rotation += 0.1f * (Projectile.velocity.X * 0.15f) * Projectile.direction;
             Projectile.velocity.Y += 0.2f;
             if (Projectile.velocity.Y > 0)
             {

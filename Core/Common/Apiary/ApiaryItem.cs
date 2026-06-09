@@ -1,5 +1,6 @@
 ﻿using BombusApisBee.Core.BeekeeperClass;
 using BombusApisBee.Core.Common.BeeProjectile;
+using CalamityMod;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Core.Common.Apiary
@@ -69,9 +70,20 @@ namespace BombusApisBee.Core.Common.Apiary
             if (modded)
                 speed = Math.Max((Projectile.ModProjectile as CommonBeeProjectile).Speed, 1f);
 
-            Main.NewText(speed);
-
             Projectile.velocity = (Projectile.velocity * 35f + (controlsPlayer.mouseWorld - Projectile.Center).SafeNormalize(Vector2.UnitX) * speed) / 36f;
+
+            if (Projectile.velocity.Length() < 0.1f && Vector2.DistanceSquared(Projectile.Center, controlsPlayer.mouseWorld) < 5 * 5)
+                Projectile.velocity += Main.rand.NextVector2Circular(4f, 4f);               
+        }
+
+        /// <summary>
+        /// Called on the player when they are using an apiary
+        /// </summary>
+        /// <param name="Player">The player using the apiary</param>
+        /// <param name="altUse">Whether or not the player is using the alt use</param>
+        public virtual void UpdateApiaryPlayer(Player Player, bool altUse)
+        {
+
         }
 
         /// <summary>
@@ -82,7 +94,7 @@ namespace BombusApisBee.Core.Common.Apiary
         /// <param name="modifiers">Modifiers for modifying the hit</param>
         public virtual void ModifyApiaryHit(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= 2f;
+            
         }
 
         /// <summary>
@@ -166,12 +178,15 @@ namespace BombusApisBee.Core.Common.Apiary
     {
         public bool apiaryActive;
         public int holdTimer;
+        public int apiaryVisualTimer;
+        public int maxVisualTimer;
 
         public ApiaryItem CurrentApiary => apiaryActive ? Player.HeldItem.ModItem as ApiaryItem : null;
 
         public override void ResetEffects()
         {
-
+            if (apiaryVisualTimer <= 0)
+                maxVisualTimer = 20;
         }
 
         public override void PreUpdate()
@@ -183,12 +198,22 @@ namespace BombusApisBee.Core.Common.Apiary
 
             if (Player.HeldItem.ModItem != null && Player.HeldItem.ModItem is ApiaryItem && controlsPlayer.mouseRight && Main.projectile.Any(p => p.active && p.owner == Player.whoAmI && p.ModProjectile != null && p.ModProjectile is ApiaryHoldout))
             {
-                apiaryActive = true;
+                if (apiaryVisualTimer < maxVisualTimer)
+                    apiaryVisualTimer++;
+
                 if (holdTimer < 20)
                     holdTimer++;
+
+                apiaryActive = true;
             }
-            else if (holdTimer > 0)
-                holdTimer--;
+            else
+            {
+                if (holdTimer > 0)
+                    holdTimer--;
+
+                if (apiaryVisualTimer > 0)
+                    apiaryVisualTimer--;
+            } 
         }
     }
 
@@ -259,7 +284,7 @@ namespace BombusApisBee.Core.Common.Apiary
                 {
                     if (projectile.ModProjectile != null)
                         (projectile.ModProjectile as CommonBeeProjectile).speedMultiplier = 1f + player.Beekeeper().BeeSpeedMultiplier;
-                    
+
                     apiaryParent.PreApiaryAI(projectile);
                     apiaryParent.HoldAI(projectile);
 

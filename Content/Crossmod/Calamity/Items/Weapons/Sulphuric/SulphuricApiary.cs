@@ -10,6 +10,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
     [JITWhenModsEnabled("CalamityMod")]
     public class SulphuricApiary : ApiaryItem
     {
+        public override int BaseUseTime => 25;
+        public override int AltUseTime => 45;
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void AddStaticDefaults()
         {
@@ -47,24 +49,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
             honeyCost = 1;
             altHoneyCost = 4;
-        }
-
-        public override bool SafeCanUseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                Item.useTime = 50;
-                Item.useAnimation = 50;
-
-            }
-            else
-            {
-                Item.useTime = 20;
-                Item.useAnimation = 20;
-
-            }
-
-            return base.SafeCanUseItem(player);
         }
 
         public override void ModifyApiaryHit(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -122,7 +106,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override Color GlowColor => Color.Lerp(new Color(140, 234, 87, 0), new Color(89, 93, 48, 0), (float)Math.Sin(Main.GlobalTimeWrappedHourly * 1f));
-        public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Sulphuric/SulphuricApiary";
+        //public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Sulphuric/SulphuricApiary";
+        public override bool UseDefaultTextures => true;
 
         public override void SetDefaults()
         {
@@ -131,39 +116,38 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
         protected override void Shoot()
         {
-            if (Main.myPlayer == Projectile.owner)
+            flashTimer = 20;
+            int direction = Main.rand.NextBool() ? -1 : 1;
+            swingRotation += Main.rand.NextFloat(0.15f) * direction;
+            if (Owner.altFunctionUse == 2)
+                swingRotation += Main.rand.NextFloat(0.2f) * direction;
+
+            shakeTimer = 13;
+
+            SoundID.Item97.PlayWith(Projectile.Center, 0, 0.1f, 1.25f);
+            BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center, volume: 0.5f);
+
+            for (int j = 0; j < 2; j++)
             {
-                if (Owner.UseBeeResource(Owner.altFunctionUse == 2 ? (Owner.HeldItem.ModItem as ApiaryItem).altHoneyCost : (Owner.HeldItem.ModItem as ApiaryItem).honeyCost))
-                {
-                    shakeTimer = 15;
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
+                    Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(4f), Main.rand.Next(120, 200), new Color(80, 93, 48), Main.rand.NextFloat(0.4f, 0.6f)).noGravity = true;
 
-                    SoundID.Item97.PlayWith(Projectile.Center, 0, 0.1f, 1.25f);
-                    BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center, volume: 0.5f);
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
+                    Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(4f), Main.rand.Next(120, 200), new Color(137, 162, 74), Main.rand.NextFloat(0.4f, 0.8f)).noGravity = true;
 
-                    for (int j = 0; j < 6; j++)
-                    {
-                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
-                            Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(4f), Main.rand.Next(120, 200), new Color(80, 93, 48), Main.rand.NextFloat(0.4f, 0.6f)).noGravity = true;
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
+                    Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(4f), Main.rand.Next(120, 200), new Color(140, 234, 87), Main.rand.NextFloat(0.4f, 1f)).noGravity = true;
 
-                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
-                            Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(4f), Main.rand.Next(120, 200), new Color(137, 162, 74), Main.rand.NextFloat(0.4f, 0.8f)).noGravity = true;
-
-                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(5f, 5f), DustType<SmokeDust2>(),
-                            Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(4f), Main.rand.Next(120, 200), new Color(140, 234, 87), Main.rand.NextFloat(0.4f, 1f)).noGravity = true;
-
-                        Dust.NewDustPerfect(Projectile.Center, DustType<PixeelatedGlowAltWhite>(), Projectile.velocity.RotatedByRandom(1.5f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.25f);
-                    }
-
-                    for (int i = 0; i < 1 + Main.rand.Next(1, 4); i++)
-                    {
-                        Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
-
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(7f, 8f), ProjectileType<SulphuricBee>(), Projectile.damage, Projectile.knockBack);
-                    }
-                }
-                else
-                    Projectile.Kill();
+                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlowAltWhite>(), Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(2f, 4f), 0, GlowColor with { A = 0 }, 0.25f);
             }
+
+            for (int i = 0; i < 1 + Main.rand.Next(0, 2); i++)
+            {
+                Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
+
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity * Main.rand.NextFloat(3f) + Main.rand.NextVector2Circular(1f, 1f), ProjectileType<SulphuricBee>(), Projectile.damage, Projectile.knockBack);
+            }
+
         }
     }
 
@@ -181,7 +165,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         {
             if (Main.rand.NextBool(120))
             {
-                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixeelatedGlowAltWhite>(),
+                Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixelatedGlowAltWhite>(),
                    Main.rand.NextVector2Circular(5f, 5f), 0, new Color(140, 234, 87, 0), Main.rand.NextFloat(0.25f, 0.5f)).noGravity = true;
             }
         }
@@ -215,7 +199,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
             if (Main.rand.NextBool(15))
             {
-                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixeelatedGlowAltWhite>(),
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixelatedGlowAltWhite>(),
                    Main.rand.NextVector2Circular(5f, 5f), 0, new Color(140, 234, 87, 0), Main.rand.NextFloat(0.25f, 0.5f)).noGravity = true;
             }
         }
@@ -279,7 +263,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                         for (int i = 0; i < 20; i++)
                         {
-                            Dust.NewDustPerfect(closest.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixeelatedGlowAltWhite>(),
+                            Dust.NewDustPerfect(closest.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixelatedGlowAltWhite>(),
                                 Main.rand.NextVector2Circular(8f, 8f), 0, new Color(140, 234, 87, 0), Main.rand.NextFloat(0.5f, 1f)).noGravity = true;
 
                             Dust.NewDustPerfect(closest.Center + Main.rand.NextVector2CircularEdge(25f, 25f), DustType<SmokeDust2>(),

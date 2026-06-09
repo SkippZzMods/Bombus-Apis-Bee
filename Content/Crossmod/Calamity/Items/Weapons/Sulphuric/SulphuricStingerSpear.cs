@@ -259,7 +259,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
                 {
                     Vector2 velocity = target.Center.DirectionTo(Owner.Center);
 
-                    Dust.NewDustPerfect(Projectile.Center, DustType<PixeelatedGlowAltWhite>(), velocity.RotatedByRandom(0.75f) * Main.rand.NextFloat(5.5f), 50, new Color(255, 156, 41, 0), .2f);
+                    Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlowAltWhite>(), velocity.RotatedByRandom(0.75f) * Main.rand.NextFloat(5.5f), 50, new Color(255, 156, 41, 0), .2f);
 
                     Dust.NewDustPerfect(Projectile.Center, DustType<PixelImpactLineDustGlow>(), velocity.RotatedByRandom(0.5f) * Main.rand.NextFloat(15f), 50, new Color(255, 156, 41, 0), .2f);
                 }
@@ -535,7 +535,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
                 {
                     Vector2 velocity = -Projectile.rotation.ToRotationVector2();
 
-                    Dust.NewDustPerfect(Projectile.Center, DustType<PixeelatedGlowAltWhite>(), velocity.RotatedByRandom(0.75f) * Main.rand.NextFloat(5.5f), 50, new Color(255, 156, 41, 0), .2f);
+                    Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlowAltWhite>(), velocity.RotatedByRandom(0.75f) * Main.rand.NextFloat(5.5f), 50, new Color(255, 156, 41, 0), .2f);
 
                     Dust.NewDustPerfect(Projectile.Center, DustType<PixelImpactLineDustGlow>(), velocity.RotatedByRandom(0.5f) * Main.rand.NextFloat(15f), 50, new Color(255, 156, 41, 0), .2f);
                 }
@@ -697,7 +697,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
             if (Main.rand.NextBool(15))
             {
-                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixeelatedGlowAltWhite>(),
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixelatedGlowAltWhite>(),
                    new Vector2(0f, -Main.rand.NextFloat(5f)), 0, new Color(140, 234, 87, 0), Main.rand.NextFloat(0.25f, 0.5f)).noGravity = true;
             }
         }
@@ -754,7 +754,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                     for (int i = 0; i < 4; i++)
                     {
-                        Dust.NewDustPerfect(npc.Center, DustType<PixeelatedGlowAltWhite>(),
+                        Dust.NewDustPerfect(npc.Center, DustType<PixelatedGlowAltWhite>(),
                             dir.RotatedByRandom(0.2f) * Main.rand.NextFloat(0.1f, peakVelocity), 0, new Color(140, 234, 87, 0), Main.rand.NextFloat(0.25f, 0.5f)).noGravity = true;
                     }
 
@@ -782,7 +782,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
             for (int i = 0; i < 20; i++)
             {
-                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixeelatedGlowAltWhite>(),
+                Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustType<PixelatedGlowAltWhite>(),
                     Main.rand.NextVector2Circular(8f, 8f), 0, new Color(140, 234, 87, 0), Main.rand.NextFloat(0.5f, 1f)).noGravity = true;
 
                 Dust.NewDustPerfect(npc.Center + Main.rand.NextVector2CircularEdge(25f, 25f), DustType<SmokeDust2>(),

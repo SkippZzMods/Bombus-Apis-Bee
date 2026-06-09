@@ -218,7 +218,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
                     }
                 }
 
-            if (switchTimer >= 480)
+            if (switchTimer >= 180)
             {
                 attackState++;
                 switchTimer = 0;
@@ -273,7 +273,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
             }
 
 
-            if (++switchTimer >= 480)
+            if (++switchTimer >= 180)
             {
                 attackState++;
                 switchTimer = 0;
@@ -341,7 +341,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
                 switchTimer++;
             }
 
-            if (switchTimer >= 6 && attackTimer <= 0)
+            if (switchTimer >= 3 && attackTimer <= 0)
             {
                 attackState++;
                 switchTimer = 0;
@@ -416,7 +416,7 @@ namespace BombusApisBee.Content.Forest.Items.QueensLarvae
 
             Projectile.rotation = 0f;
 
-            if (switchTimer >= 6 && attackTimer <= 0)
+            if (switchTimer >= 3 && attackTimer <= 0)
             {
                 attackState++;
                 switchTimer = 0;
