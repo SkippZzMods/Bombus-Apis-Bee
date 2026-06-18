@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.SunkenSea
     public class MolluscanHoneycombShard : HoneycombShardItem
     {
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
-        public MolluscanHoneycombShard() : base("Molluscan Honeycomb Shard", "Increases the chance to strengthen friendly bees by 30%\nStrengthened bees ignore 15 points of defense", 60) { }
+        public MolluscanHoneycombShard() : base("Molluscan Honeycomb Shard", "Increases the chance to strengthen friendly bees by 30%\nStrengthened bees ignore 15 points of defense", -1) { }
 
         public override void SetStaticDefaults()
         {

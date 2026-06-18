@@ -71,8 +71,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
             player.Bombus().AddShake(10);
 
             new SoundStyle("BombusApisBee/Sounds/Item/GoreLight").PlayWith(npc.Center, volume: 0.65f);
-            new SoundStyle("BombusApisBee/Sounds/ShadowDeath").PlayWith(npc.Center);
-            new SoundStyle("BombusApisBee/Sounds/Shadow2").PlayWith(npc.Center);
+            new SoundStyle("BombusApisBee/Sounds/Crossmod/Calamity/ShadowDeath").PlayWith(npc.Center);
+            new SoundStyle("BombusApisBee/Sounds/Crossmod/Calamity/Shadow2").PlayWith(npc.Center);
 
             for (int i = 0; i < 3; i++)
             {
@@ -118,8 +118,8 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         {
             player.AddBuff<ShadestingerScytheCooldown>(60 * 30);
 
-            new SoundStyle("BombusApisBee/Sounds/ShadowDeath").PlayWith(player.Center);
-            new SoundStyle("BombusApisBee/Sounds/Shadow2").PlayWith(player.Center, volume: 0.65f);
+            new SoundStyle("BombusApisBee/Sounds/Crossmod/Calamity/ShadowDeath").PlayWith(player.Center);
+            new SoundStyle("BombusApisBee/Sounds/Crossmod/Calamity/Shadow2").PlayWith(player.Center, volume: 0.65f);
             SoundID.Item4.PlayWith(player.Center);
 
             for (int i = 0; i < 10; i++)

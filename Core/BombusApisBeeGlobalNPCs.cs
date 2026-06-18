@@ -190,7 +190,7 @@ namespace BombusApisBee.Core
             }
 
             if (npc.lifeMax > 5 && npc.value > 0f && !NPCID.Sets.CountsAsCritter[npc.type] && !npc.boss)
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PollenItem>(), 5, 1, 3));
+                npcLoot.Add(new ItemDropWithConditionRule(ModContent.ItemType<PollenItem>(), 4, 1, 4, new PollenCondition()));
 
             if (PillarList.Contains(npc.type))
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<PhotonFragment>(), 5, 4));

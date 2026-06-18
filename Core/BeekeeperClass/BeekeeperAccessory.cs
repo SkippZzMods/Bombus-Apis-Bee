@@ -94,6 +94,7 @@ namespace BombusApisBee.Core.BeekeeperClass
         public virtual void OnEquippedHit(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) { }
 
         public virtual void ModifyEquippedHit(Player player, NPC target, ref NPC.HitModifiers modifiers) { }
+        public virtual void ModifyEquippedHit(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers) { }
 
         public virtual void OnHurtWhileEquipped(Player player, Player.HurtInfo info) { }
 
@@ -171,6 +172,16 @@ namespace BombusApisBee.Core.BeekeeperClass
                 var accessory = item.ModItem as BeekeeperAccessory;
 
                 accessory.ModifyEquippedHit(Player, target, ref modifiers);
+            }
+        }
+
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+        {
+            foreach (Item item in equippedAccessories)
+            {
+                var accessory = item.ModItem as BeekeeperAccessory;
+
+                accessory.ModifyEquippedHit(Player, proj, target, ref modifiers);
             }
         }
 

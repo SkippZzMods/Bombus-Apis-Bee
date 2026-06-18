@@ -145,10 +145,8 @@ namespace BombusApisBee.Core.Common.Apiary
             }
 
             Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
-            //for (int i = 0; i < 4; i++ )
-            //    {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity.RotatedByRandom(1f) * 2f + Main.rand.NextVector2CircularEdge(1f, 1f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
-            //}
+
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity.RotatedByRandom(1f) * 2f + Main.rand.NextVector2CircularEdge(1f, 1f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
 
         /// <summary>

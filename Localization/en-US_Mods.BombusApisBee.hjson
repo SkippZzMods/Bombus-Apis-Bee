@@ -1136,11 +1136,15 @@ Items: {
 			'''
 	}
 
-	ShadesentHoneycombShard.Tooltip:
-		'''
-		Increases chance to strengthen friendly bees by 35%
-		Strengthened bees can travel through walls, empowering their critical strike chance
-		'''
+	ShadesentHoneycombShard: {
+		Tooltip:
+			'''
+			Increases chance to strengthen friendly bees by 35%
+			Strengthened bees can travel through walls, empowering their critical strike chance
+			'''
+		DisplayName: Shadesent Honeycomb Shard
+	}
+
 	ChippedTailspike.Tooltip:
 		'''
 		Causes spikes to grow on your back over time
@@ -1295,6 +1299,43 @@ Items: {
 	MoltenCharm: {
 		DisplayName: Fireshot Pendant
 		Tooltip: Apiaries conjure flaming stars
+	}
+
+	EboncombShard: {
+		DisplayName: Crimcomb Shard
+		Tooltip:
+			'''
+			Increases the chance to strengthen friendly bees by 30%
+			Increases the damage of strengthened bees by 3
+			Only one honeycomb shard can be equipped at a time
+
+			'''
+	}
+
+	CrimcombShard: {
+		DisplayName: Crimcomb Shard
+		Tooltip:
+			'''
+			Increases the chance to strengthen friendly bees by 30%
+			Increases the damage of strengthened bees by 3
+			Only one honeycomb shard can be equipped at a time
+
+			'''
+	}
+
+	StarryApiary: {
+		DisplayName: Starfall
+		Tooltip:
+			'''
+			Hold <left> to rapidly fire bees
+			Hold <right> to fire bees slower, but take control over the bees causing them to rain stars on nearby enemies
+			Stars get more powerful during nightfall
+			'''
+	}
+
+	TestAccessory: {
+		DisplayName: Test Accessory
+		Tooltip: For debugging purposes
 	}
 }
 
@@ -1501,6 +1542,7 @@ Projectiles: {
 	WulfrumStingerPowerCellItemProjectile.DisplayName: Wulfrum Power Cell
 	WulfrumStingerPowerCellProjectile.DisplayName: Wulfrum Power Cell
 	WulfrumStingerProjectile.DisplayName: Wulfrum Stinger
+	StarryApiaryHoldout.DisplayName: Apiary
 }
 
 NPCs: {

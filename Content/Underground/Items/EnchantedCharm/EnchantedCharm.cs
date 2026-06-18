@@ -314,6 +314,9 @@ namespace BombusApisBee.Content.Underground.Items.EnchantedCharm
 
         public override bool PreDraw(ref Color lightColor)
         {
+            if (cache is null)
+                return false;
+
             Main.instance.LoadProjectile(9);
 
             var starTexture = TextureAssets.Projectile[9].Value;

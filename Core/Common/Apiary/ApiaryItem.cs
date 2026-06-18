@@ -107,6 +107,16 @@ namespace BombusApisBee.Core.Common.Apiary
 
         }
 
+        /// <summary>
+        /// Called when a bee being controlled by an apiary dies. Mirrors Projectile.OnKill
+        /// </summary>
+        ///  /// <param name="projectile">The projectile that died</param>
+        /// <param name="timeLeft">The timeLeft of the projectile</param>
+        public virtual void OnApiaryKill(Projectile projectile, int timeLeft)
+        {
+
+        }
+
         // see below
         public virtual void AddStaticDefaults()
         {
@@ -308,6 +318,14 @@ namespace BombusApisBee.Core.Common.Apiary
             if (fromApiary && Main.player[projectile.owner].GetModPlayer<ApiaryPlayer>().apiaryActive)
             {
                 Main.player[projectile.owner].GetModPlayer<ApiaryPlayer>().CurrentApiary.OnApiaryHit(projectile, target, hit, damageDone);
+            }
+        }
+
+        public override void OnKill(Projectile projectile, int timeLeft)
+        {
+            if (fromApiary && Main.player[projectile.owner].GetModPlayer<ApiaryPlayer>().apiaryActive)
+            {
+                Main.player[projectile.owner].GetModPlayer<ApiaryPlayer>().CurrentApiary.OnApiaryKill(projectile, timeLeft);
             }
         }
     }

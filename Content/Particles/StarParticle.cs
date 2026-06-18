@@ -2,13 +2,13 @@
 
 namespace BombusApisBee.Content.Particles
 {
-    public class FallenStarParticle : Particle
+    public class StarParticle : Particle
     {
         internal Color[] _bloomColors;
         internal Color[] _starColors;
         public override ParticleDrawType DrawType => ParticleDrawType.Custom;
 
-        public FallenStarParticle(Vector2 position, Vector2 velocity, Color color, float scale, int maxTime)
+        public StarParticle(Vector2 position, Vector2 velocity, Color color, float scale, int maxTime)
         {
             Position = position;
             Velocity = velocity;
@@ -19,7 +19,7 @@ namespace BombusApisBee.Content.Particles
             _starColors = [color];
         }
 
-        public FallenStarParticle(Vector2 position, Vector2 velocity, Color[] starColors, Color[] bloomColors, float scale, int maxTime) : this(position, velocity, Color.White, scale, maxTime)
+        public StarParticle(Vector2 position, Vector2 velocity, Color[] starColors, Color[] bloomColors, float scale, int maxTime) : this(position, velocity, Color.White, scale, maxTime)
         {
             _bloomColors = bloomColors;
             _starColors = starColors;
@@ -28,15 +28,16 @@ namespace BombusApisBee.Content.Particles
         public override void Update()
         {
             Lighting.AddLight(Position, _starColors[0].ToVector3() * (1f - Progress) * 0.5f);
+
             Velocity *= 0.97f;
             Rotation += Velocity.Length() * 0.04f;
         }
 
         public override void CustomDraw(SpriteBatch spriteBatch)
         {
-            Main.instance.LoadProjectile(9);
+            Main.instance.LoadProjectile(79);
 
-            var starTexture = TextureAssets.Projectile[9].Value;
+            var starTexture = TextureAssets.Projectile[79].Value;
             var bloomTex = ParticleHandler.GetTexture(Type);
 
             float progress = EaseBuilder.EaseCircularIn.Ease(1f - Progress);
@@ -56,8 +57,10 @@ namespace BombusApisBee.Content.Particles
 
 
             spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, starColor, Rotation, starTexture.Size() / 2, Scale * progress, SpriteEffects.None, 0);
+            
+            spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, Color.White with { A = 0 } * 0.7f, Rotation, starTexture.Size() / 2, Scale * 0.8f * progress, SpriteEffects.None, 0);
 
-            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, bloomColor * 0.2f, Rotation, bloomTex.Size() / 2, Scale * progress, SpriteEffects.None, 0);
+            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, bloomColor * 0.4f, Rotation, bloomTex.Size() / 2, Scale * progress, SpriteEffects.None, 0);
         }
     }
 }

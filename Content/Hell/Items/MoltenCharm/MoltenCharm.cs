@@ -1,13 +1,16 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Content.Forest.Items.Pollen;
+using BombusApisBee.Content.Hell.Items.HellfireBeemstick;
 using BombusApisBee.Content.Underground.Items.EnchantedCharm;
 using BombusApisBee.Core.BeekeeperClass;
 using BombusApisBee.Core.Common.Apiary;
 using BombusApisBee.Core.Helpers;
+using BombusApisBee.Core.Loading;
 using BombusApisBee.Core.Systems.ParticleSystem;
 using BombusApisBee.Core.Systems.PixelationSystem;
 using BombusApisBee.Core.Systems.PrimitiveSystem;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 
 
 namespace BombusApisBee.Content.Hell.Items.MoltenCharm
@@ -37,7 +40,7 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
                         for (int i = 0; i < 5; i++)
                         {
                             Dust.NewDustPerfect(player.Center + Main.rand.NextVector2Circular(7f, 7f),
-                                DustType<StarDustWhite>(), Main.rand.NextVector2Circular(0.5f, 0.5f), 20, new Color(241, 238, 92, 0), 0.2f);
+                                DustType<StarDustWhite>(), Main.rand.NextVector2Circular(1.5f, 1.5f), 20, Color.DarkOrange with { A = 0 }, 0.3f);
 
                             SoundID.MaxMana.PlayWith(player.Center);
                         }
@@ -57,13 +60,16 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
                     pos,
                     pos.DirectionTo(Main.MouseWorld),
                     ProjectileType<MoltenBolt>(),
-                    Main.rand.Next(15, 25),
+                    Main.rand.Next(40, 60),
                     5f,
                     player.whoAmI
                     );
 
                 // 3 - 8 second cooldown
-                acc._cooldown = 30;//Main.rand.Next(3, 9) * 60;
+                acc._cooldown = Main.rand.Next(3, 9) * 60;
+                //acc._cooldown = 90;
+
+                new SoundStyle("BombusApisBee/Sounds/Item/FireCast").PlayWith(player.Center, -0.2f, 0, 0.35f);
             }
         }
 
@@ -108,8 +114,10 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
             Projectile.Size = new(16);
 
             Projectile.timeLeft = 300;
-            Projectile.tileCollide = true;
-            Projectile.penetrate = 2;
+
+            Projectile.tileCollide = false;
+            Projectile.penetrate = 3;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
 
         public override void AI()
@@ -134,20 +142,30 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
                     ManageTrail();
                 }
 
-                if (Projectile.velocity.Y < 16f)
+                if (Projectile.wet && Projectile.timeLeft > 40)
                 {
-                    Projectile.velocity.Y += 0.03f;
-                    if (Projectile.velocity.Y > 0)
-                        Projectile.velocity.Y *= 1.01f;
+                    Projectile.timeLeft = 40;
+                    Projectile.friendly = false;
+                    Projectile.velocity *= 0.5f;
                 }
-                else if (Projectile.velocity.Y > 16f)
-                    Projectile.velocity.Y = 16f;
-                
+
+                Projectile.velocity *= 0.995f;
+                if (Projectile.penetrate < 0 || Projectile.timeLeft < 40)
+                    Projectile.velocity *= 0.98f;
+
                 if (Main.rand.NextBool(7))
                     Dust.NewDustPerfect(Projectile.Center, DustID.Torch, Main.rand.NextVector2Circular(1f, 1f), 50, default, 3f).noGravity = true;
 
                 if (Main.rand.NextBool(6))
                     Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedEmber>(), -Projectile.velocity.RotatedByRandom(0.5f) * Main.rand.NextFloat(0.2f), 50, new Color(Main.rand.Next(150, 255), Main.rand.Next(50, 150), 0, 0), 0.15f).customData = Main.rand.NextBool() ? -1 : 1;
+
+                if (Main.rand.NextBool() && Projectile.timeLeft > 40)
+                {
+                    ParticleHandler.SpawnParticle(new FireParticle(Projectile.Center, Projectile.velocity.RotatedByRandom(0.02f) * Main.rand.NextFloat(0.9f, 1.5f), new Color(0.1f, 0, 0f), Main.rand.NextFloat(0.06f, 0.12f), Main.rand.Next(35, 60), true, Main.rand.NextFloat(0.12f, 0.2f))
+                    {
+                        LayerPixel = RenderLayer.UnderNPCs
+                    });
+                }
             }
             else
             {
@@ -156,9 +174,19 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
                     Projectile.friendly = true;
 
                     if (Main.myPlayer == Projectile.owner)
-                        Projectile.velocity += Projectile.DirectionTo(Main.MouseWorld) * Main.rand.NextFloat(7f, 12f);
+                        Projectile.velocity += Projectile.DirectionTo(Main.MouseWorld) * Main.rand.NextFloat(12f, 15f);
 
                     Projectile.netUpdate = true;
+
+                    new SoundStyle("BombusApisBee/Sounds/Crossmod/Calamity/HeavyWhooshShort").PlayWith(Projectile.Center, 0.3f, 0.1f, 0.5f);
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        ParticleHandler.SpawnParticle(new FireParticle(Projectile.Center + Main.rand.NextVector2Circular(15f, 15f), Main.rand.NextVector2Circular(0.2f, 0.2f), new Color(0.1f, 0, 0f), Main.rand.NextFloat(0.07f, 0.1f), 55)
+                        {
+                            LayerPixel = RenderLayer.UnderNPCs
+                        });
+                    }
                 }
 
                 Vector2 target = Owner.Center + originalCenter;
@@ -182,7 +210,29 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            new SoundStyle("BombusApisBee/Sounds/Item/FireHit").PlayWith(Projectile.Center, 0, 0, 0.35f);
+
+            Main.player[Projectile.owner].Bombus().AddShake(5);
+
             target.AddBuff(BuffID.OnFire3, 300);
+
+            if (Projectile.penetrate == 1)
+                Projectile.timeLeft = 40;
+
+            for (int i = 0; i < 15; i++)
+            {
+                Dust.NewDustPerfect(Projectile.Center, DustID.Torch, Main.rand.NextVector2Circular(4f, 4f), 50, default, 3f).noGravity = true;
+
+                Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedEmber>(), Main.rand.NextVector2Circular(2.5f, 2.5f), 50, new Color(Main.rand.Next(150, 255), Main.rand.Next(50, 150), 0, 0), 0.2f).customData = Main.rand.NextBool() ? -1 : 1;
+            }
+
+            for (int i = 0; i < 9; i++)
+            {
+                ParticleHandler.SpawnParticle(new FireParticle(Projectile.Center + Main.rand.NextVector2Circular(15f, 15f), Main.rand.NextVector2Circular(1f, 1f) - Vector2.UnitY * Main.rand.NextFloat(2.5f), new Color(0.1f, 0, 0f), Main.rand.NextFloat(0.07f, 0.1f), 45)
+                {
+                    LayerPixel = RenderLayer.UnderNPCs
+                });
+            }
         }
 
         public override void OnKill(int timeLeft)
@@ -211,18 +261,21 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
 
         private float Fade()
         {
+            if (Projectile.timeLeft < 30f)
+                return Projectile.timeLeft / 30f;
+
             if (Timer < 60f)
                 return 0f;
 
             if (Timer > 90f)
                 return 1f;
-
+            
             return (Timer - 60f) / 30f;
         }
 
         private void ManageTrail()
         {
-            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(11f, 4f, EaseFunction.EaseCircularIn.Ease(1f - factor)), factor =>
+            trail = trail ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(9f, 3f, EaseFunction.EaseCircularIn.Ease(1f - factor)), factor =>
             {
                 return new Color(255, 50, 20) * factor.X * Fade();
             });
@@ -230,7 +283,7 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
             trail.Positions = cache.ToArray();
             trail.NextPosition = Projectile.Center + Projectile.velocity;
 
-            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(9f, 3f, EaseFunction.EaseCircularIn.Ease(1f - factor)), factor =>
+            trail2 = trail2 ?? new Trail(Main.instance.GraphicsDevice, 15, new RoundedTip(), factor => MathHelper.Lerp(7f, 2f, EaseFunction.EaseCircularIn.Ease(1f - factor)), factor =>
             {
                 return BeeUtils.MulticolorLerp(factor.X, [new Color(200, 110, 20, 0), new Color(200, 50, 0, 0), new Color(255, 150, 20)]) * factor.X * Fade();
             });
@@ -269,22 +322,27 @@ namespace BombusApisBee.Content.Hell.Items.MoltenCharm
             float fadeIn = (Timer - 60f) / 30f;
             fadeIn = Utils.Clamp(fadeIn, 0, 1);
 
+            float fadeOut = 1f;
+
+            if (Projectile.timeLeft < 30f)
+                fadeOut = Projectile.timeLeft / 30f;
+
             for (int i = 0; i < cache.Count; i += 2)
             {
                 float lerp = i / (float)cache.Count;
                 
-                sb.Draw(bloom, cache[i] - Main.screenPosition, null, new Color(255, 50, 0, 0) * 0.5f * lerp * fadeIn, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
+                sb.Draw(bloom, cache[i] - Main.screenPosition, null, new Color(255, 50, 0, 0) * 0.5f * lerp * fadeIn * fadeOut, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
 
-                sb.Draw(bloom, cache[i] - Main.screenPosition, null, new Color(255, 150, 0, 0) * 0.5f * lerp * fadeIn, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
+                sb.Draw(bloom, cache[i] - Main.screenPosition, null, new Color(255, 150, 0, 0) * 0.5f * lerp * fadeIn * fadeOut, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
 
-                sb.Draw(fireball, cache[i] - Main.screenPosition, frame, Color.White * 0.5f * lerp, Projectile.rotation - MathHelper.PiOver2, frame.Size() / 2f, 1f, 0f, 0f);
+                sb.Draw(fireball, cache[i] - Main.screenPosition, frame, Color.White * 0.5f * lerp * fadeOut, Projectile.rotation - MathHelper.PiOver2, frame.Size() / 2f, 1f, 0f, 0f);
             }
             
-            sb.Draw(bloom, Projectile.Center - Main.screenPosition, null, new Color(255, 50, 0, 0) * 0.5f * fadeIn, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
+            sb.Draw(bloom, Projectile.Center - Main.screenPosition, null, new Color(255, 50, 0, 0) * 0.5f * fadeIn * fadeOut, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
 
-            sb.Draw(bloom, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 0, 0) * 0.5f * fadeIn, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
+            sb.Draw(bloom, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 0, 0) * 0.5f * fadeIn * fadeOut, 0f, bloom.Size() / 2f, 0.45f, 0f, 0f);
 
-            sb.Draw(fireball, Projectile.Center - Main.screenPosition, frame, Color.White, Projectile.rotation - MathHelper.PiOver2,  frame.Size() / 2f, 1f, 0f, 0f);
+            sb.Draw(fireball, Projectile.Center - Main.screenPosition, frame, Color.White * fadeOut, Projectile.rotation - MathHelper.PiOver2,  frame.Size() / 2f, 1f, 0f, 0f);
 
             return false;
         }

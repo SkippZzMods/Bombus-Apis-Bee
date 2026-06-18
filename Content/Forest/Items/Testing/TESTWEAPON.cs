@@ -1,5 +1,7 @@
 using BombusApisBee.Content.Hell.Items.HellcombShard;
 using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.ParticleSystem;
+using Terraria;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Forest.Items.Testing
@@ -40,6 +42,8 @@ namespace BombusApisBee.Content.Forest.Items.Testing
         {
             player.Beekeeper().SHOWCASEMODETIMER = 0;
             Vector2 pos = Main.MouseWorld;
+
+            ParticleHandler.SpawnParticle(new StarImpactParticle(pos, Color.Yellow with { A = 0 }, new(0.5f, 0.3f), new(2.5f, 0.1f), 120));
             return false;
         }
 
@@ -48,6 +52,20 @@ namespace BombusApisBee.Content.Forest.Items.Testing
             player.Beekeeper().SHOWCASEMODETIMER = 6000;
             player.Beekeeper().BeeResourceReserved = 0;
             player.IncreaseBeeCrit(100);
+        }
+    }
+
+    public class TestAccessory : BeekeeperAccessory
+    {
+        public TestAccessory() : base("Test Accessory", "For debugging purposes") { }
+        public override void SafeUpdateEquip(Player Player)
+        {
+            Player.Beekeeper().BeeResourceCurrent = 100;
+            Player.IncreaseBeeDamage(-0.8f);
+            Player.Beekeeper().SHOWCASEMODETIMER = 20;
+            
+            if (Player.HeldItem.ModItem is BeekeeperWeapon)
+               (Player.HeldItem.ModItem as BeekeeperWeapon).SHOWCASEMODE = true;
         }
     }
 }

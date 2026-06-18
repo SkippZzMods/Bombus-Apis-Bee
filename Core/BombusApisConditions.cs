@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.ItemDropRules;
+﻿using BombusApisBee.Core.BeekeeperClass;
+using Terraria.GameContent.ItemDropRules;
 
 namespace BombusApisBee.Core
 {
@@ -35,5 +36,16 @@ namespace BombusApisBee.Core
 
         public bool CanShowItemDropInUI() => true;
         public string GetConditionDescription() => "Drops from Blood Moon enemies";
+    }
+
+    public class PollenCondition : IItemDropRuleCondition, IProvideItemConditionDescription
+    {
+        public bool CanDrop(DropAttemptInfo info)
+        {
+            return info.player.HeldItem.CountsAsClass<BeekeeperDamageClass>();
+        }
+
+        public bool CanShowItemDropInUI() => true;
+        public string GetConditionDescription() => "Drops from killing enemies with beekeeper weapons";
     }
 }

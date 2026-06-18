@@ -1,25 +1,27 @@
 ﻿using BombusApisBee.Core.Systems.ParticleSystem;
-
 namespace BombusApisBee.Content.Particles
 {
-    public class FallenStarParticle : Particle
+    public class StarImpactParticle : Particle
     {
         internal Color[] _bloomColors;
         internal Color[] _starColors;
+
+        Vector2 _scale;
+        Vector2 _endScale;
+
         public override ParticleDrawType DrawType => ParticleDrawType.Custom;
 
-        public FallenStarParticle(Vector2 position, Vector2 velocity, Color color, float scale, int maxTime)
+        public StarImpactParticle(Vector2 position, Color color, Vector2 scale, Vector2 endScale, int maxTime)
         {
             Position = position;
-            Velocity = velocity;
-            Rotation = Main.rand.NextFloat(MathHelper.TwoPi);
-            Scale = scale;
+            _scale = scale;
+            _endScale = endScale;
             MaxTime = maxTime;
             _bloomColors = [color];
             _starColors = [color];
         }
 
-        public FallenStarParticle(Vector2 position, Vector2 velocity, Color[] starColors, Color[] bloomColors, float scale, int maxTime) : this(position, velocity, Color.White, scale, maxTime)
+        public StarImpactParticle(Vector2 position, Color[] starColors, Color[] bloomColors, Vector2 scale, Vector2 endScale, int maxTime) : this(position, Color.White, scale, endScale, maxTime)
         {
             _bloomColors = bloomColors;
             _starColors = starColors;
@@ -28,15 +30,12 @@ namespace BombusApisBee.Content.Particles
         public override void Update()
         {
             Lighting.AddLight(Position, _starColors[0].ToVector3() * (1f - Progress) * 0.5f);
-            Velocity *= 0.97f;
-            Rotation += Velocity.Length() * 0.04f;
         }
 
         public override void CustomDraw(SpriteBatch spriteBatch)
         {
-            Main.instance.LoadProjectile(9);
-
-            var starTexture = TextureAssets.Projectile[9].Value;
+            Main.instance.LoadProjectile(79);
+            var starTexture = TextureAssets.Projectile[79].Value;
             var bloomTex = ParticleHandler.GetTexture(Type);
 
             float progress = EaseBuilder.EaseCircularIn.Ease(1f - Progress);
@@ -54,10 +53,16 @@ namespace BombusApisBee.Content.Particles
             else if (_bloomColors.Length > 2)
                 starColor = BeeUtils.MulticolorLerp(progress, _bloomColors);
 
+            Vector2 scale = Vector2.Lerp(_scale, _endScale, 1f - progress);
 
-            spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, starColor, Rotation, starTexture.Size() / 2, Scale * progress, SpriteEffects.None, 0);
 
-            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, bloomColor * 0.2f, Rotation, bloomTex.Size() / 2, Scale * progress, SpriteEffects.None, 0);
+            spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, starColor * progress, 0f, starTexture.Size() / 2, scale, SpriteEffects.None, 0);
+
+            spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, Color.White with { A = 0 } * 0.7f * progress, 0f, starTexture.Size() / 2, scale * 0.8f, SpriteEffects.None, 0);
+
+            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, bloomColor * 0.5f * progress, 0f, bloomTex.Size() / 2, scale.Length() * 0.35f, SpriteEffects.None, 0);
+
+            spriteBatch.Draw(bloomTex, Position - Main.screenPosition, null, Color.White with { A = 0 } * 0.4f * progress, 0f, bloomTex.Size() / 2, scale.Length() * 0.15f, SpriteEffects.None, 0);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace BombusApisBee.Core
         internal int resourceBonus = 0;
         internal string displayName;
 
-        public override PrefixCategory Category => PrefixCategory.Custom;
+        public override PrefixCategory Category => PrefixCategory.AnyWeapon;
 
         public HymenoptraPrefix() { }
 

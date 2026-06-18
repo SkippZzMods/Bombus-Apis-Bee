@@ -6,6 +6,7 @@ using CalamityMod;
 using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Materials;
 using CalamityMod.Particles;
+using Terraria;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
@@ -42,6 +43,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
         private void CheckShield(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var gp = proj.GetGlobalProjectile<WulfrumHoneycombShardGlobalProjectile>();
+
             if (gp.HasShield)
             {
                 gp.HasShield = false;
@@ -102,6 +104,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
             var mp = player.GetModPlayer<BombusApisCalamityPlayer>();
 
             player.Beekeeper().BeeStrengthenChance += 0.25f;
+
             mp.WulfrumHCShard = true;
             mp.WulfrumHCShardDraw = !hideVisual;
         }
@@ -130,7 +133,10 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Wulfrum
             bool giantBee = projectile.type == ProjectileID.GiantBee;
             bool giantModdedBee = projectile.ModProjectile as CommonBeeProjectile != null && (projectile.ModProjectile as CommonBeeProjectile).Giant;
             if ((giantBee || giantModdedBee) && Main.player[projectile.owner].GetModPlayer<BombusApisCalamityPlayer>().WulfrumHCShard && !Main.player[projectile.owner].HasBuff<HoneycombShardCooldown>())
+            {
                 HasShield = true;
+                Main.player[projectile.owner].AddBuff<HoneycombShardCooldown>(120);
+            }             
         }
     }
 }

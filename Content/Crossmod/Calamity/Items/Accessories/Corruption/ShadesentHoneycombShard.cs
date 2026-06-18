@@ -1,28 +1,27 @@
 ﻿using BombusApisBee.Content.Crossmod.Calamity.Core;
 using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Core.Common.BeeProjectile;
+using BombusApisBee.Core.Common.HoneycombShard;
+using BombusApisBee.Core.Systems.ParticleSystem;
+using BombusApisBee.Core.Systems.PixelationSystem;
 using CalamityMod.Items.Materials;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Corruption
 {
-    public class ShadesentHoneycombShard : CalamityItem
+    [JITWhenModsEnabled("CalamityMod")]
+    public class ShadesentHoneycombShard : HoneycombShardItem
     {
-        public override void SetStaticDefaults()
+        public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
+        public ShadesentHoneycombShard() : base("Shadesent Honeycomb Shard", "Increases chance to strengthen friendly bees by 30%\nStrengthened bees can travel through walls, empowering their critical strike chance", -1) { }
+        public override void SafeSetDefaults()
         {
-            Tooltip.SetDefault("Increases chance to strengthen friendly bees by 35%\nStrengthened bees can travel through walls, empowering their critical strike chance");
-        }
-
-        public override void SetDefaults()
-        {
-            Item.width = Item.height = 32;
-            Item.accessory = true;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(gold: 1);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.Beekeeper().BeeStrengthenChance += 0.35f;
+            player.Beekeeper().BeeStrengthenChance += 0.30f;
             player.GetModPlayer<BombusApisCalamityPlayer>().ShadesentShard = true;
         }
 
@@ -46,9 +45,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Corruption
             if (!entity.friendly)
                 return false;
 
-            if (entity.type == ProjectileID.Bee || entity.type == ProjectileID.GiantBee)
-                return true;
-
             if (entity.ModProjectile != null && entity.ModProjectile is CommonBeeProjectile)
                 return true;
 
@@ -66,6 +62,14 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Corruption
                 _origCrit = entity.CritChance;
         }
 
+        public static Color[] shadowPallete =
+                [
+                    new Color(5, 5, 5),
+                    new Color(53, 42, 81),
+                    new Color(87, 62, 132),
+                    new Color(152, 137, 255)
+                ];
+
         public override void AI(Projectile projectile)
         {
             if (Enabled(projectile))
@@ -75,12 +79,14 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Corruption
 
                 if (_inTileTimer > 0)
                 {
-                    Main.NewText("testing" + _inTileTimer);
+                    if (Main.rand.NextBool(7))
+                    {
+                        ParticleHandler.SpawnParticle(new FireParticle(projectile.Center + Main.rand.NextVector2Circular(15f, 15f), -projectile.velocity * 0.2f, new(0.1f, 0.1f, 0.1f), Main.rand.NextFloat(0.03f, 0.06f), 35, palletColors: shadowPallete)
+                        {
+                            LayerPixel = RenderLayer.UnderNPCs
+                        });
+                    }
 
-                    projectile.CritChance = _origCrit + 100;
-                    _inTileTimer--;
-                    if (_inTileTimer == 0)
-                        projectile.CritChance = _origCrit;
                 }
                 else
                 {
@@ -102,13 +108,15 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Corruption
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (Main.player[projectile.owner].Beekeeper().RerollCrit(12))
+                modifiers.SetCrit();
         }
 
         internal static bool Enabled(Projectile p)
         {
             if (p.TryGetOwner(out Player player))
             {
-                return player.GetModPlayer<BombusApisCalamityPlayer>().ShadesentShard;
+                return player.GetModPlayer<BombusApisCalamityPlayer>().ShadesentShard && BeeUtils.IsStrongBee(p.whoAmI);
             }
 
             return false;

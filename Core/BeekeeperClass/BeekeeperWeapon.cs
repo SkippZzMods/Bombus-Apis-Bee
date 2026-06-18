@@ -98,7 +98,12 @@ namespace BombusApisBee.Core.BeekeeperClass
             return SafeCanUseItem(player) && bee;
         }
 
-        public sealed override int ChoosePrefix(UnifiedRandom rand)
+        public override bool WeaponPrefix()
+        {
+            return true;
+        }
+
+        /*public sealed override int ChoosePrefix(UnifiedRandom rand)
         {
             List<int> prefixes = [
                 PrefixType<Rotten>(),
@@ -136,6 +141,6 @@ namespace BombusApisBee.Core.BeekeeperClass
                 prefixes.Add(PrefixType<Delectable>());
 
             return rand.Next(prefixes);
-        }
+        }*/
     }
 }

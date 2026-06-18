@@ -27,8 +27,11 @@ namespace BombusApisBee.Core.Loading
 
         public static void LoadShader(string name, string path)
         {
-            var screenRef = new Ref<Effect>(GetInstance<BombusApisBee>().Assets.Request<Effect>(path, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
-            Filters.Scene[name] = new Filter(new ScreenShaderData(screenRef, screenRef.Value.CurrentTechnique.Passes[0].Name), EffectPriority.High);
+            var shaderAsset = GetInstance<BombusApisBee>().Assets.Request<Effect>(path, ReLogic.Content.AssetRequestMode.ImmediateLoad);
+
+            string passName = shaderAsset.Value.CurrentTechnique.Passes[0].Name;
+
+            Filters.Scene[name] = new Filter(new ScreenShaderData(shaderAsset, passName), EffectPriority.High);
             Filters.Scene[name].Load();
         }
     }

@@ -1,9 +1,23 @@
-﻿[h1]Bombus Apis Bee (The Bee Mod!)[/h1]
+﻿[h1]Bombus Apis[/h1]
+
 [url=https://discord.com/invite/ugnX7e7uMd]Discord[/url] [url=https://terrariamods.fandom.com/wiki/BombusApis]Official Wiki (Work In Progress)[/url] [url=https://forums.terraria.org/index.php?threads/the-terraria-bee-mod-bombusapis.109431/]Forum Page[/url]
 
-Bombus Apis Bee is a content mod that adds a new class, the Beekeeper! This class utilizes Honey, a custom resource, to use with beekeeper weapons. Honey is custom resource, which constantly regenerates at a slow rate. This can be increased to much faster via use of the class' gimmick: Loyal Bees. While playing as the Beekeeper, 3 Bees will hover around the player, and you can get more Loyal Bees via accessories and armor sets. The Loyal Bees have three modes, all with their own uses. There is Defense, Offense, and Gathering. While they are in Defense Mode, you are granted defensive bonuses such as defense and dr akin to how many Loyal Bees you currently have. Along with this, you are granted a honey shield which can block attacks. While in Offense mode, you are granted offensive bonuses, and your Loyal Bees will seek out and attack enemies. While your Loyal Bees are in Gathering Mode, they will seek out enemies and lodge themselves in them, granting increased honey regeneration and dealing DoT. Keep in mind damage is decreased in Gathering Mode, so the best way to play is to be constantly switching between modes. The Beekeeper class has a large focus on homing and strong damage, with the drawbacks being very little defense, usually having as much or less than summoner throughout progression.
+Join 40,000+ players in experiencing Terraria's sweetest mod! 
 
-This mod currently has 52 weapons, 7 armor sets, and 26 accessories. 
+Bombus Apis introduces a completely custom, fully fleshed-out new combat class: The Beekeeper. Control the swarm, manage a brand new resource, and utilize high-damage homing weaponry to melt bosses. 
+
+Using the beekeeper's Loyal Bees, you can command an army of bees with three modes, able to be swapped in combat: 
+[list]
+[*] [b]Defense:[/b] Grants defensive bonuses and a honey shield.
+[*] [b]Offense:[/b] Loyal Bees seek out and attack enemies.
+[*] [b]Gathering:[/b] Bees lodge into enemies for DoT and increased honey regen.
+[/list]
+
+Leverage the power of the hive to become Terraria's greatest beekeeper!
+
+This mod currently has 75 weapons, 7 armor sets, and 35 accessories. 
+
+This includes 11 weapons, and 7 accessories that are cross-mod specifically with the Calamity Mod.
 
 [b]Be sure to join the Discord server linked above to see spoilers of upcoming updates, news and patch notes about the mod, and talk with people who are knowledgeable about the mod, including me[/b]
 
