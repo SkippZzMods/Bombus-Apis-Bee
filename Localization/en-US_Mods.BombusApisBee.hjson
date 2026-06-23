@@ -1543,6 +1543,7 @@ Projectiles: {
 	WulfrumStingerPowerCellProjectile.DisplayName: Wulfrum Power Cell
 	WulfrumStingerProjectile.DisplayName: Wulfrum Stinger
 	StarryApiaryHoldout.DisplayName: Apiary
+	HoneycombProjectile.DisplayName: Honeycomb
 }
 
 NPCs: {

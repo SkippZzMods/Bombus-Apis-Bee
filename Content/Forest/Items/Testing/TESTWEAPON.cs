@@ -43,7 +43,7 @@ namespace BombusApisBee.Content.Forest.Items.Testing
             player.Beekeeper().SHOWCASEMODETIMER = 0;
             Vector2 pos = Main.MouseWorld;
 
-            ParticleHandler.SpawnParticle(new StarImpactParticle(pos, Color.Yellow with { A = 0 }, new(0.5f, 0.3f), new(2.5f, 0.1f), 120));
+            ParticleHandler.SpawnParticle(new SmokeParticle(pos, Main.rand.NextVector2Circular(2f, 2f), new Color(200, 150, 20), new Color(211, 133, 11), 0.1f, 50, addLight: false));
             return false;
         }
 
@@ -61,7 +61,7 @@ namespace BombusApisBee.Content.Forest.Items.Testing
         public override void SafeUpdateEquip(Player Player)
         {
             Player.Beekeeper().BeeResourceCurrent = 100;
-            Player.IncreaseBeeDamage(-0.8f);
+            //Player.IncreaseBeeDamage(-0.8f);
             Player.Beekeeper().SHOWCASEMODETIMER = 20;
             
             if (Player.HeldItem.ModItem is BeekeeperWeapon)

@@ -1,6 +1,7 @@
 ﻿using BombusApisBee.Assets;
 using BombusApisBee.Content.Dusts.Pixelized;
 using BombusApisBee.Core.BeekeeperClass;
+using BombusApisBee.Core.Systems.ParticleSystem;
 using Terraria;
 
 namespace BombusApisBee.Core.Common.Apiary

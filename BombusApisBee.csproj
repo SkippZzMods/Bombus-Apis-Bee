@@ -26,12 +26,17 @@
     <None Remove="Assets\ExtraTextures\SmokeTransparent_3.png" />
     <None Remove="Assets\ExtraTextures\StarAlpha.png" />
     <None Remove="Assets\ExtraTextures\Star_01.png" />
+    <None Remove="Assets\Shaders\DissipatingSmoke.fx" />
     <None Remove="Content\Dusts\CoralcombDust.png" />
     <None Remove="Content\Dusts\GraveBlood.png" />
     <None Remove="Content\Dusts\HitSlashDust.png" />
     <None Remove="Content\Dusts\SmokeDust2.png" />
     <None Remove="Content\Dusts\WaterBubble.png" />
+    <None Remove="Content\Forest\Items\Honeycomb\HoneycombParticle_01.png" />
+    <None Remove="Content\Forest\Items\Honeycomb\HoneycombParticle_02.png" />
+    <None Remove="Content\Forest\Items\Honeycomb\HoneycombParticle_03.png" />
     <None Remove="Content\Forest\Items\HoneyFlareGun\HoneyFlareGun.png" />
+    <None Remove="Content\Particles\SmokeParticle.png" />
     <None Remove="Content\Snow\Items\BorealApiary\BorealApiary_Glowy.png" />
     <None Remove="Content\Snow\Items\BorealApiary\BorealApiary_Outline.png" />
     <None Remove="Core\Systems\PixelationSystem\README.txt" />

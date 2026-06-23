@@ -1,4 +1,5 @@
 ﻿using BombusApisBee.Core.Systems.ParticleSystem;
+using BombusApisBee.Core.Systems.PixelationSystem;
 
 namespace BombusApisBee.Content.Particles
 {
@@ -23,6 +24,12 @@ namespace BombusApisBee.Content.Particles
         {
             _bloomColors = bloomColors;
             _starColors = starColors;
+        }
+
+        public StarParticle(Vector2 position, Vector2 velocity, Color starColor, Color bloomColor, float scale, int maxTime) : this(position, velocity, Color.White, scale, maxTime)
+        {
+            _bloomColors = [bloomColor];
+            _starColors = [starColor];
         }
 
         public override void Update()
@@ -54,6 +61,9 @@ namespace BombusApisBee.Content.Particles
                 bloomColor = Color.Lerp(_bloomColors[0], _bloomColors[1], progress);
             else if (_bloomColors.Length > 2)
                 starColor = BeeUtils.MulticolorLerp(progress, _bloomColors);
+
+            bloomColor.A = 0;
+            starColor.A = 0;
 
 
             spriteBatch.Draw(starTexture, Position - Main.screenPosition, null, starColor, Rotation, starTexture.Size() / 2, Scale * progress, SpriteEffects.None, 0);

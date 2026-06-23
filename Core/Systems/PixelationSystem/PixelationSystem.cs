@@ -227,6 +227,7 @@ namespace BombusApisBee.Core.Systems.PixelationSystem
         OverPlayers = 4,
         OverWiresUI = 5,
         Dusts = 6,
+        AboveItems = 7,
     }
 }
 

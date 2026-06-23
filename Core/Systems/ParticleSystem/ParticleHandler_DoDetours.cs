@@ -5,6 +5,20 @@ namespace BombusApisBee.Core.Systems.ParticleSystem
 {
     internal partial class ParticleHandler : ILoadable
     {
+        private void DrawItemParticles(On_Main.orig_DrawItems orig, Main self)
+        {
+            orig(self);
+
+            DrawAllParticles(Main.spriteBatch, RenderLayer.AboveItems);
+        }
+
+        private void DrawDustParticles(On_Main.orig_DrawDust orig, Main self)
+        {
+            orig(self);
+
+            DrawAllParticles(Main.spriteBatch, RenderLayer.Dusts);
+        }
+
         private void DrawParticles(On_Main.orig_DrawCachedProjs orig, Main self, List<int> projCache, bool startSpriteBatch)
         {
             SpriteBatch sb = Main.spriteBatch;

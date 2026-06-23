@@ -30,6 +30,8 @@ namespace BombusApisBee.Core.Systems.ParticleSystem
         public void Load(Mod mod)
         {
             On_Main.DrawCachedProjs += DrawParticles;
+            On_Main.DrawDust += DrawDustParticles;
+            On_Main.DrawItems += DrawItemParticles;
 
             Particles = new Particle[MaxParticlesAllowed];
             QueuedParticles = new Dictionary<Particle, int>();
@@ -57,6 +59,8 @@ namespace BombusApisBee.Core.Systems.ParticleSystem
         public void Unload()
         {
             On_Main.DrawCachedProjs -= DrawParticles;
+            On_Main.DrawDust -= DrawDustParticles;
+            On_Main.DrawItems -= DrawItemParticles;
 
             Particles = null;
             QueuedParticles = null;
