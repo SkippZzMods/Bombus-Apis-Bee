@@ -410,7 +410,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
             return false;
         }
 
-        private BezierCurve GetBezierCurve()
+        private CalamityMod.DataStructures.BezierCurve GetBezierCurve()
         {
             Vector2[] curvePoints =
             {
@@ -420,7 +420,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
                 originalCenter + new Vector2(MathHelper.Lerp(100f, 200f, ChargePercent), 0f).RotatedBy(Projectile.velocity.ToRotation())
             };
 
-            BezierCurve curve = new BezierCurve(curvePoints);
+            CalamityMod.DataStructures.BezierCurve curve = new CalamityMod.DataStructures.BezierCurve(curvePoints);
 
             return curve;
         }

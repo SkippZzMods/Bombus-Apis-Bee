@@ -36,7 +36,7 @@ float4 PixelShaderFunction(float2 coords : TEXCOORD0) : COLOR0
     if (tex.a <= 0.01)
         return float4(0, 0, 0, 0);
     
-    float2 noiseCoords = coords + float2(uTime * -0.2, uTime * 0.5);
+    float2 noiseCoords = coords + float2(uTime * -0.5, uTime * 1.5);
     float4 noiseColor = tex2D(uImage1Sampler, noiseCoords);
     
     float2 distortedCoords = coords + (noiseColor.rg - 0.5) * 0.02;
@@ -44,16 +44,16 @@ float4 PixelShaderFunction(float2 coords : TEXCOORD0) : COLOR0
     float dist = length(coords - 0.5) * 2.0;
     float shape = 1.0 - dist;
     
-    float density = (noiseColor.r * 1.5) * shape - uProgress;
+    float density = (noiseColor.r * 2.0) * shape - uProgress;
    
-    float alpha = smoothstep(-2.0, 2.0, density);
+    float alpha = smoothstep(-2.0, 1.0, density);
     
-    float colorMix = smoothstep(0.0, 0.75, density);
+    float colorMix = smoothstep(0.0, 1.0, density);
     float4 finalColor = tex * lerp(uSecondaryColor, uColor, colorMix);
     
     finalColor.a *= alpha;
     
-    finalColor.rgb *= 0.9;
+    finalColor.rgb *= 1.25;
     
     return finalColor;
 }

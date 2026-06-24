@@ -6,6 +6,7 @@ namespace BombusApisBee.Content.Forest.Items.Honeycomb
 {
     public class Honeycomb : BaseHoneycombWeapon
     {
+        public override int MaxCombo => 8;
         public Honeycomb() : base("Honeycomb", "Throws a fragile honeycomb\nIncreases combo by 1 on hit\nWhen at max combo, direct hits create a burst of bees") { }
 
         public override void AddDefaults()
@@ -170,7 +171,7 @@ namespace BombusApisBee.Content.Forest.Items.Honeycomb
             {
                 ParentWeapon?.AddCombo();
 
-                if (ParentWeapon.HasMaxCombo)
+                if (ParentWeapon.CurrentCombo == ParentWeapon.MaxCombo)
                 {
                     SoundID.MaxMana.PlayWith(Owner.Center);
 

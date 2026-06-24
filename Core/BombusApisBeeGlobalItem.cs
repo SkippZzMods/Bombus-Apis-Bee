@@ -15,7 +15,7 @@ namespace BombusApisBee.Core
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (item.ModItem != null && item.ModItem is BeeKeeperItem)
+            /*if (item.ModItem != null && item.ModItem is BeeKeeperItem)
             {
                 secondtimer++;
                 int index;
@@ -41,7 +41,7 @@ namespace BombusApisBee.Core
 
                     tooltips.Insert(index + 1, new TooltipLine(Mod, "BeeKeeperItemTag", gradient));
                 }
-            }
+            }*/
         }
     }
 }

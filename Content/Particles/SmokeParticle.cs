@@ -36,6 +36,7 @@ namespace BombusApisBee.Content.Particles
 
             _addLight = addLight;
             _addBloom = addBloom;
+            _action = extraUpdateAction;
 
             drawPixellated = true;
             _variant = 1 + Main.rand.Next(3);
@@ -49,10 +50,10 @@ namespace BombusApisBee.Content.Particles
 
         public override void Update()
         {
-            Scale *= 1.03f;
+            Scale *= 1.02f;
 
             Rotation += Velocity.Length() * 0.01f;
-            Velocity *= 0.97f;
+            Velocity *= 0.98f;
 
             if (_addLight)
                 Lighting.AddLight(Position, BloomColor.R / 255f, BloomColor.G / 255f, BloomColor.B / 255f);
@@ -74,12 +75,12 @@ namespace BombusApisBee.Content.Particles
                 fadeIn = EaseBuilder.EaseCircularIn.Ease(1f - (progress - 0.25f) / 0.75f);
 
             spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.EffectMatrix);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.EffectMatrix);
 
             Effect effect = Filters.Scene["DissipatingSmoke"].GetShader().Shader;
 
             effect.Parameters["uTime"].SetValue((float)Main.timeForVisualEffects * 0.01f);
-            effect.Parameters["uProgress"].SetValue(EaseBuilder.EaseCircularInOut.Ease(progress));
+            effect.Parameters["uProgress"].SetValue(progress);
             effect.Parameters["uImage1"].SetValue(Request<Texture2D>(AssetDirectory.Assets + "ShaderTextures/voronoiNoise_01").Value);
             effect.Parameters["uColor"].SetValue(SmokeColor.ToVector4() * fadeIn);
             effect.Parameters["uSecondaryColor"].SetValue(OutlineColor.ToVector4() * fadeIn);

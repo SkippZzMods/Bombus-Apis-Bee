@@ -12,6 +12,7 @@ namespace BombusApisBee.Core.Common.Honeycomb
         private int fadeInBar;
         private int comboDecayTimer;
 
+
         protected BaseHoneycombWeapon(string name, string tooltip) : base()
         {
             this.name = name;
@@ -19,6 +20,7 @@ namespace BombusApisBee.Core.Common.Honeycomb
         }
 
         public virtual int MaxCombo => 5;
+        public virtual int ThrowDustType => DustID.Honey2;
 
         public int CurrentCombo;
 
@@ -64,10 +66,58 @@ namespace BombusApisBee.Core.Common.Honeycomb
             return false;
         }
 
-        public void AddCombo(int amount = 1)
+        public void AddCombo(int amount = 1, int decayTimer = 180)
         {
             CurrentCombo += amount;
-            comboDecayTimer = 180;
+            comboDecayTimer = decayTimer;
+        }
+
+        internal float shootRotation;
+        internal int shootDirection;
+        internal int armDirection;
+
+        public override bool CanUseItem(Player Player)
+        {
+            shootRotation = (Player.Center - Main.MouseWorld).ToRotation();
+            shootDirection = Main.MouseWorld.X < Player.Center.X ? -1 : 1;
+
+            if (armDirection != 1 && armDirection != -1)
+                armDirection = 1;
+
+            armDirection *= -1;
+
+            return base.CanUseItem(Player);
+        }
+
+        public override void UseItemFrame(Player player)
+        {
+            if (Main.myPlayer == player.whoAmI)
+                player.direction = shootDirection;
+
+            float animProgress = 1f - player.itemTime / (float)player.itemTimeMax;
+            float rotation = shootRotation * player.gravDir + 1.5707964f;
+
+            if (animProgress < 0.6f)
+            {
+                float lerper = animProgress / 0.6f;
+                rotation += MathHelper.Lerp(0f, -1.57f * armDirection, EaseFunction.EaseCircularOut.Ease(lerper)) * player.direction;
+
+                ItemEffects(player, rotation, lerper);
+            }
+            else
+            {
+                rotation += -1.57f * armDirection * player.direction;
+            }
+
+            player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, rotation);
+        }
+
+        /// <summary>
+        /// Effects that happen during the players throw animation
+        /// </summary>
+        public virtual void ItemEffects(Player player, float rotation, float lerper)
+        {
+            Dust.NewDustPerfect(player.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, rotation), ThrowDustType, rotation.ToRotationVector2() * 0.5f, 50, default, 1.2f * (1f - lerper)).noGravity = true;
         }
 
         public override void UpdateInventory(Player player)

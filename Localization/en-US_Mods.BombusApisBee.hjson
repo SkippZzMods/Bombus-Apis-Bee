@@ -1544,6 +1544,8 @@ Projectiles: {
 	WulfrumStingerProjectile.DisplayName: Wulfrum Stinger
 	StarryApiaryHoldout.DisplayName: Apiary
 	HoneycombProjectile.DisplayName: Honeycomb
+	StoneShockwave.DisplayName: Shockwave
+	GelatinousHoneycombProjectile.DisplayName: Honeycomb
 }
 
 NPCs: {
