@@ -9,12 +9,16 @@ namespace BombusApisBee.Core.Systems.ParticleSystem
         {
             orig(self);
 
+            SmokeTargetSystem.DrawCompositeSmoke(6, false);
+
             DrawAllParticles(Main.spriteBatch, RenderLayer.AboveItems);
         }
 
         private void DrawDustParticles(On_Main.orig_DrawDust orig, Main self)
         {
             orig(self);
+            
+            SmokeTargetSystem.DrawCompositeSmoke(5, true);
 
             DrawAllParticles(Main.spriteBatch, RenderLayer.Dusts);
         }
@@ -64,26 +68,36 @@ namespace BombusApisBee.Core.Systems.ParticleSystem
 
             if (projCache.Equals(Main.instance.DrawCacheProjsBehindNPCsAndTiles))
             {
+                SmokeTargetSystem.DrawCompositeSmoke(0, !startSpriteBatch);
+
                 DrawAllParticles(sb, RenderLayer.UnderTiles);
             }
 
             if (projCache.Equals(Main.instance.DrawCacheProjsBehindNPCs))
             {
+                SmokeTargetSystem.DrawCompositeSmoke(1, !startSpriteBatch);
+
                 DrawAllParticles(sb, RenderLayer.UnderNPCs);
             }
 
             if (projCache.Equals(Main.instance.DrawCacheProjsBehindProjectiles))
             {
+                SmokeTargetSystem.DrawCompositeSmoke(2, !startSpriteBatch);
+
                 DrawAllParticles(sb, RenderLayer.UnderProjectiles);
             }
 
             if (projCache.Equals(Main.instance.DrawCacheProjsOverPlayers))
             {
+                SmokeTargetSystem.DrawCompositeSmoke(3, !startSpriteBatch);
+
                 DrawAllParticles(sb, RenderLayer.OverPlayers);
             }
 
             if (projCache.Equals(Main.instance.DrawCacheProjsOverWiresUI))
             {
+                SmokeTargetSystem.DrawCompositeSmoke(4, startSpriteBatch);
+
                 DrawAllParticles(sb, RenderLayer.OverWiresUI);
             }
 

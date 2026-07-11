@@ -1546,6 +1546,7 @@ Projectiles: {
 	HoneycombProjectile.DisplayName: Honeycomb
 	StoneShockwave.DisplayName: Shockwave
 	GelatinousHoneycombProjectile.DisplayName: Honeycomb
+	HoneyFlareExplosion.DisplayName: Shockwave
 }
 
 NPCs: {

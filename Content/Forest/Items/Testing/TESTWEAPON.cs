@@ -1,3 +1,4 @@
+using BombusApisBee.Content.Forest.Items.HoneyFlareGun;
 using BombusApisBee.Content.Hell.Items.HellcombShard;
 using BombusApisBee.Core.BeekeeperClass;
 using BombusApisBee.Core.Systems.ParticleSystem;
@@ -43,7 +44,13 @@ namespace BombusApisBee.Content.Forest.Items.Testing
             player.Beekeeper().SHOWCASEMODETIMER = 0;
             Vector2 pos = Main.MouseWorld;
 
-            ParticleHandler.SpawnParticle(new SmokeParticle(pos, Main.rand.NextVector2Circular(2f, 2f), new Color(200, 150, 20), new Color(211, 133, 11), 0.1f, 50, addLight: false));
+            ParticleHandler.SpawnParticle(new CompositeSmoke(pos, -Vector2.UnitY * Main.rand.NextFloat(3.5f), Color.Yellow, 40, false, false, null)
+            {
+                Layer = Core.Systems.PixelationSystem.RenderLayer.UnderNPCs
+            });
+
+            HoneyFlareNPC.ExplodeAllStuckNPCs(player.whoAmI);
+
             return false;
         }
 

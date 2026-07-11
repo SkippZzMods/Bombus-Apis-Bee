@@ -51,7 +51,16 @@ namespace BombusApisBee.Core.Systems.ParticleSystem
         /// <summary>
         /// Call this when you want to clear your particle and remove it from the world.
         /// </summary>
-        public void Kill() => ParticleHandler.DeleteParticleAtIndex(ID);
+        public void Kill()
+        {
+            OnKill();
+            ParticleHandler.DeleteParticleAtIndex(ID);
+        }
+
+        /// <summary>
+        /// Called when a particle is killed
+        /// </summary>
+        public virtual void OnKill() { }
 
         /// <summary>
         /// Called every tick. Update your particle in this method.

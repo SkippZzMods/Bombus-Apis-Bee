@@ -221,13 +221,13 @@ namespace BombusApisBee.Core.Systems.PixelationSystem
 
     public enum RenderLayer : int
     {
-        UnderTiles = 1,
-        UnderNPCs = 2,
-        UnderProjectiles = 3,
-        OverPlayers = 4,
-        OverWiresUI = 5,
-        Dusts = 6,
-        AboveItems = 7,
+        UnderTiles = 0,
+        UnderNPCs = 1,
+        UnderProjectiles = 2,
+        OverPlayers = 3,
+        OverWiresUI = 4,
+        Dusts = 5,
+        AboveItems = 6,
     }
 }
 
