@@ -6,8 +6,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("'It costs four hundred thousand bottles of honey to fire this weapon... for twelve seconds'");
-            DisplayName.SetDefault("Beenigun");
+
         }
 
         public override void SafeSetDefaults()

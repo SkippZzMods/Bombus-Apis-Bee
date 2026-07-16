@@ -6,7 +6,7 @@
         public ref float healing => ref Projectile.ai[1];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Galactic Healing Orb");
+
         }
         public override void SetDefaults()
         {

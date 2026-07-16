@@ -11,7 +11,7 @@ namespace BombusApisBee.Content.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Stinger");
+
         }
 
         public override void SetDefaults()

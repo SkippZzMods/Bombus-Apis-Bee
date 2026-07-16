@@ -12,7 +12,7 @@ namespace BombusApisBee.Content.Jungle.Items.Beemstick
         public bool spawnedGore;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Blasts a spread of bee buckshot and bees\n'This... is my BEEMSTICK'");
+
         }
 
         public override void SafeSetDefaults()

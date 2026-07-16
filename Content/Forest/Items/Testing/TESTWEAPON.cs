@@ -11,8 +11,6 @@ namespace BombusApisBee.Content.Forest.Items.Testing
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Test Honeycomb");
-            Tooltip.SetDefault("TEST DONT USE");
 
             SHOWCASEMODE = true;
         }

@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Eclipse.Items.BeeFlasks
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a variety of bee related flasks\n'Might wanna wear some goggles'");
+
         }
 
         public override void SafeSetDefaults()

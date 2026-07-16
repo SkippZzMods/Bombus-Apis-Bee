@@ -8,8 +8,7 @@ namespace BombusApisBee.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee Squire!");
-            Description.SetDefault("The Bee Squire will protect you with his life!");
+
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

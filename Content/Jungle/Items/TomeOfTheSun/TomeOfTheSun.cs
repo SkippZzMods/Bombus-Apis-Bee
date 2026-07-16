@@ -5,7 +5,7 @@ public class TomeOfTheSun : BeekeeperWeapon
 {
     public override void SafeSetStaticDefaults()
     {
-        Tooltip.SetDefault("Creates a pulse of vibrant nectar energy at the mouse cursor, which splits into homing bolts");
+
     }
 
 

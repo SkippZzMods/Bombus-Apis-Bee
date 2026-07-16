@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
         public override bool AltFunctionUse(Player player) => cooldown <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Conjures skeletal bees which slash enemies\nPress <right> to fire a cursed skull, cursing enemies, causing them to take 15% more damage from all sources");
+
         }
 
         public override void SafeSetDefaults()

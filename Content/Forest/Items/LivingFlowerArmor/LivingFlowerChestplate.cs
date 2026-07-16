@@ -7,8 +7,7 @@ namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Living Flower Chestplate");
-            Tooltip.SetDefault("4% increased beekeeper damage");
+
         }
 
         public override void SetDefaults()

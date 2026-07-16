@@ -6,8 +6,7 @@ namespace BombusApisBee.Content.Pillars.Items.PhotonFragment
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Photonic Particle");
-            Tooltip.SetDefault("'An incessant buzzing sound can be heard coming from this particle'");
+
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 2));
             ItemID.Sets.ItemIconPulse[Item.type] = true;
             ItemID.Sets.ItemNoGravity[Item.type] = true;

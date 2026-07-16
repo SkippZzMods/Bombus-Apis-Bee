@@ -27,7 +27,7 @@ namespace BombusApisBee.Content.Forest.Items.NectarSlasher
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Slasher");
+
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             ProjectileID.Sets.TrailingMode[Type] = 2;
         }
@@ -453,7 +453,7 @@ namespace BombusApisBee.Content.Forest.Items.NectarSlasher
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectarslash");
+
         }
 
         public override void SafeSetDefaults()

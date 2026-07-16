@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased beekeeper damage and critical strike chance\nIncreases maximum honey by 75");
+
             Item.ResearchUnlockCount = 1;
         }
 
@@ -90,7 +90,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyphytecomb");
+
         }
 
         public override void SetDefaults()

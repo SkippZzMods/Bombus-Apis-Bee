@@ -5,7 +5,6 @@
         public override string Texture => "BombusApisBee/Content/Space/Items/StarStrap/AstralStar";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Big Star");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }

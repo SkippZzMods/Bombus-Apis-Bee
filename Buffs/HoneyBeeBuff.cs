@@ -4,8 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Honey Bee");
-            Description.SetDefault("The honey bee will collect honey for you!");
+
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

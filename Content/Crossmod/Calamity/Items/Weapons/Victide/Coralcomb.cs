@@ -12,7 +12,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Victide
         internal int armDirection;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a serrated honeycomb capable of shredding through enemies\nCritical hits bleed enemies\nThe last hit always crits and deals 50% more damage");
+
         }
 
         public override void SafeSetDefaults()
@@ -100,7 +100,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Victide
         public Player Owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Coralcomb");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
         }
@@ -282,8 +282,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Victide
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bleeding");
-            Description.SetDefault("Ouch!");
+
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

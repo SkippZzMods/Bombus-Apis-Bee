@@ -7,7 +7,7 @@
         public int bounces = 5;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Quarter Note");
+
         }
 
         public override void SafeSetDefaults()
@@ -100,7 +100,7 @@
         public int bounces = 5;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Eighth Note");
+
         }
 
         public override void SafeSetDefaults()
@@ -211,7 +211,7 @@
         public int bounces = 5;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Tied Eighth Note");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
         }

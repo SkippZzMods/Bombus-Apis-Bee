@@ -10,15 +10,6 @@ namespace BombusApisBee.Content.Snow.Items.BorealApiary
         public override int BaseUseTime => 21;
         public override int AltUseTime => 30;
 
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Boreal Apiary");
-            Tooltip.SetDefault("" +
-                "Hold <left> to rapidly fire snowy bees\n" +
-                "Hold <right> to fire the bees slower, but take control over the bees\n" +
-                "Controlled bees have 10% increased critical strike chance, and their crits inflict Frostburn");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 6;

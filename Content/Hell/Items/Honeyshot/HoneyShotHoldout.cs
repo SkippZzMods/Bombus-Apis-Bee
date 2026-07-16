@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Hell.Items.Honeyshot
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyshot");
+
         }
 
         public Player owner => Main.player[Projectile.owner];
@@ -177,7 +177,7 @@ namespace BombusApisBee.Content.Hell.Items.Honeyshot
         private Trail trail2;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Arrow");
+
         }
 
         public override void SafeSetDefaults()

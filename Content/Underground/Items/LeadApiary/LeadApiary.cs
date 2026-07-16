@@ -83,16 +83,6 @@ namespace BombusApisBee.Content.Underground.Items.LeadApiary
         public override int BaseUseTime => 25;
         public override int AltUseTime => 36;
 
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Lead Apiary");
-            Tooltip.SetDefault("" +
-                "Hold <left> to rapidly fire bees\n" +
-                "Hold <right> to fire the bees slower, but take control over the bees\n" +
-                "Controlled bees inflict stacks of Lead Poisoning\n" +
-                "'Banned in Michigan'");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 11;

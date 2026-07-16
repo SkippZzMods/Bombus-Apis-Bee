@@ -8,8 +8,7 @@ namespace BombusApisBee.Content.Forest.Items.LivingFlowerArmor
         public int FlowerTimer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Living Flower Crown");
-            Tooltip.SetDefault("3% increased beekeeper critical strike chance\nIncreases maximum honey by 15");
+
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 

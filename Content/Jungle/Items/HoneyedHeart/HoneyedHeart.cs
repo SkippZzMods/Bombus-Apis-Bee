@@ -6,9 +6,9 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyedHeart
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Heart Of Honey");
+
             // TODO: Change this to "Restoring Honey has a 5% chance to heal you for the amount of Honey gained"
-            Tooltip.SetDefault("25% of Honey gained is instead granted as health");
+
         }
 
         public override void SetDefaults()

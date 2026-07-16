@@ -6,7 +6,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey");
+
         }
 
 
@@ -67,7 +67,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey");
+
         }
 
         public override void SafeSetDefaults()

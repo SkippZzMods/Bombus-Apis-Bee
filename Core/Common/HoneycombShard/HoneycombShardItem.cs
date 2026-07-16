@@ -11,8 +11,6 @@ namespace BombusApisBee.Core.Common.HoneycombShard
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Shard Cooldown");
-            Description.SetDefault("You cannot use Honeycomb Shard Effects\nBees still get strengthened, though!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

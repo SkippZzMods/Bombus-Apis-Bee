@@ -7,8 +7,7 @@ namespace BombusApisBee.Content.Forest.Items.BeefinTuna
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee-Fin Tuna");
-            Tooltip.SetDefault("Spews a spread of honey bubbles which burst into bees\n'The meat is said to be incredibly sweet and tender'");
+
             Item.staff[Item.type] = true;
         }
         public override void SafeSetDefaults()

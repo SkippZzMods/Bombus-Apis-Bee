@@ -8,11 +8,6 @@ namespace BombusApisBee.Content.Forest.Items.WoodenApiary
     {
         public override int BaseUseTime => 27;
         public override int AltUseTime => 45;
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Wooden Apiary");
-            Tooltip.SetDefault("Hold <left> to rapidly fire bees\nHold <right> to fire bees slower, but take control over the bees causing them to deal an additonal 3 damage");
-        }
 
         public override void AddDefaults()
         {

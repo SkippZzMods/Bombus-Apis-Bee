@@ -16,13 +16,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.SunkenSea
         internal int shootDirection;
         internal int armDirection;
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<SeashoneHoneycombHoldout>() <= 0;
-        public override void SafeSetStaticDefaults()
-        {
-            Tooltip.SetDefault("<left> to throw the honeycomb\n" +
-                "Hold <right> to manifest a powerful crystal which imbeds in enemies" +
-                "\nStrike enemies with embedded crystals to drive them deeper, eventually shattering the crystal into violent projectiles" +
-                "\nThere can only be one crystal embedded in an enemy at once");
-        }
+
         public override bool AltFunctionUse(Player player) => true;
 
         public override void SafeSetDefaults()
@@ -374,7 +368,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.SunkenSea
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/SunkenSea/SeashoneHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Seashone Honeycomb");
+
             //ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
             //ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -563,7 +557,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.SunkenSea
         public Player Owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Crystal");
+
             //ProjectileID.Sets.TrailingMode[Type] = 0;
             //ProjectileID.Sets.TrailCacheLength[Type] = 7;
         }
@@ -815,7 +809,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.SunkenSea
         public override bool? CanDamage() => Projectile.timeLeft < 465;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Crystal");
+
         }
 
         public override void SetDefaults()

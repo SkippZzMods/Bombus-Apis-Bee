@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gel Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -30,7 +30,7 @@ namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bouncy Slimeball");
+
         }
 
         public override void SafeSetDefaults()
@@ -111,7 +111,7 @@ namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Volatile Ruby");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             Main.projFrames[Type] = 4;
@@ -209,7 +209,7 @@ namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ruby Explosion");
+
         }
 
         public override void AI()

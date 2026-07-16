@@ -5,7 +5,7 @@
         public override string Texture => "BombusApisBee/Content/Forest/Items/PeeperPoker/PeeperPokerHoldout";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Peeper Poker");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }

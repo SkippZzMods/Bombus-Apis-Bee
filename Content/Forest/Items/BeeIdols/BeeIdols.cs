@@ -5,7 +5,7 @@ namespace BombusApisBee.Content.Forest.Items.BeeIdols
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("10% increased chance to not consume honey\n'Clearly ancient civilizations didn't know what bees looked like'");
+
         }
 
         public override void SetDefaults()
@@ -26,7 +26,7 @@ namespace BombusApisBee.Content.Forest.Items.BeeIdols
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("4% increased beekeeper damage and critical strike chance\n'Clearly ancient civilizations didn't know what bees looked like'");
+
         }
 
         public override void SetDefaults()

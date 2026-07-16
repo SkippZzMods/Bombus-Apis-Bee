@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
         public SpectralBee() : base(frameTimer: 4) { }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spectral Bee");
+
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 6;

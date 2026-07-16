@@ -20,7 +20,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Explosion");
+
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -58,7 +58,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Explosion");
+
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

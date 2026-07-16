@@ -15,7 +15,7 @@ namespace BombusApisBee.Content.Forest.Items.PeeperPoker
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Peeper Poker");
+
         }
         public override void SafeSetDefaults()
         {

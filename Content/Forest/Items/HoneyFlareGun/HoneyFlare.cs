@@ -12,7 +12,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Flare");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
         }
@@ -61,21 +61,21 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
 
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-            ParticleHandler.SpawnParticle(new SmallCompositeSmoke(Projectile.Center, Projectile.velocity * 0.3f, new Color(255, Main.rand.Next(190, 210), 20), 20, false, true, null));
-            
-            if (Main.rand.NextBool())
-                ParticleHandler.SpawnParticle(new SmallCompositeSmoke(Projectile.Center, Projectile.velocity * 0.3f, new Color(255, Main.rand.Next(150, 170), 20), 20, false, true, null));
-
+          
             for (int i = 0; i < 2; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center - Projectile.velocity * 0.5f, DustID.Honey2, -Projectile.velocity.RotatedByRandom(0.6f) * Main.rand.NextFloat(0.1f, 0.2f),
                     Main.rand.Next(100), Scale: Main.rand.NextFloat(0.5f, 1.5f)).noGravity = true;
             }
 
-            if (Projectile.timeLeft > 330)
+            if (Projectile.timeLeft > 320)
             {
+                float lerp = EaseBuilder.EaseQuinticInOut.Ease((Projectile.timeLeft - 320) / 40f);
+
+                Lighting.AddLight(Projectile.Center, new Vector3(1f, 0.9f, 0.75f) * lerp);
+
                 Dust.NewDustPerfect(Projectile.Center - Projectile.velocity * 0.5f, ModContent.DustType<GlowFastDecelerate>(), -Projectile.velocity.RotatedByRandom(0.6f) * Main.rand.NextFloat(0.1f, 0.2f),
-                    Main.rand.Next(100), new Color(255, 105, 0), Main.rand.NextFloat(0.3f, 0.5f));
+                    Main.rand.Next(100), new Color(255, 230, 150), Main.rand.NextFloat(0.2f, 0.6f) * lerp);
             }
         }
 
@@ -135,34 +135,43 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            Main.instance.LoadProjectile(79);
+
             Texture2D tex = Request<Texture2D>(Texture).Value;
-            
+            Texture2D outlineTex = Request<Texture2D>(Texture + "_Outline").Value;
+
             var bloom = Request<Texture2D>("BombusApisBee/ExtraTextures/GlowAlpha").Value;
-            var star = Request<Texture2D>("BombusApisBee/Assets/ExtraTextures/StarAlpha").Value;
+            var star = TextureAssets.Projectile[79].Value;
 
             if (!stuck)
             {
-                Main.spriteBatch.Draw(bloom, Projectile.Center - Projectile.velocity - Main.screenPosition, null, new Color(255, 180, 0, 0), 0f, bloom.Size() / 2f, Projectile.scale * 0.35f, 0, 0f);
-
                 for (int i = 0; i < Projectile.oldPos.Length; i++)
                 {
-                    Main.spriteBatch.Draw(tex, Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f - Main.screenPosition, null, lightColor * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length),
+                    float fade = ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
+
+                    Main.spriteBatch.Draw(tex, Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f - Main.screenPosition, null, lightColor * fade,
                         Projectile.rotation, tex.Size() / 2f, Projectile.scale * MathHelper.Lerp(1f, 0.65f, i / (float)Projectile.oldPos.Length), Projectile.direction == -1 ? (SpriteEffects)1 : 0, 0);
+
+                    Main.spriteBatch.Draw(outlineTex, Projectile.oldPos[i] + new Vector2(Projectile.width, Projectile.height) * 0.5f - Main.screenPosition, null, new Color(255, 200, 50) * 0.3f * fade, Projectile.rotation, outlineTex.Size() / 2f, Projectile.scale, 0, 0f);
+
                 }
             }
 
-            if (!stuck)
-                Main.spriteBatch.Draw(bloom, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 0, 0), 0f, bloom.Size() / 2f, Projectile.scale * 0.4f, 0, 0f);
-
             Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2f, Projectile.scale, Projectile.direction == -1 ? (SpriteEffects)1 : 0, 0f);
             
-            if (Projectile.timeLeft > 330 && !stuck)
-            {
-                float lerp = EaseBuilder.EaseQuinticOut.Ease((Projectile.timeLeft - 330) / 30f);
+            Main.spriteBatch.Draw(outlineTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 50) * 0.3f, Projectile.rotation, outlineTex.Size() / 2f, Projectile.scale, 0, 0f);
 
-                Main.spriteBatch.Draw(star, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 0, 0) * lerp, 0f, star.Size() / 2f, Projectile.scale * 0.6f, 0, 0f);
-               
-                Main.spriteBatch.Draw(star, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 0, 0) * lerp, MathHelper.PiOver4, star.Size() / 2f, Projectile.scale * 0.4f, 0, 0f);
+            if (Projectile.timeLeft > 320 && !stuck)
+            {
+                float lerp = EaseBuilder.EaseQuinticInOut.Ease((Projectile.timeLeft - 320) / 40f);
+
+                Vector2 bloomPos = Projectile.Center + Projectile.velocity * 0.5f - Main.screenPosition;
+                
+                Main.spriteBatch.Draw(outlineTex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 50, 0) * lerp, Projectile.rotation, outlineTex.Size() / 2f, Projectile.scale, 0, 0f);
+
+                Main.spriteBatch.Draw(bloom, bloomPos, null, new Color(255, 200, 50, 0) * lerp, 0f, bloom.Size() / 2f, Projectile.scale * 0.4f, 0, 0f);
+
+                Main.spriteBatch.Draw(star, bloomPos, null, new Color(255, 200, 50, 0) * lerp, 0f, star.Size() / 2f, Projectile.scale * 0.4f, 0, 0f);
             }
 
             return false;

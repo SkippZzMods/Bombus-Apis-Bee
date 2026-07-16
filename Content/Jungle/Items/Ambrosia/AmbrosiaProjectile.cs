@@ -11,7 +11,6 @@ namespace BombusApisBee.Content.Jungle.Items.Ambrosia
             ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 300f;
             ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 13.5f;
 
-            DisplayName.SetDefault("Ambrosia");
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
         }
@@ -104,7 +103,7 @@ namespace BombusApisBee.Content.Jungle.Items.Ambrosia
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ambrosia Explosion");
+
         }
 
         public override void AI()

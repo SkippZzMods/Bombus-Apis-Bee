@@ -13,15 +13,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         public override int BaseUseTime => 25;
         public override int AltUseTime => 45;
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Sulphuric Apiary");
-            Tooltip.SetDefault("Hold <left> to fire sulphuric bees\n" +
-                "Hold <right> to fire bees slower, but take control over the bees causing them to inflict Ionized\n" +
-                "Ionized spreads between enemies causing explosions\n" +
-                "Ionized enemies take 15% more damage from non-bee sources of beekeeper damage");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 15;
@@ -157,7 +148,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphuric Bee");
+
             Main.projFrames[Type] = 4;
         }
 
@@ -187,8 +178,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ionized");
-            Description.SetDefault("straight up got a valence electron up in this joint");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -316,7 +305,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphuric Explosion");
+
         }
 
         public override void AI()

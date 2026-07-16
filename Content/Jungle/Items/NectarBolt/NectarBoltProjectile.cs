@@ -10,7 +10,7 @@ namespace BombusApisBee.Content.Jungle.Items.NectarBolt
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Bolt");
+
         }
 
         public override void SafeSetDefaults()
@@ -151,7 +151,7 @@ namespace BombusApisBee.Content.Jungle.Items.NectarBolt
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Bolt");
+
         }
 
         public override void SafeSetDefaults()

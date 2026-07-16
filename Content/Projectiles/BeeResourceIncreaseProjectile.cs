@@ -6,7 +6,7 @@
         public ref float resourceincrease => ref Projectile.ai[1];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey");
+
         }
         public override void SetDefaults()
         {

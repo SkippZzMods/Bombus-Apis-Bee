@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Jungle.Items.Needleshot
         public int shot;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of high velocity stingers and hivebombs");
+
         }
 
         public override void SafeSetDefaults()

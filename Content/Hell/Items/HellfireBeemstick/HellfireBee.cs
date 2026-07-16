@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 

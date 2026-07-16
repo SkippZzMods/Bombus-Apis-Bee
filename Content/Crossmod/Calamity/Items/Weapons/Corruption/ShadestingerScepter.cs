@@ -12,9 +12,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Shadestinger Scepter");
-            Tooltip.SetDefault("Casts a volley of unstable shadestingers, infusing Dark Energy within enemies\n" +
-                "Strike enemies infused with sufficient Dark Energy to rip Shadestung bees from them\n");
+
         }
 
         public override void SafeSetDefaults()
@@ -70,7 +68,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Corruption/ShadestingerScepter";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shadestinger Scepter");
+
         }
 
         public override void SetDefaults()
@@ -276,7 +274,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         public Player Owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shadestinger");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
         }

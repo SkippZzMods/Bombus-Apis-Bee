@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Victide
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Coats your beekeeper attacks with a special hydrophobic coating, causing them to deal more damage when wet\nCauses your bee projectiles no longer die in water\nDisable visibility on accessory to disable water aura drawing on wet projectiles");
+
         }
 
         public override void SetDefaults()

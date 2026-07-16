@@ -10,7 +10,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspYoyo
             ProjectileID.Sets.YoyosLifeTimeMultiplier[Projectile.type] = 14f;
             ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 325f;
             ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 15.5f;
-            DisplayName.SetDefault("Wasp Nest");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
         }

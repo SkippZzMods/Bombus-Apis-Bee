@@ -6,9 +6,9 @@ namespace BombusApisBee.Content.Jungle.Items.TriTipStinger
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tri-Tip Stinger");
+
             // TODO: Change to Beekeeper attacks apply a stacking poison
-            Tooltip.SetDefault("Grants a chance on hit for beekeeper attacks to apply an improved poison\nThe improved poison deals a percentage of the inflicted enemies max hp, and spreads between enemies");
+
         }
 
         public override void SetDefaults()

@@ -9,8 +9,7 @@ namespace BombusApisBee.Content.Forest.Items.Beezooka
         int shots;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of homing bee-rockets, which explode into mini-missiles\nMini-missiles target the closest enemy to the mouse cursor, and explode into shrapnel\n'If God had wanted you to live, he would not have created me!'");
-            DisplayName.SetDefault("Beezooka");
+
         }
 
         public override void SafeSetDefaults()

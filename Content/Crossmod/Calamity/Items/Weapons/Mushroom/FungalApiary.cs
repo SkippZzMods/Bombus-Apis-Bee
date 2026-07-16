@@ -15,12 +15,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
         public override int BaseUseTime => 28;
         public override int AltUseTime => 40;
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Fungal Apiary");
-            Tooltip.SetDefault("Hold <left> to fire fungal bees\nHold <right> to fire bees slower, but take control over the bees causing them to create homing spores on hit\nCritical hits spawn explosive spores");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 8;
@@ -161,7 +155,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fungal Bee");
+
             Main.projFrames[Type] = 4;
         }
 
@@ -203,7 +197,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spore");
 
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
@@ -302,7 +295,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Explosive Spore");
 
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
@@ -446,7 +438,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fungal Explosion");
+
         }
 
         public override void AI()

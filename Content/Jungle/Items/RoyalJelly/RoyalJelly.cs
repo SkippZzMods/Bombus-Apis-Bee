@@ -10,7 +10,7 @@ namespace BombusApisBee.Content.Jungle.Items.RoyalJelly
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Permanently increases maximum honey by 25\n'A delicacy that's highly sought after for its refined taste and healing properties'");
+
         }
 
         public override void SetDefaults()

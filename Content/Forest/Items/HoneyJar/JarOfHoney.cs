@@ -6,8 +6,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyJar
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Jar Of Honey");
-            Tooltip.SetDefault("Increases beekeeper damage by 6%\nIncreases maximum honey by 5\nIncreases life regeneration");
+
             Item.ResearchUnlockCount = 1;
         }
 

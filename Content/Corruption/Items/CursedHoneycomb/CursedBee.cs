@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 

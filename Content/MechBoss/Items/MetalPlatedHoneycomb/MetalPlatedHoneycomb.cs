@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<HoneycombPrime>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold <left> to channel the power of Honeycomb Prime\n'Initializing proj.Ubersaw'\n'Initializing proj.MetalBee'\n'Initializing proj.DeathLaser'\n'Compiling Honeycomb Prime'");
+
         }
 
         public override void SafeSetDefaults()

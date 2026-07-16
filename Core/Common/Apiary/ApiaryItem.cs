@@ -117,17 +117,6 @@ namespace BombusApisBee.Core.Common.Apiary
 
         }
 
-        // see below
-        public virtual void AddStaticDefaults()
-        {
-
-        }
-
-        public sealed override void SafeSetStaticDefaults()
-        {
-            DisplayName.SetDefault("Apiary");
-            AddStaticDefaults();
-        }
 
         // im not doing SafeSafeSetDefaults
         public virtual void AddDefaults()

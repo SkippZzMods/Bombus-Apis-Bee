@@ -47,7 +47,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.NPCs.Enemies.Wulfrum
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Hive");
+
             Main.npcFrameCount[Type] = 2;
         }
 

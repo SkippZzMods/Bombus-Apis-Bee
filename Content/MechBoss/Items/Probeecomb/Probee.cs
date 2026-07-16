@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.MechBoss.Items.Probeecomb
         public Probee() : base(canBeGiant: false, size: new(16)) { }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Probee");
+
             Main.projFrames[Projectile.type] = 1;
         }
 

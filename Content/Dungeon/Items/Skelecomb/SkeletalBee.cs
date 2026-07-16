@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -52,7 +52,7 @@ namespace BombusApisBee.Content.Dungeon.Items.Skelecomb
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skeletal Slash");
+
         }
         public override void SafeSetDefaults()
         {

@@ -12,8 +12,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         internal int shootDirection;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphurstinger Spear");
-            Tooltip.SetDefault("Impales enemies, causing Sulphurstruck enemies to explode\n<right> to throw the spear, inflicting Sulphurstruck");
+
         }
 
         public override void SafeSetDefaults()
@@ -120,7 +119,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         public Player Owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphurstinger Spear");
+
         }
 
         public override void SafeSetDefaults()
@@ -368,7 +367,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Sulphuric/SulphuricStingerSpearProjectile";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphurstinger Spear");
+
         }
 
         public override void SafeSetDefaults()
@@ -684,8 +683,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sulphurstruck");
-            Description.SetDefault("gorkin off the sulphur straight strikin it");
+
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

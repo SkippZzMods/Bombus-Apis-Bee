@@ -6,8 +6,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyedEmblem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyed Emblem");
-            Tooltip.SetDefault("12% increased beekeeper damage\nIncreases maximum honey by 10");
+
             Item.ResearchUnlockCount = 1;
         }
 

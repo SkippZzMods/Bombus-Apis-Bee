@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Poison Cloud");
+
         }
 
         public override void SafeSetDefaults()

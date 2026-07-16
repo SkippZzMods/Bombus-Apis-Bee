@@ -91,7 +91,6 @@ namespace BombusApisBee.Core.Common.BeeProjectile
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault(_displayName);
             Main.projFrames[Type] = _projFrames;
         }
 

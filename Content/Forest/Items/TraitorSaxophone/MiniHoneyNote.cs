@@ -7,7 +7,7 @@
         public int bounces = 3;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Honey Quarter Note");
+
         }
 
         public override void SafeSetDefaults()
@@ -95,7 +95,7 @@
         public int bounces = 3;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Honey Eighth Note");
+
         }
 
         public override void SafeSetDefaults()
@@ -201,7 +201,7 @@
         public int bounces = 3;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Honey Tied Eighth Note");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
         }

@@ -4,8 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Heart of Nectar");
-            Description.SetDefault("Majorly increased life regeneration");
+
             Main.buffNoSave[Type] = true;
         }
 

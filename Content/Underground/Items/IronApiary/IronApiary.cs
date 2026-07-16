@@ -10,16 +10,6 @@ namespace BombusApisBee.Content.Underground.Items.IronApiary
     {
         public override int BaseUseTime => 35;
         public override int AltUseTime => 45;
-
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Iron Apiary");
-            Tooltip.SetDefault("" +
-                "Hold <left> to rapidly fire bees\n" +
-                "Hold <right> to fire the bees slower, but take control over the bees\n" +
-                "Controlled bees get coated in a heavy metal, making them move 25% slower but deal 50% more damage");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 9;

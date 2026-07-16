@@ -7,12 +7,6 @@ namespace BombusApisBee.Content.Space.Items.ElectricHoneycomb
     public class ElectricHoneycombProj : BeeProjectile
     {
         public override string Texture => "BombusApisBee/Content/Space/Items/ElectricHoneycomb/ElectricHoneycomb";
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Electric Honeycomh");
-        }
-
         public override void SafeSetDefaults()
         {
             Projectile.friendly = true;
@@ -121,11 +115,6 @@ namespace BombusApisBee.Content.Space.Items.ElectricHoneycomb
         private bool HasHit;
         private bool collided;
         public override string Texture => BombusApisBee.Invisible;
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Lightning");
-        }
 
         public override void SafeSetDefaults()
         {
@@ -316,7 +305,7 @@ namespace BombusApisBee.Content.Space.Items.ElectricHoneycomb
         }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Electric Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 

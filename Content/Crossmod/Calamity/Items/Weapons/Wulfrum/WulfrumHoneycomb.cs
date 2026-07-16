@@ -22,7 +22,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
         public Color ChargeColor => chargeTimer > 0 ? new Color(55, 180, 220) : new Color(130, 200, 70);
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Press <right> to empower the machination for a short time, at the cost of 20 honey");
+
         }
 
         public override void SafeSetDefaults()
@@ -231,7 +231,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
         public Color SuperchargeColor => Supercharged ? new Color(55, 180, 220) : new Color(130, 200, 70);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Bee");
+
             Main.projFrames[Type] = 4;
         }
 
@@ -290,7 +290,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Laser");
 
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
             ProjectileID.Sets.TrailingMode[Type] = 0;

@@ -5,8 +5,7 @@
         public override string Texture => "BombusApisBee/Content/Space/Items/StarSwarmer/AstralStarSplitting";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Astral Star");
-            Tooltip.SetDefault("you shouldn't see this....");
+
             ItemID.Sets.ItemNoGravity[Item.type] = true;
         }
         public override void SetDefaults()

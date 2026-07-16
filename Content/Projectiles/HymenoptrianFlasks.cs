@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Flask");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 7;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -82,7 +82,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Flask");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 7;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -165,7 +165,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stinger Flask");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 7;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -257,7 +257,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stinger");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
             Main.projFrames[Type] = 2;

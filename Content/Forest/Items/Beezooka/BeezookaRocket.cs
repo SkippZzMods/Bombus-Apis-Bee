@@ -11,7 +11,7 @@ namespace BombusApisBee.Content.Forest.Items.Beezooka
         public int explodingTimer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee Rocket");
+
         }
 
         public override void SafeSetDefaults()
@@ -268,7 +268,7 @@ namespace BombusApisBee.Content.Forest.Items.Beezooka
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini-Bee Rocket");
+
         }
 
         public override void SafeSetDefaults()
@@ -350,7 +350,7 @@ namespace BombusApisBee.Content.Forest.Items.Beezooka
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beezooka Shrapnel");
+
         }
 
         public override void AI()

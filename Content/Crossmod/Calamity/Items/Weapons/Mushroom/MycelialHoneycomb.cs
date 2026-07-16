@@ -14,9 +14,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires fungal bees\n" +
-                "Hold <right> to erupt deadly spores from the nearest tile, inflicting Mycosis\n" +
-                "Mycosis causes inflicted enemies to periodically create fungal bees");
+
         }
 
         public override void SafeSetDefaults()
@@ -199,7 +197,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mycelial Honeycomb");
+
         }
 
         public override void SetDefaults()
@@ -453,7 +451,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Spore");
+
         }
 
         public override void AI()
@@ -644,7 +642,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
-            DisplayName.SetDefault("Mushroom");
+
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -689,8 +687,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Mushroom
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mycosis");
-            Description.SetDefault("Off the goop stinkin straight shrooms");
+
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

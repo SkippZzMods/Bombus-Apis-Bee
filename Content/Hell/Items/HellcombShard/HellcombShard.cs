@@ -166,7 +166,7 @@ namespace BombusApisBee.Content.Hell.Items.HellcombShard
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Volatile Explosion");
+
         }
 
         public override void AI()

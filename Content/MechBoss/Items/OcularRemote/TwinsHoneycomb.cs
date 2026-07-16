@@ -14,7 +14,7 @@
         public override bool? CanDamage() => Projectile.penetrate > 1 && dash;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Retinacomb");
+
             Main.projFrames[Type] = 2;
         }
 
@@ -317,7 +317,7 @@
         public override bool? CanDamage() => DashDelay > 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spazacomb");
+
             Main.projFrames[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

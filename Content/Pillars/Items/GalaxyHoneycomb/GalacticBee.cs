@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Pillars.Items.GalaxyHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Galactic Bee");
+
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 7;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;

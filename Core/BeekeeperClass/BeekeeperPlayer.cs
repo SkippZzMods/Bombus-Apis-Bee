@@ -51,7 +51,7 @@ namespace BombusApisBee.Core.BeekeeperClass
 
         public float BeeSpeedMultiplier;
 
-        public bool HasBees => Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > 0;
+        public bool HasBees => Player.ownedProjectileCounts<LoyalBeeProjectile>() > 0;
 
         /// <summary>
         /// Rerolls a mathematically sound critical strike
@@ -174,9 +174,9 @@ namespace BombusApisBee.Core.BeekeeperClass
 
             if (HeldBeeWeaponTimer > 0)
             {
-                if (Player.ownedProjectileCounts<BeePlayerBeeProjectile>() < CurrentBees)
+                if (Player.ownedProjectileCounts<LoyalBeeProjectile>() < CurrentBees)
                     Projectile.NewProjectile(Player.GetSource_ReleaseEntity("BombusApisBee: Spawn Player Bee"), Player.Center + Main.rand.NextVector2Circular(50f, 50f),
-                        Main.rand.NextVector2Circular(5f, 5f), ProjectileType<BeePlayerBeeProjectile>(), 10, 0f, Player.whoAmI);
+                        Main.rand.NextVector2Circular(5f, 5f), ProjectileType<LoyalBeeProjectile>(), 10, 0f, Player.whoAmI);
 
                 if (HoldingBeeWeaponTimer < 15)
                     HoldingBeeWeaponTimer++;
@@ -281,10 +281,6 @@ namespace BombusApisBee.Core.BeekeeperClass
 
     class BeePlayerShieldProjectile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Shield");
-        }
 
         public override void SetDefaults()
         {
@@ -315,7 +311,7 @@ namespace BombusApisBee.Core.BeekeeperClass
         }
     }
 
-    public class BeePlayerBeeProjectile : ModProjectile
+    public class LoyalBeeProjectile : ModProjectile
     {
         public Player Player => Main.player[Projectile.owner];
 
@@ -358,8 +354,6 @@ namespace BombusApisBee.Core.BeekeeperClass
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee");
-
             Main.projFrames[Type] = 8;
 
             ProjectileID.Sets.TrailingMode[Type] = 2;
@@ -439,7 +433,7 @@ namespace BombusApisBee.Core.BeekeeperClass
 
             IdlePos = Player.Center + RandOffset;
 
-            if (Player.Beekeeper().HoldingBeeWeaponTimer <= 0 || Player.dead || Player.ownedProjectileCounts<BeePlayerBeeProjectile>() > Player.Beekeeper().CurrentBees)
+            if (Player.Beekeeper().HoldingBeeWeaponTimer <= 0 || Player.dead || Player.ownedProjectileCounts<LoyalBeeProjectile>() > Player.Beekeeper().CurrentBees)
                 Projectile.Kill();
 
             if (Player.Beekeeper().HeldBeeWeaponTimer > 0 || Player.Beekeeper().HoldingBeeWeaponTimer > 0)

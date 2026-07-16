@@ -37,7 +37,7 @@ namespace BombusApisBee.Content.Jungle.Items.BladeOfAculeus
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Blade of Aculeus");
+
         }
         public override void SafeSetDefaults()
         {

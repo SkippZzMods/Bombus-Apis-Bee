@@ -36,6 +36,7 @@
     <None Remove="Content\Forest\Items\Honeycomb\HoneycombParticle_02.png" />
     <None Remove="Content\Forest\Items\Honeycomb\HoneycombParticle_03.png" />
     <None Remove="Content\Forest\Items\HoneyFlareGun\HoneyFlareGun.png" />
+    <None Remove="Content\Forest\Items\Pollenator\PollenatorSmoke.png" />
     <None Remove="Content\Particles\SmokeParticle.png" />
     <None Remove="Content\Snow\Items\BorealApiary\BorealApiary_Glowy.png" />
     <None Remove="Content\Snow\Items\BorealApiary\BorealApiary_Outline.png" />
@@ -49,7 +50,6 @@
     <Folder Include="Bosses\HoneyConglomerate\" />
     <Folder Include="Effects\" />
     <Folder Include="ExtraTextures\Palettes\" />
-    <Folder Include="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CalamityMod">

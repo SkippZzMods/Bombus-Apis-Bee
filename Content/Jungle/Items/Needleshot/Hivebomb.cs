@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Jungle.Items.Needleshot
         private Trail trail;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hivebomb");
+
         }
 
         public override void SafeSetDefaults()

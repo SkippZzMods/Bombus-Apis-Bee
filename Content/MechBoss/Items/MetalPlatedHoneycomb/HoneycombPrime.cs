@@ -13,7 +13,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
         public override bool? CanDamage() => false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Prime");
+
         }
         public override void SafeSetDefaults()
         {
@@ -155,7 +155,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
         public Player owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Prime Saw");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -387,7 +387,7 @@ namespace BombusApisBee.Content.MechBoss.Items.MetalPlatedHoneycomb
         public override bool? CanDamage() => laser;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeycomb Prime Laser");
+
         }
         public override void SafeSetDefaults()
         {

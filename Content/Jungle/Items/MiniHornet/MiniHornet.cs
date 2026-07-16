@@ -8,8 +8,7 @@ namespace BombusApisBee.Content.Jungle.Items.MiniHornet
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Minihornet");
-            Tooltip.SetDefault("'Half hornet, half gun, completely awesome.'");
+
         }
 
         public override void SafeSetDefaults()

@@ -13,7 +13,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.SunkenSea
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Increases the chance to strengthen friendly bees by 30%\nStrengthened bees ignore 25 points of defense");
+
         }
 
         public override void SafeSetDefaults()

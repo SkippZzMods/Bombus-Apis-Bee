@@ -45,7 +45,7 @@ namespace BombusApisBee.Content.Forest.Items.Beenigun
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beenigun");
+
         }
         public override void SafeSetDefaults()
         {

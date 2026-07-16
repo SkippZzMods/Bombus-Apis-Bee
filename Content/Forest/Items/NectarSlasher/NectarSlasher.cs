@@ -11,8 +11,7 @@ namespace BombusApisBee.Content.Forest.Items.NectarSlasher
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts[ProjectileType<NectarSlasherHoldout>()] <= 0;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Nectar Slasher");
-            Tooltip.SetDefault("Performs a three piece combo of swift strikes and throws\nSlashes through enemies on hit\nReplenishes life on hit");
+
         }
 
         public override void SafeSetDefaults()

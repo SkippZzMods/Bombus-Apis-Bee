@@ -9,8 +9,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Hoarder Hood");
-            Tooltip.SetDefault("Increases maximum honey by 100");
+
             Item.ResearchUnlockCount = 1;
         }
 
@@ -75,7 +74,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Explosion");
+
         }
 
         public override void AI()

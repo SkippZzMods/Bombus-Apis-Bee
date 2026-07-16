@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Darksent Bee");
+
             Main.projFrames[Type] = 4;
         }
 

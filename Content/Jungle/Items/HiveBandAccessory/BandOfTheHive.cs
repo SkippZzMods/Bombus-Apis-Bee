@@ -5,8 +5,7 @@ namespace BombusApisBee.Content.Jungle.Items.HiveBandAccessory
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hive-Touched Band");
-            Tooltip.SetDefault("Dealing a large amount of damage in a short amount of time causes your next hit to make a large honey explosion");
+
             Item.ResearchUnlockCount = 1;
         }
 
@@ -117,7 +116,7 @@ namespace BombusApisBee.Content.Jungle.Items.HiveBandAccessory
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Glob");
+
         }
 
         public override void SetDefaults()
@@ -264,7 +263,7 @@ namespace BombusApisBee.Content.Jungle.Items.HiveBandAccessory
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Explosion");
+
         }
 
         public override void AI()

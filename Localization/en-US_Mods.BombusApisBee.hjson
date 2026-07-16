@@ -1337,6 +1337,16 @@ Items: {
 		DisplayName: Test Accessory
 		Tooltip: For debugging purposes
 	}
+
+	PollenatorItem: {
+		DisplayName: Pollenator
+		Tooltip: 
+		'''
+		Hold <left> to pollenate the air
+		These pollen clouds buff friendly bees, increasing their damage by 5%
+		These pollen clouds debuff enemies, causing them to periodically sneeze
+		'''
+	}
 }
 
 Projectiles: {
@@ -1547,6 +1557,17 @@ Projectiles: {
 	StoneShockwave.DisplayName: Shockwave
 	GelatinousHoneycombProjectile.DisplayName: Honeycomb
 	HoneyFlareExplosion.DisplayName: Shockwave
+	LoyalBeeProjectile.DisplayName: Bee
+	HoneyFlareGunReload.DisplayName: Honey Flare Gun Reload
+	PollenatorHoldout.DisplayName: Pollenator Holdout
+	PollenatorSmoke.DisplayName: Pollenator Smoke
+	MoltenBolt.DisplayName: Molten Bolt
+	StarryApiaryStar.DisplayName: Starry Apiary Star
+	StarryApiaryStarBlue.DisplayName: Starry Apiary Star Blue
+	StarryApiaryStarGolden.DisplayName: Starry Apiary Star Golden
+	StarryApiaryStarGreen.DisplayName: Starry Apiary Star Green
+	StarryApiaryStarPink.DisplayName: Starry Apiary Star Pink
+	StarryApiaryStarPurple.DisplayName: Starry Apiary Star Purple
 }
 
 NPCs: {

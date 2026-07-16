@@ -9,8 +9,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareCannon
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Sugar Rush");
-            Tooltip.SetDefault("Rapidly fires up to 30 sticky flares before needing to reload\nUpon reloading, detonate all existing flares\n<right> to fire a tracking glob of honey, causing flares to home on the struck enemy");
+
         }
 
         public override void SafeSetDefaults()

@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Dungeon.Items.SpectralBeeTome
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("'The souls of forgotten bees seek vengeance'");
+
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 7));
         }
 

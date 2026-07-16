@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Snow.Items.FrostedHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("FrostedBee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 

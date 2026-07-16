@@ -7,8 +7,7 @@ namespace BombusApisBee.Content.Hell.Items.Honeyshot
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<HoneyShotHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Honeyshot");
-            Tooltip.SetDefault("Fires a volley of honey arrows");
+
         }
 
         public override void SafeSetDefaults()

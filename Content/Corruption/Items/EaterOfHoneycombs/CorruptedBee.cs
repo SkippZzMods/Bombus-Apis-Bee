@@ -6,7 +6,6 @@ namespace BombusApisBee.Content.Corruption.Items.EaterOfHoneycombs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Corrupted Bee");
 
             Main.projFrames[Projectile.type] = 4;
         }

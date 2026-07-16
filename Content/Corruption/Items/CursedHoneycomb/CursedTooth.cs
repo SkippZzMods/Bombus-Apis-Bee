@@ -10,7 +10,7 @@ namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Tooth");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 6;
             Main.projFrames[Type] = 2;

@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("15% increased movement speed");
+
             Item.ResearchUnlockCount = 1;
         }
 

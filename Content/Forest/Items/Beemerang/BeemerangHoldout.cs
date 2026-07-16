@@ -24,7 +24,7 @@ namespace BombusApisBee.Content.Forest.Items.Beemerang
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beemerang");
+
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }

@@ -50,13 +50,6 @@ namespace BombusApisBee.Core.BeekeeperClass
 
             return mp.equippedAccessories.FirstOrDefault(n => n.type == type)?.ModItem as BeekeeperAccessory;
         }
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault(name);
-            Tooltip.SetDefault(tooltip);
-        }
-
         public virtual void OnEquip(Player player, Item item) { }
         public virtual void SafeSetDefaults() { }
         public sealed override void SetDefaults()

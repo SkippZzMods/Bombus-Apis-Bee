@@ -4,7 +4,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Honey Slash");
+
         }
         public override void SafeSetDefaults()
         {

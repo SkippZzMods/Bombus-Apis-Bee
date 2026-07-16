@@ -6,8 +6,7 @@
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Extra Spiky");
-            Description.SetDefault("Beekeeper critical strike chance increased by 25%");
+
             Main.buffNoSave[Type] = true;
         }
         public override void Update(Player player, ref int buffIndex)

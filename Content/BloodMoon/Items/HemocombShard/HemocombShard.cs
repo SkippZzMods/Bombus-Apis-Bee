@@ -67,8 +67,7 @@ namespace BombusApisBee.Content.BloodMoon.Items.HemocombShard
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Meat Chunk");
-            Tooltip.SetDefault("You shouldn't see this...");
+
         }
 
         public override void SetDefaults()

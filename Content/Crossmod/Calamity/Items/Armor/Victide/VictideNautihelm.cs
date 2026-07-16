@@ -12,8 +12,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Armor.Victide
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Victide Nauti-helm");
-            Tooltip.SetDefault("5% increased beekeeper damage");
+
         }
         public override void SetDefaults()
         {

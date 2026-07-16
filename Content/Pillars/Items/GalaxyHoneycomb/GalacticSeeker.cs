@@ -6,7 +6,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Galaxy Seeker");
+
         }
 
 

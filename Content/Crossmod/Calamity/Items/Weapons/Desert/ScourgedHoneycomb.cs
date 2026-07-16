@@ -11,7 +11,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<ScourgedHoneycombHoldout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold <left> to charge up a powerful snapjaw attack\nFires a shotgun of deadly water when fully charged\n'Imbued with the power of the Scourge'");
+
         }
 
         public override void SafeSetDefaults()
@@ -58,7 +58,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Desert/ScourgedHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Scourged Honeycomb");
+
         }
 
         public override void SetDefaults()
@@ -258,7 +258,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Scourged Honeycomb");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 25;
         }
@@ -433,7 +433,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Scourged Honeycomb Explosion");
+
         }
 
         public override void SetDefaults()
@@ -480,7 +480,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Water Shot");
+
         }
 
         public override void AI()

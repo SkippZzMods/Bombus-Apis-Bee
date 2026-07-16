@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Jungle.Items.BladeOfAculeus
         public int pauseTimer;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stinger");
+
             Main.projFrames[Type] = 2;
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 10;

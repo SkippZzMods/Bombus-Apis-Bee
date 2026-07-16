@@ -62,7 +62,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Accessories.Mushroom
         public override string Texture => BombusApisBee.Invisible;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spore Cloud");
+
         }
 
         public override void SafeSetDefaults()

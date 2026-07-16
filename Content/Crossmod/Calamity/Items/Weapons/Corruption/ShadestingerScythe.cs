@@ -12,8 +12,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Darkheal Cooldown");
-            Description.SetDefault("Their souls take time to regenerate proper healing for the taking...");
+
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -32,16 +31,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
         internal int shootDirection;
 
         public override bool CanUseItem(Player player) => player.ownedProjectileCounts<ShadestingerScytheProjectile>() <= 0;
-
-        public override void SafeSetStaticDefaults()
-        {
-            DisplayName.SetDefault("Shadestinger Scythe");
-            Tooltip.SetDefault(
-                "Rapidly strikes enemies with a flurry of swift stabs and throws, infusing Dark Energy within them\n" +
-                "Strike enemies infused with sufficient Dark Energy to rip Shadestung bees from them\n" +
-                "Press <right> to rip healing energy from all enemies, ridding them off all their dark energy\n" +
-                "Healing has a cooldown of 30 seconds");
-        }
 
         public override void SafeSetDefaults()
         {
@@ -149,7 +138,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shadestinger Scythe");
+
         }
         public override void SafeSetDefaults()
         {
@@ -1035,7 +1024,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Corruption
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shadestinger Scythe");
+
         }
         public override void SafeSetDefaults()
         {

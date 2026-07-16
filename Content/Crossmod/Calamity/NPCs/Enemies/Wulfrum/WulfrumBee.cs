@@ -14,7 +14,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.NPCs.Enemies.Wulfrum
         public Color SuperchargeColor => Supercharged ? new Color(55, 180, 220) : new Color(130, 200, 70);
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Bee");
+
             Main.npcFrameCount[Type] = 4;
         }
 

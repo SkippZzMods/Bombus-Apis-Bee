@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Crimson.Items.Cystcomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ichor Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 

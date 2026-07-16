@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Jungle.Items.HoneyphyteArmor
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("30% increased chance to not consume honey\nLoyal Bees increased by 5");
+
             Item.ResearchUnlockCount = 1;
         }
 

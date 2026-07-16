@@ -6,8 +6,7 @@ namespace BombusApisBee.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enraged");
-            Description.SetDefault("Increased beekeeper damage");
+
             Main.buffNoSave[Type] = true;
         }
 

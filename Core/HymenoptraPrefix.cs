@@ -15,19 +15,13 @@ namespace BombusApisBee.Core
 
         public HymenoptraPrefix() { }
 
-        public HymenoptraPrefix(string displayName, float damageMult = 1f, int critBonus = 0, float speedBonus = 1f, float chanceBonus = 0f, int resourceBonus = 0)
+        public HymenoptraPrefix(float damageMult = 1f, int critBonus = 0, float speedBonus = 1f, float chanceBonus = 0f, int resourceBonus = 0)
         {
-            this.displayName = displayName;
             this.damageMult = damageMult;
             this.critBonus = critBonus;
             this.speedBonus = speedBonus;
             this.chanceBonus = chanceBonus;
             this.resourceBonus = resourceBonus;
-        }
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault(displayName);
         }
 
         public override bool CanRoll(Item item)
@@ -85,22 +79,22 @@ namespace BombusApisBee.Core
         }
     }
 
-    public class Rotten : HymenoptraPrefix { public Rotten() : base("Rotten", damageMult: 0.8f, resourceBonus: -1) { } }
-    public class Moldy : HymenoptraPrefix { public Moldy() : base("Moldy", damageMult: 0.8f, speedBonus: 1.1f) { } }
-    public class Snaillike : HymenoptraPrefix { public Snaillike() : base("Snail-like", speedBonus: 1.2f) { } }
+    public class Rotten : HymenoptraPrefix { public Rotten() : base(damageMult: 0.8f, resourceBonus: -1) { } }
+    public class Moldy : HymenoptraPrefix { public Moldy() : base(damageMult: 0.8f, speedBonus: 1.1f) { } }
+    public class Snaillike : HymenoptraPrefix { public Snaillike() : base(speedBonus: 1.2f) { } }
 
-    public class Punchy : HymenoptraPrefix { public Punchy() : base("Punchy", damageMult: 1.2f, resourceBonus: -1) { } }
-    public class Critical : HymenoptraPrefix { public Critical() : base("Critical", damageMult: 0.9f, critBonus: 10) { } }
+    public class Punchy : HymenoptraPrefix { public Punchy() : base(damageMult: 1.2f, resourceBonus: -1) { } }
+    public class Critical : HymenoptraPrefix { public Critical() : base(damageMult: 0.9f, critBonus: 10) { } }
 
-    public class Juicy : HymenoptraPrefix { public Juicy() : base("Juicy", damageMult: 1.1f) { } }
-    public class Piquant : HymenoptraPrefix { public Piquant() : base("Piquant", critBonus: 5, chanceBonus: 0.1f) { } }
-    public class Pungent : HymenoptraPrefix { public Pungent() : base("Pungent", damageMult: 1.15f, speedBonus: 0.9f) { } }
-    public class Bland : HymenoptraPrefix { public Bland() : base("Bland", damageMult: 1.05f, critBonus: 5, speedBonus: 0.95f, chanceBonus: 0.05f) { } }
+    public class Juicy : HymenoptraPrefix { public Juicy() : base(damageMult: 1.1f) { } }
+    public class Piquant : HymenoptraPrefix { public Piquant() : base(critBonus: 5, chanceBonus: 0.1f) { } }
+    public class Pungent : HymenoptraPrefix { public Pungent() : base(damageMult: 1.15f, speedBonus: 0.9f) { } }
+    public class Bland : HymenoptraPrefix { public Bland() : base(damageMult: 1.05f, critBonus: 5, speedBonus: 0.95f, chanceBonus: 0.05f) { } }
 
-    public class Delicious : HymenoptraPrefix { public Delicious() : base("Delicious", damageMult: 1.15f, speedBonus: 0.85f) { } }
-    public class Succulent : HymenoptraPrefix { public Succulent() : base("Succulent", damageMult: 1.2f) { } }
-    public class Buzzing : HymenoptraPrefix { public Buzzing() : base("Buzzing", speedBonus: 0.75f, chanceBonus: 0.25f) { } }
-    public class Delectable : HymenoptraPrefix { public Delectable() : base("Delectable", chanceBonus: 0.1f, resourceBonus: 1) { } }
+    public class Delicious : HymenoptraPrefix { public Delicious() : base(damageMult: 1.15f, speedBonus: 0.85f) { } }
+    public class Succulent : HymenoptraPrefix { public Succulent() : base(damageMult: 1.2f) { } }
+    public class Buzzing : HymenoptraPrefix { public Buzzing() : base(speedBonus: 0.75f, chanceBonus: 0.25f) { } }
+    public class Delectable : HymenoptraPrefix { public Delectable() : base(chanceBonus: 0.1f, resourceBonus: 1) { } }
     public abstract class HymenoptraAccessoryPrefix : ModPrefix
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
@@ -116,11 +110,6 @@ namespace BombusApisBee.Core
             this.honeyBonus = honeyBonus;
             this.chanceBonus = chanceBonus;
             this.displayName = displayName;
-        }
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault(displayName);
         }
 
         public override void ModifyValue(ref float valueMult)

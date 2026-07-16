@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Space.Items.StarStrap
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Astral Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 

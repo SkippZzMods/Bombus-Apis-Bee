@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chlorophyte Bee");
+
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -44,7 +44,7 @@ namespace BombusApisBee.Content.Jungle.Items.ChlorophyteHoneycomb
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chloro-energy");
+
         }
 
         public override void SafeSetDefaults()

@@ -17,15 +17,6 @@ namespace BombusApisBee.Content.Space.Items.StarryApiary
 
         public override int BaseUseTime => 23;
         public override int AltUseTime => 35;
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Starfall");
-            Tooltip.SetDefault("" +
-                "Hold <left> to rapidly fire bees\n" +
-                "Hold <right> to fire bees slower, but take control over the bees causing them to rain stars on nearby enemies\n" +
-                "Stars get more powerful during nightfall");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 21;

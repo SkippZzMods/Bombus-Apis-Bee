@@ -9,7 +9,7 @@ namespace BombusApisBee.Content.Forest.Items.HymenoptraHandcannon
         public int delay;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires a burst of 6 bee bullets\n'Fear the swarm!'");
+
         }
 
         public override void SafeSetDefaults()

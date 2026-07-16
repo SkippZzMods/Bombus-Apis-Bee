@@ -10,7 +10,7 @@ namespace BombusApisBee.Content.Space.Items.StarStrap
         public int delay;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("'Stay strapped.'\nFires a burst of star bees, which spawn stars from the heavens on hit");
+
         }
 
         public override void SafeSetDefaults()

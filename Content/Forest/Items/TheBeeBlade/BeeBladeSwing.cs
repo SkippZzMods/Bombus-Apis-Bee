@@ -44,7 +44,7 @@ namespace BombusApisBee.Content.Forest.Items.TheBeeBlade
         public int MaxTimeLeft;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee Blade");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }

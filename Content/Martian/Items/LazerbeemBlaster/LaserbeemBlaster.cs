@@ -7,7 +7,7 @@ namespace BombusApisBee.Content.Martian.Items.LazerbeemBlaster
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires pure concentrations of bouncing honey energy, which ricochet between enemies\nSpawns bees of pure honey energy on bounce");
+
         }
 
         public override void SafeSetDefaults()

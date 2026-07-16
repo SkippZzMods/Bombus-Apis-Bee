@@ -12,13 +12,6 @@ namespace BombusApisBee.Core.Common.Honeycomb
         private int fadeInBar;
         private int comboDecayTimer;
 
-
-        protected BaseHoneycombWeapon(string name, string tooltip) : base()
-        {
-            this.name = name;
-            this.tooltip = tooltip;
-        }
-
         public virtual int MaxCombo => 5;
         public virtual int ThrowDustType => DustID.Honey2;
 
@@ -30,12 +23,6 @@ namespace BombusApisBee.Core.Common.Honeycomb
         public virtual void AddStaticDefaults()
         {
 
-        }
-
-        public sealed override void SafeSetStaticDefaults()
-        {
-            DisplayName.SetDefault(name);
-            Tooltip.SetDefault(tooltip);
         }
 
         // im not doing SafeSafeSetDefaults

@@ -5,7 +5,7 @@
         public override string Texture => "BombusApisBee/Content/Snow/Items/FrostedHoneycomb/FrostedHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Frozen Honeycomb");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -87,7 +87,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Homing Icicle");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -178,7 +178,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Solid Icicle");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -243,7 +243,7 @@
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Piercing Icicle");
+
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }

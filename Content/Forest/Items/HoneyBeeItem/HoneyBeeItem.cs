@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyBeeItem
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Summons a large Honeybee which will mimic your loyal bees\nIncreases maximum honey by 25");
+
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 4));
             Item.ResearchUnlockCount = 1;
         }

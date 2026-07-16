@@ -23,11 +23,6 @@ namespace BombusApisBee.Core.Common.Apiary
         public Vector2 ArmPosition => Owner.RotatedRelativePoint(Owner.MountedCenter, true) + new Vector2((Owner.altFunctionUse == 2 ? 8f : 10f) * Owner.direction, (Owner.altFunctionUse == 2 ? 2f : 12f) - MathHelper.Clamp((Projectile.Center.Y - Main.MouseWorld.Y) * 0.02f, -6, 6)).RotatedBy(Projectile.rotation) * EaseFunction.EaseBackOut.Ease(Timer < 50f ? Timer / 50f : 1f);
         //public Vector2 ArmPosition => Owner.RotatedRelativePoint(Owner.MountedCenter, true) + new Vector2(18f + MathHelper.Lerp(0f, -6f, EaseFunction.EaseQuarticOut.Ease(Timer < 100f ? Timer / 100f : 1f)), -4f * Owner.direction).RotatedBy(Projectile.velocity.ToRotation());
         public Player Owner => Main.player[Projectile.owner];
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Apiary");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 32;

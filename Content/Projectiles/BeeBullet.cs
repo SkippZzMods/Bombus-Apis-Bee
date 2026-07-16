@@ -14,7 +14,7 @@
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bee Bullet");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
             Main.projFrames[Type] = 3;

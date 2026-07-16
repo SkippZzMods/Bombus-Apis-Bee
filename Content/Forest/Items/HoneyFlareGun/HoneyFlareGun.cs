@@ -64,14 +64,14 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
                     Projectile.NewProjectile(n.GetSource_Misc("BombusApisBee: Honey Flare Explosion Spawn"), n.Center, Vector2.Zero, ProjectileType<HoneyFlareExplosion>(), damage, 5f * strength, playerIndex, 70 * strength);
 
                 Main.player[playerIndex].Bombus().AddShake((int)(9 * strength));
-                SoundID.DD2_ExplosiveTrapExplode.PlayWith(n.position, 0, 0.2f, 0.33f);
+                SoundID.DD2_ExplosiveTrapExplode.PlayWith(n.position, 0, 0.2f, 1f);
                 BombusApisBee.HoneycombWeapon.PlayWith(n.position, 0.1f, 0.1f, 0.6f);
 
                 for (int i = 0; i < (int)(50 * strength); i++)
                 {
-                    ParticleHandler.SpawnParticle(new CompositeSmoke(n.Center + Main.rand.NextVector2Circular(25f, 25f) * strength, Main.rand.NextVector2Circular(9f, 9f) * strength, new Color(255, Main.rand.Next(170, 190), 20), 50, false, true, SmokeUpdate));
+                    ParticleHandler.SpawnParticle(new CompositeSmoke(n.Center + Main.rand.NextVector2Circular(25f, 25f) * strength, Main.rand.NextVector2Circular(9f, 9f) * strength, new Color(255, Main.rand.Next(170, 190), 20), Main.rand.Next(40, 80), false, true, SmokeUpdate));
 
-                    ParticleHandler.SpawnParticle(new SmallCompositeSmoke(n.Center + Main.rand.NextVector2Circular(25f, 25f) * strength, Main.rand.NextVector2Circular(9f, 9f) * strength, new Color(255, Main.rand.Next(190, 210), 50), 60, false, true, SmokeUpdate));
+                    ParticleHandler.SpawnParticle(new SmallCompositeSmoke(n.Center + Main.rand.NextVector2Circular(25f, 25f) * strength, Main.rand.NextVector2Circular(9f, 9f) * strength, new Color(255, Main.rand.Next(190, 210), 50), Main.rand.Next(55, 95), false, true, SmokeUpdate));
 
                     Dust.NewDustPerfect(n.Center, DustID.Honey2, Main.rand.NextVector2Circular(8f, 8f) * strength, 110, default, 1.25f);
 
@@ -154,7 +154,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shockwave");
+
         }
 
         public override void AI()
@@ -306,12 +306,6 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
         public float shootRotation;
         public int shootDirection;
 
-        public override void SafeSetStaticDefaults()
-        {
-            DisplayName.SetDefault("Sugar Shot");
-            Tooltip.SetDefault($"Can fire up to {MAX_SHOTS} sticky flares before needing to reload\nUpon reloading, detonate all existing flares");
-        }
-
         public override void SafeSetDefaults()
         {
             Item.damage = 14;
@@ -460,7 +454,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
 
         public override string Texture => "BombusApisBee/Content/Forest/Items/HoneyFlareGun/HoneyFlareGun";
         public Vector2 ArmPosition => Owner.RotatedRelativePoint(Owner.MountedCenter, true) + new Vector2((12f + offset.X) * Projectile.direction, -4f + offset.Y).RotatedBy((Projectile.velocity * Projectile.direction).ToRotation());
-        public float Progress => 1f - Projectile.timeLeft / 110f;
+        public float Progress => 1f - Projectile.timeLeft / 95f;
         public ref float Timer => ref Projectile.ai[0];
         public Player Owner => Main.player[Projectile.owner];
         public override void SetDefaults()
@@ -472,7 +466,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
 
-            Projectile.timeLeft = 110;
+            Projectile.timeLeft = 95;
         }
 
         public override void AI()
@@ -480,19 +474,18 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
             if (flashTimer > 0)
                 flashTimer--;
 
-            if (Timer == 23)
+            if (Timer == 20)
             {
                 SoundID.DD2_MonkStaffSwing.PlayWith(Owner.Center, 0, 0.2f, 1f);
             }
 
-            if (Timer == 65)
+            if (Timer == 55)
             {
                 BombusApisBee.HoneycombWeapon.PlayWith(Owner.Center, 0, 0.2f, 0.35f);
             }
 
-            if (Timer == 85)
+            if (Timer == 80)
             {
-                SoundID.Item11.PlayWith(Owner.Center, -0.5f, 0.2f, 1f);
                 SoundID.DD2_MonkStaffSwing.PlayWith(Owner.Center, 0, 0.2f, 1f);
             }
 
@@ -560,7 +553,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
             var texGrip = Request<Texture2D>(Texture + "_Grip").Value;
             
             var flareTexture = Request<Texture2D>("BombusApisBee/Content/Forest/Items/HoneyFlareGun/HoneyFlare").Value;
-            var star = Request<Texture2D>("BombusApisBee/Assets/ExtraTextures/StarAlpha").Value;
+            var star = TextureAssets.Projectile[79].Value;
 
             SpriteEffects spriteEffects = Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
@@ -581,7 +574,7 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
                     float lerp = EaseBuilder.EaseCircularInOut.Ease((Progress - 0.15f) / 0.35f);
 
                     flarePosition = position + new Vector2(8 * Projectile.direction, MathHelper.Lerp(15, -15, lerp));
-                    flareRotation = 2f * lerp;
+                    flareRotation = MathHelper.Lerp(-6f, 2f, lerp);
 
                     fadeIn = lerp;
                 }
@@ -602,9 +595,9 @@ namespace BombusApisBee.Content.Forest.Items.HoneyFlareGun
             {
                 float lerp = flashTimer / 20f;
 
-                Main.spriteBatch.Draw(star, position + new Vector2(8 * Projectile.direction, 0), null, new Color(255, 200, 50, 0) * lerp, 0f, star.Size() / 2f, new Vector2(MathHelper.Lerp(0.3f, 0.6f, 1f - lerp), MathHelper.Lerp(0.5f, 0.3f, 1f - lerp)), 0f, 0f);
+                Main.spriteBatch.Draw(star, position + new Vector2(8 * Projectile.direction, 0), null, new Color(255, 200, 50, 0) * lerp, 0f, star.Size() / 2f, new Vector2(MathHelper.Lerp(0.3f, 0.6f, 1f - lerp), MathHelper.Lerp(0.5f, 0.3f, 1f - lerp)) * 2f, 0f, 0f);
 
-                Main.spriteBatch.Draw(star, position + new Vector2(8 * Projectile.direction, 0), null, new Color(255, 255, 150, 0) * lerp, 0f, star.Size() / 2f, new Vector2(MathHelper.Lerp(0.3f, 0.6f, 1f - lerp), MathHelper.Lerp(0.5f, 0.3f, 1f - lerp)) * 0.6f, 0f, 0f);
+                Main.spriteBatch.Draw(star, position + new Vector2(8 * Projectile.direction, 0), null, new Color(255, 255, 150, 0) * lerp, 0f, star.Size() / 2f, new Vector2(MathHelper.Lerp(0.3f, 0.6f, 1f - lerp), MathHelper.Lerp(0.5f, 0.3f, 1f - lerp)) * 1.6f, 0f, 0f);
             }
 
             return false;

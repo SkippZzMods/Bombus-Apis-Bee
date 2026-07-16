@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Jungle.Items.NectarBolt
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Casts a bolt of glistening nectar, which bounces off of tiles\nSpawns homing nectar on bounce, which have slight lifesteal");
+
         }
         public override void SafeSetDefaults()
         {

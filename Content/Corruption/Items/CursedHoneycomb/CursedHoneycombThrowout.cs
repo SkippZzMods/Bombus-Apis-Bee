@@ -15,7 +15,7 @@ namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
         public override string Texture => "BombusApisBee/Content/Corruption/Items/CursedHoneycomb/CursedHoneycomb";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cursed Honeycomb");
+
         }
 
         public override void SafeSetDefaults()

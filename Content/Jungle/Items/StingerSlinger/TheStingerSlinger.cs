@@ -7,7 +7,6 @@ namespace BombusApisBee.Content.Jungle.Items.StingerSlinger
     {
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Throws a yoyo that shoots stingers at enemies\nPeriodically fires out a burst of homing stingers");
 
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;

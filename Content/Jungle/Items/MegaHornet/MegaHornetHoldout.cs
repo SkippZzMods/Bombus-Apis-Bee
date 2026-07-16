@@ -18,7 +18,7 @@ namespace BombusApisBee.Content.Jungle.Items.MegaHornet
         public override bool? CanDamage() => false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Megahornet");
+
             Main.projFrames[Type] = 2;
         }
         public override void SafeSetDefaults()

@@ -12,15 +12,6 @@ namespace BombusApisBee.Content.Underground.Items.FlamingApiary
         public override int BaseUseTime => 29;
         public override int AltUseTime => 41;
 
-        public override void AddStaticDefaults()
-        {
-            DisplayName.SetDefault("Flaming Apiary");
-            Tooltip.SetDefault("" +
-                "Hold <left> to rapidly fire bees\n" +
-                "Hold <right> to fire the bees slower, but take control over the bees, lighting them on fire\n" +
-                "Controlled bees move 25% faster, have 5% increased critical strike chance, and their critical strikes inflict On Fire!");
-        }
-
         public override void AddDefaults()
         {
             Item.damage = 7;

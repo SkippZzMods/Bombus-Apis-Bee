@@ -7,8 +7,7 @@ namespace BombusApisBee.Content.Forest.Items.Pollen
         public bool useAltTex = false;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pollen");
-            Tooltip.SetDefault("'Careful if you're allergic'");
+
             Item.ResearchUnlockCount = 999;
         }
         public override void SetDefaults()

@@ -6,7 +6,7 @@ namespace BombusApisBee.Content.Crimson.Items.BrainyHoneycomb
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Brainy Bee");
+
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;

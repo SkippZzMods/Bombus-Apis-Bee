@@ -25,7 +25,7 @@ namespace BombusApisBee.Content.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Laser");
+
         }
 
         public override void AI()
@@ -135,7 +135,7 @@ namespace BombusApisBee.Content.Projectiles
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Laser");
+
         }
 
         public override void AI()

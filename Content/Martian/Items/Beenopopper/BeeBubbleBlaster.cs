@@ -7,8 +7,7 @@ namespace BombusApisBee.Content.Martian.Items.Beenopopper
     {
         public override void SafeSetStaticDefaults()
         {
-            DisplayName.SetDefault("Beenopopper");
-            Tooltip.SetDefault("'Aliens really like bubbles... that shoot bullets'");
+
         }
 
 

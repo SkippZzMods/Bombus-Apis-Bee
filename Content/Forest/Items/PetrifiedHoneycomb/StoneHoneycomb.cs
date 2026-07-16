@@ -11,8 +11,6 @@ namespace BombusApisBee.Content.Forest.Items.PetrifiedHoneycomb
     public class StoneHoneycomb : BaseHoneycombWeapon
     {
         public override int MaxCombo => 3;
-        public StoneHoneycomb() : base("Petrified Honeycomb", "Throws a hardened honeycomb\nIncreases combo by 1 on critical hit\nThe honeycomb always crits when falling fast enough\nWhen at max combo, direct strikes hits deal area of effect damage\n'Two bees... one stone..'") { }
-
         public override void AddDefaults()
         {
             Item.damage = 14;
@@ -317,7 +315,7 @@ namespace BombusApisBee.Content.Forest.Items.PetrifiedHoneycomb
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shockwave");
+
         }
 
         public override void AI()

@@ -12,8 +12,6 @@ namespace BombusApisBee.Content.Forest.Items.GelatinousHoneycomb
     {
         public override int ThrowDustType => DustID.t_Slime;
         public override int MaxCombo => 7;
-        public GelatinousHoneycomb() : base("Gelatinous Honeycomb", "Throws a slimy honeycomb that causes slimeballs to fall from the sky\nIncreases combo by 1 on direct hits\nCombo hits conjure a volatile gemstone") { }
-
         public override void AddDefaults()
         {
             Item.damage = 11;

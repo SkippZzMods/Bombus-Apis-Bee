@@ -31,7 +31,7 @@ namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Bee Buckshot");
+
         }
 
         public override void AI()
@@ -191,7 +191,7 @@ namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Slug");
+
         }
 
         public override void AI()
@@ -335,7 +335,7 @@ namespace BombusApisBee.Content.Hell.Items.HellfireBeemstick
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hellfire Explosion");
+
         }
 
         public override void AI()

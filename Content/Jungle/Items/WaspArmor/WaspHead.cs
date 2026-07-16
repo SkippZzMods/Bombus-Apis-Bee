@@ -8,14 +8,14 @@ namespace BombusApisBee.Content.Jungle.Items.WaspArmor
     {
         public override void Load()
         {
-            BeePlayerBeeProjectile.ExtraAIEvent += AddStingers;
+            LoyalBeeProjectile.ExtraAIEvent += AddStingers;
 
-            BeePlayerBeeProjectile.ExtraPreAIEvent += AddGatheringStingers;
+            LoyalBeeProjectile.ExtraPreAIEvent += AddGatheringStingers;
         }
 
         private void AddGatheringStingers(Projectile proj)
         {
-            BeePlayerBeeProjectile modProj = proj.ModProjectile as BeePlayerBeeProjectile;
+            LoyalBeeProjectile modProj = proj.ModProjectile as LoyalBeeProjectile;
 
             if (modProj.Player.Bombus().WaspArmorSet)
             {
@@ -40,7 +40,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspArmor
 
         private void AddStingers(Projectile proj)
         {
-            BeePlayerBeeProjectile modProj = proj.ModProjectile as BeePlayerBeeProjectile;
+            LoyalBeeProjectile modProj = proj.ModProjectile as LoyalBeeProjectile;
 
             if (modProj.Player.Bombus().WaspArmorSet)
             {
@@ -94,7 +94,7 @@ namespace BombusApisBee.Content.Jungle.Items.WaspArmor
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("20% increased wing flight time and increased jump speed\nIncreases maximum honey by 35");
+
             Item.ResearchUnlockCount = 1;
         }
 

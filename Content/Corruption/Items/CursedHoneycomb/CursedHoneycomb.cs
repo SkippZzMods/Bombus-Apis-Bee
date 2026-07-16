@@ -8,7 +8,7 @@ namespace BombusApisBee.Content.Corruption.Items.CursedHoneycomb
         public override bool SafeCanUseItem(Player player) => player.ownedProjectileCounts<CursedHoneycombThrowout>() <= 0;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold <left> to control a cursed honeycomb\nThe cursed honeycomb spits out cursed teeth and eyes\nTeeth stick to enemies, dealing stacking damage-over-time, and eyes home in on enemies\nSpawns cursed bees on hit");
+
         }
 
         public override void SafeSetDefaults()

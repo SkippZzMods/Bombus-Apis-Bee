@@ -17,7 +17,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
         internal int armDirection;
         public override void SafeSetStaticDefaults()
         {
-            Tooltip.SetDefault("Rapidly throws wulfrum stingers\nStriking an enemy has a chance to drop an unstable Wulfrum power cell\nPower cells can be picked up, and are thrown with <right>\nPower cells can be hit mid air to supercharge them, causing them to detonate with an even more violent explosion");
+
         }
 
         public override void SafeSetDefaults()
@@ -358,7 +358,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Wulfrum/WulfrumStingerPowerCell";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Power Cell");
+
         }
 
         public override void SetDefaults()
@@ -558,7 +558,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Wulfrum/WulfrumStingerPowerCell";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Power Cell");
+
         }
 
         public override void SafeSetDefaults()
@@ -909,7 +909,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Explosion");
+
         }
 
         public override void AI()
@@ -1023,7 +1023,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Wulfrum
         public Player Owner => Main.player[Projectile.owner];
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wulfrum Stinger");
+
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 7;
         }

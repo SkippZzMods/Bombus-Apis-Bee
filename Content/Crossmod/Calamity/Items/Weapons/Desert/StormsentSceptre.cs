@@ -11,14 +11,6 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
 {
     class StormsentSceptre : CalamityDamageItem
     {
-        public override void SafeSetStaticDefaults()
-        {
-            DisplayName.SetDefault("Stormsent Sceptre");
-            Tooltip.SetDefault("Casts a volley of Stormsent bees\n" +
-                "Press <right> to cast a bolt of chain lightning, inflicting Stormsurged\n" +
-                "Stormsent bees deal much more damage to Stormsurged enemies");
-        }
-
         public override void SafeSetDefaults()
         {
             Item.width = 32;
@@ -101,8 +93,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override string Texture => "BombusApisBee/ExtraTextures/Invisible";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stormsurged");
-            Description.SetDefault("Stormy!");
+
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -175,7 +166,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override string Texture => "BombusApisBee/Content/Crossmod/Calamity/Items/Weapons/Desert/StormsentSceptre";
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stormsent Sceptre");
+
         }
 
         public override void SetDefaults()
@@ -383,7 +374,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
         public override bool IsLoadingEnabled(Mod mod) => CrossMod.Calamity.Enabled;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stormsent Bee");
+
             Main.projFrames[Type] = 4;
         }
 
@@ -663,7 +654,7 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Desert
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lightning");
+
         }
 
         public override void SafeSetDefaults()
