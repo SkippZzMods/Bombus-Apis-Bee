@@ -10,12 +10,16 @@ namespace BombusApisBee.Core.Common.Smoker
 {
     public abstract class SmokerHoldout : ModProjectile
     {
-        public SmokerHoldout(int smokerItemType, int frameCount, int maxAttackTime)
+        public SmokerHoldout(int smokerItemType, int frameCount, int maxAttackTime, Color? outlineColor = null)
         {
             _smokerItemType = smokerItemType;
             _frameCount = frameCount;
             _maxAttackTime = maxAttackTime;
+
+            _outlineColor = outlineColor;
         }
+
+        private Color? _outlineColor;
 
         // should be assigned to the SmokerItem this holdout is associated with
         private int _smokerItemType;
@@ -85,7 +89,7 @@ namespace BombusApisBee.Core.Common.Smoker
             {
                 AttackTime--;
 
-                Projectile.frame = Utils.Clamp((int)MathHelper.Lerp(TrueFrameCount, 0, 1f - AttackTime / (float)_maxAttackTime), 0, TrueFrameCount);
+                Projectile.frame = Utils.Clamp((int)MathHelper.Lerp(TrueFrameCount, 0, EaseBuilder.EaseCircularOut.Ease(1f - AttackTime / (float)_maxAttackTime)), 0, TrueFrameCount);
             }
             else if (AttackCooldown > 0)
             {
@@ -93,14 +97,14 @@ namespace BombusApisBee.Core.Common.Smoker
 
                 float interpolant = 1f - AttackCooldown / (float)(UseTime + _maxAttackTime);
 
-                Projectile.frame = Utils.Clamp((int)MathHelper.Lerp(0, TrueFrameCount, interpolant), 0, TrueFrameCount);
+                Projectile.frame = (int)MathHelper.Lerp(0, TrueFrameCount + 2, EaseBuilder.EaseCubicIn.Ease(interpolant));
             }
 
             if (_recoilTimer > 0)
             {
                 int offset = (int)MathHelper.Min(60, _recoilTimer);
 
-                ArmOffset = new Vector2(-15f * (offset / 60f), 0f).RotatedBy(Projectile.rotation);
+                ArmOffset = new Vector2(-9f * EaseBuilder.EaseBackInOut.Ease(offset / 60f), 0f).RotatedBy(Projectile.rotation);
 
                 _recoilTimer--;
             }
@@ -206,12 +210,23 @@ namespace BombusApisBee.Core.Common.Smoker
 
             float fadeIn = 1f;
 
-            var frame = tex.Frame(1, _frameCount, 0, Projectile.frame);
+            var frame = tex.Frame(1, _frameCount, 0, (int)MathHelper.Clamp(Projectile.frame, 0, TrueFrameCount));
 
             if (Timer < 10f)
                 fadeIn = Timer / 10f;
             else if (_dying)
                 fadeIn = Projectile.timeLeft / 10f;
+
+            if (_outlineColor.HasValue && _recoilTimer > 0)
+            {
+                var outline = Request<Texture2D>(Texture + "_Outline").Value;
+
+                var outlineFrame = outline.Frame(1, _frameCount, 0, (int)MathHelper.Clamp(Projectile.frame, 0, TrueFrameCount));
+
+                float opacity = MathHelper.Min(60, _recoilTimer) / 60f;
+
+                Main.spriteBatch.Draw(outline, position, outlineFrame, _outlineColor.Value * opacity * fadeIn, rotation, outlineFrame.Size() / 2f, Projectile.scale, spriteEffects, 0f);
+            }
 
             Main.spriteBatch.Draw(tex, position, frame, lightColor * fadeIn, rotation, frame.Size() / 2f, Projectile.scale, spriteEffects, 0f);
 

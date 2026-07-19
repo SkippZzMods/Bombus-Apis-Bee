@@ -128,7 +128,6 @@ namespace BombusApisBee.Core.Common.Apiary
             flashTimer = 20;
             swingRotation += Main.rand.NextFloat(-0.15f, 0.15f);
             shakeTimer = 12;
-
             
             SoundID.Item97.PlayWith(Projectile.Center, 0, 0.1f, 1.25f);
             BombusApisBee.HoneycombWeapon.PlayWith(Projectile.Center, volume: 0.5f);
@@ -140,9 +139,9 @@ namespace BombusApisBee.Core.Common.Apiary
                 Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlow>(), Main.rand.NextVector2Circular(3f, 3f), 0, GlowColor with { A = 0 }, 0.15f);
             }
 
-            Vector2 offset = Main.rand.NextVector2Circular(15f, 15f);
+            Vector2 offset = Main.rand.NextVector2Circular(5f, 5f);
 
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + offset, Projectile.velocity.RotatedByRandom(1f) * 2f + Main.rand.NextVector2CircularEdge(1f, 1f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.6f) * 0.2f, ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
 
         /// <summary>

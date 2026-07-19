@@ -55,7 +55,7 @@ namespace BombusApisBee.Core.Common.Smoker
         public virtual void PreDrawBuffedBees(Projectile p, ref Color lightColor) { }
 
         public virtual void PostDrawBuffedBees(Projectile p, Color lightColor) { }
-
+        public virtual void PreUpdateDebuffedNPC(NPC n) { }
         public virtual void UpdateDebuffedNPC(NPC n) { }
         public virtual void ModifyDebuffedNPCHit(NPC npc, ref NPC.HitModifiers modifiers) { }
     }
@@ -198,6 +198,16 @@ namespace BombusApisBee.Core.Common.Smoker
         internal int applicationCooldown;
         public bool Active => _buffTimer > 0 && _curBuffType >= 0 && SmokerBuffLoader.GetBuff(_curBuffType) != null;
         public SmokerBuff CurrentActiveBuff => Active ? SmokerBuffLoader.GetBuff(_curBuffType) : null;
+
+        public override bool PreAI(NPC npc)
+        {
+            if (Active)
+            {
+                CurrentActiveBuff.PreUpdateDebuffedNPC(npc);
+            }
+
+            return true;
+        }
 
         public override void AI(NPC npc)
         {

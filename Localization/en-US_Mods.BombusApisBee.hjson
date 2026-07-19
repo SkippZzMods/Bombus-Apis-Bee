@@ -1340,12 +1340,12 @@ Items: {
 
 	PollenatorItem: {
 		DisplayName: Pollenator
-		Tooltip: 
-		'''
-		Hold <left> to pollenate the air
-		These pollen clouds buff friendly bees, increasing their damage by 5%
-		These pollen clouds debuff enemies, causing them to periodically sneeze
-		'''
+		Tooltip:
+			'''
+			Hold <left> to pollenate the air
+			These pollen clouds buff friendly bees, increasing their damage by 5%
+			These pollen clouds debuff enemies, causing them to periodically sneeze
+			'''
 	}
 }
 

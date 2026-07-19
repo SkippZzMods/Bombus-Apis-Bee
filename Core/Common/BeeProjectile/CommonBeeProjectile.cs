@@ -301,7 +301,11 @@ namespace BombusApisBee.Core.Common.BeeProjectile
                 Texture2D tex = Giant ? Request<Texture2D>(Texture + "_Giant").Value : Request<Texture2D>(Texture).Value;
                 Rectangle sourceRectangle = tex.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
 
-                Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, sourceRectangle, Projectile.GetAlpha(lightColor), Projectile.rotation, sourceRectangle.Size() / 2f,
+                float fadeIn = 1f;
+                if (Projectile.timeLeft > 1175)
+                    fadeIn = (Projectile.timeLeft - 1175) / 25f;
+
+                Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, sourceRectangle, Projectile.GetAlpha(lightColor) * fadeIn, Projectile.rotation, sourceRectangle.Size() / 2f,
                     Projectile.scale, Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
             }
 
