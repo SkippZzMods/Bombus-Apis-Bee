@@ -292,7 +292,7 @@ namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
 
                 item.noGrabDelay = 60;
 
-                (item.ModItem as HoneycombChunkPickup).TextureString = "BombusApisBee/Items/Other/OnPickupItems/HoneycombChunkPickup_" + Main.rand.Next(1, 5);
+                (item.ModItem as HoneycombChunkPickup).TextureString = "BombusApisBee/Content/Forest/Items/HoneycombChunkPickup/HoneycombChunkPickup_" + Main.rand.Next(1, 5);
 
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
