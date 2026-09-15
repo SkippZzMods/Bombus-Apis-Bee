@@ -1,9 +1,12 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
+using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Core.BeekeeperClass;
 using BombusApisBee.Core.Common.Apiary;
 using BombusApisBee.Core.Common.BeeProjectile;
 using BombusApisBee.Core.Systems.PixelationSystem;
 using BombusApisBee.Core.Systems.PrimitiveSystem;
+using CalamityMod.Items.Materials;
+using CalamityMod.Items.Placeables.FurnitureAcidwood;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 {
@@ -80,16 +83,15 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
                 Main.spriteBatch.Draw(tex, projectile.Center - Main.screenPosition, null, color * (holdTimer / 20f) * 0.13f, 0f, tex.Size() / 2f, 0.25f, 0, 0f);
         }
 
-        /*public override void AddRecipes()
+        public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient<WoodenApiary>().
-                AddIngredient<PearlShard>(3).
-                AddIngredient<Pollen>(15).
-                AddIngredient(ItemID.GlowingMushroom, 15).
+                AddIngredient<Acidwood>(20).
+                AddIngredient<SulphuricScale>(12).
+                AddIngredient<PollenItem>(15).
                 AddTile(TileID.Anvils).
                 Register();
-        }*/
+        }
     }
 
     [JITWhenModsEnabled("CalamityMod")]

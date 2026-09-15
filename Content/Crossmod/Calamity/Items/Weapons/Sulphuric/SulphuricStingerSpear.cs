@@ -1,6 +1,9 @@
 ﻿using BombusApisBee.Content.Dusts.Pixelized;
+using BombusApisBee.Content.Forest.Items.Pollen;
 using BombusApisBee.Core.Systems.PixelationSystem;
 using BombusApisBee.Core.Systems.PrimitiveSystem;
+using CalamityMod.Items.Materials;
+using CalamityMod.Items.Placeables.FurnitureAcidwood;
 using Terraria.DataStructures;
 
 namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
@@ -97,6 +100,17 @@ namespace BombusApisBee.Content.Crossmod.Calamity.Items.Weapons.Sulphuric
 
                 player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, rotation);
             }
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<Acidwood>(20).
+                AddIngredient<SulphuricScale>(12).
+                AddIngredient<PollenItem>(15).
+                AddIngredient(ItemID.Spear).
+                AddTile(TileID.Anvils).
+                Register();
         }
     }
 
