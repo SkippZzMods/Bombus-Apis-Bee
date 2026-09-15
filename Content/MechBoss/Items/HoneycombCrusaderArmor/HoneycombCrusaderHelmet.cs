@@ -295,9 +295,7 @@ namespace BombusApisBee.Content.MechBoss.Items.HoneycombCrusaderArmor
                 (item.ModItem as HoneycombChunkPickup).TextureString = "BombusApisBee/Content/Forest/Items/HoneycombChunkPickup/HoneycombChunkPickup_" + Main.rand.Next(1, 5);
 
                 if (Main.netMode == NetmodeID.MultiplayerClient)
-                {
                     NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI, 1f);
-                }
             }
         }
     }

@@ -139,9 +139,8 @@ namespace BombusApisBee.Core.Common.Apiary
                 Dust.NewDustPerfect(Projectile.Center, DustType<PixelatedGlow>(), Main.rand.NextVector2Circular(3f, 3f), 0, GlowColor with { A = 0 }, 0.15f);
             }
 
-            Vector2 offset = Main.rand.NextVector2Circular(5f, 5f);
 
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.6f) * 0.2f, ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Owner.Center, Main.rand.NextVector2Circular(3f, 3f), ProjectileTypeToFire, Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
 
         /// <summary>

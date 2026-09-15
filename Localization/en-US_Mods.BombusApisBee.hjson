@@ -392,9 +392,9 @@ Items: {
 	GelatinousHoneycomb: {
 		Tooltip:
 			'''
-			Fires royal bees which cause bouncy slimeballs to rain from the sky
-			Fires a volatile ruby every few shots
-			'A honeycomb fit for a king'
+			Throws a slimy honeycomb
+			Direct hits increase combo by 1
+			Combo throws light the honeycomb on fire, inflicting Hellfire
 			'''
 		DisplayName: Gelatinous Honeycomb
 	}

@@ -51,6 +51,8 @@ namespace BombusApisBee.Content.Particles
                 ];
             }
 
+            _action = extraUpdateAction;
+
             timeVariance = Main.rand.NextFloat(0.02f, 0.06f);
 
             Color = outlineColor;
@@ -64,14 +66,18 @@ namespace BombusApisBee.Content.Particles
 
         public override void Update()
         {
-            Velocity *= 0.97f;
-            Velocity.Y -= 0.05f;
+            if (_action is null)
+            {
+                Velocity *= 0.97f;
+                Velocity.Y -= 0.05f;
+            }
+            else
+                _action.Invoke(this);
+
             Rotation += Velocity.Length() * 0.003f;
 
             if (_addLight)
-                Lighting.AddLight(Position, _colors[2].R / 255f, _colors[2].G / 255f, _colors[2].B / 255f);
-
-            _action?.Invoke(this);
+                Lighting.AddLight(Position, _colors[2].R / 255f, _colors[2].G / 255f, _colors[2].B / 255f);          
         }
 
         public override void PixelatedDraw(SpriteBatch spriteBatch)
